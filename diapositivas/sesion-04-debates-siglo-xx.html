@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 4 · Los grandes debates del siglo XX · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 4: Martes 27 de octubre · 2 horas
+     4.1 a 4.7 Concepción contemporánea de la ciencia (repaso por exposiciones)
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulo 4
+     Después de cada equipo, el docente cierra con la diapositiva «Lo esencial».
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Temas 1 a 4 · Repaso intensivo",
+      dia: "Martes 27 de octubre · Sesión 4 de 13",
+      titulo: "Los grandes debates del siglo XX",
+      subtitulo: "4.1 a 4.7 · Del Círculo de Viena a Morin, en voz de ustedes",
+      duracion: "2 horas",
+      imagen: "img/s4-portada.jpg",
+      minutos: "0-2" },
+
+    { tipo: "objetivos",
+      intro: "Este tema es el corazón del curso. Hoy lo recorremos como lo que fue: una conversación entre autores que se respondían unos a otros.",
+      puntos: [
+        "Exponer y escuchar a **seis autores** de la filosofía de la ciencia.",
+        "Responder: **¿son ciencia las ciencias sociales?** (4.7)",
+        "Aprender a **responder y citar** las preguntas del proyecto.",
+        "Dejar lista la **Entrega 1** (martes 3 de noviembre)."
+      ],
+      pasoAPaso: true,
+      minutos: "2-3" },
+
+    { tipo: "tabla",
+      titulo: "Una conversación de setenta años",
+      columnas: ["Año", "Quién", "Qué dijo, en una línea"],
+      filas: [
+        ["1929", "Círculo de Viena", "Solo tiene sentido lo que puede **verificarse**."],
+        ["1934", "Popper", "No: lo científico es lo que puede **refutarse**."],
+        ["1962", "Kuhn", "La historia muestra **paradigmas** y **revoluciones**."],
+        ["1975", "Feyerabend", "Ninguna regla fija garantiza el progreso: **«todo vale»**."],
+        ["1978", "Lakatos", "Un puente: **programas de investigación** con núcleo y cinturón."],
+        ["1990", "Morin", "Hay que superar la simplificación: **pensamiento complejo**."]
+      ],
+      pasoAPaso: true,
+      minutos: "3-6",
+      notas: "Los años son de las obras citadas en el libro: manifiesto del Círculo (1929), La lógica de la investigación científica (1934), La estructura de las revoluciones científicas (1962), la metodología de Lakatos reunida en 1978 (sus ideas son de los años 60 y 70), Tratado contra el método (1975), Introducción al pensamiento complejo (1990). Ojo: Lakatos murió en 1974 y Feyerabend le dedicó el Tratado; las ideas de ambos se cruzaron en los mismos años. Hoy exponen en el orden del libro." },
+
+    { tipo: "tema",
+      titulo: "Cómo vamos a trabajar",
+      etiqueta: "Reglas del juego",
+      puntos: [
+        "Cada equipo: **8 minutos** de exposición + **2 minutos** de preguntas.",
+        "Después de cada equipo, **una diapositiva de cierre** con lo esencial.",
+        "Mientras escuchas, llena tu **cuadro comparativo** (es la tarea de hoy).",
+        "Se evalúa: dominio del autor, crítica y aplicación, organización y tiempo, fuentes en APA."
+      ],
+      minutos: "6-8",
+      notas: "Pon un temporizador visible. Avisa al minuto 7." },
+
+    { tipo: "tarea",
+      titulo: "Tu cuadro comparativo",
+      etiqueta: "Llénalo mientras escuchas",
+      puntos: [
+        "**Columnas:** positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend y Morin.",
+        "**Filas:** cómo avanza la ciencia · qué distingue a la ciencia de lo que no lo es · papel de la comunidad científica.",
+        "**Más filas:** concepto clave · obra principal con referencia APA · una aplicación a la investigación educativa.",
+        "Lo terminas en casa: es la tarea de hoy."
+      ],
+      minutos: "8",
+      evaluacion: "Rúbrica de Tarea (cuadro comparativo)" },
+
+    { tipo: "tema",
+      titulo: "Equipo 1 · El positivismo lógico",
+      etiqueta: "4.1 · 10 minutos",
+      puntos: ["Adelante, equipo 1."],
+      minutos: "8-18",
+      evaluacion: "Rúbrica de Exposición por equipos" },
+
+    { tipo: "tema",
+      titulo: "Lo esencial: el positivismo lógico",
+      etiqueta: "Círculo de Viena · Schlick, Carnap, Neurath",
+      puntos: [
+        "**Principio de verificación:** una afirmación solo tiene sentido si puede verificarse con la experiencia (o es lógica o matemática).",
+        "La ciencia avanza por **inducción** y **acumulación**, ladrillo por ladrillo.",
+        "**El problema de la inducción** (Hume): por muchos casos que observes, el siguiente puede ser distinto.",
+        "**Huella en la educación:** pruebas estandarizadas e indicadores. Aporta rendición de cuentas; arriesga reducir la educación a lo que se mide fácil."
+      ],
+      pasoAPaso: true,
+      minutos: "18-20" },
+
+    { tipo: "observa",
+      titulo: "Mil cisnes blancos… y uno negro",
+      etiqueta: "El problema de la inducción",
+      imagen: "img/s4-cisnes.jpg",
+      puntos: [
+        "Durante siglos, Europa vio **millones de cisnes blancos**.",
+        "Conclusión inductiva: «**todos** los cisnes son blancos».",
+        "Siglo XVII: los exploradores encuentran **cisnes negros en Australia**.",
+        "Ningún número de casos **verifica** una ley universal…",
+        "…pero **un solo caso** puede **refutarla**. Ahí entra Popper."
+      ],
+      minutos: "20-21" },
+
+    { tipo: "tema",
+      titulo: "Equipo 2 · Karl Popper",
+      etiqueta: "4.2 · 10 minutos",
+      puntos: ["Adelante, equipo 2."],
+      minutos: "21-31",
+      evaluacion: "Rúbrica de Exposición por equipos" },
+
+    { tipo: "tema",
+      titulo: "Lo esencial: Popper",
+      etiqueta: "La lógica de la investigación científica (1934)",
+      puntos: [
+        "**Asimetría:** nada verifica una teoría universal; un caso puede refutarla.",
+        "**Demarcación:** es científica la teoría **falsable**: un hecho podría contradecirla.",
+        "Avanza por **conjeturas y refutaciones**; lo que resiste queda **corroborado**.",
+        "Einstein arriesgó una predicción: el **eclipse de 1919** pudo desmentirla, y no lo hizo.",
+        "**Crítica:** en la práctica nadie abandona una teoría a la primera observación contraria."
+      ],
+      pasoAPaso: true,
+      minutos: "31-33" },
+
+    { tipo: "pregunta",
+      pregunta: "«Si mejoraron, el programa funcionó; si no mejoraron, es que necesitan más tiempo». ¿Es una hipótesis científica?",
+      respuesta: "**No es falsable:** ningún resultado podría desmentirla. Para serlo, hay que decir antes **qué resultado la refutaría**.",
+      minutos: "33-34",
+      notas: "Es el caso «Una hipótesis falsable en la escuela» del libro, y la base de la pregunta 5 del proyecto." },
+
+    { tipo: "tema",
+      titulo: "Equipo 3 · Thomas Kuhn",
+      etiqueta: "4.3 · 10 minutos",
+      puntos: ["Adelante, equipo 3."],
+      minutos: "34-44",
+      evaluacion: "Rúbrica de Exposición por equipos" },
+
+    { tipo: "tabla",
+      titulo: "Lo esencial: el ciclo de Kuhn",
+      columnas: ["Etapa", "Qué pasa"],
+      filas: [
+        ["Preciencia", "Varias escuelas compiten sin acuerdo sobre lo básico."],
+        ["Ciencia normal", "Se acepta un **paradigma** y se resuelven sus problemas, como un rompecabezas."],
+        ["Anomalías", "Aparecen resultados que el paradigma no explica. Al principio se ignoran."],
+        ["Crisis", "Las anomalías se acumulan y se pierde la confianza."],
+        ["Revolución", "Un nuevo paradigma resuelve las anomalías; la comunidad se convierte, no sin resistencia."],
+        ["Nueva ciencia normal", "El ciclo comienza otra vez."]
+      ],
+      pasoAPaso: true,
+      minutos: "44-46",
+      notas: "Paradigma: teorías, métodos, problemas legítimos, ejemplos y valores compartidos por una comunidad. Video de apoyo para casa: «Los paradigmas según Thomas Kuhn», TeoCom (unos 11 minutos), https://www.youtube.com/watch?v=D44ilHJQj0U" },
+
+    { tipo: "observa",
+      titulo: "¿Pato o conejo?",
+      etiqueta: "Inconmensurabilidad",
+      imagen: "img/s4-pato-conejo.jpg",
+      completa: true,
+      puntos: [
+        "Los datos son **los mismos**; lo que cambia es **cómo se ven**.",
+        "Así describió Kuhn el cambio de paradigma: como un **cambio de percepción**.",
+        "Dos paradigmas no se comparan punto por punto con una **medida común**.",
+        "Consecuencia polémica: elegir entre teorías depende también de **factores sociales**.",
+        "La ciencia es también una **actividad humana y social**."
+      ],
+      minutos: "46-47" },
+
+    { tipo: "tema",
+      titulo: "Equipo 4 · Imre Lakatos",
+      etiqueta: "4.4 · 10 minutos",
+      puntos: ["Adelante, equipo 4."],
+      minutos: "47-57",
+      evaluacion: "Rúbrica de Exposición por equipos" },
+
+    { tipo: "imagen",
+      titulo: "Lo esencial: un programa de investigación",
+      imagen: "img/s4-lakatos.svg",
+      pie: "Lakatos, un puente entre Popper y Kuhn: se protege el núcleo ajustando el cinturón.",
+      minutos: "57-59" },
+
+    { tipo: "pregunta",
+      pregunta: "Una estrategia constructivista falla en el aula y el docente dice «faltó andamiaje». ¿Es un programa progresivo o degenerativo?",
+      respuesta: "Depende: si ese ajuste **permite predecir y lograr nuevos aprendizajes**, es progresivo; si solo sirve para **justificar el fracaso**, es degenerativo.",
+      minutos: "59-60" },
+
+    { tipo: "tema",
+      titulo: "Equipo 5 · Paul Feyerabend",
+      etiqueta: "4.5 · 10 minutos",
+      puntos: ["Adelante, equipo 5."],
+      minutos: "60-70",
+      evaluacion: "Rúbrica de Exposición por equipos" },
+
+    { tipo: "tema",
+      titulo: "Lo esencial: Feyerabend",
+      etiqueta: "Tratado contra el método (1975)",
+      puntos: [
+        "En la historia real, **toda regla metodológica** ha sido violada alguna vez **con éxito**. Ejemplo: Galileo.",
+        "**«Todo vale»** no significa que cualquier opinión valga igual: significa que **ninguna regla fija garantiza el progreso**.",
+        "**Proliferación de teorías:** las alternativas muestran los puntos débiles de la dominante.",
+        "La ciencia como **una tradición más** en una sociedad libre.",
+        "**Riesgo:** leerlo como «da igual la vacuna que el remedio milagroso»."
+      ],
+      pasoAPaso: true,
+      minutos: "70-72" },
+
+    { tipo: "tema",
+      titulo: "Equipo 6 · Edgar Morin",
+      etiqueta: "4.6 · 10 minutos",
+      puntos: ["Adelante, equipo 6."],
+      minutos: "72-82",
+      evaluacion: "Rúbrica de Exposición por equipos",
+      notas: "Dato reciente: Morin murió el 29 de mayo de 2026, a los 104 años." },
+
+    { tipo: "tabla",
+      titulo: "Lo esencial: Morin y el pensamiento complejo",
+      columnas: ["Idea", "Qué significa", "En el aula"],
+      filas: [
+        ["Paradigma de simplificación", "Disyunción, reducción y abstracción: un saber **fragmentado**", "Materias que nunca se tocan entre sí"],
+        ["*Complexus*", "«Lo que está tejido junto»", "El alumno es biológico, psicológico, social, cultural e histórico"],
+        ["Principio dialógico", "Opuestos que se complementan", "Ni un salón demasiado ordenado ni uno en caos aprenden"],
+        ["Recursividad", "Los efectos producen a sus causas", "La sociedad forma individuos que forman la sociedad"],
+        ["Principio hologramático", "El todo está en la parte", "Cada salón refleja el sistema educativo completo"]
+      ],
+      pasoAPaso: true,
+      minutos: "82-84",
+      notas: "Los siete saberes (UNESCO, 1999) y su huella en la NEM: campos formativos y ejes articuladores contra la fragmentación (SEP, 2022)." },
+
+    { tipo: "dato",
+      titulo: "Morin (1921-2026)",
+      cifra: "7",
+      texto: "**saberes necesarios para la educación del futuro**, escritos para la UNESCO en 1999. Son la raíz de los **campos formativos** de la Nueva Escuela Mexicana.",
+      fuente: "Morin (1999), UNESCO; SEP (2022). Morin murió en mayo de 2026, a los 104 años.",
+      minutos: "84-85" },
+
+    { tipo: "tema",
+      titulo: "4.7 ¿Son ciencia las ciencias sociales?",
+      etiqueta: "El cierre lo hacemos juntos",
+      puntos: [
+        "**Distintos objetos, distintos métodos:** el ser humano da sentido a sus actos; exige comprensión (Dilthey, Weber).",
+        "**Doble hermenéutica** (Giddens): interpretamos un mundo ya interpretado, y nuestros conceptos lo transforman. Cuando «bullying» entró a la escuela, cambió cómo se viven ciertos conflictos.",
+        "**Rigor sin imitación:** ni la física sigue un método único; exigírselo a la pedagogía es injusto.",
+        "**Criterios propios:** credibilidad, transferibilidad, consistencia y confirmabilidad."
+      ],
+      pasoAPaso: true,
+      minutos: "85-90" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Puede la pedagogía ser ciencia? ¿Qué te diría Popper? ¿Y Kuhn? ¿Y Morin?",
+      respuesta: "**Popper:** si sus hipótesis son falsables. **Kuhn:** si una comunidad comparte un paradigma. **Morin:** solo si no fragmenta un objeto que es complejo.",
+      minutos: "90-93",
+      notas: "Es una pregunta abierta: estas respuestas son una síntesis posible, no la única. Pide que la escriban en el cuaderno, un renglón por autor." },
+
+    { tipo: "tema",
+      titulo: "Taller: cómo responder una pregunta guía",
+      etiqueta: "Proyecto · Entrega 1",
+      puntos: [
+        "**1. Responde de frente** en la primera oración. Nada de rodeos.",
+        "**2. Usa un concepto del curso** y cítalo: (Popper, 1934/2008).",
+        "**3. Aterrízalo en tu protocolo** con un dato concreto: tu tema, tu muestra, tu instrumento.",
+        "**4. Cierra** con lo que eso implica para tu investigación.",
+        "Mínimo **un párrafo de 6 a 8 renglones** por pregunta."
+      ],
+      pasoAPaso: true,
+      minutos: "93-97" },
+
+    { tipo: "ejemplo",
+      numero: 5,
+      pregunta: "¿Tu hipótesis o supuesto es falsable? ¿Qué resultado lo desmentiría?",
+      respuesta: "Sí. Mi hipótesis es que la lectura en voz alta diaria mejora la comprensión lectora. Siguiendo el criterio de demarcación de **Popper (1934/2008)**, la hipótesis queda **refutada** si, después de un ciclo escolar, el grupo que participó **no supera** en la prueba de comprensión al grupo que no participó. Por eso definiré la prueba y la diferencia esperada **antes** de aplicar el programa: así no podré reinterpretar cualquier resultado como un éxito.",
+      fuente: "Caso ficticio. Observa los cuatro pasos: respuesta de frente, concepto citado, dato concreto del protocolo y consecuencia.",
+      minutos: "97-101" },
+
+    { tipo: "ejemplo",
+      numero: 6,
+      pregunta: "En el sentido de Kuhn, ¿qué paradigma domina en la comunidad que estudia tu tema? ¿Detectas alguna anomalía?",
+      respuesta: "En la investigación sobre comprensión lectora domina un paradigma de **medición estandarizada**: se evalúa con pruebas y con palabras leídas por minuto. Una **anomalía**, en el sentido de **Kuhn (1962/2013)**, es que muchos alumnos leen con fluidez y aun así **no entienden** lo que leen: la fluidez no explica la comprensión. Esa anomalía es justamente la que motivó mi investigación.",
+      fuente: "Caso ficticio. Fíjate en el formato de las obras traducidas en APA 7: año original / año de la edición consultada.",
+      minutos: "101-105" },
+
+    { tipo: "tema",
+      titulo: "Entrega 1: lista de verificación",
+      etiqueta: "Martes 3 de noviembre · 15 puntos",
+      puntos: [
+        "Portada y las **preguntas 1 a 6**, cada una con su número y la pregunta escrita completa.",
+        "Al menos **3 referencias en APA 7** al final, en orden alfabético y con sangría francesa.",
+        "Cada cita en el texto tiene **su referencia** en la lista, y al revés.",
+        "Usa la **Plantilla APA** y la **Guía APA** del Aula Virtual (sección Diapositivas).",
+        "Revisa **acentos y mayúsculas** antes de entregar. La rúbrica está en el Aula Virtual."
+      ],
+      pasoAPaso: true,
+      minutos: "105-109",
+      notas: "El lunes 2 de noviembre no hay clase (descanso obligatorio): la entrega es el martes 3." },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 5, texto: "¿Tu hipótesis o supuesto es falsable? ¿Qué resultado lo desmentiría?" },
+        { numero: 6, texto: "En el sentido de Kuhn, ¿qué paradigma domina en la comunidad que estudia tu tema? ¿Detectas alguna anomalía?" }
+      ],
+      minutos: "109-113",
+      notas: "Quien trabaja con un tema de tesis tentativo y aún no tiene hipótesis: que redacte un supuesto provisional y lo someta a la pregunta 5." },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "¿Qué criterio propuso Popper para distinguir la ciencia de lo que no lo es?", respuesta: "**La falsabilidad** (criterio de demarcación)." },
+        { pregunta: "Para Kuhn, ¿qué pasa cuando las anomalías se acumulan?", respuesta: "**Crisis**, y después una **revolución científica**." },
+        { pregunta: "En Lakatos, ¿qué parte del programa recibe los golpes de la experiencia?", respuesta: "**El cinturón protector.**" },
+        { pregunta: "¿Qué significa *complexus*?", respuesta: "**«Lo que está tejido junto».**" }
+      ],
+      minutos: "113-117" },
+
+    { tipo: "cierre",
+      evidencia: "Exposiciones por equipos del Tema 4 y cuadro comparativo iniciado en clase.",
+      materiales: "Presentaciones de los equipos, libro de texto (Tema 4), Plantilla y Guía APA.",
+      proxima: "Termina el **cuadro comparativo** de los seis autores. **Lunes 2: no hay clase.** **Martes 3:** entrega la **Entrega 1** (preguntas 1 a 6) y lee el **Tema 5**.",
+      minutos: "117-120",
+      notas: "Cuadro comparativo, filas: cómo avanza la ciencia; qué distingue a la ciencia; papel de la comunidad; concepto clave; obra principal con referencia APA; una aplicación a la investigación educativa." }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

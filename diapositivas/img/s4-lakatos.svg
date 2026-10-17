@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" font-family="Public Sans, Arial, sans-serif">
+  <rect width="1100" height="520" fill="#F4F6F9"/>
+  <circle cx="330" cy="260" r="235" fill="#2E5E8C" fill-opacity=".15" stroke="#2E5E8C" stroke-width="4" stroke-dasharray="14 10"/>
+  <circle cx="330" cy="260" r="110" fill="#16213A"/>
+  <text x="330" y="252" fill="#fff" font-size="30" font-weight="700" text-anchor="middle">Núcleo duro</text>
+  <text x="330" y="284" fill="#E3C47E" font-size="18" text-anchor="middle">no se toca</text>
+  <text x="330" y="70" fill="#16213A" font-size="24" font-weight="700" text-anchor="middle">Cinturón protector</text>
+  <text x="330" y="98" fill="#4F5868" font-size="18" text-anchor="middle">hipótesis auxiliares que se ajustan</text>
+  <g stroke="#A8323E" stroke-width="5" fill="none"><path d="M585 128 H640 M628 116 L642 128 L628 140"/><path d="M585 258 H640 M628 246 L642 258 L628 270"/><path d="M585 388 H640 M628 376 L642 388 L628 400"/></g>
+  <text x="660" y="132" fill="#16213A" font-size="22" font-weight="700">Golpes de la experiencia</text>
+  <text x="660" y="160" fill="#4F5868" font-size="18">los recibe el cinturón, no el núcleo</text>
+  <text x="660" y="262" fill="#4E7D6A" font-size="22" font-weight="700">Progresivo</text>
+  <text x="660" y="290" fill="#4F5868" font-size="18">sus ajustes predicen hechos nuevos</text>
+  <text x="660" y="392" fill="#A8323E" font-size="22" font-weight="700">Degenerativo</text>
+  <text x="660" y="420" fill="#4F5868" font-size="18">solo justifica lo que ya sabía</text>
+</svg>
