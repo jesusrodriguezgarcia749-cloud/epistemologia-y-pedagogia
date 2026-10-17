@@ -45,9 +45,9 @@ export const TOPES = {
 export const TOPES_PROYECTO = { entrega1: 15, entrega2: 15, entregaFinal: 10 };
 
 export const NOMBRES_ENTREGA_PROYECTO = {
-  entrega1: 'Ensayo · Entrega 1 (tesis y esquema)',
-  entrega2: 'Ensayo · Entrega 2 (borrador completo)',
-  entregaFinal: 'Ensayo · Entrega final (versión final y defensa)',
+  entrega1: 'Pienso, luego investigo · Entrega 1 (tesis y esquema)',
+  entrega2: 'Pienso, luego investigo · Entrega 2 (borrador completo)',
+  entregaFinal: 'Pienso, luego investigo · Entrega final (versión final y defensa)',
 };
 
 // Meta de participaciones por parcial para llegar al tope de 25 pts.

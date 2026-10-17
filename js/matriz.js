@@ -331,7 +331,7 @@ async function vistaProyecto(ctx) {
 
   dibujar(cont, {
     titulo,
-    ayuda: 'Calificación de 0 a 10 de cada entrega del <em>ensayo final</em> (El quehacer científico de la pedagogía). Un casillero vacío significa que todavía no entrega.',
+    ayuda: 'Calificación de 0 a 10 de cada entrega del proyecto <em>Pienso, luego investigo</em>. Un casillero vacío significa que todavía no entrega.',
     alumnos,
     columnas: ENTREGAS,
     valores,
