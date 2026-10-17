@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 2 · Los caminos del conocimiento · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 2: Martes 20 de octubre · 2 horas
+     1.2 Epistemología, teoría del conocimiento y filosofía de la ciencia
+     2.1 a 2.4 Naturaleza del conocimiento (repaso)
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulos 1 y 2
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Temas 1 a 4 · Repaso intensivo",
+      dia: "Martes 20 de octubre · Sesión 2 de 13",
+      titulo: "Los caminos del conocimiento",
+      subtitulo: "1.2 Epistemología, teoría del conocimiento y filosofía de la ciencia · 2.1 a 2.4 Naturaleza del conocimiento",
+      duracion: "2 horas",
+      imagen: "img/s2-portada.jpg",
+      minutos: "0-2" },
+
+    { tipo: "objetivos",
+      intro: "Ayer vimos qué significa conocer. Hoy: no todo conocimiento es igual.",
+      puntos: [
+        "Distinguir **teoría del conocimiento, epistemología y filosofía de la ciencia**, y armar tu mapa conceptual.",
+        "Comparar los **cinco tipos de conocimiento**.",
+        "Usar los **cánones de cientificidad** para revisar una afirmación viral.",
+        "Ubicar a la pedagogía en la **clasificación de las ciencias** (Dilthey y Bunge).",
+        "Avanzar tu proyecto: **preguntas 2 y 3**."
+      ],
+      pasoAPaso: true,
+      minutos: "2-4" },
+
+    { tipo: "repaso",
+      titulo: "¿Qué recuerdas de ayer?",
+      preguntas: [
+        { pregunta: "Conocer es una creencia verdadera y…", respuesta: "**…justificada.**" },
+        { pregunta: "¿Qué evaluación supone que el conocimiento se demuestra en desempeños complejos?", respuesta: "**La rúbrica de un proyecto.**" },
+        { pregunta: "¿Cómo se llama tu proyecto y cuándo es la Entrega 1?", respuesta: "**Pienso, luego investigo · martes 3 de noviembre.**" }
+      ],
+      minutos: "4-8",
+      notas: "Si ayer no se pudo aplicar el Examen Diagnóstico, aplícalo ahora (40 minutos) y recorta el video del minuto 1 y la pausa activa." },
+
+    { tipo: "tema",
+      titulo: "1.2 Tres nombres que se confunden",
+      etiqueta: "Teoría del conocimiento · Epistemología · Filosofía de la ciencia",
+      puntos: [
+        "Se usan como sinónimos, y eso genera confusión.",
+        "**Teoría del conocimiento (gnoseología):** todo conocimiento humano, de cualquier tipo.",
+        "**Epistemología:** el conocimiento **científico** en particular.",
+        "**Filosofía de la ciencia:** la ciencia como actividad humana completa: su historia, sus valores, su lugar en la sociedad.",
+        "Sus fronteras no siempre son nítidas, pero conviene distinguirlas."
+      ],
+      pasoAPaso: true,
+      minutos: "8-11" },
+
+    { tipo: "tabla",
+      titulo: "Un cuadro para ordenar",
+      columnas: ["Campo", "¿Qué estudia?", "Pregunta típica"],
+      filas: [
+        ["Teoría del conocimiento", "El conocimiento humano en general", "¿Es posible conocer algo con certeza?"],
+        ["Epistemología", "El conocimiento científico en particular", "¿Qué hace que una teoría sea científica?"],
+        ["Filosofía de la ciencia", "La ciencia como actividad humana completa", "¿Cómo cambia la ciencia y qué papel tiene en la sociedad?"]
+      ],
+      pasoAPaso: true,
+      minutos: "11-14",
+      notas: "Autores: Chalmers, ¿Qué es esa cosa llamada ciencia? (1976/2000), como ejemplo de filosofía de la ciencia; Kuhn, que veremos en el Tema 4." },
+
+    { tipo: "imagen",
+      titulo: "Círculos que se cruzan",
+      imagen: "img/s2-circulos.svg",
+      pie: "La epistemología vive dentro de la teoría del conocimiento y es uno de los ángulos de la filosofía de la ciencia.",
+      minutos: "14-15" },
+
+    { tipo: "video",
+      titulo: "Ojo crítico: «la epistemología en 1 minuto»",
+      youtube: "https://www.youtube.com/watch?v=vlTAd_8qVKw",
+      pie: "Video breve. Mientras lo ves, fíjate cómo define la epistemología.",
+      minutos: "15-17" },
+
+    { tipo: "pregunta",
+      pregunta: "El video dice que epistemología, gnoseología y teoría del conocimiento son lo mismo. ¿Se equivoca?",
+      respuesta: "No exactamente: sigue la **tradición anglosajona**, donde *epistemology* es sinónimo de teoría del conocimiento. En la tradición **francesa y latinoamericana**, que sigue este curso, la epistemología se reserva para el **conocimiento científico**.",
+      minutos: "17-19",
+      notas: "Lección de fondo: ante cualquier fuente, preguntar desde qué tradición habla. Eso también es pensar epistemológicamente." },
+
+    { tipo: "tarea",
+      titulo: "Mapa conceptual de los tres campos",
+      etiqueta: "Actividad con docente · 22 minutos",
+      puntos: [
+        "Relaciona **Epistemología**, **Teoría del conocimiento** y **Filosofía de la ciencia**.",
+        "Para cada uno: su **objeto de estudio**, **dos preguntas típicas**, **un autor** y **un ejemplo aplicado a la educación**.",
+        "Usa **conectores verbales** claros: «se ocupa de», «es más amplio que», «se aplica en».",
+        "Un buen mapa no es un resumen con flechas: **muestra relaciones**.",
+        "Lo que no termines hoy, lo terminas en casa."
+      ],
+      minutos: "19-41",
+      evaluacion: "Rúbrica de Tarea (mapa conceptual)",
+      notas: "La rúbrica «Mapa conceptual y cuadros comparativos» está pública en el Aula Virtual (Rúbricas). Pasa por los lugares: revisa que haya conectores y ejemplos educativos, no solo definiciones." },
+
+    { tipo: "pregunta",
+      pregunta: "La abuela que sabe que va a llover porque «le duelen las rodillas», ¿tiene conocimiento?",
+      respuesta: "Sí: un **conocimiento empírico o cotidiano**. Es práctico y a veces muy preciso, pero no está sistematizado: sabe *que* ocurre, no siempre *por qué*.",
+      minutos: "41-43" },
+
+    { tipo: "tabla",
+      titulo: "2.1 Tipos de conocimiento",
+      columnas: ["Tipo", "Fuente", "Cómo se valida", "Ejemplo"],
+      filas: [
+        ["Empírico o cotidiano", "Experiencia directa, tradición", "Funciona en la práctica", "Saber cuándo sembrar maíz"],
+        ["Religioso", "Fe, revelación", "Autoridad sagrada, experiencia espiritual", "Creencias sobre la vida después de la muerte"],
+        ["Filosófico", "Razón, reflexión", "Argumentación coherente", "Debate sobre qué es la justicia"],
+        ["Artístico", "Creación, sensibilidad", "Experiencia estética", "Una novela sobre la Revolución"],
+        ["Científico", "Método sistemático", "Comprobación y crítica de la comunidad", "Teoría de la evolución"]
+      ],
+      pasoAPaso: true,
+      minutos: "43-47",
+      notas: "Es una clasificación útil, no una verdad absoluta. El religioso responde otras preguntas (sentido, origen último): respetarlo implica no confundirlo con la ciencia." },
+
+    { tipo: "observa",
+      titulo: "El saber que no viene de los libros",
+      etiqueta: "Conocimiento empírico",
+      imagen: "img/s2-pescador.jpg",
+      puntos: [
+        "El pescador de Champotón sabe **en qué temporada sale el pulpo**.",
+        "La cocinera sabe **cuándo la masa tiene el punto exacto**.",
+        "La madre distingue **el llanto de hambre del llanto de sueño**.",
+        "Es un saber **práctico, útil y preciso**, aunque no esté escrito ni explicado.",
+        "En el Tema 6 veremos que la ciencia hoy **lo valora mucho más** que antes."
+      ],
+      minutos: "47-50",
+      notas: "Pregunta rápida: ¿qué sabes hacer muy bien sin haberlo aprendido en un libro? ¿Qué se perdería si lo explicaras por escrito?" },
+
+    { tipo: "tema",
+      titulo: "2.2 ¿Qué es la ciencia?",
+      etiqueta: "Tres sentidos de una misma palabra",
+      puntos: [
+        "Del latín *scientia*: simplemente, «conocimiento».",
+        "**Ciencia como producto:** lo que ya se sabe; la ciencia de los libros de texto.",
+        "**Ciencia como proceso:** la actividad de investigar, preguntar, reunir datos e interpretarlos.",
+        "**Ciencia como institución:** universidades, revistas, congresos; la ciencia como práctica social.",
+        "La escuela enseñó casi solo el producto. El gran cambio es **enseñar también a investigar**."
+      ],
+      pasoAPaso: true,
+      minutos: "50-53" },
+
+    { tipo: "cita",
+      texto: "La ciencia es una forma de conocimiento que busca explicar la realidad de manera sistemática y fundamentada, mediante métodos que permiten someter sus afirmaciones a prueba y crítica pública.",
+      autor: "Definición de trabajo del curso (Rodríguez García, 2026)",
+      minutos: "53-54",
+      notas: "Subraya: prueba y crítica pública. Lo que distingue a la ciencia no son verdades eternas, sino que está organizada para detectar y corregir sus propios errores." },
+
+    { tipo: "tema",
+      titulo: "El mito del método único",
+      etiqueta: "Observación → hipótesis → experimento → conclusión",
+      puntos: [
+        "Esa secuencia es una **herramienta didáctica**, no la forma en que trabaja toda la ciencia.",
+        "Un astrónomo **no puede experimentar** con galaxias.",
+        "Un historiador **no puede repetir** la Independencia de México.",
+        "Un antropólogo **no formula hipótesis** antes de convivir con una comunidad.",
+        "Cada ciencia desarrolla **métodos adecuados a su objeto**. (Feyerabend lo llevará al extremo en el Tema 4.)"
+      ],
+      pasoAPaso: true,
+      minutos: "54-57" },
+
+    { tipo: "tabla",
+      titulo: "2.3 Cánones de cientificidad",
+      columnas: ["Canon", "Qué pide"],
+      filas: [
+        ["Objetividad", "Que no dependa de los gustos del investigador. En ciencias sociales: **intersubjetividad**."],
+        ["Racionalidad y coherencia", "Afirmaciones ordenadas lógicamente, sin contradecirse."],
+        ["Sistematicidad", "Un conjunto ordenado en una teoría, no datos sueltos."],
+        ["Contrastabilidad", "Que pueda **ponerse a prueba**. Popper pedirá más: que pueda **refutarse**."],
+        ["Comunicabilidad", "Lenguaje preciso y público, para que otros lo revisen: de ahí las **citas**."],
+        ["Provisionalidad", "Ninguna verdad es definitiva: la ciencia avanza **corrigiéndose**."]
+      ],
+      pasoAPaso: true,
+      minutos: "57-62" },
+
+    { tipo: "dato",
+      titulo: "¿Te acuerdas de la lectura del diagnóstico?",
+      cifra: "1847",
+      texto: "Semmelweis mostró que lavarse las manos salvaba a las madres en el parto, pero sus colegas tardaron **décadas** en aceptarlo. La ciencia se corrige… y también es una **comunidad** con resistencias.",
+      fuente: "Lectura del Examen Diagnóstico · la retomaremos con Kuhn en el Tema 4.",
+      minutos: "62-63" },
+
+    { tipo: "observa",
+      titulo: "«Está comprobado científicamente»",
+      etiqueta: "En el aula mexicana",
+      imagen: "img/s2-junta-padres.jpg",
+      puntos: [
+        "En una junta, un papá comparte un video: «está comprobado científicamente» que los videojuegos bajan el rendimiento escolar.",
+        "La orientadora no acepta ni rechaza. Pregunta: **¿quién hizo el estudio?**",
+        "**¿Dónde se publicó?**",
+        "**¿Cuántos niños participaron y cómo se midió el rendimiento?**",
+        "Nadie sabe. **Lo que no puede rastrearse hasta su fuente no puede evaluarse.**"
+      ],
+      minutos: "63-66" },
+
+    { tipo: "video",
+      titulo: "Tres preguntas antes de creer algo",
+      youtube: "https://www.youtube.com/watch?v=TyuGBi6joxY",
+      subtitulos: "es",
+      pie: "TED-Ed · en inglés con subtítulos en español (si no aparecen, actívalos en el botón CC).",
+      minutos: "66-72",
+      notas: "Unos 5 minutos y medio. Al terminar: ¿cuál de las tres preguntas del video se parece a algún canon de cientificidad?" },
+
+    { tipo: "tarea",
+      titulo: "Caso: revisa una afirmación viral",
+      etiqueta: "En equipos · 15 minutos",
+      puntos: [
+        "Elijan una: **«Solo usamos el 10 % del cerebro»** · **«Cada alumno aprende mejor con su estilo: visual, auditivo o kinestésico»** · **«Mozart te hace más inteligente»**.",
+        "Pásenla por los **seis cánones**: ¿qué pide cada uno y qué le falta a la afirmación?",
+        "Respondan las preguntas de la orientadora: **quién, dónde, cómo se midió**.",
+        "Veredicto en una frase: **¿ciencia, mito o falta información?**",
+        "Un equipo por afirmación expone en 1 minuto."
+      ],
+      minutos: "72-87",
+      evaluacion: "Participación",
+      notas: "Las tres son neuromitos documentados; no lo digas al inicio. En el Tema 7 volveremos a ellas con la evidencia actual (Dekker et al., 2012). El valor está en el proceso, no en adivinar." },
+
+    { tipo: "pausa",
+      titulo: "¡Pausa activa!",
+      duracion: "2 minutos",
+      texto: "De pie. Si crees que la pedagogía se parece más a la **física**, ve hacia la ventana; si a la **historia**, hacia la puerta; si a la **medicina**, quédate en tu lugar. Mira cómo quedó repartido el grupo… y siéntate: la siguiente diapositiva tiene la respuesta.",
+      minutos: "87-89" },
+
+    { tipo: "tema",
+      titulo: "2.4 ¿Para qué clasificar las ciencias?",
+      etiqueta: "No es un pasatiempo de bibliotecario",
+      puntos: [
+        "Cada clasificación revela **una idea de qué es el conocimiento**.",
+        "Según cómo se clasifique, la pedagogía aparece en un lugar u otro… **o en ninguno**.",
+        "**Comte** (s. XIX): de las matemáticas a la sociología, la «física social». Todas debían seguir el modelo de las ciencias naturales.",
+        "**Dilthey** respondió que no: hay dos tipos de ciencias, con métodos distintos."
+      ],
+      pasoAPaso: true,
+      minutos: "89-92" },
+
+    { tipo: "tabla",
+      titulo: "Dilthey: explicar y comprender",
+      columnas: ["", "Ciencias de la naturaleza", "Ciencias del espíritu"],
+      filas: [
+        ["Estudian", "Fenómenos externos al ser humano", "La vida humana: historia, cultura, lenguaje"],
+        ["Buscan", "**Explicar** con leyes generales", "**Comprender** desde dentro, interpretando significados"],
+        ["Método", "Explicación causal", "Comprensión (*Verstehen*)"],
+        ["Ejemplo", "Por qué hierve el agua", "Qué significa para un alumno reprobar frente a su familia"]
+      ],
+      pasoAPaso: true,
+      minutos: "92-95",
+      notas: "Dilthey (1883/1949). Es una de las ideas más importantes del curso: la usaremos muchas veces, empezando hoy con la pregunta 2 del proyecto." },
+
+    { tipo: "cita",
+      texto: "La naturaleza la explicamos; la vida anímica la comprendemos.",
+      autor: "Wilhelm Dilthey (1894), Ideas acerca de una psicología descriptiva y analítica",
+      minutos: "95-96" },
+
+    { tipo: "tabla",
+      titulo: "Bunge: un esquema para ubicar a la pedagogía",
+      columnas: ["Ciencias formales", "Fácticas naturales", "Fácticas sociales y humanas"],
+      filas: [
+        ["Lógica", "Física", "Sociología"],
+        ["Matemáticas", "Química", "Psicología"],
+        ["", "Biología", "Historia · Economía · Antropología"],
+        ["**Se validan por demostración**", "**Se validan por la experiencia**", "**Pedagogía y ciencias de la educación**"]
+      ],
+      minutos: "96-99",
+      notas: "Bunge (1960), La ciencia, su método y su filosofía: muy usado en los manuales latinoamericanos. Video opcional de repaso para casa: «La ciencia, su método y su filosofía según Mario Bunge (resumen)», canal Sistémico, https://www.youtube.com/watch?v=dHjOJLnEY5A (el propio autor advierte que lo hizo rápido; úsalo con ojo crítico)." },
+
+    { tipo: "pregunta",
+      pregunta: "¿La pedagogía está más cerca de la física, de la historia o de la medicina?",
+      respuesta: "Con Bunge es una ciencia **fáctica social**; con Dilthey, del lado de **comprender**. Pero como la medicina, también **interviene** para mejorar una realidad. Esa tensión es parte de nuestra pregunta guía.",
+      minutos: "99-101",
+      notas: "Retoma la pausa activa: ¿quién se movió a cada lado y por qué?" },
+
+    { tipo: "tema",
+      titulo: "¿Pedagogía o ciencias de la educación?",
+      etiqueta: "Un debate que vale la pena conocer",
+      puntos: [
+        "**Tradición alemana:** la pedagogía como **ciencia unitaria** de la educación.",
+        "**Tradición francesa** (desde la segunda mitad del siglo XX): las **ciencias de la educación**, en plural.",
+        "**Ventaja del plural:** reconoce la complejidad del fenómeno educativo.",
+        "**Riesgo del plural:** que la pedagogía se disuelva y **pierda identidad propia**."
+      ],
+      pasoAPaso: true,
+      minutos: "101-104" },
+
+    { tipo: "ejemplo",
+      numero: 2,
+      pregunta: "¿Qué tipo de conocimiento quieres producir con tu investigación: explicar, comprender o transformar?",
+      respuesta: "Quiero producir, sobre todo, conocimiento que **explique**: saber si la lectura en voz alta se relaciona con una mejor comprensión. Pero también me interesa **comprender** cómo viven los alumnos esa práctica, así que mi trabajo combina ambos propósitos, como explica Dilthey al distinguir explicar y comprender (como se citó en Rodríguez García, 2026).",
+      fuente: "Caso ficticio de la página Proyecto. Fíjate en la cita: es una **cita de una cita** en APA 7.",
+      minutos: "104-107" },
+
+    { tipo: "ejemplo",
+      numero: 3,
+      pregunta: "¿Dónde se ubica tu tema en la clasificación de las ciencias y por qué?",
+      respuesta: "Mi tema pertenece a las **ciencias fácticas sociales y humanas** (Bunge, 1960): estudia hechos —la comprensión lectora de alumnos reales— y se valida con la experiencia, no con una demostración lógica. Con Dilthey, la prueba de comprensión busca **explicar** y las entrevistas buscan **comprender**. Por eso lo ubico en la **pedagogía**, con préstamos de la **psicología educativa**.",
+      fuente: "Caso ficticio. Tu respuesta debe hablar de tu propio protocolo o tema de tesis.",
+      minutos: "107-110" },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 2, texto: "¿Qué tipo de conocimiento quieres producir con tu investigación: explicar, comprender o transformar?" },
+        { numero: 3, texto: "¿Dónde se ubica tu tema en la clasificación de las ciencias y por qué?" }
+      ],
+      minutos: "110-114",
+      notas: "«Transformar» anticipa la ciencia crítica de Carr y Kemmis y el paradigma sociocrítico (pregunta 4, próxima sesión)." },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "¿Cuál de los tres campos estudia el conocimiento científico en particular?", respuesta: "**La epistemología.**" },
+        { pregunta: "¿Qué canon pide que una afirmación pueda ponerse a prueba con la experiencia?", respuesta: "**La contrastabilidad (verificabilidad).**" },
+        { pregunta: "Para Dilthey, ¿qué buscan las ciencias del espíritu?", respuesta: "**Comprender** el sentido de la vida humana desde dentro." },
+        { pregunta: "Con Bunge, ¿dónde va la pedagogía?", respuesta: "**Ciencias fácticas sociales y humanas.**" }
+      ],
+      minutos: "114-118" },
+
+    { tipo: "cierre",
+      evidencia: "Mapa conceptual de los tres campos (con conectores, autores y ejemplos educativos) y análisis en equipo de una afirmación viral.",
+      materiales: "Libro de texto (Temas 1 y 2), hojas o cartulina para el mapa, Aula Virtual.",
+      proxima: "**Lunes 26:** termina el mapa conceptual, resuelve las actividades de repaso de los Temas 1 y 2 en el Aula Virtual y lee el **Tema 3**. Avanza las preguntas 2 y 3.",
+      minutos: "118-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

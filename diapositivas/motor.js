@@ -49,7 +49,7 @@
   .d-portadaDia .pd{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
   .d-portadaDia .pd.sola{grid-template-columns:1fr}
   .d-portadaDia .tema{font-size:.68em;color:var(--arena);margin-bottom:1.6em}
-  .d-portadaDia .dia{font-size:.75em;color:#E7A3A3;font-weight:600;margin-bottom:.3em}
+  .d-portadaDia .dia{font-size:.75em;color:#E3C47E;font-weight:600;margin-bottom:.3em}
   .d-portadaDia h1{color:#fff;font-size:1.9em}
   .d-portadaDia .sub{color:var(--arena);font-size:.85em;margin-top:.2em}
   .d-portadaDia .duracion{display:inline-block;margin-top:1.4em;background:var(--rojo);color:#fff;font-weight:600;font-size:.68em;padding:.45em 1.3em;border-radius:999px}
@@ -68,11 +68,13 @@
   .reveal table.tabla td{padding:.6em .8em;border:0;border-bottom:1px solid var(--arena);vertical-align:top;line-height:1.35}
   .reveal table.tabla tr:nth-child(even) td{background:#E9EDF3}
   .reveal table.tabla td:first-child{font-weight:600;color:var(--marino)}
+  .reveal table.tabla.densa{font-size:.68em}
+  .reveal table.tabla.densa td{padding:.45em .8em}
   .pista-abajo{font-size:.6em;color:var(--gris);margin-top:.9em}
   /* Pausa activa */
   .d-pausa{color:#fff}
   .d-pausa h2{color:#fff;font-size:1.7em}
-  .d-pausa .dur{font-size:.7em;color:#F3CFCF;margin-bottom:1em}
+  .d-pausa .dur{font-size:.7em;color:#D3D9E3;margin-bottom:1em}
   .d-pausa .caja{background:rgba(255,255,255,.12);padding:.9em 1.1em;line-height:1.45}
   /* Imagen y video */
   .d-imagen figure{margin:0}
@@ -112,14 +114,14 @@
   .d-cierre .col{background:#fff;padding:.8em .9em;border-top:6px solid var(--rojo);font-size:.82em;line-height:1.45}
   .d-cierre .col h3{font-family:"Public Sans",sans-serif;font-size:.85em;color:var(--rojo);font-weight:700;margin:0 0 .5em}
   /* Botón volver y controles */
-  .volver{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:12px;z-index:30;font:600 12px "Public Sans",sans-serif;color:var(--marino);background:rgba(244,242,237,.9);border:1.5px solid var(--marino);padding:4px 10px;text-decoration:none;opacity:.85}
+  .volver{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:12px;z-index:30;font:600 12px "Public Sans",sans-serif;color:var(--marino);background:rgba(244,246,249,.9);border:1.5px solid var(--marino);padding:4px 10px;text-decoration:none;opacity:.85}
   .volver:hover{opacity:1}
   .volver:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
   .reveal .progress{color:var(--rojo);height:5px}
   .reveal .controls{color:var(--marino)}
   .reveal .slide-number{background:transparent;color:var(--gris);font-family:"Public Sans",sans-serif;bottom:16px}
-  .panel-docente{position:fixed;left:0;right:0;bottom:0;z-index:35;background:rgba(37,39,52,.94);color:#fff;font:400 15px/1.45 "Public Sans",sans-serif;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));max-height:38vh;overflow-y:auto;border-top:4px solid var(--rojo)}
-  .panel-docente b{color:#F3CFCF;font-weight:600}
+  .panel-docente{position:fixed;left:0;right:0;bottom:0;z-index:35;background:rgba(22,33,58,.95);color:#fff;font:400 15px/1.45 "Public Sans",sans-serif;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));max-height:38vh;overflow-y:auto;border-top:4px solid var(--rojo)}
+  .panel-docente b{color:#E3C47E;font-weight:600}
   .panel-docente.oculto{display:none}
   .btn-notas{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:36;font:600 14px "Public Sans",sans-serif;color:#fff;background:var(--rojo);border:0;padding:7px 12px;cursor:pointer}
   .btn-notas:focus-visible{outline:3px solid var(--marino);outline-offset:2px}
@@ -141,7 +143,7 @@
 
   /* ---------- 3. Plantillas ---------- */
   const P = (typeof PRESENTACION !== "undefined") ? PRESENTACION : { materia: "", diapositivas: [] };
-  const COLOR = { portadaDia: "#252734", pausa: "#AA2F2F", proyecto: "#252734" };
+  const COLOR = { portadaDia: "#16213A", pausa: "#2E5E8C", proyecto: "#16213A" };
 
   const plantillas = {
     portadaDia: d => `
@@ -185,7 +187,7 @@
 
     tabla: d => `
       <h2>${esc(d.titulo)}</h2>
-      <table class="tabla">
+      <table class="tabla${(d.filas || []).length > 4 ? " densa" : ""}">
         <thead><tr>${(d.columnas || []).map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead>
         <tbody>${(d.filas || []).map(f => `<tr${d.pasoAPaso ? ' class="fragment"' : ""}>${f.map(c => `<td>${txt(c)}</td>`).join("")}</tr>`).join("")}</tbody>
       </table>
@@ -237,7 +239,7 @@
 
     proyecto: d => `
       <div class="marca">Proyecto del curso</div>
-      <h2>${esc(d.titulo || "Ensayo final: el quehacer científico de la pedagogía")}</h2>
+      <h2>${esc(d.titulo || "Pienso, luego investigo")}</h2>
       ${(d.preguntas || []).map(p => `<div class="pr"><span class="num">${p.numero === "·" ? "Avance" : "Pregunta " + esc(p.numero)}</span><span class="txt">${esc(p.texto)}</span></div>`).join("")}`,
 
     cierre: d => `

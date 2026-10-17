@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 1 · Encuadre e introducción a la epistemología · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 1: Lunes 19 de octubre · 2 horas
+     Encuadre · 1.1 a 1.3 Introducción a la epistemología (repaso)
+     Fuente: libro de texto Epistemología y Pedagogía, Introducción y Capítulo 1
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Temas 1 a 4 · Repaso intensivo",
+      dia: "Lunes 19 de octubre · Sesión 1 de 13",
+      titulo: "¿Puede la pedagogía ser ciencia?",
+      subtitulo: "Encuadre del curso · 1.1 a 1.3 Introducción a la epistemología",
+      duracion: "2 horas",
+      imagen: "img/s1-portada.jpg",
+      minutos: "0-3",
+      notas: "Bienvenida. Preséntate en una frase y di que este bloque arranca con un repaso intensivo de los Temas 1 a 4, que el grupo ya vio con el docente anterior." },
+
+    { tipo: "objetivos",
+      intro: "Hoy no empezamos de cero: retomamos lo que ya viste y le damos dirección.",
+      puntos: [
+        "Conocer **cómo vamos a trabajar**: temas, fechas, evaluación y el Aula Virtual.",
+        "Resolver el **Examen Diagnóstico** (no cuenta para tu calificación).",
+        "Repasar qué significa **conocer** y qué estudia la **epistemología**.",
+        "Descubrir que **enseñar y evaluar** siempre suponen una idea de conocimiento.",
+        "Arrancar tu proyecto: **Pienso, luego investigo** (pregunta 1)."
+      ],
+      pasoAPaso: true,
+      minutos: "3-5" },
+
+    { tipo: "cita",
+      texto: "¿Puede la pedagogía ser ciencia, y qué tipo de ciencia?",
+      autor: "La pregunta guía de todo el curso",
+      minutos: "5-7",
+      notas: "No la respondas. Di que cada tema la mira desde un ángulo distinto y que al final cada quien escribirá su propia respuesta en el ensayo." },
+
+    { tipo: "tabla",
+      titulo: "El curso en tres bloques",
+      columnas: ["Bloque", "Temas", "Qué pasa"],
+      filas: [
+        ["Parcial 1", "1 a 4", "Ya lo calificó el docente anterior. Hoy y las próximas tres sesiones lo **repasamos**, porque es la base de todo lo demás."],
+        ["Parcial 2", "5 a 7", "Romper la inercia, saber científico y saber cotidiano, neurociencia. **Examen: lunes 23 de noviembre.**"],
+        ["Examen Final", "8 a 10", "Orientación, nuevos horizontes y la pedagogía en la Nueva Escuela Mexicana. **Examen: 14 de diciembre** (por confirmar)."]
+      ],
+      minutos: "7-10",
+      notas: "Aclara que el Parcial 1 ya está capturado tal cual en el Aula Virtual: nadie lo vuelve a presentar." },
+
+    { tipo: "tabla",
+      titulo: "¿Cómo se califica?",
+      columnas: ["Rubro", "Parcial 2", "Examen Final"],
+      filas: [
+        ["Examen", "40 %", "40 %"],
+        ["Proyecto «Pienso, luego investigo»", "—", "40 % (entregas de 15 + 15 + 10 puntos)"],
+        ["Tareas", "25 %", "15 % (tareas y participación)"],
+        ["Participación", "25 %", "(incluida arriba)"],
+        ["Asistencia", "5 %", "5 %"],
+        ["Uniforme", "5 %", "—"]
+      ],
+      minutos: "10-14",
+      evaluacion: "Encuadre",
+      notas: "Lo que más confunde: el proyecto se trabaja durante el Parcial 2, pero su calificación NO se suma ahí; vive completa en el Examen Final (40 de 100). Examen y proyecto suman el 80 % institucional del Final." },
+
+    { tipo: "tema",
+      titulo: "Fechas que no puedes perder",
+      etiqueta: "Anótalas hoy",
+      puntos: [
+        "**Martes 3 de noviembre:** Entrega 1 del proyecto (preguntas 1 a 6).",
+        "**Lunes 23 de noviembre:** Examen del Parcial 2 (Temas 5 a 7).",
+        "**Martes 24 de noviembre:** Entrega 2 del proyecto (preguntas 1 a 14).",
+        "**Martes 8 de diciembre:** Entrega final del ensayo y **defensa oral**.",
+        "**14 de diciembre:** Examen Final (día por confirmar).",
+        "**Sin clase:** lunes 2 y lunes 16 de noviembre (descanso obligatorio)."
+      ],
+      pasoAPaso: true,
+      minutos: "14-16",
+      notas: "Todo esto está en la página Calendario del Aula Virtual, con cuenta regresiva." },
+
+    { tipo: "tema",
+      titulo: "Tu Aula Virtual",
+      etiqueta: "Recorrido",
+      imagen: "img/s1-aula-virtual.png",
+      puntos: [
+        "**Hoy en el curso:** la portada te dice qué toca en la próxima clase y qué leer antes.",
+        "**Compendio:** el libro completo, por subtemas, con buscador.",
+        "**Actividades**, **Examen** y **Mi progreso**: entras con tu nombre y tu PIN.",
+        "**Proyecto** y **Rúbricas:** qué se entrega, cuándo y cómo se califica."
+      ],
+      minutos: "16-22",
+      notas: "Proyecta la portada en vivo: jesusrodriguezgarcia749-cloud.github.io/epistemologia-y-pedagogia. Muestra el botón 🌙 de modo oscuro y la página Calendario. Diles que en el celular pueden instalarla: menú del navegador → Agregar a pantalla de inicio." },
+
+    { tipo: "tarea",
+      titulo: "Examen Diagnóstico",
+      etiqueta: "Ahora mismo · 40 minutos",
+      puntos: [
+        "Entra al Aula Virtual → **Examen** → elige tu grupo, tu nombre y tu **PIN**.",
+        "Son **30 reactivos** en 40 minutos, con una lectura breve al inicio.",
+        "**No cuenta para tu calificación:** sirve para saber de dónde partimos.",
+        "Responde con lo que sabes hoy. No busques en internet: arruinarías el diagnóstico.",
+        "**No salgas de la pantalla:** el examen se cierra solo y queda registrado."
+      ],
+      minutos: "22-62",
+      evaluacion: "Examen Diagnóstico (sin valor oficial)",
+      notas: "Antes de clase: Panel docente → Exámenes → abre el Diagnóstico. Si los alumnos todavía no están dados de alta (falta la lista oficial), cárgalos con la carga masiva al inicio o pásalo al inicio de la sesión 2 y aquí avanza con la exposición. Al terminar, ciérralo. El Panel muestra los resultados por área: cultura filosófica y científica, metodología, comprensión lectora, argumentación y vocabulario pedagógico." },
+
+    { tipo: "pausa",
+      titulo: "¡Pausa activa!",
+      duracion: "2 minutos",
+      texto: "De pie. Estira los brazos hacia arriba durante 10 segundos, gira los hombros hacia atrás 5 veces y respira hondo 3 veces. Ahora, sin sentarte: dile a quien tengas al lado **cuál reactivo del diagnóstico te hizo dudar más**.",
+      minutos: "62-64" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Qué diferencia hay entre creer que algo es cierto y saber que es cierto?",
+      respuesta: "Para **saber** no basta estar convencido: lo que crees debe ser **verdad** y tú debes tener **buenas razones** para sostenerlo.",
+      minutos: "64-66",
+      notas: "Deja que dos o tres alumnos respondan antes de mostrar la respuesta." },
+
+    { tipo: "tema",
+      titulo: "1.1 Un problema muy antiguo",
+      etiqueta: "Platón, Teeteto (ca. 369 a. C.)",
+      imagen: "img/s1-teeteto.jpg",
+      puntos: [
+        "Sócrates pregunta: **¿qué es el conocimiento?**",
+        "Teeteto: «conocer es **percibir**». Pero los sentidos engañan.",
+        "«Es tener una **opinión verdadera**». Pero se puede acertar por casualidad.",
+        "«Es una opinión verdadera **con una razón** que la explique».",
+        "De ahí nace la definición clásica que la filosofía repitió por siglos."
+      ],
+      pasoAPaso: true,
+      minutos: "66-69" },
+
+    { tipo: "tabla",
+      titulo: "Conocer = creencia verdadera justificada",
+      columnas: ["Condición", "Qué pide", "El alumno que escribe «el agua hierve a 100 °C»"],
+      filas: [
+        ["Creencia", "Que la persona acepte la afirmación como cierta.", "Lo cree: lo escribió."],
+        ["Verdad", "Que la afirmación corresponda con la realidad.", "Es verdad, a nivel del mar."],
+        ["Justificación", "Que tenga buenas razones para sostenerla.", "Si lo escribió «porque le sonaba», **le falta**."]
+      ],
+      pasoAPaso: true,
+      minutos: "69-72",
+      notas: "Remata: acertó, pero no supo. El problema del conocimiento está metido en el corazón de la evaluación." },
+
+    { tipo: "tema",
+      titulo: "Villoro: saber no es lo mismo que conocer",
+      etiqueta: "Creer, saber, conocer (1982)",
+      imagen: "img/s1-saber-conocer.jpg",
+      puntos: [
+        "**Saber:** tener razones suficientes y objetivas para una creencia.",
+        "**Conocer:** haber tenido una experiencia directa y personal con algo.",
+        "Puedes **saber** que la cocina oaxaqueña es muy diversa porque lo leíste…",
+        "…pero **conocerla** exige haberla probado, olido, vivido.",
+        "En la escuela: hay aprendizajes que se transmiten y otros que **solo se alcanzan por experiencia**."
+      ],
+      pasoAPaso: true,
+      minutos: "72-75",
+      notas: "Luis Villoro, filósofo mexicano: uno de los textos de epistemología más importantes escritos en nuestro país." },
+
+    { tipo: "cita",
+      texto: "La epistemología es la rama de la filosofía que estudia el conocimiento, en especial el conocimiento científico: sus fundamentos, sus métodos, sus criterios de validez y sus límites.",
+      autor: "Definición de trabajo del curso (Rodríguez García, 2026)",
+      minutos: "75-76" },
+
+    { tipo: "tabla",
+      titulo: "Cuatro palabras clave",
+      columnas: ["Palabra", "Pregunta que abre"],
+      filas: [
+        ["Fundamentos", "¿En qué se apoya el conocimiento: en los sentidos, en la razón, en ambos?"],
+        ["Métodos", "¿Cómo se produce: experimentando, observando, dialogando, interpretando?"],
+        ["Validez", "¿Cuándo es aceptable? ¿Qué lo distingue de una ocurrencia?"],
+        ["Límites", "¿Hasta dónde podemos conocer? ¿Hay cosas que nunca sabremos con certeza?"]
+      ],
+      pasoAPaso: true,
+      minutos: "76-78" },
+
+    { tipo: "video",
+      titulo: "¿Qué es la epistemología?",
+      youtube: "https://www.youtube.com/watch?v=2FtclNLosk0",
+      pie: "En Minutos · Educación. Repaso de unos 5 minutos: fíjate qué dice sobre Platón y sobre la ciencia.",
+      minutos: "78-83",
+      notas: "Al terminar, pregunta qué idea del video coincide con la definición de trabajo y cuál agrega algo nuevo (positivismo lógico y racionalismo crítico los veremos en el Tema 4)." },
+
+    { tipo: "tabla",
+      titulo: "Las grandes respuestas históricas",
+      columnas: ["Postura", "¿De dónde viene el conocimiento?", "Quién"],
+      filas: [
+        ["Racionalismo", "De la **razón**. «Si dudo, pienso; si pienso, existo».", "Descartes (s. XVII)"],
+        ["Empirismo", "De la **experiencia** sensible. La mente es una hoja en blanco.", "Locke, Hume"],
+        ["Criticismo", "Empieza con la experiencia, pero la **mente la organiza** (espacio, tiempo, causalidad).", "Kant"],
+        ["Constructivismo", "Se **construye** en la interacción del sujeto con su mundo.", "Piaget (epistemología genética)"]
+      ],
+      pasoAPaso: true,
+      minutos: "83-87",
+      notas: "Conexión: Platón, Descartes, Locke y Kant ya aparecieron en Filosofía Clásica y Contemporánea de la Educación; Piaget en Teorías del Aprendizaje. Aquí los leemos por lo que dijeron sobre el conocimiento." },
+
+    { tipo: "dato",
+      titulo: "Cogito, ergo sum",
+      cifra: "1637",
+      texto: "Descartes publica el *Discurso del método*: «pienso, luego existo». Tu institución lleva su nombre, y el lema de nuestro escudo da nombre a tu proyecto: **Pienso, luego investigo**.",
+      fuente: "Descartes (1637/2011), Discurso del método.",
+      minutos: "87-88" },
+
+    { tipo: "tema",
+      titulo: "1.3 La evaluación es epistemología aplicada",
+      etiqueta: "La pedagogía también tiene supuestos",
+      puntos: [
+        "**Examen de opción múltiple:** supone que el conocimiento se fragmenta en respuestas correctas e incorrectas.",
+        "**Rúbrica de proyecto:** supone que el conocimiento se demuestra en desempeños complejos.",
+        "**Portafolio:** supone que el conocimiento se construye en un proceso que vale la pena documentar.",
+        "Lo mismo pasa con **qué es aprender** y con **qué conocimientos merecen enseñarse**: el currículo siempre es una selección."
+      ],
+      pasoAPaso: true,
+      minutos: "88-91" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Qué supone sobre el conocimiento un examen de opción múltiple?",
+      respuesta: "Que saber es **reconocer la respuesta correcta** entre varias. Mide bien la información; mide peor la comprensión, la argumentación o el desempeño.",
+      minutos: "91-97",
+      evaluacion: "Participación (discusión grupal)",
+      notas: "Discusión grupal de la planeación. Gancho: el diagnóstico que acaban de resolver es casi todo de opción múltiple. ¿Qué sí te dice de ti y qué no? ¿Qué tendría que agregar para medir si sabes argumentar?" },
+
+    { tipo: "observa",
+      titulo: "Dos maestras, una misma lección",
+      etiqueta: "En el aula mexicana",
+      imagen: "img/s1-dos-maestras.jpg",
+      puntos: [
+        "**Rosa** dicta las etapas del ciclo del agua, los alumnos copian y al final hay examen.",
+        "**Lucía** pregunta de dónde viene la lluvia que inunda la ciudad en temporada de nortes.",
+        "Hacen un experimento con una olla, una tapa fría y una fuente de calor.",
+        "Los alumnos explican el ciclo con sus palabras y lo ligan con los **cenotes**.",
+        "Mismo contenido, **distinta idea de qué es conocer**. Ninguna es «la buena» en todos los casos."
+      ],
+      minutos: "97-100",
+      notas: "Rosa: más eficiente para transmitir información. Lucía: favorece la comprensión y el contexto. Reconocer los supuestos es el primer paso para elegir con conciencia." },
+
+    { tipo: "tabla",
+      titulo: "¿Qué tipo de disciplina es la pedagogía?",
+      columnas: ["Postura", "La pedagogía sería…"],
+      filas: [
+        ["Arte", "Una habilidad práctica que se aprende con experiencia e intuición, como cocinar o tocar un instrumento."],
+        ["Ciencia aplicada", "La aplicación al aula de la psicología, la sociología o la neurociencia, como la ingeniería aplica la física."],
+        ["Ciencia propia", "Una disciplina con objeto (el hecho educativo), métodos y teorías propias."],
+        ["Ciencia crítica", "Una ciencia para **transformar** la educación, con los docentes como investigadores de su práctica (Carr y Kemmis, 1986/1988)."]
+      ],
+      pasoAPaso: true,
+      minutos: "100-102" },
+
+    { tipo: "tarea",
+      titulo: "Tu postura inicial",
+      etiqueta: "En tu cuaderno · 2 minutos",
+      puntos: [
+        "Escribe **una sola frase**: ¿con cuál de las cuatro posturas te identificas hoy y por qué?",
+        "Ponle fecha. **No la borres.**",
+        "La vamos a releer en la última sesión para ver si cambió."
+      ],
+      minutos: "102-104" },
+
+    { tipo: "tema",
+      titulo: "Tu proyecto: Pienso, luego investigo",
+      etiqueta: "Proyecto del curso",
+      puntos: [
+        "Es el **ensayo final** sobre el quehacer científico de la pedagogía.",
+        "Analizas con lentes epistemológicos **tu propio protocolo de investigación**.",
+        "¿Aún no tienes protocolo? Trabajas con el **tema de tesis** que te gustaría investigar.",
+        "**18 preguntas guía** en tres entregas; al final las integras en un ensayo y lo defiendes oralmente.",
+        "Vale **40 de los 100 puntos** del Examen Final."
+      ],
+      pasoAPaso: true,
+      minutos: "104-106",
+      notas: "Todo está en la página Proyecto del Aula Virtual, con un ejemplo resuelto y las rúbricas." },
+
+    { tipo: "tabla",
+      titulo: "Las tres entregas",
+      columnas: ["Entrega", "Fecha", "Qué incluye", "Puntos"],
+      filas: [
+        ["1 · Tesis y esquema", "Martes 3 de noviembre", "Preguntas 1 a 6, con al menos 3 referencias APA 7.", "15"],
+        ["2 · Borrador completo", "Martes 24 de noviembre", "Preguntas 1 a 14 en texto continuo, con al menos 6 referencias.", "15"],
+        ["Final · Ensayo y defensa", "Martes 8 de diciembre", "Ensayo de 2,500 a 3,500 palabras (mínimo 8 referencias) y defensa oral de 3 a 4 minutos.", "10"]
+      ],
+      minutos: "106-108" },
+
+    { tipo: "tema",
+      titulo: "Sondeo: ¿en qué etapa va tu protocolo?",
+      etiqueta: "Levanta la mano",
+      puntos: [
+        "**A.** Tengo mi protocolo completo del Taller de Investigación.",
+        "**B.** Tengo tema y pregunta de investigación.",
+        "**C.** Solo tengo el tema.",
+        "**D.** Todavía no tengo nada: hoy defino un **tema de tesis tentativo**."
+      ],
+      minutos: "108-111",
+      evaluacion: "Diagnóstico del proyecto",
+      notas: "Anota cuántos hay en cada grupo. Los del D trabajarán con un tema tentativo; no pasa nada si cambia más adelante." },
+
+    { tipo: "ejemplo",
+      numero: 1,
+      pregunta: "¿Cuál es el tema y la pregunta de investigación de tu protocolo (o del que te gustaría hacer) y por qué te interesa?",
+      respuesta: "Mi protocolo se titula «La lectura en voz alta y la comprensión lectora en primer grado de secundaria». Mi pregunta es: ¿de qué manera la lectura en voz alta diaria del docente influye en la comprensión lectora de alumnos de primer grado de una secundaria pública de Campeche? Me interesa porque en mis prácticas vi que muchos alumnos **leen las palabras, pero no entienden lo que leen**.",
+      fuente: "Caso ficticio, solo para mostrar el nivel esperado. Tu respuesta debe hablar de tu propio protocolo.",
+      minutos: "111-113" },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 1, texto: "¿Cuál es el tema y la pregunta de investigación de tu protocolo (o del que te gustaría hacer) y por qué te interesa?" }
+      ],
+      minutos: "113-115",
+      notas: "Que empiecen a escribirla en clase; la terminan en casa. Es la primera de las seis de la Entrega 1." },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "¿Cuáles son las tres condiciones de la definición clásica de conocimiento?", respuesta: "**Creencia, verdad y justificación.**" },
+        { pregunta: "Según Villoro, ¿qué distingue a *conocer* de *saber*?", respuesta: "**Conocer exige experiencia directa y personal.**" },
+        { pregunta: "¿Qué estudia la epistemología, en especial?", respuesta: "**El conocimiento científico.**" },
+        { pregunta: "¿Qué cuarta postura sobre la pedagogía agregaron Carr y Kemmis?", respuesta: "**La pedagogía como ciencia crítica, que busca transformar.**" }
+      ],
+      minutos: "115-118" },
+
+    { tipo: "cierre",
+      evidencia: "Examen Diagnóstico resuelto, postura inicial escrita en el cuaderno y borrador de la pregunta 1 del proyecto.",
+      materiales: "Aula Virtual (celular o computadora), libro de texto, cuaderno.",
+      proxima: "**Martes 20:** lee la Introducción y el Tema 1, y el Tema 2 del compendio (2.1 a 2.4). Termina la pregunta 1 del proyecto.",
+      minutos: "118-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>
