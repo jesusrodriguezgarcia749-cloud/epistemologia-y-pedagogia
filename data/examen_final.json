@@ -1,6 +1,6 @@
 {
  "parcial": "final",
- "titulo": "Examen Final — Integrador de los Temas 1 a 10",
+ "titulo": "Examen Final — Integrador: Temas 8 a 10 y casos de aplicación de los Temas 1 a 7",
  "config": {
   "preguntasPorExamen": 40,
   "minutos": 60
@@ -22,20 +22,6 @@
   },
   {
    "id": "final-002",
-   "subtema": "1.2",
-   "tipo": "opcion_multiple",
-   "pregunta": "Un investigador pregunta \"¿cómo cambia la ciencia a lo largo de la historia y qué papel tiene en la sociedad?\". ¿A qué campo pertenece su pregunta?",
-   "opciones": [
-    "Filosofía de la ciencia",
-    "Gnoseología en sentido estricto",
-    "Lógica formal",
-    "Didáctica general"
-   ],
-   "correcta": 0,
-   "explicacion": "La filosofía de la ciencia mira la ciencia como actividad humana completa."
-  },
-  {
-   "id": "final-003",
    "subtema": "1.3",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada enfoque de investigación con su supuesto epistemológico.",
@@ -60,33 +46,7 @@
    "explicacion": "Ningún enfoque es superior en abstracto: cada uno responde a preguntas distintas."
   },
   {
-   "id": "final-004",
-   "subtema": "2.3",
-   "tipo": "verdadero_falso",
-   "pregunta": "Lo que distingue a la ciencia es que posee verdades eternas que nunca se revisan.",
-   "opciones": [
-    "Verdadero",
-    "Falso"
-   ],
-   "correcta": 1,
-   "explicacion": "Su rasgo distintivo es someter sus afirmaciones a prueba y crítica pública, y corregirse."
-  },
-  {
-   "id": "final-005",
-   "subtema": "2.4",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Por qué importa, para la pregunta guía del curso, cómo se clasifican las ciencias?",
-   "opciones": [
-    "Porque según la clasificación la pedagogía aparece en un lugar u otro, o no aparece en ninguno",
-    "Porque determina cuántas materias tiene la licenciatura",
-    "Porque solo las ciencias formales son ciencias",
-    "Porque la clasificación no tiene ninguna consecuencia"
-   ],
-   "correcta": 0,
-   "explicacion": "Cada clasificación revela una idea sobre qué es el conocimiento."
-  },
-  {
-   "id": "final-006",
+   "id": "final-003",
    "subtema": "3.1",
    "tipo": "caso",
    "pregunta": "Una tesista quiere comprender cómo viven las madres de familia la evaluación de sus hijos y, además, que ellas mismas propongan cambios que se pongan en práctica. ¿Qué combinación de paradigmas describe mejor su proyecto?",
@@ -100,7 +60,7 @@
    "explicacion": "Los paradigmas pueden dialogar cuando la pregunta lo exige."
   },
   {
-   "id": "final-007",
+   "id": "final-004",
    "subtema": "3.2",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué aporta la mirada sistémica al análisis de un problema de conducta en un grupo?",
@@ -114,21 +74,7 @@
    "explicacion": "Una escuela es un sistema con clima, normas no escritas e historia."
   },
   {
-   "id": "final-008",
-   "subtema": "3.4",
-   "tipo": "completar",
-   "pregunta": "Karel Kosík llamó _______ a la apariencia inmediata de las cosas que el pensamiento dialéctico debe superar.",
-   "opciones": [
-    "pseudoconcreción",
-    "equifinalidad",
-    "inconmensurabilidad",
-    "fusión de horizontes"
-   ],
-   "correcta": 0,
-   "explicacion": "Pensar dialécticamente es comprender las cosas en su totalidad, relaciones e historia."
-  },
-  {
-   "id": "final-009",
+   "id": "final-005",
    "subtema": "4.2",
    "tipo": "caso",
    "pregunta": "Un equipo docente afirma que su estrategia \"siempre funciona\": si los alumnos mejoran, es por la estrategia; si no mejoran, es por factores externos. ¿Qué crítica haría Popper y qué propondría Lakatos?",
@@ -142,7 +88,7 @@
    "explicacion": "Explicar cualquier resultado es una debilidad, no una fortaleza."
   },
   {
-   "id": "final-010",
+   "id": "final-006",
    "subtema": "4.3",
    "tipo": "caso",
    "pregunta": "La NEM se presenta como un \"cambio de paradigma\". ¿Qué tendría que mostrarse para hablar de revolución en el sentido técnico de Kuhn?",
@@ -156,7 +102,7 @@
    "explicacion": "En Kuhn, paradigma tiene un sentido técnico ligado a las comunidades."
   },
   {
-   "id": "final-011",
+   "id": "final-007",
    "subtema": "4.3",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada autor con su forma de explicar cómo avanza la ciencia.",
@@ -185,7 +131,7 @@
    "explicacion": "Es el núcleo del Tema 4."
   },
   {
-   "id": "final-012",
+   "id": "final-008",
    "subtema": "4.6",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué crítica central hace Morin a la ciencia clásica?",
@@ -199,7 +145,7 @@
    "explicacion": "Disyunción, reducción y abstracción dieron frutos, pero fragmentaron el conocimiento."
   },
   {
-   "id": "final-013",
+   "id": "final-009",
    "subtema": "4.7",
    "tipo": "verdadero_falso",
    "pregunta": "Según lo estudiado, defender la cientificidad de la pedagogía exige que imite exactamente el método experimental de la física.",
@@ -211,7 +157,7 @@
    "explicacion": "Ni la física sigue un método único; las ciencias sociales tienen criterios de rigor propios."
   },
   {
-   "id": "final-014",
+   "id": "final-010",
    "subtema": "5.1",
    "tipo": "opcion_multiple",
    "pregunta": "¿Cómo se relaciona la inercia mental con el cambio en las escuelas?",
@@ -225,7 +171,7 @@
    "explicacion": "Hay que distinguir los argumentos de los hábitos."
   },
   {
-   "id": "final-015",
+   "id": "final-011",
    "subtema": "5.2",
    "tipo": "caso",
    "pregunta": "Un investigador cualitativo explica en su tesis su relación con la escuela que estudia, sus supuestos y cómo pudieron influir en su interpretación. ¿Qué práctica aplica?",
@@ -239,21 +185,7 @@
    "explicacion": "En lugar de fingir neutralidad, explicita su posición."
   },
   {
-   "id": "final-016",
-   "subtema": "5.4",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Por qué la dimensión dialógica es central para el diálogo de saberes?",
-   "opciones": [
-    "Porque si el conocimiento se construye dialogando, los saberes de la comunidad pueden entrar en conversación con el científico",
-    "Porque elimina la necesidad del conocimiento científico",
-    "Porque solo admite el saber del maestro",
-    "Porque prohíbe el debate en el aula"
-   ],
-   "correcta": 0,
-   "explicacion": "Es una de las ideas centrales de la Nueva Escuela Mexicana."
-  },
-  {
-   "id": "final-017",
+   "id": "final-012",
    "subtema": "6.2",
    "tipo": "caso",
    "pregunta": "En un proyecto sobre plantas medicinales, unos alumnos proponen \"comprobar\" un remedio tradicional para la diabetes de un familiar dejando su tratamiento médico. ¿Qué respuesta es coherente con la ecología de saberes y con la bioética?",
@@ -267,7 +199,7 @@
    "explicacion": "Se evitan a la vez el relativismo ingenuo y el cientificismo, y se respeta el principio de no maleficencia."
   },
   {
-   "id": "final-018",
+   "id": "final-013",
    "subtema": "6.3",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada autor con su idea sobre ciencia, arte y práctica.",
@@ -292,33 +224,7 @@
    "explicacion": "La ciencia necesita imaginación para proponer y rigor para comprobar."
   },
   {
-   "id": "final-019",
-   "subtema": "6.4",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Qué respuesta parcial a la pregunta guía ofrece el Tema 6?",
-   "opciones": [
-    "Si la pedagogía es ciencia, no lo es solo por lo que producen las universidades, sino también por lo que los maestros investigan y sistematizan",
-    "La pedagogía es ciencia solo cuando la hacen investigadores universitarios",
-    "La pedagogía no puede ser ciencia porque es práctica",
-    "La pedagogía es un arte sin relación con la investigación"
-   ],
-   "correcta": 0,
-   "explicacion": "Stenhouse, Elliott, Carr y Kemmis colocan al docente en el centro de la producción de conocimiento."
-  },
-  {
-   "id": "final-020",
-   "subtema": "7.1",
-   "tipo": "verdadero_falso",
-   "pregunta": "Existen periodos sensibles en los que ciertos aprendizajes se adquieren con mayor facilidad, como la discriminación de sonidos de una lengua en los primeros años.",
-   "opciones": [
-    "Verdadero",
-    "Falso"
-   ],
-   "correcta": 0,
-   "explicacion": "Pero no son ventanas que se cierren para siempre en la mayoría de los aprendizajes escolares."
-  },
-  {
-   "id": "final-021",
+   "id": "final-014",
    "subtema": "7.4",
    "tipo": "caso",
    "pregunta": "Una escuela compra un programa que promete \"sincronizar los hemisferios\" con ejercicios físicos para mejorar las calificaciones. ¿Cómo evaluarlo con lo aprendido?",
@@ -332,7 +238,7 @@
    "explicacion": "La actividad física en general favorece el bienestar, pero no esos efectos prometidos."
   },
   {
-   "id": "final-022",
+   "id": "final-015",
    "subtema": "7.4",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada estrategia con su respaldo.",
@@ -357,7 +263,7 @@
    "explicacion": "Enseñar a estudiar es una tarea pedagógica fundamentada."
   },
   {
-   "id": "final-023",
+   "id": "final-016",
    "subtema": "8.1",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué cambio epistemológico vivió la orientación vocacional?",
@@ -371,7 +277,7 @@
    "explicacion": "Las personas cambian y el mundo del trabajo es inestable."
   },
   {
-   "id": "final-024",
+   "id": "final-017",
    "subtema": "8.3",
    "tipo": "caso",
    "pregunta": "Un docente afirma: \"Ese alumno no aprende porque tiene un problema\". Desde el enfoque de Booth y Ainscow, ¿cómo reformularías la pregunta?",
@@ -385,7 +291,7 @@
    "explicacion": "El problema se ve como relacional y sistémico, no solo del alumno."
   },
   {
-   "id": "final-025",
+   "id": "final-018",
    "subtema": "8.2",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada principio de la orientación contemporánea con su significado.",
@@ -410,7 +316,7 @@
    "explicacion": "Se reflejan en la tutoría y la educación socioemocional en México."
   },
   {
-   "id": "final-026",
+   "id": "final-019",
    "subtema": "9.1",
    "tipo": "caso",
    "pregunta": "Para tu tesis vas a entrevistar a alumnos de secundaria. ¿Qué conjunto de medidas éticas corresponde?",
@@ -424,7 +330,7 @@
    "explicacion": "La ética de la investigación con menores es una aplicación concreta de la bioética."
   },
   {
-   "id": "final-027",
+   "id": "final-020",
    "subtema": "9.2",
    "tipo": "opcion_multiple",
    "pregunta": "¿Por qué el desarrollo sustentable es un problema \"complejo\" en el sentido de Morin?",
@@ -438,7 +344,7 @@
    "explicacion": "Una solución técnica a un problema ambiental puede generar problemas sociales."
   },
   {
-   "id": "final-028",
+   "id": "final-021",
    "subtema": "9.3",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada perspectiva con la crítica principal que recibe.",
@@ -463,7 +369,7 @@
    "explicacion": "Cada perspectiva lleva a políticas educativas distintas."
   },
   {
-   "id": "final-029",
+   "id": "final-022",
    "subtema": "9.3",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué economista propuso que el desarrollo se mida por la expansión de las capacidades o libertades reales de las personas?",
@@ -477,7 +383,7 @@
    "explicacion": "Su enfoque inspiró el Índice de Desarrollo Humano del PNUD."
   },
   {
-   "id": "final-030",
+   "id": "final-023",
    "subtema": "9.4",
    "tipo": "caso",
    "pregunta": "Un compañero pide a una IA \"cinco artículos sobre neuromitos con DOI\" y los pega directamente en su lista de referencias. ¿Qué problema epistemológico y qué norma del curso incumple?",
@@ -491,7 +397,7 @@
    "explicacion": "Verificar fuentes es parte de la práctica epistemológica de citar."
   },
   {
-   "id": "final-031",
+   "id": "final-024",
    "subtema": "9.4",
    "tipo": "opcion_multiple",
    "pregunta": "Seymour Papert criticó que la computadora se usara para \"programar al niño\". ¿Qué propuso a cambio?",
@@ -505,7 +411,7 @@
    "explicacion": "Era una propuesta constructivista, heredera de Piaget."
   },
   {
-   "id": "final-032",
+   "id": "final-025",
    "subtema": "10.1",
    "tipo": "opcion_multiple",
    "pregunta": "¿Cuál es el marco legal y curricular de la Nueva Escuela Mexicana?",
@@ -519,7 +425,7 @@
    "explicacion": "El Plan de Estudio 2022 se implementó a partir del ciclo 2023-2024."
   },
   {
-   "id": "final-033",
+   "id": "final-026",
    "subtema": "10.1",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada elemento de la NEM con su descripción.",
@@ -544,7 +450,7 @@
    "explicacion": "La NEM reconoce la autonomía profesional del magisterio."
   },
   {
-   "id": "final-034",
+   "id": "final-027",
    "subtema": "10.2",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué autor sustenta la idea de que el programa analítico convierte al docente en investigador de su contexto?",
@@ -558,7 +464,7 @@
    "explicacion": "También se relacionan Elliott, Carr y Kemmis, y Schön."
   },
   {
-   "id": "final-035",
+   "id": "final-028",
    "subtema": "10.2",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada concepto de la NEM con su fuente epistemológica.",
@@ -583,7 +489,7 @@
    "explicacion": "El propio Plan de Estudio 2022 menciona varias de estas corrientes."
   },
   {
-   "id": "final-036",
+   "id": "final-029",
    "subtema": "10.3",
    "tipo": "caso",
    "pregunta": "Un maestro dice: \"La NEM es perfecta y cualquier crítica es política\". Otro dice: \"La NEM no sirve y punto\". Con los criterios del curso, ¿qué harías?",
@@ -597,7 +503,7 @@
    "explicacion": "La actitud epistemológica examina fundamentos, argumentos y evidencia."
   },
   {
-   "id": "final-037",
+   "id": "final-030",
    "subtema": "10.3",
    "tipo": "verdadero_falso",
    "pregunta": "Entre los argumentos críticos sobre la NEM está el riesgo de que, sin rigor, el diálogo de saberes debilite la enseñanza del conocimiento científico.",
@@ -609,7 +515,7 @@
    "explicacion": "Recuerda la distinción entre ecología de saberes y relativismo ingenuo."
   },
   {
-   "id": "final-038",
+   "id": "final-031",
    "subtema": "10.4",
    "tipo": "completar",
    "pregunta": "Según la respuesta posible del Tema 10, la pedagogía sería una ciencia social y humana, práctica, plural, dialógica y con una dimensión _______ inevitable.",
@@ -623,7 +529,7 @@
    "explicacion": "Porque su objeto no es solo describir cómo se educa, sino pensar cómo se debe educar."
   },
   {
-   "id": "final-039",
+   "id": "final-032",
    "subtema": "10.4",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué aporta la epistemología a un pedagogo, según el epílogo?",
@@ -637,7 +543,7 @@
    "explicacion": "Pensar lo que hacemos mientras lo hacemos."
   },
   {
-   "id": "final-040",
+   "id": "final-033",
    "subtema": "10.5",
    "tipo": "opcion_multiple",
    "pregunta": "Según el Taller APA, ¿cuál es la diferencia entre \"Referencias\" y \"Bibliografía\"?",
@@ -651,7 +557,7 @@
    "explicacion": "En APA la lista se titula \"Referencias\"."
   },
   {
-   "id": "final-041",
+   "id": "final-034",
    "subtema": "8.3",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada paradigma con la forma en que la orientación \"conoce\" a la persona.",
@@ -672,7 +578,7 @@
    "explicacion": "Cada forma de orientar se apoya en una idea distinta de qué es conocer a una persona."
   },
   {
-   "id": "final-042",
+   "id": "final-035",
    "subtema": "9.3",
    "tipo": "caso",
    "pregunta": "Una tesis evalúa un programa de becas midiendo solo el salario de los egresados cinco años después. Desde la lectura epistemológica del Tema 9, ¿qué limitación tiene?",
@@ -684,6 +590,76 @@
    ],
    "correcta": 0,
    "explicacion": "Elegir qué medir ya es tomar una postura epistemológica."
+  },
+  {
+   "id": "final-036",
+   "subtema": "8.1",
+   "tipo": "caso",
+   "pregunta": "Un orientador aplica a un grupo un test de intereses y entrega a cada alumno \"la carrera para la que nació\", sin entrevistas ni contexto. Con lo visto en todo el curso, ¿cuál es la crítica más completa?",
+   "opciones": [
+    "Trabaja desde un supuesto positivista que confunde un momento con un destino; ignora el contexto sistémico y la construcción del proyecto de vida",
+    "Ninguna: los tests estandarizados son el único conocimiento válido sobre una persona",
+    "Su único error es no usar inteligencia artificial para interpretar el test",
+    "Que el test es falsable y por eso no es científico"
+   ],
+   "correcta": 0,
+   "explicacion": "Une el modelo de rasgos y factores (Tema 8) con los paradigmas (Tema 3) y la plasticidad y el cambio (Temas 3 y 7)."
+  },
+  {
+   "id": "final-037",
+   "subtema": "8.3",
+   "tipo": "caso",
+   "pregunta": "Una escuela atribuye el bajo rendimiento de un grupo a que \"los alumnos no quieren aprender\". Desde la mirada sistémica del Tema 3 y el enfoque de barreras del Tema 8, ¿qué conviene hacer primero?",
+   "opciones": [
+    "Analizar las relaciones entre enseñanza, materiales, organización, familias y comunidad para identificar barreras para el aprendizaje y la participación",
+    "Sancionar a los alumnos con más reportes para que cambien de actitud",
+    "Aplicar un test de inteligencia a cada alumno para clasificarlos",
+    "Esperar a que el problema se resuelva solo con el tiempo"
+   ],
+   "correcta": 0,
+   "explicacion": "Un problema educativo rara vez tiene una sola causa ubicada en el alumno."
+  },
+  {
+   "id": "final-038",
+   "subtema": "9.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué un proyecto escolar sobre el cuidado de los cenotes de Campeche ilustra a la vez el pensamiento complejo y la ecología de saberes?",
+   "opciones": [
+    "Porque el problema une dimensiones ambientales, sociales y económicas, y puede integrar el conocimiento científico con el saber de la comunidad",
+    "Porque solo requiere conocimiento científico de laboratorio",
+    "Porque se resuelve con una sola disciplina y una sola causa",
+    "Porque los saberes comunitarios sustituyen por completo a la ciencia"
+   ],
+   "correcta": 0,
+   "explicacion": "Integra el desarrollo sustentable (Tema 9) con Morin (Tema 4) y Sousa Santos (Tema 6)."
+  },
+  {
+   "id": "final-039",
+   "subtema": "9.4",
+   "tipo": "caso",
+   "pregunta": "Una inteligencia artificial responde correctamente una pregunta de examen. Usando la definición clásica de conocimiento del Tema 1, ¿qué es lo más preciso afirmar?",
+   "opciones": [
+    "Produce una afirmación verdadera, pero no tiene creencias ni justificación en el sentido humano; quien copia la respuesta tampoco demuestra saberla",
+    "La IA sabe exactamente como un ser humano, porque acertó",
+    "La respuesta es falsa por haber sido generada por una máquina",
+    "La definición clásica de conocimiento no tiene relación con la IA"
+   ],
+   "correcta": 0,
+   "explicacion": "Creencia, verdad y justificación: acertar no es lo mismo que saber."
+  },
+  {
+   "id": "final-040",
+   "subtema": "10.2",
+   "tipo": "jerarquizar",
+   "pregunta": "Un colectivo docente elabora su programa analítico como un ciclo de investigación-acción. ¿Cuál es el orden correcto de las fases?",
+   "opciones": [
+    "Diagnóstico → planificación → acción → observación → reflexión",
+    "Acción → diagnóstico → reflexión → planificación → observación",
+    "Reflexión → observación → acción → diagnóstico → planificación",
+    "Planificación → reflexión → diagnóstico → observación → acción"
+   ],
+   "correcta": 0,
+   "explicacion": "El programa analítico conecta con Elliott, Stenhouse y Carr y Kemmis (Temas 1 y 6)."
   }
  ]
 }
