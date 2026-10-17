@@ -1,0 +1,95 @@
+{
+ "bloque": 7,
+ "nombre": "El proceso de enseñanza-aprendizaje a la luz de la neurociencia",
+ "descripcion": "En el tema 5 vimos que la neurociencia aporta a la epistemología una idea poderosa: el cerebro construye activamente lo que conoce. Ahora vamos a bajar al aula y preguntarnos qué nos dice la neurociencia sobre el proceso de enseñanza-aprendizaje.",
+ "subtemas": [
+  {
+   "id": "7.1",
+   "titulo": "Dinámica del cerebro",
+   "contenido": [
+    "PREGUNTAS DE ARRANQUE: • ¿Es cierto que solo usamos el 10 % del cerebro? ¶ • ¿Hay personas «de hemisferio derecho» y personas «de hemisferio izquierdo»? ¶ • Si un alumno dice que es «visual», ¿hay que enseñarle solo con imágenes?",
+    "En el tema 5 vimos que la neurociencia aporta a la epistemología una idea poderosa: el cerebro construye activamente lo que conoce. Ahora vamos a bajar al aula y preguntarnos qué nos dice la neurociencia sobre el **proceso de enseñanza-aprendizaje**.",
+    "Este tema tiene un doble propósito. Por un lado, presentar lo que la investigación actual sabe con razonable solidez sobre cómo aprende el cerebro. Por otro, enseñar a distinguir ese conocimiento de los **neuromitos**: creencias que circulan como si fueran científicas, que muchos docentes aceptan de buena fe y que la investigación no respalda. Este segundo propósito es, en el fondo, un ejercicio de epistemología aplicada: aplicar los cánones de cientificidad del tema 2 a un campo de moda.",
+    "§ Neuronas, sinapsis y redes",
+    "El cerebro humano contiene alrededor de 86 000 millones de neuronas, conectadas entre sí mediante billones de **sinapsis**. Cada neurona puede comunicarse con miles de otras. La información no está guardada en un solo lugar, como en un archivero, sino distribuida en **redes** de neuronas que se activan juntas.",
+    "§ Plasticidad: el cerebro que cambia",
+    "El descubrimiento más importante para la educación es la **plasticidad cerebral**: la capacidad del cerebro de modificar sus conexiones a partir de la experiencia. Cada vez que aprendemos algo, ciertas conexiones se fortalecen y otras se debilitan. El psicólogo canadiense Donald Hebb propuso en 1949 una idea que se resume a menudo así: las neuronas que se activan juntas tienden a conectarse entre sí. Por eso la práctica repetida consolida un aprendizaje, y lo que no se usa tiende a debilitarse.",
+    "La plasticidad dura toda la vida, aunque es mayor en la infancia. Esto tiene una consecuencia pedagógica y ética: **nadie está condenado por su cerebro**. Ningún alumno es incapaz de aprender por naturaleza; las capacidades se desarrollan con la experiencia y la enseñanza adecuadas.",
+    "§ Periodos sensibles, no ventanas que se cierran",
+    "Existen **periodos sensibles** en los que ciertos aprendizajes se adquieren con mayor facilidad: por ejemplo, la discriminación de los sonidos de una lengua en los primeros años. Pero conviene no exagerar. La idea de que «todo se juega antes de los tres años» y de que después las ventanas se cierran para siempre es una simplificación que la investigación no respalda para la mayoría de los aprendizajes escolares, como leer, escribir o resolver problemas matemáticos.",
+    "§ El cerebro adolescente",
+    "Para quienes trabajarán en secundaria o bachillerato, es especialmente útil saber que el cerebro adolescente está en plena reorganización. La **corteza prefrontal**, relacionada con la planeación, el control de impulsos y la toma de decisiones, termina de madurar hasta pasados los veinte años. Al mismo tiempo, los sistemas relacionados con la recompensa y la sensibilidad social son muy activos en la adolescencia. Esto ayuda a entender por qué los adolescentes son más sensibles a la opinión de sus pares y más propensos a buscar emociones intensas. No es «falta de voluntad»: es una etapa del desarrollo que la escuela debe acompañar con estructura, sentido y oportunidades de participación.",
+    "§ El sueño y el aprendizaje",
+    "Una de las conclusiones más sólidas de la neurociencia actual es que **el sueño es necesario para consolidar la memoria**. Durante el sueño, el cerebro reactiva y reorganiza lo aprendido durante el día. Dormir poco no solo produce cansancio: perjudica el aprendizaje. Esto plantea preguntas serias sobre los horarios escolares, las tareas nocturnas y el uso de pantallas antes de dormir."
+   ]
+  },
+  {
+   "id": "7.2",
+   "titulo": "Interacción en el sistema cognitivo-afectivo",
+   "contenido": [
+    "§ Pensar y sentir no se separan",
+    "Durante mucho tiempo, la escuela trató la cognición y la emoción como mundos distintos: el salón para pensar, el recreo para sentir. La neurociencia ha mostrado que esa separación es artificial. Ya vimos en el tema 5 el trabajo de Damasio (1994/1996). Mary Helen Immordino-Yang y Antonio Damasio (2007) lo aplicaron directamente a la educación: las emociones no son un añadido al aprendizaje, sino que forman parte de él. Aprendemos, recordamos y usamos lo aprendido en la medida en que tiene significado emocional y social para nosotros.",
+    "§ El estrés y el aprendizaje",
+    "Un poco de tensión puede movilizar la atención, como el nerviosismo antes de una exposición. Pero el **estrés intenso y prolongado** afecta negativamente la memoria y el aprendizaje. Alumnos que viven en situaciones de violencia, inseguridad, hambre o conflicto familiar llegan al salón con su sistema de alerta activado, y eso dificulta su concentración. No es un problema de «mala actitud»: es una respuesta del organismo. Esta evidencia respalda la importancia de un clima escolar seguro y de vínculos de confianza.",
+    "§ La curiosidad y la recompensa",
+    "La curiosidad no es un adorno: la investigación sugiere que, cuando algo nos genera curiosidad, el cerebro se prepara para aprender mejor, e incluso recordamos con más facilidad la información que llega en ese estado. El neurocientífico español Francisco Mora (2013), en su libro *Neuroeducación*, insiste en que la emoción y la curiosidad son la puerta del aprendizaje, y lo resume en el subtítulo de su obra: solo se puede aprender aquello que se ama.",
+    "EN EL AULA MEXICANA: **Una pregunta antes del tema.** Un maestro de Historia de segundo de secundaria va a enseñar el comercio colonial. En lugar de empezar con fechas, pregunta: «¿Por qué creen que Campeche tenía murallas y baluartes? ¿De quién se defendía?». Los alumnos lanzan hipótesis sobre piratas, guerras e invasiones. Durante la clase, el maestro va respondiendo esas preguntas con información histórica. Al final, varios alumnos recuerdan con detalle lo que vieron, porque la clase respondió una curiosidad que ellos mismos tenían. La pregunta inicial no fue un truco motivacional: fue una manera de preparar el aprendizaje.",
+    "§ Lo social en el aprendizaje",
+    "El cerebro humano es profundamente social. Aprendemos observando, imitando, conversando y colaborando. La relación con el maestro y con los compañeros influye en cuánto y cómo aprendemos. Esto conecta con Vygotsky (1978/1979) y con la dimensión dialógica del tema 5: aprender es, en buena medida, una actividad social.",
+    "PARA PENSAR: ¿Qué emociones predominan en un examen en tu experiencia? ¿Cómo influyen en lo que logras demostrar? ¿Qué cambiaría en la evaluación si tomáramos en serio la relación entre emoción y cognición?"
+   ]
+  },
+  {
+   "id": "7.3",
+   "titulo": "Armonía entre las partes del cerebro",
+   "contenido": [
+    "§ El mito de los hemisferios",
+    "Uno de los neuromitos más difundidos es que hay personas de «hemisferio izquierdo» (lógicas, analíticas, verbales) y personas de «hemisferio derecho» (creativas, intuitivas, artísticas), y que la escuela debería enseñar de manera diferente a cada una.",
+    "¿De dónde salió esta idea? De investigaciones reales, pero mal interpretadas. El neurobiólogo Roger Sperry, premio Nobel en 1981, estudió pacientes a quienes se había cortado el cuerpo calloso —el haz de fibras que conecta los dos hemisferios— para tratar epilepsias graves. Encontró que, en esas condiciones excepcionales, cada hemisferio procesaba cierta información de manera diferente. Es cierto que existen especializaciones: por ejemplo, en la mayoría de las personas, ciertas funciones del lenguaje dependen más del hemisferio izquierdo.",
+    "Pero en un cerebro sano **los dos hemisferios trabajan juntos constantemente**, comunicados por el cuerpo calloso. Leer, resolver un problema matemático o crear una obra de arte activan redes que involucran ambos hemisferios. No hay evidencia de que las personas «usen más» un hemisferio que otro como rasgo de personalidad, ni de que enseñar «al hemisferio derecho» mejore el aprendizaje.",
+    "§ El mito del cerebro triuno",
+    "Otra idea muy difundida en cursos para docentes es el modelo del **cerebro triuno**, propuesto por Paul MacLean a mediados del siglo XX: un cerebro «reptiliano» de los instintos, un cerebro «límbico» de las emociones y una «neocorteza» racional, superpuestos como capas evolutivas. Es una metáfora atractiva, pero la neurociencia actual la considera superada: la evolución no apiló cerebros, y las emociones y la razón no ocupan capas separadas, sino redes que se entrelazan.",
+    "§ Lo que sí sabemos: redes integradas",
+    "La neurociencia contemporánea habla de **redes cerebrales** que conectan zonas distantes y trabajan de manera coordinada: redes de atención, de control ejecutivo, de memoria, de lenguaje, de procesamiento emocional. La «armonía» entre las partes del cerebro no consiste en equilibrar dos hemisferios, sino en la integración de múltiples redes. Una educación integral, que combine razonamiento, emoción, movimiento, lenguaje y arte, es valiosa no porque «active el hemisferio derecho», sino porque el ser humano es una unidad."
+   ]
+  },
+  {
+   "id": "7.4",
+   "titulo": "Principios básicos para aumentar el aprendizaje",
+   "contenido": [
+    "§ Los cuatro pilares de Dehaene",
+    "El neurocientífico francés Stanislas Dehaene (2018/2019), en *¿Cómo aprendemos?*, propuso cuatro pilares del aprendizaje basados en la investigación de las ciencias cognitivas y la neurociencia:",
+    "• **Atención:** el cerebro selecciona la información. Lo que no recibe atención difícilmente se aprende. Las clases con demasiados estímulos simultáneos, o con distracciones constantes, dificultan el aprendizaje.",
+    "• **Compromiso activo:** un organismo pasivo aprende poco. El alumno debe generar hipótesis, intentar, responder, predecir. No se trata de que se mueva todo el tiempo, sino de que su mente esté activa.",
+    "• **Retroalimentación del error:** el cerebro aprende cuando detecta la diferencia entre lo que esperaba y lo que ocurrió. El error es información, no un fracaso. Una retroalimentación rápida y precisa, sin castigo, es una de las herramientas más poderosas.",
+    "• **Consolidación:** lo aprendido debe volverse automático para liberar recursos mentales. Esto requiere práctica, repetición espaciada y sueño.",
+    "§ Estrategias con respaldo de investigación",
+    "La psicología cognitiva ha identificado algunas estrategias de estudio con evidencia sólida. Una amplia revisión de John Dunlosky y sus colegas (2013) comparó diez técnicas de estudio y encontró que dos tenían una utilidad alta: la **práctica de recuperación** y la **práctica espaciada**.",
+    "• **Práctica de recuperación (efecto de prueba):** intentar recordar lo aprendido —por ejemplo, con preguntas, tarjetas o pequeños cuestionarios sin calificación— fortalece la memoria más que releer. Roediger y Karpicke (2006) mostraron experimentalmente que los estudiantes que practicaban recordando retenían más a largo plazo que quienes solo releían el texto.",
+    "• **Práctica espaciada:** distribuir el estudio en varias sesiones a lo largo del tiempo es más eficaz que concentrarlo todo en una sola sesión la noche antes del examen.",
+    "• **Práctica intercalada:** alternar tipos de problemas en lugar de practicar uno solo en bloque ayuda a distinguir cuándo usar cada estrategia.",
+    "• **Elaboración y ejemplos:** explicar con las propias palabras, preguntarse por qué algo es así y relacionarlo con lo que ya se sabe favorece la comprensión.",
+    "Las técnicas que los alumnos usan con más frecuencia, como releer o subrayar, resultaron de baja utilidad en esa revisión. Enseñar a estudiar es, por tanto, una tarea pedagógica fundamentada.",
+    "§ Neuromitos frecuentes en la escuela",
+    "Un estudio de Dekker y sus colegas (2012) aplicó un cuestionario a docentes del Reino Unido y los Países Bajos y encontró que, en promedio, aceptaban aproximadamente la mitad de los neuromitos que se les presentaron. Un dato inquietante: los docentes más interesados en la neurociencia no estaban protegidos; a veces aceptaban más mitos, posiblemente porque habían estado más expuestos a materiales comerciales de baja calidad. Paul Howard-Jones (2014) ha documentado cómo estos mitos se difunden en todo el mundo.",
+    "TABLA: Neuromito | Lo que dice la evidencia ¶ Solo usamos el 10 % del cerebro. | Usamos prácticamente todo el cerebro; distintas zonas se activan según la tarea. ¶ Hay personas de hemisferio izquierdo y de hemisferio derecho. | Los hemisferios trabajan juntos; no hay evidencia de un hemisferio dominante como rasgo de aprendizaje. ¶ Se aprende mejor si se enseña según el estilo de aprendizaje (visual, auditivo, kinestésico). | No hay evidencia de que adaptar la enseñanza al estilo preferido mejore el aprendizaje (Pashler et al., 2008). Sí ayuda presentar la información en varios formatos a todos. ¶ Ciertos ejercicios físicos (como los de «gimnasia cerebral») mejoran la conexión entre hemisferios. | No hay evidencia de esos efectos específicos; la actividad física en general sí favorece la salud y el bienestar. ¶ Escuchar a Mozart hace más inteligentes a los niños. | El llamado «efecto Mozart» fue un efecto pequeño y pasajero que no se ha confirmado de manera consistente. ¶ Todo se juega antes de los tres años. | Hay periodos sensibles, pero la plasticidad dura toda la vida. ¶ El azúcar provoca hiperactividad. | Los estudios controlados no han encontrado ese efecto en la conducta de los niños.",
+    "EN EL AULA MEXICANA: **El test de estilos de aprendizaje.** En muchas escuelas se aplica al inicio del ciclo un cuestionario para clasificar a los alumnos como visuales, auditivos o kinestésicos, y se pide a los docentes que adapten sus clases a cada estilo. Desde la epistemología, podemos hacer tres preguntas: ¿qué evidencia respalda la idea?, ¿quién la promueve?, ¿qué pasaría si fuera falsa? La revisión de Pashler y sus colegas (2008) mostró que no hay evidencia de que adaptar la enseñanza al estilo preferido mejore los resultados. Las preferencias de los alumnos existen, pero eso no significa que aprendan mejor así. Lo que sí tiene respaldo es presentar el contenido en varias formas —palabras, imágenes, ejemplos, práctica— para todos los alumnos.",
+    "§ Cautela: de la neurociencia al aula",
+    "Conviene cerrar con una advertencia epistemológica. Entre un hallazgo de laboratorio sobre neuronas y una recomendación para el salón de clases hay una gran distancia. Muchos productos se venden con la etiqueta «neuro» —neuroeducación, neurodidáctica, neuromarketing— sin que exista un puente sólido entre la investigación y la práctica que proponen. La pregunta que debemos hacernos ante cualquier propuesta es la misma que ante cualquier afirmación científica: ¿dónde está la evidencia?, ¿quién la produjo?, ¿se ha replicado?",
+    "PARA PENSAR: Busca en internet un curso, video o libro que prometa mejorar el aprendizaje con «neuroeducación». Aplícale los cánones de cientificidad del tema 2. ¿Cita investigaciones? ¿Son verificables? ¿Promete demasiado? ¿Vende algo?",
+    "TALLER APA: **Obras con varios autores.** En APA 7: ¶ • **Dos autores:** se citan siempre ambos: (Immordino-Yang y Damasio, 2007). ¶ • **Tres o más autores:** desde la primera cita se escribe solo el primero seguido de «et al.»: (Pashler et al., 2008); (Dekker et al., 2012). ¶ • En la **lista de referencias**, en cambio, se escriben todos los autores hasta 20. ¶ Ejemplo de referencia: Pashler, H., McDaniel, M., Rohrer, D., y Bjork, R. (2008). Learning styles: Concepts and evidence. *Psychological Science in the Public Interest*, *9*(3), 105-119. https://doi.org/10.1111/j.1539-6053.2009.01038.x",
+    "§ Glosario del tema",
+    "**Sinapsis.** Punto de comunicación entre dos neuronas.",
+    "**Plasticidad cerebral.** Capacidad del cerebro de modificar sus conexiones a partir de la experiencia, presente durante toda la vida.",
+    "**Periodo sensible.** Etapa en que ciertos aprendizajes se adquieren con mayor facilidad.",
+    "**Corteza prefrontal.** Región cerebral relacionada con la planeación y el control de impulsos, que madura hasta la adultez temprana.",
+    "**Consolidación.** Proceso por el cual un aprendizaje se estabiliza en la memoria, en buena parte durante el sueño.",
+    "**Neuromito.** Creencia falsa o exagerada sobre el cerebro que se difunde como si fuera científica.",
+    "**Práctica de recuperación.** Estrategia de estudio que consiste en intentar recordar lo aprendido.",
+    "**Práctica espaciada.** Distribución del estudio en varias sesiones a lo largo del tiempo.",
+    "**Retroalimentación.** Información sobre el resultado de una acción que permite corregir el error.",
+    "RESUMEN DEL TEMA: El cerebro aprende modificando sus conexiones: la plasticidad dura toda la vida y nadie está condenado por su cerebro. Existen periodos sensibles, el cerebro adolescente está en reorganización y el sueño es esencial para consolidar la memoria. Cognición y emoción no se separan: el estrés intenso perjudica el aprendizaje, y la curiosidad y los vínculos sociales lo favorecen. Los hemisferios y las redes cerebrales trabajan integrados; el cerebro triuno y los estilos de aprendizaje son neuromitos. Los cuatro pilares de Dehaene —atención, compromiso activo, retroalimentación del error y consolidación— y estrategias como la práctica de recuperación y la espaciada tienen respaldo sólido. Ante cualquier propuesta «neuro», hay que preguntar por la evidencia. Este cambio en la manera de entender al ser humano también transformó la orientación educativa, tema del tema 8."
+   ]
+  }
+ ]
+}

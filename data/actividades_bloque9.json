@@ -1,0 +1,279 @@
+{
+ "bloque": 9,
+ "reactivos": [
+  {
+   "id": "ep9-001",
+   "subtema": "9.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cómo concibió Van Rensselaer Potter la bioética?",
+   "opciones": [
+    "Como un puente entre las ciencias de la vida y las humanidades, especialmente la ética",
+    "Como una rama de la medicina dedicada a cirugías",
+    "Como un código de leyes para hospitales",
+    "Como la ética de los negocios farmacéuticos"
+   ],
+   "correcta": 0,
+   "explicacion": "Su preocupación era que la reflexión sobre el uso de la ciencia se había quedado atrás."
+  },
+  {
+   "id": "ep9-002",
+   "subtema": "9.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada principio de Beauchamp y Childress con su significado.",
+   "pares": [
+    {
+     "izquierda": "Autonomía",
+     "derecha": "Respetar la capacidad de decidir sobre sí mismo, con información y consentimiento"
+    },
+    {
+     "izquierda": "Beneficencia",
+     "derecha": "Actuar en favor del bien de las personas"
+    },
+    {
+     "izquierda": "No maleficencia",
+     "derecha": "No causar daño"
+    },
+    {
+     "izquierda": "Justicia",
+     "derecha": "Distribuir con equidad beneficios y cargas"
+    }
+   ],
+   "explicacion": "Son los cuatro principios clásicos de la bioética."
+  },
+  {
+   "id": "ep9-003",
+   "subtema": "9.1",
+   "tipo": "caso",
+   "pregunta": "Una practicante publica en redes fotos de niños trabajando, con el nombre de la escuela, sin permiso de las familias. ¿Qué principio de ética de la investigación descuidó?",
+   "opciones": [
+    "Consentimiento informado y confidencialidad",
+    "Triangulación de fuentes",
+    "Retroalimentación del error",
+    "Práctica espaciada"
+   ],
+   "correcta": 0,
+   "explicacion": "La bioética empieza en lo cotidiano: la ubicación de algunos niños no debe hacerse pública."
+  },
+  {
+   "id": "ep9-004",
+   "subtema": "9.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "En una investigación con menores, ¿qué es el asentimiento?",
+   "opciones": [
+    "El acuerdo del propio menor para participar, además de la autorización de sus tutores",
+    "La firma del director de la escuela",
+    "La aprobación de la tesis por el sínodo",
+    "El permiso para publicar resultados en redes sociales"
+   ],
+   "correcta": 0,
+   "explicacion": "Aunque los padres autoricen, el menor también debe estar de acuerdo, en lenguaje adecuado a su edad."
+  },
+  {
+   "id": "ep9-005",
+   "subtema": "9.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué propuso Hans Jonas en El principio de responsabilidad?",
+   "opciones": [
+    "Una ética orientada al futuro: actuar de modo compatible con la permanencia de la vida humana auténtica",
+    "Que la tecnología no requiere reflexión ética",
+    "Que solo importan las consecuencias inmediatas de los actos",
+    "Que la ética debe dejarse a los científicos"
+   ],
+   "correcta": 0,
+   "explicacion": "El poder de la tecnología exige pensar en las generaciones futuras."
+  },
+  {
+   "id": "ep9-006",
+   "subtema": "9.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cómo definió el Informe Brundtland (1987) el desarrollo sostenible?",
+   "opciones": [
+    "El que satisface las necesidades del presente sin comprometer la capacidad de las generaciones futuras de satisfacer las suyas",
+    "El que maximiza el crecimiento económico a cualquier costo",
+    "El que prohíbe toda actividad industrial",
+    "El que se limita a proteger especies en peligro"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la definición que hizo historia."
+  },
+  {
+   "id": "ep9-007",
+   "subtema": "9.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada dimensión del desarrollo sustentable con su enfoque.",
+   "pares": [
+    {
+     "izquierda": "Ambiental",
+     "derecha": "Conservar ecosistemas, biodiversidad y recursos"
+    },
+    {
+     "izquierda": "Social",
+     "derecha": "Equidad, inclusión y bienestar de las personas"
+    },
+    {
+     "izquierda": "Económica",
+     "derecha": "Generar prosperidad sin destruir sus propias bases"
+    }
+   ],
+   "explicacion": "Es un problema complejo: las dimensiones no pueden resolverse por separado."
+  },
+  {
+   "id": "ep9-008",
+   "subtema": "9.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué Objetivo de Desarrollo Sostenible de la Agenda 2030 se refiere a la educación?",
+   "opciones": [
+    "El Objetivo 4",
+    "El Objetivo 1",
+    "El Objetivo 10",
+    "El Objetivo 17"
+   ],
+   "correcta": 0,
+   "explicacion": "Pide una educación inclusiva, equitativa y de calidad."
+  },
+  {
+   "id": "ep9-009",
+   "subtema": "9.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "Desde América Latina, la propuesta del buen vivir plantea una relación de armonía con la naturaleza en lugar de su explotación.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Conecta con la ecología de saberes y el conocimiento de las comunidades indígenas."
+  },
+  {
+   "id": "ep9-010",
+   "subtema": "9.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada perspectiva sobre economía y educación con su idea central.",
+   "pares": [
+    {
+     "izquierda": "Capital humano (Schultz, Becker)",
+     "derecha": "La educación es una inversión que aumenta la productividad"
+    },
+    {
+     "izquierda": "Reproducción (Bourdieu y Passeron)",
+     "derecha": "La escuela premia el capital cultural y legitima desigualdades"
+    },
+    {
+     "izquierda": "Capacidades (Sen)",
+     "derecha": "La educación amplía las libertades reales de las personas"
+    },
+    {
+     "izquierda": "Derecho humano (Delors; LGE 2019)",
+     "derecha": "La educación es un derecho que el Estado debe garantizar"
+    }
+   ],
+   "explicacion": "Cada perspectiva lleva a políticas educativas distintas."
+  },
+  {
+   "id": "ep9-011",
+   "subtema": "9.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué sostuvieron Bowles y Gintis en Schooling in Capitalist America (1976)?",
+   "opciones": [
+    "Que la escuela reproduce las desigualdades preparando a unos para obedecer y a otros para dirigir",
+    "Que la escuela elimina por completo las desigualdades",
+    "Que la educación no tiene relación con la economía",
+    "Que el capital humano es la única explicación del crecimiento"
+   ],
+   "correcta": 0,
+   "explicacion": "Hablan de una correspondencia entre las relaciones sociales de la escuela y las del trabajo."
+  },
+  {
+   "id": "ep9-012",
+   "subtema": "9.3",
+   "tipo": "completar",
+   "pregunta": "Para Pierre Bourdieu, la escuela premia el _______ que los alumnos de clases privilegiadas traen de casa y lo presenta como mérito.",
+   "opciones": [
+    "capital cultural",
+    "capital humano",
+    "conocimiento tácito",
+    "núcleo duro"
+   ],
+   "correcta": 0,
+   "explicacion": "Así la escuela legitima las desigualdades."
+  },
+  {
+   "id": "ep9-013",
+   "subtema": "9.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cómo se referencia en APA 7 el artículo de Schultz de 1961?",
+   "opciones": [
+    "Schultz, T. W. (1961). Investment in human capital. The American Economic Review, 51(1), 1-17.",
+    "Schultz (1961) Investment in Human Capital, American Economic Review, pág. 1.",
+    "Theodore Schultz, \"Investment in human capital\", 1961, The American Economic Review.",
+    "Schultz, T. W. Investment in human capital. (1961). The American Economic Review: 51-1."
+   ],
+   "correcta": 0,
+   "explicacion": "Autor, año, título del artículo, revista y volumen (en cursivas en el original), número entre paréntesis y páginas."
+  },
+  {
+   "id": "ep9-014",
+   "subtema": "9.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "En los años noventa, ¿a qué se refería hablar de \"programas computacionales\" en educación?",
+   "opciones": [
+    "A la enseñanza asistida por computadora, el software educativo multimedia y los programas de análisis de datos",
+    "A la inteligencia artificial generativa",
+    "A las redes sociales",
+    "A las clases en línea por videollamada"
+   ],
+   "correcta": 0,
+   "explicacion": "El tema se escribió en un contexto muy distinto del actual."
+  },
+  {
+   "id": "ep9-015",
+   "subtema": "9.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada antecedente con su aporte.",
+   "pares": [
+    {
+     "izquierda": "B. F. Skinner",
+     "derecha": "Las máquinas de enseñar: pasos pequeños y refuerzo inmediato"
+    },
+    {
+     "izquierda": "Seymour Papert",
+     "derecha": "Logo: que el niño programe a la computadora"
+    },
+    {
+     "izquierda": "Red Escolar (1997)",
+     "derecha": "Llevar computadoras e internet a escuelas públicas de México"
+    },
+    {
+     "izquierda": "Software de análisis cualitativo",
+     "derecha": "Codificar entrevistas y documentos en la computadora"
+    }
+   ],
+   "explicacion": "Papert proponía una mirada constructivista, heredera de Piaget."
+  },
+  {
+   "id": "ep9-016",
+   "subtema": "9.4",
+   "tipo": "caso",
+   "pregunta": "Un alumno entrega un ensayo impecable, pero no puede explicar sus argumentos y una de sus fuentes no existe. ¿Qué rediseño hizo el maestro del caso?",
+   "opciones": [
+    "Entregas por etapas, bitácora del proceso y breve defensa oral, enseñando a usar la IA para generar preguntas y contraargumentos",
+    "Prohibió escribir ensayos para siempre",
+    "Aceptó el ensayo porque estaba bien escrito",
+    "Pidió que todos usaran IA para redactar"
+   ],
+   "correcta": 0,
+   "explicacion": "La IA no debe sustituir el pensamiento del alumno."
+  },
+  {
+   "id": "ep9-017",
+   "subtema": "9.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según el Taller APA, se puede citar una fuente sugerida por una inteligencia artificial sin haberla localizado y leído, siempre que el DOI se vea real.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Nunca: estos sistemas pueden inventar autores, títulos y DOI que parecen reales."
+  }
+ ]
+}

@@ -1,0 +1,298 @@
+{
+ "bloque": 3,
+ "reactivos": [
+  {
+   "id": "ep3-001",
+   "subtema": "3.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué imagen del mundo surgió de la revolución científica de los siglos XVI y XVII?",
+   "opciones": [
+    "Mecanicista: el universo como una gran máquina regida por leyes fijas",
+    "Dialéctica: el universo como lucha permanente de contrarios",
+    "Sistémica: el universo como red de partes con propiedades emergentes",
+    "Hermenéutica: el universo como texto que hay que interpretar"
+   ],
+   "correcta": 0,
+   "explicacion": "Galileo, Descartes y Newton dieron forma a una imagen del mundo como reloj."
+  },
+  {
+   "id": "ep3-002",
+   "subtema": "3.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada estadio de Comte con su forma de explicar los fenómenos.",
+   "pares": [
+    {
+     "izquierda": "Teológico",
+     "derecha": "Por la voluntad de dioses"
+    },
+    {
+     "izquierda": "Metafísico",
+     "derecha": "Por entidades abstractas"
+    },
+    {
+     "izquierda": "Positivo",
+     "derecha": "Por leyes descubiertas mediante la observación"
+    }
+   ],
+   "explicacion": "Para Comte, el estadio positivo renuncia a las causas últimas y busca leyes."
+  },
+  {
+   "id": "ep3-003",
+   "subtema": "3.1",
+   "tipo": "completar",
+   "pregunta": "Émile Durkheim formuló la regla de tratar los hechos sociales como _______.",
+   "opciones": [
+    "cosas",
+    "textos",
+    "contradicciones",
+    "sistemas"
+   ],
+   "correcta": 0,
+   "explicacion": "Con ello quería decir que las normas e instituciones existen fuera de los individuos y pueden estudiarse objetivamente."
+  },
+  {
+   "id": "ep3-004",
+   "subtema": "3.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada paradigma de investigación educativa con su finalidad.",
+   "pares": [
+    {
+     "izquierda": "Positivista",
+     "derecha": "Explicar, predecir y controlar"
+    },
+    {
+     "izquierda": "Interpretativo",
+     "derecha": "Comprender e interpretar significados"
+    },
+    {
+     "izquierda": "Sociocrítico",
+     "derecha": "Transformar y emancipar"
+    }
+   ],
+   "explicacion": "Se apoyan en las tres tradiciones de las ciencias sociales y en los intereses del conocimiento de Habermas."
+  },
+  {
+   "id": "ep3-005",
+   "subtema": "3.1",
+   "tipo": "caso",
+   "pregunta": "Una investigadora quiere entender cómo viven los docentes de una secundaria la llegada de la reforma, mediante entrevistas a profundidad. ¿Qué paradigma sigue?",
+   "opciones": [
+    "Interpretativo",
+    "Positivista",
+    "Sociocrítico",
+    "Formal"
+   ],
+   "correcta": 0,
+   "explicacion": "Busca comprender significados desde la experiencia de los actores."
+  },
+  {
+   "id": "ep3-006",
+   "subtema": "3.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según Jürgen Habermas, ¿qué interés guía a las ciencias críticas?",
+   "opciones": [
+    "Emancipatorio",
+    "Técnico",
+    "Práctico",
+    "Económico"
+   ],
+   "correcta": 0,
+   "explicacion": "El técnico guía a las ciencias empírico-analíticas; el práctico, a las hermenéuticas; el emancipatorio, a las críticas."
+  },
+  {
+   "id": "ep3-007",
+   "subtema": "3.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es la idea central de la Teoría General de los Sistemas de Bertalanffy?",
+   "opciones": [
+    "El todo es más que la suma de las partes",
+    "El todo es exactamente la suma de sus partes",
+    "Para entender algo hay que desarmarlo pieza por pieza",
+    "Las partes no se influyen entre sí"
+   ],
+   "correcta": 0,
+   "explicacion": "Al relacionarse, las partes generan propiedades emergentes."
+  },
+  {
+   "id": "ep3-008",
+   "subtema": "3.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "\"El agua moja, pero ni el hidrógeno ni el oxígeno mojan por separado\". ¿Qué concepto ilustra?",
+   "opciones": [
+    "Propiedad emergente",
+    "Retroalimentación",
+    "Equifinalidad",
+    "Lógica lineal"
+   ],
+   "correcta": 0,
+   "explicacion": "Una propiedad emergente aparece en el sistema y no existe en sus partes aisladas."
+  },
+  {
+   "id": "ep3-009",
+   "subtema": "3.2",
+   "tipo": "caso",
+   "pregunta": "Kevin llega tarde y se duerme en clase. Los reportes no cambian nada; la trabajadora social descubre que cuida a sus hermanos porque su mamá entró al turno temprano. ¿Qué enseña el caso?",
+   "opciones": [
+    "Que mirar el sistema completo (escuela, familia, trabajo, transporte) permite soluciones que la mirada lineal no ve",
+    "Que los reportes siempre son la mejor solución a la impuntualidad",
+    "Que el problema era solo de falta de voluntad de Kevin",
+    "Que la escuela no debe involucrarse con la familia"
+   ],
+   "correcta": 0,
+   "explicacion": "La mirada lineal \"llegar tarde → reporte\" no resolvía nada; la sistémica sí."
+  },
+  {
+   "id": "ep3-010",
+   "subtema": "3.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada característica de los sistemas con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Interdependencia",
+     "derecha": "Un cambio en una parte afecta a todas las demás"
+    },
+    {
+     "izquierda": "Apertura",
+     "derecha": "Intercambio de energía o información con el entorno"
+    },
+    {
+     "izquierda": "Retroalimentación",
+     "derecha": "Los efectos regresan para modificar al propio sistema"
+    },
+    {
+     "izquierda": "Equifinalidad",
+     "derecha": "Se puede llegar al mismo resultado por caminos distintos"
+    }
+   ],
+   "explicacion": "Son rasgos de los sistemas según la teoría sistémica."
+  },
+  {
+   "id": "ep3-011",
+   "subtema": "3.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada principio de la lógica clásica con su formulación.",
+   "pares": [
+    {
+     "izquierda": "Identidad",
+     "derecha": "A es A"
+    },
+    {
+     "izquierda": "No contradicción",
+     "derecha": "No puede ser A y no-A a la vez y en el mismo sentido"
+    },
+    {
+     "izquierda": "Tercero excluido",
+     "derecha": "Una afirmación es verdadera o falsa, sin tercera opción"
+    }
+   ],
+   "explicacion": "Son los tres principios de la lógica heredada de Aristóteles."
+  },
+  {
+   "id": "ep3-012",
+   "subtema": "3.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿En qué caso es útil el pensamiento lineal en la educación?",
+   "opciones": [
+    "Al identificar los prerrequisitos de un aprendizaje para planear una secuencia",
+    "Al explicar por completo un conflicto familiar con muchas causas",
+    "Al describir la relación circular entre reprobar y no estudiar",
+    "Al comprender el clima de una escuela como totalidad"
+   ],
+   "correcta": 0,
+   "explicacion": "Lo lineal es útil para secuencias y diseños controlados; se queda corto ante fenómenos complejos y circulares."
+  },
+  {
+   "id": "ep3-013",
+   "subtema": "3.3",
+   "tipo": "caso",
+   "pregunta": "\"No estudia porque no le gusta la materia; no le gusta porque reprueba; reprueba porque no estudia\". ¿Qué muestra este razonamiento?",
+   "opciones": [
+    "Una relación circular que la lógica lineal no capta bien",
+    "Un ejemplo perfecto de causa única",
+    "Un error de lógica que hay que eliminar",
+    "Una demostración matemática"
+   ],
+   "correcta": 0,
+   "explicacion": "Las causas se influyen mutuamente; por eso Morin propone el pensamiento complejo."
+  },
+  {
+   "id": "ep3-014",
+   "subtema": "3.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué afirma la lógica dialéctica sobre la contradicción?",
+   "opciones": [
+    "Que es el motor del cambio y del desarrollo",
+    "Que es un error que hay que eliminar del pensamiento",
+    "Que solo existe en las matemáticas",
+    "Que impide cualquier conocimiento"
+   ],
+   "correcta": 0,
+   "explicacion": "Desde Heráclito y Hegel, la contradicción se entiende como impulso de transformación."
+  },
+  {
+   "id": "ep3-015",
+   "subtema": "3.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "La fórmula tesis-antítesis-síntesis es una simplificación didáctica muy difundida, más que una expresión que el propio Hegel usara para describir su método.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "El compendio lo aclara: ayuda a captar la idea, pero no es la fórmula literal de Hegel."
+  },
+  {
+   "id": "ep3-016",
+   "subtema": "3.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Paulo Freire llamó \"educación bancaria\" a la que:",
+   "opciones": [
+    "Deposita conocimientos en los alumnos como quien deposita dinero",
+    "Enseña finanzas personales a los estudiantes",
+    "Se basa en el diálogo y la problematización",
+    "Une reflexión y acción para transformar el mundo"
+   ],
+   "correcta": 0,
+   "explicacion": "La alternativa de Freire es una educación problematizadora basada en la praxis."
+  },
+  {
+   "id": "ep3-017",
+   "subtema": "3.4",
+   "tipo": "completar",
+   "pregunta": "Para Freire, la _______ es la unión inseparable de reflexión y acción sobre el mundo para transformarlo.",
+   "opciones": [
+    "praxis",
+    "pseudoconcreción",
+    "hermenéutica",
+    "inducción"
+   ],
+   "correcta": 0,
+   "explicacion": "La praxis es un concepto central de la pedagogía dialéctica de Freire."
+  },
+  {
+   "id": "ep3-018",
+   "subtema": "3.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada autor con su aporte al pensamiento dialéctico.",
+   "pares": [
+    {
+     "izquierda": "Heráclito",
+     "derecha": "Todo fluye; nadie se baña dos veces en el mismo río"
+    },
+    {
+     "izquierda": "Karl Marx",
+     "derecha": "Aplicó la dialéctica a la historia y la sociedad concretas"
+    },
+    {
+     "izquierda": "Karel Kosík",
+     "derecha": "Ir más allá de la pseudoconcreción hacia la totalidad"
+    },
+    {
+     "izquierda": "Lev Vygotsky",
+     "derecha": "El aprendizaje social jalona el desarrollo"
+    }
+   ],
+   "explicacion": "Todos ellos ponen el cambio y la relación en el centro."
+  }
+ ]
+}

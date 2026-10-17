@@ -1,0 +1,287 @@
+{
+ "bloque": 2,
+ "reactivos": [
+  {
+   "id": "ep2-001",
+   "subtema": "2.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada tipo de conocimiento con su forma de validarse.",
+   "pares": [
+    {
+     "izquierda": "Empírico o cotidiano",
+     "derecha": "Funciona en la práctica"
+    },
+    {
+     "izquierda": "Religioso",
+     "derecha": "Autoridad sagrada o experiencia espiritual"
+    },
+    {
+     "izquierda": "Filosófico",
+     "derecha": "Argumentación coherente"
+    },
+    {
+     "izquierda": "Científico",
+     "derecha": "Comprobación y crítica de la comunidad"
+    }
+   ],
+   "explicacion": "Cada tipo de conocimiento tiene su fuente y su propia forma de validarse."
+  },
+  {
+   "id": "ep2-002",
+   "subtema": "2.1",
+   "tipo": "caso",
+   "pregunta": "El pescador de Champotón sabe en qué temporada sale el pulpo, aunque no pueda explicar la biología que lo causa. ¿Qué tipo de conocimiento tiene?",
+   "opciones": [
+    "Empírico o cotidiano: práctico y preciso, pero no sistematizado",
+    "Científico: porque acierta en sus predicciones",
+    "Religioso: porque se transmite por tradición",
+    "Filosófico: porque reflexiona sobre la naturaleza"
+   ],
+   "correcta": 0,
+   "explicacion": "El conocimiento empírico sabe que algo funciona aunque no siempre explique por qué."
+  },
+  {
+   "id": "ep2-003",
+   "subtema": "2.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué rasgo atribuye Mario Bunge al conocimiento científico?",
+   "opciones": [
+    "Es verificable, metódico, explicativo y abierto a revisión",
+    "Es definitivo y nunca cambia",
+    "Depende de la autoridad de quien lo enuncia",
+    "Solo describe los hechos sin explicarlos"
+   ],
+   "correcta": 0,
+   "explicacion": "Bunge enumera rasgos como fáctico, claro, comunicable, verificable, metódico, explicativo, predictivo y abierto."
+  },
+  {
+   "id": "ep2-004",
+   "subtema": "2.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según el compendio, respetar el conocimiento religioso implica también no confundirlo con la ciencia ni pedirle a la ciencia que responda las preguntas de la fe.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Cada tipo de conocimiento responde a preguntas distintas."
+  },
+  {
+   "id": "ep2-005",
+   "subtema": "2.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "Una novela sobre la Revolución mexicana puede enseñarnos sobre la condición humana. ¿Qué tipo de conocimiento ilustra?",
+   "opciones": [
+    "Artístico",
+    "Empírico",
+    "Religioso",
+    "Formal"
+   ],
+   "correcta": 0,
+   "explicacion": "El conocimiento artístico se expresa y transmite a través de la creación estética."
+  },
+  {
+   "id": "ep2-006",
+   "subtema": "2.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada sentido de la palabra \"ciencia\" con su ejemplo.",
+   "pares": [
+    {
+     "izquierda": "Ciencia como producto",
+     "derecha": "Las leyes de la física de un libro de texto"
+    },
+    {
+     "izquierda": "Ciencia como proceso",
+     "derecha": "Formular preguntas, reunir datos e interpretarlos"
+    },
+    {
+     "izquierda": "Ciencia como institución",
+     "derecha": "Universidades, revistas científicas y congresos"
+    }
+   ],
+   "explicacion": "La escuela tradicional enseñó sobre todo la ciencia como producto; hoy se busca enseñar también la ciencia como proceso."
+  },
+  {
+   "id": "ep2-007",
+   "subtema": "2.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según la definición de trabajo del compendio, ¿qué distingue a la ciencia?",
+   "opciones": [
+    "Que somete sus afirmaciones a prueba y a crítica pública, y corrige sus errores",
+    "Que solo contiene verdades eternas que nunca cambian",
+    "Que siempre sigue los mismos cinco pasos en el mismo orden",
+    "Que solo la practican personas con doctorado"
+   ],
+   "correcta": 0,
+   "explicacion": "La historia de la ciencia está llena de teorías abandonadas; su fuerza está en detectar y corregir sus errores."
+  },
+  {
+   "id": "ep2-008",
+   "subtema": "2.2",
+   "tipo": "caso",
+   "pregunta": "Un estudiante afirma: \"La historia no es ciencia porque no puede repetir la Independencia de México en un laboratorio\". ¿Qué le responderías con lo visto en el tema?",
+   "opciones": [
+    "Que cada ciencia desarrolla métodos adecuados a su objeto; no existe un método único",
+    "Que tiene razón: solo es ciencia lo que se experimenta en laboratorio",
+    "Que la historia sí puede repetir los hechos con simulaciones exactas",
+    "Que la historia es conocimiento religioso"
+   ],
+   "correcta": 0,
+   "explicacion": "El \"método científico\" de pasos fijos es una herramienta didáctica, no la descripción de toda la ciencia."
+  },
+  {
+   "id": "ep2-009",
+   "subtema": "2.2",
+   "tipo": "completar",
+   "pregunta": "La palabra ciencia viene del latín _______, que significa simplemente \"conocimiento\".",
+   "opciones": [
+    "scientia",
+    "episteme",
+    "logos",
+    "methodos"
+   ],
+   "correcta": 0,
+   "explicacion": "Scientia es latín; episteme es la palabra griega para conocimiento firme."
+  },
+  {
+   "id": "ep2-010",
+   "subtema": "2.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué nombre recibe, en las ciencias sociales, el acuerdo razonado entre varios sujetos que siguen los mismos procedimientos?",
+   "opciones": [
+    "Intersubjetividad",
+    "Neutralidad absoluta",
+    "Sistematicidad",
+    "Provisionalidad"
+   ],
+   "correcta": 0,
+   "explicacion": "Como el investigador social forma parte de la realidad que estudia, se prefiere hablar de intersubjetividad."
+  },
+  {
+   "id": "ep2-011",
+   "subtema": "2.3",
+   "tipo": "caso",
+   "pregunta": "En una junta, un padre comparte un video que asegura que \"está comprobado científicamente\" que los videojuegos bajan el rendimiento. La orientadora pregunta quién hizo el estudio, dónde se publicó y cuántos niños participaron. ¿Qué está haciendo?",
+   "opciones": [
+    "Aplicando los cánones de cientificidad para evaluar la afirmación",
+    "Descalificando al padre por no ser científico",
+    "Aceptando la afirmación porque viene de un video",
+    "Demostrando que los videojuegos son buenos"
+   ],
+   "correcta": 0,
+   "explicacion": "Una afirmación que no puede rastrearse hasta su fuente no puede evaluarse."
+  },
+  {
+   "id": "ep2-012",
+   "subtema": "2.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada canon de cientificidad con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Sistematicidad",
+     "derecha": "Las afirmaciones forman un conjunto ordenado dentro de una teoría"
+    },
+    {
+     "izquierda": "Contrastabilidad",
+     "derecha": "Las afirmaciones pueden ponerse a prueba con la experiencia"
+    },
+    {
+     "izquierda": "Comunicabilidad",
+     "derecha": "El conocimiento se expresa con precisión y se hace público"
+    },
+    {
+     "izquierda": "Provisionalidad",
+     "derecha": "Ningún conocimiento es definitivo; todo puede revisarse"
+    }
+   ],
+   "explicacion": "Son parte del núcleo de criterios ampliamente aceptados para considerar científico un conocimiento."
+  },
+  {
+   "id": "ep2-013",
+   "subtema": "2.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "Que la ciencia sea provisional es, según el compendio, su mayor debilidad.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Es su mayor fortaleza: la ciencia avanza corrigiéndose."
+  },
+  {
+   "id": "ep2-014",
+   "subtema": "2.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada autor con su clasificación de las ciencias.",
+   "pares": [
+    {
+     "izquierda": "Auguste Comte",
+     "derecha": "Escala de la matemática a la sociología, todas bajo el modelo natural"
+    },
+    {
+     "izquierda": "Wilhelm Dilthey",
+     "derecha": "Ciencias de la naturaleza que explican y ciencias del espíritu que comprenden"
+    },
+    {
+     "izquierda": "Mario Bunge",
+     "derecha": "Ciencias formales y ciencias fácticas"
+    }
+   ],
+   "explicacion": "Cada clasificación revela una idea sobre el conocimiento y ubica de modo distinto a la pedagogía."
+  },
+  {
+   "id": "ep2-015",
+   "subtema": "2.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según Dilthey, ¿cuál es el método propio de las ciencias del espíritu?",
+   "opciones": [
+    "La comprensión del sentido desde dentro",
+    "La explicación causal mediante leyes generales",
+    "La demostración lógico-matemática",
+    "La experimentación en laboratorio"
+   ],
+   "correcta": 0,
+   "explicacion": "Dilthey distingue explicar (naturaleza) de comprender (Verstehen), propio de las ciencias humanas."
+  },
+  {
+   "id": "ep2-016",
+   "subtema": "2.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "En la clasificación de Bunge, ¿dónde se ubica la pedagogía?",
+   "opciones": [
+    "Entre las ciencias fácticas sociales y humanas",
+    "Entre las ciencias formales, junto a la lógica",
+    "Entre las ciencias fácticas naturales, junto a la biología",
+    "Fuera de toda clasificación científica"
+   ],
+   "correcta": 0,
+   "explicacion": "Las ciencias fácticas estudian hechos del mundo; la pedagogía estudia el hecho educativo."
+  },
+  {
+   "id": "ep2-017",
+   "subtema": "2.4",
+   "tipo": "caso",
+   "pregunta": "Un colega dice: \"No existe la pedagogía, solo existen las ciencias de la educación: psicología educativa, sociología de la educación, economía de la educación…\". ¿Qué ventaja y qué riesgo tiene esa postura?",
+   "opciones": [
+    "Reconoce la complejidad del fenómeno educativo, pero puede disolver la identidad propia de la pedagogía",
+    "No tiene ninguna ventaja; es un error de vocabulario",
+    "Su ventaja es que elimina la necesidad de investigar",
+    "Su riesgo es que convierte a la pedagogía en una ciencia formal"
+   ],
+   "correcta": 0,
+   "explicacion": "La expresión plural \"ciencias de la educación\" se impuso en la tradición francesa; la tensión forma parte de la pregunta guía."
+  },
+  {
+   "id": "ep2-018",
+   "subtema": "2.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "Comte llamó primero \"física social\" a la sociología.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Para Comte, todas las ciencias debían seguir el modelo de las ciencias naturales."
+  }
+ ]
+}

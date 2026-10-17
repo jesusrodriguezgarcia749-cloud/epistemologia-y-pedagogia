@@ -1,0 +1,202 @@
+{
+ "bloque": 8,
+ "reactivos": [
+  {
+   "id": "ep8-001",
+   "subtema": "8.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué proponía Frank Parsons en 1909 para elegir una ocupación?",
+   "opciones": [
+    "Conocer las aptitudes de la persona, los requisitos de las ocupaciones y razonar su correspondencia",
+    "Dejar la decisión completamente al azar",
+    "Elegir siempre la profesión de los padres",
+    "Acompañar la construcción de una historia de vida"
+   ],
+   "correcta": 0,
+   "explicacion": "De ahí surgió el modelo de rasgos y factores."
+  },
+  {
+   "id": "ep8-002",
+   "subtema": "8.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada rasgo del modelo de rasgos y factores con su crítica desde el nuevo paradigma.",
+   "pares": [
+    {
+     "izquierda": "La persona es un conjunto de rasgos estables",
+     "derecha": "Las personas cambian, aprenden y se transforman"
+    },
+    {
+     "izquierda": "Se mira a la persona aislada",
+     "derecha": "Las decisiones dependen también del contexto familiar, económico y cultural"
+    },
+    {
+     "izquierda": "Existe una ocupación correcta para siempre",
+     "derecha": "El mundo del trabajo cambia a gran velocidad"
+    },
+    {
+     "izquierda": "Lo importante es lo que la persona puede hacer",
+     "derecha": "También importa lo que significa para ella"
+    }
+   ],
+   "explicacion": "El nuevo paradigma pasa de diagnosticar y predecir a acompañar la construcción de proyectos de vida."
+  },
+  {
+   "id": "ep8-003",
+   "subtema": "8.1",
+   "tipo": "caso",
+   "pregunta": "A una alumna de 14 años un test vocacional le recomendó una sola carrera \"ideal\". ¿Qué diría el nuevo paradigma de la orientación?",
+   "opciones": [
+    "Que el test captura un momento, no un destino, y que la orientación debe acompañar la construcción de su proyecto de vida",
+    "Que la recomendación es definitiva y debe seguirla sin dudar",
+    "Que los tests vocacionales deben prohibirse",
+    "Que la familia debe decidir por ella"
+   ],
+   "correcta": 0,
+   "explicacion": "Los instrumentos son útiles, pero no definen el futuro de una persona."
+  },
+  {
+   "id": "ep8-004",
+   "subtema": "8.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Donald Super propuso que el desarrollo vocacional es un proceso a lo largo de toda la vida, ligado al concepto de sí mismo.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es un antecedente de las propuestas constructivistas actuales."
+  },
+  {
+   "id": "ep8-005",
+   "subtema": "8.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada modelo de intervención en orientación (Bisquerra) con su característica.",
+   "pares": [
+    {
+     "izquierda": "Clínico o counseling",
+     "derecha": "Atención individual en entrevista, centrada en problemas"
+    },
+    {
+     "izquierda": "De servicios",
+     "derecha": "Un departamento atiende las demandas que le llegan"
+    },
+    {
+     "izquierda": "De programas",
+     "derecha": "Planificado, preventivo y dirigido a grupos"
+    },
+    {
+     "izquierda": "De consulta",
+     "derecha": "El orientador asesora a docentes y familias para que intervengan"
+    }
+   ],
+   "explicacion": "El modelo clínico llega a pocas personas y suele actuar cuando el problema ya existe."
+  },
+  {
+   "id": "ep8-006",
+   "subtema": "8.2",
+   "tipo": "caso",
+   "pregunta": "Un tutor de tercer grado organiza unidades sobre conocimiento de sí mismo, oferta de bachillerato, toma de decisiones y proyecto de vida, e invita a las familias. ¿Qué modelo aplica?",
+   "opciones": [
+    "El modelo de programas, con principios de prevención y desarrollo",
+    "El modelo clínico, porque atiende casos individuales",
+    "El modelo del déficit",
+    "El modelo de rasgos y factores"
+   ],
+   "correcta": 0,
+   "explicacion": "Llega a todo el grupo y se anticipa a los problemas."
+  },
+  {
+   "id": "ep8-007",
+   "subtema": "8.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué advertencia crítica hace el compendio sobre la educación emocional?",
+   "opciones": [
+    "Que no debe convertirse en pedir a los alumnos que se adapten emocionalmente a situaciones injustas que habría que transformar",
+    "Que no tiene ninguna relación con el aprendizaje",
+    "Que solo deben recibirla los alumnos con problemas",
+    "Que sustituye a todas las demás asignaturas"
+   ],
+   "correcta": 0,
+   "explicacion": "La educación emocional es valiosa, pero hay que mantener la mirada crítica."
+  },
+  {
+   "id": "ep8-008",
+   "subtema": "8.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según los principios de la orientación contemporánea, la orientación es un añadido externo al proyecto educativo de la escuela.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "El principio de integración curricular dice lo contrario: participan todos los docentes."
+  },
+  {
+   "id": "ep8-009",
+   "subtema": "8.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué cambio propusieron Booth y Ainscow en el Índice de inclusión?",
+   "opciones": [
+    "Hablar de barreras para el aprendizaje y la participación en lugar de déficits del alumno",
+    "Separar a los alumnos con dificultades en escuelas especiales",
+    "Etiquetar con precisión a cada alumno con un diagnóstico",
+    "Eliminar la evaluación de los aprendizajes"
+   ],
+   "correcta": 0,
+   "explicacion": "La pregunta pasa de \"¿qué le pasa al alumno?\" a \"¿qué le impide aprender y participar?\"."
+  },
+  {
+   "id": "ep8-010",
+   "subtema": "8.3",
+   "tipo": "caso",
+   "pregunta": "Andrea tiene baja visión. En su nueva escuela revisan textos con letra pequeña, el pizarrón con poco contraste y su lugar alejado; con ajustes, trabaja al nivel del grupo. ¿Qué enfoque aplicaron?",
+   "opciones": [
+    "El de barreras para el aprendizaje y la participación",
+    "El modelo del déficit",
+    "El modelo de rasgos y factores",
+    "La racionalidad técnica"
+   ],
+   "correcta": 0,
+   "explicacion": "El cambio no estuvo en Andrea, sino en la mirada de la escuela."
+  },
+  {
+   "id": "ep8-011",
+   "subtema": "8.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cómo cambia el papel del psicopedagogo.",
+   "pares": [
+    {
+     "izquierda": "De especialista que diagnostica",
+     "derecha": "A colaborador de docentes y familias"
+    },
+    {
+     "izquierda": "De intervenir fuera del aula",
+     "derecha": "A apoyar dentro del aula"
+    },
+    {
+     "izquierda": "De etiquetar",
+     "derecha": "A identificar barreras y diseñar ajustes"
+    },
+    {
+     "izquierda": "De trabajar con el alumno aislado",
+     "derecha": "A trabajar con el sistema escolar"
+    }
+   ],
+   "explicacion": "Es un cambio epistemológico: el problema se ve como relacional y sistémico."
+  },
+  {
+   "id": "ep8-012",
+   "subtema": "8.3",
+   "tipo": "completar",
+   "pregunta": "Carl Rogers propuso una educación centrada en la _______, con autenticidad, aceptación y comprensión empática.",
+   "opciones": [
+    "persona",
+    "disciplina",
+    "evaluación",
+    "memoria"
+   ],
+   "correcta": 0,
+   "explicacion": "Rogers, desde la psicología humanista, anticipó parte de este cambio."
+  }
+ ]
+}

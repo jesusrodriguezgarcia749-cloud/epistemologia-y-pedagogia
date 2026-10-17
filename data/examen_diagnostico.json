@@ -1,0 +1,401 @@
+{
+ "config": {
+  "minutos": 40,
+  "preguntasPorExamen": 30
+ },
+ "texto_lectura": "En 1847, el médico húngaro Ignaz Semmelweis trabajaba en el Hospital General de Viena, que tenía dos salas de maternidad. En una de ellas morían por fiebre puerperal muchas más mujeres que en la otra. Semmelweis comparó ambas salas con cuidado y encontró una diferencia: en la sala con más muertes atendían médicos y estudiantes que llegaban directamente de practicar autopsias, mientras que en la otra atendían parteras. Sospechó que los médicos llevaban en las manos alguna materia de los cadáveres y ordenó que se lavaran las manos con una solución de cal clorada antes de atender a las pacientes. La mortalidad bajó de manera drástica. Sin embargo, muchos colegas rechazaron su propuesta: contradecía las ideas médicas dominantes, ofendía a quienes no aceptaban ser la causa del problema y Semmelweis no podía explicar el mecanismo del contagio. Solo décadas después, con los trabajos de Louis Pasteur y Joseph Lister, la teoría de los gérmenes dio a su intuición un fundamento aceptado por todos.",
+ "reactivos": [
+  {
+   "id": "diag-a1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué filósofo de la Antigüedad escribió diálogos en los que Sócrates es el protagonista?",
+   "opciones": [
+    "Platón",
+    "Descartes",
+    "Kant",
+    "Comte"
+   ],
+   "correcta": 0,
+   "explicacion": "Platón escribió diálogos como el Teeteto o La República, con Sócrates como personaje principal."
+  },
+  {
+   "id": "diag-a2",
+   "tipo": "opcion_multiple",
+   "pregunta": "La frase \"Pienso, luego existo\" se asocia con:",
+   "opciones": [
+    "René Descartes",
+    "Aristóteles",
+    "Paulo Freire",
+    "Karl Marx"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la certeza que Descartes encontró al dudar de todo."
+  },
+  {
+   "id": "diag-a3",
+   "tipo": "verdadero_falso",
+   "pregunta": "La filosofía es una disciplina que se apoya en la argumentación racional para reflexionar sobre problemas generales como la verdad o el bien.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "El conocimiento filosófico se basa en argumentos, no en experimentos."
+  },
+  {
+   "id": "diag-a4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué científico formuló leyes universales del movimiento y de la gravitación en el siglo XVII?",
+   "opciones": [
+    "Isaac Newton",
+    "Charles Darwin",
+    "Albert Einstein",
+    "Galileo Galilei"
+   ],
+   "correcta": 0,
+   "explicacion": "Newton explicó con las mismas leyes la caída de una manzana y el movimiento de los planetas."
+  },
+  {
+   "id": "diag-a5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de las siguientes es una ciencia social?",
+   "opciones": [
+    "Sociología",
+    "Química",
+    "Geología",
+    "Astronomía"
+   ],
+   "correcta": 0,
+   "explicacion": "Las ciencias sociales estudian la vida humana en sociedad."
+  },
+  {
+   "id": "diag-a6",
+   "tipo": "verdadero_falso",
+   "pregunta": "Una teoría científica, una vez aceptada, ya no puede cambiar nunca.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "El conocimiento científico es provisional y se corrige con nuevas evidencias."
+  },
+  {
+   "id": "diag-b1",
+   "tipo": "opcion_multiple",
+   "pregunta": "En una investigación, ¿qué es una hipótesis?",
+   "opciones": [
+    "Una respuesta tentativa a la pregunta de investigación que se pone a prueba",
+    "La conclusión final ya demostrada",
+    "La lista de referencias bibliográficas",
+    "El título del trabajo"
+   ],
+   "correcta": 0,
+   "explicacion": "La hipótesis se formula antes de reunir la evidencia que la confirma o desmiente."
+  },
+  {
+   "id": "diag-b2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada enfoque de investigación con su técnica típica.",
+   "pares": [
+    {
+     "izquierda": "Cuantitativo",
+     "derecha": "Encuesta con escala numérica y análisis estadístico"
+    },
+    {
+     "izquierda": "Cualitativo",
+     "derecha": "Entrevista a profundidad y observación"
+    },
+    {
+     "izquierda": "Investigación-acción",
+     "derecha": "Ciclos de planeación, acción y reflexión con los participantes"
+    }
+   ],
+   "explicacion": "Cada enfoque usa técnicas acordes con sus preguntas."
+  },
+  {
+   "id": "diag-b3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es una muestra en una investigación?",
+   "opciones": [
+    "La parte de la población que se estudia",
+    "El resultado final del estudio",
+    "El instrumento para recoger datos",
+    "La teoría que sustenta el trabajo"
+   ],
+   "correcta": 0,
+   "explicacion": "Se estudia una parte cuando no es posible estudiar a toda la población."
+  },
+  {
+   "id": "diag-b4",
+   "tipo": "verdadero_falso",
+   "pregunta": "En el formato APA, las referencias al final de un trabajo se ordenan alfabéticamente por el apellido del primer autor.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Además llevan sangría francesa."
+  },
+  {
+   "id": "diag-b5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué apartado de un protocolo explica por qué vale la pena realizar la investigación?",
+   "opciones": [
+    "La justificación",
+    "Las referencias",
+    "El índice",
+    "Los anexos"
+   ],
+   "correcta": 0,
+   "explicacion": "La justificación argumenta la relevancia y utilidad del estudio."
+  },
+  {
+   "id": "diag-b6",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estas fuentes es más confiable para fundamentar una tesis?",
+   "opciones": [
+    "Un artículo publicado en una revista académica arbitrada",
+    "Una publicación anónima en redes sociales",
+    "Un video sin autor identificado",
+    "Un foro de opiniones en internet"
+   ],
+   "correcta": 0,
+   "explicacion": "Las revistas arbitradas someten los artículos a revisión de especialistas."
+  },
+  {
+   "id": "diag-c1",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el texto, ¿qué observó Semmelweis en el hospital de Viena?",
+   "opciones": [
+    "Que en una sala de maternidad morían muchas más mujeres que en la otra",
+    "Que todas las salas tenían la misma mortalidad",
+    "Que las parteras causaban la fiebre puerperal",
+    "Que la enfermedad se curaba con medicamentos"
+   ],
+   "correcta": 0,
+   "explicacion": "El texto señala una diferencia notable de mortalidad entre las dos salas."
+  },
+  {
+   "id": "diag-c2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué diferencia encontró Semmelweis entre las dos salas?",
+   "opciones": [
+    "En la sala con más muertes atendían médicos y estudiantes que venían de practicar autopsias",
+    "En la sala con más muertes no había camas suficientes",
+    "En la sala con menos muertes atendían solo médicos",
+    "En ambas salas trabajaba el mismo personal"
+   ],
+   "correcta": 0,
+   "explicacion": "Esa diferencia lo llevó a formular su hipótesis."
+  },
+  {
+   "id": "diag-c3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué medida introdujo Semmelweis y con qué resultado?",
+   "opciones": [
+    "Lavarse las manos con una solución de cal clorada, y la mortalidad bajó de manera drástica",
+    "Cerrar la sala de maternidad, y la mortalidad aumentó",
+    "Prohibir las autopsias, y la mortalidad se mantuvo igual",
+    "Contratar más parteras, y no hubo cambios"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la intervención central que describe el texto."
+  },
+  {
+   "id": "diag-c4",
+   "tipo": "verdadero_falso",
+   "pregunta": "De acuerdo con el texto, la comunidad médica de la época aceptó de inmediato la propuesta de Semmelweis.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "El texto dice que muchos colegas la rechazaron."
+  },
+  {
+   "id": "diag-c5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué, según el texto, fue tan difícil que se aceptara su propuesta?",
+   "opciones": [
+    "Porque contradecía las ideas médicas dominantes y no podía explicar el mecanismo de contagio",
+    "Porque sus resultados empeoraron la salud de las pacientes",
+    "Porque nunca reunió datos sobre la mortalidad",
+    "Porque los gérmenes ya eran bien conocidos"
+   ],
+   "correcta": 0,
+   "explicacion": "La teoría de los gérmenes se consolidó hasta décadas después."
+  },
+  {
+   "id": "diag-c6",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es la idea principal del texto?",
+   "opciones": [
+    "Una evidencia sólida puede ser rechazada cuando contradice las ideas dominantes de una época",
+    "Los hospitales del siglo XIX eran lugares seguros",
+    "La ciencia siempre acepta de inmediato los nuevos descubrimientos",
+    "Lavarse las manos es una costumbre reciente sin fundamento"
+   ],
+   "correcta": 0,
+   "explicacion": "El caso de Semmelweis es un ejemplo clásico de resistencia al cambio en la ciencia."
+  },
+  {
+   "id": "diag-d1",
+   "tipo": "opcion_multiple",
+   "pregunta": "\"Todos los alumnos que conozco que usan celular sacan bajas calificaciones; por lo tanto, el celular causa bajas calificaciones\". ¿Cuál es el principal problema de este razonamiento?",
+   "opciones": [
+    "Generaliza a partir de pocos casos y confunde relación con causa",
+    "Ninguno, es un razonamiento correcto",
+    "Usa demasiados datos",
+    "No menciona ningún caso"
+   ],
+   "correcta": 0,
+   "explicacion": "Que dos cosas aparezcan juntas no prueba que una cause la otra."
+  },
+  {
+   "id": "diag-d2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de las siguientes afirmaciones es un hecho y no una opinión?",
+   "opciones": [
+    "La SEP publicó en 2022 un nuevo plan de estudio para educación básica",
+    "El nuevo plan de estudio es el mejor de la historia",
+    "Los maestros deberían estar contentos con el plan",
+    "El plan anterior era aburrido"
+   ],
+   "correcta": 0,
+   "explicacion": "Un hecho puede verificarse; una opinión expresa una valoración."
+  },
+  {
+   "id": "diag-d3",
+   "tipo": "verdadero_falso",
+   "pregunta": "Un buen argumento se sostiene en razones y evidencias, no solo en la autoridad o la fama de quien lo dice.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Apelar solo a la autoridad no basta para justificar una afirmación."
+  },
+  {
+   "id": "diag-d4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Ante una noticia sorprendente en redes sociales, ¿qué es lo primero que conviene hacer?",
+   "opciones": [
+    "Verificar la fuente y contrastarla con otras fuentes confiables",
+    "Compartirla de inmediato para que más gente la vea",
+    "Creerla si tiene muchos \"me gusta\"",
+    "Rechazarla siempre sin leerla"
+   ],
+   "correcta": 0,
+   "explicacion": "Verificar antes de compartir es una práctica básica del pensamiento crítico."
+  },
+  {
+   "id": "diag-d5",
+   "tipo": "opcion_multiple",
+   "pregunta": "\"Si un maestro grita, sus alumnos no aprenden. Este maestro no grita. Por lo tanto, sus alumnos sí aprenden\". ¿Es válida esta conclusión?",
+   "opciones": [
+    "No: que no grite no garantiza que sus alumnos aprendan",
+    "Sí: es una conclusión lógicamente necesaria",
+    "Sí, porque los maestros nunca gritan",
+    "No, porque los alumnos nunca aprenden"
+   ],
+   "correcta": 0,
+   "explicacion": "Negar la condición no permite afirmar la consecuencia: es una falacia."
+  },
+  {
+   "id": "diag-d6",
+   "tipo": "opcion_multiple",
+   "pregunta": "En un debate, ¿qué actitud favorece más la construcción de conocimiento?",
+   "opciones": [
+    "Escuchar los argumentos contrarios y responder con razones",
+    "Hablar más fuerte que los demás",
+    "Descalificar a la persona en lugar de su argumento",
+    "Cambiar de tema cuando no se tiene respuesta"
+   ],
+   "correcta": 0,
+   "explicacion": "El diálogo crítico se basa en argumentos, no en la fuerza."
+  },
+  {
+   "id": "diag-e1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada término con su definición.",
+   "pares": [
+    {
+     "izquierda": "Didáctica",
+     "derecha": "Disciplina que estudia los procesos y métodos de enseñanza"
+    },
+    {
+     "izquierda": "Currículo",
+     "derecha": "Organización de lo que se enseña y aprende en un sistema educativo"
+    },
+    {
+     "izquierda": "Evaluación",
+     "derecha": "Proceso para valorar los aprendizajes y la enseñanza"
+    }
+   ],
+   "explicacion": "Son términos básicos del vocabulario pedagógico."
+  },
+  {
+   "id": "diag-e2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué estudia la pedagogía?",
+   "opciones": [
+    "El hecho educativo en sus distintas dimensiones",
+    "Exclusivamente la enseñanza de las matemáticas",
+    "Solo el comportamiento de los niños pequeños",
+    "Únicamente la administración de las escuelas"
+   ],
+   "correcta": 0,
+   "explicacion": "La pedagogía es la disciplina que estudia la educación."
+  },
+  {
+   "id": "diag-e3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es una evaluación diagnóstica?",
+   "opciones": [
+    "La que se aplica al inicio para conocer los saberes previos del grupo",
+    "La que define la calificación final del curso",
+    "La que se aplica solo a los alumnos reprobados",
+    "La que evalúa al maestro"
+   ],
+   "correcta": 0,
+   "explicacion": "Como este mismo examen: no tiene valor en la calificación."
+  },
+  {
+   "id": "diag-e4",
+   "tipo": "opcion_multiple",
+   "pregunta": "El aprendizaje que se relaciona de manera sustancial con lo que el alumno ya sabe se llama:",
+   "opciones": [
+    "Aprendizaje significativo",
+    "Aprendizaje memorístico",
+    "Aprendizaje mecánico",
+    "Aprendizaje pasivo"
+   ],
+   "correcta": 0,
+   "explicacion": "El concepto se asocia con David Ausubel."
+  },
+  {
+   "id": "diag-e5",
+   "tipo": "verdadero_falso",
+   "pregunta": "La zona de desarrollo próximo es un concepto asociado con Lev Vygotsky.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la distancia entre lo que el alumno logra solo y lo que logra con ayuda."
+  },
+  {
+   "id": "diag-e6",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es una rúbrica?",
+   "opciones": [
+    "Un instrumento con criterios y niveles de desempeño para evaluar un trabajo",
+    "Un tipo de examen de opción múltiple",
+    "La lista de asistencia del grupo",
+    "Un reglamento escolar"
+   ],
+   "correcta": 0,
+   "explicacion": "Las rúbricas hacen explícitos los criterios de evaluación."
+  }
+ ]
+}

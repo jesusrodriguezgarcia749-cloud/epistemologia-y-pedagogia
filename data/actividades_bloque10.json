@@ -1,0 +1,216 @@
+{
+ "bloque": 10,
+ "reactivos": [
+  {
+   "id": "ep10-001",
+   "subtema": "10.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada campo formativo de la NEM con su enfoque general.",
+   "pares": [
+    {
+     "izquierda": "Lenguajes",
+     "derecha": "Campo de la comunicación y la expresión"
+    },
+    {
+     "izquierda": "Saberes y pensamiento científico",
+     "derecha": "Campo donde dialogan la ciencia y los saberes"
+    },
+    {
+     "izquierda": "Ética, naturaleza y sociedades",
+     "derecha": "Campo de la relación con la naturaleza y la vida social"
+    },
+    {
+     "izquierda": "De lo humano y lo comunitario",
+     "derecha": "Campo del desarrollo personal y la vida en comunidad"
+    }
+   ],
+   "explicacion": "Son los cuatro campos formativos del Plan de Estudio 2022."
+  },
+  {
+   "id": "ep10-002",
+   "subtema": "10.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es el programa analítico en la Nueva Escuela Mexicana?",
+   "opciones": [
+    "El programa que el colectivo docente elabora para contextualizar los contenidos del programa sintético",
+    "El programa nacional que establece los contenidos básicos",
+    "El examen que aplica la SEP al final del ciclo",
+    "El reglamento de evaluación de cada escuela"
+   ],
+   "correcta": 0,
+   "explicacion": "Se elabora en un proceso llamado codiseño."
+  },
+  {
+   "id": "ep10-003",
+   "subtema": "10.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de los siguientes NO es uno de los ejes articuladores de la NEM?",
+   "opciones": [
+    "Competitividad económica",
+    "Pensamiento crítico",
+    "Interculturalidad crítica",
+    "Vida saludable"
+   ],
+   "correcta": 0,
+   "explicacion": "Los siete ejes son: inclusión; pensamiento crítico; interculturalidad crítica; igualdad de género; vida saludable; apropiación de las culturas a través de la lectura y la escritura; y artes y experiencias estéticas."
+  },
+  {
+   "id": "ep10-004",
+   "subtema": "10.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "El Plan de Estudio 2022 se implementó en las escuelas a partir del ciclo escolar 2023-2024.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Su base legal es la reforma al artículo 3.º de 2019 y la Ley General de Educación de ese año."
+  },
+  {
+   "id": "ep10-005",
+   "subtema": "10.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada elemento de la NEM con la idea epistemológica que lo sustenta.",
+   "pares": [
+    {
+     "izquierda": "Campos formativos y ejes articuladores",
+     "derecha": "Pensamiento complejo de Morin"
+    },
+    {
+     "izquierda": "Saberes comunitarios",
+     "derecha": "Ecología de saberes de Sousa Santos"
+    },
+    {
+     "izquierda": "Programa analítico y codiseño",
+     "derecha": "Docente investigador de Stenhouse"
+    },
+    {
+     "izquierda": "Inclusión",
+     "derecha": "Barreras para el aprendizaje y la participación"
+    }
+   ],
+   "explicacion": "La NEM puede leerse con las herramientas epistemológicas del curso."
+  },
+  {
+   "id": "ep10-006",
+   "subtema": "10.2",
+   "tipo": "caso",
+   "pregunta": "Un colectivo hace un diagnóstico, detecta problemas de lectura y de basura en la colonia, articula proyectos en torno a ellos, registra avances y ajusta. ¿Qué hicieron, sin llamarlo así?",
+   "opciones": [
+    "Un ciclo de investigación-acción: diagnóstico, planificación, acción, observación y reflexión",
+    "Un experimento de laboratorio controlado",
+    "Una aplicación técnica del programa sin decisiones propias",
+    "Un ejemplo de inercia mental"
+   ],
+   "correcta": 0,
+   "explicacion": "Si lo documentan y comparten, producen conocimiento pedagógico."
+  },
+  {
+   "id": "ep10-007",
+   "subtema": "10.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué el compendio afirma que el programa analítico es un \"acto epistemológico\"?",
+   "opciones": [
+    "Porque el colectivo decide qué conocimientos entran a su escuela, en qué orden y con qué sentido",
+    "Porque lo revisa un filósofo de la SEP",
+    "Porque solo contiene definiciones de epistemología",
+    "Porque sustituye a la investigación educativa"
+   ],
+   "correcta": 0,
+   "explicacion": "Decidir qué conocimiento cuenta es una decisión epistemológica."
+  },
+  {
+   "id": "ep10-008",
+   "subtema": "10.3",
+   "tipo": "relacionar",
+   "pregunta": "Clasifica cada argumento según su postura en el debate sobre la NEM.",
+   "pares": [
+    {
+     "izquierda": "Pertinencia de partir de la comunidad",
+     "derecha": "A favor"
+    },
+    {
+     "izquierda": "Reconocimiento de los saberes de los pueblos originarios",
+     "derecha": "A favor"
+    },
+    {
+     "izquierda": "Riesgo de relativismo frente al conocimiento científico",
+     "derecha": "Crítico"
+    },
+    {
+     "izquierda": "Carga de trabajo del codiseño sin tiempo ni formación",
+     "derecha": "Crítico"
+    }
+   ],
+   "explicacion": "Un análisis honesto escucha las distintas voces del debate."
+  },
+  {
+   "id": "ep10-009",
+   "subtema": "10.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el compendio, ¿cuál es un criterio adecuado para evaluar el debate sobre la NEM?",
+   "opciones": [
+    "Distinguir los fundamentos de la implementación y pedir evidencia sobre sus efectos",
+    "Aceptar la postura del gobierno en turno",
+    "Rechazar toda reforma porque cambiar es negativo",
+    "Decidir según la opinión mayoritaria en redes sociales"
+   ],
+   "correcta": 0,
+   "explicacion": "Una idea puede ser valiosa y estar mal implementada, o al revés."
+  },
+  {
+   "id": "ep10-010",
+   "subtema": "10.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué respuesta posible a la pregunta guía propone el compendio, sin pretender cerrarla?",
+   "opciones": [
+    "La pedagogía puede ser una ciencia social y humana, práctica, plural, dialógica y con una dimensión ética inevitable",
+    "La pedagogía no es ciencia y nunca podrá serlo",
+    "La pedagogía es una ciencia exacta como la física",
+    "La pedagogía es solo un arte que no puede estudiarse"
+   ],
+   "correcta": 0,
+   "explicacion": "Lo importante es que puedas argumentar tu propia posición con autores, conceptos y ejemplos."
+  },
+  {
+   "id": "ep10-011",
+   "subtema": "10.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "El compendio considera que la respuesta propuesta a la pregunta guía es la única válida y que el alumno debe adoptarla.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Se presenta como una respuesta posible: puedes estar de acuerdo, matizarla o rechazarla."
+  },
+  {
+   "id": "ep10-012",
+   "subtema": "10.5",
+   "tipo": "jerarquizar",
+   "pregunta": "¿Cuál es el orden de la estructura sugerida para el ensayo final?",
+   "opciones": [
+    "Introducción con tesis → desarrollo con autores y contraargumento → aplicación a la práctica → conclusión → referencias APA",
+    "Referencias APA → conclusión → introducción → desarrollo → aplicación",
+    "Desarrollo → introducción → referencias → aplicación → conclusión",
+    "Conclusión → aplicación → tesis → referencias → desarrollo"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la estructura que pide la actividad del ensayo \"El quehacer científico de la pedagogía\"."
+  },
+  {
+   "id": "ep10-013",
+   "subtema": "10.5",
+   "tipo": "opcion_multiple",
+   "pregunta": "Antes de entregar un trabajo, ¿qué revisa la lista de verificación APA del compendio?",
+   "opciones": [
+    "Que cada cita tenga su referencia y viceversa, que las citas textuales lleven página y que todas las fuentes existan",
+    "Que el trabajo tenga al menos cincuenta citas textuales",
+    "Que las referencias estén en el orden en que aparecen en el texto",
+    "Que no se incluya ningún artículo académico"
+   ],
+   "correcta": 0,
+   "explicacion": "En APA la lista va en orden alfabético con sangría francesa."
+  }
+ ]
+}

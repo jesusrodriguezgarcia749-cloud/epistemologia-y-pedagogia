@@ -1,0 +1,245 @@
+{
+ "bloque": 7,
+ "reactivos": [
+  {
+   "id": "ep7-001",
+   "subtema": "7.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es la plasticidad cerebral?",
+   "opciones": [
+    "La capacidad del cerebro de modificar sus conexiones con la experiencia, durante toda la vida",
+    "La rigidez del cerebro después de los tres años",
+    "La capacidad de recordar todo lo que vemos",
+    "La división del cerebro en dos hemisferios"
+   ],
+   "correcta": 0,
+   "explicacion": "Por la plasticidad, nadie está condenado por su cerebro."
+  },
+  {
+   "id": "ep7-002",
+   "subtema": "7.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "La idea de que \"todo se juega antes de los tres años\" está respaldada por la investigación para la mayoría de los aprendizajes escolares.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Existen periodos sensibles, pero la plasticidad dura toda la vida."
+  },
+  {
+   "id": "ep7-003",
+   "subtema": "7.1",
+   "tipo": "caso",
+   "pregunta": "Una maestra de secundaria nota que sus alumnos buscan mucho la aprobación de sus compañeros y emociones intensas. ¿Qué explicación ofrece la neurociencia?",
+   "opciones": [
+    "La corteza prefrontal madura hasta pasados los veinte años y los sistemas de recompensa y sensibilidad social son muy activos",
+    "Los adolescentes tienen falta de voluntad por naturaleza",
+    "Su cerebro ya está completamente maduro",
+    "Es un efecto exclusivo de los videojuegos"
+   ],
+   "correcta": 0,
+   "explicacion": "No es \"falta de voluntad\": es una etapa del desarrollo que la escuela debe acompañar."
+  },
+  {
+   "id": "ep7-004",
+   "subtema": "7.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué ocurre con la memoria durante el sueño?",
+   "opciones": [
+    "El cerebro reactiva y reorganiza lo aprendido, consolidándolo",
+    "El cerebro borra todo lo aprendido durante el día",
+    "No ocurre nada relevante para el aprendizaje",
+    "Solo se consolidan los recuerdos emocionales negativos"
+   ],
+   "correcta": 0,
+   "explicacion": "Dormir poco perjudica el aprendizaje."
+  },
+  {
+   "id": "ep7-005",
+   "subtema": "7.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué sostuvieron Immordino-Yang y Damasio sobre la emoción en la educación?",
+   "opciones": [
+    "Que forma parte del aprendizaje: aprendemos lo que tiene significado emocional y social",
+    "Que es un obstáculo que hay que dejar fuera del salón",
+    "Que solo importa en el recreo",
+    "Que no tiene relación con la memoria"
+   ],
+   "correcta": 0,
+   "explicacion": "La separación entre salón para pensar y recreo para sentir es artificial."
+  },
+  {
+   "id": "ep7-006",
+   "subtema": "7.2",
+   "tipo": "caso",
+   "pregunta": "Alumnos que viven situaciones de violencia llegan al salón sin poder concentrarse. ¿Qué dice la evidencia?",
+   "opciones": [
+    "El estrés intenso y prolongado afecta la memoria y el aprendizaje; importa un clima seguro y vínculos de confianza",
+    "Es solo mala actitud que se corrige con reportes",
+    "El estrés siempre mejora el rendimiento escolar",
+    "La emoción no influye en la atención"
+   ],
+   "correcta": 0,
+   "explicacion": "No es un problema de \"mala actitud\": es una respuesta del organismo."
+  },
+  {
+   "id": "ep7-007",
+   "subtema": "7.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "Un maestro abre la clase preguntando por qué Campeche tenía murallas. ¿Por qué funciona según el tema?",
+   "opciones": [
+    "Despierta la curiosidad, y el cerebro se prepara para aprender y recordar mejor",
+    "Porque los alumnos dejan de pensar en el tema",
+    "Porque así se evita explicar el contenido",
+    "Porque la curiosidad sustituye a la información"
+   ],
+   "correcta": 0,
+   "explicacion": "La pregunta inicial no fue un truco motivacional: preparó el aprendizaje."
+  },
+  {
+   "id": "ep7-008",
+   "subtema": "7.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "En un cerebro sano, los dos hemisferios trabajan juntos constantemente, comunicados por el cuerpo calloso.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "El mito de las personas \"de hemisferio izquierdo o derecho\" surgió de estudios mal interpretados."
+  },
+  {
+   "id": "ep7-009",
+   "subtema": "7.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué estudió Roger Sperry, de donde surgió (mal interpretado) el mito de los hemisferios?",
+   "opciones": [
+    "Pacientes a quienes se había cortado el cuerpo calloso para tratar epilepsias graves",
+    "Niños que aprendían a leer con música",
+    "Estudiantes con estilos de aprendizaje distintos",
+    "Personas que usaban solo el 10 % del cerebro"
+   ],
+   "correcta": 0,
+   "explicacion": "En esas condiciones excepcionales cada hemisferio procesaba distinto, pero en un cerebro sano trabajan juntos."
+  },
+  {
+   "id": "ep7-010",
+   "subtema": "7.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cómo considera la neurociencia actual el modelo del cerebro triuno?",
+   "opciones": [
+    "Como una metáfora atractiva pero superada",
+    "Como el modelo más preciso del cerebro humano",
+    "Como la base de toda la neuroeducación actual",
+    "Como una teoría demostrada en laboratorio"
+   ],
+   "correcta": 0,
+   "explicacion": "La evolución no apiló cerebros; emoción y razón son redes entrelazadas."
+  },
+  {
+   "id": "ep7-011",
+   "subtema": "7.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada pilar del aprendizaje de Dehaene con su significado.",
+   "pares": [
+    {
+     "izquierda": "Atención",
+     "derecha": "El cerebro selecciona la información; lo que no se atiende difícilmente se aprende"
+    },
+    {
+     "izquierda": "Compromiso activo",
+     "derecha": "El alumno genera hipótesis, responde y predice"
+    },
+    {
+     "izquierda": "Retroalimentación del error",
+     "derecha": "Aprender de la diferencia entre lo esperado y lo ocurrido"
+    },
+    {
+     "izquierda": "Consolidación",
+     "derecha": "Volver automático lo aprendido con práctica, repetición espaciada y sueño"
+    }
+   ],
+   "explicacion": "Son los cuatro pilares propuestos en ¿Cómo aprendemos?"
+  },
+  {
+   "id": "ep7-012",
+   "subtema": "7.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según la revisión de Dunlosky y colaboradores (2013), ¿qué técnicas de estudio tienen utilidad alta?",
+   "opciones": [
+    "La práctica de recuperación y la práctica espaciada",
+    "Releer y subrayar",
+    "Estudiar todo la noche anterior",
+    "Escuchar música clásica mientras se lee"
+   ],
+   "correcta": 0,
+   "explicacion": "Releer y subrayar, las más usadas, resultaron de baja utilidad."
+  },
+  {
+   "id": "ep7-013",
+   "subtema": "7.4",
+   "tipo": "caso",
+   "pregunta": "Una escuela aplica un test para clasificar alumnos en visuales, auditivos o kinestésicos y pide enseñar a cada uno según su estilo. ¿Qué dice la evidencia?",
+   "opciones": [
+    "No hay evidencia de que adaptar la enseñanza al estilo preferido mejore el aprendizaje; sí ayuda presentar el contenido en varias formas a todos",
+    "Es la estrategia mejor respaldada por la neurociencia",
+    "Funciona solo con los alumnos visuales",
+    "Está prohibida por la Nueva Escuela Mexicana"
+   ],
+   "correcta": 0,
+   "explicacion": "La revisión de Pashler y colaboradores (2008) no encontró respaldo para enseñar según estilos."
+  },
+  {
+   "id": "ep7-014",
+   "subtema": "7.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada neuromito con lo que dice la evidencia.",
+   "pares": [
+    {
+     "izquierda": "Solo usamos el 10 % del cerebro",
+     "derecha": "Usamos prácticamente todo; las zonas se activan según la tarea"
+    },
+    {
+     "izquierda": "Escuchar a Mozart hace más inteligentes a los niños",
+     "derecha": "Fue un efecto pequeño y pasajero no confirmado"
+    },
+    {
+     "izquierda": "El azúcar provoca hiperactividad",
+     "derecha": "Los estudios controlados no encontraron ese efecto"
+    },
+    {
+     "izquierda": "Todo se juega antes de los tres años",
+     "derecha": "Hay periodos sensibles, pero la plasticidad dura toda la vida"
+    }
+   ],
+   "explicacion": "Ante cualquier propuesta \"neuro\" hay que preguntar por la evidencia."
+  },
+  {
+   "id": "ep7-015",
+   "subtema": "7.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "En el estudio de Dekker y colaboradores (2012), los docentes más interesados en la neurociencia estaban protegidos contra los neuromitos.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "No lo estaban: a veces aceptaban más mitos, posiblemente por su exposición a materiales comerciales de baja calidad."
+  },
+  {
+   "id": "ep7-016",
+   "subtema": "7.4",
+   "tipo": "completar",
+   "pregunta": "En APA 7, una obra de tres o más autores se cita desde la primera vez con el primer autor seguido de _______.",
+   "opciones": [
+    "et al.",
+    "y otros autores",
+    "& cols.",
+    "ibídem"
+   ],
+   "correcta": 0,
+   "explicacion": "Ejemplo: (Pashler et al., 2008). En la lista de referencias sí se escriben todos los autores hasta 20."
+  }
+ ]
+}

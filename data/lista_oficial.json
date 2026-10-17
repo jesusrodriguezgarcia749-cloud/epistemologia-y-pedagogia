@@ -1,0 +1,4 @@
+{
+ "_comentario": "Lista oficial del acta de calificaciones (ITES). El reporte PDF del grupo sale en este orden, con matrícula y apellidos primero. alumnoId = identificador del alumno en la plataforma (null = no está registrado). Se llena cuando el docente comparta el acta del grupo de Epistemología y Pedagogía.",
+ "grupos": {}
+}

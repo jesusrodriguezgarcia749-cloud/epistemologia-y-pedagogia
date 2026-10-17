@@ -1,0 +1,105 @@
+{
+ "bloque": 2,
+ "nombre": "Naturaleza del conocimiento",
+ "descripcion": "En el tema anterior vimos qué significa conocer. Ahora daremos un paso más: no todo conocimiento es igual. Sabemos cosas de maneras muy distintas, y la ciencia es solo uno de esos caminos, aunque muy poderoso. Este tema responde tres preguntas encadenadas: ¿qué tipos de conocimiento existen?, ¿qué es exactamente la ciencia?, y ¿cómo se ordenan las distintas ciencias?",
+ "subtemas": [
+  {
+   "id": "2.1",
+   "titulo": "Tipos de conocimiento",
+   "contenido": [
+    "PREGUNTAS DE ARRANQUE: • La abuela que sabe cuándo va a llover porque «le duelen las rodillas», ¿tiene conocimiento? ¶ • ¿Qué tienen en común un médico, un historiador y un matemático para que a los tres los llamemos científicos? ¶ • ¿La pedagogía está más cerca de la física, de la historia o de la medicina?",
+    "En el tema anterior vimos qué significa conocer. Ahora daremos un paso más: no todo conocimiento es igual. Sabemos cosas de maneras muy distintas, y la ciencia es solo uno de esos caminos, aunque muy poderoso. Este tema responde tres preguntas encadenadas: ¿qué tipos de conocimiento existen?, ¿qué es exactamente la ciencia?, y ¿cómo se ordenan las distintas ciencias?",
+    "Hay muchas maneras de clasificar el conocimiento. Presentaremos la más usada en los manuales de metodología, sabiendo que es una simplificación útil y no una verdad absoluta.",
+    "§ Conocimiento empírico o cotidiano",
+    "Es el que adquirimos en la vida diaria, por experiencia directa, imitación o tradición. El pescador de Champotón sabe en qué temporada sale el pulpo; la cocinera sabe cuándo la masa tiene el punto exacto; la madre sabe distinguir el llanto de hambre del llanto de sueño de su bebé. Este conocimiento es **práctico, útil y muchas veces muy preciso**, pero no suele estar sistematizado ni explicado: se sabe *que* algo funciona, aunque no siempre *por qué*.",
+    "Durante mucho tiempo, la ciencia miró este saber con desconfianza, como algo inferior. En el tema 6 veremos que esa mirada ha cambiado mucho, y que hoy se reconoce el valor del conocimiento local y tradicional.",
+    "§ Conocimiento religioso o teológico",
+    "Se basa en la fe y en la revelación: acepta como verdaderas ciertas afirmaciones porque provienen de una autoridad sagrada o de una experiencia espiritual. No se demuestra con experimentos ni se refuta con datos, porque responde a otro tipo de preguntas: el sentido de la vida, el origen último del mundo, el destino humano. Respetarlo implica también no confundirlo con la ciencia, ni pedir a la ciencia que responda las preguntas de la fe.",
+    "§ Conocimiento filosófico",
+    "Usa la razón para reflexionar sobre los problemas más generales: qué es la realidad, qué es el bien, qué es la verdad, qué es el conocimiento. No se basa en experimentos, sino en argumentos. La epistemología misma es un ejemplo de conocimiento filosófico.",
+    "§ Conocimiento artístico",
+    "Es el que se expresa y se transmite a través de la creación estética: la música, la pintura, la danza, la literatura. Una novela puede enseñarnos sobre la condición humana tanto como un tratado de psicología, aunque de otra manera. En el tema 6 volveremos a la relación entre ciencia y arte.",
+    "§ Conocimiento científico",
+    "Es el que se produce de manera **sistemática, metódica, fundamentada y verificable**. Busca explicar los fenómenos, no solo describirlos, y somete sus afirmaciones a prueba. El filósofo argentino Mario Bunge (1960), en un texto clásico de introducción, *La ciencia, su método y su filosofía*, enumeró una larga lista de rasgos del conocimiento científico: es fáctico, trasciende los hechos, es claro y preciso, es comunicable, es verificable, es metódico, es explicativo, es predictivo, es abierto y es útil. Veremos algunos de ellos con más calma en el apartado 2.3.",
+    "PARA PENSAR: Piensa en algo que sabes hacer muy bien y que aprendiste sin un libro: cocinar un platillo, arreglar una bicicleta, calmar a un niño. ¿Qué tipo de conocimiento es? ¿Podrías explicarlo por escrito para que otro lo aprendiera? ¿Qué se perdería en esa explicación?",
+    "§ Comparación de los tipos de conocimiento",
+    "TABLA: Tipo | Fuente | Forma de validarse | Ejemplo ¶ Empírico o cotidiano | Experiencia directa, tradición | Funciona en la práctica | Saber cuándo sembrar maíz ¶ Religioso | Fe, revelación | Autoridad sagrada, experiencia espiritual | Creencias sobre la vida después de la muerte ¶ Filosófico | Razón, reflexión | Argumentación coherente | Debate sobre qué es la justicia ¶ Artístico | Creación, sensibilidad | Experiencia estética | Una novela sobre la Revolución ¶ Científico | Método sistemático | Comprobación, crítica de la comunidad | Teoría de la evolución"
+   ]
+  },
+  {
+   "id": "2.2",
+   "titulo": "Conceptualización de la ciencia",
+   "contenido": [
+    "§ ¿Qué es la ciencia?",
+    "Parece una pregunta fácil, pero no lo es. La palabra viene del latín *scientia*, que significa simplemente «conocimiento». Con el tiempo pasó a designar un tipo especial de conocimiento, organizado y riguroso.",
+    "Podemos distinguir tres sentidos de la palabra «ciencia»:",
+    "• **Ciencia como producto:** el conjunto de conocimientos acumulados, por ejemplo, las leyes de la física o la tabla periódica. Es la ciencia de los libros de texto.",
+    "• **Ciencia como proceso:** la actividad de investigar, formular preguntas, diseñar estudios, reunir datos, interpretar resultados. Es la ciencia que se hace en los laboratorios, en las escuelas y en el campo.",
+    "• **Ciencia como institución:** el conjunto de comunidades, universidades, revistas, congresos y organismos que producen, evalúan y difunden el conocimiento. Es la ciencia como práctica social.",
+    "Durante mucho tiempo, la escuela enseñó casi solo la ciencia como producto: datos para memorizar. Uno de los grandes cambios de la pedagogía contemporánea es enseñar también la ciencia como proceso, es decir, enseñar a investigar.",
+    "§ Una definición de trabajo",
+    "IDEA CLAVE: La **ciencia** es una forma de conocimiento que busca explicar la realidad de manera sistemática y fundamentada, mediante métodos que permiten someter sus afirmaciones a prueba y crítica pública.",
+    "Fíjate en la última parte: **prueba y crítica pública**. Lo que distingue a la ciencia no es que sus afirmaciones sean verdades eternas —de hecho, la historia de la ciencia está llena de teorías abandonadas—, sino que está organizada para detectar y corregir sus propios errores. Un conocimiento científico siempre puede ser revisado si aparecen buenas razones para ello.",
+    "§ El mito del método único",
+    "En la escuela solemos aprender que la ciencia sigue un «método científico» con pasos fijos: observación, hipótesis, experimentación, conclusión. Esa secuencia es una herramienta didáctica útil, pero no describe cómo trabaja realmente la ciencia. Un astrónomo no puede experimentar con galaxias; un historiador no puede repetir la Independencia de México; un antropólogo no formula hipótesis antes de convivir con una comunidad. Cada ciencia ha desarrollado métodos adecuados a su objeto. En el tema 4 veremos que filósofos como Feyerabend llevaron esta crítica al extremo, y en el tema 5 estudiaremos la «desconstrucción» del método tradicional."
+   ]
+  },
+  {
+   "id": "2.3",
+   "titulo": "Cánones de cientificidad",
+   "contenido": [
+    "Si no hay un método único, ¿qué hace que algo sea científico? La pregunta por los **cánones o criterios de cientificidad** busca precisamente eso: los requisitos mínimos que un conocimiento debe cumplir para ser considerado ciencia. Aunque los filósofos discuten mucho sobre ellos, hay un núcleo de criterios ampliamente aceptados:",
+    "§ Objetividad",
+    "Que el conocimiento no dependa solo de los gustos, deseos o prejuicios del investigador. En las ciencias naturales esto se busca con mediciones controladas. En las ciencias sociales, donde el investigador es parte de la realidad que estudia, se prefiere hablar de **intersubjetividad**: que varias personas, siguiendo los mismos procedimientos, puedan llegar a conclusiones compatibles, o al menos entender cómo se llegó a ellas.",
+    "§ Racionalidad y coherencia",
+    "Las afirmaciones deben estar organizadas lógicamente y no contradecirse entre sí. Una teoría que afirma una cosa y la contraria al mismo tiempo no puede ser científica.",
+    "§ Sistematicidad",
+    "El conocimiento científico no es un montón de datos sueltos, sino un conjunto ordenado, donde cada afirmación se relaciona con otras dentro de una teoría.",
+    "§ Verificabilidad o contrastabilidad",
+    "Las afirmaciones deben poder ponerse a prueba con la experiencia. Si digo que «los alumnos que desayunan rinden más en matemáticas», debo poder diseñar un estudio que lo confirme o lo desmienta. En el tema 4 veremos que Karl Popper propuso un criterio más exigente: no basta con que una teoría pueda confirmarse, sino que debe poder **refutarse**.",
+    "§ Comunicabilidad y publicidad",
+    "El conocimiento científico se expresa en un lenguaje preciso y se hace público para que otros lo revisen. Por eso existen las revistas científicas, los congresos y, claro, las citas y referencias que aprenderás a manejar en este curso.",
+    "§ Provisionalidad",
+    "Ninguna verdad científica es definitiva. La ciencia avanza corrigiéndose. Esto no es una debilidad, sino su mayor fortaleza.",
+    "EN EL AULA MEXICANA: **«Está comprobado científicamente».** En una reunión de padres de familia, un papá comparte un video de redes sociales que asegura que «está comprobado científicamente» que los niños que juegan videojuegos tienen menor rendimiento escolar. La orientadora de la escuela, en lugar de aceptar o rechazar la afirmación, hace tres preguntas: ¿quién hizo el estudio?, ¿dónde se publicó?, ¿cuántos niños participaron y cómo se midió el rendimiento? Nadie sabe responder. La orientadora no está descalificando al papá: está aplicando los cánones de cientificidad. Una afirmación que no puede rastrearse hasta su fuente no puede evaluarse.",
+    "PARA PENSAR: ¿Cuántas veces al día escuchas o lees la frase «está comprobado científicamente»? ¿Cuántas de esas veces podrías verificar la fuente? ¿Qué le enseñarías a un alumno de secundaria para defenderse de la desinformación?"
+   ]
+  },
+  {
+   "id": "2.4",
+   "titulo": "Clasificación de las ciencias",
+   "contenido": [
+    "§ ¿Para qué clasificar?",
+    "Clasificar las ciencias no es un pasatiempo de bibliotecario. Cada clasificación revela una idea sobre qué es el conocimiento y qué lugar ocupa cada disciplina. Además, para nosotros tiene una consecuencia directa: dependiendo de cómo se clasifiquen las ciencias, la pedagogía aparece en un lugar u otro, o no aparece en ninguno.",
+    "§ La clasificación de Comte",
+    "Auguste Comte, el fundador del positivismo, en el siglo XIX, ordenó las ciencias en una escala que iba de la más simple y general a la más compleja y particular: matemáticas, astronomía, física, química, biología y, en la cúspide, la sociología, a la que llamó primero «física social» (Comte, 1844/1980). Para Comte, todas las ciencias debían seguir el modelo de las ciencias naturales. Volveremos a él en los temas 3 y 4.",
+    "§ La distinción de Dilthey: naturaleza y espíritu",
+    "A fines del siglo XIX, el filósofo alemán Wilhelm Dilthey (1883/1949) rechazó la idea de Comte. Sostuvo que hay dos grandes tipos de ciencias, con métodos diferentes:",
+    "• **Ciencias de la naturaleza:** estudian fenómenos externos al ser humano y buscan **explicarlos** mediante leyes generales. Su método es la explicación causal.",
+    "• **Ciencias del espíritu** (hoy diríamos ciencias humanas y sociales): estudian la vida humana, la historia, la cultura, el lenguaje, y buscan **comprenderla** desde dentro, interpretando los significados. Su método es la comprensión (*Verstehen*).",
+    "Esta distinción entre **explicar** y **comprender** es una de las ideas más importantes del curso, y la usaremos muchas veces. La pedagogía, por supuesto, estaría del lado de las ciencias del espíritu.",
+    "§ La clasificación de Bunge: formales y fácticas",
+    "En el siglo XX se popularizó la clasificación de Mario Bunge (1960), muy usada en los manuales latinoamericanos:",
+    "• **Ciencias formales:** la lógica y las matemáticas. No estudian hechos del mundo, sino relaciones entre signos y formas. Se validan por demostración.",
+    "• **Ciencias fácticas:** estudian hechos del mundo y se validan por la experiencia. Se dividen en **naturales** (física, química, biología) y **sociales o culturales** (sociología, economía, historia, psicología, pedagogía).",
+    "§ Un esquema para ubicar a la pedagogía",
+    "TABLA: Ciencias formales | Ciencias fácticas naturales | Ciencias fácticas sociales y humanas ¶ Lógica | Física | Sociología ¶ Matemáticas | Química | Psicología ¶  | Biología | Historia ¶  | Geología | Economía ¶  |  | Antropología ¶  |  | **Pedagogía y ciencias de la educación**",
+    "§ Pedagogía o ciencias de la educación",
+    "Un debate que vale la pena conocer: ¿hay una sola ciencia de la educación, la pedagogía, o hay muchas «ciencias de la educación» —psicología educativa, sociología de la educación, economía de la educación, historia de la educación—? En la tradición alemana se defendió la pedagogía como ciencia unitaria; en la tradición francesa, a partir de la segunda mitad del siglo XX, se impuso la expresión plural «ciencias de la educación». La segunda opción tiene una ventaja (reconoce la complejidad del fenómeno educativo) y un riesgo (que la pedagogía se disuelva y pierda identidad propia). Esta tensión es parte de nuestra pregunta guía.",
+    "ACTIVIDAD: **Investigación bibliográfica (actividad independiente).** Busca en la biblioteca o en repositorios académicos confiables (Redalyc, SciELO, Dialnet) dos artículos que discutan si la pedagogía es una ciencia. Para cada uno anota: autor, año, postura que defiende y su argumento principal. Elabora la referencia completa en APA 7. Trae tus fichas a la siguiente sesión para una discusión grupal.",
+    "TALLER APA: **La referencia de un artículo de revista.** El formato es: ¶ Apellido, Inicial., y Apellido, Inicial. (Año). Título del artículo. *Nombre de la Revista en Cursivas*, *volumen*(número), páginas. https://doi.org/xxxxx ¶ Ejemplo: Dekker, S., Lee, N. C., Howard-Jones, P., y Jolles, J. (2012). Neuromyths in education: Prevalence and predictors of misconceptions among teachers. *Frontiers in Psychology*, *3*, Artículo 429. https://doi.org/10.3389/fpsyg.2012.00429 ¶ El DOI (identificador digital de objeto) es como la «CURP» del artículo: nunca cambia y permite encontrarlo siempre. Si el artículo lo tiene, inclúyelo.",
+    "§ Glosario del tema",
+    "**Conocimiento empírico.** Saber práctico adquirido por experiencia directa, imitación o tradición.",
+    "**Ciencia.** Conocimiento sistemático y fundamentado que somete sus afirmaciones a prueba y a crítica pública.",
+    "**Cánones de cientificidad.** Criterios que debe cumplir un conocimiento para ser considerado científico.",
+    "**Intersubjetividad.** Acuerdo razonado entre varios sujetos sobre un conocimiento; versión de la objetividad propia de las ciencias sociales.",
+    "**Provisionalidad.** Rasgo de la ciencia según el cual ningún conocimiento es definitivo y todo puede revisarse.",
+    "**Explicar.** Dar cuenta de un fenómeno por sus causas o leyes generales; método de las ciencias naturales según Dilthey.",
+    "**Comprender.** Captar el sentido o significado de una acción humana desde dentro; método de las ciencias del espíritu según Dilthey.",
+    "**Ciencias formales.** Lógica y matemáticas; se validan por demostración.",
+    "**Ciencias fácticas.** Estudian hechos del mundo y se validan por la experiencia.",
+    "RESUMEN DEL TEMA: Existen varios tipos de conocimiento: empírico, religioso, filosófico, artístico y científico. Cada uno tiene su fuente y su forma de validarse. La ciencia puede entenderse como producto, como proceso y como institución; su rasgo distintivo no es poseer verdades eternas, sino someter sus afirmaciones a prueba y crítica pública. Los cánones de cientificidad incluyen objetividad o intersubjetividad, coherencia, sistematicidad, contrastabilidad, comunicabilidad y provisionalidad. Las ciencias se han clasificado de distintas maneras; la distinción de Dilthey entre explicar y comprender y la de Bunge entre ciencias formales y fácticas ubican a la pedagogía entre las ciencias sociales y humanas. Pero ¿de dónde vienen las bases de estas ciencias sociales? Eso lo veremos en el tema 3."
+   ]
+  }
+ ]
+}

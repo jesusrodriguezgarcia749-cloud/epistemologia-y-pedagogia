@@ -1,0 +1,499 @@
+{
+ "parcial": "p2",
+ "titulo": "Examen Parcial 2 — Temas 5 a 7: nuevo paradigma, conocimiento ordinario y neurociencia",
+ "config": {
+  "preguntasPorExamen": 32,
+  "minutos": 60
+ },
+ "reactivos": [
+  {
+   "id": "p2-001",
+   "subtema": "5.1",
+   "tipo": "caso",
+   "pregunta": "Un alumno de secundaria está convencido de que \"las cosas caen porque son pesadas\" y, aunque el maestro explica la gravedad, sigue usando su idea en los ejercicios. ¿Qué concepto de Bachelard describe la situación?",
+   "opciones": [
+    "Un obstáculo epistemológico: un conocimiento previo que resiste al nuevo",
+    "Un periodo sensible que ya se cerró",
+    "Un ejemplo de doble hermenéutica",
+    "Una propiedad emergente del sistema escolar"
+   ],
+   "correcta": 0,
+   "explicacion": "Para Bachelard, el conocimiento científico se construye contra conocimientos previos mal hechos."
+  },
+  {
+   "id": "p2-002",
+   "subtema": "5.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué observación atribuida a Max Planck ilustra la inercia mental de las comunidades científicas?",
+   "opciones": [
+    "Las nuevas verdades triunfan no porque convenzan a sus opositores, sino porque surge una generación familiarizada con ellas",
+    "Los científicos cambian de opinión inmediatamente ante cualquier dato",
+    "La ciencia avanza solo por acumulación de verdades",
+    "Los jóvenes siempre rechazan las ideas nuevas"
+   ],
+   "correcta": 0,
+   "explicacion": "Kuhn también observó que los paradigmas cambian con mucha resistencia."
+  },
+  {
+   "id": "p2-003",
+   "subtema": "5.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada situación escolar con el obstáculo epistemológico que muestra.",
+   "pares": [
+    {
+     "izquierda": "\"Ya sé qué es la fotosíntesis: es cuando la planta come luz\"",
+     "derecha": "Obstáculo verbal"
+    },
+    {
+     "izquierda": "\"Vi dos alumnos que aprendieron con música; la música funciona para todos\"",
+     "derecha": "Generalización apresurada"
+    },
+    {
+     "izquierda": "\"Se ve que el Sol gira alrededor de la Tierra\"",
+     "derecha": "Experiencia primera"
+    },
+    {
+     "izquierda": "\"Ese material tiene una energía especial que ayuda a concentrarse\"",
+     "derecha": "Obstáculo sustancialista"
+    }
+   ],
+   "explicacion": "Reconocer los obstáculos ayuda a diseñar la enseñanza."
+  },
+  {
+   "id": "p2-004",
+   "subtema": "5.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de los siguientes es un supuesto discutible del método tradicional, según el compendio?",
+   "opciones": [
+    "Que el sujeto y el objeto de estudio están completamente separados",
+    "Que el conocimiento debe ser público",
+    "Que las afirmaciones deben ser coherentes",
+    "Que la ciencia busca explicar"
+   ],
+   "correcta": 0,
+   "explicacion": "En ciencias humanas, un maestro que investiga su grupo es parte del fenómeno."
+  },
+  {
+   "id": "p2-005",
+   "subtema": "5.2",
+   "tipo": "caso",
+   "pregunta": "Una tesista empieza con una guía de entrevista, pero tras las primeras entrevistas descubre un tema inesperado y ajusta sus preguntas. ¿Es un error metodológico?",
+   "opciones": [
+    "No: es un diseño emergente, legítimo en la investigación cualitativa",
+    "Sí: un plan nunca debe modificarse",
+    "Sí: invalida toda la investigación",
+    "No, porque en cualitativa no hay ningún plan"
+   ],
+   "correcta": 0,
+   "explicacion": "En la investigación cualitativa el plan se ajusta a medida que aparecen hallazgos."
+  },
+  {
+   "id": "p2-006",
+   "subtema": "5.2",
+   "tipo": "completar",
+   "pregunta": "Contrastar distintas fuentes, métodos o investigadores sobre un mismo fenómeno para dar solidez a los resultados se llama _______.",
+   "opciones": [
+    "triangulación",
+    "reflexividad",
+    "inducción",
+    "desconstrucción"
+   ],
+   "correcta": 0,
+   "explicacion": "Aumenta la confianza en los resultados."
+  },
+  {
+   "id": "p2-007",
+   "subtema": "5.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según Martínez Miguélez, el método debe elegirse primero y después buscar a qué fenómeno aplicarlo.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Al revés: se estudia la naturaleza del fenómeno y se elige el camino adecuado."
+  },
+  {
+   "id": "p2-008",
+   "subtema": "5.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué significa que el cerebro funcione como una \"máquina de predicción\"?",
+   "opciones": [
+    "Genera continuamente hipótesis sobre el mundo y las corrige con la información de los sentidos",
+    "Adivina el futuro con exactitud",
+    "Solo recibe datos sin interpretarlos",
+    "Predice únicamente resultados matemáticos"
+   ],
+   "correcta": 0,
+   "explicacion": "Las ilusiones ópticas muestran que el cerebro completa e interpreta."
+  },
+  {
+   "id": "p2-009",
+   "subtema": "5.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada autor con su aporte a la idea de que conocer es construir.",
+   "pares": [
+    {
+     "izquierda": "Maturana y Varela",
+     "derecha": "Todo hacer es conocer y todo conocer es hacer"
+    },
+    {
+     "izquierda": "Antonio Damasio",
+     "derecha": "La emoción es condición del razonamiento"
+    },
+    {
+     "izquierda": "Neurociencia de la percepción",
+     "derecha": "El cerebro completa e interpreta lo que percibe"
+    }
+   ],
+   "explicacion": "El conocimiento es producto de un ser humano completo, con cuerpo y emociones."
+  },
+  {
+   "id": "p2-010",
+   "subtema": "5.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es la \"fusión de horizontes\" de Gadamer?",
+   "opciones": [
+    "La comprensión en la que el horizonte del intérprete y el de lo interpretado se amplían mutuamente",
+    "Abandonar por completo el propio punto de vista",
+    "Imponer la propia interpretación al texto",
+    "Leer un texto exactamente como lo entendía su autor"
+   ],
+   "correcta": 0,
+   "explicacion": "Comprender es entrar en diálogo con lo que se quiere comprender."
+  },
+  {
+   "id": "p2-011",
+   "subtema": "5.4",
+   "tipo": "caso",
+   "pregunta": "Un maestro dice: \"Hago participar a mis alumnos con preguntas, pero yo ya sé las respuestas correctas y solo espero que las adivinen\". ¿Cumple con el diálogo en el sentido de Freire?",
+   "opciones": [
+    "No: para Freire el diálogo es una postura epistemológica en la que el educando también sabe y el conocimiento se construye entre ambos",
+    "Sí: cualquier pregunta en clase es diálogo freiriano",
+    "Sí: el maestro siempre debe tener todas las respuestas",
+    "No, porque Freire prohibía hacer preguntas"
+   ],
+   "correcta": 0,
+   "explicacion": "El diálogo no es una técnica para \"hacer participar\", sino una forma de construir conocimiento."
+  },
+  {
+   "id": "p2-012",
+   "subtema": "5.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "El principio dialógico de Morin y el diálogo de Freire significan exactamente lo mismo.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Se complementan: Freire habla del diálogo entre personas; Morin, de mantener juntas ideas opuestas."
+  },
+  {
+   "id": "p2-013",
+   "subtema": "6.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué consecuencia tiene para la formación científica la idea de conocimiento tácito de Polanyi?",
+   "opciones": [
+    "Que no puede hacerse solo con libros: requiere aprender junto a un maestro, como en los talleres artesanales",
+    "Que basta con memorizar los manuales",
+    "Que la ciencia no necesita formación",
+    "Que solo se aprende de forma autodidacta"
+   ],
+   "correcta": 0,
+   "explicacion": "El experto \"ve\" en sus datos lo que el principiante no ve."
+  },
+  {
+   "id": "p2-014",
+   "subtema": "6.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Ningún investigador repite todos los experimentos de su disciplina; los científicos dependen enormemente del testimonio de sus colegas.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Casi todo lo que sabemos combina varias vías de conocimiento."
+  },
+  {
+   "id": "p2-015",
+   "subtema": "6.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada saber local mexicano con su fundamento.",
+   "pares": [
+    {
+     "izquierda": "Milpa",
+     "derecha": "El frijol aporta nitrógeno y la calabaza conserva la humedad del suelo"
+    },
+    {
+     "izquierda": "Nixtamalización",
+     "derecha": "Cocer el maíz con cal mejora su valor nutritivo"
+    },
+    {
+     "izquierda": "Herbolaria",
+     "derecha": "Algunas plantas dieron origen a medicamentos modernos"
+    },
+    {
+     "izquierda": "Saber del monte y del mar",
+     "derecha": "Conocimiento preciso de ciclos de lluvia y comportamiento animal"
+    }
+   ],
+   "explicacion": "Son ejemplos de conocimiento local con valor que la ciencia ha reconocido."
+  },
+  {
+   "id": "p2-016",
+   "subtema": "6.2",
+   "tipo": "caso",
+   "pregunta": "Un padre de familia propone en la escuela sustituir el antibiótico recetado a su hijo por un remedio sin eficacia comprobada, \"porque todos los saberes valen lo mismo\". ¿Qué error comete según el tema?",
+   "opciones": [
+    "El relativismo ingenuo",
+    "El cientificismo",
+    "La ecología de saberes",
+    "La racionalidad técnica"
+   ],
+   "correcta": 0,
+   "explicacion": "El diálogo de saberes no significa que todo vale igual para todo, sobre todo en salud."
+  },
+  {
+   "id": "p2-017",
+   "subtema": "6.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué propone la ecología de saberes de Sousa Santos?",
+   "opciones": [
+    "Reconocer la ciencia como saber valioso pero no único, y hacer dialogar distintos saberes según los problemas",
+    "Sustituir la ciencia por los saberes tradicionales",
+    "Eliminar los saberes tradicionales de la escuela",
+    "Que todos los saberes son idénticos"
+   ],
+   "correcta": 0,
+   "explicacion": "Para llegar a la Luna se necesita la ciencia; para conservar un territorio, quizá también el saber de sus habitantes."
+  },
+  {
+   "id": "p2-018",
+   "subtema": "6.3",
+   "tipo": "caso",
+   "pregunta": "Durante una clase, una actividad no funciona; la maestra nota el desinterés, cambia sobre la marcha a una pregunta provocadora y el grupo se activa. ¿Qué concepto de Schön ilustra?",
+   "opciones": [
+    "Reflexión en la acción",
+    "Racionalidad técnica",
+    "Reflexión sobre la acción",
+    "Contexto de justificación"
+   ],
+   "correcta": 0,
+   "explicacion": "Es pensar y ajustar mientras se actúa."
+  },
+  {
+   "id": "p2-019",
+   "subtema": "6.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué criticó Donald Schön con el concepto de \"racionalidad técnica\"?",
+   "opciones": [
+    "La idea de que los profesionales solo aplican la teoría científica a la práctica",
+    "La idea de que la teoría no sirve para nada",
+    "El uso de tecnología en el aula",
+    "La investigación cualitativa"
+   ],
+   "correcta": 0,
+   "explicacion": "Esa visión no explica lo que hacen los buenos profesionales ante situaciones únicas."
+  },
+  {
+   "id": "p2-020",
+   "subtema": "6.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada cambio del nuevo paradigma para la educación con su opuesto.",
+   "pares": [
+    {
+     "izquierda": "Conocimiento relacionado",
+     "derecha": "Conocimiento fragmentado en materias aisladas"
+    },
+    {
+     "izquierda": "Construcción dialógica",
+     "derecha": "Transmisión de información"
+    },
+    {
+     "izquierda": "Aprendizaje contextualizado",
+     "derecha": "Contenidos desconectados de la vida"
+    },
+    {
+     "izquierda": "Docente investigador",
+     "derecha": "Docente aplicador de programas"
+    }
+   ],
+   "explicacion": "Son los cambios que se derivan de todo lo visto hasta el Tema 6."
+  },
+  {
+   "id": "p2-021",
+   "subtema": "6.4",
+   "tipo": "completar",
+   "pregunta": "El informe coordinado por Jacques Delors (1996) se titula La educación encierra un _______.",
+   "opciones": [
+    "tesoro",
+    "misterio",
+    "método",
+    "paradigma"
+   ],
+   "correcta": 0,
+   "explicacion": "Propuso los cuatro pilares de la educación."
+  },
+  {
+   "id": "p2-022",
+   "subtema": "7.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué consecuencia pedagógica y ética tiene la plasticidad cerebral?",
+   "opciones": [
+    "Nadie está condenado por su cerebro: las capacidades se desarrollan con experiencia y enseñanza adecuadas",
+    "Los alumnos con bajo rendimiento nunca podrán mejorar",
+    "Solo los niños menores de tres años pueden aprender",
+    "El aprendizaje no depende de la enseñanza"
+   ],
+   "correcta": 0,
+   "explicacion": "La plasticidad dura toda la vida, aunque es mayor en la infancia."
+  },
+  {
+   "id": "p2-023",
+   "subtema": "7.1",
+   "tipo": "caso",
+   "pregunta": "Una escuela deja tareas extensas que los alumnos terminan de madrugada. ¿Qué evidencia de la neurociencia es relevante para revisar esa práctica?",
+   "opciones": [
+    "El sueño es necesario para consolidar la memoria; dormir poco perjudica el aprendizaje",
+    "Dormir menos aumenta la memoria a largo plazo",
+    "El sueño no tiene relación con el aprendizaje",
+    "Solo importa el número de horas de estudio"
+   ],
+   "correcta": 0,
+   "explicacion": "Plantea preguntas sobre horarios, tareas nocturnas y pantallas antes de dormir."
+  },
+  {
+   "id": "p2-024",
+   "subtema": "7.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "La corteza prefrontal, relacionada con la planeación y el control de impulsos, termina de madurar hasta pasados los veinte años.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Ayuda a entender el comportamiento adolescente."
+  },
+  {
+   "id": "p2-025",
+   "subtema": "7.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué relación hay entre curiosidad y aprendizaje según el tema?",
+   "opciones": [
+    "Cuando algo genera curiosidad, el cerebro se prepara para aprender y se recuerda mejor la información",
+    "La curiosidad distrae y reduce el aprendizaje",
+    "La curiosidad solo importa en preescolar",
+    "No existe relación demostrada"
+   ],
+   "correcta": 0,
+   "explicacion": "Mora insiste en que emoción y curiosidad son puertas del aprendizaje."
+  },
+  {
+   "id": "p2-026",
+   "subtema": "7.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada hallazgo con su implicación para el aula.",
+   "pares": [
+    {
+     "izquierda": "El estrés intenso y prolongado afecta la memoria",
+     "derecha": "Cuidar un clima escolar seguro y vínculos de confianza"
+    },
+    {
+     "izquierda": "La curiosidad prepara el aprendizaje",
+     "derecha": "Abrir con preguntas que despierten interés"
+    },
+    {
+     "izquierda": "El aprendizaje es social",
+     "derecha": "Favorecer el diálogo y la colaboración"
+    },
+    {
+     "izquierda": "La emoción forma parte del aprendizaje",
+     "derecha": "Dar significado personal a los contenidos"
+    }
+   ],
+   "explicacion": "Cognición y emoción no se separan."
+  },
+  {
+   "id": "p2-027",
+   "subtema": "7.3",
+   "tipo": "caso",
+   "pregunta": "En un curso para docentes se afirma que hay que \"activar el hemisferio derecho\" de los alumnos creativos con ejercicios especiales. ¿Qué responderías?",
+   "opciones": [
+    "Que los hemisferios trabajan integrados y no hay evidencia de que enseñar a un hemisferio mejore el aprendizaje",
+    "Que es correcto y debe aplicarse en todos los grupos",
+    "Que solo funciona con alumnos de hemisferio izquierdo",
+    "Que está demostrado por el estudio de Sperry"
+   ],
+   "correcta": 0,
+   "explicacion": "Sperry estudió condiciones excepcionales; en cerebros sanos los hemisferios cooperan."
+  },
+  {
+   "id": "p2-028",
+   "subtema": "7.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿En qué consiste la \"armonía\" entre las partes del cerebro según la neurociencia actual?",
+   "opciones": [
+    "En la integración de múltiples redes cerebrales que trabajan coordinadas",
+    "En equilibrar el uso de los dos hemisferios",
+    "En activar el cerebro reptiliano antes que la neocorteza",
+    "En usar el 100 % del cerebro al mismo tiempo"
+   ],
+   "correcta": 0,
+   "explicacion": "Atención, control ejecutivo, memoria, lenguaje y emoción funcionan en redes."
+  },
+  {
+   "id": "p2-029",
+   "subtema": "7.4",
+   "tipo": "jerarquizar",
+   "pregunta": "Ordena los cuatro pilares del aprendizaje de Dehaene tal como se presentan en el compendio.",
+   "opciones": [
+    "Atención → compromiso activo → retroalimentación del error → consolidación",
+    "Consolidación → atención → retroalimentación del error → compromiso activo",
+    "Compromiso activo → consolidación → atención → retroalimentación del error",
+    "Retroalimentación del error → consolidación → compromiso activo → atención"
+   ],
+   "correcta": 0,
+   "explicacion": "Son los pilares propuestos en ¿Cómo aprendemos? (2018/2019)."
+  },
+  {
+   "id": "p2-030",
+   "subtema": "7.4",
+   "tipo": "caso",
+   "pregunta": "Para preparar un examen, un alumno relee tres veces sus apuntes y los subraya; otro se hace preguntas y las responde sin ver, repartiendo el estudio en varios días. Según la evidencia, ¿quién usa mejores estrategias?",
+   "opciones": [
+    "El segundo: práctica de recuperación y práctica espaciada",
+    "El primero: releer y subrayar son las técnicas más eficaces",
+    "Ninguno: las técnicas de estudio no influyen",
+    "Ambos por igual"
+   ],
+   "correcta": 0,
+   "explicacion": "Roediger y Karpicke (2006) y Dunlosky et al. (2013) lo respaldan."
+  },
+  {
+   "id": "p2-031",
+   "subtema": "7.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Ante una propuesta comercial de \"neuroeducación\", ¿qué preguntas recomienda hacer el compendio?",
+   "opciones": [
+    "¿Dónde está la evidencia? ¿Quién la produjo? ¿Se ha replicado?",
+    "¿Cuánto cuesta? ¿Qué tan popular es en redes?",
+    "¿Usa palabras científicas? ¿Tiene imágenes del cerebro?",
+    "¿Es nueva? ¿La recomienda un famoso?"
+   ],
+   "correcta": 0,
+   "explicacion": "Entre un hallazgo de laboratorio y una recomendación para el aula hay una gran distancia."
+  },
+  {
+   "id": "p2-032",
+   "subtema": "7.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "Presentar el contenido en varias formas —palabras, imágenes, ejemplos y práctica— a todos los alumnos sí tiene respaldo, aunque enseñar según estilos de aprendizaje no lo tenga.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Las preferencias existen, pero no significan que se aprenda mejor así."
+  }
+ ]
+}

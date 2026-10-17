@@ -1,0 +1,688 @@
+{
+ "fuentes": [
+  {
+   "autor": "American Psychological Association",
+   "titulo": "Publication manual of the American Psychological Association (7.ª ed.)",
+   "anio": "2020",
+   "tipo": "Manual de estilo",
+   "tema": "1.0",
+   "descripcion": "El manual oficial del estilo APA, séptima edición, que se usa en todo el curso para citar y referenciar.",
+   "apa": "American Psychological Association. (2020). *Publication manual of the American Psychological Association* (7.ª ed.). https://doi.org/10.1037/0000165-000"
+  },
+  {
+   "autor": "Platón",
+   "titulo": "Teeteto",
+   "anio": "ca. 369 a. C.",
+   "tipo": "Diálogo filosófico",
+   "tema": "1.1",
+   "descripcion": "El diálogo donde Sócrates pregunta qué es el conocimiento y aparece, por primera vez, la idea de conocimiento como opinión verdadera con justificación.",
+   "apa": "Platón. (1988). Teeteto. En *Diálogos V: Parménides, Teeteto, Sofista, Político*. Gredos. (Obra original escrita ca. 369 a. C.)."
+  },
+  {
+   "autor": "René Descartes",
+   "titulo": "Discurso del método",
+   "anio": "1637",
+   "tipo": "Obra clásica",
+   "tema": "1.1",
+   "descripcion": "El texto fundador del racionalismo moderno: dudar de todo hasta encontrar una verdad firme y dividir cada problema en sus partes.",
+   "apa": "Descartes, R. (2011). *Discurso del método* (R. Frondizi, Trad.). Alianza. (Obra original publicada en 1637)."
+  },
+  {
+   "autor": "Luis Villoro",
+   "titulo": "Creer, saber, conocer",
+   "anio": "1982",
+   "tipo": "Epistemología mexicana",
+   "tema": "1.1",
+   "descripcion": "Uno de los grandes libros de epistemología escritos en México: distingue con precisión entre creer, saber y conocer.",
+   "apa": "Villoro, L. (1982). *Creer, saber, conocer*. Siglo XXI."
+  },
+  {
+   "autor": "Jean Piaget",
+   "titulo": "Psicología y epistemología",
+   "anio": "1970",
+   "tipo": "Epistemología genética",
+   "tema": "1.1",
+   "descripcion": "Piaget explica cómo se forma el conocimiento en el desarrollo del niño: la base del constructivismo.",
+   "apa": "Piaget, J. (1971). *Psicología y epistemología*. Ariel. (Obra original publicada en 1970)."
+  },
+  {
+   "autor": "Alan F. Chalmers",
+   "titulo": "¿Qué es esa cosa llamada ciencia?",
+   "anio": "1976",
+   "tipo": "Introducción a la filosofía de la ciencia",
+   "tema": "1.2",
+   "descripcion": "El manual introductorio más leído en el mundo para entender, sin tecnicismos, los debates sobre qué es la ciencia.",
+   "apa": "Chalmers, A. F. (2000). *¿Qué es esa cosa llamada ciencia?* (3.ª ed.). Siglo XXI. (Obra original publicada en 1976)."
+  },
+  {
+   "autor": "Wilfred Carr y Stephen Kemmis",
+   "titulo": "Teoría crítica de la enseñanza",
+   "anio": "1986",
+   "tipo": "Pedagogía crítica",
+   "tema": "1.3",
+   "descripcion": "Propone la pedagogía como ciencia crítica y a los docentes como investigadores de su propia práctica mediante la investigación-acción.",
+   "apa": "Carr, W., y Kemmis, S. (1988). *Teoría crítica de la enseñanza: la investigación-acción en la formación del profesorado*. Martínez Roca. (Obra original publicada en 1986)."
+  },
+  {
+   "autor": "John Elliott",
+   "titulo": "La investigación-acción en educación",
+   "anio": "1990",
+   "tipo": "Metodología",
+   "tema": "1.3",
+   "descripcion": "Referencia clásica de la investigación-acción: el conocimiento educativo se produce al transformar la práctica.",
+   "apa": "Elliott, J. (1990). *La investigación-acción en educación*. Morata."
+  },
+  {
+   "autor": "Roberto Hernández Sampieri y Christian P. Mendoza Torres",
+   "titulo": "Metodología de la investigación: las rutas cuantitativa, cualitativa y mixta",
+   "anio": "2018",
+   "tipo": "Manual de metodología",
+   "tema": "1.3",
+   "descripcion": "El manual de metodología más usado en México; útil para fundamentar el enfoque de tu protocolo.",
+   "apa": "Hernández Sampieri, R., y Mendoza Torres, C. P. (2018). *Metodología de la investigación: las rutas cuantitativa, cualitativa y mixta*. McGraw-Hill Education."
+  },
+  {
+   "autor": "Mario Bunge",
+   "titulo": "La ciencia, su método y su filosofía",
+   "anio": "1960",
+   "tipo": "Filosofía de la ciencia",
+   "tema": "2.1",
+   "descripcion": "Texto breve y claro que enumera los rasgos del conocimiento científico y propone la distinción entre ciencias formales y fácticas.",
+   "apa": "Bunge, M. (1960). *La ciencia, su método y su filosofía*. Siglo Veinte."
+  },
+  {
+   "autor": "Auguste Comte",
+   "titulo": "Discurso sobre el espíritu positivo",
+   "anio": "1844",
+   "tipo": "Obra clásica",
+   "tema": "2.4",
+   "descripcion": "La presentación más accesible del positivismo de Comte y su ley de los tres estadios.",
+   "apa": "Comte, A. (1980). *Discurso sobre el espíritu positivo*. Alianza. (Obra original publicada en 1844)."
+  },
+  {
+   "autor": "Wilhelm Dilthey",
+   "titulo": "Introducción a las ciencias del espíritu",
+   "anio": "1883",
+   "tipo": "Obra clásica",
+   "tema": "2.4",
+   "descripcion": "Funda la distinción entre ciencias de la naturaleza, que explican, y ciencias del espíritu, que comprenden.",
+   "apa": "Dilthey, W. (1949). *Introducción a las ciencias del espíritu* (E. Ímaz, Trad.). Fondo de Cultura Económica. (Obra original publicada en 1883)."
+  },
+  {
+   "autor": "Émile Durkheim",
+   "titulo": "Las reglas del método sociológico",
+   "anio": "1895",
+   "tipo": "Obra clásica",
+   "tema": "3.1",
+   "descripcion": "El libro donde Durkheim pide tratar los hechos sociales como cosas: base de la sociología positivista.",
+   "apa": "Durkheim, É. (1986). *Las reglas del método sociológico*. Fondo de Cultura Económica. (Obra original publicada en 1895)."
+  },
+  {
+   "autor": "Max Weber",
+   "titulo": "Ensayos sobre metodología sociológica",
+   "anio": "1922",
+   "tipo": "Obra clásica",
+   "tema": "3.1",
+   "descripcion": "Weber defiende una sociología comprensiva que interpreta el sentido de las acciones y propone los tipos ideales.",
+   "apa": "Weber, M. (1973). *Ensayos sobre metodología sociológica*. Amorrortu. (Obra original publicada en 1922)."
+  },
+  {
+   "autor": "Jürgen Habermas",
+   "titulo": "Conocimiento e interés",
+   "anio": "1968",
+   "tipo": "Teoría crítica",
+   "tema": "3.1",
+   "descripcion": "Distingue tres intereses del conocimiento —técnico, práctico y emancipatorio— que sostienen los tres paradigmas de investigación.",
+   "apa": "Habermas, J. (1982). *Conocimiento e interés*. Taurus. (Obra original publicada en 1968)."
+  },
+  {
+   "autor": "Ludwig von Bertalanffy",
+   "titulo": "Teoría general de los sistemas",
+   "anio": "1968",
+   "tipo": "Pensamiento sistémico",
+   "tema": "3.2",
+   "descripcion": "Presenta la idea de sistema y de propiedades emergentes: el todo es más que la suma de las partes.",
+   "apa": "Bertalanffy, L. von (1976). *Teoría general de los sistemas: fundamentos, desarrollo, aplicaciones*. Fondo de Cultura Económica. (Obra original publicada en 1968)."
+  },
+  {
+   "autor": "Karel Kosík",
+   "titulo": "Dialéctica de lo concreto",
+   "anio": "1963",
+   "tipo": "Filosofía dialéctica",
+   "tema": "3.4",
+   "descripcion": "Explica el pensamiento dialéctico como el paso de la apariencia inmediata a la comprensión de la totalidad.",
+   "apa": "Kosík, K. (1967). *Dialéctica de lo concreto* (A. Sánchez Vázquez, Trad.). Grijalbo. (Obra original publicada en 1963)."
+  },
+  {
+   "autor": "Paulo Freire",
+   "titulo": "Pedagogía del oprimido",
+   "anio": "1970",
+   "tipo": "Pedagogía crítica",
+   "tema": "3.4",
+   "descripcion": "Crítica de la educación bancaria y propuesta de una educación dialógica basada en la praxis.",
+   "apa": "Freire, P. (2005). *Pedagogía del oprimido* (2.ª ed.). Siglo XXI. (Obra original publicada en 1970)."
+  },
+  {
+   "autor": "Lev S. Vygotsky",
+   "titulo": "El desarrollo de los procesos psicológicos superiores",
+   "anio": "1978",
+   "tipo": "Psicología del desarrollo",
+   "tema": "3.4",
+   "descripcion": "El aprendizaje como proceso social que jalona el desarrollo; base de la zona de desarrollo próximo.",
+   "apa": "Vygotsky, L. S. (1979). *El desarrollo de los procesos psicológicos superiores*. Crítica. (Obra original publicada en 1978)."
+  },
+  {
+   "autor": "Karl R. Popper",
+   "titulo": "La lógica de la investigación científica",
+   "anio": "1934",
+   "tipo": "Filosofía de la ciencia",
+   "tema": "4.2",
+   "descripcion": "El libro donde Popper propone la falsabilidad como criterio de demarcación entre ciencia y no ciencia.",
+   "apa": "Popper, K. R. (2008). *La lógica de la investigación científica* (V. Sánchez de Zavala, Trad.). Tecnos. (Obra original publicada en 1934)."
+  },
+  {
+   "autor": "Karl R. Popper",
+   "titulo": "Conjeturas y refutaciones",
+   "anio": "1963",
+   "tipo": "Filosofía de la ciencia",
+   "tema": "4.2",
+   "descripcion": "Ensayos donde Popper explica cómo avanza el conocimiento: proponiendo conjeturas audaces y tratando de refutarlas.",
+   "apa": "Popper, K. R. (1994). *Conjeturas y refutaciones: el desarrollo del conocimiento científico*. Paidós. (Obra original publicada en 1963)."
+  },
+  {
+   "autor": "Thomas S. Kuhn",
+   "titulo": "La estructura de las revoluciones científicas",
+   "anio": "1962",
+   "tipo": "Filosofía e historia de la ciencia",
+   "tema": "4.3",
+   "descripcion": "Probablemente el libro de filosofía de la ciencia más leído: paradigmas, ciencia normal, anomalías y revoluciones.",
+   "apa": "Kuhn, T. S. (2013). *La estructura de las revoluciones científicas* (4.ª ed.; C. Solís Santos, Trad.). Fondo de Cultura Económica. (Obra original publicada en 1962)."
+  },
+  {
+   "autor": "Imre Lakatos",
+   "titulo": "La metodología de los programas de investigación científica",
+   "anio": "1978",
+   "tipo": "Filosofía de la ciencia",
+   "tema": "4.4",
+   "descripcion": "Núcleo duro, cinturón protector y programas progresivos o degenerativos: el puente entre Popper y Kuhn.",
+   "apa": "Lakatos, I. (1989). *La metodología de los programas de investigación científica* (J. C. Zapatero, Trad.). Alianza. (Obra original publicada en 1978)."
+  },
+  {
+   "autor": "Paul K. Feyerabend",
+   "titulo": "Tratado contra el método",
+   "anio": "1975",
+   "tipo": "Filosofía de la ciencia",
+   "tema": "4.5",
+   "descripcion": "La defensa del anarquismo epistemológico: ninguna regla metodológica fija garantiza el progreso de la ciencia.",
+   "apa": "Feyerabend, P. K. (1986). *Tratado contra el método: esquema de una teoría anarquista del conocimiento* (D. Ribes, Trad.). Tecnos. (Obra original publicada en 1975)."
+  },
+  {
+   "autor": "Edgar Morin",
+   "titulo": "Introducción al pensamiento complejo",
+   "anio": "1990",
+   "tipo": "Pensamiento complejo",
+   "tema": "4.6",
+   "descripcion": "La crítica de Morin al paradigma de simplificación y sus principios dialógico, recursivo y hologramático.",
+   "apa": "Morin, E. (1994). *Introducción al pensamiento complejo* (M. Pakman, Trad.). Gedisa. (Obra original publicada en 1990)."
+  },
+  {
+   "autor": "Edgar Morin",
+   "titulo": "Los siete saberes necesarios para la educación del futuro",
+   "anio": "1999",
+   "tipo": "Documento UNESCO",
+   "tema": "4.6",
+   "descripcion": "Texto breve escrito para la UNESCO que influyó en las reformas educativas de América Latina, incluida la mexicana.",
+   "apa": "Morin, E. (1999). *Los siete saberes necesarios para la educación del futuro*. UNESCO."
+  },
+  {
+   "autor": "Anthony Giddens",
+   "titulo": "Las nuevas reglas del método sociológico",
+   "anio": "1976",
+   "tipo": "Teoría social",
+   "tema": "4.7",
+   "descripcion": "Introduce la doble hermenéutica: las ciencias sociales interpretan un mundo ya interpretado por sus actores.",
+   "apa": "Giddens, A. (1987). *Las nuevas reglas del método sociológico: crítica positiva de las sociologías interpretativas*. Amorrortu. (Obra original publicada en 1976)."
+  },
+  {
+   "autor": "José María Mardones y Nicanor Ursua",
+   "titulo": "Filosofía de las ciencias humanas y sociales",
+   "anio": "1982",
+   "tipo": "Antología",
+   "tema": "4.7",
+   "descripcion": "Antología muy usada en América Latina con textos clásicos sobre el debate explicación-comprensión. Lectura recomendada.",
+   "apa": "Mardones, J. M., y Ursua, N. (1982). *Filosofía de las ciencias humanas y sociales: materiales para una fundamentación científica*. Fontamara."
+  },
+  {
+   "autor": "Miguel Martínez Miguélez",
+   "titulo": "El paradigma emergente",
+   "anio": "1997",
+   "tipo": "Epistemología latinoamericana",
+   "tema": "5.1",
+   "descripcion": "Base de buena parte del programa: la inercia mental, la crítica al método tradicional y la nueva racionalidad.",
+   "apa": "Martínez Miguélez, M. (1997). *El paradigma emergente: hacia una nueva teoría de la racionalidad científica* (2.ª ed.). Trillas."
+  },
+  {
+   "autor": "Gaston Bachelard",
+   "titulo": "La formación del espíritu científico",
+   "anio": "1938",
+   "tipo": "Epistemología",
+   "tema": "5.1",
+   "descripcion": "Los obstáculos epistemológicos: el conocimiento científico se construye contra ideas previas mal hechas.",
+   "apa": "Bachelard, G. (2000). *La formación del espíritu científico: contribución a un psicoanálisis del conocimiento objetivo*. Siglo XXI. (Obra original publicada en 1938)."
+  },
+  {
+   "autor": "Miguel Martínez Miguélez",
+   "titulo": "Nuevos paradigmas en la investigación",
+   "anio": "2009",
+   "tipo": "Epistemología latinoamericana",
+   "tema": "5.2",
+   "descripcion": "Reúne sus reflexiones sobre el nuevo paradigma, la neurociencia y la orientación. Lectura recomendada.",
+   "apa": "Martínez Miguélez, M. (2009). *Nuevos paradigmas en la investigación*. Editorial Alfa."
+  },
+  {
+   "autor": "Norwood Russell Hanson",
+   "titulo": "Patrones de descubrimiento",
+   "anio": "1958",
+   "tipo": "Filosofía de la ciencia",
+   "tema": "5.2",
+   "descripcion": "Muestra que toda observación está cargada de teoría: lo que vemos depende de lo que sabemos.",
+   "apa": "Hanson, N. R. (1977). *Patrones de descubrimiento: investigación de las bases conceptuales de la ciencia*. Alianza. (Obra original publicada en 1958)."
+  },
+  {
+   "autor": "Ilya Prigogine e Isabelle Stengers",
+   "titulo": "La nueva alianza",
+   "anio": "1979",
+   "tipo": "Ciencia y filosofía",
+   "tema": "5.2",
+   "descripcion": "Un premio Nobel de química muestra una naturaleza hecha también de procesos irreversibles e incertidumbre.",
+   "apa": "Prigogine, I., y Stengers, I. (1983). *La nueva alianza: metamorfosis de la ciencia*. Alianza. (Obra original publicada en 1979)."
+  },
+  {
+   "autor": "Fritjof Capra",
+   "titulo": "La trama de la vida",
+   "anio": "1996",
+   "tipo": "Pensamiento sistémico",
+   "tema": "5.2",
+   "descripcion": "Divulgación del pensamiento sistémico y de la visión de los seres vivos como redes. Lectura recomendada.",
+   "apa": "Capra, F. (1998). *La trama de la vida: una nueva perspectiva de los sistemas vivos*. Anagrama. (Obra original publicada en 1996)."
+  },
+  {
+   "autor": "Humberto Maturana y Francisco Varela",
+   "titulo": "El árbol del conocimiento",
+   "anio": "1984",
+   "tipo": "Biología del conocimiento",
+   "tema": "5.3",
+   "descripcion": "Todo hacer es conocer y todo conocer es hacer: el conocimiento como actividad de los seres vivos.",
+   "apa": "Maturana, H., y Varela, F. (1984). *El árbol del conocimiento: las bases biológicas del entendimiento humano*. Editorial Universitaria."
+  },
+  {
+   "autor": "Antonio R. Damasio",
+   "titulo": "El error de Descartes",
+   "anio": "1994",
+   "tipo": "Neurociencia",
+   "tema": "5.3",
+   "descripcion": "La emoción no es enemiga de la razón, sino su condición: un libro clave para la neuroeducación.",
+   "apa": "Damasio, A. R. (1996). *El error de Descartes: la emoción, la razón y el cerebro humano*. Crítica. (Obra original publicada en 1994)."
+  },
+  {
+   "autor": "Hans-Georg Gadamer",
+   "titulo": "Verdad y método",
+   "anio": "1960",
+   "tipo": "Hermenéutica",
+   "tema": "5.4",
+   "descripcion": "La gran obra de la hermenéutica filosófica: comprender es una fusión de horizontes entre el intérprete y lo interpretado.",
+   "apa": "Gadamer, H.-G. (1977). *Verdad y método: fundamentos de una hermenéutica filosófica*. Sígueme. (Obra original publicada en 1960)."
+  },
+  {
+   "autor": "Paulo Freire",
+   "titulo": "Pedagogía de la autonomía",
+   "anio": "1996",
+   "tipo": "Pedagogía crítica",
+   "tema": "5.4",
+   "descripcion": "Los saberes que Freire consideraba indispensables para enseñar: respeto, curiosidad, diálogo y pensamiento crítico.",
+   "apa": "Freire, P. (1997). *Pedagogía de la autonomía: saberes necesarios para la práctica educativa*. Siglo XXI. (Obra original publicada en 1996)."
+  },
+  {
+   "autor": "Michael Polanyi",
+   "titulo": "The tacit dimension",
+   "anio": "1966",
+   "tipo": "Epistemología",
+   "tema": "6.1",
+   "descripcion": "Sabemos más de lo que podemos decir: el concepto de conocimiento tácito. (En inglés).",
+   "apa": "Polanyi, M. (1966). *The tacit dimension*. Doubleday."
+  },
+  {
+   "autor": "Boaventura de Sousa Santos",
+   "titulo": "Una epistemología del sur",
+   "anio": "2009",
+   "tipo": "Epistemologías del Sur",
+   "tema": "6.2",
+   "descripcion": "Ecología de saberes y crítica del epistemicidio: base de la idea de diálogo de saberes de la NEM.",
+   "apa": "Sousa Santos, B. de (2009). *Una epistemología del sur: la reinvención del conocimiento y la emancipación social*. Siglo XXI; CLACSO."
+  },
+  {
+   "autor": "Miguel Martínez Miguélez",
+   "titulo": "Ciencia y arte en la metodología cualitativa",
+   "anio": "2004",
+   "tipo": "Metodología cualitativa",
+   "tema": "6.3",
+   "descripcion": "Defiende la dimensión creativa y artística de la investigación en ciencias humanas.",
+   "apa": "Martínez Miguélez, M. (2004). *Ciencia y arte en la metodología cualitativa*. Trillas."
+  },
+  {
+   "autor": "Donald A. Schön",
+   "titulo": "El profesional reflexivo",
+   "anio": "1983",
+   "tipo": "Práctica profesional",
+   "tema": "6.3",
+   "descripcion": "Conocimiento en la acción y reflexión en la acción: cómo piensan los profesionales cuando actúan.",
+   "apa": "Schön, D. A. (1998). *El profesional reflexivo: cómo piensan los profesionales cuando actúan*. Paidós. (Obra original publicada en 1983)."
+  },
+  {
+   "autor": "John Dewey",
+   "titulo": "Cómo pensamos",
+   "anio": "1910",
+   "tipo": "Obra clásica",
+   "tema": "6.3",
+   "descripcion": "El pensamiento reflexivo y su relación con la educación. Lectura recomendada.",
+   "apa": "Dewey, J. (1989). *Cómo pensamos: nueva exposición de la relación entre pensamiento reflexivo y proceso educativo*. Paidós. (Obra original publicada en 1910)."
+  },
+  {
+   "autor": "Jacques Delors (coord.)",
+   "titulo": "La educación encierra un tesoro",
+   "anio": "1996",
+   "tipo": "Informe UNESCO",
+   "tema": "6.4",
+   "descripcion": "Los cuatro pilares de la educación: aprender a conocer, a hacer, a vivir juntos y a ser.",
+   "apa": "Delors, J. (Coord.). (1996). *La educación encierra un tesoro: informe a la UNESCO de la Comisión Internacional sobre la Educación para el Siglo XXI*. Santillana; UNESCO."
+  },
+  {
+   "autor": "Lawrence Stenhouse",
+   "titulo": "Investigación y desarrollo del currículum",
+   "anio": "1975",
+   "tipo": "Currículum",
+   "tema": "6.4",
+   "descripcion": "El currículo como hipótesis que el maestro pone a prueba: el docente como investigador.",
+   "apa": "Stenhouse, L. (1984). *Investigación y desarrollo del currículum*. Morata. (Obra original publicada en 1975)."
+  },
+  {
+   "autor": "Francisco Mora",
+   "titulo": "Neuroeducación",
+   "anio": "2013",
+   "tipo": "Neuroeducación",
+   "tema": "7.2",
+   "descripcion": "Divulgación sobre la emoción y la curiosidad como puertas del aprendizaje.",
+   "apa": "Mora, F. (2013). *Neuroeducación: solo se puede aprender aquello que se ama*. Alianza."
+  },
+  {
+   "autor": "Mary Helen Immordino-Yang y Antonio Damasio",
+   "titulo": "We feel, therefore we learn",
+   "anio": "2007",
+   "tipo": "Artículo científico",
+   "tema": "7.2",
+   "descripcion": "Artículo clave sobre la relación entre emoción, cognición y aprendizaje escolar. (En inglés).",
+   "apa": "Immordino-Yang, M. H., y Damasio, A. (2007). We feel, therefore we learn: The relevance of affective and social neuroscience to education. *Mind, Brain, and Education*, *1*(1), 3-10. https://doi.org/10.1111/j.1751-228X.2007.00004.x"
+  },
+  {
+   "autor": "Stanislas Dehaene",
+   "titulo": "¿Cómo aprendemos?",
+   "anio": "2018",
+   "tipo": "Neurociencia",
+   "tema": "7.4",
+   "descripcion": "Los cuatro pilares del aprendizaje: atención, compromiso activo, retroalimentación del error y consolidación.",
+   "apa": "Dehaene, S. (2019). *¿Cómo aprendemos? Los cuatro pilares con los que la educación puede potenciar los talentos de nuestro cerebro*. Siglo XXI. (Obra original publicada en 2018)."
+  },
+  {
+   "autor": "Sanne Dekker y colaboradores",
+   "titulo": "Neuromyths in education",
+   "anio": "2012",
+   "tipo": "Artículo científico",
+   "tema": "7.4",
+   "descripcion": "Encuesta a docentes que mostró qué tan difundidos están los neuromitos en las escuelas. (En inglés).",
+   "apa": "Dekker, S., Lee, N. C., Howard-Jones, P., y Jolles, J. (2012). Neuromyths in education: Prevalence and predictors of misconceptions among teachers. *Frontiers in Psychology*, *3*, Artículo 429. https://doi.org/10.3389/fpsyg.2012.00429"
+  },
+  {
+   "autor": "Paul A. Howard-Jones",
+   "titulo": "Neuroscience and education: Myths and messages",
+   "anio": "2014",
+   "tipo": "Artículo científico",
+   "tema": "7.4",
+   "descripcion": "Revisión sobre cómo se difunden los neuromitos en todo el mundo y qué mensajes sí tienen respaldo. (En inglés).",
+   "apa": "Howard-Jones, P. A. (2014). Neuroscience and education: Myths and messages. *Nature Reviews Neuroscience*, *15*(12), 817-824. https://doi.org/10.1038/nrn3817"
+  },
+  {
+   "autor": "Harold Pashler y colaboradores",
+   "titulo": "Learning styles: Concepts and evidence",
+   "anio": "2008",
+   "tipo": "Artículo científico",
+   "tema": "7.4",
+   "descripcion": "La revisión que mostró que no hay evidencia para enseñar según estilos de aprendizaje. (En inglés).",
+   "apa": "Pashler, H., McDaniel, M., Rohrer, D., y Bjork, R. (2008). Learning styles: Concepts and evidence. *Psychological Science in the Public Interest*, *9*(3), 105-119. https://doi.org/10.1111/j.1539-6053.2009.01038.x"
+  },
+  {
+   "autor": "John Dunlosky y colaboradores",
+   "titulo": "Improving students' learning with effective learning techniques",
+   "anio": "2013",
+   "tipo": "Artículo científico",
+   "tema": "7.4",
+   "descripcion": "Compara diez técnicas de estudio: la práctica de recuperación y la espaciada son las de mayor utilidad. (En inglés).",
+   "apa": "Dunlosky, J., Rawson, K. A., Marsh, E. J., Nathan, M. J., y Willingham, D. T. (2013). Improving students' learning with effective learning techniques: Promising directions from cognitive and educational psychology. *Psychological Science in the Public Interest*, *14*(1), 4-58. https://doi.org/10.1177/1529100612453266"
+  },
+  {
+   "autor": "Henry L. Roediger III y Jeffrey D. Karpicke",
+   "titulo": "Test-enhanced learning",
+   "anio": "2006",
+   "tipo": "Artículo científico",
+   "tema": "7.4",
+   "descripcion": "El experimento clásico del efecto de prueba: recordar fortalece la memoria más que releer. (En inglés).",
+   "apa": "Roediger, H. L., III, y Karpicke, J. D. (2006). Test-enhanced learning: Taking memory tests improves long-term retention. *Psychological Science*, *17*(3), 249-255. https://doi.org/10.1111/j.1467-9280.2006.01693.x"
+  },
+  {
+   "autor": "John Hattie",
+   "titulo": "Visible learning",
+   "anio": "2009",
+   "tipo": "Investigación educativa",
+   "tema": "7.4",
+   "descripcion": "Síntesis de cientos de metaanálisis sobre qué influye en el aprendizaje. Lectura recomendada. (En inglés).",
+   "apa": "Hattie, J. (2009). *Visible learning: A synthesis of over 800 meta-analyses relating to achievement*. Routledge."
+  },
+  {
+   "autor": "Frank Parsons",
+   "titulo": "Choosing a vocation",
+   "anio": "1909",
+   "tipo": "Obra clásica",
+   "tema": "8.1",
+   "descripcion": "El punto de partida de la orientación vocacional y del modelo de rasgos y factores. (En inglés).",
+   "apa": "Parsons, F. (1909). *Choosing a vocation*. Houghton Mifflin."
+  },
+  {
+   "autor": "Rafael Bisquerra (coord.)",
+   "titulo": "Modelos de orientación e intervención psicopedagógica",
+   "anio": "1998",
+   "tipo": "Orientación educativa",
+   "tema": "8.2",
+   "descripcion": "Los modelos clínico, de servicios, de programas y de consulta en orientación.",
+   "apa": "Bisquerra, R. (Coord.). (1998). *Modelos de orientación e intervención psicopedagógica*. Praxis."
+  },
+  {
+   "autor": "Rafael Bisquerra",
+   "titulo": "Educación emocional y bienestar",
+   "anio": "2000",
+   "tipo": "Orientación educativa",
+   "tema": "8.2",
+   "descripcion": "La educación emocional como proceso continuo para desarrollar competencias emocionales.",
+   "apa": "Bisquerra, R. (2000). *Educación emocional y bienestar*. Praxis."
+  },
+  {
+   "autor": "Tony Booth y Mel Ainscow",
+   "titulo": "Índice de inclusión",
+   "anio": "2000",
+   "tipo": "Educación inclusiva",
+   "tema": "8.3",
+   "descripcion": "Introduce el concepto de barreras para el aprendizaje y la participación.",
+   "apa": "Booth, T., y Ainscow, M. (2000). *Índice de inclusión: desarrollando el aprendizaje y la participación en las escuelas*. Centre for Studies on Inclusive Education; UNESCO."
+  },
+  {
+   "autor": "Carl R. Rogers",
+   "titulo": "Libertad y creatividad en la educación",
+   "anio": "1969",
+   "tipo": "Psicología humanista",
+   "tema": "8.3",
+   "descripcion": "Una educación centrada en la persona: autenticidad, aceptación y comprensión empática.",
+   "apa": "Rogers, C. R. (1975). *Libertad y creatividad en la educación*. Paidós. (Obra original publicada en 1969)."
+  },
+  {
+   "autor": "Van Rensselaer Potter",
+   "titulo": "Bioethics: Bridge to the future",
+   "anio": "1971",
+   "tipo": "Bioética",
+   "tema": "9.1",
+   "descripcion": "El libro que difundió la palabra bioética como puente entre la ciencia y los valores. (En inglés).",
+   "apa": "Potter, V. R. (1971). *Bioethics: Bridge to the future*. Prentice-Hall."
+  },
+  {
+   "autor": "Tom L. Beauchamp y James F. Childress",
+   "titulo": "Principles of biomedical ethics",
+   "anio": "1979",
+   "tipo": "Bioética",
+   "tema": "9.1",
+   "descripcion": "Los cuatro principios de la bioética: autonomía, beneficencia, no maleficencia y justicia. (En inglés).",
+   "apa": "Beauchamp, T. L., y Childress, J. F. (1979). *Principles of biomedical ethics*. Oxford University Press."
+  },
+  {
+   "autor": "Hans Jonas",
+   "titulo": "El principio de responsabilidad",
+   "anio": "1979",
+   "tipo": "Ética",
+   "tema": "9.1",
+   "descripcion": "Una ética para la civilización tecnológica, pensada hacia las generaciones futuras.",
+   "apa": "Jonas, H. (1995). *El principio de responsabilidad: ensayo de una ética para la civilización tecnológica*. Herder. (Obra original publicada en 1979)."
+  },
+  {
+   "autor": "Comisión Mundial sobre el Medio Ambiente y el Desarrollo",
+   "titulo": "Nuestro futuro común (Informe Brundtland)",
+   "anio": "1987",
+   "tipo": "Informe internacional",
+   "tema": "9.2",
+   "descripcion": "El informe que definió el desarrollo sostenible.",
+   "apa": "Comisión Mundial sobre el Medio Ambiente y el Desarrollo. (1988). *Nuestro futuro común*. Alianza. (Obra original publicada en 1987)."
+  },
+  {
+   "autor": "Organización de las Naciones Unidas",
+   "titulo": "Transformar nuestro mundo: la Agenda 2030",
+   "anio": "2015",
+   "tipo": "Documento internacional",
+   "tema": "9.2",
+   "descripcion": "La resolución que estableció los diecisiete Objetivos de Desarrollo Sostenible.",
+   "apa": "Organización de las Naciones Unidas. (2015). *Transformar nuestro mundo: la Agenda 2030 para el Desarrollo Sostenible* (A/RES/70/1)."
+  },
+  {
+   "autor": "UNESCO",
+   "titulo": "Educación para los Objetivos de Desarrollo Sostenible",
+   "anio": "2017",
+   "tipo": "Documento internacional",
+   "tema": "9.2",
+   "descripcion": "Orientaciones y objetivos de aprendizaje para la educación para el desarrollo sostenible.",
+   "apa": "UNESCO. (2017). *Educación para los Objetivos de Desarrollo Sostenible: objetivos de aprendizaje*."
+  },
+  {
+   "autor": "Theodore W. Schultz",
+   "titulo": "Investment in human capital",
+   "anio": "1961",
+   "tipo": "Artículo clásico",
+   "tema": "9.3",
+   "descripcion": "El artículo que propuso ver la educación como una inversión en capital humano. (En inglés).",
+   "apa": "Schultz, T. W. (1961). Investment in human capital. *The American Economic Review*, *51*(1), 1-17."
+  },
+  {
+   "autor": "Gary S. Becker",
+   "titulo": "Human capital",
+   "anio": "1964",
+   "tipo": "Economía de la educación",
+   "tema": "9.3",
+   "descripcion": "El desarrollo sistemático de la teoría del capital humano. (En inglés).",
+   "apa": "Becker, G. S. (1964). *Human capital: A theoretical and empirical analysis, with special reference to education*. Columbia University Press."
+  },
+  {
+   "autor": "Samuel Bowles y Herbert Gintis",
+   "titulo": "Schooling in capitalist America",
+   "anio": "1976",
+   "tipo": "Sociología de la educación",
+   "tema": "9.3",
+   "descripcion": "La escuela como reproductora de las desigualdades sociales. (En inglés).",
+   "apa": "Bowles, S., y Gintis, H. (1976). *Schooling in capitalist America: Educational reform and the contradictions of economic life*. Basic Books."
+  },
+  {
+   "autor": "Pierre Bourdieu y Jean-Claude Passeron",
+   "titulo": "La reproducción",
+   "anio": "1970",
+   "tipo": "Sociología de la educación",
+   "tema": "9.3",
+   "descripcion": "El capital cultural y cómo la escuela convierte el privilegio en aparente mérito.",
+   "apa": "Bourdieu, P., y Passeron, J.-C. (1977). *La reproducción: elementos para una teoría del sistema de enseñanza*. Laia. (Obra original publicada en 1970)."
+  },
+  {
+   "autor": "Amartya Sen",
+   "titulo": "Desarrollo y libertad",
+   "anio": "1999",
+   "tipo": "Economía del desarrollo",
+   "tema": "9.3",
+   "descripcion": "El enfoque de las capacidades: el desarrollo como ampliación de las libertades reales.",
+   "apa": "Sen, A. (2000). *Desarrollo y libertad*. Planeta. (Obra original publicada en 1999)."
+  },
+  {
+   "autor": "B. F. Skinner",
+   "titulo": "Teaching machines",
+   "anio": "1958",
+   "tipo": "Artículo clásico",
+   "tema": "9.4",
+   "descripcion": "Las máquinas de enseñar: raíz de la enseñanza asistida por computadora. (En inglés).",
+   "apa": "Skinner, B. F. (1958). Teaching machines. *Science*, *128*(3330), 969-977. https://doi.org/10.1126/science.128.3330.969"
+  },
+  {
+   "autor": "Seymour Papert",
+   "titulo": "Mindstorms",
+   "anio": "1980",
+   "tipo": "Tecnología educativa",
+   "tema": "9.4",
+   "descripcion": "El lenguaje Logo y la idea de que el niño programe a la computadora, no al revés. (En inglés).",
+   "apa": "Papert, S. (1980). *Mindstorms: Children, computers, and powerful ideas*. Basic Books."
+  },
+  {
+   "autor": "UNESCO",
+   "titulo": "Guía para el uso de IA generativa en educación e investigación",
+   "anio": "2023",
+   "tipo": "Documento internacional",
+   "tema": "9.4",
+   "descripcion": "Recomendaciones para un uso responsable de la inteligencia artificial generativa en las escuelas.",
+   "apa": "UNESCO. (2023). *Guía para el uso de IA generativa en educación e investigación*."
+  },
+  {
+   "autor": "Neil Selwyn",
+   "titulo": "Should robots replace teachers?",
+   "anio": "2019",
+   "tipo": "Tecnología educativa",
+   "tema": "9.4",
+   "descripcion": "Qué papel debe jugar la tecnología en la educación que queremos. (En inglés).",
+   "apa": "Selwyn, N. (2019). *Should robots replace teachers? AI and the future of education*. Polity."
+  },
+  {
+   "autor": "Secretaría de Educación Pública",
+   "titulo": "Plan de estudio para la educación preescolar, primaria y secundaria 2022",
+   "anio": "2022",
+   "tipo": "Documento oficial",
+   "tema": "10.1",
+   "descripcion": "El documento curricular de la Nueva Escuela Mexicana: campos formativos, ejes articuladores y codiseño.",
+   "apa": "Secretaría de Educación Pública. (2022). *Plan de estudio para la educación preescolar, primaria y secundaria 2022*. SEP."
+  },
+  {
+   "autor": "Congreso de la Unión",
+   "titulo": "Ley General de Educación",
+   "anio": "2019",
+   "tipo": "Documento oficial",
+   "tema": "10.1",
+   "descripcion": "La ley que establece la educación como derecho y la educación inclusiva como principio del sistema.",
+   "apa": "Ley General de Educación. (2019, 30 de septiembre). *Diario Oficial de la Federación*. https://www.dof.gob.mx"
+  }
+ ]
+}

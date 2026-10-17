@@ -1,0 +1,252 @@
+// mi-progreso.js — vista de calificación del alumno para Epistemología y Pedagogía.
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getFirestore, doc, getDoc, getDocs, collection, query, orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+import { firebaseConfig } from "./firebase-config.js";
+import { calcularParcial, calcularCuatrimestreRedondeado, NOMBRES_PARCIAL, NOMBRES_ENTREGA_PROYECTO } from "./calculo.js";
+
+const app = initializeApp(firebaseConfig);
+const auth_db = getFirestore(app);
+const db = auth_db;
+
+const SESSION_KEY = 'ep_sesion_alumno';
+let sesion = null;
+let datosCache = null;
+
+function slugNombre(n) {
+  return n.trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+}
+function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
+
+async function cargarGrupos() {
+  const select = document.getElementById('pg-grupo');
+  const snap = await getDocs(query(collection(db, 'grupos'), orderBy('nombre')));
+  select.innerHTML = '<option value="">— Elige tu grupo —</option>';
+  snap.forEach(d => {
+    const o = document.createElement('option');
+    o.value = d.id; o.textContent = d.data().nombre;
+    select.appendChild(o);
+  });
+}
+
+document.getElementById('form-login-prog').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = document.getElementById('pg-error');
+  err.hidden = true;
+  const grupoId = document.getElementById('pg-grupo').value;
+  const nombre = document.getElementById('pg-nombre').value.trim();
+  const pin = document.getElementById('pg-pin').value.trim();
+  if (!grupoId || !nombre || !pin) return;
+
+  try {
+    const alumnoId = slugNombre(nombre);
+    const snap = await getDoc(doc(db, 'grupos', grupoId, 'alumnos', alumnoId));
+    if (!snap.exists() || String(snap.data().pin) !== pin) {
+      err.textContent = 'No encontramos ese nombre y PIN. Verifica con tu docente.';
+      err.hidden = false;
+      return;
+    }
+    sesion = { grupoId, alumnoId, nombre: snap.data().nombre };
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(sesion));
+    await entrar();
+  } catch (e2) {
+    err.textContent = 'No se pudo entrar: ' + (e2.message || e2);
+    err.hidden = false;
+  }
+});
+
+document.getElementById('pg-salir').addEventListener('click', () => {
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+});
+
+async function entrar() {
+  document.getElementById('prog-login').hidden = true;
+  document.getElementById('prog-app').hidden = false;
+  document.getElementById('pg-whoami').textContent = `Hola, ${sesion.nombre}`;
+  await cargarAvisos();
+  await cargarDatos();
+  renderParciales();
+  renderResumen();
+}
+
+async function cargarAvisos() {
+  const cont = document.getElementById('prog-avisos');
+  try {
+    const snap = await getDocs(query(collection(db, 'grupos', sesion.grupoId, 'avisos'), orderBy('creado', 'desc')));
+    if (snap.empty) { cont.innerHTML = ''; return; }
+    cont.innerHTML = snap.docs.slice(0, 3).map(d => {
+      const a = d.data();
+      return `<div class="aviso-card"><div class="aviso-card-top"><span class="aviso-card-titulo">${esc(a.titulo || '')}</span></div><div class="aviso-card-texto">${esc(a.texto || '')}</div></div>`;
+    }).join('');
+  } catch { cont.innerHTML = ''; }
+}
+
+async function cargarDatos() {
+  const base = ['grupos', sesion.grupoId, 'alumnos', sesion.alumnoId];
+  const [alumnoSnap, catalogoSnap, tareasSnap, partSnap, asisSnap, unifP1, unifP2, exaP1, exaP2, exaFinal, externaP1, proyE1, proyE2, proyEF] = await Promise.all([
+    // Documento del alumno: ahí están las decisiones de redondeo del docente.
+    getDoc(doc(db, ...base)).catch(() => null),
+    // Catálogo de tareas del grupo: define cuántas tareas existen en cada
+    // parcial. Es el denominador del promedio, para que una tarea no
+    // entregada cuente como cero y no se infle la calificación.
+    getDocs(collection(db, 'grupos', sesion.grupoId, 'tareas_catalogo')).catch(() => null),
+    getDocs(collection(db, ...base, 'tareas')).catch(() => null),
+    getDocs(collection(db, ...base, 'participaciones')).catch(() => null),
+    getDocs(collection(db, ...base, 'asistencias')).catch(() => null),
+    getDoc(doc(db, ...base, 'uniformes', 'p1')).catch(() => null),
+    getDoc(doc(db, ...base, 'uniformes', 'p2')).catch(() => null),
+    getDoc(doc(db, ...base, 'examenes', 'p1')).catch(() => null),
+    getDoc(doc(db, ...base, 'examenes', 'p2')).catch(() => null),
+    getDoc(doc(db, ...base, 'examenes', 'final')).catch(() => null),
+    getDoc(doc(db, ...base, 'externa', 'p1')).catch(() => null),
+    getDoc(doc(db, ...base, 'proyecto', 'entrega1')).catch(() => null),
+    getDoc(doc(db, ...base, 'proyecto', 'entrega2')).catch(() => null),
+    getDoc(doc(db, ...base, 'proyecto', 'entregaFinal')).catch(() => null),
+  ]);
+
+  datosCache = {
+    redondeos: alumnoSnap && alumnoSnap.exists() ? (alumnoSnap.data().redondeos || {}) : {},
+    catalogoTareas: catalogoSnap ? catalogoSnap.docs.map(d => ({ id: d.id, ...d.data() })) : [],
+    // Se conserva el id del documento: es el mismo id que la tarea tiene en
+    // el catálogo, y es con lo que se emparejan entregadas contra esperadas.
+    tareas: tareasSnap ? tareasSnap.docs.map(d => ({ id: d.id, ...d.data() })) : [],
+    participaciones: partSnap ? partSnap.docs.map(d => ({ id: d.id, ...d.data() })) : [],
+    asistencias: asisSnap ? asisSnap.docs.map(d => d.data()) : [],
+    uniformes: {
+      p1: unifP1 && unifP1.exists() ? unifP1.data() : null,
+      p2: unifP2 && unifP2.exists() ? unifP2.data() : null,
+    },
+    examenes: {
+      p1: exaP1 && exaP1.exists() ? exaP1.data() : null,
+      p2: exaP2 && exaP2.exists() ? exaP2.data() : null,
+      final: exaFinal && exaFinal.exists() ? exaFinal.data() : null,
+    },
+    externa: {
+      p1: externaP1 && externaP1.exists() ? externaP1.data() : null,
+    },
+    proyecto: {
+      entrega1: proyE1 && proyE1.exists() ? proyE1.data() : null,
+      entrega2: proyE2 && proyE2.exists() ? proyE2.data() : null,
+      entregaFinal: proyEF && proyEF.exists() ? proyEF.data() : null,
+    },
+  };
+}
+
+function filaRubro(nombre, pts, tope, extra) {
+  return `<div class="res-row"><span>${nombre}${extra ? ` <small class="res-extra">${extra}</small>` : ''}</span><strong>${pts.toFixed(1)} / ${tope}</strong></div>`;
+}
+
+// Texto de apoyo del rubro Tareas: cuántas entregó de cuántas hay en el
+// parcial, y el promedio ya calculado sobre ese total.
+function textoTareas(r) {
+  if (!r.esperadas) return 'sin tareas registradas';
+  const prom = r.promedio === null ? 0 : r.promedio;
+  return `${r.entregadas} de ${r.esperadas} entregadas · prom. ${prom.toFixed(1)}/10`;
+}
+
+// Lista de tareas que marca explícitamente las no entregadas, para que el
+// alumno vea cuál le falta y no solo el número final.
+function renderListaTareas(entregadas, faltantes) {
+  const items = [
+    ...(entregadas || []).map(x => ({ ...x, entregada: true })),
+    ...(faltantes || []).map(x => ({ ...x, entregada: false })),
+  ];
+  if (items.length === 0) return `<p class="empty-inline">Sin tareas registradas.</p>`;
+  const filas = items.sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''))
+    .map(x => x.entregada
+      ? `<li>${esc(x.fecha || 'sin fecha')} — ${esc(x.nombre || '')}: <strong>${Number(x.calificacion).toFixed(1)}/10</strong></li>`
+      : `<li>${esc(x.fecha || 'sin fecha')} — ${esc(x.nombre || '')}: <strong>no entregada (0/10)</strong></li>`)
+    .join('');
+  return `<ul style="margin:6px 0 0; padding-left:18px; font-size:.9em;">${filas}</ul>`;
+}
+
+// conCalificacion = false para participación: ahí solo importa que participó,
+// no con qué número, porque se registra con palomita.
+function renderListaActividades(lista, vacio, conCalificacion = true) {
+  if (!lista || lista.length === 0) return `<p class="empty-inline">${vacio}</p>`;
+  const filas = lista.slice().sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''))
+    .map(x => `<li>${esc(x.fecha || 'sin fecha')} — ${esc(x.nombre || '')}${conCalificacion && x.calificacion !== undefined && x.calificacion !== null ? `: <strong>${Number(x.calificacion).toFixed(1)}/10</strong>` : ''}</li>`).join('');
+  return `<ul style="margin:6px 0 0; padding-left:18px; font-size:.9em;">${filas}</ul>`;
+}
+
+function renderParciales() {
+  const cont = document.getElementById('prog-parciales');
+  const PARCIALES = ['p1', 'p2', 'final'];
+  let html = '';
+
+  PARCIALES.forEach(p => {
+    const r = calcularParcial(p, datosCache);
+    const esFinal = p === 'final';
+    
+    let filasDetalle;
+    if (esFinal) {
+      filasDetalle =
+        filaRubro('Examen', r.examen.pts, r.examen.tope, r.examen.calificacion !== null ? `${r.examen.calificacion}/10` : 'sin capturar') +
+        filaRubro(NOMBRES_ENTREGA_PROYECTO.entrega1, r.proyecto.detalle.entrega1.pts, r.proyecto.detalle.entrega1.tope, r.proyecto.detalle.entrega1.calificacion !== null ? `${r.proyecto.detalle.entrega1.calificacion}/10` : 'sin capturar') +
+        filaRubro(NOMBRES_ENTREGA_PROYECTO.entrega2, r.proyecto.detalle.entrega2.pts, r.proyecto.detalle.entrega2.tope, r.proyecto.detalle.entrega2.calificacion !== null ? `${r.proyecto.detalle.entrega2.calificacion}/10` : 'sin capturar') +
+        filaRubro(NOMBRES_ENTREGA_PROYECTO.entregaFinal, r.proyecto.detalle.entregaFinal.pts, r.proyecto.detalle.entregaFinal.tope, r.proyecto.detalle.entregaFinal.calificacion !== null ? `${r.proyecto.detalle.entregaFinal.calificacion}/10` : 'sin capturar') +
+        filaRubro('Tareas y Participación', r.tareasParticipacion.pts, r.tareasParticipacion.tope) +
+        filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope, `${r.asistencia.presentes}/${r.asistencia.total} clases`);
+    } else if (r.externa) {
+      filasDetalle =
+        filaRubro('Calificación del Parcial 1 (docente del primer bloque)', r.total, 100, `${r.externa.calificacion}/10`);
+    } else {
+      filasDetalle =
+        filaRubro('Examen', r.examen.pts, r.examen.tope, r.examen.calificacion !== null ? `${r.examen.calificacion}/10` : 'sin capturar') +
+        filaRubro('Tareas', r.tareas.pts, r.tareas.tope, textoTareas(r.tareas)) +
+        filaRubro('Participación', r.participacion.pts, r.participacion.tope, `${r.participacion.cantidad} de ${r.participacion.meta} participaciones`) +
+        filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope, `${r.asistencia.presentes}/${r.asistencia.total} clases`) +
+        filaRubro('Uniformes', r.uniformes.pts, r.uniformes.tope, `${r.uniformes.faltas} falta(s)`);
+    }
+
+    const listaTareas = esFinal ? [...r.tareasParticipacion.lista] : r.tareas.lista;
+    const faltantesTareas = esFinal ? [] : (r.tareas.faltantes || []);
+    const listaPart = esFinal ? null : r.participacion.lista;
+
+    html += `
+      <div class="res-card">
+        <h4>${NOMBRES_PARCIAL[p]}</h4>
+        ${filasDetalle}
+        <details class="prog-detalle-bloque" style="margin-top:8px;">
+          <summary>Ver fechas — Tareas${listaPart ? ' y Participación' : ''}</summary>
+          <p class="field-hint" style="margin:8px 0 2px;">Tareas:</p>
+          ${esFinal ? renderListaActividades(listaTareas, 'Sin tareas capturadas.') : renderListaTareas(listaTareas, faltantesTareas)}
+          ${listaPart ? `<p class="field-hint" style="margin:10px 0 2px;">Participación:</p>${renderListaActividades(listaPart, 'Sin participación capturada.', false)}` : ''}
+        </details>
+        <div class="res-row res-total"><span>Total</span><strong>${r.total.toFixed(1)} / 100 pts</strong></div>
+        ${r.total > 0 ? `<div class="res-row res-total"><span>Calificación del bloque</span><strong>${r.calif.pendiente ? `${r.calif.cruda.toFixed(2)} <small class="res-extra">— tu docente está revisando el redondeo</small>` : `${r.calif.oficial} / 10`}</strong></div>` : ''}
+      </div>`;
+  });
+
+  cont.innerHTML = html;
+}
+
+function renderResumen() {
+  const resultados = {};
+  ['p1', 'p2', 'final'].forEach(p => { resultados[p] = calcularParcial(p, datosCache); });
+  const cuatri = calcularCuatrimestreRedondeado(resultados, datosCache.redondeos);
+  const texto = cuatri.calif.pendiente ? `${cuatri.calif.cruda.toFixed(2)} (en revisión)` : `${cuatri.calif.oficial} / 10`;
+  document.getElementById('prog-resumen').innerHTML = `
+    <div class="score-display">Calificación del cuatrimestre: ${texto}</div>
+    <p class="field-hint">Se promedian Parcial 1 y Parcial 2 (ya redondeados) y ese resultado se promedia con el Examen Final. Redondeo: reprobatoria baja; .50 o menos baja; .60 o más sube.</p>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await cargarGrupos();
+  const g = sessionStorage.getItem(SESSION_KEY);
+  if (g) {
+    try {
+      sesion = JSON.parse(g);
+      const snap = await getDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId));
+      if (snap.exists()) { await entrar(); return; }
+    } catch { /* sesión inválida */ }
+    sessionStorage.removeItem(SESSION_KEY);
+  }
+});

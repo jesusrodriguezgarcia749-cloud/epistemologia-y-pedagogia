@@ -1,0 +1,106 @@
+{
+ "bloque": 3,
+ "nombre": "La racionalidad científica clásica",
+ "descripcion": "Toda ciencia mira la realidad a través de ciertos lentes: supuestos sobre cómo es el mundo y sobre cómo debe razonarse acerca de él. En este tema vamos a examinar los lentes de la llamada racionalidad científica clásica, la que nació con la revolución científica de los siglos XVI y XVII y que dio forma a las primeras ciencias sociales. También veremos dos maneras alternativas de mirar: la sistémica y la dialéctica.",
+ "subtemas": [
+  {
+   "id": "3.1",
+   "titulo": "Bases epistemológicas de las ciencias sociales",
+   "contenido": [
+    "PREGUNTAS DE ARRANQUE: • Si quieres entender por qué un alumno reprueba, ¿basta con buscar «la causa»? ¶ • ¿Se puede estudiar a las personas igual que se estudian las piedras o las plantas? ¶ • ¿Una escuela es una suma de salones o es algo más?",
+    "Toda ciencia mira la realidad a través de ciertos lentes: supuestos sobre cómo es el mundo y sobre cómo debe razonarse acerca de él. En este tema vamos a examinar los lentes de la llamada **racionalidad científica clásica**, la que nació con la revolución científica de los siglos XVI y XVII y que dio forma a las primeras ciencias sociales. También veremos dos maneras alternativas de mirar: la sistémica y la dialéctica.",
+    "§ Antecedentes: la revolución científica",
+    "Entre los siglos XVI y XVII, un grupo de pensadores transformó la manera de conocer el mundo. Copérnico propuso que la Tierra gira alrededor del Sol; Galileo apuntó un telescopio al cielo y defendió que el libro de la naturaleza está escrito en lenguaje matemático; Descartes propuso un método basado en dividir los problemas en sus partes más simples; Newton formuló leyes universales que explicaban por igual la caída de una manzana y el movimiento de los planetas.",
+    "De esta revolución surgió una imagen del mundo que se ha llamado **mecanicista**: el universo como una gran máquina, un reloj, cuyas piezas se mueven según leyes fijas. Conocer era descubrir esas leyes; y para descubrirlas había que descomponer el todo en sus partes, medirlas y encontrar las relaciones de causa y efecto entre ellas. Esta imagen tuvo un éxito enorme en las ciencias naturales. La pregunta que se hicieron los pensadores del siglo XIX fue: ¿podría aplicarse también a la sociedad?",
+    "Las ciencias sociales nacieron en el siglo XIX, en una época de grandes transformaciones: la Revolución Industrial, el crecimiento de las ciudades, las revoluciones políticas. Había urgencia por entender la sociedad para ordenarla. Desde el inicio surgieron tres grandes tradiciones, que todavía hoy marcan la investigación educativa.",
+    "§ La tradición positivista: estudiar la sociedad como la naturaleza",
+    "Auguste Comte (1844/1980) sostuvo que el conocimiento humano pasa por tres estadios: el **teológico**, en el que los fenómenos se explican por la voluntad de dioses; el **metafísico**, en el que se explican por entidades abstractas; y el **positivo**, en el que la humanidad renuncia a buscar causas últimas y se limita a descubrir, mediante la observación, las leyes que relacionan los hechos. Para Comte, la sociedad debía estudiarse con el mismo espíritu que la física.",
+    "Émile Durkheim (1895/1986), considerado uno de los padres de la sociología y también de la sociología de la educación, formuló una regla célebre: hay que tratar los **hechos sociales como cosas**. Con ello quería decir que las normas, las costumbres o las instituciones existen fuera de los individuos, se imponen sobre ellos y pueden estudiarse objetivamente, desde fuera. Su famoso estudio sobre el suicidio buscó demostrar que incluso un acto aparentemente tan personal tiene regularidades sociales medibles.",
+    "En educación, esta tradición dio origen a la investigación que busca medir variables, comparar grupos y encontrar regularidades: por ejemplo, la relación entre el nivel socioeconómico y el rendimiento escolar, o los grandes estudios internacionales como PISA.",
+    "§ La tradición comprensiva o hermenéutica: entender los significados",
+    "Frente al positivismo, otros pensadores defendieron que las personas no son cosas. Ya vimos a Dilthey y su distinción entre explicar y comprender. Max Weber (1922/1973) propuso una **sociología comprensiva**: el científico social debe interpretar el sentido que los actores dan a sus acciones. No basta con saber que un alumno deja la escuela; hay que entender qué significa para él dejarla, por qué lo decide, cómo lo vive. Weber también propuso los **tipos ideales**, modelos conceptuales que exageran ciertos rasgos de la realidad para poder compararla y entenderla.",
+    "La **hermenéutica**, que originalmente era el arte de interpretar textos sagrados, se convirtió en el método general de las ciencias humanas. En el siglo XX, Hans-Georg Gadamer (1960/1977) mostró que toda comprensión parte de prejuicios —en el sentido de juicios previos— y que comprender es un diálogo entre el horizonte del intérprete y el horizonte de lo interpretado. Volveremos a él en el tema 5.",
+    "En educación, esta tradición dio origen a la investigación cualitativa: etnografías escolares, historias de vida de docentes, estudios de caso.",
+    "§ La tradición crítica: conocer para transformar",
+    "Una tercera tradición, inspirada en Karl Marx y desarrollada en el siglo XX por la llamada Escuela de Fráncfort, sostiene que el conocimiento nunca es neutral: siempre está ligado a intereses. Jürgen Habermas (1968/1982) distinguió tres intereses que guían el conocimiento: un **interés técnico**, propio de las ciencias empírico-analíticas, que busca controlar la naturaleza; un **interés práctico**, propio de las ciencias hermenéuticas, que busca el entendimiento entre las personas; y un **interés emancipatorio**, propio de las ciencias críticas, que busca liberar a las personas de la dominación.",
+    "En educación, esta tradición inspiró la pedagogía crítica, la educación popular de Paulo Freire y la investigación-acción participativa.",
+    "§ Tres paradigmas de la investigación educativa",
+    "TABLA:  | Positivista | Interpretativo | Sociocrítico ¶ Finalidad | Explicar, predecir, controlar | Comprender, interpretar | Transformar, emancipar ¶ Realidad | Objetiva, externa, medible | Construida socialmente, múltiple | Histórica, atravesada por el poder ¶ Relación investigador-objeto | Distancia, neutralidad | Interacción, implicación | Compromiso, participación ¶ Métodos típicos | Experimentos, encuestas, estadística | Entrevistas, observación, etnografía | Investigación-acción, talleres participativos ¶ Ejemplo en educación | Medir el efecto de un programa de lectura | Entender cómo viven los docentes la reforma | Que la comunidad escolar diagnostique y resuelva su problema de deserción",
+    "Esta clasificación, muy usada en la investigación educativa hispanohablante, se apoya en autores como Habermas y Carr y Kemmis. Te será muy útil al escribir tu protocolo.",
+    "PARA PENSAR: Revisa el tema que tienes pensado para tu tesis. ¿Con cuál de los tres paradigmas encaja mejor tu pregunta de investigación? ¿Podría estudiarse desde otro paradigma? ¿Qué cambiaría?"
+   ]
+  },
+  {
+   "id": "3.2",
+   "titulo": "Ontología sistémica",
+   "contenido": [
+    "§ ¿Qué es la ontología?",
+    "La **ontología** es la parte de la filosofía que se pregunta qué es la realidad, cómo está hecha. Toda ciencia tiene una ontología implícita. La ontología de la ciencia clásica era **atomista**: la realidad está formada por partes elementales y el todo es la suma de las partes. Para entender un reloj, hay que desarmarlo pieza por pieza.",
+    "§ La idea de sistema",
+    "En el siglo XX, el biólogo Ludwig von Bertalanffy (1968/1976) propuso la **Teoría General de los Sistemas**. Observó que los seres vivos no pueden entenderse desarmándolos: un organismo es un sistema, es decir, un conjunto de partes en interacción, donde **el todo es más que la suma de las partes**. Cuando las partes se relacionan, aparecen propiedades nuevas, llamadas **propiedades emergentes**, que no existen en ninguna parte por separado. El agua moja, pero ni el hidrógeno ni el oxígeno mojan por separado. La conciencia surge del cerebro, pero ninguna neurona aislada es consciente.",
+    "Los sistemas tienen además otras características:",
+    "• **Interdependencia:** un cambio en una parte afecta a todas las demás.",
+    "• **Apertura:** intercambian energía, materia o información con su entorno.",
+    "• **Retroalimentación:** los efectos de una acción regresan para modificar al propio sistema.",
+    "• **Equifinalidad:** se puede llegar al mismo resultado por caminos distintos.",
+    "El venezolano Miguel Martínez Miguélez (1997), uno de los autores más leídos en epistemología latinoamericana, sostiene que la mayoría de las realidades que estudian las ciencias humanas son sistemas o estructuras de este tipo, y que por eso los métodos atomistas, que las fragmentan, resultan insuficientes para comprenderlas.",
+    "§ La escuela como sistema",
+    "Pensar sistémicamente cambia la mirada sobre la educación. Una escuela no es la suma de sus salones, maestros y alumnos: es un sistema con un «clima» propio, con relaciones, normas no escritas y una historia. Un problema de conducta en un grupo puede tener su origen en la organización de la escuela, en la relación con las familias o en la situación de la colonia. Tratarlo como un problema aislado de un alumno puede no resolver nada.",
+    "EN EL AULA MEXICANA: **El caso de Kevin.** Kevin, alumno de primero de secundaria, llega tarde casi todos los días y se duerme en clase. El primer reflejo de la escuela es lineal: llegar tarde (causa) produce un reporte (efecto). Los reportes se acumulan, pero nada cambia. Cuando la trabajadora social visita a la familia, descubre que Kevin cuida a sus dos hermanos pequeños por la mañana porque su mamá entró a trabajar en el turno temprano de una empresa. La escuela, la familia, el empleo de la madre y el transporte forman un sistema. La solución que finalmente funcionó —coordinarse con una vecina y ajustar temporalmente el horario— solo apareció cuando la escuela miró el sistema completo."
+   ]
+  },
+  {
+   "id": "3.3",
+   "titulo": "Lógica lineal",
+   "contenido": [
+    "§ Los principios de la lógica clásica",
+    "La lógica que heredamos de Aristóteles se apoya en tres principios fundamentales:",
+    "• **Principio de identidad:** una cosa es igual a sí misma (A es A).",
+    "• **Principio de no contradicción:** una cosa no puede ser y no ser al mismo tiempo y en el mismo sentido (no puede ser A y no-A a la vez).",
+    "• **Principio del tercero excluido:** una afirmación es verdadera o falsa; no hay una tercera opción.",
+    "Estos principios son extraordinariamente útiles: sin ellos no podríamos razonar, programar una computadora ni resolver una ecuación.",
+    "§ El pensamiento lineal en la ciencia",
+    "La ciencia clásica combinó esta lógica con una forma de razonar que podemos llamar **lineal**: los fenómenos se explican por cadenas de causas y efectos que avanzan en una sola dirección, como fichas de dominó. Si A causa B, y B causa C, entonces conociendo A podemos predecir C. Descartes (1637/2011) añadió a esto su famoso precepto de dividir cada dificultad en tantas partes como sea posible para resolverla mejor.",
+    "§ Alcances y límites en educación",
+    "El pensamiento lineal tiene su lugar en la educación: es útil para planificar una secuencia didáctica, para identificar los prerrequisitos de un aprendizaje o para diseñar un experimento controlado. Pero se queda corto ante fenómenos complejos, donde las causas son múltiples, se influyen mutuamente y los efectos regresan para modificar las causas.",
+    "Un ejemplo: «El alumno no estudia porque no le gusta la materia». Puede ser. Pero también puede ser que no le guste porque reprueba, y que repruebe porque no estudia: una relación circular, no lineal. En el tema 4 veremos cómo Edgar Morin propuso superar estas limitaciones con el pensamiento complejo."
+   ]
+  },
+  {
+   "id": "3.4",
+   "titulo": "Lógica dialéctica",
+   "contenido": [
+    "§ Todo fluye",
+    "Frente a una lógica que busca identidades fijas, existe una tradición que pone en el centro el **cambio** y la **contradicción**. Ya en la antigua Grecia, Heráclito afirmaba que todo fluye y que la lucha de contrarios es el motor del mundo: nadie puede bañarse dos veces en el mismo río, porque ni el río ni la persona son ya los mismos.",
+    "§ La dialéctica de Hegel",
+    "En el siglo XIX, Georg Wilhelm Friedrich Hegel hizo de la dialéctica el centro de su filosofía. Para Hegel, la realidad y el pensamiento avanzan a través de contradicciones que se superan. Suele resumirse su idea con la tríada **tesis, antítesis y síntesis**: una afirmación genera su opuesto, y del conflicto entre ambos surge una nueva realidad que conserva algo de los dos y los supera. Conviene aclarar que esta fórmula de tres pasos es una simplificación didáctica muy difundida, más que una expresión que el propio Hegel usara para describir su método; pero ayuda a captar la idea central: la contradicción no es un error que haya que eliminar, sino el motor del desarrollo.",
+    "§ La dialéctica materialista",
+    "Karl Marx tomó la dialéctica de Hegel y la aplicó a la historia y la sociedad concretas: las contradicciones entre clases sociales y entre fuerzas productivas y relaciones de producción serían el motor del cambio histórico. El filósofo checo Karel Kosík (1963/1967), en *Dialéctica de lo concreto*, mostró que pensar dialécticamente es ir más allá de la apariencia inmediata de las cosas —lo que él llamó la *pseudoconcreción*— para comprenderlas en su totalidad, en sus relaciones y en su historia.",
+    "§ Principios de la lógica dialéctica",
+    "• **Todo está relacionado:** nada se comprende aislado de su contexto.",
+    "• **Todo cambia:** la realidad es proceso, no cosa fija.",
+    "• **La contradicción es motor del cambio:** las tensiones internas generan transformaciones.",
+    "• **Los cambios cuantitativos producen saltos cualitativos:** la acumulación de pequeños cambios desemboca en una transformación de naturaleza.",
+    "§ Dialéctica y educación",
+    "La pedagogía de Paulo Freire es profundamente dialéctica. Para Freire (1970/2005), la educación tradicional, a la que llamó **educación bancaria**, deposita conocimientos en los alumnos como quien deposita dinero en una cuenta. La alternativa es una educación problematizadora, basada en la **praxis**: la unión inseparable de reflexión y acción sobre el mundo para transformarlo. El maestro y el alumno no son polos fijos, sino que ambos enseñan y ambos aprenden.",
+    "Lev Vygotsky (1978/1979), por su parte, construyó su psicología sobre bases dialécticas: el desarrollo humano surge de la interacción entre la persona y su entorno social, y el aprendizaje precede y jalona al desarrollo, en lugar de solo seguirlo.",
+    "PARA PENSAR: Piensa en un conflicto que hayas vivido en un grupo escolar: entre alumnos, entre alumnos y maestro, o entre la escuela y las familias. ¿Ese conflicto produjo algún cambio? ¿Fue destructivo o generó algo nuevo? ¿Qué diría la lógica lineal y qué diría la dialéctica sobre él?",
+    "§ Comparación de las tres miradas",
+    "TABLA:  | Lógica lineal | Ontología sistémica | Lógica dialéctica ¶ Imagen de la realidad | Cadena de causas y efectos | Red de partes en interacción | Proceso de cambio impulsado por contradicciones ¶ Pregunta típica | ¿Cuál es la causa? | ¿Cómo se relacionan las partes? | ¿Qué tensiones mueven el cambio? ¶ Fortaleza | Precisión, predicción | Visión de conjunto | Comprensión histórica y del cambio ¶ Riesgo | Simplificar lo complejo | Perder de vista el conflicto | Forzar todo en esquemas de oposición",
+    "TALLER APA: **Varias obras de un mismo autor.** Si citas dos obras del mismo autor, se distinguen por el año: (Freire, 1970/2005) y (Freire, 1996/1997). Si un autor publicó dos obras el mismo año, se añaden letras: (Morin, 1999a) y (Morin, 1999b). ¶ Cuando citas varias fuentes que apoyan la misma idea, ordénalas alfabéticamente y sepáralas con punto y coma: (Carr y Kemmis, 1986/1988; Freire, 1970/2005; Habermas, 1968/1982).",
+    "§ Glosario del tema",
+    "**Mecanicismo.** Visión del mundo como una máquina regida por leyes fijas, propia de la ciencia clásica.",
+    "**Positivismo.** Corriente que sostiene que solo es válido el conocimiento basado en la observación de hechos y sus leyes.",
+    "**Hechos sociales.** Según Durkheim, maneras de actuar, pensar y sentir exteriores al individuo que se imponen sobre él.",
+    "**Hermenéutica.** Teoría y arte de la interpretación de textos, acciones y significados.",
+    "**Paradigma sociocrítico.** Enfoque de investigación que busca transformar la realidad y emancipar a las personas.",
+    "**Ontología.** Rama de la filosofía que estudia qué es la realidad y cómo está constituida.",
+    "**Sistema.** Conjunto de partes interrelacionadas que forman un todo con propiedades propias.",
+    "**Propiedad emergente.** Característica que aparece en un sistema y no existe en sus partes por separado.",
+    "**Dialéctica.** Forma de pensamiento que comprende la realidad como proceso de cambio impulsado por contradicciones.",
+    "**Praxis.** En Freire, unión de reflexión y acción para transformar el mundo.",
+    "RESUMEN DEL TEMA: La ciencia clásica nació con una imagen mecanicista del mundo y un método basado en descomponer los problemas y buscar causas lineales. Cuando surgieron las ciencias sociales, aparecieron tres tradiciones: la positivista (Comte, Durkheim), que propone estudiar la sociedad como a la naturaleza; la comprensiva (Dilthey, Weber, Gadamer), que busca interpretar significados; y la crítica (Marx, Habermas, Freire), que busca transformar. De ellas derivan los tres paradigmas de la investigación educativa. Frente al atomismo y la lógica lineal, la ontología sistémica muestra que el todo es más que la suma de las partes, y la lógica dialéctica pone en el centro el cambio y la contradicción. En el siglo XX, estas tensiones estallaron en un gran debate sobre qué es la ciencia: lo estudiaremos en el tema 4."
+   ]
+  }
+ ]
+}

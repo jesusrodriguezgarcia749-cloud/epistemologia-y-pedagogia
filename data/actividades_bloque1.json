@@ -1,0 +1,327 @@
+{
+ "bloque": 1,
+ "reactivos": [
+  {
+   "id": "ep1-001",
+   "subtema": "1.0",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es la pregunta guía que atraviesa todo el curso?",
+   "opciones": [
+    "¿Puede la pedagogía ser ciencia, y qué tipo de ciencia?",
+    "¿Qué método es el mejor para enseñar cualquier contenido?",
+    "¿Qué autor tiene la razón sobre el conocimiento?",
+    "¿Cómo se aplica la Nueva Escuela Mexicana en el aula?"
+   ],
+   "correcta": 0,
+   "explicacion": "El curso entero gira en torno a esa pregunta; cada tema la mira desde un ángulo distinto y el ensayo final es tu respuesta personal."
+  },
+  {
+   "id": "ep1-002",
+   "subtema": "1.0",
+   "tipo": "opcion_multiple",
+   "pregunta": "Un maestro solo aplica exámenes de opción múltiple. Desde la epistemología, ¿qué supone sobre el conocimiento?",
+   "opciones": [
+    "Que \"saber\" es poder elegir la respuesta correcta entre varias",
+    "Que \"saber\" es poder hacer algo complejo con lo aprendido",
+    "Que el conocimiento se construye en un proceso que hay que documentar",
+    "Que no existe ninguna forma válida de evaluar el conocimiento"
+   ],
+   "correcta": 0,
+   "explicacion": "Toda forma de evaluar descansa en una idea de qué es saber. La opción múltiple supone que el conocimiento se fragmenta en respuestas correctas."
+  },
+  {
+   "id": "ep1-003",
+   "subtema": "1.0",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según el compendio, la epistemología es una reflexión lejana del aula, propia solo de filósofos.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Al contrario: la epistemología está \"debajo\" de todo lo que hacemos en el aula, por ejemplo al decidir cómo evaluar."
+  },
+  {
+   "id": "ep1-004",
+   "subtema": "1.0",
+   "tipo": "opcion_multiple",
+   "pregunta": "En APA 7, ¿qué significa la forma (Freire, 1970/2005)?",
+   "opciones": [
+    "Que la obra se publicó originalmente en 1970 y se consultó una edición de 2005",
+    "Que Freire publicó dos libros distintos, uno en 1970 y otro en 2005",
+    "Que la obra se escribió entre 1970 y 2005",
+    "Que la cita textual está entre las páginas 1970 y 2005"
+   ],
+   "correcta": 0,
+   "explicacion": "En APA, cuando lees una traducción o reedición, se pone el año original y después el de la edición consultada."
+  },
+  {
+   "id": "ep1-005",
+   "subtema": "1.0",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada forma de cita en APA 7 con su ejemplo.",
+   "pares": [
+    {
+     "izquierda": "Cita parentética",
+     "derecha": "La educación es un acto de diálogo (Freire, 1970/2005)."
+    },
+    {
+     "izquierda": "Cita narrativa",
+     "derecha": "Freire (1970/2005) sostuvo que la educación es diálogo."
+    },
+    {
+     "izquierda": "Cita textual corta",
+     "derecha": "\"texto exacto\" (Autor, año, p. 25)."
+    }
+   ],
+   "explicacion": "La parentética va entre paréntesis al final; en la narrativa el autor forma parte de la oración; la textual lleva comillas y página."
+  },
+  {
+   "id": "ep1-006",
+   "subtema": "1.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es la definición clásica de conocimiento que se remonta al Teeteto de Platón?",
+   "opciones": [
+    "Creencia verdadera y justificada",
+    "Percepción directa de los sentidos",
+    "Opinión compartida por la mayoría",
+    "Información memorizada correctamente"
+   ],
+   "correcta": 0,
+   "explicacion": "En el Teeteto se llega a la idea de opinión verdadera acompañada de una razón: de ahí la fórmula clásica \"creencia verdadera justificada\"."
+  },
+  {
+   "id": "ep1-007",
+   "subtema": "1.1",
+   "tipo": "caso",
+   "pregunta": "Un alumno escribe en su examen que el agua hierve a 100 °C a nivel del mar, pero lo puso \"porque le sonaba\". Según la definición clásica, ¿qué le falta para saberlo?",
+   "opciones": [
+    "Justificación: no tiene razones para sostenerlo",
+    "Creencia: no acepta que la afirmación sea cierta",
+    "Verdad: la afirmación es falsa a nivel del mar",
+    "Nada: acertar es lo mismo que saber"
+   ],
+   "correcta": 0,
+   "explicacion": "Cree y la afirmación es verdadera, pero acertar por casualidad no es conocer: le falta la justificación."
+  },
+  {
+   "id": "ep1-008",
+   "subtema": "1.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada postura con su idea central sobre el origen del conocimiento.",
+   "pares": [
+    {
+     "izquierda": "Racionalismo",
+     "derecha": "La razón es la fuente principal del conocimiento"
+    },
+    {
+     "izquierda": "Empirismo",
+     "derecha": "Todo conocimiento procede de la experiencia sensible"
+    },
+    {
+     "izquierda": "Criticismo de Kant",
+     "derecha": "La experiencia inicia el conocimiento, pero la mente lo organiza con estructuras propias"
+    },
+    {
+     "izquierda": "Constructivismo",
+     "derecha": "El conocimiento se construye en la interacción del sujeto con su mundo"
+    }
+   ],
+   "explicacion": "Son las grandes respuestas históricas al problema del fundamento del conocimiento."
+  },
+  {
+   "id": "ep1-009",
+   "subtema": "1.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "Luis Villoro distingue entre saber y conocer. ¿Cuál ejemplo corresponde a \"conocer\"?",
+   "opciones": [
+    "Haber probado, olido y vivido la cocina oaxaqueña",
+    "Haber leído que Oaxaca tiene gran diversidad gastronómica",
+    "Poder citar un libro sobre la historia de Oaxaca",
+    "Tener razones objetivas para afirmar algo sobre Oaxaca"
+   ],
+   "correcta": 0,
+   "explicacion": "Para Villoro, saber implica razones suficientes y objetivas; conocer implica una experiencia directa y personal."
+  },
+  {
+   "id": "ep1-010",
+   "subtema": "1.1",
+   "tipo": "completar",
+   "pregunta": "Jean Piaget llamó a su propuesta _______ porque estudió cómo se forma el conocimiento en el desarrollo del niño.",
+   "opciones": [
+    "epistemología genética",
+    "epistemología crítica",
+    "teoría del conocimiento tácito",
+    "pedagogía dialógica"
+   ],
+   "correcta": 0,
+   "explicacion": "Piaget habló de epistemología genética: el estudio de la génesis del conocimiento."
+  },
+  {
+   "id": "ep1-011",
+   "subtema": "1.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Para David Hume, la relación de causa y efecto puede comprobarse con total certeza mediante la observación.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Hume mostró que solo vemos que una cosa sigue a otra; la conexión causal necesaria no se observa."
+  },
+  {
+   "id": "ep1-012",
+   "subtema": "1.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada campo con su objeto de estudio.",
+   "pares": [
+    {
+     "izquierda": "Teoría del conocimiento (gnoseología)",
+     "derecha": "El conocimiento humano en general"
+    },
+    {
+     "izquierda": "Epistemología",
+     "derecha": "El conocimiento científico en particular"
+    },
+    {
+     "izquierda": "Filosofía de la ciencia",
+     "derecha": "La ciencia como actividad humana completa"
+    }
+   ],
+   "explicacion": "La teoría del conocimiento es la más amplia; la epistemología se centra en la ciencia; la filosofía de la ciencia mira también su historia, valores y relación social."
+  },
+  {
+   "id": "ep1-013",
+   "subtema": "1.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué pregunta es típica de la epistemología, y no de la teoría del conocimiento en general?",
+   "opciones": [
+    "¿Qué hace que una teoría sea científica?",
+    "¿Es posible conocer algo con certeza?",
+    "¿Cuál es el origen de todo conocimiento humano?",
+    "¿Qué relación hay entre sujeto y objeto en cualquier saber?"
+   ],
+   "correcta": 0,
+   "explicacion": "La epistemología, en el uso latinoamericano, se ocupa del conocimiento científico: sus teorías, métodos y criterios."
+  },
+  {
+   "id": "ep1-014",
+   "subtema": "1.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "En la tradición anglosajona, la palabra epistemology suele usarse como sinónimo de teoría del conocimiento en general.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "En inglés es así; en la tradición francesa y latinoamericana se suele reservar para el conocimiento científico."
+  },
+  {
+   "id": "ep1-015",
+   "subtema": "1.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué Thomas Kuhn es central para la filosofía de la ciencia?",
+   "opciones": [
+    "Porque mostró que la ciencia también es una práctica social, con comunidades, acuerdos y conflictos",
+    "Porque inventó el método científico de cinco pasos",
+    "Porque demostró que la ciencia no puede equivocarse",
+    "Porque separó por completo la ciencia de su historia"
+   ],
+   "correcta": 0,
+   "explicacion": "Kuhn llevó la mirada histórica y social a la filosofía de la ciencia."
+  },
+  {
+   "id": "ep1-016",
+   "subtema": "1.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "En su libro introductorio sobre qué es la ciencia, ¿qué muestra Alan Chalmers?",
+   "opciones": [
+    "Que ideas populares como \"la ciencia se basa en hechos comprobados\" son más complicadas de lo que parecen",
+    "Que la ciencia es solo una opinión más sin valor especial",
+    "Que solo las matemáticas son ciencia verdadera",
+    "Que el método científico tiene pasos fijos que nunca cambian"
+   ],
+   "correcta": 0,
+   "explicacion": "Chalmers examina críticamente las imágenes populares de la ciencia."
+  },
+  {
+   "id": "ep1-017",
+   "subtema": "1.3",
+   "tipo": "caso",
+   "pregunta": "Dos maestras enseñan el ciclo del agua: Rosa dicta y aplica examen; Lucía parte de las inundaciones por los nortes, experimenta y pide explicar con palabras propias. ¿Qué conclusión es la correcta?",
+   "opciones": [
+    "Ambas tienen supuestos distintos sobre qué es conocer; reconocerlos permite elegir con conciencia",
+    "Solo la maestra Lucía enseña; la maestra Rosa no enseña nada",
+    "Solo la maestra Rosa enseña; experimentar es perder el tiempo",
+    "Las dos tienen exactamente la misma idea de conocimiento"
+   ],
+   "correcta": 0,
+   "explicacion": "El compendio no declara una \"buena\" en todos los casos: la de Rosa es eficiente para transmitir, la de Lucía favorece la comprensión."
+  },
+  {
+   "id": "ep1-018",
+   "subtema": "1.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada postura sobre la pedagogía con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Pedagogía como arte",
+     "derecha": "Habilidad práctica que se aprende con experiencia e intuición"
+    },
+    {
+     "izquierda": "Pedagogía como ciencia aplicada",
+     "derecha": "Aplica hallazgos de la psicología o la sociología al aula"
+    },
+    {
+     "izquierda": "Pedagogía como ciencia propia",
+     "derecha": "Tiene objeto, métodos y teorías propias sobre el hecho educativo"
+    },
+    {
+     "izquierda": "Pedagogía como ciencia crítica",
+     "derecha": "Busca transformar la educación, con docentes que investigan su práctica"
+    }
+   ],
+   "explicacion": "La cuarta postura fue propuesta por Carr y Kemmis."
+  },
+  {
+   "id": "ep1-019",
+   "subtema": "1.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Elegir un enfoque cualitativo para tu tesis supone que:",
+   "opciones": [
+    "Lo importante son los significados que las personas dan a sus experiencias",
+    "El fenómeno educativo solo vale si puede medirse con números",
+    "El conocimiento se produce únicamente al transformar la práctica",
+    "Ningún enfoque necesita justificación epistemológica"
+   ],
+   "correcta": 0,
+   "explicacion": "Cada enfoque responde a supuestos distintos; el cualitativo privilegia los significados."
+  },
+  {
+   "id": "ep1-020",
+   "subtema": "1.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "El currículo nunca es una selección: incluye todo el conocimiento disponible.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Todo currículo selecciona, y decidir qué entra y qué no es una decisión epistemológica y política."
+  },
+  {
+   "id": "ep1-021",
+   "subtema": "1.3",
+   "tipo": "completar",
+   "pregunta": "Wilfred Carr y Stephen Kemmis propusieron la pedagogía como ciencia _______, cuyo propósito es transformar la educación.",
+   "opciones": [
+    "crítica",
+    "formal",
+    "natural",
+    "exacta"
+   ],
+   "correcta": 0,
+   "explicacion": "En Teoría crítica de la enseñanza defienden una ciencia educativa crítica, con docentes investigadores."
+  }
+ ]
+}

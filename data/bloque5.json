@@ -1,0 +1,102 @@
+{
+ "bloque": 5,
+ "nombre": "Nuevo paradigma epistemológico de la ciencia",
+ "descripcion": "El tema anterior terminó con una sospecha: si ni siquiera la física sigue un método único y fijo, quizá necesitamos repensar desde la raíz cómo se produce el conocimiento. Varios autores latinoamericanos y europeos hablaron a fines del siglo XX de un nuevo paradigma epistemológico. Uno de sus principales difusores en nuestra región fue Miguel Martínez Miguélez (1997, 2009), cuyas ideas organizan buena parte de este tema y de los siguientes. Veremos cuatro piezas de ese nuevo paradigma: la inercia mental que lo frena, la crítica al método tradicional, la contribución de la neurociencia y la dimensión dialógica del conocimiento.",
+ "subtemas": [
+  {
+   "id": "5.1",
+   "titulo": "Inercia mental",
+   "contenido": [
+    "PREGUNTAS DE ARRANQUE: • ¿Por qué nos cuesta tanto cambiar una forma de enseñar, aunque sepamos que no funciona? ¶ • ¿Vemos el mundo tal como es, o como estamos acostumbrados a verlo? ¶ • ¿Puede producirse conocimiento conversando?",
+    "El tema anterior terminó con una sospecha: si ni siquiera la física sigue un método único y fijo, quizá necesitamos repensar desde la raíz cómo se produce el conocimiento. Varios autores latinoamericanos y europeos hablaron a fines del siglo XX de un **nuevo paradigma epistemológico**. Uno de sus principales difusores en nuestra región fue Miguel Martínez Miguélez (1997, 2009), cuyas ideas organizan buena parte de este tema y de los siguientes. Veremos cuatro piezas de ese nuevo paradigma: la inercia mental que lo frena, la crítica al método tradicional, la contribución de la neurociencia y la dimensión dialógica del conocimiento.",
+    "§ El peso de las costumbres intelectuales",
+    "En física, la inercia es la tendencia de un cuerpo a mantener su estado de reposo o de movimiento mientras ninguna fuerza lo cambie. Por analogía, la **inercia mental** es la tendencia de las personas y de las comunidades a seguir pensando como siempre han pensado, aunque aparezcan razones para cambiar.",
+    "Martínez Miguélez (1997) sostiene que uno de los mayores obstáculos para adoptar una nueva racionalidad no es la falta de argumentos, sino la fuerza de los hábitos mentales: aprendimos durante años a pensar de manera lineal, fragmentada y cuantitativa, y esa forma de pensar se volvió «natural», casi invisible. No la elegimos: la heredamos.",
+    "§ Los obstáculos epistemológicos de Bachelard",
+    "Mucho antes, el filósofo francés Gaston Bachelard (1938/2000) había estudiado este fenómeno en *La formación del espíritu científico*. Bachelard observó que el conocimiento científico no se construye sobre una mente vacía, sino **contra** conocimientos previos mal hechos. A estas barreras las llamó **obstáculos epistemológicos**. Algunos de los que describió:",
+    "• **La experiencia primera:** confiar en la primera impresión de los sentidos, sin crítica.",
+    "• **La generalización apresurada:** sacar conclusiones generales de pocos casos.",
+    "• **El obstáculo verbal:** creer que se explica algo solo porque se le pone un nombre.",
+    "• **El conocimiento unitario y pragmático:** querer explicarlo todo con un solo principio o solo por su utilidad.",
+    "• **El obstáculo sustancialista:** atribuir cualidades ocultas a las cosas.",
+    "Bachelard decía que, para un profesor de ciencias, el problema no es que los alumnos no sepan, sino que ya «saben» algo que les impide aprender. Llegan al salón con ideas previas sobre el calor, la fuerza o los seres vivos, y esas ideas resisten. Esta intuición fue retomada décadas después por la investigación sobre **concepciones alternativas** y **cambio conceptual** en la enseñanza de las ciencias.",
+    "§ La inercia en las comunidades",
+    "La inercia mental no es solo individual. Kuhn ya había observado que los paradigmas cambian con mucha resistencia, y suele recordarse la amarga observación del físico Max Planck: las nuevas verdades científicas no triunfan porque convenzan a sus opositores, sino porque esos opositores terminan por desaparecer y crece una generación familiarizada con la nueva idea.",
+    "EN EL AULA MEXICANA: **«Así lo hemos hecho siempre».** En una escuela secundaria se propone sustituir el examen bimestral único por una evaluación con proyectos y rúbricas. En la reunión, varias voces se oponen. Algunos argumentos son razonables (falta de tiempo, grupos numerosos); otros son pura inercia: «así lo hemos hecho siempre», «los papás quieren ver un número», «a mí me evaluaron así y salí bien». Reconocer la inercia mental no significa descalificar a quien se resiste —todos tenemos inercias—, sino distinguir los argumentos de los hábitos. Un buen directivo pregunta: ¿qué evidencia tenemos de que el modelo actual funciona?",
+    "PARA PENSAR: Identifica una inercia mental que tú mismo tengas sobre la educación: algo que das por hecho sin haberlo examinado nunca. ¿De dónde viene? ¿Qué te haría cambiar de opinión?"
+   ]
+  },
+  {
+   "id": "5.2",
+   "titulo": "Desconstrucción del método científico tradicional",
+   "contenido": [
+    "§ ¿Qué significa «desconstruir»?",
+    "La palabra **desconstrucción** viene del filósofo francés Jacques Derrida, y se ha vuelto popular. En su sentido más general, desconstruir no es destruir: es desarmar cuidadosamente una estructura para mostrar sus supuestos ocultos, sus tensiones y aquello que excluye. Desconstruir el método científico tradicional es preguntarse qué supuestos lo sostienen y qué deja fuera.",
+    "§ Los supuestos del método tradicional",
+    "El método tradicional, tal como se enseña en los manuales, descansa en varios supuestos discutibles:",
+    "• **La observación es neutral.** Se supone que el investigador observa los hechos «tal como son», sin interpretarlos. Pero el filósofo Norwood Russell Hanson (1958/1977) mostró que **toda observación está cargada de teoría**: lo que vemos depende de lo que sabemos. Un médico ve en una radiografía una fractura; un lego ve manchas grises. Ambos miran lo mismo, pero no ven lo mismo.",
+    "• **El sujeto y el objeto están separados.** Se supone que quien investiga puede quedar fuera de lo investigado. En las ciencias humanas esto es imposible: un maestro que investiga su propio grupo es parte del fenómeno.",
+    "• **El método es un algoritmo.** Se supone que hay una secuencia fija de pasos que, bien aplicada, garantiza el conocimiento.",
+    "• **Solo vale lo medible.** Se supone que lo que no puede cuantificarse no es conocimiento científico.",
+    "§ Hacia una concepción más amplia del método",
+    "Desconstruir estos supuestos no lleva a abandonar el rigor, sino a entenderlo de otra manera. Martínez Miguélez (2004) propone recuperar el sentido original de la palabra método: del griego *méthodos*, «camino». El método es el camino que se recorre para conocer algo, y el camino depende del terreno. No se usa la misma ruta para subir una montaña que para cruzar un río.",
+    "Algunas ideas que caracterizan esta concepción más amplia:",
+    "• **El método se adecua al objeto.** No se elige el método primero y luego se busca a qué aplicarlo; se estudia la naturaleza del fenómeno y se elige el camino adecuado.",
+    "• **El diseño puede ser emergente.** En la investigación cualitativa, el plan se ajusta a medida que avanza la investigación y aparecen hallazgos inesperados.",
+    "• **La triangulación da solidez.** Contrastar distintas fuentes, métodos o investigadores sobre el mismo fenómeno aumenta la confianza en los resultados.",
+    "• **El investigador se reconoce como parte.** En lugar de fingir neutralidad, se explicitan los propios supuestos y la propia posición: a esto se le llama **reflexividad**.",
+    "§ Ciencia del orden y ciencia de la incertidumbre",
+    "El químico Ilya Prigogine, premio Nobel en 1977, contribuyó a este cambio desde las propias ciencias naturales. Junto con Isabelle Stengers, en *La nueva alianza*, mostró que la naturaleza no es solo un reloj predecible: también está hecha de procesos irreversibles, inestabilidades y fenómenos donde del desorden surge un orden nuevo (Prigogine y Stengers, 1979/1983). Si la propia física reconoce la incertidumbre y la creatividad de la naturaleza, las ciencias humanas tienen todavía más razones para hacerlo.",
+    "PARA PENSAR: Revisa el método que planeas usar en tu protocolo. ¿Lo elegiste porque se adecua a tu pregunta de investigación, o porque es «el que siempre se usa»? ¿Cómo pensarías la triangulación en tu caso?"
+   ]
+  },
+  {
+   "id": "5.3",
+   "titulo": "Neurociencia actual",
+   "contenido": [
+    "§ Lo que la neurociencia aporta a la epistemología",
+    "Este apartado no trata todavía sobre cómo aprende el cerebro en el aula —eso lo veremos en el tema 7—, sino sobre algo previo y más profundo: qué nos dice la neurociencia acerca de **cómo conocemos**. Su aporte a la epistemología puede resumirse en una idea: **el cerebro no es un espejo de la realidad, sino un constructor activo de ella**.",
+    "§ El cerebro que predice",
+    "La neurociencia actual muestra que percibir no es recibir pasivamente la información de los sentidos. El cerebro completa, interpreta y anticipa. Las ilusiones ópticas lo demuestran: vemos movimiento donde no lo hay, completamos figuras incompletas, interpretamos colores según el contexto. Hoy, muchos investigadores describen el cerebro como una «máquina de predicción» que genera continuamente hipótesis sobre el mundo y las corrige con la información que llega de los sentidos. Curiosamente, esta descripción se parece bastante al esquema de conjeturas y refutaciones de Popper.",
+    "§ El árbol del conocimiento",
+    "Los biólogos chilenos Humberto Maturana y Francisco Varela (1984), en *El árbol del conocimiento*, propusieron que conocer es una actividad propia de todo ser vivo: todo hacer es conocer y todo conocer es hacer. Para ellos, el conocimiento no es la representación de un mundo independiente, sino el resultado de la interacción del organismo con su medio. Lo que un ser vivo conoce depende de su estructura. Un perro, un murciélago y un ser humano «conocen» mundos distintos en el mismo lugar.",
+    "§ La razón no está sola: emoción y conocimiento",
+    "El neurocientífico portugués Antonio Damasio (1994/1996), en *El error de Descartes*, estudió pacientes con lesiones en ciertas zonas del cerebro que conservaban intacta su capacidad de razonar en abstracto, pero no podían tomar decisiones adecuadas en su vida. Su conclusión fue que **la emoción no es enemiga de la razón, sino su condición**: sin las señales emocionales que marcan lo importante, el razonamiento se paraliza. El «error de Descartes» habría sido separar la mente del cuerpo y la razón de la emoción.",
+    "Para la epistemología, esto tiene consecuencias importantes: el conocimiento no es producto de una razón pura y desapasionada, sino de un ser humano completo, con cuerpo, emociones e historia.",
+    "EN EL AULA MEXICANA: **«Primero que se calmen, luego aprenden».** Una maestra de primer grado de secundaria nota que, después del recreo, su grupo llega alterado y no logra concentrarse. Decide dedicar tres minutos a una actividad de respiración y a una pregunta abierta sobre cómo se sienten. Algunos colegas lo consideran una pérdida de tiempo. Sin embargo, lo que hoy sabemos sobre la relación entre emoción y cognición sugiere que atender lo emocional no le resta tiempo al aprendizaje, sino que puede ser una condición para que ocurra."
+   ]
+  },
+  {
+   "id": "5.4",
+   "titulo": "La dimensión dialógica",
+   "contenido": [
+    "§ El conocimiento como conversación",
+    "Si el método no es un algoritmo, si la observación está cargada de teoría y si el investigador forma parte de lo que estudia, ¿cómo podemos llegar a un conocimiento confiable? Una respuesta del nuevo paradigma es: **a través del diálogo**. El conocimiento no se produce en la mente aislada de un genio, sino en la conversación crítica entre personas que contrastan sus perspectivas.",
+    "§ Gadamer: la fusión de horizontes",
+    "Para Gadamer (1960/1977), comprender algo es entrar en diálogo con ello. Cada persona tiene un **horizonte**: el conjunto de experiencias, conocimientos y prejuicios desde los que mira. Comprender no es abandonar el propio horizonte para ponerse en el del otro, sino lograr una **fusión de horizontes**, en la que ambos se amplían. Un buen lector de un texto antiguo no lo entiende «como lo entendía su autor», sino que establece un diálogo entre su presente y el pasado del texto.",
+    "§ Habermas: la acción comunicativa",
+    "Jürgen Habermas propuso que la racionalidad no está solo en la relación entre un sujeto y un objeto, sino en la comunicación entre sujetos que buscan entenderse. En una conversación ideal, se impone la fuerza del mejor argumento, no la autoridad ni la fuerza. Aunque esta situación ideal nunca se da plenamente, funciona como un criterio para evaluar los diálogos reales: ¿todos pudieron hablar?, ¿se escucharon los argumentos?, ¿alguien impuso su posición por su jerarquía?",
+    "§ Freire: diálogo y educación",
+    "Para Paulo Freire (1970/2005), el diálogo es el corazón de la educación liberadora. No se trata de una técnica didáctica para «hacer participar» a los alumnos, sino de una postura epistemológica: el educador reconoce que el educando también sabe, y que el conocimiento se construye entre ambos, mediados por el mundo que tratan de comprender. Freire insistía en que el diálogo exige humildad, fe en las personas, esperanza y pensamiento crítico.",
+    "§ El principio dialógico de Morin",
+    "Recordemos que Morin (1990/1994) también habló de un principio dialógico, aunque en un sentido algo distinto: la capacidad de mantener juntas ideas aparentemente opuestas, como orden y desorden, individuo y sociedad, razón y emoción, sin eliminar ninguna. Ambos sentidos se complementan: el diálogo entre personas y el diálogo entre ideas.",
+    "PARA PENSAR: Piensa en la última discusión grupal que tuviste en clase. ¿Fue un diálogo en el sentido de Freire o de Habermas, o fue un intercambio de opiniones donde cada quien defendió lo suyo sin escuchar? ¿Qué condiciones hacen falta para un verdadero diálogo en el aula?",
+    "§ Diálogo de saberes",
+    "La dimensión dialógica tiene una consecuencia que retomaremos en el tema siguiente y en el tema 10: si el conocimiento se construye dialogando, entonces los saberes de la comunidad, de los pueblos originarios, de las familias y de los propios alumnos pueden entrar en conversación con el saber científico. A esto se le llama **diálogo de saberes**, y es una de las ideas centrales de la Nueva Escuela Mexicana.",
+    "TALLER APA: **Paráfrasis y cita textual.** En este libro casi todas las citas son **paráfrasis**: expresamos con nuestras palabras la idea de un autor y señalamos la fuente (Autor, año). APA recomienda, aunque no exige, agregar la página también en las paráfrasis cuando ayude al lector a ubicar la idea. ¶ La **cita textual** reproduce exactamente las palabras del autor. Si tiene menos de 40 palabras, va entre comillas dentro del párrafo, y **siempre** lleva el número de página: (Autor, año, p. 25). Si tiene 40 palabras o más, va en un bloque aparte, con sangría y sin comillas. ¶ Regla de oro: cita textualmente solo cuando las palabras exactas importan; en lo demás, parafrasea. Una tesis llena de citas textuales muestra que el autor no ha digerido sus lecturas.",
+    "§ Glosario del tema",
+    "**Inercia mental.** Tendencia a mantener las formas de pensar habituales aunque existan razones para cambiarlas.",
+    "**Obstáculo epistemológico.** Según Bachelard, conocimiento previo o hábito de pensamiento que impide construir un conocimiento científico nuevo.",
+    "**Desconstrucción.** Análisis que desarma una estructura de pensamiento para mostrar sus supuestos y exclusiones.",
+    "**Observación cargada de teoría.** Idea de que lo que observamos depende de los conocimientos y expectativas que ya tenemos.",
+    "**Diseño emergente.** Plan de investigación que se ajusta conforme avanzan los hallazgos.",
+    "**Triangulación.** Contraste de diversas fuentes, métodos o investigadores sobre un mismo fenómeno.",
+    "**Reflexividad.** Reconocimiento explícito de la posición y los supuestos del investigador.",
+    "**Fusión de horizontes.** Según Gadamer, la comprensión como ampliación mutua de perspectivas.",
+    "**Acción comunicativa.** Según Habermas, interacción orientada al entendimiento mediante argumentos.",
+    "**Diálogo de saberes.** Encuentro respetuoso entre el conocimiento científico y otros saberes, como los comunitarios.",
+    "RESUMEN DEL TEMA: El nuevo paradigma epistemológico enfrenta primero la inercia mental: los hábitos de pensamiento que Bachelard llamó obstáculos epistemológicos. Desconstruir el método tradicional muestra que la observación está cargada de teoría, que sujeto y objeto no se separan del todo y que el método es un camino que se adapta al terreno, no una receta. La neurociencia muestra que el cerebro construye activamente lo que conoce y que emoción y razón van juntas. Finalmente, la dimensión dialógica propone que el conocimiento confiable surge del diálogo crítico entre personas y perspectivas, como plantearon Gadamer, Habermas, Freire y Morin. Si el diálogo incluye otros saberes, ¿qué relación hay entre el conocimiento científico y el conocimiento de la vida diaria? Lo veremos en el tema 6."
+   ]
+  }
+ ]
+}

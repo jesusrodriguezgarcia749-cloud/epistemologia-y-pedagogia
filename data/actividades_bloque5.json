@@ -1,0 +1,256 @@
+{
+ "bloque": 5,
+ "reactivos": [
+  {
+   "id": "ep5-001",
+   "subtema": "5.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es la inercia mental?",
+   "opciones": [
+    "La tendencia a seguir pensando como siempre aunque aparezcan razones para cambiar",
+    "La incapacidad biológica de aprender cosas nuevas",
+    "El cansancio que produce estudiar mucho tiempo",
+    "La velocidad con que una comunidad adopta ideas nuevas"
+   ],
+   "correcta": 0,
+   "explicacion": "Martínez Miguélez la señala como uno de los mayores obstáculos para una nueva racionalidad."
+  },
+  {
+   "id": "ep5-002",
+   "subtema": "5.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada obstáculo epistemológico de Bachelard con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Experiencia primera",
+     "derecha": "Confiar sin crítica en la primera impresión de los sentidos"
+    },
+    {
+     "izquierda": "Generalización apresurada",
+     "derecha": "Sacar conclusiones generales de pocos casos"
+    },
+    {
+     "izquierda": "Obstáculo verbal",
+     "derecha": "Creer que se explica algo solo por ponerle nombre"
+    },
+    {
+     "izquierda": "Obstáculo sustancialista",
+     "derecha": "Atribuir cualidades ocultas a las cosas"
+    }
+   ],
+   "explicacion": "Para Bachelard, el conocimiento científico se construye contra conocimientos previos mal hechos."
+  },
+  {
+   "id": "ep5-003",
+   "subtema": "5.1",
+   "tipo": "caso",
+   "pregunta": "En una reunión se propone evaluar con proyectos. Alguien responde: \"Así lo hemos hecho siempre; a mí me evaluaron así y salí bien\". ¿Qué es lo más adecuado?",
+   "opciones": [
+    "Distinguir los argumentos de los hábitos y preguntar qué evidencia respalda el modelo actual",
+    "Descalificar a quien se resiste porque tiene inercia mental",
+    "Aceptar sin discusión que lo tradicional siempre funciona",
+    "Cambiar de inmediato todo el sistema sin analizar nada"
+   ],
+   "correcta": 0,
+   "explicacion": "Todos tenemos inercias; lo importante es examinar las razones."
+  },
+  {
+   "id": "ep5-004",
+   "subtema": "5.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Para Bachelard, el problema de los alumnos en ciencias no es que no sepan, sino que ya \"saben\" algo que les impide aprender.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Esa intuición dio pie a la investigación sobre concepciones alternativas y cambio conceptual."
+  },
+  {
+   "id": "ep5-005",
+   "subtema": "5.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el compendio, desconstruir el método científico tradicional significa:",
+   "opciones": [
+    "Desarmar sus supuestos para mostrar sus tensiones y lo que excluye, sin abandonar el rigor",
+    "Destruir la ciencia y sustituirla por opiniones",
+    "Prohibir los métodos cuantitativos",
+    "Aplicar el método tradicional con más pasos"
+   ],
+   "correcta": 0,
+   "explicacion": "Desconstruir no es destruir: es examinar supuestos."
+  },
+  {
+   "id": "ep5-006",
+   "subtema": "5.2",
+   "tipo": "caso",
+   "pregunta": "Un médico ve una fractura en una radiografía; una persona sin formación solo ve manchas grises. ¿Qué idea ilustra?",
+   "opciones": [
+    "La observación está cargada de teoría",
+    "La observación siempre es neutral",
+    "Los médicos inventan lo que ven",
+    "La radiografía es un conocimiento religioso"
+   ],
+   "correcta": 0,
+   "explicacion": "Hanson mostró que lo que vemos depende de lo que sabemos."
+  },
+  {
+   "id": "ep5-007",
+   "subtema": "5.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada concepto de una concepción amplia del método con su significado.",
+   "pares": [
+    {
+     "izquierda": "Diseño emergente",
+     "derecha": "El plan se ajusta conforme aparecen hallazgos"
+    },
+    {
+     "izquierda": "Triangulación",
+     "derecha": "Contrastar fuentes, métodos o investigadores"
+    },
+    {
+     "izquierda": "Reflexividad",
+     "derecha": "Explicitar los propios supuestos y la posición del investigador"
+    },
+    {
+     "izquierda": "Método como camino",
+     "derecha": "Elegir la ruta según la naturaleza del fenómeno"
+    }
+   ],
+   "explicacion": "Méthodos significa \"camino\" en griego."
+  },
+  {
+   "id": "ep5-008",
+   "subtema": "5.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué aportó Ilya Prigogine al cambio de paradigma?",
+   "opciones": [
+    "Mostró desde la química que la naturaleza también tiene procesos irreversibles, inestabilidad y orden que surge del desorden",
+    "Demostró que la naturaleza es un reloj completamente predecible",
+    "Inventó el método científico de cinco pasos",
+    "Propuso los obstáculos epistemológicos"
+   ],
+   "correcta": 0,
+   "explicacion": "Si la propia física reconoce la incertidumbre, las ciencias humanas tienen más razones para hacerlo."
+  },
+  {
+   "id": "ep5-009",
+   "subtema": "5.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es el aporte central de la neurociencia a la epistemología según el compendio?",
+   "opciones": [
+    "El cerebro no es un espejo de la realidad, sino un constructor activo de ella",
+    "El cerebro guarda cada recuerdo en un lugar fijo, como un archivero",
+    "El cerebro solo recibe pasivamente la información de los sentidos",
+    "La emoción estorba siempre al razonamiento"
+   ],
+   "correcta": 0,
+   "explicacion": "La percepción completa, interpreta y anticipa."
+  },
+  {
+   "id": "ep5-010",
+   "subtema": "5.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Maturana y Varela sostienen en El árbol del conocimiento que:",
+   "opciones": [
+    "Todo hacer es conocer y todo conocer es hacer",
+    "Solo los seres humanos conocen",
+    "El conocimiento es una copia exacta del mundo",
+    "Conocer es solo memorizar información"
+   ],
+   "correcta": 0,
+   "explicacion": "Para ellos, conocer es una actividad propia de todo ser vivo en interacción con su medio."
+  },
+  {
+   "id": "ep5-011",
+   "subtema": "5.3",
+   "tipo": "caso",
+   "pregunta": "Unos pacientes razonaban bien en abstracto pero no lograban tomar decisiones adecuadas en su vida tras una lesión cerebral. ¿Qué concluyó Damasio?",
+   "opciones": [
+    "Que la emoción no es enemiga de la razón, sino su condición",
+    "Que la razón funciona mejor sin emociones",
+    "Que la lesión mejoró su capacidad de decidir",
+    "Que Descartes tenía razón al separar mente y cuerpo"
+   ],
+   "correcta": 0,
+   "explicacion": "El \"error de Descartes\" fue separar razón y emoción."
+  },
+  {
+   "id": "ep5-012",
+   "subtema": "5.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "Describir el cerebro como una \"máquina de predicción\" se parece al esquema de conjeturas y refutaciones de Popper.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "El cerebro genera hipótesis y las corrige con la información de los sentidos."
+  },
+  {
+   "id": "ep5-013",
+   "subtema": "5.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada autor con su idea sobre el diálogo.",
+   "pares": [
+    {
+     "izquierda": "Gadamer",
+     "derecha": "Comprender es una fusión de horizontes"
+    },
+    {
+     "izquierda": "Habermas",
+     "derecha": "En el diálogo debe imponerse la fuerza del mejor argumento"
+    },
+    {
+     "izquierda": "Freire",
+     "derecha": "El diálogo exige humildad, fe en las personas, esperanza y pensamiento crítico"
+    },
+    {
+     "izquierda": "Morin",
+     "derecha": "Mantener unidas ideas opuestas pero complementarias"
+    }
+   ],
+   "explicacion": "Todos sostienen que el conocimiento se construye en el encuentro de perspectivas."
+  },
+  {
+   "id": "ep5-014",
+   "subtema": "5.4",
+   "tipo": "caso",
+   "pregunta": "En una discusión de clase cada alumno defendió su opinión sin escuchar a los demás y ganó quien habló más fuerte. Según Habermas, ¿qué faltó?",
+   "opciones": [
+    "Que todos pudieran hablar y se impusiera el mejor argumento, no la fuerza ni la jerarquía",
+    "Que el maestro diera la respuesta correcta desde el inicio",
+    "Que hubiera menos participantes",
+    "Que se votara para decidir quién tenía razón"
+   ],
+   "correcta": 0,
+   "explicacion": "La situación ideal de habla sirve como criterio para evaluar los diálogos reales."
+  },
+  {
+   "id": "ep5-015",
+   "subtema": "5.4",
+   "tipo": "completar",
+   "pregunta": "El encuentro respetuoso entre el conocimiento científico y otros saberes, como los comunitarios, se llama _______.",
+   "opciones": [
+    "diálogo de saberes",
+    "doble hermenéutica",
+    "inercia mental",
+    "falsacionismo"
+   ],
+   "correcta": 0,
+   "explicacion": "Es una de las ideas centrales de la Nueva Escuela Mexicana."
+  },
+  {
+   "id": "ep5-016",
+   "subtema": "5.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "En APA 7, una cita textual de menos de 40 palabras va entre comillas y siempre lleva el número de página.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Las de 40 palabras o más van en bloque aparte, con sangría y sin comillas."
+  }
+ ]
+}

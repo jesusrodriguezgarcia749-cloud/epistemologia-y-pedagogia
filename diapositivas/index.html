@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diapositivas · Epistemología y Pedagogía</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{--marino:#16213A;--rojo:#2E5E8C;--beige:#F4F6F9;--arena:#D3D9E3;--tinta:#1A1A1A;--gris:#4F5868}
+  *{box-sizing:border-box}
+  html{scroll-padding-top:env(safe-area-inset-top,0px)}
+  body{margin:0;background:var(--beige);color:var(--tinta);font-family:"Public Sans",Calibri,Arial,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  header{background:var(--marino);color:#fff;border-bottom:8px solid var(--rojo)}
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px}
+  header .wrap{padding-top:22px;padding-bottom:30px}
+  .volver{display:inline-block;color:#fff;border:2px solid var(--arena);padding:6px 12px;text-decoration:none;font-weight:500;font-size:.95rem}
+  .volver:focus-visible,.clase:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
+  h1{font-family:"Fraunces",Cambria,Georgia,serif;font-weight:700;font-size:clamp(2rem,6vw,2.8rem);line-height:1.05;margin:26px 0 8px}
+  header p{color:var(--arena);margin:0;line-height:1.5}
+  main{padding:28px 0 56px}
+  h2{font-family:"Fraunces",Cambria,Georgia,serif;font-weight:600;font-size:1.35rem;color:var(--marino);margin:30px 0 10px}
+  ol{list-style:none;margin:0;padding:0}
+  .clase{display:grid;grid-template-columns:7.2em 1fr;gap:4px 16px;padding:16px 6px;border-top:1px solid var(--arena);text-decoration:none;color:inherit}
+  li:last-child .clase{border-bottom:1px solid var(--arena)}
+  a.clase:hover .titulo{color:var(--rojo)}
+  .sin-enlace{background:#E9EDF3}
+  .sin-enlace .titulo::after{content:" · sin diapositivas";font-family:"Public Sans",sans-serif;font-size:.8rem;font-weight:500;color:var(--gris)}
+  .descarga .titulo::after{content:" ↓";color:var(--rojo)}
+  .fecha{grid-row:span 2;font-weight:600;color:var(--rojo);font-size:.9rem;padding-top:3px}
+  .titulo{font-family:"Fraunces",serif;font-weight:600;font-size:1.2rem;line-height:1.25;color:var(--marino)}
+  .desc{color:var(--gris);line-height:1.45;font-size:.95rem}
+  .bloque{color:var(--marino);font-weight:600}
+  .vacia{border:3px dashed var(--gris);color:var(--gris);padding:24px;text-align:center}
+  @media (max-width:480px){.clase{grid-template-columns:1fr}.fecha{grid-row:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="volver" href="../index.html">Volver a Epistemología y Pedagogía</a>
+  <h1>Diapositivas de clase</h1>
+  <p>Elige una sesión para repasar el tema. Avanza con las flechas o deslizando el dedo.</p>
+</div></header>
+<main class="wrap" id="lista"></main>
+
+<!-- =====================================================================
+     LISTA DE SESIONES — agrega un renglón por cada presentación nueva
+     ===================================================================== -->
+<script>
+const SESIONES = [
+  { tema: "Guías de consulta", fecha: "Siempre", orden: "0000-00-00",
+    archivo: "guia-apa.html",
+    titulo: "Cómo citar en APA",
+    descripcion: "Formato, interlineado, sangría francesa, citas textuales, cita de una cita y lista de referencias." },
+  { tema: "Guías de consulta", fecha: "Descarga", orden: "0000-00-01",
+    archivo: "plantillas/Plantilla_APA.docx", descarga: true,
+    titulo: "Plantilla de Word en formato APA",
+    descripcion: "Hoja ya configurada: márgenes, interlineado doble y las dos sangrías. Escribe encima y entrega." }
+  // Las sesiones de clase (lunes y martes, 2 horas) se agregan aquí con la planeación.
+];
+</script>
+
+<script>
+(function () {
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const cont = document.getElementById("lista");
+  if (!SESIONES.length) { cont.innerHTML = '<p class="vacia">Todavía no hay presentaciones.</p>'; return; }
+  // Se ordena todo por fecha y se agrupa por mes, para que el alumno siga el curso en orden.
+  const MESES = { "10": "Octubre", "11": "Noviembre", "12": "Diciembre" };
+  const lista = SESIONES.slice().sort((a, b) => (a.orden || "").localeCompare(b.orden || ""));
+  const grupos = [];
+  lista.forEach(s => {
+    const o = s.orden || "";
+    const titulo = o < "2026-01-01" ? "Guías de consulta" : (MESES[o.slice(5, 7)] || "Otras fechas");
+    let g = grupos.find(x => x.tema === titulo);
+    if (!g) grupos.push(g = { tema: titulo, items: [] });
+    g.items.push(s);
+  });
+  cont.innerHTML = grupos.map(g => `
+    <h2>${esc(g.tema)}</h2>
+    <ol>${g.items.map(s => `
+      <li>${s.archivo
+        ? `<a class="clase${s.descarga ? " descarga" : ""}" href="${esc(s.archivo)}"${s.descarga ? " download" : ""}>`
+        : `<div class="clase sin-enlace">`}
+        <span class="fecha">${esc(s.fecha)}</span>
+        <span class="titulo">${esc(s.titulo)}</span>
+        <span class="desc">${s.tema && s.orden >= "2026-01-01" ? `<b class="bloque">${esc(s.tema)}</b> · ` : ""}${esc(s.descripcion)}</span>
+      ${s.archivo ? "</a>" : "</div>"}</li>`).join("")}</ol>`).join("");
+})();
+</script>
+</body>
+</html>

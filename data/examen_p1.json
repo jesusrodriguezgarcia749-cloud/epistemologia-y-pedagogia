@@ -1,0 +1,649 @@
+{
+ "parcial": "p1",
+ "titulo": "Examen Parcial 1 — Temas 1 a 4: del concepto de epistemología a la concepción contemporánea de la ciencia",
+ "config": {
+  "preguntasPorExamen": 40,
+  "minutos": 60
+ },
+ "reactivos": [
+  {
+   "id": "p1-001",
+   "subtema": "1.0",
+   "tipo": "caso",
+   "pregunta": "En una junta de Consejo Técnico, una maestra afirma que sus alumnos \"aprenden mejor con videos porque son visuales\". Desde la epistemología, ¿cuál es la primera pregunta pertinente?",
+   "opciones": [
+    "¿Qué evidencia respalda esa afirmación y de dónde proviene?",
+    "¿Cuántos videos se deben proyectar por clase?",
+    "¿Qué plataforma de videos es la mejor?",
+    "¿Cuántos maestros comparten esa opinión?"
+   ],
+   "correcta": 0,
+   "explicacion": "La pregunta epistemológica de fondo es cómo sabemos lo que decimos saber sobre la educación."
+  },
+  {
+   "id": "p1-002",
+   "subtema": "1.0",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué el curso se ubica en séptimo cuatrimestre, según la introducción del compendio?",
+   "opciones": [
+    "Porque los alumnos ya tienen formación teórica y están construyendo su protocolo de investigación",
+    "Porque es una materia de repaso de los cuatrimestres anteriores",
+    "Porque no requiere ningún conocimiento previo",
+    "Porque sustituye al taller de investigación"
+   ],
+   "correcta": 0,
+   "explicacion": "Un protocolo sin reflexión epistemológica es como una casa sin cimientos."
+  },
+  {
+   "id": "p1-003",
+   "subtema": "1.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "En el Teeteto, Sócrates rechaza que conocer sea \"tener una opinión verdadera\" porque:",
+   "opciones": [
+    "Alguien puede acertar por casualidad sin saber realmente",
+    "Las opiniones siempre son falsas",
+    "Solo los dioses pueden tener opiniones verdaderas",
+    "La verdad no existe"
+   ],
+   "correcta": 0,
+   "explicacion": "La opinión verdadera necesita justificación para ser conocimiento."
+  },
+  {
+   "id": "p1-004",
+   "subtema": "1.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada autor con su postura sobre el conocimiento.",
+   "pares": [
+    {
+     "izquierda": "René Descartes",
+     "derecha": "Racionalismo"
+    },
+    {
+     "izquierda": "John Locke",
+     "derecha": "Empirismo"
+    },
+    {
+     "izquierda": "Immanuel Kant",
+     "derecha": "Criticismo"
+    },
+    {
+     "izquierda": "Jean Piaget",
+     "derecha": "Constructivismo (epistemología genética)"
+    }
+   ],
+   "explicacion": "Son las grandes respuestas históricas al fundamento del conocimiento."
+  },
+  {
+   "id": "p1-005",
+   "subtema": "1.1",
+   "tipo": "caso",
+   "pregunta": "Un docente sostiene: \"Los alumnos deben construir su propio aprendizaje a partir de su interacción con el entorno\". ¿Con qué postura epistemológica es más coherente?",
+   "opciones": [
+    "Constructivismo",
+    "Empirismo radical de Hume",
+    "Positivismo lógico",
+    "Racionalismo cartesiano"
+   ],
+   "correcta": 0,
+   "explicacion": "El constructivismo sostiene que el conocimiento se construye en la interacción del sujeto con su mundo."
+  },
+  {
+   "id": "p1-006",
+   "subtema": "1.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Para Luis Villoro, \"saber\" implica tener razones suficientes y objetivas para una creencia, mientras que \"conocer\" implica una experiencia directa y personal.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la distinción central de Creer, saber, conocer (1982)."
+  },
+  {
+   "id": "p1-007",
+   "subtema": "1.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada palabra clave de la definición de epistemología con su pregunta.",
+   "pares": [
+    {
+     "izquierda": "Fundamentos",
+     "derecha": "¿En qué se apoya el conocimiento?"
+    },
+    {
+     "izquierda": "Métodos",
+     "derecha": "¿Cómo se produce?"
+    },
+    {
+     "izquierda": "Validez",
+     "derecha": "¿Cuándo es aceptable un conocimiento?"
+    },
+    {
+     "izquierda": "Límites",
+     "derecha": "¿Hasta dónde podemos conocer?"
+    }
+   ],
+   "explicacion": "La epistemología estudia fundamentos, métodos, criterios de validez y límites del conocimiento científico."
+  },
+  {
+   "id": "p1-008",
+   "subtema": "1.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué afirmación distingue correctamente los tres campos estudiados?",
+   "opciones": [
+    "La teoría del conocimiento es la más amplia; la epistemología se centra en el conocimiento científico; la filosofía de la ciencia mira la ciencia en todas sus dimensiones",
+    "Los tres son exactamente sinónimos en cualquier tradición",
+    "La epistemología estudia todo conocimiento humano y la gnoseología solo el científico",
+    "La filosofía de la ciencia solo estudia la lógica formal"
+   ],
+   "correcta": 0,
+   "explicacion": "Pueden imaginarse como círculos que se cruzan."
+  },
+  {
+   "id": "p1-009",
+   "subtema": "1.2",
+   "tipo": "completar",
+   "pregunta": "A la teoría del conocimiento también se le llama _______, del griego gnôsis.",
+   "opciones": [
+    "gnoseología",
+    "ontología",
+    "hermenéutica",
+    "axiología"
+   ],
+   "correcta": 0,
+   "explicacion": "La gnoseología estudia el conocimiento humano en general."
+  },
+  {
+   "id": "p1-010",
+   "subtema": "1.3",
+   "tipo": "caso",
+   "pregunta": "Un tesista elige la investigación-acción para mejorar la convivencia en su grupo de prácticas. ¿Qué supuesto epistemológico asume?",
+   "opciones": [
+    "Que el conocimiento se produce al transformar la práctica",
+    "Que solo vale lo que puede medirse con estadística",
+    "Que el investigador debe mantenerse completamente fuera del fenómeno",
+    "Que las relaciones entre variables son el único conocimiento válido"
+   ],
+   "correcta": 0,
+   "explicacion": "Elegir un enfoque metodológico es una decisión epistemológica (Elliott, 1990)."
+  },
+  {
+   "id": "p1-011",
+   "subtema": "1.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué cuarta postura sobre la pedagogía añadieron Carr y Kemmis?",
+   "opciones": [
+    "La pedagogía como ciencia crítica orientada a transformar la educación",
+    "La pedagogía como rama de la medicina",
+    "La pedagogía como técnica sin teoría",
+    "La pedagogía como ciencia formal"
+   ],
+   "correcta": 0,
+   "explicacion": "Con docentes como investigadores de su práctica."
+  },
+  {
+   "id": "p1-012",
+   "subtema": "1.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según el compendio, un enfoque metodológico puede elegirse sin justificar su fundamento epistemológico, porque todos son equivalentes.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Ninguno es superior en abstracto, pero es un error elegir sin saber por qué."
+  },
+  {
+   "id": "p1-013",
+   "subtema": "2.1",
+   "tipo": "caso",
+   "pregunta": "La abuela \"sabe\" que va a llover porque le duelen las rodillas; un meteorólogo lo predice con modelos y datos. ¿Qué diferencia principal existe entre ambos conocimientos?",
+   "opciones": [
+    "El científico es sistemático, metódico y se somete a prueba pública; el cotidiano es práctico pero no sistematizado",
+    "El cotidiano siempre es falso y el científico siempre es verdadero",
+    "No hay ninguna diferencia",
+    "El científico es religioso y el cotidiano es filosófico"
+   ],
+   "correcta": 0,
+   "explicacion": "El conocimiento empírico puede ser útil y preciso, pero no suele explicar por qué."
+  },
+  {
+   "id": "p1-014",
+   "subtema": "2.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es la fuente del conocimiento filosófico?",
+   "opciones": [
+    "La razón y la reflexión argumentada",
+    "La revelación sagrada",
+    "La experiencia sensible sin reflexión",
+    "La creación estética"
+   ],
+   "correcta": 0,
+   "explicacion": "La epistemología misma es un ejemplo de conocimiento filosófico."
+  },
+  {
+   "id": "p1-015",
+   "subtema": "2.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué el \"método científico\" de pasos fijos no describe cómo trabaja realmente la ciencia?",
+   "opciones": [
+    "Porque cada ciencia desarrolla métodos adecuados a su objeto; un astrónomo no experimenta con galaxias",
+    "Porque la ciencia no usa ningún método",
+    "Porque solo lo usan las ciencias sociales",
+    "Porque fue prohibido por la comunidad científica"
+   ],
+   "correcta": 0,
+   "explicacion": "Es una herramienta didáctica útil, no la descripción de toda la ciencia."
+  },
+  {
+   "id": "p1-016",
+   "subtema": "2.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada sentido de \"ciencia\" con lo que la escuela debería enseñar de él.",
+   "pares": [
+    {
+     "izquierda": "Producto",
+     "derecha": "Conocimientos acumulados como la tabla periódica"
+    },
+    {
+     "izquierda": "Proceso",
+     "derecha": "Enseñar a investigar"
+    },
+    {
+     "izquierda": "Institución",
+     "derecha": "Cómo la comunidad científica evalúa y difunde el conocimiento"
+    }
+   ],
+   "explicacion": "La pedagogía contemporánea busca enseñar la ciencia también como proceso."
+  },
+  {
+   "id": "p1-017",
+   "subtema": "2.3",
+   "tipo": "caso",
+   "pregunta": "Un artículo que circula en redes no menciona autores, ni revista, ni número de participantes, pero asegura \"estar comprobado\". ¿Qué canon de cientificidad incumple de manera más directa?",
+   "opciones": [
+    "Comunicabilidad y publicidad: no puede rastrearse ni revisarse públicamente",
+    "Provisionalidad: porque dice ser definitivo",
+    "Sistematicidad: porque no es una teoría",
+    "Coherencia: porque se contradice"
+   ],
+   "correcta": 0,
+   "explicacion": "El conocimiento científico se hace público para que otros lo revisen."
+  },
+  {
+   "id": "p1-018",
+   "subtema": "2.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué en ciencias sociales se habla de intersubjetividad más que de objetividad?",
+   "opciones": [
+    "Porque el investigador forma parte de la realidad que estudia",
+    "Porque las ciencias sociales no buscan rigor",
+    "Porque la objetividad está prohibida",
+    "Porque solo usan encuestas"
+   ],
+   "correcta": 0,
+   "explicacion": "La intersubjetividad es el acuerdo razonado entre varios sujetos."
+  },
+  {
+   "id": "p1-019",
+   "subtema": "2.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada clasificación con su criterio.",
+   "pares": [
+    {
+     "izquierda": "Ciencias formales",
+     "derecha": "Se validan por demostración"
+    },
+    {
+     "izquierda": "Ciencias fácticas naturales",
+     "derecha": "Estudian hechos de la naturaleza y se validan por la experiencia"
+    },
+    {
+     "izquierda": "Ciencias fácticas sociales",
+     "derecha": "Estudian hechos humanos y sociales y se validan por la experiencia"
+    }
+   ],
+   "explicacion": "Es la clasificación de Mario Bunge."
+  },
+  {
+   "id": "p1-020",
+   "subtema": "2.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué distinción de Dilthey es, según el compendio, una de las ideas más importantes del curso?",
+   "opciones": [
+    "Explicar frente a comprender",
+    "Inducir frente a deducir",
+    "Verificar frente a refutar",
+    "Paradigma frente a anomalía"
+   ],
+   "correcta": 0,
+   "explicacion": "Las ciencias naturales explican; las del espíritu comprenden."
+  },
+  {
+   "id": "p1-021",
+   "subtema": "2.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "La expresión plural \"ciencias de la educación\" se impuso en la tradición francesa a partir de la segunda mitad del siglo XX.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "En la tradición alemana se defendió la pedagogía como ciencia unitaria."
+  },
+  {
+   "id": "p1-022",
+   "subtema": "3.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada tradición de las ciencias sociales con sus representantes.",
+   "pares": [
+    {
+     "izquierda": "Positivista",
+     "derecha": "Comte y Durkheim"
+    },
+    {
+     "izquierda": "Comprensiva o hermenéutica",
+     "derecha": "Dilthey, Weber y Gadamer"
+    },
+    {
+     "izquierda": "Crítica",
+     "derecha": "Marx, Habermas y Freire"
+    }
+   ],
+   "explicacion": "De ellas derivan los tres paradigmas de la investigación educativa."
+  },
+  {
+   "id": "p1-023",
+   "subtema": "3.1",
+   "tipo": "caso",
+   "pregunta": "Un equipo quiere medir el efecto de un programa de lectura comparando grupos con y sin programa mediante pruebas estandarizadas. ¿Qué paradigma sigue?",
+   "opciones": [
+    "Positivista",
+    "Interpretativo",
+    "Sociocrítico",
+    "Dialéctico"
+   ],
+   "correcta": 0,
+   "explicacion": "Busca explicar y medir relaciones entre variables."
+  },
+  {
+   "id": "p1-024",
+   "subtema": "3.1",
+   "tipo": "caso",
+   "pregunta": "Una comunidad escolar diagnostica su problema de deserción y diseña y evalúa ella misma las soluciones. ¿Qué paradigma de investigación es?",
+   "opciones": [
+    "Sociocrítico",
+    "Positivista",
+    "Interpretativo",
+    "Mecanicista"
+   ],
+   "correcta": 0,
+   "explicacion": "Busca transformar con la participación de los propios actores."
+  },
+  {
+   "id": "p1-025",
+   "subtema": "3.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "Max Weber propuso los \"tipos ideales\". ¿Qué son?",
+   "opciones": [
+    "Modelos conceptuales que exageran ciertos rasgos de la realidad para compararla y entenderla",
+    "Los alumnos con mejores calificaciones de un grupo",
+    "Las leyes universales de la sociedad",
+    "Las hipótesis que no pueden refutarse"
+   ],
+   "correcta": 0,
+   "explicacion": "Son herramientas de la sociología comprensiva."
+  },
+  {
+   "id": "p1-026",
+   "subtema": "3.1",
+   "tipo": "completar",
+   "pregunta": "Según Gadamer, toda comprensión parte de _______, en el sentido de juicios previos.",
+   "opciones": [
+    "prejuicios",
+    "certezas",
+    "leyes",
+    "datos"
+   ],
+   "correcta": 0,
+   "explicacion": "Comprender es un diálogo entre el horizonte del intérprete y el de lo interpretado."
+  },
+  {
+   "id": "p1-027",
+   "subtema": "3.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué principio de los sistemas explica que se pueda llegar al mismo resultado por caminos distintos?",
+   "opciones": [
+    "Equifinalidad",
+    "Retroalimentación",
+    "Interdependencia",
+    "Apertura"
+   ],
+   "correcta": 0,
+   "explicacion": "Es una de las características de los sistemas abiertos."
+  },
+  {
+   "id": "p1-028",
+   "subtema": "3.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "La ontología de la ciencia clásica era atomista: la realidad está formada por partes elementales y el todo es la suma de las partes.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "La ontología sistémica cuestiona esa visión."
+  },
+  {
+   "id": "p1-029",
+   "subtema": "3.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es el principal límite del pensamiento lineal frente a los fenómenos educativos?",
+   "opciones": [
+    "No capta causas múltiples que se influyen mutuamente ni efectos que regresan a modificar las causas",
+    "No sirve para planificar ninguna secuencia didáctica",
+    "Contradice los tres principios de la lógica",
+    "Solo funciona en ciencias sociales"
+   ],
+   "correcta": 0,
+   "explicacion": "Lo lineal es útil para secuencias y diseños controlados, pero insuficiente ante lo complejo."
+  },
+  {
+   "id": "p1-030",
+   "subtema": "3.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada principio de la lógica dialéctica con su formulación.",
+   "pares": [
+    {
+     "izquierda": "Todo está relacionado",
+     "derecha": "Nada se comprende aislado de su contexto"
+    },
+    {
+     "izquierda": "Todo cambia",
+     "derecha": "La realidad es proceso, no cosa fija"
+    },
+    {
+     "izquierda": "La contradicción es motor",
+     "derecha": "Las tensiones internas generan transformaciones"
+    },
+    {
+     "izquierda": "Salto cualitativo",
+     "derecha": "La acumulación de pequeños cambios produce una transformación de naturaleza"
+    }
+   ],
+   "explicacion": "Son principios del pensamiento dialéctico."
+  },
+  {
+   "id": "p1-031",
+   "subtema": "3.4",
+   "tipo": "caso",
+   "pregunta": "Un conflicto entre alumnos y maestra sobre las reglas del salón termina con un acuerdo nuevo que nadie había propuesto al inicio. ¿Cómo lo interpretaría la lógica dialéctica?",
+   "opciones": [
+    "Como una contradicción que impulsó una transformación y produjo algo nuevo",
+    "Como un error que nunca debió ocurrir",
+    "Como una relación lineal de causa y efecto",
+    "Como un ejemplo de inercia mental"
+   ],
+   "correcta": 0,
+   "explicacion": "La contradicción no es un error que haya que eliminar, sino motor del cambio."
+  },
+  {
+   "id": "p1-032",
+   "subtema": "4.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué consideraba el positivismo lógico sobre la metafísica y la teología?",
+   "opciones": [
+    "Que carecían de significado cognoscitivo por no ser verificables",
+    "Que eran las formas más altas de conocimiento científico",
+    "Que eran falsas pero verificables",
+    "Que debían enseñarse como ciencia"
+   ],
+   "correcta": 0,
+   "explicacion": "Para el Círculo de Viena no eran falsas, sino vacías de sentido."
+  },
+  {
+   "id": "p1-033",
+   "subtema": "4.2",
+   "tipo": "caso",
+   "pregunta": "Un investigador propone: \"Si el programa funciona, los grupos que participen superarán en comprensión lectora a grupos comparables; si no los superan, la hipótesis queda refutada\". ¿Qué rasgo popperiano cumple?",
+   "opciones": [
+    "Es falsable: precisa qué resultado la desmentiría",
+    "Es inductiva: generaliza desde un caso",
+    "Es inconmensurable con otras hipótesis",
+    "Es un núcleo duro que no puede tocarse"
+   ],
+   "correcta": 0,
+   "explicacion": "Una hipótesis científica debe arriesgarse a ser refutada."
+  },
+  {
+   "id": "p1-034",
+   "subtema": "4.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué Popper comparó la teoría de Einstein con ciertos defensores del psicoanálisis y el marxismo?",
+   "opciones": [
+    "Porque Einstein hacía predicciones arriesgadas que podían fallar, mientras aquellos parecían explicar cualquier cosa",
+    "Porque Einstein era psicoanalista",
+    "Porque las tres teorías eran igual de falsables",
+    "Porque quería demostrar que la física no es ciencia"
+   ],
+   "correcta": 0,
+   "explicacion": "Explicarlo todo, incluso lo contrario, era para Popper una debilidad."
+  },
+  {
+   "id": "p1-035",
+   "subtema": "4.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es la inconmensurabilidad de los paradigmas según Kuhn?",
+   "opciones": [
+    "La imposibilidad de compararlos punto por punto con una medida común",
+    "La facilidad con que un paradigma sustituye a otro",
+    "El número de anomalías que acumula un paradigma",
+    "La medición exacta de las teorías científicas"
+   ],
+   "correcta": 0,
+   "explicacion": "Usan conceptos distintos e incluso \"ven\" el mundo de otro modo."
+  },
+  {
+   "id": "p1-036",
+   "subtema": "4.3",
+   "tipo": "jerarquizar",
+   "pregunta": "Ordena las etapas del desarrollo de la ciencia según Kuhn, desde el inicio.",
+   "opciones": [
+    "Preciencia → ciencia normal → anomalías → crisis → revolución científica",
+    "Ciencia normal → preciencia → revolución → anomalías → crisis",
+    "Revolución científica → preciencia → crisis → ciencia normal → anomalías",
+    "Anomalías → crisis → preciencia → ciencia normal → revolución científica"
+   ],
+   "correcta": 0,
+   "explicacion": "Después de la revolución comienza una nueva ciencia normal."
+  },
+  {
+   "id": "p1-037",
+   "subtema": "4.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué buscaba Lakatos con su propuesta de programas de investigación?",
+   "opciones": [
+    "Reconocer con Kuhn que los científicos no abandonan teorías a la primera refutación, pero mantener con Popper la racionalidad de la elección",
+    "Demostrar que Popper y Kuhn decían exactamente lo mismo",
+    "Eliminar toda regla en la ciencia",
+    "Volver al verificacionismo del Círculo de Viena"
+   ],
+   "correcta": 0,
+   "explicacion": "Fue un puente entre Popper y Kuhn."
+  },
+  {
+   "id": "p1-038",
+   "subtema": "4.5",
+   "tipo": "verdadero_falso",
+   "pregunta": "Feyerabend propuso que en una sociedad libre los ciudadanos pudieran decidir democráticamente qué tradiciones enseñar, y criticó que la ciencia ocupara un lugar de autoridad indiscutible.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "También defendió la proliferación de teorías alternativas."
+  },
+  {
+   "id": "p1-039",
+   "subtema": "4.6",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada operación del paradigma de simplificación (Morin) con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Disyunción",
+     "derecha": "Separar lo que está unido, como sujeto y objeto"
+    },
+    {
+     "izquierda": "Reducción",
+     "derecha": "Explicar el todo por sus partes más simples"
+    },
+    {
+     "izquierda": "Abstracción",
+     "derecha": "Aislar el objeto de su contexto"
+    }
+   ],
+   "explicacion": "Dieron frutos, pero produjeron un conocimiento fragmentado."
+  },
+  {
+   "id": "p1-040",
+   "subtema": "4.6",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es uno de los siete saberes que Morin propuso para la educación del futuro?",
+   "opciones": [
+    "Enfrentar las incertidumbres",
+    "Memorizar las leyes de la física",
+    "Separar las disciplinas para especializarse",
+    "Evitar el error a toda costa"
+   ],
+   "correcta": 0,
+   "explicacion": "Otros son enseñar la condición humana, la comprensión y la ética del género humano."
+  },
+  {
+   "id": "p1-041",
+   "subtema": "4.7",
+   "tipo": "caso",
+   "pregunta": "Cuando la palabra \"bullying\" entró a las escuelas, cambió la manera en que alumnos y maestros viven ciertos conflictos. ¿Qué concepto lo explica?",
+   "opciones": [
+    "La doble hermenéutica de Giddens",
+    "El problema de la inducción",
+    "El principio de verificación",
+    "La equifinalidad de los sistemas"
+   ],
+   "correcta": 0,
+   "explicacion": "Los conceptos de las ciencias sociales regresan a la sociedad y la transforman."
+  },
+  {
+   "id": "p1-042",
+   "subtema": "4.7",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué criterios de rigor ha desarrollado la investigación cualitativa?",
+   "opciones": [
+    "Credibilidad, transferibilidad, consistencia y confirmabilidad",
+    "Verificabilidad, inducción y control experimental",
+    "Ninguno, porque no busca rigor",
+    "Solo la significancia estadística"
+   ],
+   "correcta": 0,
+   "explicacion": "No son los de la física, pero son exigentes."
+  }
+ ]
+}

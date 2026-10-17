@@ -1,0 +1,297 @@
+{
+ "bloque": 4,
+ "reactivos": [
+  {
+   "id": "ep4-001",
+   "subtema": "4.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué sostiene el principio de verificación del positivismo lógico?",
+   "opciones": [
+    "Una afirmación solo tiene sentido si puede verificarse por la experiencia o es una verdad lógica",
+    "Toda afirmación tiene sentido si mucha gente la acepta",
+    "Una teoría es científica si puede refutarse",
+    "Las afirmaciones éticas son las más verificables"
+   ],
+   "correcta": 0,
+   "explicacion": "Para el Círculo de Viena, lo que no es verificable ni lógico carece de significado cognoscitivo."
+  },
+  {
+   "id": "ep4-002",
+   "subtema": "4.1",
+   "tipo": "caso",
+   "pregunta": "Durante siglos, los europeos observaron millones de cisnes blancos y concluyeron que todos los cisnes eran blancos, hasta hallar cisnes negros en Australia. ¿Qué problema ilustra?",
+   "opciones": [
+    "El problema de la inducción: ningún número de casos garantiza el siguiente",
+    "El problema de la inconmensurabilidad entre paradigmas",
+    "La doble hermenéutica de las ciencias sociales",
+    "La inercia mental de las comunidades científicas"
+   ],
+   "correcta": 0,
+   "explicacion": "Hume ya había mostrado que la inducción no puede justificarse lógicamente."
+  },
+  {
+   "id": "ep4-003",
+   "subtema": "4.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "El espíritu positivista sigue presente en la educación, por ejemplo en la confianza en las pruebas estandarizadas y los indicadores numéricos.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Su aporte es la rendición de cuentas; su riesgo, reducir la educación a lo fácil de medir."
+  },
+  {
+   "id": "ep4-004",
+   "subtema": "4.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué, según Popper, una sola observación tiene más peso que mil observaciones?",
+   "opciones": [
+    "Porque mil casos no verifican una teoría universal, pero un solo caso contrario la refuta",
+    "Porque la primera observación siempre es la más exacta",
+    "Porque los científicos solo aceptan una observación por estudio",
+    "Porque mil observaciones siempre contienen errores"
+   ],
+   "correcta": 0,
+   "explicacion": "Hay una asimetría lógica entre verificar y refutar."
+  },
+  {
+   "id": "ep4-005",
+   "subtema": "4.2",
+   "tipo": "caso",
+   "pregunta": "Un equipo dice: \"Si los alumnos mejoraron, el programa funcionó; si no mejoraron, es que les falta tiempo\". ¿Qué diría Popper?",
+   "opciones": [
+    "Que la afirmación dejó de ser científica, porque ningún resultado podría refutarla",
+    "Que es un excelente ejemplo de hipótesis falsable",
+    "Que el programa quedó corroborado de manera definitiva",
+    "Que así funciona correctamente la inducción"
+   ],
+   "correcta": 0,
+   "explicacion": "Para ser falsable, hay que precisar qué resultado la desmentiría."
+  },
+  {
+   "id": "ep4-006",
+   "subtema": "4.2",
+   "tipo": "completar",
+   "pregunta": "Popper llamó criterio de _______ a la regla para distinguir la ciencia de lo que no lo es: una teoría es científica si es falsable.",
+   "opciones": [
+    "demarcación",
+    "verificación",
+    "inconmensurabilidad",
+    "corroboración"
+   ],
+   "correcta": 0,
+   "explicacion": "El criterio de demarcación de Popper es la falsabilidad."
+  },
+  {
+   "id": "ep4-007",
+   "subtema": "4.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "Una teoría que ha resistido pruebas severas, para Popper, queda:",
+   "opciones": [
+    "Corroborada provisionalmente",
+    "Demostrada para siempre",
+    "Verificada por inducción",
+    "Fuera de toda crítica"
+   ],
+   "correcta": 0,
+   "explicacion": "El conocimiento científico es siempre conjetural."
+  },
+  {
+   "id": "ep4-008",
+   "subtema": "4.3",
+   "tipo": "jerarquizar",
+   "pregunta": "Ordena el ciclo de la ciencia según Kuhn. ¿Cuál es la secuencia correcta?",
+   "opciones": [
+    "Ciencia normal → anomalías → crisis → revolución → nueva ciencia normal",
+    "Anomalías → ciencia normal → revolución → crisis → nueva ciencia normal",
+    "Revolución → crisis → anomalías → ciencia normal → preciencia",
+    "Crisis → ciencia normal → revolución → anomalías → preciencia"
+   ],
+   "correcta": 0,
+   "explicacion": "Tras la preciencia, el paradigma aceptado entra en crisis cuando se acumulan anomalías y es sustituido en una revolución."
+  },
+  {
+   "id": "ep4-009",
+   "subtema": "4.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Para Kuhn, un paradigma es:",
+   "opciones": [
+    "El conjunto de teorías, métodos, problemas y valores compartidos por una comunidad científica",
+    "Un ejemplo bonito para explicar una clase",
+    "Una teoría ya demostrada que no admite cambios",
+    "La opinión personal de un científico famoso"
+   ],
+   "correcta": 0,
+   "explicacion": "Hoy la palabra se usa en todos lados, pero su sentido técnico viene de Kuhn."
+  },
+  {
+   "id": "ep4-010",
+   "subtema": "4.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Kuhn usó la figura que puede verse como pato o como conejo para ilustrar:",
+   "opciones": [
+    "La inconmensurabilidad: los mismos datos se ven de otra manera en otro paradigma",
+    "El problema de la inducción",
+    "El principio de verificación",
+    "El núcleo duro de un programa de investigación"
+   ],
+   "correcta": 0,
+   "explicacion": "El cambio de paradigma se parece a un cambio de percepción."
+  },
+  {
+   "id": "ep4-011",
+   "subtema": "4.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "En la ciencia normal, los científicos buscan refutar el paradigma vigente.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "En la ciencia normal se resuelven \"rompecabezas\" dentro del paradigma; no se busca derribarlo."
+  },
+  {
+   "id": "ep4-012",
+   "subtema": "4.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada concepto de Lakatos con su significado.",
+   "pares": [
+    {
+     "izquierda": "Núcleo duro",
+     "derecha": "Hipótesis fundamentales que no se ponen en duda"
+    },
+    {
+     "izquierda": "Cinturón protector",
+     "derecha": "Hipótesis auxiliares que se ajustan ante datos contrarios"
+    },
+    {
+     "izquierda": "Programa progresivo",
+     "derecha": "Sus cambios predicen hechos nuevos que se confirman"
+    },
+    {
+     "izquierda": "Programa degenerativo",
+     "derecha": "Solo hace ajustes para explicar lo que ya sabía"
+    }
+   ],
+   "explicacion": "Lakatos buscó mantener la racionalidad de Popper reconociendo la tenacidad que describió Kuhn."
+  },
+  {
+   "id": "ep4-013",
+   "subtema": "4.4",
+   "tipo": "caso",
+   "pregunta": "Una estrategia constructivista falla en un grupo y los investigadores dicen: \"faltó andamiaje\", sin abandonar la idea de que el conocimiento se construye. En términos de Lakatos, ¿qué hicieron?",
+   "opciones": [
+    "Ajustaron el cinturón protector sin tocar el núcleo duro",
+    "Abandonaron el núcleo duro del programa",
+    "Aplicaron el principio de verificación",
+    "Provocaron una revolución científica"
+   ],
+   "correcta": 0,
+   "explicacion": "La pregunta lakatosiana es si esos ajustes anticipan logros nuevos o solo justifican fracasos."
+  },
+  {
+   "id": "ep4-014",
+   "subtema": "4.5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué quiso decir Feyerabend con \"todo vale\"?",
+   "opciones": [
+    "Que ninguna regla metodológica fija garantiza el progreso y que imponer un método único empobrece el conocimiento",
+    "Que cualquier opinión es igual de buena que cualquier teoría científica",
+    "Que los científicos pueden mentir sin consecuencias",
+    "Que la ciencia debe prohibirse en las escuelas"
+   ],
+   "correcta": 0,
+   "explicacion": "Leído superficialmente puede alimentar el relativismo, pero esa lectura no le hace justicia."
+  },
+  {
+   "id": "ep4-015",
+   "subtema": "4.5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué ejemplo histórico usó Feyerabend para mostrar que las reglas del método se han violado con éxito?",
+   "opciones": [
+    "Galileo, que defendió a Copérnico con argumentos retóricos cuando la evidencia no lo favorecía claramente",
+    "Newton, que siguió paso a paso el método inductivo",
+    "Darwin, que nunca publicó sus teorías",
+    "Einstein, que se negó a hacer predicciones"
+   ],
+   "correcta": 0,
+   "explicacion": "Si se hubiera seguido estrictamente \"el método\", la ciencia moderna no habría nacido."
+  },
+  {
+   "id": "ep4-016",
+   "subtema": "4.6",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada principio del pensamiento complejo con su ejemplo.",
+   "pares": [
+    {
+     "izquierda": "Dialógico",
+     "derecha": "Un salón demasiado ordenado no aprende; uno en caos tampoco"
+    },
+    {
+     "izquierda": "Recursivo",
+     "derecha": "La sociedad produce a los individuos y los individuos producen la sociedad"
+    },
+    {
+     "izquierda": "Hologramático",
+     "derecha": "Cada alumno lleva en sí la cultura de su comunidad"
+    }
+   ],
+   "explicacion": "Son tres principios con los que Morin propone superar el paradigma de simplificación."
+  },
+  {
+   "id": "ep4-017",
+   "subtema": "4.6",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué significa complexus, raíz de \"complejidad\" según Morin?",
+   "opciones": [
+    "Lo que está tejido junto",
+    "Lo que es difícil de entender",
+    "Lo que no tiene orden",
+    "Lo que se divide en partes"
+   ],
+   "correcta": 0,
+   "explicacion": "Un fenómeno complejo tiene elementos entrelazados de manera inseparable."
+  },
+  {
+   "id": "ep4-018",
+   "subtema": "4.6",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cómo se refleja la influencia de Morin en la Nueva Escuela Mexicana?",
+   "opciones": [
+    "En los campos formativos y los ejes articuladores que buscan superar la fragmentación",
+    "En la desaparición de la evaluación",
+    "En el uso exclusivo de exámenes estandarizados",
+    "En la separación estricta de las asignaturas"
+   ],
+   "correcta": 0,
+   "explicacion": "El Plan de Estudio 2022 integra saberes en torno a problemas."
+  },
+  {
+   "id": "ep4-019",
+   "subtema": "4.7",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es la doble hermenéutica de Giddens?",
+   "opciones": [
+    "Las ciencias sociales interpretan un mundo ya interpretado, y sus conceptos regresan a transformarlo",
+    "Leer dos veces un texto antes de interpretarlo",
+    "La traducción de un texto a dos idiomas",
+    "La comparación entre dos paradigmas inconmensurables"
+   ],
+   "correcta": 0,
+   "explicacion": "Cuando \"bullying\" entró a las escuelas, cambió la manera de vivir ciertos conflictos."
+  },
+  {
+   "id": "ep4-020",
+   "subtema": "4.7",
+   "tipo": "verdadero_falso",
+   "pregunta": "Exigirle a la pedagogía que imite un método idealizado de la física resulta injusto, pues ni siquiera la física sigue un método único.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es una de las conclusiones del recorrido por Popper, Kuhn, Lakatos y Feyerabend."
+  }
+ ]
+}

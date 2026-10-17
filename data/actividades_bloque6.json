@@ -1,0 +1,226 @@
+{
+ "bloque": 6,
+ "reactivos": [
+  {
+   "id": "ep6-001",
+   "subtema": "6.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "Michael Polanyi resumió su idea de conocimiento tácito con la frase:",
+   "opciones": [
+    "Sabemos más de lo que podemos decir",
+    "Solo sabemos lo que podemos demostrar",
+    "Todo conocimiento puede escribirse en un manual",
+    "Lo que no se dice no se sabe"
+   ],
+   "correcta": 0,
+   "explicacion": "Reconocemos un rostro o andamos en bicicleta sin poder explicar cómo."
+  },
+  {
+   "id": "ep6-002",
+   "subtema": "6.1",
+   "tipo": "caso",
+   "pregunta": "Un maestro con años de experiencia \"sabe\" cuándo un grupo está a punto de desbordarse, aunque no puede explicar exactamente cómo lo detecta. ¿Qué tipo de conocimiento es?",
+   "opciones": [
+    "Conocimiento tácito",
+    "Conocimiento formal",
+    "Conocimiento religioso",
+    "Conocimiento por testimonio"
+   ],
+   "correcta": 0,
+   "explicacion": "Polanyi sostiene que incluso la pericia científica descansa en una base tácita."
+  },
+  {
+   "id": "ep6-003",
+   "subtema": "6.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según el compendio, los científicos repiten personalmente todos los experimentos de su disciplina antes de aceptar sus resultados.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Ningún investigador lo hace: la ciencia depende enormemente del testimonio de los colegas."
+  },
+  {
+   "id": "ep6-004",
+   "subtema": "6.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué hace el frijol en el sistema de la milpa?",
+   "opciones": [
+    "Aporta nitrógeno al suelo",
+    "Cubre el suelo para conservar la humedad",
+    "Sirve de soporte a las otras plantas",
+    "Atrae la lluvia"
+   ],
+   "correcta": 0,
+   "explicacion": "El maíz sirve de soporte al frijol y la calabaza cubre el suelo y limita la maleza."
+  },
+  {
+   "id": "ep6-005",
+   "subtema": "6.2",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada error con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Cientificismo",
+     "derecha": "Creer que solo la ciencia produce conocimiento válido"
+    },
+    {
+     "izquierda": "Relativismo ingenuo",
+     "derecha": "Creer que todos los saberes valen lo mismo para todo"
+    },
+    {
+     "izquierda": "Ecología de saberes",
+     "derecha": "Valorar cada saber según las preguntas que responde y discutir con respeto"
+    }
+   ],
+   "explicacion": "Los dos primeros son errores opuestos que hay que evitar; el tercero es la propuesta de Sousa Santos."
+  },
+  {
+   "id": "ep6-006",
+   "subtema": "6.2",
+   "tipo": "completar",
+   "pregunta": "Boaventura de Sousa Santos llamó _______ a la destrucción de los saberes de los pueblos colonizados.",
+   "opciones": [
+    "epistemicidio",
+    "epistemología genética",
+    "ecología de saberes",
+    "obstáculo verbal"
+   ],
+   "correcta": 0,
+   "explicacion": "Su propuesta alternativa es la ecología de saberes."
+  },
+  {
+   "id": "ep6-007",
+   "subtema": "6.2",
+   "tipo": "caso",
+   "pregunta": "En una telesecundaria maya, el maestro invita a dos abuelos a explicar cómo preparan la milpa; luego los alumnos investigan el ciclo del nitrógeno y hacen un cartel bilingüe. ¿Qué ilustra el caso?",
+   "opciones": [
+    "Un diálogo de saberes donde el conocimiento comunitario y el científico se complementan",
+    "Un ejemplo de cientificismo",
+    "Un ejemplo de relativismo ingenuo",
+    "Una pérdida de tiempo frente al libro de texto"
+   ],
+   "correcta": 0,
+   "explicacion": "Ambos saberes se enriquecen mutuamente sin que ninguno anule al otro."
+  },
+  {
+   "id": "ep6-008",
+   "subtema": "6.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "La nixtamalización es una técnica mesoamericana cuyos beneficios nutritivos la ciencia explicó siglos después de que los pueblos la practicaran.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es un ejemplo de conocimiento local con fundamento que la ciencia confirmó después."
+  },
+  {
+   "id": "ep6-009",
+   "subtema": "6.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada concepto de Schön con su significado.",
+   "pares": [
+    {
+     "izquierda": "Racionalidad técnica",
+     "derecha": "Ver la práctica solo como aplicación de teoría científica"
+    },
+    {
+     "izquierda": "Conocimiento en la acción",
+     "derecha": "Saber tácito que se manifiesta en lo que hacemos con destreza"
+    },
+    {
+     "izquierda": "Reflexión en la acción",
+     "derecha": "Pensar y ajustar la intervención mientras se actúa"
+    },
+    {
+     "izquierda": "Reflexión sobre la acción",
+     "derecha": "Revisar después lo ocurrido para comprenderlo"
+    }
+   ],
+   "explicacion": "Schön criticó la racionalidad técnica para explicar lo que hacen los buenos profesionales."
+  },
+  {
+   "id": "ep6-010",
+   "subtema": "6.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Popper distinguía entre el contexto de descubrimiento y el de justificación. ¿Qué afirmaba?",
+   "opciones": [
+    "El descubrimiento puede ser creativo; lo que debe ser riguroso es la justificación",
+    "El descubrimiento debe seguir reglas estrictas; la justificación no importa",
+    "Ambos contextos son idénticos",
+    "Solo existe el contexto de descubrimiento"
+   ],
+   "correcta": 0,
+   "explicacion": "La ciencia necesita imaginación para proponer y rigor para comprobar."
+  },
+  {
+   "id": "ep6-011",
+   "subtema": "6.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según Martínez Miguélez, en la investigación en ciencias humanas:",
+   "opciones": [
+    "Interpretar, categorizar y teorizar exige creatividad e intuición, además de procedimientos",
+    "Basta con aplicar procedimientos mecánicos para producir teoría",
+    "La creatividad está prohibida porque destruye el rigor",
+    "Solo vale la estadística"
+   ],
+   "correcta": 0,
+   "explicacion": "La rigurosidad no está reñida con la creatividad: la necesita."
+  },
+  {
+   "id": "ep6-012",
+   "subtema": "6.4",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada pilar de la educación del informe Delors con su ejemplo.",
+   "pares": [
+    {
+     "izquierda": "Aprender a conocer",
+     "derecha": "Comprender el ciclo del agua y por qué ocurre"
+    },
+    {
+     "izquierda": "Aprender a hacer",
+     "derecha": "Diseñar y realizar un experimento con materiales caseros"
+    },
+    {
+     "izquierda": "Aprender a vivir juntos",
+     "derecha": "Resolver en equipo un conflicto del grupo"
+    },
+    {
+     "izquierda": "Aprender a ser",
+     "derecha": "Construir el propio proyecto de vida"
+    }
+   ],
+   "explicacion": "Los cuatro pilares inspiraron muchas reformas en América Latina."
+  },
+  {
+   "id": "ep6-013",
+   "subtema": "6.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué sostuvo Lawrence Stenhouse sobre el currículo?",
+   "opciones": [
+    "Que es una hipótesis que el maestro pone a prueba en su salón",
+    "Que es un programa cerrado que solo se aplica",
+    "Que debe diseñarse sin participación de los docentes",
+    "Que no tiene relación con la investigación"
+   ],
+   "correcta": 0,
+   "explicacion": "Para Stenhouse, no hay desarrollo del currículo sin desarrollo del profesor."
+  },
+  {
+   "id": "ep6-014",
+   "subtema": "6.4",
+   "tipo": "caso",
+   "pregunta": "Un equipo docente aplica una estrategia de lectura todo el ciclo, registra diarios, evidencias y resultados, y al final escribe qué funcionó y por qué. ¿Qué hizo, en términos del tema?",
+   "opciones": [
+    "Convertir su enseñanza en investigación y producir conocimiento pedagógico",
+    "Cumplir un trámite administrativo sin valor",
+    "Aplicar la racionalidad técnica",
+    "Un ejemplo de inercia mental"
+   ],
+   "correcta": 0,
+   "explicacion": "Ese documento puede ser leído, criticado y aprovechado por otras escuelas."
+  }
+ ]
+}

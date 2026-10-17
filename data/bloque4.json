@@ -1,0 +1,151 @@
+{
+ "bloque": 4,
+ "nombre": "Concepción contemporánea de la ciencia",
+ "descripcion": "El siglo XX fue el gran siglo de la filosofía de la ciencia. Mientras la física se transformaba con la relatividad y la mecánica cuántica, un grupo de pensadores se preguntó con una intensidad inédita qué es la ciencia, cómo progresa y qué la distingue de otros saberes. Este tema es el corazón del curso. Lo recorreremos como una conversación entre autores que se respondían unos a otros, porque eso fue lo que ocurrió.",
+ "subtemas": [
+  {
+   "id": "4.1",
+   "titulo": "Concepción positivista de la ciencia",
+   "contenido": [
+    "PREGUNTAS DE ARRANQUE: • Si has visto mil cisnes blancos, ¿puedes asegurar que todos los cisnes son blancos? ¶ • ¿Los científicos cambian de opinión solo por las pruebas, o también por otras razones? ¶ • ¿Existe un método que garantice el progreso del conocimiento?",
+    "El siglo XX fue el gran siglo de la filosofía de la ciencia. Mientras la física se transformaba con la relatividad y la mecánica cuántica, un grupo de pensadores se preguntó con una intensidad inédita qué es la ciencia, cómo progresa y qué la distingue de otros saberes. Este tema es el corazón del curso. Lo recorreremos como una conversación entre autores que se respondían unos a otros, porque eso fue lo que ocurrió.",
+    "§ El Círculo de Viena",
+    "En la década de 1920, en Viena, se reunió un grupo de filósofos, matemáticos y científicos que se llamó a sí mismo **Círculo de Viena**. Entre sus miembros estaban Moritz Schlick, Rudolf Carnap y Otto Neurath. En 1929 publicaron un manifiesto titulado *La concepción científica del mundo*. Su corriente se conoce como **positivismo lógico** o **empirismo lógico**, porque unía el empirismo clásico con la lógica matemática moderna.",
+    "§ El criterio de verificación",
+    "La idea central del positivismo lógico es el **principio de verificación**: una afirmación solo tiene sentido si puede verificarse mediante la experiencia, o si es una verdad lógica o matemática. Todo lo demás —la metafísica, la teología, buena parte de la ética— sería, literalmente, un sinsentido: no falso, sino vacío de significado cognoscitivo.",
+    "Según esta concepción, la ciencia avanza por **inducción**: se observan muchos casos particulares, se generaliza una ley y se verifica con nuevas observaciones. El conocimiento científico crecería por acumulación, como una pared que se levanta ladrillo por ladrillo.",
+    "§ El problema de la inducción",
+    "El positivismo lógico tuvo un problema serio, que ya había señalado David Hume en el siglo XVIII: **la inducción no puede justificarse lógicamente**. Por muchos casos que observemos, nunca podemos estar seguros de que el siguiente se comportará igual. El ejemplo clásico es el de los cisnes: durante siglos, los europeos observaron millones de cisnes blancos y concluyeron que todos los cisnes eran blancos. Hasta que, en el siglo XVII, los exploradores encontraron cisnes negros en Australia.",
+    "§ La huella positivista en la educación",
+    "Aunque el positivismo lógico como escuela filosófica entró en crisis, su espíritu sigue muy presente en la educación: en la confianza en las pruebas estandarizadas, en los indicadores numéricos, en la idea de que una práctica educativa solo vale si se demuestra con datos medibles. Esta herencia tiene aportes valiosos —nos obliga a rendir cuentas y a no conformarnos con impresiones— y también riesgos: reducir la educación a lo que puede medirse fácilmente."
+   ]
+  },
+  {
+   "id": "4.2",
+   "titulo": "Karl Popper: la ciencia como conjeturas y refutaciones",
+   "contenido": [
+    "§ Del verificacionismo al falsacionismo",
+    "Karl Popper (1902-1994), filósofo austriaco que tuvo contacto con el Círculo de Viena sin pertenecer a él, dio un giro decisivo al debate. En *La lógica de la investigación científica* (Popper, 1934/2008) sostuvo que el problema de la inducción no tiene solución, pero que la ciencia no la necesita.",
+    "Su argumento es sencillo y brillante: **ningún número de observaciones puede verificar una teoría universal, pero una sola observación puede refutarla**. Mil cisnes blancos no prueban que todos los cisnes sean blancos, pero un solo cisne negro demuestra que la afirmación es falsa. Hay una asimetría entre verificar y refutar.",
+    "§ El criterio de demarcación",
+    "De ahí surge el criterio de Popper para distinguir la ciencia de lo que no lo es, al que llamó **criterio de demarcación**: una teoría es científica si es **falsable**, es decir, si es posible imaginar una observación que la contradiga. Una teoría que no puede ser refutada por ningún hecho imaginable no es científica, por más que parezca explicarlo todo.",
+    "Popper llegó a esta idea, según él mismo relató, al comparar la teoría de la relatividad de Einstein con el psicoanálisis y el marxismo de su época (Popper, 1963/1994). La teoría de Einstein hacía predicciones arriesgadas que podían fallar, como la desviación de la luz de las estrellas al pasar cerca del Sol, comprobada en el eclipse de 1919. En cambio, ciertos defensores del psicoanálisis y del marxismo parecían capaces de explicar cualquier comportamiento y su contrario: eso, que parecía una fortaleza, era para Popper su debilidad.",
+    "§ Cómo avanza la ciencia según Popper",
+    "Para Popper, la ciencia no avanza acumulando verdades, sino mediante **conjeturas y refutaciones**: los científicos proponen hipótesis audaces y luego hacen todo lo posible por refutarlas. Las teorías que sobreviven a pruebas severas no están «demostradas», sino **corroboradas** provisionalmente. El conocimiento científico es siempre conjetural.",
+    "Popper también defendió una ética del conocimiento: el buen científico no protege su teoría, sino que la expone a la crítica. Esta idea la llevó a la política en *La sociedad abierta y sus enemigos*, donde defendió las sociedades que permiten la crítica y corrigen sus errores.",
+    "EN EL AULA MEXICANA: **Una hipótesis falsable en la escuela.** Un equipo docente afirma: «El programa de lectura en voz alta mejora la comprensión lectora». Para que esta afirmación sea falsable, deben precisar qué resultado la desmentiría: por ejemplo, «si después de un ciclo escolar los grupos que participaron no superan en comprensión a grupos comparables que no participaron, la hipótesis queda refutada». En cambio, si cualquier resultado se interpreta como éxito («si mejoraron, funcionó; si no mejoraron, es que necesitan más tiempo»), la afirmación deja de ser científica. Pensar como Popper nos ayuda a evaluar con honestidad nuestros propios proyectos.",
+    "§ Críticas a Popper",
+    "La propuesta de Popper es muy influyente, pero tiene problemas. En la práctica, los científicos no abandonan una teoría a la primera observación contraria: suelen sospechar primero de los instrumentos, de los datos o de alguna hipótesis auxiliar. Si la ciencia funcionara como Popper dice, muchas teorías exitosas se habrían descartado demasiado pronto. Esta crítica abrió el camino a Kuhn y a Lakatos."
+   ]
+  },
+  {
+   "id": "4.3",
+   "titulo": "Thomas Kuhn: paradigmas y revoluciones",
+   "contenido": [
+    "§ Un físico que miró la historia",
+    "Thomas S. Kuhn (1922-1996) era físico de formación. Al estudiar la historia de la ciencia descubrió que las cosas no habían ocurrido como contaban los libros de texto. En 1962 publicó *La estructura de las revoluciones científicas*, probablemente el libro de filosofía de la ciencia más leído de todos los tiempos (Kuhn, 1962/2013).",
+    "§ El concepto de paradigma",
+    "La idea central de Kuhn es el **paradigma**: el conjunto de teorías, métodos, problemas legítimos, ejemplos ejemplares y valores compartidos por una comunidad científica en un momento dado. Un paradigma no es solo una teoría: es una forma de ver el mundo y de hacer ciencia que se aprende durante la formación profesional, a menudo sin darse cuenta.",
+    "Hoy usamos la palabra «paradigma» en todos lados, desde la publicidad hasta la política. Conviene recordar que su sentido técnico viene de Kuhn y que él mismo reconoció que la había usado con muchos significados diferentes.",
+    "§ El ciclo de la ciencia según Kuhn",
+    "Kuhn describió el desarrollo de la ciencia como un ciclo:",
+    "• **Preciencia:** varias escuelas compiten sin acuerdo sobre lo básico.",
+    "• **Ciencia normal:** la comunidad acepta un paradigma y se dedica a resolver los problemas que este plantea, como quien arma un rompecabezas cuya imagen ya conoce. Los científicos no buscan refutar el paradigma, sino ampliarlo.",
+    "• **Anomalías:** aparecen resultados que el paradigma no puede explicar. Al principio se ignoran o se dejan para después.",
+    "• **Crisis:** las anomalías se acumulan y la comunidad pierde confianza en el paradigma.",
+    "• **Revolución científica:** surge un nuevo paradigma que resuelve las anomalías y la comunidad, no sin resistencia, se convierte a él.",
+    "• **Nueva ciencia normal:** el ciclo comienza de nuevo.",
+    "Ejemplos de revoluciones serían el paso de la astronomía de Ptolomeo, con la Tierra en el centro, a la de Copérnico; o de la física de Newton a la de Einstein.",
+    "§ Inconmensurabilidad: ver el mundo de otro modo",
+    "Kuhn sostuvo que los paradigmas sucesivos son **inconmensurables**: no pueden compararse punto por punto con una medida común, porque usan conceptos distintos e incluso «ven» el mundo de manera diferente. Para explicarlo, recurrió a las figuras ambiguas de la psicología de la Gestalt, como el dibujo que puede verse como un pato o como un conejo. El cambio de paradigma sería como un cambio de percepción: los datos son los mismos, pero se ven de otra manera.",
+    "Esta idea fue muy polémica, porque parecía implicar que la elección entre teorías no es completamente racional, sino que depende también de factores sociales, generacionales o psicológicos. Kuhn matizó después su postura, pero la puerta ya estaba abierta: la ciencia es también una actividad humana y social.",
+    "PARA PENSAR: La Nueva Escuela Mexicana se presenta como un «cambio de paradigma» frente a modelos anteriores. Usando el sentido técnico de Kuhn, ¿qué anomalías habría detectado el modelo anterior? ¿Hay crisis? ¿Hay revolución, o más bien una reforma dentro del mismo paradigma? Anota tus argumentos: los retomaremos en el tema 10."
+   ]
+  },
+  {
+   "id": "4.4",
+   "titulo": "Imre Lakatos: los programas de investigación",
+   "contenido": [
+    "§ Un puente entre Popper y Kuhn",
+    "Imre Lakatos (1922-1974), húngaro, discípulo y luego crítico de Popper, buscó un camino intermedio. Aceptaba con Kuhn que los científicos no abandonan sus teorías a la primera refutación, pero quería mantener con Popper que la elección entre teorías es racional (Lakatos, 1978/1989).",
+    "§ La estructura de un programa de investigación",
+    "Para Lakatos, la unidad de análisis no es una teoría aislada, sino un **programa de investigación científica**, que tiene dos partes:",
+    "• **Núcleo duro:** las hipótesis fundamentales que los investigadores deciden no poner en duda. Si se abandonan, se abandona el programa.",
+    "• **Cinturón protector:** hipótesis auxiliares que rodean al núcleo y que se ajustan, modifican o sustituyen cuando aparecen datos contrarios. Son las que reciben los golpes de la experiencia.",
+    "Además, cada programa tiene una **heurística negativa**, que indica qué no se debe tocar (el núcleo), y una **heurística positiva**, que orienta qué problemas investigar y cómo desarrollar el programa.",
+    "§ Programas progresivos y degenerativos",
+    "¿Cómo se decide entre programas? Lakatos propuso un criterio: un programa es **progresivo** cuando sus modificaciones permiten predecir hechos nuevos que luego se confirman; es **degenerativo** cuando solo hace ajustes para explicar a posteriori lo que ya sabía, sin anticipar nada nuevo. Un programa degenerativo termina siendo abandonado cuando aparece uno progresivo que lo supera.",
+    "EN EL AULA MEXICANA: **El constructivismo como programa de investigación.** Podríamos analizar el constructivismo en educación con las herramientas de Lakatos. Su núcleo duro sería la idea de que el conocimiento se construye activamente por el sujeto. Su cinturón protector incluiría hipótesis más específicas: el papel del conflicto cognitivo, el aprendizaje entre pares, la zona de desarrollo próximo. Cuando una estrategia constructivista falla en el aula, los investigadores no abandonan el núcleo: ajustan el cinturón (quizá faltó andamiaje, quizá los conocimientos previos no eran los supuestos). La pregunta lakatosiana sería: ¿estos ajustes nos permiten predecir y lograr nuevos aprendizajes, o solo sirven para justificar los fracasos?"
+   ]
+  },
+  {
+   "id": "4.5",
+   "titulo": "Paul Feyerabend: contra el método",
+   "contenido": [
+    "§ El anarquista de la epistemología",
+    "Paul Feyerabend (1924-1994), austriaco, amigo y rival de Lakatos, llevó la crítica hasta sus últimas consecuencias. En *Tratado contra el método* (Feyerabend, 1975/1986) sostuvo que, si se estudia la historia real de la ciencia, no hay ninguna regla metodológica que no haya sido violada alguna vez con éxito. Galileo, por ejemplo, defendió el sistema de Copérnico cuando la evidencia disponible no lo favorecía claramente, usando argumentos retóricos, propaganda y apelaciones al sentido común. Si se hubiera seguido estrictamente «el método», la ciencia moderna no habría nacido.",
+    "§ «Todo vale»",
+    "De ahí su provocadora conclusión: el único principio que no inhibe el progreso es **«todo vale»** (*anything goes*). Feyerabend llamó a su postura **anarquismo epistemológico**. Conviene entenderla bien: no quería decir que cualquier opinión sea igual de buena, sino que ninguna regla fija puede garantizar el progreso, y que imponer un método único empobrece el conocimiento.",
+    "§ Pluralismo y sociedad libre",
+    "Feyerabend defendió también la **proliferación de teorías**: es bueno que existan teorías alternativas, incluso las que contradicen lo establecido, porque permiten ver los puntos débiles de la teoría dominante. Fue más allá y criticó que la ciencia ocupara en las sociedades modernas el lugar de autoridad indiscutible que antes ocupó la religión. Propuso que la ciencia fuera una tradición más entre otras, y que en una sociedad libre los ciudadanos pudieran decidir democráticamente qué tradiciones enseñar.",
+    "§ Valor y riesgos de Feyerabend",
+    "Feyerabend es incómodo y necesario. Nos recuerda que la ciencia es creativa y humana, que no hay recetas, y que otros saberes merecen respeto. Pero leído sin cuidado puede alimentar el relativismo extremo: la idea de que da igual creer en la vacuna o en el remedio milagroso. Esa lectura superficial no le hace justicia, pero conviene estar atentos a ella, sobre todo en tiempos de desinformación.",
+    "PARA PENSAR: ¿Debería la escuela enseñar la ciencia como «una tradición más» junto a otros saberes, como proponía Feyerabend? ¿Qué se gana y qué se arriesga? ¿Cómo se relaciona esta pregunta con la idea de «diálogo de saberes»?"
+   ]
+  },
+  {
+   "id": "4.6",
+   "titulo": "Edgar Morin: el pensamiento complejo",
+   "contenido": [
+    "§ Contra el paradigma de la simplificación",
+    "Edgar Morin (nacido en 1921), sociólogo y filósofo francés, propuso una crítica de largo alcance a la ciencia clásica. Según Morin (1990/1994), la ciencia moderna se organizó bajo un **paradigma de simplificación**, basado en tres operaciones: **disyunción** (separar lo que está unido, como el sujeto del objeto o la biología de la cultura), **reducción** (explicar el todo por sus partes más simples) y **abstracción** (aislar el objeto de su contexto). Estas operaciones dieron grandes frutos, pero también produjeron un conocimiento fragmentado, incapaz de entender los problemas complejos del mundo real.",
+    "§ ¿Qué es la complejidad?",
+    "Morin recuerda que *complexus* significa «lo que está tejido junto». Un fenómeno complejo es aquel en el que múltiples elementos están entrelazados de manera inseparable: un ser humano es a la vez biológico, psicológico, social, cultural e histórico, y no puede entenderse reduciéndolo a una sola de esas dimensiones.",
+    "§ Tres principios del pensamiento complejo",
+    "• **Principio dialógico:** permite mantener unidos dos términos que parecen opuestos pero que son complementarios. Por ejemplo, orden y desorden: un salón demasiado ordenado no aprende; un salón en caos tampoco.",
+    "• **Principio de recursividad organizacional:** los productos y efectos son, al mismo tiempo, causas y productores de aquello que los produce. La sociedad produce a los individuos, y los individuos producen la sociedad.",
+    "• **Principio hologramático:** no solo la parte está en el todo, sino que el todo está en la parte. Cada alumno lleva en sí la cultura de su comunidad, y cada salón refleja el sistema educativo completo.",
+    "§ Los siete saberes para la educación del futuro",
+    "Por encargo de la UNESCO, Morin (1999) escribió un breve texto, *Los siete saberes necesarios para la educación del futuro*, que se volvió referencia obligada en las reformas educativas de América Latina. Los siete saberes son:",
+    "• Enseñar a detectar las cegueras del conocimiento: el error y la ilusión.",
+    "• Enseñar un conocimiento pertinente, que relacione y contextualice.",
+    "• Enseñar la condición humana.",
+    "• Enseñar la identidad terrenal.",
+    "• Enfrentar las incertidumbres.",
+    "• Enseñar la comprensión.",
+    "• Enseñar la ética del género humano.",
+    "La influencia de Morin es visible en la Nueva Escuela Mexicana: la organización del currículo por **campos formativos** en lugar de asignaturas aisladas, y la propuesta de **ejes articuladores** que atraviesan todo el plan, buscan superar la fragmentación del conocimiento que Morin criticó (SEP, 2022)."
+   ]
+  },
+  {
+   "id": "4.7",
+   "titulo": "La cientificidad de las ciencias sociales",
+   "contenido": [
+    "§ ¿Son ciencia las ciencias sociales?",
+    "Después de este recorrido, podemos volver a la pregunta que nos interesa. Si tomamos el modelo de la física como única medida, las ciencias sociales parecen siempre en desventaja: no tienen leyes universales, no pueden hacer experimentos controlados en la mayoría de los casos y sus predicciones fallan a menudo. Pero los autores que estudiamos nos permiten matizar.",
+    "Algunos argumentos que se han dado:",
+    "• **Distintos objetos, distintos métodos.** Siguiendo a Dilthey y Weber, las ciencias sociales no fracasan al no parecerse a la física; tienen un objeto —el ser humano que da sentido a sus acciones— que exige métodos propios de comprensión.",
+    "• **La doble hermenéutica.** El sociólogo británico Anthony Giddens (1976/1987) señaló que las ciencias sociales interpretan un mundo que ya ha sido interpretado por los propios actores; y, además, sus conceptos regresan a la sociedad y la transforman. Cuando la palabra «bullying» entró a las escuelas, cambió la manera en que alumnos y maestros viven ciertos conflictos. Esto no ocurre con las piedras o los planetas.",
+    "• **Rigor sin imitación.** Kuhn, Lakatos y Feyerabend mostraron que ni siquiera las ciencias naturales funcionan como decía el positivismo. Si la física no sigue un método único, exigirle a la pedagogía que imite un método idealizado resulta injusto.",
+    "• **Criterios propios de calidad.** La investigación cualitativa ha desarrollado sus propios criterios de rigor: credibilidad, transferibilidad, consistencia, confirmabilidad. No son los de la física, pero son exigentes.",
+    "PARA PENSAR: Con lo visto hasta aquí, regresa a la pregunta guía: ¿puede la pedagogía ser ciencia? ¿Qué te diría Popper? ¿Qué te diría Kuhn? ¿Y Morin? Escribe un párrafo para cada uno.",
+    "ACTIVIDAD: **Cuadro comparativo (actividad independiente).** Elabora un cuadro comparativo de las posturas de los autores del tema: positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend y Morin. Usa como filas los siguientes criterios: cómo avanza la ciencia; qué distingue a la ciencia de lo que no lo es; papel de la comunidad científica; concepto clave; obra principal (con referencia APA); una aplicación a la investigación educativa. ¶ **Exposición por equipos (actividad independiente).** En equipos, preparen una exposición de 20 minutos sobre uno de los autores. La exposición debe incluir: contexto histórico y biográfico breve; ideas centrales con un ejemplo propio; una crítica al autor; una aplicación a la pedagogía; y una pregunta para abrir la discusión con el grupo. Citen al menos tres fuentes en formato APA 7.",
+    "TALLER APA: **Citar un tema de libro editado y un documento institucional.** Algunos textos son temas dentro de libros coordinados por otros autores: ¶ Apellido, Inicial. (Año). Título del tema. En Inicial. Apellido (Ed.), *Título del libro* (pp. xx-xx). Editorial. ¶ Los documentos de organismos se citan con el organismo como autor. Ejemplo: Morin, E. (1999). *Los siete saberes necesarios para la educación del futuro*. UNESCO. ¶ Si el autor es una institución con siglas conocidas, la primera vez se escribe el nombre completo con las siglas: (Secretaría de Educación Pública [SEP], 2022); después basta con (SEP, 2022).",
+    "§ Glosario del tema",
+    "**Positivismo lógico.** Corriente del Círculo de Viena que solo acepta como significativas las afirmaciones verificables empíricamente o lógicamente.",
+    "**Inducción.** Razonamiento que va de casos particulares a generalizaciones.",
+    "**Falsabilidad.** Según Popper, posibilidad de que una teoría sea refutada por la experiencia; criterio de demarcación de la ciencia.",
+    "**Corroboración.** Estado provisional de una teoría que ha resistido intentos serios de refutación.",
+    "**Paradigma.** Según Kuhn, conjunto de teorías, métodos, problemas y valores compartidos por una comunidad científica.",
+    "**Ciencia normal.** Periodo en que la comunidad trabaja dentro de un paradigma aceptado.",
+    "**Revolución científica.** Sustitución de un paradigma por otro.",
+    "**Inconmensurabilidad.** Imposibilidad de comparar dos paradigmas con una medida común.",
+    "**Programa de investigación.** Según Lakatos, conjunto formado por un núcleo duro y un cinturón protector de hipótesis.",
+    "**Anarquismo epistemológico.** Postura de Feyerabend según la cual ninguna regla metodológica fija garantiza el progreso de la ciencia.",
+    "**Pensamiento complejo.** Propuesta de Morin para comprender la realidad en sus múltiples dimensiones entrelazadas.",
+    "**Doble hermenéutica.** Según Giddens, el hecho de que las ciencias sociales interpretan un mundo ya interpretado por los actores.",
+    "RESUMEN DEL TEMA: El positivismo lógico sostuvo que la ciencia avanza verificando por inducción, pero chocó con el problema de la inducción. Popper respondió que la ciencia avanza por conjeturas y refutaciones y que una teoría es científica si es falsable. Kuhn mostró, desde la historia, que la ciencia funciona por paradigmas que cambian mediante revoluciones. Lakatos propuso los programas de investigación con un núcleo duro y un cinturón protector. Feyerabend negó que exista un método único y defendió el pluralismo. Morin criticó el paradigma de simplificación y propuso el pensamiento complejo, que influye en la Nueva Escuela Mexicana. Todos ellos permiten defender que las ciencias sociales, y la pedagogía, pueden ser rigurosas con criterios propios. Pero si el método tradicional está en crisis, ¿qué lo reemplaza? Ese es el tema del tema 5."
+   ]
+  }
+ ]
+}
