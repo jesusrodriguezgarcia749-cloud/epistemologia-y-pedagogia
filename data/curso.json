@@ -1,0 +1,657 @@
+{
+ "inicio": "2026-10-19",
+ "fin": "2026-12-18",
+ "sesiones": [
+  {
+   "n": 1,
+   "fecha": "2026-10-19",
+   "fechaTexto": "Lun 19 de octubre",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
+   "titulo": "Encuadre · 1.1–1.3 Introducción a la epistemología (repaso)",
+   "docente": [
+    "Presentación de la asignatura, encuadre, ponderaciones institucionales y calendario de exámenes.",
+    "Recorrido por el Aula Virtual: compendio, actividades, examen y Mi progreso.",
+    "Aplicación del Examen Diagnóstico en el Aula Virtual (sin valor oficial).",
+    "Exposición: la pregunta guía del curso —¿puede la pedagogía ser ciencia?— y la definición clásica de conocimiento (Platón, Villoro).",
+    "Discusión grupal: ¿qué supone sobre el conocimiento un examen de opción múltiple?"
+   ],
+   "independiente": [
+    "Lectura analítica de la Introducción y el Tema 1 del libro de texto.",
+    "Escribir en una frase su postura inicial ante la pregunta guía (se retoma en la sesión final)."
+   ],
+   "proyecto": [
+    "Presentar el proyecto Pienso, luego investigo, sus tres entregas y su peso en el Examen Final.",
+    "Sondeo del grupo: quién tiene protocolo del Taller de Investigación y en qué etapa; quien no lo tenga define un tema de tesis tentativo.",
+    "Pregunta 1: ¿cuál es el tema y la pregunta de investigación de tu protocolo (o del que te gustaría hacer) y por qué te interesa?"
+   ],
+   "evaluacion": [
+    "Examen Diagnóstico (sin valor oficial)",
+    "Participación (discusión grupal)",
+    "Asistencia"
+   ],
+   "subtemas": [
+    "1.0",
+    "1.1",
+    "1.3"
+   ]
+  },
+  {
+   "n": 2,
+   "fecha": "2026-10-20",
+   "fechaTexto": "Mar 20 de octubre",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
+   "titulo": "1.2 Epistemología, teoría del conocimiento y filosofía de la ciencia · 2.1–2.4 Naturaleza del conocimiento (repaso)",
+   "docente": [
+    "Exposición comparativa de los tres campos: teoría del conocimiento, epistemología y filosofía de la ciencia.",
+    "Elaboración guiada del mapa conceptual sobre los tres términos (actividad con docente del programa).",
+    "Exposición: tipos de conocimiento, cánones de cientificidad y clasificación de las ciencias (Dilthey: explicar y comprender; Bunge: ciencias formales y fácticas).",
+    "Caso «Está comprobado científicamente»: análisis grupal de una afirmación viral con los cánones de cientificidad."
+   ],
+   "independiente": [
+    "Terminar el mapa conceptual.",
+    "Actividades de repaso de los Temas 1 y 2 en el Aula Virtual.",
+    "Lectura analítica del Tema 3."
+   ],
+   "proyecto": [
+    "Pregunta 2: ¿qué tipo de conocimiento quieres producir con tu investigación: explicar, comprender o transformar?",
+    "Pregunta 3: ¿dónde se ubica tu tema en la clasificación de las ciencias y por qué?"
+   ],
+   "evaluacion": [
+    "Rúbrica de Tarea (mapa conceptual)",
+    "Participación"
+   ],
+   "subtemas": [
+    "1.2",
+    "2.1",
+    "2.2",
+    "2.3",
+    "2.4"
+   ]
+  },
+  {
+   "n": 3,
+   "fecha": "2026-10-26",
+   "fechaTexto": "Lun 26 de octubre",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
+   "titulo": "3.1–3.4 La racionalidad científica clásica (repaso)",
+   "docente": [
+    "Exposición: tradiciones positivista, comprensiva y crítica de las ciencias sociales, y los tres paradigmas de la investigación educativa.",
+    "Análisis del caso de Kevin: lectura lineal frente a lectura sistémica de un problema escolar.",
+    "Lógica lineal y lógica dialéctica con ejemplos del aula; la praxis en Freire.",
+    "Organización de los equipos y asignación de autores para las exposiciones del Tema 4."
+   ],
+   "independiente": [
+    "Cuadro de los tres paradigmas con un ejemplo de tesis para cada uno.",
+    "Investigación bibliográfica, hemerográfica y electrónica del autor asignado para la exposición por equipos."
+   ],
+   "proyecto": [
+    "Pregunta 4: ¿desde qué paradigma —positivista, interpretativo o sociocrítico— está planteada tu investigación? Justifícalo con dos rasgos de tu protocolo."
+   ],
+   "evaluacion": [
+    "Rúbrica de Tarea (cuadro de paradigmas)",
+    "Participación"
+   ],
+   "subtemas": [
+    "3.1",
+    "3.2",
+    "3.3",
+    "3.4"
+   ]
+  },
+  {
+   "n": 4,
+   "fecha": "2026-10-27",
+   "fechaTexto": "Mar 27 de octubre",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
+   "titulo": "4.1–4.7 Concepción contemporánea de la ciencia (repaso por exposiciones)",
+   "docente": [
+    "Exposiciones por equipos: positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend y Morin (actividad independiente del programa), con retroalimentación del docente.",
+    "Cierre: la cientificidad de las ciencias sociales (doble hermenéutica, criterios propios de rigor).",
+    "Taller de proyecto: cómo responder las preguntas 1 a 6 y citarlas en APA 7 (guía APA del Aula Virtual)."
+   ],
+   "independiente": [
+    "Cuadro comparativo de las posturas de los teóricos del Tema 4 (actividad independiente del programa).",
+    "Lectura analítica del Tema 5."
+   ],
+   "proyecto": [
+    "Pregunta 5: ¿tu hipótesis o supuesto es falsable? ¿Qué resultado lo desmentiría? (Popper)",
+    "Pregunta 6: en el sentido de Kuhn, ¿qué paradigma domina en la comunidad que estudia tu tema? ¿Detectas alguna anomalía?"
+   ],
+   "evaluacion": [
+    "Rúbrica de Exposición por equipos",
+    "Rúbrica de Tarea (cuadro comparativo)",
+    "Participación"
+   ],
+   "subtemas": [
+    "4.1",
+    "4.2",
+    "4.3",
+    "4.4",
+    "4.5",
+    "4.6",
+    "4.7"
+   ]
+  },
+  {
+   "n": 5,
+   "fecha": "2026-11-03",
+   "fechaTexto": "Mar 3 de noviembre",
+   "tema": "TEMA 5 — NUEVO PARADIGMA EPISTEMOLÓGICO DE LA CIENCIA",
+   "titulo": "5.1–5.4 Inercia mental, desconstrucción del método, neurociencia y dimensión dialógica",
+   "docente": [
+    "Exposición: obstáculos epistemológicos (Bachelard), la observación cargada de teoría (Hanson) y el método como camino (Martínez Miguélez).",
+    "El cerebro que construye lo que conoce: Maturana y Varela, Damasio.",
+    "La dimensión dialógica: Gadamer, Habermas y Freire.",
+    "Dinámica: cada alumno identifica una inercia mental propia sobre la educación."
+   ],
+   "independiente": [
+    "Actividades de repaso del Tema 5 en el Aula Virtual.",
+    "Lectura analítica del Tema 6."
+   ],
+   "proyecto": [
+    "Recepción de la Entrega 1 (preguntas 1 a 6, con referencias APA).",
+    "Pregunta 7: ¿qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?"
+   ],
+   "evaluacion": [
+    "Participación (dinámica de inercias)",
+    "Entrega 1 del proyecto (cuenta en el Examen Final)"
+   ],
+   "subtemas": [
+    "5.1",
+    "5.2",
+    "5.3",
+    "5.4"
+   ]
+  },
+  {
+   "n": 6,
+   "fecha": "2026-11-09",
+   "fechaTexto": "Lun 9 de noviembre",
+   "tema": "TEMA 6 — CONOCIMIENTO CIENTÍFICO Y CONOCIMIENTO ORDINARIO",
+   "titulo": "6.1–6.4 Aproximaciones al conocimiento, conocimiento local y ordinario, ciencia y arte, nuevo paradigma para la educación",
+   "docente": [
+    "Exposición: conocimiento tácito (Polanyi), conocimiento local mexicano (milpa, nixtamalización) y ecología de saberes (Sousa Santos).",
+    "Elaboración del cuadro comparativo sobre el conocimiento científico y el ordinario (actividad con docente del programa).",
+    "Ciencia y arte en la docencia: el profesional reflexivo (Schön) y el docente investigador (Stenhouse)."
+   ],
+   "independiente": [
+    "Entrevistar a un docente con experiencia sobre un saber de su práctica que no esté en los libros.",
+    "Lectura analítica del Tema 7."
+   ],
+   "proyecto": [
+    "Pregunta 8: ¿qué método usarás y por qué es el camino adecuado para tu objeto de estudio?",
+    "Pregunta 9: ¿qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?"
+   ],
+   "evaluacion": [
+    "Rúbrica de Tarea (cuadro comparativo)",
+    "Participación"
+   ],
+   "subtemas": [
+    "6.1",
+    "6.2",
+    "6.3",
+    "6.4"
+   ]
+  },
+  {
+   "n": 7,
+   "fecha": "2026-11-10",
+   "fechaTexto": "Mar 10 de noviembre",
+   "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
+   "titulo": "7.1–7.4 Dinámica del cerebro, sistema cognitivo-afectivo, armonía entre las partes del cerebro y principios para aumentar el aprendizaje",
+   "docente": [
+    "Exposición: plasticidad, periodos sensibles, cerebro adolescente y sueño; emoción y cognición.",
+    "Los cuatro pilares del aprendizaje (Dehaene) y las estrategias con evidencia: práctica de recuperación y práctica espaciada.",
+    "«Detector de neuromitos»: hemisferios, cerebro triuno y estilos de aprendizaje frente a la evidencia.",
+    "Taller de proyecto: cómo integrar las preguntas 7 a 14 en un borrador continuo."
+   ],
+   "independiente": [
+    "Analizar un curso, libro o video comercial de «neuroeducación» con los cánones de cientificidad.",
+    "Actividades de repaso de los Temas 6 y 7 en el Aula Virtual."
+   ],
+   "proyecto": [
+    "Pregunta 10: ¿cómo darás rigor a tu investigación? (triangulación, reflexividad, criterios de calidad)",
+    "Pregunta 11: ¿hay algún neuromito o creencia sin evidencia cerca de tu tema? ¿Cómo lo evitarías?"
+   ],
+   "evaluacion": [
+    "Rúbrica de Tarea (análisis de un producto «neuro»)",
+    "Participación"
+   ],
+   "subtemas": [
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4"
+   ]
+  },
+  {
+   "n": 8,
+   "fecha": "2026-11-17",
+   "fechaTexto": "Mar 17 de noviembre",
+   "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
+   "titulo": "Repaso integral del Parcial 2 (Temas 5 a 7) · Asesoría grupal del proyecto",
+   "docente": [
+    "Repaso por equipos con preguntas relámpago de los Temas 5, 6 y 7.",
+    "Resolución de dudas y explicación del formato del examen en línea.",
+    "Asesoría grupal del proyecto: errores frecuentes de la Entrega 1 y cómo corregirlos."
+   ],
+   "independiente": [
+    "Práctica en el Aula Virtual con las actividades de los Temas 5 a 7.",
+    "Avanzar el borrador del ensayo (Entrega 2)."
+   ],
+   "proyecto": [
+    "Pregunta 12: ¿qué interés guía tu investigación: técnico, práctico o emancipatorio? (Habermas)",
+    "Pregunta 13: ¿qué objetaría Feyerabend o Morin a tu método? ¿Cómo responderías?",
+    "Pregunta 14: redacta tu tesis provisional: ¿tu investigación es ciencia y de qué tipo?"
+   ],
+   "evaluacion": [
+    "Participación (repaso)",
+    "Asistencia"
+   ],
+   "subtemas": []
+  },
+  {
+   "n": 9,
+   "fecha": "2026-11-24",
+   "fechaTexto": "Mar 24 de noviembre",
+   "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
+   "titulo": "Asesoría del protocolo y del ensayo · Retroalimentación del Parcial 2",
+   "docente": [
+    "Asesoría individual (8 a 10 minutos por alumno): revisión epistemológica del protocolo —paradigma, enfoque, coherencia entre pregunta y método— y del borrador del ensayo (actividad con docente del programa).",
+    "Retroalimentación grupal del Examen Parcial 2."
+   ],
+   "independiente": [
+    "Incorporar al borrador las observaciones de la asesoría.",
+    "Lectura analítica del Tema 8."
+   ],
+   "proyecto": [
+    "Recepción de la Entrega 2: borrador completo que integra las preguntas 1 a 14 en texto continuo."
+   ],
+   "evaluacion": [
+    "Entrega 2 del proyecto (cuenta en el Examen Final)",
+    "Asistencia"
+   ],
+   "subtemas": [
+    "10.5"
+   ]
+  },
+  {
+   "n": 10,
+   "fecha": "2026-11-30",
+   "fechaTexto": "Lun 30 de noviembre",
+   "tema": "TEMA 8 — NUEVO PARADIGMA EN ORIENTACIÓN",
+   "titulo": "8.1–8.3 Nuevo paradigma en orientación: bases epistemológicas, orientación y psicopedagogía",
+   "docente": [
+    "Exposición: del modelo de rasgos y factores (Parsons) al proyecto de vida; modelos de intervención (Bisquerra).",
+    "Del modelo del déficit a las barreras para el aprendizaje y la participación (Booth y Ainscow): caso Andrea.",
+    "La orientación a la luz de los paradigmas (conexión con Orientación Educativa)."
+   ],
+   "independiente": [
+    "Analizar un caso de orientación vivido u observado desde dos paradigmas distintos.",
+    "Lectura analítica del Tema 9."
+   ],
+   "proyecto": [
+    "Pregunta 15: ¿qué barreras o desigualdades podría revelar —o reproducir— tu investigación?"
+   ],
+   "evaluacion": [
+    "Rúbrica de Tarea (análisis de caso)",
+    "Participación"
+   ],
+   "subtemas": [
+    "8.1",
+    "8.2",
+    "8.3"
+   ]
+  },
+  {
+   "n": 11,
+   "fecha": "2026-12-01",
+   "fechaTexto": "Mar 1 de diciembre",
+   "tema": "TEMA 9 — NUEVOS ENFOQUES PARADIGMÁTICOS",
+   "titulo": "9.1–9.4 Bioética, desarrollo sustentable, economía y educación, de los programas computacionales a la inteligencia artificial",
+   "docente": [
+    "Exposición: bioética y ética de la investigación con menores (consentimiento, asentimiento, confidencialidad).",
+    "Desarrollo sustentable y Agenda 2030 como problema complejo.",
+    "Economía y educación: lectura epistemológica de las cuatro perspectivas (conexión con Economía y Educación).",
+    "De los programas computacionales de los noventa a la inteligencia artificial generativa: qué es saber, cómo verificar y cómo declarar su uso en APA."
+   ],
+   "independiente": [
+    "Ficha de investigación con APA de un artículo reciente sobre economía y educación en México o América Latina.",
+    "Lectura analítica del Tema 10."
+   ],
+   "proyecto": [
+    "Pregunta 16: ¿qué dilemas éticos tiene tu investigación y cómo los resolverás? Si usaste inteligencia artificial, ¿cómo lo declaras?"
+   ],
+   "evaluacion": [
+    "Rúbrica de Tarea (ficha APA)",
+    "Participación"
+   ],
+   "subtemas": [
+    "9.1",
+    "9.2",
+    "9.3",
+    "9.4"
+   ]
+  },
+  {
+   "n": 12,
+   "fecha": "2026-12-07",
+   "fechaTexto": "Lun 7 de diciembre",
+   "tema": "TEMA 10 — INTEGRACIÓN: LA PEDAGOGÍA COMO CIENCIA EN LA NUEVA ESCUELA MEXICANA",
+   "titulo": "10.1–10.5 Lectura epistemológica de la NEM, debate a favor y en contra, regreso a la pregunta guía · Repaso del Examen Final",
+   "docente": [
+    "Exposición: fundamentos epistemológicos de la NEM (pensamiento complejo, diálogo de saberes, docente investigador).",
+    "Debate estructurado: argumentos a favor y críticos de la NEM, evaluados con evidencia.",
+    "Regreso a la pregunta guía y repaso integral de los Temas 1 a 10 para el Examen Final."
+   ],
+   "independiente": [
+    "Terminar la versión final del ensayo y preparar la defensa oral (3 a 4 minutos).",
+    "Práctica en el Aula Virtual con las actividades de todos los temas."
+   ],
+   "proyecto": [
+    "Pregunta 17: ¿cómo se relaciona tu investigación con la Nueva Escuela Mexicana?",
+    "Pregunta 18 (reflexión final): después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu protocolo?"
+   ],
+   "evaluacion": [
+    "Participación (debate)",
+    "Asistencia"
+   ],
+   "subtemas": [
+    "10.1",
+    "10.2",
+    "10.3",
+    "10.4"
+   ]
+  },
+  {
+   "n": 13,
+   "fecha": "2026-12-08",
+   "fechaTexto": "Mar 8 de diciembre",
+   "tema": "TEMA 10 — INTEGRACIÓN: LA PEDAGOGÍA COMO CIENCIA EN LA NUEVA ESCUELA MEXICANA",
+   "titulo": "Defensa oral del ensayo · Cierre del curso",
+   "docente": [
+    "Defensa oral individual del ensayo (3 a 4 minutos por alumno) con preguntas del docente y del grupo.",
+    "Cierre: cada alumno compara su postura inicial (sesión 1) con su postura final ante la pregunta guía."
+   ],
+   "independiente": [
+    "Repaso final en el Aula Virtual para el Examen Final."
+   ],
+   "proyecto": [
+    "Recepción de la versión final del ensayo y defensa oral."
+   ],
+   "evaluacion": [
+    "Rúbrica de ensayo y defensa (Entrega final)"
+   ],
+   "subtemas": [
+    "10.5"
+   ]
+  }
+ ],
+ "eventos": [
+  {
+   "tipo": "descanso",
+   "fecha": "2026-11-02",
+   "titulo": "Día de descanso obligatorio · sin clase",
+   "fechaTexto": "Lunes 2 de noviembre"
+  },
+  {
+   "tipo": "entrega",
+   "fecha": "2026-11-03",
+   "titulo": "Entrega 1 del proyecto «Pienso, luego investigo»",
+   "detalle": "Tesis y esquema del ensayo: respuestas a las preguntas 1 a 6 (Temas 1 a 4), con al menos 3 referencias en formato APA 7.",
+   "fechaTexto": "Martes 3 de noviembre"
+  },
+  {
+   "tipo": "descanso",
+   "fecha": "2026-11-16",
+   "titulo": "Día de descanso obligatorio · sin clase",
+   "fechaTexto": "Lunes 16 de noviembre"
+  },
+  {
+   "tipo": "examen",
+   "fecha": "2026-11-23",
+   "titulo": "Examen Parcial 2",
+   "detalle": "Examen escrito en línea (Aula Virtual) de los Temas 5, 6 y 7; 60 minutos. Reactivos de opción múltiple, caso (multirreactivo), relación de columnas, jerarquización, completar enunciados y verdadero o falso, de nivel licenciatura. Vale el 40% del Parcial 2.",
+   "fechaTexto": "Lunes 23 de noviembre"
+  },
+  {
+   "tipo": "entrega",
+   "fecha": "2026-11-24",
+   "titulo": "Entrega 2 del proyecto «Pienso, luego investigo»",
+   "detalle": "Borrador completo del ensayo: preguntas 1 a 14 integradas en texto continuo, con al menos 6 referencias en formato APA 7.",
+   "fechaTexto": "Martes 24 de noviembre"
+  },
+  {
+   "tipo": "entrega",
+   "fecha": "2026-12-08",
+   "titulo": "Entrega final del proyecto «Pienso, luego investigo»",
+   "detalle": "Versión final del ensayo «Pienso, luego investigo» (2,500 a 3,500 palabras, formato APA 7, mínimo 8 referencias, al menos 2 artículos académicos) y defensa oral individual.",
+   "fechaTexto": "Martes 8 de diciembre"
+  },
+  {
+   "tipo": "aviso",
+   "fecha": "2026-12-11",
+   "titulo": "Fin de cuatrimestre",
+   "fechaTexto": "Viernes 11 de diciembre",
+   "detalle": "Entrega de calificaciones acumuladas del parcial y del curso."
+  },
+  {
+   "tipo": "examen",
+   "fecha": "2026-12-14",
+   "titulo": "Examen Final",
+   "detalle": "Examen escrito en línea (Aula Virtual), integrador; 60 minutos, 40 reactivos de nivel licenciatura y de al menos tres tipos distintos: 25 de los Temas 8, 9 y 10 (aún no evaluados) y 15 casos de aplicación que retoman los Temas 1 a 7 para usarlos, no para memorizarlos.",
+   "fechaTexto": "Semana del 14 al 18 de diciembre (día por confirmar)"
+  }
+ ],
+ "proyecto": {
+  "nombre": "Pienso, luego investigo",
+  "lema": "Cogito ergo sum: el lema de nuestro escudo, convertido en método.",
+  "descripcion": "Es el ensayo final del curso sobre el quehacer científico de la pedagogía. Cada alumno analiza con lentes epistemológicos su propio protocolo de investigación; si todavía no lo tienes, trabajas sobre el tema de tesis que te gustaría investigar. Respondes 18 preguntas guía en tres entregas y, al final, las integras en un ensayo continuo que defiendes oralmente.",
+  "peso": "El proyecto vale 40 de los 100 puntos del Examen Final. No se suma al Parcial 2: vive completo en el Final.",
+  "entregas": [
+   {
+    "clave": "entrega1",
+    "nombre": "Entrega 1 · Tesis y esquema",
+    "fecha": "2026-11-03",
+    "fechaTexto": "Martes 3 de noviembre",
+    "puntos": 15,
+    "temas": "Temas 1 a 4",
+    "requisito": "Respuestas a las preguntas 1 a 6, con al menos 3 referencias en APA 7.",
+    "preguntas": [
+     "¿Cuál es el tema y la pregunta de investigación de tu protocolo (o del que te gustaría hacer) y por qué te interesa?",
+     "¿Qué tipo de conocimiento quieres producir con tu investigación: explicar, comprender o transformar?",
+     "¿Dónde se ubica tu tema en la clasificación de las ciencias y por qué?",
+     "¿Desde qué paradigma —positivista, interpretativo o sociocrítico— está planteada tu investigación?",
+     "¿Tu hipótesis o supuesto es falsable? ¿Qué resultado lo desmentiría?",
+     "En el sentido de Kuhn, ¿qué paradigma domina en la comunidad que estudia tu tema? ¿Detectas alguna anomalía?"
+    ]
+   },
+   {
+    "clave": "entrega2",
+    "nombre": "Entrega 2 · Borrador completo",
+    "fecha": "2026-11-24",
+    "fechaTexto": "Martes 24 de noviembre",
+    "puntos": 15,
+    "temas": "Temas 5 a 7",
+    "requisito": "Preguntas 1 a 14 integradas en texto continuo, con al menos 6 referencias en APA 7.",
+    "preguntas": [
+     "¿Qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?",
+     "¿Qué método usarás y por qué es el camino adecuado para tu objeto de estudio?",
+     "¿Qué saberes no científicos toca tu tema y cómo dialogarías con ellos?",
+     "¿Cómo darás rigor a tu investigación?",
+     "¿Hay algún neuromito o creencia sin evidencia cerca de tu tema?",
+     "¿Qué interés guía tu investigación: técnico, práctico o emancipatorio?",
+     "¿Qué objetaría Feyerabend o Morin a tu método? ¿Cómo responderías?",
+     "Tesis provisional: ¿tu investigación es ciencia y de qué tipo?"
+    ]
+   },
+   {
+    "clave": "entregaFinal",
+    "nombre": "Entrega final · Versión final y defensa",
+    "fecha": "2026-12-08",
+    "fechaTexto": "Martes 8 de diciembre",
+    "puntos": 10,
+    "temas": "Temas 8 a 10",
+    "requisito": "Ensayo de 2,500 a 3,500 palabras en APA 7 (mínimo 8 referencias, al menos 2 artículos académicos) y defensa oral de 3 a 4 minutos.",
+    "preguntas": [
+     "¿Qué barreras o desigualdades podría revelar —o reproducir— tu investigación?",
+     "¿Qué dilemas éticos tiene tu investigación y cómo los resolverás?",
+     "¿Cómo se relaciona tu investigación con la Nueva Escuela Mexicana?",
+     "Después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu protocolo?"
+    ]
+   }
+  ],
+  "ejemplo": {
+   "titulo": "Ejemplo resuelto (preguntas 1, 2 y 4)",
+   "nota": "Caso ficticio, solo para mostrar el nivel esperado. No lo copies: tu respuesta debe hablar de tu propio protocolo.",
+   "respuestas": [
+    {
+     "n": 1,
+     "texto": "Mi protocolo se titula «La lectura en voz alta y la comprensión lectora en primer grado de secundaria». Mi pregunta es: ¿de qué manera la lectura en voz alta diaria del docente influye en la comprensión lectora de alumnos de primer grado de una secundaria pública de Campeche? Me interesa porque en mis prácticas vi que muchos alumnos leen las palabras, pero no entienden lo que leen."
+    },
+    {
+     "n": 2,
+     "texto": "Quiero producir, sobre todo, conocimiento que **explique**: saber si la lectura en voz alta se relaciona con una mejor comprensión. Pero también me interesa **comprender** cómo viven los alumnos esa práctica, así que mi trabajo combina ambos propósitos, como explica Dilthey al distinguir explicar y comprender (como se citó en Rodríguez García, 2026)."
+    },
+    {
+     "n": 4,
+     "texto": "Mi investigación se acerca al **paradigma positivista** porque compararé dos grupos con una prueba de comprensión antes y después. Sin embargo, al incluir entrevistas a los alumnos incorporo rasgos del **paradigma interpretativo**. Por eso mi enfoque es mixto (Hernández Sampieri y Mendoza Torres, 2018)."
+    }
+   ]
+  }
+ },
+ "rubricas": [
+  {
+   "id": "ensayo",
+   "nombre": "Ensayo final y defensa (Entrega final)",
+   "criterios": [
+    [
+     "Tesis clara",
+     "Plantea una postura explícita ante la pregunta guía aplicada a su investigación.",
+     "La postura existe, pero es ambigua o general.",
+     "No hay postura identificable."
+    ],
+    [
+     "Uso de autores",
+     "Usa con precisión al menos cinco autores del curso para sostener su postura.",
+     "Menciona autores, pero sin conectarlos con su argumento.",
+     "No usa autores del curso o los usa de forma incorrecta."
+    ],
+    [
+     "Contraargumento",
+     "Presenta una objeción seria y la responde con razones.",
+     "Menciona una objeción sin responderla.",
+     "No considera posturas contrarias."
+    ],
+    [
+     "Aplicación a su protocolo",
+     "Analiza su propio protocolo con los conceptos del curso.",
+     "La relación con su protocolo es superficial.",
+     "No hay relación con su investigación."
+    ],
+    [
+     "Formato APA 7 y redacción",
+     "Citas y referencias correctas; redacción clara y sin faltas de ortografía.",
+     "Errores menores de formato u ortografía.",
+     "Errores frecuentes o citas sin referencia."
+    ],
+    [
+     "Defensa oral",
+     "Explica su postura con seguridad y responde preguntas con argumentos.",
+     "Explica, pero le cuesta responder preguntas.",
+     "Lee sin comprender o no puede responder."
+    ]
+   ]
+  },
+  {
+   "id": "entregas",
+   "nombre": "Entregas 1 y 2 del proyecto",
+   "criterios": [
+    [
+     "Respuestas completas",
+     "Responde todas las preguntas del bloque con desarrollo.",
+     "Responde todas, pero algunas de forma muy breve.",
+     "Faltan preguntas."
+    ],
+    [
+     "Uso de conceptos",
+     "Aplica con precisión los conceptos de los temas correspondientes.",
+     "Usa conceptos, con imprecisiones.",
+     "No usa los conceptos del curso."
+    ],
+    [
+     "Referencias APA",
+     "Cumple el número mínimo de referencias y el formato es correcto.",
+     "Cumple el número, con errores de formato.",
+     "No cumple el mínimo de referencias."
+    ],
+    [
+     "Vínculo con su protocolo",
+     "Cada respuesta habla de su investigación concreta.",
+     "Algunas respuestas son genéricas.",
+     "Las respuestas no se relacionan con su investigación."
+    ]
+   ]
+  },
+  {
+   "id": "exposicion",
+   "nombre": "Exposición por equipos (Tema 4)",
+   "criterios": [
+    [
+     "Dominio del autor",
+     "Explica las ideas centrales con un ejemplo propio.",
+     "Explica las ideas, con apoyo excesivo en la lectura.",
+     "Lee sin explicar."
+    ],
+    [
+     "Crítica y aplicación",
+     "Presenta una crítica al autor y una aplicación a la pedagogía.",
+     "Incluye solo una de las dos.",
+     "No incluye crítica ni aplicación."
+    ],
+    [
+     "Organización y tiempo",
+     "Respeta el tiempo y todos los integrantes participan.",
+     "Se excede o participa solo una parte del equipo.",
+     "Desorganizada o muy incompleta."
+    ],
+    [
+     "Fuentes",
+     "Cita al menos tres fuentes en APA 7.",
+     "Cita fuentes con errores de formato.",
+     "No cita fuentes."
+    ]
+   ]
+  },
+  {
+   "id": "mapa",
+   "nombre": "Mapa conceptual y cuadros comparativos",
+   "criterios": [
+    [
+     "Conceptos",
+     "Incluye todos los conceptos clave del tema.",
+     "Faltan algunos conceptos.",
+     "Faltan la mayoría de los conceptos."
+    ],
+    [
+     "Relaciones",
+     "Usa conectores claros que muestran relaciones correctas.",
+     "Algunas relaciones son confusas.",
+     "Es una lista sin relaciones."
+    ],
+    [
+     "Ejemplos",
+     "Incluye ejemplos aplicados a la educación.",
+     "Ejemplos escasos o generales.",
+     "Sin ejemplos."
+    ],
+    [
+     "Presentación",
+     "Ordenado, legible y sin faltas de ortografía.",
+     "Algunos errores de presentación.",
+     "Desordenado o ilegible."
+    ]
+   ]
+  }
+ ]
+}
