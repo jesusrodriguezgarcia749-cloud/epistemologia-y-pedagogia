@@ -43,7 +43,7 @@ async function renderHoy() {
 
   const hoy = hoyISO();
   const sesion = curso.sesiones.find(s => s.fecha >= hoy);
-  const evento = curso.eventos.find(e => e.fecha >= hoy && (e.tipo === 'entrega' || e.tipo === 'examen'));
+  const evento = curso.eventos.find(e => e.fecha >= hoy && ['entrega', 'examen', 'practica'].includes(e.tipo));
   const siguientes = [...curso.sesiones.map(s => ({ fecha: s.fecha, txt: `Sesión ${s.n} · ${s.titulo}` })),
     ...curso.eventos.filter(e => e.tipo !== 'aviso').map(e => ({ fecha: e.fecha, txt: e.titulo }))]
     .filter(x => x.fecha > (sesion ? sesion.fecha : hoy)).sort((a, b) => a.fecha.localeCompare(b.fecha)).slice(0, 3);
@@ -56,12 +56,12 @@ async function renderHoy() {
     principal = `
       <article class="hoy-card">
         <p class="hoy-kicker">${esHoy ? 'Hoy en clase' : 'Próxima clase'} · Sesión ${sesion.n} de ${curso.sesiones.length}</p>
-        <p class="hoy-fecha">${capital(fechaLarga(sesion.fecha))} · 2 horas</p>
+        <p class="hoy-fecha">${capital(fechaLarga(sesion.fecha))} · ${sesion.horas || 2} horas</p>
         <h2>${esc(sesion.titulo)}</h2>
         ${sesion.subtemas.length ? `<p class="hoy-sub">${esHoy ? 'Repasa en el compendio' : 'Lee antes de clase'}</p>${linksSubtemas(sesion.subtemas)}` : ''}
         <p class="hoy-sub">Lo que haremos</p>
         <ul>${sesion.docente.slice(0, 3).map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-        ${sesion.proyecto.length ? `<p class="hoy-sub">Proyecto · Pienso, luego investigo</p><ul>${sesion.proyecto.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+        ${sesion.proyecto.length ? `<p class="hoy-sub">Proyecto · ${esc(curso.proyecto.nombre)}</p><ul>${sesion.proyecto.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
         <div class="hoy-acciones">
           <a class="btn btn-primary btn-sm" href="calendario.html">Ver todo el calendario</a>
           <a class="btn btn-line btn-sm" href="proyecto.html">Ir al proyecto</a>
@@ -74,7 +74,7 @@ async function renderHoy() {
     const [num, unidad] = textoCuenta(diasEntre(hoy, evento.fecha));
     lateral = `
       <aside class="hoy-side">
-        <p class="hoy-kicker">${evento.tipo === 'examen' ? 'Próximo examen' : 'Próxima entrega'}</p>
+        <p class="hoy-kicker">${{ examen: 'Próximo examen', practica: 'Próxima práctica de cocina' }[evento.tipo] || 'Próxima entrega'}</p>
         <div class="cuenta"><span class="cuenta-num">${num}</span><span class="cuenta-txt">${unidad ? `${unidad} para` : ''}</span></div>
         <h3>${esc(evento.titulo)}</h3>
         <p>${esc(evento.fechaTexto || capital(fechaLarga(evento.fecha)))}</p>
@@ -98,7 +98,7 @@ async function renderCalendario() {
   ].sort((a, b) => a.fecha.localeCompare(b.fecha) || (a.tipo === 'sesion' ? -1 : 1));
   const siguiente = items.find(i => i.fecha >= hoy);
 
-  const etiqueta = { sesion: 'Clase', examen: 'Examen', entrega: 'Entrega', descanso: 'Sin clase', aviso: 'Aviso' };
+  const etiqueta = { sesion: 'Clase', examen: 'Examen', entrega: 'Entrega', practica: 'Práctica', descanso: 'Sin clase', aviso: 'Aviso' };
   let html = '', mesActual = -1;
   items.forEach(it => {
     const f = aFecha(it.fecha);
@@ -118,7 +118,7 @@ async function renderCalendario() {
         <details><summary>Ver el plan de la sesión</summary>
           <h4>En clase</h4><ul>${it.docente.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
           <h4>Trabajo independiente</h4><ul>${it.independiente.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-          ${it.proyecto.length ? `<h4>Proyecto · Pienso, luego investigo</h4><ul>${it.proyecto.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+          ${it.proyecto.length ? `<h4>Proyecto · ${esc(curso.proyecto.nombre)}</h4><ul>${it.proyecto.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
           <h4>Se evalúa</h4><ul>${it.evaluacion.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
         </details>`;
     } else if (it.detalle) {
@@ -130,7 +130,7 @@ async function renderCalendario() {
         <div>
           <span class="cal-tipo">${etiqueta[it.tipo] || ''}</span>${it.fecha === hoy ? '<span class="badge-hoy">HOY</span>' : (it === siguiente ? '<span class="badge-hoy">SIGUE</span>' : '')}
           <h3>${esc(titulo)}</h3>
-          ${it.tipo === 'examen' && it.fechaTexto ? `<p><strong>${esc(it.fechaTexto)}</strong></p>` : ''}
+          ${(it.tipo === 'examen' || it.tipo === 'practica') && it.fechaTexto ? `<p><strong>${esc(it.fechaTexto)}</strong></p>` : ''}
           ${detalle}
         </div>
       </li>`;
@@ -149,7 +149,7 @@ async function renderProyecto() {
   try { curso = await cargarCurso(); } catch (e) { cont.innerHTML = `<p>${esc(e.message)}</p>`; return; }
   const p = curso.proyecto, hoy = hoyISO();
   const proxima = p.entregas.find(e => e.fecha >= hoy);
-  const colores = ['#4E7D6A', '#2E5E8C', '#C9A04A'];
+  const colores = p.colores || ['#4E7D6A', '#2E5E8C', '#C9A04A'];
   let num = 1;
 
   cont.innerHTML = `
@@ -168,22 +168,19 @@ async function renderProyecto() {
         <article class="entrega${e === proxima ? ' proxima' : ''}" style="border-top-color:${colores[i]}">
           <div><span class="pts" style="background:${colores[i]}">${e.puntos} pts</span> <span class="cal-tipo">${estado}</span></div>
           <h3>${esc(e.nombre)}</h3>
-          <p class="meta">${esc(e.fechaTexto)} · ${esc(e.temas)}</p>
+          <p class="meta">${esc(e.fechaTexto)}${e.temas ? ` · ${esc(e.temas)}` : ''}</p>
           <p class="req">${esc(e.requisito)}</p>
           <ol start="${num}">${e.preguntas.map(q => { num++; return `<li>${esc(q)}</li>`; }).join('')}</ol>
         </article>`;
       }).join('')}
     </div>
-    <section class="ejemplo">
+    ${p.ejemplo ? `<section class="ejemplo">
       <h2 style="font-size:1.3rem;margin:0 0 6px">${esc(p.ejemplo.titulo)}</h2>
       <p class="aviso">${esc(p.ejemplo.nota)}</p>
       ${p.ejemplo.respuestas.map(r => `<p class="resp"><b class="n">${r.n}</b>${md(r.texto)}</p>`).join('')}
-    </section>
+    </section>` : ''}
     <div class="enlaces-utiles">
-      <a class="btn btn-primary btn-sm" href="rubricas.html">Ver las rúbricas</a>
-      <a class="btn btn-line btn-sm" href="diapositivas/guia-apa.html">Guía para citar en APA</a>
-      <a class="btn btn-line btn-sm" href="diapositivas/plantillas/Plantilla_APA.docx" download>Plantilla de Word APA</a>
-      <a class="btn btn-line btn-sm" href="tema.html?id=10.5">El ensayo en el compendio</a>
+      ${(p.enlaces || []).map((l, k) => `<a class="btn ${k === 0 ? 'btn-primary' : 'btn-line'} btn-sm" href="${esc(l.href)}"${l.descarga ? ' download' : ''}>${esc(l.texto)}</a>`).join('\n      ')}
     </div>`;
 }
 

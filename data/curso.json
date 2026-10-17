@@ -4,6 +4,7 @@
  "sesiones": [
   {
    "n": 1,
+   "horas": 2,
    "fecha": "2026-10-19",
    "fechaTexto": "Lun 19 de octubre",
    "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
@@ -37,6 +38,7 @@
   },
   {
    "n": 2,
+   "horas": 2,
    "fecha": "2026-10-20",
    "fechaTexto": "Mar 20 de octubre",
    "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
@@ -70,6 +72,7 @@
   },
   {
    "n": 3,
+   "horas": 2,
    "fecha": "2026-10-26",
    "fechaTexto": "Lun 26 de octubre",
    "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
@@ -100,6 +103,7 @@
   },
   {
    "n": 4,
+   "horas": 2,
    "fecha": "2026-10-27",
    "fechaTexto": "Mar 27 de octubre",
    "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
@@ -134,6 +138,7 @@
   },
   {
    "n": 5,
+   "horas": 2,
    "fecha": "2026-11-03",
    "fechaTexto": "Mar 3 de noviembre",
    "tema": "TEMA 5 — NUEVO PARADIGMA EPISTEMOLÓGICO DE LA CIENCIA",
@@ -165,6 +170,7 @@
   },
   {
    "n": 6,
+   "horas": 2,
    "fecha": "2026-11-09",
    "fechaTexto": "Lun 9 de noviembre",
    "tema": "TEMA 6 — CONOCIMIENTO CIENTÍFICO Y CONOCIMIENTO ORDINARIO",
@@ -195,6 +201,7 @@
   },
   {
    "n": 7,
+   "horas": 2,
    "fecha": "2026-11-10",
    "fechaTexto": "Mar 10 de noviembre",
    "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
@@ -226,6 +233,7 @@
   },
   {
    "n": 8,
+   "horas": 2,
    "fecha": "2026-11-17",
    "fechaTexto": "Mar 17 de noviembre",
    "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
@@ -252,6 +260,7 @@
   },
   {
    "n": 9,
+   "horas": 2,
    "fecha": "2026-11-24",
    "fechaTexto": "Mar 24 de noviembre",
    "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
@@ -277,6 +286,7 @@
   },
   {
    "n": 10,
+   "horas": 2,
    "fecha": "2026-11-30",
    "fechaTexto": "Lun 30 de noviembre",
    "tema": "TEMA 8 — NUEVO PARADIGMA EN ORIENTACIÓN",
@@ -305,6 +315,7 @@
   },
   {
    "n": 11,
+   "horas": 2,
    "fecha": "2026-12-01",
    "fechaTexto": "Mar 1 de diciembre",
    "tema": "TEMA 9 — NUEVOS ENFOQUES PARADIGMÁTICOS",
@@ -335,6 +346,7 @@
   },
   {
    "n": 12,
+   "horas": 2,
    "fecha": "2026-12-07",
    "fechaTexto": "Lun 7 de diciembre",
    "tema": "TEMA 10 — INTEGRACIÓN: LA PEDAGOGÍA COMO CIENCIA EN LA NUEVA ESCUELA MEXICANA",
@@ -365,6 +377,7 @@
   },
   {
    "n": 13,
+   "horas": 2,
    "fecha": "2026-12-08",
    "fechaTexto": "Mar 8 de diciembre",
    "tema": "TEMA 10 — INTEGRACIÓN: LA PEDAGOGÍA COMO CIENCIA EN LA NUEVA ESCUELA MEXICANA",
@@ -499,6 +512,25 @@
      "¿Cómo se relaciona tu investigación con la Nueva Escuela Mexicana?",
      "Después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu protocolo?"
     ]
+   }
+  ],
+  "enlaces": [
+   {
+    "texto": "Ver las rúbricas",
+    "href": "rubricas.html"
+   },
+   {
+    "texto": "Guía para citar en APA",
+    "href": "diapositivas/guia-apa.html"
+   },
+   {
+    "texto": "Plantilla de Word APA",
+    "href": "diapositivas/plantillas/Plantilla_APA.docx",
+    "descarga": true
+   },
+   {
+    "texto": "El ensayo en el compendio",
+    "href": "tema.html?id=10.5"
    }
   ],
   "ejemplo": {

@@ -261,3 +261,5 @@ html[data-theme="dark"] .sources h2{color:#F8F9FB !important;}
 .search-form input{min-width:0;}
 .search-form button{flex-shrink:0;}
 html,body{overflow-x:clip;}
+.cal-item.t-practica{border-left-color:var(--charcoal-soft);}
+.t-practica .cal-tipo{background:var(--charcoal-soft); color:#fff;}
