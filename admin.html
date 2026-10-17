@@ -81,6 +81,13 @@
       <input id="input-alumno-nombre" type="text" placeholder="Nombre completo del alumno" required>
       <button type="submit" class="btn btn-primary">Agregar</button>
     </form>
+    <details class="bloques-activos-card" id="carga-masiva">
+      <summary class="section-title" style="cursor:pointer;margin:0;">Agregar varios alumnos a la vez (pegar lista)</summary>
+      <p class="field-hint">Pega un nombre completo por renglón. A cada alumno se le asigna su PIN automáticamente; los que ya estén registrados se omiten.</p>
+      <textarea id="carga-masiva-texto" rows="8" placeholder="Ana Claudia Álvarez Osorio&#10;Lizzet Abigail Aké Blanco&#10;…"></textarea>
+      <button id="btn-carga-masiva" type="button" class="btn btn-primary btn-block">Agregar todos</button>
+      <div id="carga-masiva-resultado"></div>
+    </details>
     <ul id="lista-alumnos" class="student-list"></ul>
     <p id="alumnos-empty" class="empty-state" hidden>Aún no hay alumnos en este grupo.</p>
   </div>

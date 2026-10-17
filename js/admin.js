@@ -207,6 +207,54 @@ function slugNombre(nombre) {
 function generarPIN() { return String(Math.floor(1000 + Math.random() * 9000)); }
 
 on('form-alumno', 'submit', agregarAlumno);
+on('btn-carga-masiva', 'click', cargaMasiva);
+
+// Carga masiva: un nombre completo por renglón. Omite renglones vacíos y
+// nombres que ya existen en el grupo (mismo nombre, sin importar acentos).
+async function cargaMasiva() {
+  if (!grupoActivo) { alert('Primero elige o crea un grupo.'); return; }
+  const area = document.getElementById('carga-masiva-texto');
+  const res = document.getElementById('carga-masiva-resultado');
+  const nombres = area.value.split(/\r?\n/).map(x => x.replace(/\s+/g, ' ').trim()).filter(Boolean);
+  if (nombres.length === 0) { alert('Pega al menos un nombre.'); return; }
+  const btn = document.getElementById('btn-carga-masiva');
+  btn.disabled = true; btn.textContent = 'Agregando…';
+
+  const existentes = new Set();
+  try {
+    const snap = await getDocs(collection(db, 'grupos', grupoActivo, 'alumnos'));
+    snap.docs.forEach(d => existentes.add(slugNombre(d.data().nombre || '')));
+  } catch { /* si falla, se intenta de todos modos */ }
+
+  const agregados = [], omitidos = [];
+  for (const nombre of nombres) {
+    const id = slugNombre(nombre);
+    if (!id) { omitidos.push(`${nombre} (nombre no válido)`); continue; }
+    if (existentes.has(id)) { omitidos.push(`${nombre} (ya estaba registrado)`); continue; }
+    let idFinal = id, sufijo = 2;
+    while ((await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', idFinal))).exists()) { idFinal = `${id}-${sufijo}`; sufijo++; }
+    const pin = generarPIN();
+    try {
+      await setDoc(doc(db, 'grupos', grupoActivo, 'alumnos', idFinal), { nombre, pin, creado: serverTimestamp() });
+      agregados.push({ nombre, pin });
+      existentes.add(id);
+    } catch (err) { omitidos.push(`${nombre} (error: ${err.message || err})`); }
+  }
+
+  btn.disabled = false; btn.textContent = 'Agregar todos';
+  area.value = '';
+  await cargarAlumnos();
+  const textoPins = agregados.map(a => `${a.nombre} — PIN ${a.pin}`).join('\n');
+  res.innerHTML = `
+    <p class="field-hint" style="margin-top:12px;"><strong>${agregados.length}</strong> alumno(s) agregado(s)${omitidos.length ? ` · ${omitidos.length} omitido(s)` : ''}.</p>
+    ${agregados.length ? `<table style="width:100%;border-collapse:collapse;font-size:.9rem;"><thead><tr><th style="text-align:left;padding:4px;border-bottom:1px solid #ccc;">Alumno</th><th style="text-align:right;padding:4px;border-bottom:1px solid #ccc;">PIN</th></tr></thead><tbody>${agregados.map(a => `<tr><td style="padding:4px;border-bottom:1px solid #eee;">${escaparHTML(a.nombre)}</td><td style="padding:4px;border-bottom:1px solid #eee;text-align:right;font-weight:700;">${a.pin}</td></tr>`).join('')}</tbody></table>
+    <button type="button" id="btn-copiar-pins" class="btn btn-ghost btn-block" style="margin-top:8px;color:inherit;border-color:#ccc;">Copiar lista de PIN</button>` : ''}
+    ${omitidos.length ? `<p class="field-hint" style="margin-top:8px;">Omitidos: ${omitidos.map(escaparHTML).join('; ')}</p>` : ''}`;
+  document.getElementById('btn-copiar-pins')?.addEventListener('click', async (e) => {
+    try { await navigator.clipboard.writeText(textoPins); e.target.textContent = '✓ Copiada'; }
+    catch { e.target.textContent = 'No se pudo copiar'; }
+  });
+}
 
 async function cargarAlumnos() {
   if (!grupoActivo) return;
