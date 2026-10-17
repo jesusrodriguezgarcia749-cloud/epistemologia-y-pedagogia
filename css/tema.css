@@ -107,3 +107,6 @@
 .tema-tabla th{background:var(--charcoal); color:#fff; text-align:left; padding:9px 10px; font-weight:600;}
 .tema-tabla td{padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
 .tema-tabla tbody tr:nth-child(even) td{background:#F6F8FB;}
+
+.tema-recuadro-conexion{background:#EAF4F6; border-left-color:#2A7F8E;}
+.tema-recuadro-conexion .tema-recuadro-tag{color:#22697A;}

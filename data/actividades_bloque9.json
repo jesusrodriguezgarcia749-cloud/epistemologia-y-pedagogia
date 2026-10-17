@@ -274,6 +274,31 @@
    ],
    "correcta": 1,
    "explicacion": "Nunca: estos sistemas pueden inventar autores, títulos y DOI que parecen reales."
+  },
+  {
+   "id": "ep9-018",
+   "subtema": "9.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada perspectiva con lo que considera evidencia de que la educación \"funciona\".",
+   "pares": [
+    {
+     "izquierda": "Capital humano",
+     "derecha": "Ingresos y productividad"
+    },
+    {
+     "izquierda": "Reproducción",
+     "derecha": "Trayectorias desiguales según el origen social"
+    },
+    {
+     "izquierda": "Capacidades",
+     "derecha": "Libertades reales para vivir la vida que se valora"
+    },
+    {
+     "izquierda": "Derecho humano",
+     "derecha": "Acceso, permanencia y aprendizaje garantizados para todos"
+    }
+   ],
+   "explicacion": "Cada teoría económica de la educación es también una postura epistemológica."
   }
  ]
 }

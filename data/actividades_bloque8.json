@@ -197,6 +197,20 @@
    ],
    "correcta": 0,
    "explicacion": "Rogers, desde la psicología humanista, anticipó parte de este cambio."
+  },
+  {
+   "id": "ep8-013",
+   "subtema": "8.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el tema, ¿cuál es la pregunta epistemológica de fondo sobre la orientación?",
+   "opciones": [
+    "Cuando un orientador dice \"conozco a este alumno\", qué tipo de conocimiento tiene y cómo lo obtuvo",
+    "Cuál es el test vocacional más barato",
+    "Cuántos alumnos debe atender un orientador por día",
+    "Qué carrera conviene más económicamente"
+   ],
+   "correcta": 0,
+   "explicacion": "Diagnosticar, acompañar o eliminar barreras responden a ideas distintas sobre qué es conocer a una persona."
   }
  ]
 }

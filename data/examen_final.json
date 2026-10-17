@@ -649,6 +649,41 @@
    ],
    "correcta": 0,
    "explicacion": "En APA la lista se titula \"Referencias\"."
+  },
+  {
+   "id": "final-041",
+   "subtema": "8.3",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada paradigma con la forma en que la orientación \"conoce\" a la persona.",
+   "pares": [
+    {
+     "izquierda": "Positivista",
+     "derecha": "Midiendo rasgos estables con instrumentos estandarizados"
+    },
+    {
+     "izquierda": "Interpretativo",
+     "derecha": "Comprendiendo los significados que la persona da a su historia"
+    },
+    {
+     "izquierda": "Sociocrítico",
+     "derecha": "Analizando las barreras y desigualdades del entorno"
+    }
+   ],
+   "explicacion": "Cada forma de orientar se apoya en una idea distinta de qué es conocer a una persona."
+  },
+  {
+   "id": "final-042",
+   "subtema": "9.3",
+   "tipo": "caso",
+   "pregunta": "Una tesis evalúa un programa de becas midiendo solo el salario de los egresados cinco años después. Desde la lectura epistemológica del Tema 9, ¿qué limitación tiene?",
+   "opciones": [
+    "Solo encontrará lo que la teoría del capital humano sabe ver; deja fuera, por ejemplo, la ampliación de libertades o la reproducción de desigualdades",
+    "Ninguna: el salario es la única evidencia válida del valor de la educación",
+    "Que no usa ningún dato numérico",
+    "Que pertenece al paradigma interpretativo"
+   ],
+   "correcta": 0,
+   "explicacion": "Elegir qué medir ya es tomar una postura epistemológica."
   }
  ]
 }

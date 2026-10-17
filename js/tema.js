@@ -45,6 +45,7 @@ const RECUADROS = {
   'EN EL AULA MEXICANA': 'aula',
   'ACTIVIDAD': 'actividad',
   'TALLER APA': 'apa',
+  'CONEXIÓN CON TU CARRERA': 'conexion',
   'IDEA CLAVE': 'idea',
   'RESUMEN DEL TEMA': 'resumen',
 };
