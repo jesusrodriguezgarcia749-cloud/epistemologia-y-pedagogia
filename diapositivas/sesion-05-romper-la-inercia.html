@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 5 · Romper la inercia · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 5: Martes 3 de noviembre · 2 horas
+     5.1 a 5.4 Inercia mental, desconstrucción del método, neurociencia y
+     dimensión dialógica. Día de la Entrega 1 del proyecto.
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulo 5
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Tema 5 · Nuevo paradigma epistemológico",
+      dia: "Martes 3 de noviembre · Sesión 5 de 13",
+      titulo: "Romper la inercia",
+      subtitulo: "5.1 a 5.4 · Inercia mental, desconstrucción del método, neurociencia y diálogo",
+      duracion: "2 horas",
+      imagen: "img/s5-portada.jpg",
+      minutos: "0-2",
+      notas: "Arranca el Parcial 2 (Temas 5 a 7). El examen es el lunes 23 de noviembre." },
+
+    { tipo: "objetivos",
+      intro: "Hoy empieza el Parcial 2. Y empieza con una pregunta incómoda: ¿por qué nos cuesta tanto cambiar de opinión?",
+      puntos: [
+        "Reconocer la **inercia mental** y los **obstáculos epistemológicos** de Bachelard.",
+        "Entender por qué el método es **un camino** y no una receta.",
+        "Descubrir que **el cerebro construye** lo que conoce, y que razón y emoción van juntas.",
+        "Distinguir un **diálogo** de un simple intercambio de opiniones.",
+        "Entregar la **Entrega 1** y arrancar la **pregunta 7**."
+      ],
+      pasoAPaso: true,
+      minutos: "2-4" },
+
+    { tipo: "tema",
+      titulo: "Hoy se recibe la Entrega 1",
+      etiqueta: "Proyecto · 15 puntos del Examen Final",
+      puntos: [
+        "Preguntas **1 a 6**, de **150 a 250 palabras** cada una.",
+        "Al menos **3 referencias en APA 7**, en orden alfabético y con sangría francesa.",
+        "Entrégala como indicó tu docente (impresa o en archivo de Word con tu nombre).",
+        "En dos semanas recibes la **retroalimentación con la rúbrica**: la usarás para corregir antes de la Entrega 2."
+      ],
+      minutos: "4-10",
+      evaluacion: "Entrega 1 del proyecto (cuenta en el Examen Final)",
+      notas: "Recoge las entregas al inicio. Anota quién no entregó y recuérdale que la rúbrica de entregas está publicada en el Aula Virtual. La calificación se captura en el Panel docente, pestaña Proyecto, campo Entrega 1 (sobre 15)." },
+
+    { tipo: "pregunta",
+      pregunta: "¿Por qué nos cuesta tanto cambiar una forma de enseñar, aunque sepamos que no funciona?",
+      respuesta: "Porque no solo pensamos con argumentos: pensamos con **hábitos**. A esa fuerza que nos mantiene pensando igual la llamaremos **inercia mental**.",
+      minutos: "10-12" },
+
+    { tipo: "tema",
+      titulo: "5.1 Inercia mental",
+      etiqueta: "El peso de las costumbres intelectuales",
+      puntos: [
+        "En física, la **inercia** mantiene a un cuerpo como está mientras ninguna fuerza lo cambie.",
+        "La **inercia mental** es seguir pensando como siempre, aunque haya razones para cambiar.",
+        "Martínez Miguélez: aprendimos a pensar de forma **lineal, fragmentada y cuantitativa**, y esa forma se volvió invisible.",
+        "**No la elegimos: la heredamos.**",
+        "También es colectiva: según Planck, las ideas nuevas triunfan cuando crece **otra generación**."
+      ],
+      pasoAPaso: true,
+      minutos: "12-15" },
+
+    { tipo: "tabla",
+      titulo: "Los obstáculos epistemológicos de Bachelard",
+      columnas: ["Obstáculo", "Qué es", "Así suena en la escuela"],
+      filas: [
+        ["Experiencia primera", "Confiar en la primera impresión, sin crítica", "«Los objetos pesados caen más rápido, se ve»"],
+        ["Generalización apresurada", "Concluir mucho a partir de pocos casos", "«En esta colonia los alumnos no leen» (por tres casos)"],
+        ["Obstáculo verbal", "Creer que nombrar algo es explicarlo", "«Reprueba porque no tiene motivación» (y ya)"],
+        ["Unitario y pragmático", "Explicarlo todo con un solo principio", "«Con tabletas en el salón se resuelve todo»"],
+        ["Sustancialista", "Atribuir cualidades ocultas a las cosas", "«Ese niño es malo por naturaleza»"]
+      ],
+      pasoAPaso: true,
+      minutos: "15-21",
+      notas: "Bachelard (1938/2000), La formación del espíritu científico. Idea central: el problema no es que los alumnos no sepan, sino que ya «saben» algo que les impide aprender. De ahí viene la investigación sobre concepciones alternativas y cambio conceptual." },
+
+    { tipo: "observa",
+      titulo: "«Así lo hemos hecho siempre»",
+      etiqueta: "En el aula mexicana",
+      imagen: "img/s5-junta.jpg",
+      puntos: [
+        "Una secundaria propone cambiar el examen bimestral único por **proyectos con rúbrica**.",
+        "Argumentos razonables: falta de tiempo, grupos numerosos.",
+        "Pura inercia: «así lo hemos hecho siempre», «a mí me evaluaron así y salí bien».",
+        "Reconocer la inercia **no es descalificar** a quien se resiste: todos tenemos inercias.",
+        "La pregunta del buen directivo: **¿qué evidencia tenemos de que lo actual funciona?**"
+      ],
+      minutos: "21-24" },
+
+    { tipo: "tarea",
+      titulo: "Tu propia inercia",
+      etiqueta: "Dinámica · 12 minutos",
+      puntos: [
+        "**Solo (4 min):** escribe algo que das por hecho sobre la educación sin haberlo examinado nunca.",
+        "Responde: **¿de dónde viene** esa idea? **¿Qué te haría cambiar** de opinión?",
+        "**En parejas (4 min):** tu compañero intenta encontrar qué obstáculo de Bachelard hay detrás.",
+        "**En grupo (4 min):** tres voluntarios comparten."
+      ],
+      minutos: "24-36",
+      evaluacion: "Participación (dinámica de inercias)",
+      notas: "Dinámica de la planeación. Si cuesta arrancar, da un ejemplo propio: «yo daba por hecho que un grupo callado es un grupo que aprende»." },
+
+    { tipo: "tema",
+      titulo: "5.2 Desconstruir el método tradicional",
+      etiqueta: "Desconstruir no es destruir",
+      puntos: [
+        "**Desconstruir** (Derrida): desarmar con cuidado una estructura para mostrar sus **supuestos ocultos** y lo que deja fuera.",
+        "No se trata de abandonar el rigor, sino de **entenderlo mejor**.",
+        "La pregunta: ¿qué supone el método de los manuales y qué deja fuera?"
+      ],
+      pasoAPaso: true,
+      minutos: "36-38" },
+
+    { tipo: "tabla",
+      titulo: "Cuatro supuestos del método tradicional",
+      columnas: ["El método supone que…", "Pero…"],
+      filas: [
+        ["La observación es **neutral**", "**Toda observación está cargada de teoría** (Hanson): un médico ve una fractura donde un lego ve manchas grises."],
+        ["Sujeto y objeto están **separados**", "Un maestro que investiga su propio grupo **es parte** del fenómeno."],
+        ["El método es un **algoritmo**", "No hay secuencia fija que garantice el conocimiento."],
+        ["Solo vale **lo medible**", "Hay realidades humanas que no se cuantifican y sí se pueden conocer."]
+      ],
+      pasoAPaso: true,
+      minutos: "38-42",
+      notas: "Hanson (1958/1977), Patrones de descubrimiento." },
+
+    { tipo: "tema",
+      titulo: "El método como camino",
+      etiqueta: "Del griego méthodos: «camino»",
+      puntos: [
+        "**El método se adecua al objeto:** no se usa la misma ruta para subir una montaña que para cruzar un río.",
+        "**Diseño emergente:** el plan se ajusta cuando aparecen hallazgos inesperados.",
+        "**Triangulación:** contrastar fuentes, métodos o investigadores da solidez.",
+        "**Reflexividad:** en lugar de fingir neutralidad, el investigador **declara sus supuestos**.",
+        "Hasta la física lo reconoce: **Prigogine** mostró que del desorden puede surgir un orden nuevo."
+      ],
+      pasoAPaso: true,
+      minutos: "42-46",
+      notas: "Martínez Miguélez (2004). La triangulación, el diseño emergente y la reflexividad ya los vieron como técnicas en Investigación Cualitativa: aquí son respuestas a la crítica del método." },
+
+    { tipo: "pausa",
+      titulo: "¡Pausa activa!",
+      duracion: "2 minutos",
+      texto: "De pie. Cruza los brazos como siempre lo haces. Ahora crúzalos al revés. ¿Se siente raro? Eso es la **inercia**: el cuerpo también tiene hábitos. Repite tres veces el cruce «raro» y siéntate.",
+      minutos: "46-48" },
+
+    { tipo: "imagen",
+      titulo: "5.3 ¿Cuál de las dos líneas es más larga?",
+      imagen: "img/s5-muller-lyer.svg",
+      pie: "Ilusión de Müller-Lyer (1889). Piénsalo antes de avanzar.",
+      minutos: "48-49" },
+
+    { tipo: "pregunta",
+      pregunta: "¿A o B?",
+      respuesta: "**Miden exactamente lo mismo.** Aunque ya lo sepas, las sigues viendo distintas: tu cerebro no copia la realidad, **la interpreta** con lo que espera ver.",
+      minutos: "49-51",
+      notas: "Si hay tiempo, mídelas con una regla sobre la pantalla. Conecta con Hanson: la observación está cargada de teoría… y de cerebro." },
+
+    { tipo: "tema",
+      titulo: "El cerebro no es un espejo",
+      etiqueta: "Neurociencia y epistemología",
+      puntos: [
+        "Percibir no es recibir: el cerebro **completa, interpreta y anticipa**.",
+        "Muchos investigadores lo describen como una **máquina de predicción**: lanza hipótesis sobre el mundo y las corrige con los sentidos.",
+        "¿Te suena? Se parece a las **conjeturas y refutaciones** de Popper.",
+        "En el Tema 7 veremos qué dice la neurociencia del aprendizaje en el aula; hoy, **cómo conocemos**."
+      ],
+      pasoAPaso: true,
+      minutos: "51-54" },
+
+    { tipo: "tabla",
+      titulo: "Dos ideas que cambiaron la conversación",
+      columnas: ["Autores", "Idea", "Ejemplo"],
+      filas: [
+        ["Maturana y Varela (1984), El árbol del conocimiento", "**Todo hacer es conocer y todo conocer es hacer.** Lo que un ser vivo conoce depende de su estructura.", "Un perro, un murciélago y una persona «conocen» mundos distintos en el mismo cuarto."],
+        ["Damasio (1994), El error de Descartes", "**La emoción no es enemiga de la razón: es su condición.**", "Pacientes que razonaban bien en abstracto, pero sin emociones no podían decidir en su vida."]
+      ],
+      pasoAPaso: true,
+      minutos: "54-58",
+      notas: "El «error de Descartes», según Damasio, fue separar mente y cuerpo, razón y emoción. Caso del libro: la maestra que dedica tres minutos a calmar al grupo después del recreo no pierde tiempo: crea una condición para aprender." },
+
+    { tipo: "video",
+      titulo: "Tu cerebro alucina tu realidad",
+      youtube: "https://www.youtube.com/watch?v=lyu7v7nWzfo",
+      subtitulos: "es",
+      pie: "Anil Seth, neurocientífico · TED (en inglés con subtítulos en español). Basta con los primeros 6 minutos.",
+      minutos: "58-64",
+      notas: "La charla completa dura unos 17 minutos: detenla alrededor del minuto 6, cuando ya explicó la percepción como predicción. Si no hay tiempo, déjala para casa." },
+
+    { tipo: "pregunta",
+      pregunta: "¿Puede producirse conocimiento conversando?",
+      respuesta: "Para el nuevo paradigma, **sí**: el conocimiento confiable no nace en la mente aislada de un genio, sino en la **conversación crítica** entre personas que contrastan perspectivas.",
+      minutos: "64-66" },
+
+    { tipo: "tabla",
+      titulo: "5.4 La dimensión dialógica",
+      columnas: ["Autor", "Idea clave", "En una frase"],
+      filas: [
+        ["Gadamer", "**Fusión de horizontes**", "Comprender no es ponerse en lugar del otro: es que ambos horizontes se amplíen."],
+        ["Habermas", "**Acción comunicativa**", "En un diálogo ideal gana la fuerza del mejor argumento, no la jerarquía."],
+        ["Freire", "**Diálogo liberador**", "El educando también sabe; el diálogo exige humildad, fe en las personas y pensamiento crítico."],
+        ["Morin", "**Principio dialógico**", "Mantener juntas ideas opuestas: orden y desorden, razón y emoción."]
+      ],
+      pasoAPaso: true,
+      minutos: "66-72" },
+
+    { tipo: "tarea",
+      titulo: "¿Fue un diálogo?",
+      etiqueta: "Prueba de Habermas · 5 minutos",
+      puntos: [
+        "Piensa en la dinámica de las inercias que hicimos hace rato.",
+        "**¿Todos pudieron hablar?**",
+        "**¿Se escucharon los argumentos**, o cada quien defendió lo suyo?",
+        "**¿Alguien impuso su posición** por quién era y no por lo que argumentaba?",
+        "¿Qué haría falta para un verdadero diálogo en el aula?"
+      ],
+      minutos: "72-77",
+      evaluacion: "Participación" },
+
+    { tipo: "tema",
+      titulo: "Diálogo de saberes",
+      etiqueta: "Puente hacia el Tema 6 y la Nueva Escuela Mexicana",
+      puntos: [
+        "Si el conocimiento se construye dialogando, los saberes de la **comunidad**, de los **pueblos originarios**, de las **familias** y de los **alumnos** pueden entrar a la conversación.",
+        "Es una de las ideas centrales de la **Nueva Escuela Mexicana**.",
+        "La pregunta del próximo lunes: ¿qué relación hay entre el saber de la ciencia y el saber de la vida?"
+      ],
+      pasoAPaso: true,
+      minutos: "77-79" },
+
+    { tipo: "tema",
+      titulo: "Taller APA: paráfrasis o cita textual",
+      etiqueta: "Para la Entrega 2",
+      puntos: [
+        "**Paráfrasis:** la idea del autor con tus palabras, más (Autor, año). Es la forma más usada.",
+        "**Cita textual corta** (menos de 40 palabras): entre comillas y **siempre con página**: (Bachelard, 1938/2000, p. 15).",
+        "**Cita textual larga** (40 palabras o más): en bloque aparte, con sangría y sin comillas.",
+        "**Regla de oro:** cita textual solo cuando las palabras exactas importan. Una tesis llena de citas textuales muestra que el autor no digirió sus lecturas."
+      ],
+      pasoAPaso: true,
+      minutos: "79-83",
+      notas: "El número de página del ejemplo es ilustrativo." },
+
+    { tipo: "ejemplo",
+      numero: 7,
+      pregunta: "¿Qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?",
+      respuesta: "Mi principal riesgo es la **experiencia primera**: por mis prácticas ya «sé» que los alumnos no entienden lo que leen, y podría ver solo lo que confirma esa idea (Bachelard, 1938/2000). Además, me gusta leer en voz alta, así que tengo una **inercia a favor** de mi propia propuesta. Para controlarlo, otra persona calificará las pruebas sin saber de qué grupo es cada una, **triangularé** los resultados con entrevistas y llevaré un diario donde escribiré mis supuestos (**reflexividad**).",
+      fuente: "Caso ficticio. Observa: nombra el obstáculo con el concepto del curso y propone **cómo controlarlo**.",
+      minutos: "83-87" },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 7, texto: "¿Qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?" }
+      ],
+      minutos: "87-95",
+      notas: "Empieza la Entrega 2 (martes 24 de noviembre): preguntas 1 a 14 en texto continuo, 150 a 250 palabras por pregunta, mínimo 6 referencias APA. Las seis primeras se corrigen con la retroalimentación de la Entrega 1." },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "¿Cómo llamó Bachelard a los hábitos de pensamiento que impiden aprender algo nuevo?", respuesta: "**Obstáculos epistemológicos.**" },
+        { pregunta: "¿Qué quiere decir que la observación está cargada de teoría?", respuesta: "**Lo que vemos depende de lo que ya sabemos** (Hanson)." },
+        { pregunta: "Para Damasio, ¿qué relación hay entre emoción y razón?", respuesta: "**La emoción es condición de la razón**, no su enemiga." },
+        { pregunta: "En un diálogo ideal, según Habermas, ¿qué debe imponerse?", respuesta: "**La fuerza del mejor argumento.**" }
+      ],
+      minutos: "95-115",
+      notas: "Si sobra tiempo, que avancen la pregunta 7 en clase y resuelvan dudas de la Entrega 2." },
+
+    { tipo: "cierre",
+      evidencia: "Entrega 1 recibida, inercia propia identificada y analizada en parejas, borrador de la pregunta 7.",
+      materiales: "Libro de texto (Tema 5), hojas para la dinámica, Aula Virtual.",
+      proxima: "**Lunes 9:** resuelve las actividades de repaso del Tema 5 en el Aula Virtual y lee el **Tema 6**. Avanza la pregunta 7.",
+      minutos: "115-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

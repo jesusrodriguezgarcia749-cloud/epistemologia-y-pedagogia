@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" font-family="Public Sans, Arial, sans-serif">
+  <defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4F5868"/></marker></defs>
+  <rect width="1100" height="500" fill="#F4F6F9"/>
+  <g stroke="#4F5868" stroke-width="3" fill="none" marker-end="url(#f)">
+    <path d="M470 175 C430 210 380 250 330 290"/>
+    <path d="M330 345 C420 360 560 360 660 345"/>
+    <path d="M760 290 C710 250 660 210 630 175"/>
+  </g>
+  <g text-anchor="middle">
+    <rect x="410" y="40" width="280" height="130" rx="16" fill="#fff" stroke="#C9A04A" stroke-width="4"/>
+    <text x="550" y="88" font-size="30" font-weight="700" fill="#16213A">Maíz</text>
+    <text x="550" y="122" font-size="19" fill="#4F5868">sirve de soporte</text>
+    <text x="550" y="148" font-size="19" fill="#4F5868">para que trepe el frijol</text>
+    <rect x="90" y="280" width="290" height="130" rx="16" fill="#fff" stroke="#4E7D6A" stroke-width="4"/>
+    <text x="235" y="328" font-size="30" font-weight="700" fill="#16213A">Frijol</text>
+    <text x="235" y="362" font-size="19" fill="#4F5868">aporta nitrógeno</text>
+    <text x="235" y="388" font-size="19" fill="#4F5868">al suelo</text>
+    <rect x="720" y="280" width="290" height="130" rx="16" fill="#fff" stroke="#2E5E8C" stroke-width="4"/>
+    <text x="865" y="328" font-size="30" font-weight="700" fill="#16213A">Calabaza</text>
+    <text x="865" y="362" font-size="19" fill="#4F5868">cubre el suelo, guarda</text>
+    <text x="865" y="388" font-size="19" fill="#4F5868">humedad, frena la maleza</text>
+    <text x="550" y="470" font-size="21" font-weight="700" fill="#9C7A2E">Un sistema que los pueblos mesoamericanos dominaban miles de años antes de la química del nitrógeno</text>
+  </g>
+</svg>

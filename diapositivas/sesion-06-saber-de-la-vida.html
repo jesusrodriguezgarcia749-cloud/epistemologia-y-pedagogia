@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 6 · El saber de la ciencia y el saber de la vida · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 6: Lunes 9 de noviembre · 2 horas
+     6.1 a 6.4 Aproximaciones al conocimiento, conocimiento local y ordinario,
+     ciencia y arte, nuevo paradigma para la educación
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulo 6
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Tema 6 · Conocimiento científico y conocimiento ordinario",
+      dia: "Lunes 9 de noviembre · Sesión 6 de 13",
+      titulo: "El saber de la ciencia y el saber de la vida",
+      subtitulo: "6.1 a 6.4 · Conocimiento tácito, saberes locales, ciencia y arte, el docente investigador",
+      duracion: "2 horas",
+      imagen: "img/s6-portada.jpg",
+      minutos: "0-2" },
+
+    { tipo: "objetivos",
+      intro: "Durante siglos, la ciencia miró al saber de la vida desde arriba. Hoy esa relación se piensa distinto, y eso cambia la escuela.",
+      puntos: [
+        "Reconocer las distintas **vías para conocer** y el **conocimiento tácito**.",
+        "Valorar el **conocimiento local** mexicano sin caer en el cientificismo ni en el relativismo.",
+        "Elaborar el **cuadro comparativo** entre conocimiento científico y ordinario.",
+        "Entender la docencia como **ciencia y arte**: el profesional reflexivo y el docente investigador.",
+        "Avanzar las **preguntas 8 y 9** del proyecto."
+      ],
+      pasoAPaso: true,
+      minutos: "2-4" },
+
+    { tipo: "repaso",
+      titulo: "¿Qué recuerdas de la sesión 5?",
+      preguntas: [
+        { pregunta: "Un obstáculo epistemológico es…", respuesta: "**un hábito o saber previo que impide aprender algo nuevo** (Bachelard)." },
+        { pregunta: "¿De dónde viene la palabra «método»?", respuesta: "Del griego *méthodos*: **camino**." },
+        { pregunta: "¿Qué es el diálogo de saberes?", respuesta: "**El encuentro respetuoso entre la ciencia y otros saberes**, como los comunitarios." }
+      ],
+      minutos: "4-7" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Quién sabe más de suelos: un agrónomo con doctorado o un campesino que ha sembrado milpa durante cuarenta años?",
+      respuesta: "Depende de **qué pregunta** quieras responder. Cada uno sabe cosas que el otro no, y de **maneras distintas**. De eso trata hoy.",
+      minutos: "7-9" },
+
+    { tipo: "tabla",
+      titulo: "6.1 Cinco maneras de conocer",
+      columnas: ["Vía", "Ejemplo"],
+      filas: [
+        ["Experiencia directa", "Conozco el sabor del chile habanero porque lo he probado."],
+        ["Testimonio", "Sé que existe la Antártida porque confío en quienes han estado ahí."],
+        ["Razonamiento", "Si todos los mamíferos tienen pulmones y la ballena es mamífero, la ballena tiene pulmones."],
+        ["Investigación sistemática", "Sé que el tabaco aumenta el riesgo de cáncer porque miles de estudios lo muestran."],
+        ["Práctica e intuición", "Sé cuándo un grupo está a punto de desbordarse, aunque no sepa explicar cómo."]
+      ],
+      pasoAPaso: true,
+      minutos: "9-12",
+      notas: "Ninguna es infalible y casi todo lo que sabemos combina varias. Hasta los científicos dependen del testimonio: nadie repite todos los experimentos de su disciplina." },
+
+    { tipo: "pregunta",
+      pregunta: "¿Puedes explicar con palabras cómo andas en bicicleta?",
+      respuesta: "No del todo. **Sabemos más de lo que podemos decir** (Polanyi). A ese saber que no cabe completo en palabras se le llama **conocimiento tácito**.",
+      minutos: "12-13" },
+
+    { tipo: "tema",
+      titulo: "El conocimiento tácito",
+      etiqueta: "Michael Polanyi (1966)",
+      puntos: [
+        "Reconocemos el rostro de un amigo entre miles, pero **no sabemos explicar cómo**.",
+        "Todo conocimiento, **incluso el científico**, descansa en una base tácita: el experto «ve» en sus datos lo que el principiante no ve.",
+        "Por eso la formación no se hace solo con libros: requiere aprender **junto a un maestro**, como en los antiguos talleres.",
+        "**¿Qué saberes tácitos tiene un buen maestro?** Manejar los tiempos, detectar que un alumno tiene problemas en casa, saber cuándo insistir."
+      ],
+      pasoAPaso: true,
+      minutos: "13-16" },
+
+    { tipo: "tema",
+      titulo: "6.2 El conocimiento ordinario",
+      etiqueta: "El sentido común",
+      puntos: [
+        "**Práctico:** resuelve problemas inmediatos.",
+        "**Compartido:** se transmite en la familia y la comunidad.",
+        "**Poco sistemático y poco crítico:** casi nunca se pone a prueba a propósito.",
+        "**Contextual:** funciona bien en su contexto, pero puede fallar fuera de él.",
+        "A veces acierta y a veces se equivoca: durante siglos dijo que **el Sol gira alrededor de la Tierra**, porque así se ve."
+      ],
+      pasoAPaso: true,
+      minutos: "16-19" },
+
+    { tipo: "imagen",
+      titulo: "El conocimiento local: la milpa",
+      imagen: "img/s6-milpa.svg",
+      pie: "Conocimiento ecológico desarrollado en Mesoamérica hace miles de años.",
+      minutos: "19-21",
+      notas: "Otros ejemplos del libro: la nixtamalización (cocer el maíz con cal mejora su valor nutritivo; la nutrición lo explicó siglos después), la herbolaria (de ahí salieron medicamentos, aunque no todo remedio resiste la comprobación) y el saber del monte y del mar de pescadores y milperos de la península." },
+
+    { tipo: "video",
+      titulo: "Agrobiodiversidad: la milpa",
+      mp4: "https://nemdigitalstorage.blob.core.windows.net/nem-main/archivos/2022/11/03/HD_BACH_VS_SEM16_MILPA.mp4",
+      pie: "Nueva Escuela Mexicana Digital (SEP), con investigadoras del Instituto de Biología de la UNAM y de la CONABIO.",
+      minutos: "21-27",
+      notas: "Video oficial de la plataforma NEM Digital de la SEP. Proyecta un fragmento de 5 o 6 minutos." },
+
+    { tipo: "tema",
+      titulo: "Ecología de saberes",
+      etiqueta: "Boaventura de Sousa Santos (2009)",
+      puntos: [
+        "**Epistemologías del Sur:** los saberes de los pueblos que fueron colonizados.",
+        "**Epistemicidio:** la destrucción o el desprecio de esos saberes.",
+        "**Ecología de saberes:** la ciencia es muy valiosa, pero **no es el único** saber; distintos saberes pueden dialogar según el problema.",
+        "Para llegar a la Luna se necesita la ciencia moderna; para cuidar la biodiversidad de un territorio, quizá también **el saber de quienes lo habitan** desde hace siglos.",
+        "La NEM lo retoma como **saberes comunitarios** (SEP, 2022)."
+      ],
+      pasoAPaso: true,
+      minutos: "27-31" },
+
+    { tipo: "tabla",
+      titulo: "Dos errores que hay que evitar",
+      columnas: ["", "Cientificismo", "Relativismo ingenuo"],
+      filas: [
+        ["Cree que…", "Solo la ciencia produce conocimiento válido", "Todos los saberes valen lo mismo para todo"],
+        ["Consecuencia", "Empobrece la escuela y la desconecta de la vida de los alumnos", "Da igual un antibiótico que un remedio sin eficacia comprobada"],
+        ["La salida", "Diálogo de saberes: cada saber se valora por su capacidad de responder **ciertas preguntas en ciertos contextos**", "Las diferencias se discuten con **respeto y con argumentos**"]
+      ],
+      pasoAPaso: true,
+      minutos: "31-34" },
+
+    { tipo: "observa",
+      titulo: "La milpa en el salón",
+      etiqueta: "En el aula mexicana",
+      imagen: "img/s6-abuelos.jpg",
+      puntos: [
+        "Telesecundaria de una comunidad maya de Campeche. Proyecto de Ciencias: **ciclos de nutrientes**.",
+        "El maestro invita a **dos abuelos** a explicar cómo preparan la milpa.",
+        "Los alumnos registran, preguntan y luego investigan **qué pasa con el nitrógeno**.",
+        "Al final: un **cartel bilingüe en maya y español** que integra ambos saberes.",
+        "Los abuelos también aprenden. **Nadie sale con menos de lo que trajo.**"
+      ],
+      minutos: "34-36" },
+
+    { tipo: "tarea",
+      titulo: "Cuadro comparativo: conocimiento científico y conocimiento ordinario",
+      etiqueta: "Actividad con docente · en equipos · 25 minutos",
+      puntos: [
+        "**Criterios:** origen · forma de transmisión · método · lenguaje · forma de validación.",
+        "**Más criterios:** nivel de sistematización · alcance (local o universal) · relación con la práctica · fortalezas · limitaciones.",
+        "Para **cada criterio**, un ejemplo de su comunidad o de la escuela.",
+        "Cierren con **un párrafo**: ¿cómo podrían dialogar ambos saberes en un proyecto escolar?"
+      ],
+      minutos: "36-61",
+      evaluacion: "Rúbrica de Tarea (cuadro comparativo)",
+      notas: "Es la actividad con docente del programa. Pasa por los equipos: el error típico es poner «científico = bueno, ordinario = malo». Pide fortalezas y limitaciones de ambos. Rúbrica «Mapa conceptual y cuadros comparativos» en el Aula Virtual." },
+
+    { tipo: "pausa",
+      titulo: "¡Pausa activa!",
+      duracion: "2 minutos",
+      texto: "De pie. Piensa en algo que sabes hacer con las manos y que aprendiste **sin un libro**: hacer tortillas, amarrar una hamaca, arreglar una llave. Explícaselo a tu compañero **solo con gestos**, sin palabras. ¿Lo entendió? Eso es conocimiento tácito.",
+      minutos: "61-63" },
+
+    { tipo: "tema",
+      titulo: "6.3 Ciencia y arte",
+      etiqueta: "Una separación que no siempre existió",
+      puntos: [
+        "**Leonardo da Vinci** era pintor, ingeniero y anatomista, y no veía contradicción.",
+        "**Poincaré** resolvió un problema de semanas… al subir a un autobús.",
+        "Los físicos hablan de la **«elegancia»** de una ecuación.",
+        "Martínez Miguélez: interpretar y categorizar exige **creatividad e intuición**. El rigor no está reñido con la creatividad: **la necesita**."
+      ],
+      pasoAPaso: true,
+      minutos: "63-66" },
+
+    { tipo: "tabla",
+      titulo: "Popper: dos momentos de la ciencia",
+      columnas: ["Contexto de descubrimiento", "Contexto de justificación"],
+      filas: [
+        ["Cómo se le **ocurre** a alguien una idea", "Cómo se **pone a prueba**"],
+        ["Puede ser creativo, intuitivo, hasta irracional", "Debe ser riguroso"],
+        ["Necesita **imaginación**", "Necesita **comprobación**"]
+      ],
+      minutos: "66-68",
+      notas: "Muchos autores criticaron esta separación tan tajante, pero sigue siendo útil: la ciencia necesita imaginación para proponer y rigor para comprobar." },
+
+    { tipo: "tabla",
+      titulo: "Schön: el profesional reflexivo",
+      columnas: ["Concepto", "Qué es", "En el aula"],
+      filas: [
+        ["Racionalidad técnica", "La idea de que el profesional solo **aplica** teoría", "El maestro como aplicador de programas"],
+        ["Conocimiento en la acción", "El saber tácito que se ve en lo que hacemos con destreza", "Calmar a un grupo sin pensarlo dos veces"],
+        ["Reflexión en la acción", "Pensar **mientras** se actúa y ajustar sobre la marcha", "Cambiar la actividad a media clase porque no está funcionando"],
+        ["Reflexión sobre la acción", "Pensar **después** sobre lo ocurrido", "Preguntarse en la tarde por qué funcionó en un grupo y no en otro"]
+      ],
+      pasoAPaso: true,
+      minutos: "68-73",
+      notas: "Schön (1983/1998), El profesional reflexivo. Conexión: si llevaron un diario de prácticas en el Taller de Formación y Práctica Docente, ya hicieron reflexión sobre la acción." },
+
+    { tipo: "tabla",
+      titulo: "6.4 Un nuevo paradigma para la educación",
+      columnas: ["De…", "A…"],
+      filas: [
+        ["Conocimiento fragmentado", "Conocimiento **relacionado**: proyectos y problemas que integran disciplinas"],
+        ["Transmisión", "**Construcción dialógica**: pensar juntos"],
+        ["Contenidos abstractos", "Aprendizajes **contextualizados** en la comunidad"],
+        ["Certeza", "**Incertidumbre**: preparar para un mundo cambiante (Morin)"],
+        ["Docente técnico", "**Docente investigador** de su práctica"]
+      ],
+      pasoAPaso: true,
+      minutos: "73-77",
+      notas: "Delors (1996), La educación encierra un tesoro (UNESCO): aprender a conocer, a hacer, a vivir juntos y a ser. Junto con los siete saberes de Morin, inspiró varias reformas en México." },
+
+    { tipo: "tema",
+      titulo: "El docente como investigador",
+      etiqueta: "Stenhouse, Elliott, Carr y Kemmis",
+      puntos: [
+        "**Stenhouse:** el currículo es una **hipótesis** que el maestro pone a prueba en su salón.",
+        "No hay desarrollo del currículo **sin desarrollo del profesor**.",
+        "Ejemplo del libro: un equipo de una secundaria técnica **sistematiza** un ciclo de su estrategia de lectura: diarios, evidencias, rúbricas. Eso ya es **conocimiento pedagógico**.",
+        "**Respuesta parcial a la pregunta guía:** si la pedagogía es ciencia, no lo es solo por lo que se produce en las universidades, sino también por lo que **los maestros investigan en sus aulas**."
+      ],
+      pasoAPaso: true,
+      minutos: "77-81" },
+
+    { tipo: "tarea",
+      titulo: "Entrevista a un maestro con experiencia",
+      etiqueta: "Trabajo independiente",
+      puntos: [
+        "Elige a un docente con **al menos 10 años** de experiencia.",
+        "Pregúntale: ¿qué sabe hacer muy bien en el aula que **no aprendió en ningún libro**? ¿Cómo lo aprendió?",
+        "¿Podría **enseñárselo** a un maestro novato? ¿Cómo?",
+        "Escribe media cuartilla relacionando lo que te dijo con **Polanyi** y **Schön**.",
+        "Pide permiso para usar su testimonio y **no pongas su nombre** completo."
+      ],
+      minutos: "81-84" },
+
+    { tipo: "ejemplo",
+      numero: 8,
+      pregunta: "¿Qué método usarás y por qué es el camino adecuado para tu objeto de estudio?",
+      respuesta: "Usaré un diseño **cuasiexperimental** con dos grupos y prueba antes y después, complementado con **entrevistas semiestructuradas**. Siguiendo a Martínez Miguélez (2004), el método es el camino que se adecua al objeto: la comprensión lectora puede **medirse** con una prueba, pero la experiencia de los alumnos con la lectura en voz alta solo se alcanza **escuchándolos**. No es un experimento puro porque los grupos ya existen en la escuela y no puedo formarlos al azar; lo reconoceré como **limitación**.",
+      fuente: "Caso ficticio. Observa: nombra el diseño, lo justifica con un autor del curso y reconoce su límite.",
+      minutos: "84-88" },
+
+    { tipo: "ejemplo",
+      numero: 9,
+      pregunta: "¿Qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?",
+      respuesta: "Mi tema toca el **saber práctico de los docentes** que leen en voz alta desde hace años, un saber en buena parte tácito (Polanyi, 1966), y las **prácticas de lectura de las familias**, como contar historias en casa. Dialogaré con ellos entrevistando a dos docentes con experiencia **antes** de diseñar la intervención y preguntando a los alumnos qué se lee en sus casas. No los trataré como creencias que hay que corregir, sino como saberes que pueden **enriquecer la interpretación** de mis resultados (Sousa Santos, 2009).",
+      fuente: "Caso ficticio. Fíjate en el «cómo»: acciones concretas de diálogo, no solo buenas intenciones.",
+      minutos: "88-92" },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 8, texto: "¿Qué método usarás y por qué es el camino adecuado para tu objeto de estudio?" },
+        { numero: 9, texto: "¿Qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?" }
+      ],
+      minutos: "92-100",
+      notas: "Recuérdales: Entrega 2, martes 24 de noviembre, preguntas 1 a 14, de 150 a 250 palabras cada una." },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "¿Qué frase resume la idea de Polanyi?", respuesta: "**«Sabemos más de lo que podemos decir».**" },
+        { pregunta: "¿Qué propone la ecología de saberes?", respuesta: "**Que distintos saberes dialoguen** según el problema, sin que la ciencia sea el único." },
+        { pregunta: "¿Cuáles son los dos errores que hay que evitar?", respuesta: "**El cientificismo y el relativismo ingenuo.**" },
+        { pregunta: "Para Stenhouse, ¿qué es el currículo?", respuesta: "**Una hipótesis** que el maestro pone a prueba en su salón." }
+      ],
+      minutos: "100-115" },
+
+    { tipo: "cierre",
+      evidencia: "Cuadro comparativo por equipos (conocimiento científico y ordinario) con ejemplos y párrafo de cierre; borrador de las preguntas 8 y 9.",
+      materiales: "Libro de texto (Tema 6), hojas o cartulina para el cuadro, Aula Virtual.",
+      proxima: "**Martes 10:** entrevista a un docente con experiencia y lee el **Tema 7** (neurociencia y aprendizaje). Avanza las preguntas 8 y 9.",
+      minutos: "115-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

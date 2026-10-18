@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 460">
+  <rect width="1100" height="460" fill="#F4F6F9"/>
+  <g stroke="#16213A" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M300 140 H800"/><path d="M300 140 l45 -45 M300 140 l45 45 M800 140 l-45 -45 M800 140 l-45 45"/>
+    <path d="M300 330 H800"/><path d="M300 330 l-45 -45 M300 330 l-45 45 M800 330 l45 -45 M800 330 l45 45"/>
+  </g>
+  <text x="120" y="152" font-family="Public Sans, Arial" font-size="38" font-weight="700" fill="#2E5E8C">A</text>
+  <text x="120" y="342" font-family="Public Sans, Arial" font-size="38" font-weight="700" fill="#2E5E8C">B</text>
+</svg>
