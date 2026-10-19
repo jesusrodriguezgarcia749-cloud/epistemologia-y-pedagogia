@@ -1,13 +1,13 @@
 {
  "inicio": "2026-10-19",
- "fin": "2026-12-18",
+ "fin": "2026-12-11",
  "sesiones": [
   {
    "n": 1,
    "horas": 1,
    "fecha": "2026-10-19",
    "fechaTexto": "Lun 19 de octubre",
-   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1) Y CIERRE DEL TEMA 4 (contenido nuevo, se evalúa en el Parcial 2)",
    "titulo": "Encuadre · 1.1 Introducción a la epistemología (repaso)",
    "docente": [
     "Presentación de la asignatura, encuadre, ponderaciones institucionales y calendario de exámenes.",
@@ -38,7 +38,7 @@
    "horas": 2,
    "fecha": "2026-10-20",
    "fechaTexto": "Mar 20 de octubre",
-   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1) Y CIERRE DEL TEMA 4 (contenido nuevo, se evalúa en el Parcial 2)",
    "titulo": "1.2–1.3 Epistemología, teoría del conocimiento y filosofía de la ciencia; la evaluación como epistemología aplicada · 2.1–2.4 Naturaleza del conocimiento (repaso)",
    "docente": [
     "Apertura: la evaluación como epistemología aplicada (1.3). Discusión grupal: ¿qué supone sobre el conocimiento un examen de opción múltiple?",
@@ -46,7 +46,7 @@
     "Elaboración guiada del mapa conceptual sobre los tres términos (actividad con docente del programa).",
     "Exposición: tipos de conocimiento, cánones de cientificidad y clasificación de las ciencias (Dilthey: explicar y comprender; Bunge: ciencias formales y fácticas).",
     "Caso «Está comprobado científicamente»: análisis grupal de una afirmación viral con los cánones de cientificidad.",
-    "Organización de los equipos y asignación de autores para las exposiciones del Tema 4 (martes 27), para que tengan una semana de preparación."
+    "Organización de cuatro equipos y asignación de autores para las exposiciones de repaso del Tema 4 (positivismo lógico, Popper, Kuhn y Lakatos), el martes 27, para que tengan una semana de preparación."
    ],
    "independiente": [
     "Terminar el mapa conceptual.",
@@ -76,7 +76,7 @@
    "horas": 1,
    "fecha": "2026-10-26",
    "fechaTexto": "Lun 26 de octubre",
-   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1) Y CIERRE DEL TEMA 4 (contenido nuevo, se evalúa en el Parcial 2)",
    "titulo": "3.1–3.3 La racionalidad científica clásica: tradiciones, paradigmas, ontología sistémica y lógica lineal (repaso)",
    "docente": [
     "Exposición: tradiciones positivista, comprensiva y crítica de las ciencias sociales, y los tres paradigmas de la investigación educativa.",
@@ -106,12 +106,13 @@
    "horas": 2,
    "fecha": "2026-10-27",
    "fechaTexto": "Mar 27 de octubre",
-   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1)",
-   "titulo": "3.4 Lógica dialéctica · 4.1–4.7 Concepción contemporánea de la ciencia (repaso por exposiciones)",
+   "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1) Y CIERRE DEL TEMA 4 (contenido nuevo, se evalúa en el Parcial 2)",
+   "titulo": "3.4 Lógica dialéctica · 4.1–4.4 Concepción contemporánea de la ciencia (repaso por exposiciones) · 4.5–4.7 Feyerabend, Morin y la cientificidad de las ciencias sociales (contenido nuevo)",
    "docente": [
     "Apertura: lógica dialéctica con ejemplos del aula y la praxis en Freire (3.4).",
-    "Exposiciones por equipos: positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend y Morin (actividad independiente del programa), con retroalimentación del docente.",
-    "Cierre: la cientificidad de las ciencias sociales (doble hermenéutica, criterios propios de rigor).",
+    "Exposiciones de repaso por cuatro equipos: positivismo lógico, Popper, Kuhn y Lakatos (actividad independiente del programa), con retroalimentación del docente.",
+    "Exposición del docente (contenido nuevo, se evalúa en el Parcial 2): Feyerabend y el anarquismo epistemológico; Morin y el pensamiento complejo.",
+    "Cierre: la cientificidad de las ciencias sociales (doble hermenéutica, criterios propios de rigor), también contenido nuevo del Parcial 2.",
     "Taller de proyecto: cómo responder las preguntas 1 a 6 y citarlas en APA 7 (guía APA del Aula Virtual)."
    ],
    "independiente": [
@@ -239,16 +240,15 @@
    "fecha": "2026-11-17",
    "fechaTexto": "Mar 17 de noviembre",
    "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
-   "titulo": "Repaso integral del Parcial 2 (Temas 5 a 7) · Asesoría grupal del proyecto",
+   "titulo": "Repaso integral del Parcial 2 (cierre del Tema 4 y Temas 5 a 7) · Asesoría del protocolo · 10.5 El ensayo final",
    "docente": [
-    "Repaso por equipos con preguntas relámpago de los Temas 5, 6 y 7.",
-    "Resolución de dudas y explicación del formato del examen en línea.",
-    "Asesoría grupal del proyecto: errores frecuentes de la Entrega 1 y cómo corregirlos.",
-    "Taller de proyecto: cómo integrar las preguntas 7 a 14 en un borrador continuo."
+    "Repaso por equipos con preguntas relámpago del cierre del Tema 4 y de los Temas 5, 6 y 7; dudas y formato del examen en línea.",
+    "Asesoría del protocolo (actividad con docente del programa): mientras el grupo practica en el Aula Virtual y trabaja su borrador, el docente revisa con cada alumno, en 3 minutos, la coherencia entre pregunta, paradigma y método. Son 16 alumnos; la retroalimentación escrita de la Entrega 1 en el Aula Virtual complementa la asesoría.",
+    "Asesoría grupal: errores frecuentes de la Entrega 1 y cómo integrar las preguntas 1 a 14 en un borrador continuo (10.5 El ensayo final)."
    ],
    "independiente": [
-    "Práctica en el Aula Virtual con las actividades de los Temas 5 a 7.",
-    "Avanzar el borrador del ensayo (Entrega 2)."
+    "Práctica en el Aula Virtual con las actividades del Tema 4 y de los Temas 5 a 7.",
+    "Avanzar el borrador del ensayo (Entrega 2) con las observaciones de la asesoría."
    ],
    "proyecto": [
     "Pregunta 12: ¿qué interés guía tu investigación: técnico, práctico o emancipatorio? (Habermas)",
@@ -259,87 +259,40 @@
     "Participación (repaso)",
     "Asistencia"
    ],
-   "subtemas": []
+   "subtemas": [
+    "10.5"
+   ]
   },
   {
    "n": 9,
    "horas": 2,
    "fecha": "2026-11-24",
    "fechaTexto": "Mar 24 de noviembre",
-   "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
-   "titulo": "Asesoría del protocolo y del ensayo · Retroalimentación del Parcial 2",
+   "tema": "TEMAS 8 Y 9 — NUEVO PARADIGMA EN ORIENTACIÓN Y NUEVOS ENFOQUES PARADIGMÁTICOS",
+   "titulo": "8.1–8.3 Nuevo paradigma en orientación · 9.1–9.4 Bioética, desarrollo sustentable, economía y educación, de los programas computacionales a la inteligencia artificial · Retroalimentación del Parcial 2",
    "docente": [
-    "Asesoría individual (8 a 10 minutos por alumno): revisión epistemológica del protocolo —paradigma, enfoque, coherencia entre pregunta y método— y del borrador del ensayo (actividad con docente del programa).",
-    "Retroalimentación grupal del Examen Parcial 2."
-   ],
-   "independiente": [
-    "Incorporar al borrador las observaciones de la asesoría.",
-    "Lectura analítica del Tema 8."
-   ],
-   "proyecto": [
-    "Recepción de la Entrega 2: borrador completo que integra las preguntas 1 a 14 en texto continuo."
-   ],
-   "evaluacion": [
-    "Entrega 2 del proyecto (cuenta en el Examen Final)",
-    "Asistencia"
-   ],
-   "subtemas": [
-    "10.5"
-   ]
-  },
-  {
-   "n": 10,
-   "horas": 1,
-   "fecha": "2026-11-30",
-   "fechaTexto": "Lun 30 de noviembre",
-   "tema": "TEMA 8 — NUEVO PARADIGMA EN ORIENTACIÓN",
-   "titulo": "8.1–8.2 Nuevo paradigma en orientación: cambios en las bases epistemológicas y en la orientación",
-   "docente": [
-    "Exposición: del modelo de rasgos y factores (Parsons) al proyecto de vida; modelos de intervención (Bisquerra).",
-    "Del modelo del déficit a las barreras para el aprendizaje y la participación (Booth y Ainscow): caso Andrea."
+    "Retroalimentación grupal del Examen Parcial 2 (10 minutos).",
+    "Exposición del Tema 8: del modelo de rasgos y factores (Parsons) al proyecto de vida; modelos de intervención (Bisquerra); del modelo del déficit a las barreras para el aprendizaje y la participación (Booth y Ainscow), con el caso Andrea; la orientación y la psicopedagogía a la luz de los paradigmas (conexión con Orientación Educativa).",
+    "Exposición del Tema 9: bioética y ética de la investigación con menores (consentimiento, asentimiento, confidencialidad); desarrollo sustentable y Agenda 2030 como problema complejo; lectura epistemológica de las cuatro perspectivas de economía y educación (conexión con Economía y Educación); de los programas computacionales de los noventa a la inteligencia artificial generativa: qué es saber, cómo verificar y cómo declarar su uso en APA."
    ],
    "independiente": [
     "Analizar un caso de orientación vivido u observado desde dos paradigmas distintos.",
-    "Lectura analítica del subtema 8.3 y del Tema 9."
-   ],
-   "proyecto": [
-    "Pregunta 15: ¿qué barreras o desigualdades podría revelar —o reproducir— tu investigación?"
-   ],
-   "evaluacion": [
-    "Rúbrica de Tarea (análisis de caso)",
-    "Participación"
-   ],
-   "subtemas": [
-    "8.1",
-    "8.2"
-   ]
-  },
-  {
-   "n": 11,
-   "horas": 2,
-   "fecha": "2026-12-01",
-   "fechaTexto": "Mar 1 de diciembre",
-   "tema": "TEMA 9 — NUEVOS ENFOQUES PARADIGMÁTICOS",
-   "titulo": "8.3 Cambios en la psicopedagogía · 9.1–9.4 Bioética, desarrollo sustentable, economía y educación, de los programas computacionales a la inteligencia artificial",
-   "docente": [
-    "Apertura: cambios en la psicopedagogía; la orientación a la luz de los paradigmas (8.3, conexión con Orientación Educativa).",
-    "Exposición: bioética y ética de la investigación con menores (consentimiento, asentimiento, confidencialidad).",
-    "Desarrollo sustentable y Agenda 2030 como problema complejo.",
-    "Economía y educación: lectura epistemológica de las cuatro perspectivas (conexión con Economía y Educación).",
-    "De los programas computacionales de los noventa a la inteligencia artificial generativa: qué es saber, cómo verificar y cómo declarar su uso en APA."
-   ],
-   "independiente": [
     "Ficha de investigación con APA de un artículo reciente sobre economía y educación en México o América Latina.",
     "Lectura analítica del Tema 10."
    ],
    "proyecto": [
+    "Recepción de la Entrega 2: borrador completo que integra las preguntas 1 a 14 en texto continuo.",
+    "Pregunta 15: ¿qué barreras o desigualdades podría revelar —o reproducir— tu investigación?",
     "Pregunta 16: ¿qué dilemas éticos tiene tu investigación y cómo los resolverás? Si usaste inteligencia artificial, ¿cómo lo declaras?"
    ],
    "evaluacion": [
-    "Rúbrica de Tarea (ficha APA)",
+    "Entrega 2 del proyecto (cuenta en el Examen Final)",
+    "Rúbrica de Tarea (análisis de caso y ficha APA)",
     "Participación"
    ],
    "subtemas": [
+    "8.1",
+    "8.2",
     "8.3",
     "9.1",
     "9.2",
@@ -348,19 +301,20 @@
    ]
   },
   {
-   "n": 12,
+   "n": 10,
    "horas": 1,
-   "fecha": "2026-12-07",
-   "fechaTexto": "Lun 7 de diciembre",
+   "fecha": "2026-11-30",
+   "fechaTexto": "Lun 30 de noviembre",
    "tema": "TEMA 10 — INTEGRACIÓN: LA PEDAGOGÍA COMO CIENCIA EN LA NUEVA ESCUELA MEXICANA",
-   "titulo": "10.1–10.3 La Nueva Escuela Mexicana: lectura epistemológica y argumentos a favor y en contra",
+   "titulo": "10.1–10.4 La Nueva Escuela Mexicana: lectura epistemológica, argumentos a favor y en contra, y regreso a la pregunta guía",
    "docente": [
     "Exposición: fundamentos epistemológicos de la NEM (pensamiento complejo, diálogo de saberes, docente investigador).",
-    "Debate estructurado breve: argumentos a favor y críticos de la NEM, evaluados con evidencia."
+    "Debate breve: argumentos a favor y críticos de la NEM, evaluados con evidencia.",
+    "Regreso a la pregunta guía: ¿puede la pedagogía ser ciencia? Cada alumno compara su postura inicial (sesión 1) con la actual."
    ],
    "independiente": [
-    "Terminar la versión final del ensayo y preparar la defensa oral (3 a 4 minutos).",
-    "Práctica en el Aula Virtual con las actividades de todos los temas."
+    "Terminar la versión final del ensayo y preparar la defensa oral (3 minutos).",
+    "Práctica en el Aula Virtual con las actividades de todos los temas para el Examen Final."
    ],
    "proyecto": [
     "Pregunta 17: ¿cómo se relaciona tu investigación con la Nueva Escuela Mexicana?",
@@ -373,20 +327,22 @@
    "subtemas": [
     "10.1",
     "10.2",
-    "10.3"
+    "10.3",
+    "10.4"
    ]
   },
   {
-   "n": 13,
+   "n": 11,
    "horas": 2,
-   "fecha": "2026-12-08",
-   "fechaTexto": "Mar 8 de diciembre",
+   "fecha": "2026-12-01",
+   "fechaTexto": "Mar 1 de diciembre",
    "tema": "TEMA 10 — INTEGRACIÓN: LA PEDAGOGÍA COMO CIENCIA EN LA NUEVA ESCUELA MEXICANA",
-   "titulo": "10.4 Regreso a la pregunta guía · 10.5 El ensayo final: defensa oral · Repaso del Examen Final · Cierre del curso",
+   "titulo": "Entrega final y defensa oral del ensayo · Repaso integral del Examen Final (Temas 1 a 10) · Cierre del curso",
    "docente": [
-    "Defensa oral individual del ensayo (3 a 4 minutos por alumno) con preguntas del docente y del grupo.",
-    "Regreso a la pregunta guía (10.4): cada alumno compara su postura inicial (sesión 1) con su postura final.",
-    "Repaso exprés de los Temas 1 a 10 para el Examen Final y cierre del curso."
+    "Recepción de la versión final escrita del ensayo.",
+    "Defensa oral breve: 3 minutos por alumno y una pregunta del docente o del grupo (16 alumnos, cerca de 60 minutos).",
+    "Repaso integral de los Temas 1 a 10 para el Examen Final del lunes 7 de diciembre: formato del examen y casos de práctica.",
+    "Cierre del curso y espacio para la retroalimentación del alumno hacia el curso."
    ],
    "independiente": [
     "Repaso final en el Aula Virtual para el Examen Final."
@@ -395,12 +351,10 @@
     "Recepción de la versión final del ensayo y defensa oral."
    ],
    "evaluacion": [
-    "Rúbrica de ensayo y defensa (Entrega final)"
+    "Rúbrica de ensayo y defensa (Entrega final)",
+    "Asistencia"
    ],
-   "subtemas": [
-    "10.4",
-    "10.5"
-   ]
+   "subtemas": []
   }
  ],
  "eventos": [
@@ -427,7 +381,7 @@
    "tipo": "examen",
    "fecha": "2026-11-23",
    "titulo": "Examen Parcial 2",
-   "detalle": "Examen escrito en línea (Aula Virtual) de los Temas 5, 6 y 7; 60 minutos. Reactivos de opción múltiple, caso (multirreactivo), relación de columnas, jerarquización, completar enunciados y verdadero o falso, de nivel licenciatura. Vale el 40% del Parcial 2.",
+   "detalle": "Examen escrito en línea (Aula Virtual) del cierre del Tema 4 (Feyerabend, Morin y la cientificidad de las ciencias sociales) y de los Temas 5, 6 y 7; 60 minutos. Reactivos de opción múltiple, caso (multirreactivo), relación de columnas, jerarquización, completar enunciados y verdadero o falso, de nivel licenciatura. Vale el 40% del Parcial 2.",
    "fechaTexto": "Lunes 23 de noviembre"
   },
   {
@@ -439,10 +393,17 @@
   },
   {
    "tipo": "entrega",
-   "fecha": "2026-12-08",
+   "fecha": "2026-12-01",
    "titulo": "Entrega final del proyecto «Pienso, luego investigo»",
-   "detalle": "Versión final del ensayo «Pienso, luego investigo» (2,500 a 3,500 palabras, formato APA 7, mínimo 8 referencias, al menos 2 artículos académicos) y defensa oral individual.",
-   "fechaTexto": "Martes 8 de diciembre"
+   "detalle": "Versión final del ensayo «Pienso, luego investigo» (2,500 a 3,500 palabras, formato APA 7, mínimo 8 referencias, al menos 2 artículos académicos) y defensa oral breve (3 minutos).",
+   "fechaTexto": "Martes 1 de diciembre"
+  },
+  {
+   "tipo": "examen",
+   "fecha": "2026-12-07",
+   "titulo": "Examen Final",
+   "detalle": "Examen escrito en línea (Aula Virtual), integrador de todos los temas del curso (1 a 10); 40 reactivos de nivel licenciatura y de al menos tres tipos distintos, con casos de aplicación que piden usar los conceptos, no solo recordarlos.",
+   "fechaTexto": "Lunes 7 de diciembre, de 10:00 a 12:00 horas"
   },
   {
    "tipo": "aviso",
@@ -450,13 +411,6 @@
    "titulo": "Fin de cuatrimestre",
    "fechaTexto": "Viernes 11 de diciembre",
    "detalle": "Entrega de calificaciones acumuladas del parcial y del curso."
-  },
-  {
-   "tipo": "examen",
-   "fecha": "2026-12-14",
-   "titulo": "Examen Final",
-   "detalle": "Examen escrito en línea (Aula Virtual), integrador; 60 minutos, 40 reactivos de nivel licenciatura y de al menos tres tipos distintos: 25 de los Temas 8, 9 y 10 (aún no evaluados) y 15 casos de aplicación que retoman los Temas 1 a 7 para usarlos, no para memorizarlos.",
-   "fechaTexto": "Semana del 14 al 18 de diciembre (día por confirmar)"
   }
  ],
  "proyecto": {
@@ -504,11 +458,11 @@
    {
     "clave": "entregaFinal",
     "nombre": "Entrega final · Versión final y defensa",
-    "fecha": "2026-12-08",
-    "fechaTexto": "Martes 8 de diciembre",
+    "fecha": "2026-12-01",
+    "fechaTexto": "Martes 1 de diciembre",
     "puntos": 10,
     "temas": "Temas 8 a 10",
-    "requisito": "Ensayo de 2,500 a 3,500 palabras en APA 7 (mínimo 8 referencias, al menos 2 artículos académicos) y defensa oral de 3 a 4 minutos.",
+    "requisito": "Ensayo de 2,500 a 3,500 palabras en APA 7 (mínimo 8 referencias, al menos 2 artículos académicos) y defensa oral breve de 3 minutos.",
     "preguntas": [
      "¿Qué barreras o desigualdades podría revelar —o reproducir— tu investigación?",
      "¿Qué dilemas éticos tiene tu investigación y cómo los resolverás?",

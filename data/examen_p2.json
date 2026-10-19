@@ -1,11 +1,128 @@
 {
  "parcial": "p2",
- "titulo": "Examen Parcial 2 — Temas 5 a 7: nuevo paradigma, conocimiento ordinario y neurociencia",
+ "titulo": "Examen Parcial 2 — Cierre del Tema 4 (Feyerabend, Morin y la cientificidad de las ciencias sociales) y Temas 5 a 7",
  "config": {
-  "preguntasPorExamen": 32,
+  "preguntasPorExamen": 40,
   "minutos": 60
  },
  "reactivos": [
+  {
+   "subtema": "4.5",
+   "tipo": "caso",
+   "pregunta": "En un colegiado, una maestra propone que todos los proyectos de investigación sigan exactamente los mismos pasos, porque «así se garantiza que sean científicos». ¿Qué le respondería Feyerabend?",
+   "opciones": [
+    "Que en la historia real toda regla metodológica ha sido violada alguna vez con éxito, y que imponer un método único empobrece el conocimiento",
+    "Que tiene razón, porque solo el método garantiza el progreso de la ciencia",
+    "Que basta con que cada proyecto sea falsable para que sea científico",
+    "Que el método debe decidirse por votación de la comunidad científica"
+   ],
+   "correcta": 0,
+   "explicacion": "En Tratado contra el método, Feyerabend sostiene que ninguna regla fija garantiza el progreso: de ahí su «todo vale».",
+   "id": "p2-033"
+  },
+  {
+   "subtema": "4.5",
+   "tipo": "verdadero_falso",
+   "pregunta": "Para Feyerabend, «todo vale» significa que cualquier opinión es igual de buena que una teoría científica.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Significa que ninguna regla metodológica fija puede garantizar el progreso; leerlo como «da igual cualquier opinión» es una lectura superficial.",
+   "id": "p2-034"
+  },
+  {
+   "subtema": "4.5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué Feyerabend defendía la proliferación de teorías?",
+   "opciones": [
+    "Porque las teorías alternativas, incluso las que contradicen lo establecido, permiten ver los puntos débiles de la teoría dominante",
+    "Porque así se llega más rápido a una teoría verdadera y definitiva",
+    "Porque cada científico debe tener su propia teoría",
+    "Porque las teorías alternativas siempre son mejores que la dominante"
+   ],
+   "correcta": 0,
+   "explicacion": "El pluralismo teórico sirve para criticar y poner a prueba lo establecido.",
+   "id": "p2-035"
+  },
+  {
+   "subtema": "4.6",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada principio del pensamiento complejo de Morin con el ejemplo que lo ilustra.",
+   "pares": [
+    {
+     "izquierda": "Principio dialógico",
+     "derecha": "Ni un salón demasiado ordenado ni uno en caos aprenden: orden y desorden se complementan"
+    },
+    {
+     "izquierda": "Recursividad organizacional",
+     "derecha": "La sociedad forma a los individuos, y los individuos forman la sociedad"
+    },
+    {
+     "izquierda": "Principio hologramático",
+     "derecha": "Cada salón refleja el sistema educativo completo"
+    }
+   ],
+   "explicacion": "Son los tres principios que Morin (1990/1994) propone para superar el paradigma de simplificación.",
+   "id": "p2-036"
+  },
+  {
+   "subtema": "4.6",
+   "tipo": "completar",
+   "pregunta": "Según Morin, la ciencia moderna se organizó bajo un paradigma de _______, basado en la disyunción, la reducción y la abstracción.",
+   "opciones": [
+    "simplificación",
+    "complejidad",
+    "refutación",
+    "comprensión"
+   ],
+   "correcta": 0,
+   "explicacion": "Ese paradigma dio frutos, pero produjo un conocimiento fragmentado.",
+   "id": "p2-037"
+  },
+  {
+   "subtema": "4.6",
+   "tipo": "caso",
+   "pregunta": "Una escuela organiza su plan en campos formativos y ejes articuladores en lugar de asignaturas aisladas. ¿Qué idea de Morin está detrás de esa decisión?",
+   "opciones": [
+    "Superar la fragmentación del conocimiento que produce el paradigma de simplificación",
+    "Asegurar que cada materia tenga su propio método",
+    "Reducir los contenidos a sus partes más simples",
+    "Aplicar el criterio de falsación a cada campo"
+   ],
+   "correcta": 0,
+   "explicacion": "La Nueva Escuela Mexicana retoma la crítica de Morin a la fragmentación (SEP, 2022); Morin (1999) escribió Los siete saberes para la UNESCO.",
+   "id": "p2-038"
+  },
+  {
+   "subtema": "4.7",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué señaló Anthony Giddens con el concepto de doble hermenéutica?",
+   "opciones": [
+    "Que las ciencias sociales interpretan un mundo ya interpretado por los actores, y que sus conceptos regresan a la sociedad y la transforman",
+    "Que toda investigación debe interpretarse dos veces para ser válida",
+    "Que las ciencias sociales deben imitar el método de la física",
+    "Que la interpretación es imposible en las ciencias sociales"
+   ],
+   "correcta": 0,
+   "explicacion": "Ejemplo del libro: cuando la palabra «bullying» entró a las escuelas, cambió cómo se viven ciertos conflictos.",
+   "id": "p2-039"
+  },
+  {
+   "subtema": "4.7",
+   "tipo": "caso",
+   "pregunta": "Un compañero dice: «La pedagogía no es ciencia porque no tiene leyes universales ni experimentos controlados como la física». ¿Qué respuesta es más defendible con lo visto en el Tema 4?",
+   "opciones": [
+    "Que ni las ciencias naturales siguen un método único (Kuhn, Lakatos, Feyerabend), y que las ciencias sociales tienen objeto, métodos y criterios de rigor propios",
+    "Que tiene razón: solo es ciencia lo que se parece a la física",
+    "Que la pedagogía es ciencia porque usa estadística",
+    "Que la pregunta no tiene sentido, porque toda opinión vale igual"
+   ],
+   "correcta": 0,
+   "explicacion": "Rigor sin imitación: credibilidad, transferibilidad, consistencia y confirmabilidad son criterios exigentes, aunque no sean los de la física.",
+   "id": "p2-040"
+  },
   {
    "id": "p2-001",
    "subtema": "5.1",
