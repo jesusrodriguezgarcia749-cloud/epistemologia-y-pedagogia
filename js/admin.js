@@ -177,7 +177,7 @@ async function eliminarGrupo() {
   const alumnosSnap = await getDocs(collection(db, 'grupos', grupoActivo, 'alumnos'));
   for (const alumnoDoc of alumnosSnap.docs) {
     const base = ['grupos', grupoActivo, 'alumnos', alumnoDoc.id];
-    for (const sub of ['tareas', 'participaciones', 'asistencias', 'uniformes', 'examenes', 'externa', 'proyecto', 'intentos']) {
+    for (const sub of ['tareas', 'participaciones', 'asistencias', 'uniformes', 'examenes', 'externa', 'proyecto', 'intentos', 'actividades']) {
       const subSnap = await getDocs(collection(db, ...base, sub)).catch(() => null);
       if (subSnap) await Promise.all(subSnap.docs.map(d => deleteDoc(doc(db, ...base, sub, d.id))));
     }
@@ -305,7 +305,7 @@ async function agregarAlumno(e) {
 
 // Subcolecciones y documentos que forman el expediente de un alumno. Si al
 // corregir el nombre cambia su identificador, todo esto se muda al nuevo.
-const SUBCOLECCIONES_ALUMNO = ['tareas', 'participaciones', 'asistencias', 'uniformes', 'examenes', 'externa', 'proyecto', 'intentos'];
+const SUBCOLECCIONES_ALUMNO = ['tareas', 'participaciones', 'asistencias', 'uniformes', 'examenes', 'externa', 'proyecto', 'intentos', 'actividades'];
 
 // Datos del alumno para guardar, sin el campo "id" (ese es el nombre del
 // documento, no un dato; si se guarda, se queda con el valor viejo).
@@ -479,7 +479,7 @@ async function cargarCatalogo(tipo) {
     const nota = document.createElement('p');
     nota.className = 'field-hint';
     nota.style.margin = '0 0 10px';
-    nota.textContent = 'La participación se marca con palomita: cuenta cuántas veces participó cada alumno, no con qué calificación.';
+    nota.textContent = 'La participación se marca con palomita: cuenta cuántas veces participó cada alumno, no con qué calificación. Desde el Parcial 2, 4 participaciones en clase dan 10 puntos; los otros 15 los dan las actividades de repaso que el alumno termina sin errores en el Aula Virtual.';
     cont.appendChild(nota);
   }
   // Para tareas, se recuerda cuántas hay: es el denominador del promedio.
@@ -528,7 +528,7 @@ async function calificarItem(tipo, item) {
       const marcado = valores[a.id] !== '' && valores[a.id] !== undefined && valores[a.id] !== null;
       row.innerHTML = `<label class="part-check" style="display:flex; align-items:center; gap:10px; width:100%; cursor:pointer;"><input type="checkbox" class="part-input" ${marcado ? 'checked' : ''} style="width:22px; height:22px; flex:none;"><span class="student-name">${escaparHTML(a.nombre)}</span></label>`;
     } else {
-      row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10">`;
+      row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10"><textarea class="proy-comentario" rows="2" placeholder="Comentarios para el alumno: qué salió bien y qué debe corregir (lo verá en Mi progreso)">${escaparHTML(comentarios[a.id] || '')}</textarea>`;
     }
     filasCont.appendChild(row);
   });
@@ -699,7 +699,7 @@ async function cargarPractico() {
   alumnosCache.forEach(a => {
     const row = document.createElement('div');
     row.className = 'ens-row'; row.dataset.alumnoId = a.id;
-    row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10">`;
+    row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10"><textarea class="proy-comentario" rows="2" placeholder="Comentarios para el alumno: qué salió bien y qué debe corregir (lo verá en Mi progreso)">${escaparHTML(comentarios[a.id] || '')}</textarea>`;
     cont.appendChild(row);
   });
 }
@@ -735,15 +735,16 @@ async function cargarEntregaProyecto(entrega) {
   if (!cont) return;
   cont.innerHTML = '<p class="empty-inline">Cargando…</p>';
   const valores = {};
+  const comentarios = {};
   await Promise.all(alumnosCache.map(async (a) => {
-    try { const snap = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, 'proyecto', entrega)); valores[a.id] = snap.exists() ? snap.data().calificacion : ''; }
-    catch { valores[a.id] = ''; }
+    try { const snap = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, 'proyecto', entrega)); valores[a.id] = snap.exists() ? snap.data().calificacion : ''; comentarios[a.id] = snap.exists() ? (snap.data().comentario || '') : ''; }
+    catch { valores[a.id] = ''; comentarios[a.id] = ''; }
   }));
   cont.innerHTML = '';
   alumnosCache.forEach(a => {
     const row = document.createElement('div');
     row.className = 'ens-row'; row.dataset.alumnoId = a.id;
-    row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10">`;
+    row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10"><textarea class="proy-comentario" rows="2" placeholder="Comentarios para el alumno: qué salió bien y qué debe corregir (lo verá en Mi progreso)">${escaparHTML(comentarios[a.id] || '')}</textarea>`;
     cont.appendChild(row);
   });
 }
@@ -756,7 +757,8 @@ async function guardarEntregaProyecto(entrega) {
     const alumnoId = row.dataset.alumnoId;
     const input = row.querySelector('.calif-input');
     const calificacion = input.value === '' ? null : parseFloat(input.value);
-    escrituras.push(setDoc(doc(db, 'grupos', grupoActivo, 'alumnos', alumnoId, 'proyecto', entrega), { calificacion, actualizado: serverTimestamp() }));
+    const comentario = (row.querySelector('.proy-comentario')?.value || '').trim();
+    escrituras.push(setDoc(doc(db, 'grupos', grupoActivo, 'alumnos', alumnoId, 'proyecto', entrega), { calificacion, comentario, actualizado: serverTimestamp() }));
   });
   try { await Promise.all(escrituras); } catch (err) { marcarResultado(`btn-guardar-${entrega}`, `${entrega}-msg`, false, '', 'No se pudo guardar: ' + (err.message || err)); return; }
   marcarResultado(`btn-guardar-${entrega}`, `${entrega}-msg`, true, '✓ Guardado.', '');
@@ -1133,7 +1135,7 @@ async function ajustarCalificacionExamen(alumnoId, parcial) {
 // ---------- HISTORIAL ----------
 async function datosDeAlumno(alumnoId) {
   const base = ['grupos', grupoActivo, 'alumnos', alumnoId];
-  const [alumnoSnap, catalogoSnap, tarSnap, partSnap, asisSnap, unifP1, unifP2, exaP1, exaP2, exaFinal, externaP1, proyE1, proyE2, proyEF] = await Promise.all([
+  const [alumnoSnap, catalogoSnap, tarSnap, partSnap, asisSnap, unifP1, unifP2, exaP1, exaP2, exaFinal, externaP1, proyE1, proyE2, proyEF, actSnap] = await Promise.all([
     // Documento del alumno: ahí se guardan las decisiones de redondeo.
     getDoc(doc(db, ...base)).catch(() => null),
     // Catálogo de tareas del grupo: define cuántas tareas existen en cada
@@ -1152,8 +1154,10 @@ async function datosDeAlumno(alumnoId) {
     getDoc(doc(db, ...base, 'proyecto', 'entrega1')).catch(() => null),
     getDoc(doc(db, ...base, 'proyecto', 'entrega2')).catch(() => null),
     getDoc(doc(db, ...base, 'proyecto', 'entregaFinal')).catch(() => null),
+    getDocs(collection(db, ...base, 'actividades')).catch(() => null),
   ]);
   return {
+    actividades: actSnap ? actSnap.docs.map(d => d.data()) : [],
     redondeos: alumnoSnap && alumnoSnap.exists() ? (alumnoSnap.data().redondeos || {}) : {},
     catalogoTareas: catalogoSnap ? catalogoSnap.docs.map(d => ({ id: d.id, ...d.data() })) : [],
     // Se conserva el id del documento: es el mismo id que la tarea tiene en
@@ -1372,7 +1376,7 @@ async function mostrarResumenAlumno(alumno) {
       } else {
         cuerpo = filaRubro('Examen', r.examen.pts, r.examen.tope) +
           filaRubro(etiquetaTareas(r.tareas), r.tareas.pts, r.tareas.tope) +
-          filaRubro(`Participación (${r.participacion.cantidad} de ${r.participacion.meta})`, r.participacion.pts, r.participacion.tope) +
+          filaRubro(`Participación (${r.participacion.texto})`, r.participacion.pts, r.participacion.tope) +
           filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope) +
           filaRubro('Uniformes', r.uniformes.pts, r.uniformes.tope) +
           `<details class="prog-detalle-bloque" style="margin-top:8px;"><summary>Ver fechas — Tareas y Participación</summary><p class="field-hint" style="margin:8px 0 2px;">Tareas:</p>${listaTareasHTML(r.tareas.lista, r.tareas.faltantes)}<p class="field-hint" style="margin:10px 0 2px;">Participación:</p>${listaDetalleHTML(r.participacion.lista, 'Sin participación capturada.', false)}</details>`;

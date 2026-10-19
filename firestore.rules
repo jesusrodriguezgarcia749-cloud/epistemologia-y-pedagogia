@@ -2,7 +2,8 @@ rules_version = '2';
 // Reglas de Firestore — Aula Virtual · Epistemología y Pedagogía
 // Docente (con sesión iniciada): lee y escribe todo.
 // Alumno (sin sesión, entra con nombre y PIN): solo lee, y solo escribe
-// su intento de examen y la calificación de su examen en línea.
+// su intento de examen, la calificación de su examen en línea y los
+// temas de repaso que termina.
 service cloud.firestore {
   match /databases/{database}/documents {
     match /grupos/{grupoId} {
@@ -27,6 +28,13 @@ service cloud.firestore {
         }
         match /examenes/{parcial} {
           allow write: if parcial in ['p1', 'p2', 'final'];
+        }
+        // Actividades de repaso: el alumno solo puede marcar un tema como
+        // terminado (tema-1, tema-2, …), con estos campos y nada más.
+        match /actividades/{temaId} {
+          allow create, update: if temaId.matches('tema-[0-9]+')
+            && request.resource.data.completado == true
+            && request.resource.data.keys().hasOnly(['tema', 'completado', 'total', 'nombre', 'fecha']);
         }
       }
     }
