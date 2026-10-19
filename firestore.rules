@@ -30,11 +30,13 @@ service cloud.firestore {
           allow write: if parcial in ['p1', 'p2', 'final'];
         }
         // Actividades de repaso: el alumno solo puede marcar un tema como
-        // terminado (tema-1, tema-2, …), con estos campos y nada más.
+        // terminado (tema-1, tema-2, …) y debe enviar su PIN correcto.
+        // Una vez guardado, el alumno ya no puede cambiarlo ni borrarlo.
         match /actividades/{temaId} {
-          allow create, update: if temaId.matches('tema-[0-9]+')
+          allow create: if temaId.matches('tema-[0-9]+')
             && request.resource.data.completado == true
-            && request.resource.data.keys().hasOnly(['tema', 'completado', 'total', 'nombre', 'fecha']);
+            && request.resource.data.correcto == true
+            && request.resource.data.pinVerificado == get(/databases/$(database)/documents/grupos/$(grupoId)/alumnos/$(alumnoId)).data.pin;
         }
       }
     }
