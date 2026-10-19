@@ -37,7 +37,7 @@ const PRESENTACION = {
         "Avanzar las **preguntas 8 y 9** del proyecto."
       ],
       pasoAPaso: true,
-      minutos: "1-3" },
+      minutos: "1-2" },
 
     { tipo: "repaso",
       titulo: "¿Qué recuerdas de la sesión 5?",
@@ -46,12 +46,12 @@ const PRESENTACION = {
         { pregunta: "¿De dónde viene la palabra «método»?", respuesta: "Del griego *méthodos*: **camino**." },
         { pregunta: "¿Qué es el diálogo de saberes?", respuesta: "**El encuentro respetuoso entre la ciencia y otros saberes**, como los comunitarios." }
       ],
-      minutos: "3-5" },
+      minutos: "2-4" },
 
     { tipo: "pregunta",
       pregunta: "¿Quién sabe más de suelos: un agrónomo con doctorado o un campesino que ha sembrado milpa durante cuarenta años?",
       respuesta: "Depende de **qué pregunta** quieras responder. Cada uno sabe cosas que el otro no, y de **maneras distintas**. De eso trata hoy.",
-      minutos: "5-6" },
+      minutos: "4-5" },
 
     { tipo: "tabla",
       titulo: "6.1 Cinco maneras de conocer",
@@ -64,13 +64,13 @@ const PRESENTACION = {
         ["Práctica e intuición", "Sé cuándo un grupo está a punto de desbordarse, aunque no sepa explicar cómo."]
       ],
       pasoAPaso: true,
-      minutos: "6-8",
+      minutos: "5-6",
       notas: "Ninguna es infalible y casi todo lo que sabemos combina varias. Hasta los científicos dependen del testimonio: nadie repite todos los experimentos de su disciplina." },
 
     { tipo: "pregunta",
       pregunta: "¿Puedes explicar con palabras cómo andas en bicicleta?",
       respuesta: "No del todo. **Sabemos más de lo que podemos decir** (Polanyi). A ese saber que no cabe completo en palabras se le llama **conocimiento tácito**.",
-      minutos: "8-9" },
+      minutos: "6-7" },
 
     { tipo: "tema",
       titulo: "El conocimiento tácito",
@@ -82,7 +82,7 @@ const PRESENTACION = {
         "**¿Qué saberes tácitos tiene un buen maestro?** Manejar los tiempos, detectar que un alumno tiene problemas en casa, saber cuándo insistir."
       ],
       pasoAPaso: true,
-      minutos: "9-11" },
+      minutos: "7-9" },
 
     { tipo: "tema",
       titulo: "6.2 El conocimiento ordinario",
@@ -95,21 +95,54 @@ const PRESENTACION = {
         "A veces acierta y a veces se equivoca: durante siglos dijo que **el Sol gira alrededor de la Tierra**, porque así se ve."
       ],
       pasoAPaso: true,
-      minutos: "11-13" },
+      minutos: "9-10" },
+
+    { tipo: "tabla",
+      titulo: "Cinco rasgos del sentido común",
+      columnas: ["El conocimiento ordinario es…", "Por ejemplo"],
+      filas: [
+        ["**Práctico**", "Sirve para resolver problemas inmediatos."],
+        ["**Compartido**", "Se transmite en la familia y la comunidad."],
+        ["**Poco sistemático**", "No se organiza en teorías explícitas."],
+        ["**Poco crítico**", "Rara vez se pone a prueba a propósito."],
+        ["**Contextual**", "Funciona bien en su contexto, pero puede fallar fuera de él."]
+      ],
+      pasoAPaso: true,
+      minutos: "10-12",
+      notas: "A veces acierta y a veces se equivoca: durante siglos dijo que el Sol gira alrededor de la Tierra «porque así se ve». Pero muchos descubrimientos partieron de observaciones populares." },
 
     { tipo: "imagen",
       titulo: "El conocimiento local: la milpa",
       imagen: "img/s6-milpa.svg",
       pie: "Conocimiento ecológico desarrollado en Mesoamérica hace miles de años.",
-      minutos: "13-15",
+      minutos: "12-14",
       notas: "Otros ejemplos del libro: la nixtamalización (cocer el maíz con cal mejora su valor nutritivo; la nutrición lo explicó siglos después), la herbolaria (de ahí salieron medicamentos, aunque no todo remedio resiste la comprobación) y el saber del monte y del mar de pescadores y milperos de la península." },
 
     { tipo: "video",
       titulo: "Agrobiodiversidad: la milpa",
       mp4: "https://nemdigitalstorage.blob.core.windows.net/nem-main/archivos/2022/11/03/HD_BACH_VS_SEM16_MILPA.mp4",
       pie: "Nueva Escuela Mexicana Digital (SEP), con investigadoras del Instituto de Biología de la UNAM y de la CONABIO.",
-      minutos: "15-21",
+      minutos: "14-20",
       notas: "Video oficial de la plataforma NEM Digital de la SEP. Proyecta un fragmento de 5 o 6 minutos." },
+
+    { tipo: "tema",
+      titulo: "Más saberes locales de México",
+      etiqueta: "Antes de que la ciencia los explicara",
+      puntos: [
+        "**Nixtamalización:** cocer el maíz con cal mejora su valor nutritivo; la nutrición lo explicó siglos después.",
+        "**Herbolaria:** de ahí salieron medicamentos modernos, aunque **no todo remedio** resiste la comprobación.",
+        "**El monte y el mar:** pescadores del Golfo y milperos de la península leen lluvias, animales y señales del entorno con gran precisión.",
+        "¿Qué saber local conoces de tu familia o tu comunidad?"
+      ],
+      pasoAPaso: true,
+      minutos: "20-22" },
+
+    { tipo: "dato",
+      titulo: "Epistemicidio",
+      cifra: "Epistemicidio",
+      texto: "Así llamó **Boaventura de Sousa Santos** a la destrucción de los saberes de los pueblos colonizados. Su respuesta: las **epistemologías del Sur** y una **ecología de saberes**.",
+      fuente: "Sousa Santos (2009). La NEM retoma la idea al pedir diálogo entre saberes comunitarios y conocimiento científico (SEP, 2022).",
+      minutos: "22-23" },
 
     { tipo: "tema",
       titulo: "Ecología de saberes",
@@ -122,7 +155,7 @@ const PRESENTACION = {
         "La NEM lo retoma como **saberes comunitarios** (SEP, 2022)."
       ],
       pasoAPaso: true,
-      minutos: "21-23" },
+      minutos: "23-24" },
 
     { tipo: "tabla",
       titulo: "Dos errores que hay que evitar",
@@ -133,7 +166,7 @@ const PRESENTACION = {
         ["La salida", "Diálogo de saberes: cada saber se valora por su capacidad de responder **ciertas preguntas en ciertos contextos**", "Las diferencias se discuten con **respeto y con argumentos**"]
       ],
       pasoAPaso: true,
-      minutos: "23-25" },
+      minutos: "24-26" },
 
     { tipo: "observa",
       titulo: "La milpa en el salón",
@@ -146,7 +179,7 @@ const PRESENTACION = {
         "Al final: un **cartel bilingüe en maya y español** que integra ambos saberes.",
         "Los abuelos también aprenden. **Nadie sale con menos de lo que trajo.**"
       ],
-      minutos: "25-27" },
+      minutos: "26-28" },
 
     { tipo: "tarea",
       titulo: "Cuadro comparativo: conocimiento científico y conocimiento ordinario",
@@ -157,7 +190,7 @@ const PRESENTACION = {
         "Para **cada criterio**, un ejemplo de su comunidad o de la escuela.",
         "Cierren con **un párrafo**: ¿cómo podrían dialogar ambos saberes en un proyecto escolar?"
       ],
-      minutos: "27-42",
+      minutos: "28-41",
       evaluacion: "Rúbrica de Tarea (cuadro comparativo)",
       notas: "Es la actividad con docente del programa. Pasa por los equipos: el error típico es poner «científico = bueno, ordinario = malo». Pide fortalezas y limitaciones de ambos. Rúbrica «Mapa conceptual y cuadros comparativos» en el Aula Virtual." },
 
@@ -171,21 +204,34 @@ const PRESENTACION = {
         "Escribe media cuartilla relacionando lo que te dijo con **Polanyi** y **Schön**.",
         "Pide permiso para usar su testimonio y **no pongas su nombre** completo."
       ],
-      minutos: "42-44" },
+      minutos: "41-42" },
 
     { tipo: "ejemplo",
       numero: 8,
       pregunta: "¿Qué método usarás y por qué es el camino adecuado para tu objeto de estudio?",
       respuesta: "Usaré un diseño **cuasiexperimental** con dos grupos y prueba antes y después, complementado con **entrevistas semiestructuradas**. Siguiendo a Martínez Miguélez (2004), el método es el camino que se adecua al objeto: la comprensión lectora puede **medirse** con una prueba, pero la experiencia de los alumnos con la lectura en voz alta solo se alcanza **escuchándolos**. No es un experimento puro porque los grupos ya existen en la escuela y no puedo formarlos al azar; lo reconoceré como **limitación**.",
       fuente: "Caso ficticio. Observa: nombra el diseño, lo justifica con un autor del curso y reconoce su límite.",
-      minutos: "44-47" },
+      minutos: "42-45" },
 
     { tipo: "ejemplo",
       numero: 9,
       pregunta: "¿Qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?",
       respuesta: "Mi tema toca el **saber práctico de los docentes** que leen en voz alta desde hace años, un saber en buena parte tácito (Polanyi, 1966), y las **prácticas de lectura de las familias**, como contar historias en casa. Dialogaré con ellos entrevistando a dos docentes con experiencia **antes** de diseñar la intervención y preguntando a los alumnos qué se lee en sus casas. No los trataré como creencias que hay que corregir, sino como saberes que pueden **enriquecer la interpretación** de mis resultados (Sousa Santos, 2009).",
       fuente: "Caso ficticio. Fíjate en el «cómo»: acciones concretas de diálogo, no solo buenas intenciones.",
-      minutos: "47-49" },
+      minutos: "45-46" },
+
+    { tipo: "tabla",
+      titulo: "Glosario de hoy",
+      columnas: ["Concepto", "En una línea"],
+      filas: [
+        ["Conocimiento tácito", "Saber que no puede expresarse del todo con palabras (Polanyi)."],
+        ["Conocimiento ordinario", "Sentido común que compartimos para la vida diaria."],
+        ["Conocimiento local", "Saber que una comunidad desarrolla por generaciones en su territorio."],
+        ["Ecología de saberes", "Diálogo y complementariedad entre distintos tipos de conocimiento."],
+        ["Cientificismo", "Creer que solo la ciencia produce conocimiento válido."]
+      ],
+      pasoAPaso: true,
+      minutos: "46-48" },
 
     { tipo: "proyecto",
       titulo: "Pienso, luego investigo · hoy",
@@ -193,7 +239,7 @@ const PRESENTACION = {
         { numero: 8, texto: "¿Qué método usarás y por qué es el camino adecuado para tu objeto de estudio?" },
         { numero: 9, texto: "¿Qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?" }
       ],
-      minutos: "49-55",
+      minutos: "48-52",
       notas: "Recuérdales: Entrega 2, martes 24 de noviembre, preguntas 1 a 14, de 150 a 250 palabras cada una." },
 
     { tipo: "repaso",
@@ -203,13 +249,13 @@ const PRESENTACION = {
         { pregunta: "¿Cuáles son los dos errores que hay que evitar?", respuesta: "**El cientificismo y el relativismo ingenuo.**" },
         { pregunta: "Da un ejemplo de conocimiento local mexicano.", respuesta: "**La milpa**: un saber ecológico que se desarrolló en Mesoamérica hace miles de años." }
       ],
-      minutos: "55-58" },
+      minutos: "52-55" },
 
     { tipo: "cierre",
       evidencia: "Cuadro comparativo por equipos (conocimiento científico y ordinario) con ejemplos y párrafo de cierre; borrador de las preguntas 8 y 9.",
       materiales: "Libro de texto (Tema 6), hojas o cartulina para el cuadro, Aula Virtual.",
       proxima: "**Martes 10:** abrimos con ciencia y arte (6.3 y 6.4) y seguimos con el Tema 7. Termina el cuadro comparativo, entrevista a un docente con experiencia y lee el **6.3, el 6.4 y el Tema 7** (neurociencia y aprendizaje). Avanza las preguntas 8 y 9.",
-      minutos: "58-60" }
+      minutos: "55-57" }
   ]
 };
 </script>

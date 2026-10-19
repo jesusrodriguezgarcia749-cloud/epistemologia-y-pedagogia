@@ -46,23 +46,26 @@ const PRESENTACION = {
       titulo: "¿Qué recuerdas de ayer?",
       preguntas: [
         { pregunta: "Conocer es una creencia verdadera y…", respuesta: "**…justificada.**" },
-        { pregunta: "¿Qué evaluación supone que el conocimiento se demuestra en desempeños complejos?", respuesta: "**La rúbrica de un proyecto.**" },
-        { pregunta: "¿Cómo se llama tu proyecto y cuándo es la Entrega 1?", respuesta: "**Pienso, luego investigo · martes 3 de noviembre.**" }
+        { pregunta: "¿Cómo se llama el proyecto del curso y qué analiza?", respuesta: "**Pienso, luego investigo:** tu protocolo de investigación, visto con lentes epistemológicos." },
+        { pregunta: "¿Cuál es la pregunta guía del curso?", respuesta: "**¿Puede la pedagogía ser ciencia?**" }
       ],
       minutos: "3-7",
       notas: "Si ayer no se pudo aplicar el Examen Diagnóstico, aplícalo ahora (40 minutos) y recorta el video del minuto 1 y la pausa activa." },
 
-    { tipo: "tabla",
-      titulo: "Ajustes al calendario",
-      etiqueta: "Corrige tus notas de ayer",
-      columnas: ["Qué", "Cuándo", "Qué cambia"],
-      filas: [
-        ["Parcial 2", "Lunes 23 de noviembre", "Incluye el **cierre del Tema 4** (Feyerabend, Morin y la cientificidad de las ciencias sociales) y los Temas 5 a 7."],
-        ["Entrega final y defensa", "Martes 1 de diciembre", "Ensayo escrito y **defensa oral de 3 minutos**."],
-        ["Examen Final", "Lunes 7 de diciembre, 10:00 a 12:00", "Es de **todos los temas**, del 1 al 10."]
+    { tipo: "tema",
+      titulo: "Fechas que no puedes perder",
+      etiqueta: "Anótalas hoy",
+      puntos: [
+        "**Martes 3 de noviembre:** Entrega 1 del proyecto (preguntas 1 a 6).",
+        "**Lunes 23 de noviembre:** Examen del Parcial 2 (cierre del Tema 4 y Temas 5 a 7).",
+        "**Martes 24 de noviembre:** Entrega 2 del proyecto (preguntas 1 a 14).",
+        "**Martes 1 de diciembre:** Entrega final del ensayo y **defensa oral** (3 minutos).",
+        "**Lunes 7 de diciembre, 10:00 a 12:00:** Examen Final, de **todos los temas**.",
+        "**Sin clase:** lunes 2 y lunes 16 de noviembre (descanso obligatorio)."
       ],
-      minutos: "7-9",
-      notas: "Coordinación confirmó el Examen Final para el lunes 7 de diciembre y que la docente anterior llegó hasta el 4.3 del programa. Feyerabend, Morin y el 4.7 son contenido nuevo: los expones tú el martes 27. Todo esto ya está en el calendario del Aula Virtual." },
+      pasoAPaso: true,
+      minutos: "7-10",
+      notas: "El lunes no alcanzó el tiempo para dar las fechas: dalas hoy. También están en el calendario del Aula Virtual." },
 
     { tipo: "tema",
       titulo: "1.3 La evaluación es epistemología aplicada",
@@ -75,12 +78,12 @@ const PRESENTACION = {
       ],
       pasoAPaso: true,
       notas: "Viene de la sesión 1: el lunes solo hay 1 hora. Si ya lo viste, salta estas cuatro diapositivas.",
-      minutos: "9-11" },
+      minutos: "10-12" },
 
     { tipo: "pregunta",
       pregunta: "¿Qué supone sobre el conocimiento un examen de opción múltiple?",
       respuesta: "Que saber es **reconocer la respuesta correcta** entre varias. Mide bien la información; mide peor la comprensión, la argumentación o el desempeño.",
-      minutos: "11-16",
+      minutos: "12-17",
       evaluacion: "Participación (discusión grupal)",
       notas: "Discusión grupal de la planeación. Gancho: el diagnóstico que acaban de resolver es casi todo de opción múltiple. ¿Qué sí te dice de ti y qué no? ¿Qué tendría que agregar para medir si sabes argumentar?" },
 
@@ -95,7 +98,7 @@ const PRESENTACION = {
         "Los alumnos explican el ciclo con sus palabras y lo ligan con los **cenotes**.",
         "Mismo contenido, **distinta idea de qué es conocer**. Ninguna es «la buena» en todos los casos."
       ],
-      minutos: "16-19",
+      minutos: "17-20",
       notas: "Rosa: más eficiente para transmitir información. Lucía: favorece la comprensión y el contexto. Reconocer los supuestos es el primer paso para elegir con conciencia." },
 
     { tipo: "tabla",
@@ -108,7 +111,7 @@ const PRESENTACION = {
         ["Ciencia crítica", "Una ciencia para **transformar** la educación, con los docentes como investigadores de su práctica (Carr y Kemmis, 1986/1988)."]
       ],
       pasoAPaso: true,
-      minutos: "19-20" },
+      minutos: "20-21" },
 
     { tipo: "tema",
       titulo: "1.2 Tres nombres que se confunden",
@@ -121,7 +124,7 @@ const PRESENTACION = {
         "Sus fronteras no siempre son nítidas, pero conviene distinguirlas."
       ],
       pasoAPaso: true,
-      minutos: "20-23" },
+      minutos: "21-24" },
 
     { tipo: "tabla",
       titulo: "Un cuadro para ordenar",
@@ -132,25 +135,25 @@ const PRESENTACION = {
         ["Filosofía de la ciencia", "La ciencia como actividad humana completa", "¿Cómo cambia la ciencia y qué papel tiene en la sociedad?"]
       ],
       pasoAPaso: true,
-      minutos: "23-25",
+      minutos: "24-26",
       notas: "Autores: Chalmers, ¿Qué es esa cosa llamada ciencia? (1976/2000), como ejemplo de filosofía de la ciencia; Kuhn, que veremos en el Tema 4." },
 
     { tipo: "imagen",
       titulo: "Círculos que se cruzan",
       imagen: "img/s2-circulos.svg",
       pie: "La epistemología vive dentro de la teoría del conocimiento y es uno de los ángulos de la filosofía de la ciencia.",
-      minutos: "25-26" },
+      minutos: "26-27" },
 
     { tipo: "video",
       titulo: "Ojo crítico: «la epistemología en 1 minuto»",
       youtube: "https://www.youtube.com/watch?v=vlTAd_8qVKw",
       pie: "Video breve. Mientras lo ves, fíjate cómo define la epistemología.",
-      minutos: "26-28" },
+      minutos: "27-29" },
 
     { tipo: "pregunta",
       pregunta: "El video dice que epistemología, gnoseología y teoría del conocimiento son lo mismo. ¿Se equivoca?",
       respuesta: "No exactamente: sigue la **tradición anglosajona**, donde *epistemology* es sinónimo de teoría del conocimiento. En la tradición **francesa y latinoamericana**, que sigue este curso, la epistemología se reserva para el **conocimiento científico**.",
-      minutos: "28-29",
+      minutos: "29-30",
       notas: "Lección de fondo: ante cualquier fuente, preguntar desde qué tradición habla. Eso también es pensar epistemológicamente." },
 
     { tipo: "tarea",
@@ -163,7 +166,7 @@ const PRESENTACION = {
         "Un buen mapa no es un resumen con flechas: **muestra relaciones**.",
         "Lo que no termines hoy, lo terminas en casa."
       ],
-      minutos: "29-46",
+      minutos: "30-46",
       evaluacion: "Rúbrica de Tarea (mapa conceptual)",
       notas: "La rúbrica «Mapa conceptual y cuadros comparativos» está pública en el Aula Virtual (Rúbricas). Pasa por los lugares: revisa que haya conectores y ejemplos educativos, no solo definiciones." },
 
