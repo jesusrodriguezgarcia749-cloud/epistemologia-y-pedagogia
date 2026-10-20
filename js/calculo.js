@@ -57,9 +57,12 @@ export const NOMBRES_ENTREGA_PROYECTO = {
 export const META_PARTICIPACION = { p1: 6, p2: 4 };
 
 // Actividades de repaso con valor: temas que cuentan en cada bloque, según
-// la planeación. Un tema cuenta cuando el alumno lo termina sin errores
+// la planeación. En el Parcial 2 cuentan los Temas 1 a 7: los Temas 1 a 4
+// se repasan con las preguntas de este curso (el grupo los vio con otra
+// docente) y el cierre del 4 y los Temas 5 a 7 son contenido del parcial.
+// Un tema cuenta cuando el alumno lo termina sin errores
 // (documento alumnos/{id}/actividades/tema-N con completado: true).
-export const ACTIVIDADES_PARCIAL = { p2: [5, 6, 7], final: [8, 9, 10] };
+export const ACTIVIDADES_PARCIAL = { p2: [1, 2, 3, 4, 5, 6, 7], final: [8, 9, 10] };
 export const PARTICIPACION_MIXTA = { clase: 10, actividades: 15 };
 
 export const PESO_CUATRIMESTRE = { p1: 0.25, p2: 0.25, final: 0.50 };
