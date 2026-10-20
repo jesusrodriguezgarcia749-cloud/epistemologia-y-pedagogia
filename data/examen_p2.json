@@ -3,25 +3,14 @@
  "titulo": "Examen Parcial 2 — Cierre del Tema 4 (Feyerabend, Morin y la cientificidad de las ciencias sociales) y Temas 5 a 7",
  "config": {
   "preguntasPorExamen": 40,
-  "minutos": 60
+  "minutos": 60,
+  "seleccion": "por_subtema"
  },
  "reactivos": [
   {
+   "id": "p2-001",
    "subtema": "4.5",
-   "tipo": "caso",
-   "pregunta": "En un colegiado, una maestra propone que todos los proyectos de investigación sigan exactamente los mismos pasos, porque «así se garantiza que sean científicos». ¿Qué le respondería Feyerabend?",
-   "opciones": [
-    "Que en la historia real toda regla metodológica ha sido violada alguna vez con éxito, y que imponer un método único empobrece el conocimiento",
-    "Que tiene razón, porque solo el método garantiza el progreso de la ciencia",
-    "Que basta con que cada proyecto sea falsable para que sea científico",
-    "Que el método debe decidirse por votación de la comunidad científica"
-   ],
-   "correcta": 0,
-   "explicacion": "En Tratado contra el método, Feyerabend sostiene que ninguna regla fija garantiza el progreso: de ahí su «todo vale».",
-   "id": "p2-033"
-  },
-  {
-   "subtema": "4.5",
+   "gemela": "ep4-014",
    "tipo": "verdadero_falso",
    "pregunta": "Para Feyerabend, «todo vale» significa que cualquier opinión es igual de buena que una teoría científica.",
    "opciones": [
@@ -29,11 +18,27 @@
     "Falso"
    ],
    "correcta": 1,
-   "explicacion": "Significa que ninguna regla metodológica fija puede garantizar el progreso; leerlo como «da igual cualquier opinión» es una lectura superficial.",
-   "id": "p2-034"
+   "explicacion": "Significa que ninguna regla metodológica fija puede garantizar el progreso; leerlo como «da igual cualquier opinión» es una lectura superficial."
   },
   {
+   "id": "p2-002",
    "subtema": "4.5",
+   "gemela": "ep4-015",
+   "tipo": "caso",
+   "pregunta": "Un estudiante afirma que Galileo fue un mal científico porque defendió a Copérnico con retórica y propaganda cuando la evidencia aún no lo favorecía. ¿Cómo interpretaría Feyerabend el caso?",
+   "opciones": [
+    "Como prueba de que las reglas del método se han violado con éxito: si Galileo hubiera seguido estrictamente «el método», la ciencia moderna no habría nacido",
+    "Como una anomalía que, al acumularse, provocó una revolución científica en el sentido de Kuhn",
+    "Como una hipótesis auxiliar que protegió el núcleo duro de un programa de investigación, en el sentido de Lakatos",
+    "Como una conjetura audaz que todavía no había sido refutada, en el sentido de Popper"
+   ],
+   "correcta": 0,
+   "explicacion": "Feyerabend (1975/1986) usó a Galileo para mostrar que ninguna regla metodológica fija garantiza el progreso."
+  },
+  {
+   "id": "p2-003",
+   "subtema": "4.5",
+   "gemela": "ep4-021",
    "tipo": "opcion_multiple",
    "pregunta": "¿Por qué Feyerabend defendía la proliferación de teorías?",
    "opciones": [
@@ -43,11 +48,42 @@
     "Porque las teorías alternativas siempre son mejores que la dominante"
    ],
    "correcta": 0,
-   "explicacion": "El pluralismo teórico sirve para criticar y poner a prueba lo establecido.",
-   "id": "p2-035"
+   "explicacion": "El pluralismo teórico sirve para criticar y poner a prueba lo establecido."
   },
   {
+   "id": "p2-004",
+   "subtema": "4.5",
+   "gemela": "ep4-022",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el compendio, ¿cuál es el principal riesgo de leer a Feyerabend sin cuidado?",
+   "opciones": [
+    "Alimentar el relativismo extremo: creer que da igual la vacuna que el remedio milagroso",
+    "Caer en el cientificismo, al tratar a la ciencia como autoridad indiscutible",
+    "Volver a un método único y rígido, como el que proponía el positivismo lógico",
+    "Confundir el anarquismo epistemológico con el falsacionismo de Popper"
+   ],
+   "correcta": 0,
+   "explicacion": "Esa lectura superficial no le hace justicia, pero conviene estar atentos a ella en tiempos de desinformación."
+  },
+  {
+   "id": "p2-005",
+   "subtema": "4.5",
+   "gemela": "ep4-023",
+   "tipo": "caso",
+   "pregunta": "En un colegiado, una maestra propone que todos los proyectos de investigación sigan exactamente los mismos pasos, porque «así se garantiza que sean científicos». ¿Qué le respondería Feyerabend?",
+   "opciones": [
+    "Que en la historia real toda regla metodológica ha sido violada alguna vez con éxito, y que imponer un método único empobrece el conocimiento",
+    "Que tiene razón, porque solo el método garantiza el progreso de la ciencia",
+    "Que basta con que cada proyecto sea falsable para que sea científico",
+    "Que el método debe decidirse por votación de la comunidad científica"
+   ],
+   "correcta": 0,
+   "explicacion": "En Tratado contra el método, Feyerabend sostiene que ninguna regla fija garantiza el progreso: de ahí su «todo vale»."
+  },
+  {
+   "id": "p2-006",
    "subtema": "4.6",
+   "gemela": "ep4-016",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada principio del pensamiento complejo de Morin con el ejemplo que lo ilustra.",
    "pares": [
@@ -64,25 +100,27 @@
      "derecha": "Cada salón refleja el sistema educativo completo"
     }
    ],
-   "explicacion": "Son los tres principios que Morin (1990/1994) propone para superar el paradigma de simplificación.",
-   "id": "p2-036"
+   "explicacion": "Son los tres principios que Morin (1990/1994) propone para superar el paradigma de simplificación."
   },
   {
+   "id": "p2-007",
    "subtema": "4.6",
+   "gemela": "ep4-017",
    "tipo": "completar",
-   "pregunta": "Según Morin, la ciencia moderna se organizó bajo un paradigma de _______, basado en la disyunción, la reducción y la abstracción.",
+   "pregunta": "Morin recuerda que complexus, la raíz de «complejidad», significa «lo que está _______ junto».",
    "opciones": [
-    "simplificación",
-    "complejidad",
-    "refutación",
-    "comprensión"
+    "tejido",
+    "reunido",
+    "ordenado",
+    "sumado"
    ],
    "correcta": 0,
-   "explicacion": "Ese paradigma dio frutos, pero produjo un conocimiento fragmentado.",
-   "id": "p2-037"
+   "explicacion": "Un fenómeno complejo es aquel en el que múltiples elementos están entrelazados de manera inseparable."
   },
   {
+   "id": "p2-008",
    "subtema": "4.6",
+   "gemela": "ep4-018",
    "tipo": "caso",
    "pregunta": "Una escuela organiza su plan en campos formativos y ejes articuladores en lugar de asignaturas aisladas. ¿Qué idea de Morin está detrás de esa decisión?",
    "opciones": [
@@ -92,11 +130,42 @@
     "Aplicar el criterio de falsación a cada campo"
    ],
    "correcta": 0,
-   "explicacion": "La Nueva Escuela Mexicana retoma la crítica de Morin a la fragmentación (SEP, 2022); Morin (1999) escribió Los siete saberes para la UNESCO.",
-   "id": "p2-038"
+   "explicacion": "La Nueva Escuela Mexicana retoma la crítica de Morin a la fragmentación (SEP, 2022); Morin (1999) escribió Los siete saberes para la UNESCO."
   },
   {
+   "id": "p2-009",
+   "subtema": "4.6",
+   "gemela": "ep4-024",
+   "tipo": "completar",
+   "pregunta": "Según Morin, la ciencia moderna se organizó bajo un paradigma de _______, basado en la disyunción, la reducción y la abstracción.",
+   "opciones": [
+    "simplificación",
+    "complejidad",
+    "refutación",
+    "comprensión"
+   ],
+   "correcta": 0,
+   "explicacion": "Ese paradigma dio frutos, pero produjo un conocimiento fragmentado."
+  },
+  {
+   "id": "p2-010",
+   "subtema": "4.6",
+   "gemela": "ep4-025",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de los siguientes NO es uno de los siete saberes que propone Morin (1999)?",
+   "opciones": [
+    "Enseñar un método científico único válido para todas las disciplinas",
+    "Enseñar a detectar las cegueras del conocimiento: el error y la ilusión",
+    "Enfrentar las incertidumbres",
+    "Enseñar la comprensión"
+   ],
+   "correcta": 0,
+   "explicacion": "Un método único va en contra del pensamiento complejo. Los otros tres sí son parte de los siete saberes."
+  },
+  {
+   "id": "p2-011",
    "subtema": "4.7",
+   "gemela": "ep4-019",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué señaló Anthony Giddens con el concepto de doble hermenéutica?",
    "opciones": [
@@ -106,11 +175,12 @@
     "Que la interpretación es imposible en las ciencias sociales"
    ],
    "correcta": 0,
-   "explicacion": "Ejemplo del libro: cuando la palabra «bullying» entró a las escuelas, cambió cómo se viven ciertos conflictos.",
-   "id": "p2-039"
+   "explicacion": "Ejemplo del libro: cuando la palabra «bullying» entró a las escuelas, cambió cómo se viven ciertos conflictos."
   },
   {
+   "id": "p2-012",
    "subtema": "4.7",
+   "gemela": "ep4-020",
    "tipo": "caso",
    "pregunta": "Un compañero dice: «La pedagogía no es ciencia porque no tiene leyes universales ni experimentos controlados como la física». ¿Qué respuesta es más defendible con lo visto en el Tema 4?",
    "opciones": [
@@ -120,40 +190,57 @@
     "Que la pregunta no tiene sentido, porque toda opinión vale igual"
    ],
    "correcta": 0,
-   "explicacion": "Rigor sin imitación: credibilidad, transferibilidad, consistencia y confirmabilidad son criterios exigentes, aunque no sean los de la física.",
-   "id": "p2-040"
+   "explicacion": "Rigor sin imitación: credibilidad, transferibilidad, consistencia y confirmabilidad son criterios exigentes, aunque no sean los de la física."
   },
   {
-   "id": "p2-001",
-   "subtema": "5.1",
+   "id": "p2-013",
+   "subtema": "4.7",
+   "gemela": "ep4-026",
    "tipo": "caso",
-   "pregunta": "Un alumno de secundaria está convencido de que \"las cosas caen porque son pesadas\" y, aunque el maestro explica la gravedad, sigue usando su idea en los ejercicios. ¿Qué concepto de Bachelard describe la situación?",
+   "pregunta": "Después de que un investigador difunde el concepto de «estilos de crianza», los padres de una escuela empiezan a describirse con esas categorías y cambian su forma de educar. ¿Qué concepto explica mejor este fenómeno?",
    "opciones": [
-    "Un obstáculo epistemológico: un conocimiento previo que resiste al nuevo",
-    "Un periodo sensible que ya se cerró",
-    "Un ejemplo de doble hermenéutica",
-    "Una propiedad emergente del sistema escolar"
+    "La doble hermenéutica (Giddens)",
+    "La fusión de horizontes (Gadamer)",
+    "La inconmensurabilidad de los paradigmas (Kuhn)",
+    "La recursividad organizacional (Morin)"
    ],
    "correcta": 0,
-   "explicacion": "Para Bachelard, el conocimiento científico se construye contra conocimientos previos mal hechos."
+   "explicacion": "Los conceptos de las ciencias sociales regresan a la sociedad y la transforman."
   },
   {
-   "id": "p2-002",
-   "subtema": "5.1",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Qué observación atribuida a Max Planck ilustra la inercia mental de las comunidades científicas?",
+   "id": "p2-014",
+   "subtema": "4.7",
+   "gemela": "ep4-027",
+   "tipo": "completar",
+   "pregunta": "La investigación cualitativa ha desarrollado criterios propios de rigor: credibilidad, transferibilidad, consistencia y _______.",
    "opciones": [
-    "Las nuevas verdades triunfan no porque convenzan a sus opositores, sino porque surge una generación familiarizada con ellas",
-    "Los científicos cambian de opinión inmediatamente ante cualquier dato",
-    "La ciencia avanza solo por acumulación de verdades",
-    "Los jóvenes siempre rechazan las ideas nuevas"
+    "confirmabilidad",
+    "falsabilidad",
+    "replicabilidad",
+    "verificabilidad"
    ],
    "correcta": 0,
-   "explicacion": "Kuhn también observó que los paradigmas cambian con mucha resistencia."
+   "explicacion": "Rigor sin imitación: criterios exigentes que no son los de la física."
   },
   {
-   "id": "p2-003",
+   "id": "p2-015",
    "subtema": "5.1",
+   "gemela": "ep5-001",
+   "tipo": "caso",
+   "pregunta": "Una comunidad docente sigue usando el dictado como estrategia principal, aunque varias evaluaciones muestran que no funciona; nadie recuerda haberla elegido: «así se ha hecho siempre». ¿Qué concepto lo describe con más precisión?",
+   "opciones": [
+    "Inercia mental: un hábito heredado que se volvió invisible",
+    "Obstáculo sustancialista: atribuir cualidades ocultas a las cosas",
+    "Ciencia normal: resolver problemas dentro de un paradigma aceptado",
+    "Racionalidad técnica: aplicar la teoría científica a la práctica"
+   ],
+   "correcta": 0,
+   "explicacion": "Martínez Miguélez: no elegimos esa forma de pensar, la heredamos."
+  },
+  {
+   "id": "p2-016",
+   "subtema": "5.1",
+   "gemela": "ep5-002",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada situación escolar con el obstáculo epistemológico que muestra.",
    "pares": [
@@ -177,36 +264,114 @@
    "explicacion": "Reconocer los obstáculos ayuda a diseñar la enseñanza."
   },
   {
-   "id": "p2-004",
-   "subtema": "5.2",
+   "id": "p2-017",
+   "subtema": "5.1",
+   "gemela": "ep5-003",
    "tipo": "opcion_multiple",
-   "pregunta": "¿Cuál de los siguientes es un supuesto discutible del método tradicional, según el compendio?",
+   "pregunta": "En la reunión del caso «Así lo hemos hecho siempre», ¿cuál de estas objeciones es un argumento razonable y no pura inercia?",
    "opciones": [
-    "Que el sujeto y el objeto de estudio están completamente separados",
-    "Que el conocimiento debe ser público",
-    "Que las afirmaciones deben ser coherentes",
-    "Que la ciencia busca explicar"
+    "Que los grupos son numerosos y falta tiempo para revisar proyectos",
+    "Que a quien lo dice lo evaluaron así y salió bien",
+    "Que siempre se ha hecho de esta manera",
+    "Que los papás quieren ver un número"
    ],
    "correcta": 0,
-   "explicacion": "En ciencias humanas, un maestro que investiga su grupo es parte del fenómeno."
+   "explicacion": "El compendio distingue argumentos razonables (tiempo, grupos numerosos) de los que son pura inercia."
   },
   {
-   "id": "p2-005",
-   "subtema": "5.2",
+   "id": "p2-018",
+   "subtema": "5.1",
+   "gemela": "ep5-004",
    "tipo": "caso",
-   "pregunta": "Una tesista empieza con una guía de entrevista, pero tras las primeras entrevistas descubre un tema inesperado y ajusta sus preguntas. ¿Es un error metodológico?",
+   "pregunta": "Un alumno de secundaria está convencido de que \"las cosas caen porque son pesadas\" y, aunque el maestro explica la gravedad, sigue usando su idea en los ejercicios. ¿Qué concepto de Bachelard describe la situación?",
    "opciones": [
-    "No: es un diseño emergente, legítimo en la investigación cualitativa",
-    "Sí: un plan nunca debe modificarse",
-    "Sí: invalida toda la investigación",
-    "No, porque en cualitativa no hay ningún plan"
+    "Un obstáculo epistemológico: un conocimiento previo que resiste al nuevo",
+    "Un periodo sensible que ya se cerró",
+    "Un ejemplo de doble hermenéutica",
+    "Una propiedad emergente del sistema escolar"
    ],
    "correcta": 0,
-   "explicacion": "En la investigación cualitativa el plan se ajusta a medida que aparecen hallazgos."
+   "explicacion": "Para Bachelard, el conocimiento científico se construye contra conocimientos previos mal hechos."
   },
   {
-   "id": "p2-006",
+   "id": "p2-019",
+   "subtema": "5.1",
+   "gemela": "ep5-017",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué observación atribuida a Max Planck ilustra la inercia mental de las comunidades científicas?",
+   "opciones": [
+    "Las nuevas verdades triunfan no porque convenzan a sus opositores, sino porque surge una generación familiarizada con ellas",
+    "Los científicos cambian de opinión inmediatamente ante cualquier dato",
+    "La ciencia avanza solo por acumulación de verdades",
+    "Los jóvenes siempre rechazan las ideas nuevas"
+   ],
+   "correcta": 0,
+   "explicacion": "Kuhn también observó que los paradigmas cambian con mucha resistencia."
+  },
+  {
+   "id": "p2-020",
+   "subtema": "5.1",
+   "gemela": "ep5-018",
+   "tipo": "caso",
+   "pregunta": "Un profesor de ciencias empieza su clase pidiendo a los alumnos que expliquen por qué un abrigo «da calor», para poner a prueba esa idea antes de explicar. ¿Qué línea de investigación respalda su decisión?",
+   "opciones": [
+    "La de concepciones alternativas y cambio conceptual, que retomó la intuición de Bachelard",
+    "La de periodos sensibles, que propone enseñar antes de que se cierre una ventana",
+    "La de estilos de aprendizaje, que adapta la clase al estilo de cada alumno",
+    "La de la doble hermenéutica, que estudia cómo los conceptos regresan a la sociedad"
+   ],
+   "correcta": 0,
+   "explicacion": "Hacer visible la idea previa y ponerla a prueba es la base del cambio conceptual."
+  },
+  {
+   "id": "p2-021",
+   "subtema": "5.1",
+   "gemela": "ep5-019",
+   "tipo": "caso",
+   "pregunta": "Un director afirma que la falta de lectura, la indisciplina y la reprobación se explican todas por un solo factor: el uso del celular. ¿Qué obstáculo de Bachelard muestra?",
+   "opciones": [
+    "Conocimiento unitario y pragmático: explicarlo todo con un solo principio",
+    "Generalización apresurada: concluir mucho a partir de pocos casos",
+    "Obstáculo sustancialista: atribuir cualidades ocultas a las cosas",
+    "Obstáculo verbal: creer que nombrar algo es explicarlo"
+   ],
+   "correcta": 0,
+   "explicacion": "Un solo principio para todo es el obstáculo unitario y pragmático."
+  },
+  {
+   "id": "p2-022",
    "subtema": "5.2",
+   "gemela": "ep5-005",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué distingue la desconstrucción del método, en el sentido que usa el compendio, de un simple rechazo de la ciencia?",
+   "opciones": [
+    "Que desarma los supuestos del método para entender mejor el rigor, sin abandonarlo",
+    "Que propone sustituir el método por la intuición personal del investigador",
+    "Que considera que toda observación es neutral si se hace con cuidado",
+    "Que reduce la investigación válida a lo que puede medirse"
+   ],
+   "correcta": 0,
+   "explicacion": "Desconstruir (Derrida) no es destruir: es mostrar supuestos ocultos, tensiones y exclusiones."
+  },
+  {
+   "id": "p2-023",
+   "subtema": "5.2",
+   "gemela": "ep5-006",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿A qué autor y concepto corresponde la idea de que un médico y un lego miran la misma radiografía, pero no ven lo mismo?",
+   "opciones": [
+    "Hanson: la observación está cargada de teoría",
+    "Bachelard: la experiencia primera",
+    "Polanyi: el conocimiento tácito",
+    "Gadamer: la fusión de horizontes"
+   ],
+   "correcta": 0,
+   "explicacion": "Hanson (1958/1977): lo que vemos depende de lo que sabemos."
+  },
+  {
+   "id": "p2-024",
+   "subtema": "5.2",
+   "gemela": "ep5-007",
    "tipo": "completar",
    "pregunta": "Contrastar distintas fuentes, métodos o investigadores sobre un mismo fenómeno para dar solidez a los resultados se llama _______.",
    "opciones": [
@@ -219,8 +384,24 @@
    "explicacion": "Aumenta la confianza en los resultados."
   },
   {
-   "id": "p2-007",
+   "id": "p2-025",
    "subtema": "5.2",
+   "gemela": "ep5-020",
+   "tipo": "caso",
+   "pregunta": "Una tesista empieza con una guía de entrevista, pero tras las primeras entrevistas descubre un tema inesperado y ajusta sus preguntas. ¿Es un error metodológico?",
+   "opciones": [
+    "No: es un diseño emergente, legítimo en la investigación cualitativa",
+    "Sí: un plan nunca debe modificarse",
+    "Sí: invalida toda la investigación",
+    "No, porque en cualitativa no hay ningún plan"
+   ],
+   "correcta": 0,
+   "explicacion": "En la investigación cualitativa el plan se ajusta a medida que aparecen hallazgos."
+  },
+  {
+   "id": "p2-026",
+   "subtema": "5.2",
+   "gemela": "ep5-021",
    "tipo": "verdadero_falso",
    "pregunta": "Según Martínez Miguélez, el método debe elegirse primero y después buscar a qué fenómeno aplicarlo.",
    "opciones": [
@@ -231,8 +412,54 @@
    "explicacion": "Al revés: se estudia la naturaleza del fenómeno y se elige el camino adecuado."
   },
   {
-   "id": "p2-008",
+   "id": "p2-027",
+   "subtema": "5.2",
+   "gemela": "ep5-008",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué es relevante para las ciencias humanas el trabajo de Prigogine y Stengers en La nueva alianza?",
+   "opciones": [
+    "Porque, si la propia física reconoce la inestabilidad y el orden que surge del desorden, no tiene sentido exigir a las ciencias humanas una predicción absoluta",
+    "Porque demostró que la naturaleza funciona como un reloj perfectamente predecible",
+    "Porque propuso un método de cinco pasos válido para todas las ciencias",
+    "Porque mostró que en química la observación es completamente neutral"
+   ],
+   "correcta": 0,
+   "explicacion": "La naturaleza no es solo un reloj predecible: también hay procesos irreversibles e inestabilidades."
+  },
+  {
+   "id": "p2-028",
+   "subtema": "5.2",
+   "gemela": "ep5-022",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de los siguientes es un supuesto discutible del método tradicional, según el compendio?",
+   "opciones": [
+    "Que el sujeto y el objeto de estudio están completamente separados",
+    "Que el conocimiento debe ser público",
+    "Que las afirmaciones deben ser coherentes",
+    "Que la ciencia busca explicar"
+   ],
+   "correcta": 0,
+   "explicacion": "En ciencias humanas, un maestro que investiga su grupo es parte del fenómeno."
+  },
+  {
+   "id": "p2-029",
+   "subtema": "5.2",
+   "gemela": "ep5-023",
+   "tipo": "caso",
+   "pregunta": "En su tesis, una maestra que investiga a su propio grupo incluye un apartado donde explica que es la docente de esos alumnos, qué espera encontrar y cómo podría influir en los resultados. ¿Qué está haciendo?",
+   "opciones": [
+    "Reflexividad: explicitar su posición y sus supuestos",
+    "Triangulación: contrastar fuentes y métodos",
+    "Diseño emergente: ajustar el plan sobre la marcha",
+    "Experiencia primera: confiar en su primera impresión"
+   ],
+   "correcta": 0,
+   "explicacion": "En lugar de fingir neutralidad, declara su posición."
+  },
+  {
+   "id": "p2-030",
    "subtema": "5.3",
+   "gemela": "ep5-009",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué significa que el cerebro funcione como una \"máquina de predicción\"?",
    "opciones": [
@@ -245,8 +472,9 @@
    "explicacion": "Las ilusiones ópticas muestran que el cerebro completa e interpreta."
   },
   {
-   "id": "p2-009",
+   "id": "p2-031",
    "subtema": "5.3",
+   "gemela": "ep5-010",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada autor con su aporte a la idea de que conocer es construir.",
    "pares": [
@@ -266,8 +494,67 @@
    "explicacion": "El conocimiento es producto de un ser humano completo, con cuerpo y emociones."
   },
   {
-   "id": "p2-010",
+   "id": "p2-032",
+   "subtema": "5.3",
+   "gemela": "ep5-011",
+   "tipo": "caso",
+   "pregunta": "Una maestra dedica tres minutos a calmar al grupo después del recreo y algunos colegas lo consideran pérdida de tiempo. ¿Qué argumento del Tema 5 la respalda mejor?",
+   "opciones": [
+    "Damasio: la emoción no es enemiga de la razón, sino su condición; calmar al grupo crea condiciones para aprender",
+    "Bachelard: hay que eliminar los obstáculos epistemológicos antes de enseñar",
+    "Maturana y Varela: el conocimiento es una copia fiel del mundo exterior",
+    "Hanson: la observación solo es neutral cuando el grupo está tranquilo"
+   ],
+   "correcta": 0,
+   "explicacion": "Caso del libro: «Primero que se calmen, luego aprenden»."
+  },
+  {
+   "id": "p2-033",
+   "subtema": "5.3",
+   "gemela": "ep5-012",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Con qué idea de la epistemología compara el compendio al cerebro como «máquina de predicción»?",
+   "opciones": [
+    "Con las conjeturas y refutaciones de Popper",
+    "Con los paradigmas y las revoluciones de Kuhn",
+    "Con el núcleo duro y el cinturón protector de Lakatos",
+    "Con el «todo vale» de Feyerabend"
+   ],
+   "correcta": 0,
+   "explicacion": "El cerebro lanza hipótesis sobre el mundo y las corrige con los sentidos."
+  },
+  {
+   "id": "p2-034",
+   "subtema": "5.3",
+   "gemela": "ep5-024",
+   "tipo": "verdadero_falso",
+   "pregunta": "Aunque una persona ya sabe que dos líneas de una ilusión óptica miden lo mismo, las sigue viendo distintas; esto apoya la idea de que percibir no es recibir pasivamente la información.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "El cerebro interpreta con lo que espera ver, incluso cuando sabemos que se equivoca."
+  },
+  {
+   "id": "p2-035",
+   "subtema": "5.3",
+   "gemela": "ep5-025",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según Damasio, ¿cuál fue «el error de Descartes»?",
+   "opciones": [
+    "Separar mente y cuerpo, razón y emoción",
+    "Dudar de todo lo que no fuera evidente",
+    "Afirmar que el cerebro construye la realidad",
+    "Definir el conocimiento como creencia verdadera justificada"
+   ],
+   "correcta": 0,
+   "explicacion": "Damasio (1994/1996) mostró que la emoción es condición del buen razonamiento."
+  },
+  {
+   "id": "p2-036",
    "subtema": "5.4",
+   "gemela": "ep5-013",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué es la \"fusión de horizontes\" de Gadamer?",
    "opciones": [
@@ -280,8 +567,54 @@
    "explicacion": "Comprender es entrar en diálogo con lo que se quiere comprender."
   },
   {
-   "id": "p2-011",
+   "id": "p2-037",
    "subtema": "5.4",
+   "gemela": "ep5-014",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según Habermas, ¿para qué sirve la situación ideal de diálogo, si nunca se da plenamente?",
+   "opciones": [
+    "Como criterio para evaluar los diálogos reales: si todos hablaron, si se escucharon los argumentos y si nadie se impuso por jerarquía",
+    "Como regla para que el maestro decida quién tiene la razón",
+    "Como prueba de que el diálogo es imposible en la escuela",
+    "Como sustituto del método científico en las ciencias sociales"
+   ],
+   "correcta": 0,
+   "explicacion": "En la acción comunicativa se impone la fuerza del mejor argumento."
+  },
+  {
+   "id": "p2-038",
+   "subtema": "5.4",
+   "gemela": "ep5-015",
+   "tipo": "caso",
+   "pregunta": "Una escuela invita a médicos tradicionales y a una enfermera del centro de salud para que, junto con los alumnos, comparen qué remedios tienen eficacia comprobada y cuáles no. ¿Qué idea del Tema 5 pone en práctica?",
+   "opciones": [
+    "El diálogo de saberes, que retoma la Nueva Escuela Mexicana",
+    "El relativismo ingenuo, porque todos los saberes valen igual",
+    "El cientificismo, porque solo vale lo que diga la enfermera",
+    "La doble hermenéutica de Giddens"
+   ],
+   "correcta": 0,
+   "explicacion": "Los saberes comunitarios entran en conversación con el saber científico, con argumentos."
+  },
+  {
+   "id": "p2-039",
+   "subtema": "5.4",
+   "gemela": "ep5-016",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según APA 7, una cita textual de 40 palabras o más:",
+   "opciones": [
+    "Va en bloque aparte, con sangría y sin comillas",
+    "Va entre comillas dentro del párrafo",
+    "Va en cursivas y sin número de página",
+    "No se permite en trabajos académicos"
+   ],
+   "correcta": 0,
+   "explicacion": "La cita corta va entre comillas; la larga, en bloque."
+  },
+  {
+   "id": "p2-040",
+   "subtema": "5.4",
+   "gemela": "ep5-026",
    "tipo": "caso",
    "pregunta": "Un maestro dice: \"Hago participar a mis alumnos con preguntas, pero yo ya sé las respuestas correctas y solo espero que las adivinen\". ¿Cumple con el diálogo en el sentido de Freire?",
    "opciones": [
@@ -294,8 +627,9 @@
    "explicacion": "El diálogo no es una técnica para \"hacer participar\", sino una forma de construir conocimiento."
   },
   {
-   "id": "p2-012",
+   "id": "p2-041",
    "subtema": "5.4",
+   "gemela": "ep5-027",
    "tipo": "verdadero_falso",
    "pregunta": "El principio dialógico de Morin y el diálogo de Freire significan exactamente lo mismo.",
    "opciones": [
@@ -306,8 +640,9 @@
    "explicacion": "Se complementan: Freire habla del diálogo entre personas; Morin, de mantener juntas ideas opuestas."
   },
   {
-   "id": "p2-013",
+   "id": "p2-042",
    "subtema": "6.1",
+   "gemela": "ep6-001",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué consecuencia tiene para la formación científica la idea de conocimiento tácito de Polanyi?",
    "opciones": [
@@ -320,8 +655,24 @@
    "explicacion": "El experto \"ve\" en sus datos lo que el principiante no ve."
   },
   {
-   "id": "p2-014",
+   "id": "p2-043",
    "subtema": "6.1",
+   "gemela": "ep6-002",
+   "tipo": "caso",
+   "pregunta": "Una enfermera con veinte años de experiencia «presiente» que un paciente se va a agravar antes de que cambien sus signos. Según Polanyi, ¿qué explica mejor ese saber?",
+   "opciones": [
+    "Conocimiento tácito: una pericia que no puede expresarse del todo con palabras",
+    "Conocimiento por testimonio: confía en lo que le dicen sus colegas",
+    "Conocimiento por razonamiento: deduce a partir de premisas generales",
+    "Experiencia primera: confía sin crítica en su primera impresión"
+   ],
+   "correcta": 0,
+   "explicacion": "Sabemos más de lo que podemos decir."
+  },
+  {
+   "id": "p2-044",
+   "subtema": "6.1",
+   "gemela": "ep6-003",
    "tipo": "verdadero_falso",
    "pregunta": "Ningún investigador repite todos los experimentos de su disciplina; los científicos dependen enormemente del testimonio de sus colegas.",
    "opciones": [
@@ -332,8 +683,99 @@
    "explicacion": "Casi todo lo que sabemos combina varias vías de conocimiento."
   },
   {
-   "id": "p2-015",
+   "id": "p2-045",
+   "subtema": "6.1",
+   "gemela": "ep6-015",
+   "tipo": "caso",
+   "pregunta": "Un alumno afirma: «Sé que el calentamiento global existe porque lo muestran miles de estudios revisados por especialistas». ¿Qué vías de conocimiento combina?",
+   "opciones": [
+    "Investigación sistemática y testimonio, porque confía en el trabajo de otros científicos",
+    "Solo experiencia directa",
+    "Práctica e intuición",
+    "Solo razonamiento deductivo"
+   ],
+   "correcta": 0,
+   "explicacion": "Incluso los científicos dependen del testimonio: nadie repite todos los experimentos."
+  },
+  {
+   "id": "p2-046",
+   "subtema": "6.1",
+   "gemela": "ep6-016",
+   "tipo": "opcion_multiple",
+   "pregunta": "Para Polanyi, ¿qué tienen en común andar en bicicleta y reconocer el rostro de un amigo entre miles?",
+   "opciones": [
+    "Son saberes que dominamos sin poder expresar con palabras todos sus pasos",
+    "Son conocimientos que obtenemos por testimonio",
+    "Son habilidades innatas que no se aprenden",
+    "Son ejemplos de experiencia primera que la ciencia debe corregir"
+   ],
+   "correcta": 0,
+   "explicacion": "Ese saber que no se puede expresar del todo es el conocimiento tácito."
+  },
+  {
+   "id": "p2-047",
    "subtema": "6.2",
+   "gemela": "ep6-004",
+   "tipo": "opcion_multiple",
+   "pregunta": "En la milpa, ¿qué función cumple la calabaza?",
+   "opciones": [
+    "Cubre el suelo, conserva la humedad y limita la maleza",
+    "Aporta nitrógeno al suelo",
+    "Sirve de soporte para que el frijol trepe",
+    "Atrae a los polinizadores del maíz"
+   ],
+   "correcta": 0,
+   "explicacion": "El frijol aporta nitrógeno; el maíz sirve de soporte; la calabaza cubre el suelo."
+  },
+  {
+   "id": "p2-048",
+   "subtema": "6.2",
+   "gemela": "ep6-005",
+   "tipo": "caso",
+   "pregunta": "Un padre de familia propone en la escuela sustituir el antibiótico recetado a su hijo por un remedio sin eficacia comprobada, \"porque todos los saberes valen lo mismo\". ¿Qué error comete según el tema?",
+   "opciones": [
+    "El relativismo ingenuo",
+    "El cientificismo",
+    "La ecología de saberes",
+    "La racionalidad técnica"
+   ],
+   "correcta": 0,
+   "explicacion": "El diálogo de saberes no significa que todo vale igual para todo, sobre todo en salud."
+  },
+  {
+   "id": "p2-049",
+   "subtema": "6.2",
+   "gemela": "ep6-006",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿A qué se refiere Boaventura de Sousa Santos con «epistemologías del Sur»?",
+   "opciones": [
+    "A las formas de conocimiento de los pueblos que fueron colonizados y cuyos saberes fueron despreciados",
+    "A la ciencia que se produce en los países del hemisferio sur",
+    "A los métodos de investigación de las universidades latinoamericanas",
+    "A la geografía de los saberes agrícolas"
+   ],
+   "correcta": 0,
+   "explicacion": "Sousa Santos (2009) llamó epistemicidio a la destrucción de esos saberes."
+  },
+  {
+   "id": "p2-050",
+   "subtema": "6.2",
+   "gemela": "ep6-007",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué propone la ecología de saberes de Sousa Santos?",
+   "opciones": [
+    "Reconocer la ciencia como saber valioso pero no único, y hacer dialogar distintos saberes según los problemas",
+    "Sustituir la ciencia por los saberes tradicionales",
+    "Eliminar los saberes tradicionales de la escuela",
+    "Que todos los saberes son idénticos"
+   ],
+   "correcta": 0,
+   "explicacion": "Para llegar a la Luna se necesita la ciencia; para conservar un territorio, quizá también el saber de sus habitantes."
+  },
+  {
+   "id": "p2-051",
+   "subtema": "6.2",
+   "gemela": "ep6-008",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada saber local mexicano con su fundamento.",
    "pares": [
@@ -357,36 +799,39 @@
    "explicacion": "Son ejemplos de conocimiento local con valor que la ciencia ha reconocido."
   },
   {
-   "id": "p2-016",
+   "id": "p2-052",
    "subtema": "6.2",
-   "tipo": "caso",
-   "pregunta": "Un padre de familia propone en la escuela sustituir el antibiótico recetado a su hijo por un remedio sin eficacia comprobada, \"porque todos los saberes valen lo mismo\". ¿Qué error comete según el tema?",
-   "opciones": [
-    "El relativismo ingenuo",
-    "El cientificismo",
-    "La ecología de saberes",
-    "La racionalidad técnica"
-   ],
-   "correcta": 0,
-   "explicacion": "El diálogo de saberes no significa que todo vale igual para todo, sobre todo en salud."
-  },
-  {
-   "id": "p2-017",
-   "subtema": "6.2",
+   "gemela": "ep6-017",
    "tipo": "opcion_multiple",
-   "pregunta": "¿Qué propone la ecología de saberes de Sousa Santos?",
+   "pregunta": "Según el compendio, ¿cuál de estas afirmaciones sobre el conocimiento ordinario es correcta?",
    "opciones": [
-    "Reconocer la ciencia como saber valioso pero no único, y hacer dialogar distintos saberes según los problemas",
-    "Sustituir la ciencia por los saberes tradicionales",
-    "Eliminar los saberes tradicionales de la escuela",
-    "Que todos los saberes son idénticos"
+    "Funciona bien en su contexto, pero puede fallar fuera de él",
+    "Es poco práctico, porque no resuelve problemas inmediatos",
+    "Es muy sistemático, aunque rara vez se pone a prueba",
+    "Siempre se equivoca, por eso la ciencia debe sustituirlo"
    ],
    "correcta": 0,
-   "explicacion": "Para llegar a la Luna se necesita la ciencia; para conservar un territorio, quizá también el saber de sus habitantes."
+   "explicacion": "El sentido común es contextual: a veces acierta y a veces se equivoca gravemente."
   },
   {
-   "id": "p2-018",
+   "id": "p2-053",
+   "subtema": "6.2",
+   "gemela": "ep6-018",
+   "tipo": "caso",
+   "pregunta": "Un maestro dice: «El sentido común y los saberes de la comunidad no sirven para nada en la escuela; solo cuenta lo que dicen los libros de ciencia». ¿Qué error comete según el tema?",
+   "opciones": [
+    "Cientificismo",
+    "Relativismo ingenuo",
+    "Ecología de saberes",
+    "Obstáculo verbal"
+   ],
+   "correcta": 0,
+   "explicacion": "Creer que solo la ciencia produce conocimiento válido empobrece la escuela."
+  },
+  {
+   "id": "p2-054",
    "subtema": "6.3",
+   "gemela": "ep6-009",
    "tipo": "caso",
    "pregunta": "Durante una clase, una actividad no funciona; la maestra nota el desinterés, cambia sobre la marcha a una pregunta provocadora y el grupo se activa. ¿Qué concepto de Schön ilustra?",
    "opciones": [
@@ -399,8 +844,52 @@
    "explicacion": "Es pensar y ajustar mientras se actúa."
   },
   {
-   "id": "p2-019",
+   "id": "p2-055",
    "subtema": "6.3",
+   "gemela": "ep6-010",
+   "tipo": "caso",
+   "pregunta": "Un investigador cuenta que la idea central de su tesis se le ocurrió mientras corría, y después diseñó un estudio riguroso para ponerla a prueba. Con la distinción de Popper, ¿qué parte puede ser creativa y cuál debe ser rigurosa?",
+   "opciones": [
+    "El descubrimiento puede ser creativo; la justificación debe ser rigurosa",
+    "Ambas deben seguir reglas estrictas",
+    "La justificación puede ser intuitiva; el descubrimiento debe ser riguroso",
+    "Ninguna importa si el resultado es útil"
+   ],
+   "correcta": 0,
+   "explicacion": "Contexto de descubrimiento y contexto de justificación."
+  },
+  {
+   "id": "p2-056",
+   "subtema": "6.3",
+   "gemela": "ep6-011",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué ejemplo usa el compendio para mostrar que antes la ciencia y el arte no estaban separados?",
+   "opciones": [
+    "Leonardo da Vinci, que era pintor, ingeniero y anatomista",
+    "Galileo, que defendió a Copérnico con retórica",
+    "Newton, que unificó las leyes del cielo y de la Tierra",
+    "Poincaré, que resolvió un problema al subir a un autobús"
+   ],
+   "correcta": 0,
+   "explicacion": "Para muchos pensadores del Renacimiento, observar con precisión era a la vez un acto científico y artístico."
+  },
+  {
+   "id": "p2-057",
+   "subtema": "6.3",
+   "gemela": "ep6-019",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según el compendio, la intuición y la imaginación no juegan ningún papel en la ciencia rigurosa.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "La historia de la ciencia está llena de momentos en que la intuición fue decisiva; la rigurosidad necesita creatividad."
+  },
+  {
+   "id": "p2-058",
+   "subtema": "6.3",
+   "gemela": "ep6-020",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué criticó Donald Schön con el concepto de \"racionalidad técnica\"?",
    "opciones": [
@@ -413,8 +902,69 @@
    "explicacion": "Esa visión no explica lo que hacen los buenos profesionales ante situaciones únicas."
   },
   {
-   "id": "p2-020",
+   "id": "p2-059",
+   "subtema": "6.3",
+   "gemela": "ep6-021",
+   "tipo": "caso",
+   "pregunta": "Un docente graba su clase y, al día siguiente, la revisa con un colega para entender por qué los alumnos se perdieron en la segunda actividad. ¿Qué concepto de Schön describe mejor lo que hace?",
+   "opciones": [
+    "Reflexión sobre la acción",
+    "Reflexión en la acción",
+    "Conocimiento en la acción",
+    "Racionalidad técnica"
+   ],
+   "correcta": 0,
+   "explicacion": "Es después de actuar, no mientras actúa: reflexión sobre la acción."
+  },
+  {
+   "id": "p2-060",
    "subtema": "6.4",
+   "gemela": "ep6-012",
+   "tipo": "completar",
+   "pregunta": "El informe coordinado por Jacques Delors (1996) se titula La educación encierra un _______.",
+   "opciones": [
+    "tesoro",
+    "misterio",
+    "método",
+    "paradigma"
+   ],
+   "correcta": 0,
+   "explicacion": "Propuso los cuatro pilares de la educación."
+  },
+  {
+   "id": "p2-061",
+   "subtema": "6.4",
+   "gemela": "ep6-013",
+   "tipo": "caso",
+   "pregunta": "Un maestro aplica una nueva secuencia de fracciones como si fuera una hipótesis: registra lo que ocurre, la ajusta y la vuelve a probar. ¿Qué autor describió así el currículo?",
+   "opciones": [
+    "Lawrence Stenhouse",
+    "Donald Schön",
+    "Jacques Delors",
+    "Michael Polanyi"
+   ],
+   "correcta": 0,
+   "explicacion": "Stenhouse (1975/1984): el currículo es una hipótesis que el maestro pone a prueba en su salón."
+  },
+  {
+   "id": "p2-062",
+   "subtema": "6.4",
+   "gemela": "ep6-014",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué respuesta parcial recibe la pregunta guía del curso en el subtema 6.4?",
+   "opciones": [
+    "Si la pedagogía es ciencia, también lo es por lo que los maestros investigan y sistematizan en sus aulas",
+    "La pedagogía solo es ciencia cuando la producen las universidades",
+    "La pedagogía es un arte y por eso no puede ser ciencia",
+    "La pedagogía es ciencia porque usa estadística"
+   ],
+   "correcta": 0,
+   "explicacion": "El docente investigador también produce conocimiento pedagógico."
+  },
+  {
+   "id": "p2-063",
+   "subtema": "6.4",
+   "gemela": "ep6-022",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada cambio del nuevo paradigma para la educación con su opuesto.",
    "pares": [
@@ -438,36 +988,67 @@
    "explicacion": "Son los cambios que se derivan de todo lo visto hasta el Tema 6."
   },
   {
-   "id": "p2-021",
+   "id": "p2-064",
    "subtema": "6.4",
-   "tipo": "completar",
-   "pregunta": "El informe coordinado por Jacques Delors (1996) se titula La educación encierra un _______.",
+   "gemela": "ep6-023",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estos cambios NO forma parte del nuevo paradigma para la educación que describe el compendio?",
    "opciones": [
-    "tesoro",
-    "misterio",
-    "método",
-    "paradigma"
+    "Del aprendizaje contextualizado a contenidos universales desconectados de la vida",
+    "Del conocimiento fragmentado al conocimiento relacionado",
+    "De la transmisión a la construcción dialógica",
+    "De la certeza a la incertidumbre"
    ],
    "correcta": 0,
-   "explicacion": "Propuso los cuatro pilares de la educación."
+   "explicacion": "El cambio va al revés: de lo abstracto a lo contextualizado."
   },
   {
-   "id": "p2-022",
+   "id": "p2-065",
    "subtema": "7.1",
+   "gemela": "ep7-001",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué consecuencia pedagógica y ética tiene la plasticidad cerebral?",
    "opciones": [
     "Nadie está condenado por su cerebro: las capacidades se desarrollan con experiencia y enseñanza adecuadas",
-    "Los alumnos con bajo rendimiento nunca podrán mejorar",
-    "Solo los niños menores de tres años pueden aprender",
-    "El aprendizaje no depende de la enseñanza"
+    "La plasticidad solo existe en la infancia, por eso lo que no se aprende entonces ya no se recupera",
+    "Como la plasticidad es mayor en la infancia, la escuela debe concentrar los contenidos difíciles en preescolar",
+    "Como el cerebro cambia todo el tiempo, lo aprendido no se consolida y hay que repetirlo cada día"
    ],
    "correcta": 0,
    "explicacion": "La plasticidad dura toda la vida, aunque es mayor en la infancia."
   },
   {
-   "id": "p2-023",
+   "id": "p2-066",
    "subtema": "7.1",
+   "gemela": "ep7-002",
+   "tipo": "caso",
+   "pregunta": "Un padre de familia dice que su hijo de doce años «ya no podrá ser bueno en matemáticas porque no lo estimularon antes de los tres años». ¿Qué responde la evidencia?",
+   "opciones": [
+    "Hay periodos sensibles, pero la plasticidad dura toda la vida, y aprendizajes escolares como las matemáticas no tienen una ventana que se cierre a los tres años",
+    "Es cierto: después de los tres años el cerebro ya no forma conexiones nuevas",
+    "Es cierto solo para las matemáticas, no para la lectura",
+    "Los periodos sensibles no existen para ningún aprendizaje"
+   ],
+   "correcta": 0,
+   "explicacion": "«Todo se juega antes de los tres años» es una simplificación que la investigación no respalda."
+  },
+  {
+   "id": "p2-067",
+   "subtema": "7.1",
+   "gemela": "ep7-003",
+   "tipo": "verdadero_falso",
+   "pregunta": "La corteza prefrontal, relacionada con la planeación y el control de impulsos, termina de madurar hasta pasados los veinte años.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Ayuda a entender el comportamiento adolescente."
+  },
+  {
+   "id": "p2-068",
+   "subtema": "7.1",
+   "gemela": "ep7-004",
    "tipo": "caso",
    "pregunta": "Una escuela deja tareas extensas que los alumnos terminan de madrugada. ¿Qué evidencia de la neurociencia es relevante para revisar esa práctica?",
    "opciones": [
@@ -480,34 +1061,99 @@
    "explicacion": "Plantea preguntas sobre horarios, tareas nocturnas y pantallas antes de dormir."
   },
   {
-   "id": "p2-024",
+   "id": "p2-069",
    "subtema": "7.1",
-   "tipo": "verdadero_falso",
-   "pregunta": "La corteza prefrontal, relacionada con la planeación y el control de impulsos, termina de madurar hasta pasados los veinte años.",
+   "gemela": "ep7-017",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según la idea de Hebb, ¿por qué la práctica repetida consolida un aprendizaje?",
    "opciones": [
-    "Verdadero",
-    "Falso"
+    "Porque se fortalecen las conexiones entre neuronas que se activan juntas, y lo que no se usa tiende a debilitarse",
+    "Porque cada repetición crea neuronas nuevas",
+    "Porque la información queda guardada en un solo lugar del cerebro, como en un archivero",
+    "Porque repetir activa sobre todo el hemisferio derecho"
    ],
    "correcta": 0,
-   "explicacion": "Ayuda a entender el comportamiento adolescente."
+   "explicacion": "Plasticidad: el cerebro modifica sus conexiones con la experiencia."
   },
   {
-   "id": "p2-025",
+   "id": "p2-070",
+   "subtema": "7.1",
+   "gemela": "ep7-018",
+   "tipo": "completar",
+   "pregunta": "El punto de comunicación entre dos neuronas se llama _______.",
+   "opciones": [
+    "sinapsis",
+    "dendrita",
+    "corteza",
+    "plasticidad"
+   ],
+   "correcta": 0,
+   "explicacion": "Cada neurona puede comunicarse con miles de otras."
+  },
+  {
+   "id": "p2-071",
    "subtema": "7.2",
+   "gemela": "ep7-005",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué aplicaron Immordino-Yang y Damasio (2007) a la educación?",
+   "opciones": [
+    "Que las emociones forman parte del aprendizaje: aprendemos y usamos lo que tiene significado emocional y social",
+    "Que las emociones deben controlarse para que no interfieran con la razón",
+    "Que la emoción solo influye en la memoria de corto plazo",
+    "Que los alumnos aprenden mejor con recompensas económicas"
+   ],
+   "correcta": 0,
+   "explicacion": "Las emociones no son un añadido al aprendizaje: son parte de él."
+  },
+  {
+   "id": "p2-072",
+   "subtema": "7.2",
+   "gemela": "ep7-006",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué afirma el compendio sobre la relación entre estrés y aprendizaje?",
+   "opciones": [
+    "Un poco de tensión puede movilizar la atención, pero el estrés intenso y prolongado afecta la memoria y el aprendizaje",
+    "Cualquier nivel de estrés impide aprender",
+    "El estrés siempre mejora el rendimiento porque activa la atención",
+    "El estrés solo afecta a los niños pequeños, no a los adolescentes"
+   ],
+   "correcta": 0,
+   "explicacion": "No es «mala actitud»: es una respuesta del organismo."
+  },
+  {
+   "id": "p2-073",
+   "subtema": "7.2",
+   "gemela": "ep7-007",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué relación hay entre curiosidad y aprendizaje según el tema?",
    "opciones": [
-    "Cuando algo genera curiosidad, el cerebro se prepara para aprender y se recuerda mejor la información",
-    "La curiosidad distrae y reduce el aprendizaje",
-    "La curiosidad solo importa en preescolar",
-    "No existe relación demostrada"
+    "Cuando algo genera curiosidad, el cerebro se prepara para aprender y recuerda mejor la información que llega en ese estado",
+    "La curiosidad funciona como una recompensa externa que sustituye a la explicación del contenido",
+    "La curiosidad solo ayuda a recordar el dato que la provocó, no la información que llega después",
+    "La curiosidad mejora la atención, pero el compendio señala que no influye en la memoria"
    ],
    "correcta": 0,
    "explicacion": "Mora insiste en que emoción y curiosidad son puertas del aprendizaje."
   },
   {
-   "id": "p2-026",
+   "id": "p2-074",
    "subtema": "7.2",
+   "gemela": "ep7-019",
+   "tipo": "completar",
+   "pregunta": "El subtítulo de la obra de Francisco Mora (2013) resume su idea: «solo se puede aprender aquello que se _______».",
+   "opciones": [
+    "ama",
+    "repite",
+    "entiende",
+    "practica"
+   ],
+   "correcta": 0,
+   "explicacion": "Para Mora, la emoción y la curiosidad son la puerta del aprendizaje."
+  },
+  {
+   "id": "p2-075",
+   "subtema": "7.2",
+   "gemela": "ep7-020",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada hallazgo con su implicación para el aula.",
    "pares": [
@@ -531,8 +1177,9 @@
    "explicacion": "Cognición y emoción no se separan."
   },
   {
-   "id": "p2-027",
+   "id": "p2-076",
    "subtema": "7.3",
+   "gemela": "ep7-008",
    "tipo": "caso",
    "pregunta": "En un curso para docentes se afirma que hay que \"activar el hemisferio derecho\" de los alumnos creativos con ejercicios especiales. ¿Qué responderías?",
    "opciones": [
@@ -545,8 +1192,39 @@
    "explicacion": "Sperry estudió condiciones excepcionales; en cerebros sanos los hemisferios cooperan."
   },
   {
-   "id": "p2-028",
+   "id": "p2-077",
    "subtema": "7.3",
+   "gemela": "ep7-009",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué encontró realmente Roger Sperry en sus pacientes?",
+   "opciones": [
+    "Que, con el cuerpo calloso cortado, cada hemisferio procesaba cierta información de manera diferente",
+    "Que las personas sanas usan más un hemisferio según su personalidad",
+    "Que los creativos usan el hemisferio derecho y los lógicos el izquierdo",
+    "Que el cuerpo calloso no cumple ninguna función"
+   ],
+   "correcta": 0,
+   "explicacion": "Investigaciones reales, pero mal interpretadas, dieron origen al mito de los hemisferios."
+  },
+  {
+   "id": "p2-078",
+   "subtema": "7.3",
+   "gemela": "ep7-010",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué la neurociencia actual considera superado el modelo del cerebro triuno de MacLean?",
+   "opciones": [
+    "Porque la evolución no apiló cerebros, y la emoción y la razón no ocupan capas separadas, sino redes entrelazadas",
+    "Porque demostró que el cerebro reptiliano controla la razón",
+    "Porque el cerebro solo tiene dos partes: los hemisferios",
+    "Porque la neocorteza no participa en el razonamiento"
+   ],
+   "correcta": 0,
+   "explicacion": "Es una metáfora atractiva, pero superada."
+  },
+  {
+   "id": "p2-079",
+   "subtema": "7.3",
+   "gemela": "ep7-021",
    "tipo": "opcion_multiple",
    "pregunta": "¿En qué consiste la \"armonía\" entre las partes del cerebro según la neurociencia actual?",
    "opciones": [
@@ -559,8 +1237,37 @@
    "explicacion": "Atención, control ejecutivo, memoria, lenguaje y emoción funcionan en redes."
   },
   {
-   "id": "p2-029",
+   "id": "p2-080",
+   "subtema": "7.3",
+   "gemela": "ep7-022",
+   "tipo": "verdadero_falso",
+   "pregunta": "En la mayoría de las personas, ciertas funciones del lenguaje dependen más del hemisferio izquierdo; aun así, leer o resolver un problema activa redes de ambos hemisferios.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Existen especializaciones, pero no un hemisferio dominante como rasgo de aprendizaje."
+  },
+  {
+   "id": "p2-081",
+   "subtema": "7.3",
+   "gemela": "ep7-023",
+   "tipo": "caso",
+   "pregunta": "Una escuela justifica su taller de arte diciendo que «activa el hemisferio derecho». ¿Cuál es la mejor justificación según el Tema 7?",
+   "opciones": [
+    "Una educación integral es valiosa porque el ser humano es una unidad, no porque active un hemisferio",
+    "El arte equilibra el cerebro reptiliano con la neocorteza",
+    "Los alumnos artísticos tienen un hemisferio derecho dominante",
+    "El arte sustituye a la práctica de recuperación"
+   ],
+   "correcta": 0,
+   "explicacion": "La justificación basada en hemisferios es un neuromito."
+  },
+  {
+   "id": "p2-082",
    "subtema": "7.4",
+   "gemela": "ep7-011",
    "tipo": "jerarquizar",
    "pregunta": "Ordena los cuatro pilares del aprendizaje de Dehaene tal como se presentan en el compendio.",
    "opciones": [
@@ -573,8 +1280,9 @@
    "explicacion": "Son los pilares propuestos en ¿Cómo aprendemos? (2018/2019)."
   },
   {
-   "id": "p2-030",
+   "id": "p2-083",
    "subtema": "7.4",
+   "gemela": "ep7-012",
    "tipo": "caso",
    "pregunta": "Para preparar un examen, un alumno relee tres veces sus apuntes y los subraya; otro se hace preguntas y las responde sin ver, repartiendo el estudio en varios días. Según la evidencia, ¿quién usa mejores estrategias?",
    "opciones": [
@@ -587,22 +1295,9 @@
    "explicacion": "Roediger y Karpicke (2006) y Dunlosky et al. (2013) lo respaldan."
   },
   {
-   "id": "p2-031",
+   "id": "p2-084",
    "subtema": "7.4",
-   "tipo": "opcion_multiple",
-   "pregunta": "Ante una propuesta comercial de \"neuroeducación\", ¿qué preguntas recomienda hacer el compendio?",
-   "opciones": [
-    "¿Dónde está la evidencia? ¿Quién la produjo? ¿Se ha replicado?",
-    "¿Cuánto cuesta? ¿Qué tan popular es en redes?",
-    "¿Usa palabras científicas? ¿Tiene imágenes del cerebro?",
-    "¿Es nueva? ¿La recomienda un famoso?"
-   ],
-   "correcta": 0,
-   "explicacion": "Entre un hallazgo de laboratorio y una recomendación para el aula hay una gran distancia."
-  },
-  {
-   "id": "p2-032",
-   "subtema": "7.4",
+   "gemela": "ep7-013",
    "tipo": "verdadero_falso",
    "pregunta": "Presentar el contenido en varias formas —palabras, imágenes, ejemplos y práctica— a todos los alumnos sí tiene respaldo, aunque enseñar según estilos de aprendizaje no lo tenga.",
    "opciones": [
@@ -611,6 +1306,122 @@
    ],
    "correcta": 0,
    "explicacion": "Las preferencias existen, pero no significan que se aprenda mejor así."
+  },
+  {
+   "id": "p2-085",
+   "subtema": "7.4",
+   "gemela": "ep7-014",
+   "tipo": "caso",
+   "pregunta": "En un curso para docentes se recomienda hacer «gimnasia cerebral» antes de cada clase para conectar los hemisferios. ¿Qué dice la evidencia?",
+   "opciones": [
+    "No hay evidencia de esos efectos específicos, aunque la actividad física en general sí favorece la salud y el bienestar",
+    "Está comprobado que mejora la conexión entre los hemisferios",
+    "Solo funciona con los alumnos kinestésicos",
+    "Daña la concentración, por lo que debe prohibirse"
+   ],
+   "correcta": 0,
+   "explicacion": "Es uno de los neuromitos de la tabla del compendio."
+  },
+  {
+   "id": "p2-086",
+   "subtema": "7.4",
+   "gemela": "ep7-015",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué encontraron Dekker y colaboradores (2012) al encuestar a docentes del Reino Unido y los Países Bajos?",
+   "opciones": [
+    "Que, en promedio, aceptaban aproximadamente la mitad de los neuromitos presentados",
+    "Que casi ningún docente creía en neuromitos",
+    "Que los docentes interesados en la neurociencia rechazaban todos los mitos",
+    "Que los neuromitos solo circulan en América Latina"
+   ],
+   "correcta": 0,
+   "explicacion": "Incluso los más interesados en neurociencia aceptaban mitos, quizá por materiales comerciales de baja calidad."
+  },
+  {
+   "id": "p2-087",
+   "subtema": "7.4",
+   "gemela": "ep7-016",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cómo se cita en APA 7 una obra de dos autores, como la de Immordino-Yang y Damasio (2007)?",
+   "opciones": [
+    "Siempre con ambos apellidos: (Immordino-Yang y Damasio, 2007)",
+    "Con el primero y et al.: (Immordino-Yang et al., 2007)",
+    "Solo con el primer apellido: (Immordino-Yang, 2007)",
+    "Con ambos la primera vez y después con et al."
+   ],
+   "correcta": 0,
+   "explicacion": "Et al. es para tres o más autores."
+  },
+  {
+   "id": "p2-088",
+   "subtema": "7.4",
+   "gemela": "ep7-024",
+   "tipo": "caso",
+   "pregunta": "Un maestro devuelve los exámenes tres semanas después, solo con la calificación. Según los pilares de Dehaene, ¿qué se desaprovecha?",
+   "opciones": [
+    "La retroalimentación del error, que funciona mejor si es rápida, precisa y sin castigo",
+    "La consolidación, que depende solo del sueño",
+    "La atención, porque el examen fue largo",
+    "El compromiso activo, porque los alumnos no se movieron"
+   ],
+   "correcta": 0,
+   "explicacion": "Una retroalimentación rápida y precisa es una de las herramientas más poderosas."
+  },
+  {
+   "id": "p2-089",
+   "subtema": "7.4",
+   "gemela": "ep7-025",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada estrategia de estudio con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Práctica de recuperación",
+     "derecha": "Intentar recordar lo aprendido con preguntas o tarjetas, sin ver"
+    },
+    {
+     "izquierda": "Práctica espaciada",
+     "derecha": "Distribuir el estudio en varias sesiones a lo largo del tiempo"
+    },
+    {
+     "izquierda": "Práctica intercalada",
+     "derecha": "Alternar tipos de problemas en lugar de practicar uno solo"
+    },
+    {
+     "izquierda": "Elaboración",
+     "derecha": "Explicar con las propias palabras y preguntarse por qué algo es así"
+    }
+   ],
+   "explicacion": "Son las estrategias con respaldo de investigación que presenta el compendio."
+  },
+  {
+   "id": "p2-090",
+   "subtema": "7.4",
+   "gemela": "ep7-026",
+   "tipo": "opcion_multiple",
+   "pregunta": "Ante una propuesta comercial de \"neuroeducación\", ¿qué preguntas recomienda hacer el compendio?",
+   "opciones": [
+    "¿Dónde está la evidencia? ¿Quién la produjo? ¿Se ha replicado?",
+    "¿La recomienda un neurocientífico famoso? ¿Usa imágenes del cerebro? ¿Es reciente?",
+    "¿La aplican muchas escuelas? ¿Tiene buenas reseñas? ¿La recomienda la SEP?",
+    "¿Explica las áreas del cerebro? ¿Usa palabras técnicas? ¿Tiene certificado?"
+   ],
+   "correcta": 0,
+   "explicacion": "Entre un hallazgo de laboratorio y una recomendación para el aula hay una gran distancia."
+  },
+  {
+   "id": "p2-091",
+   "subtema": "7.4",
+   "gemela": "ep7-027",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es el «efecto de prueba»?",
+   "opciones": [
+    "Que intentar recordar lo aprendido fortalece la memoria más que releer",
+    "Que los exámenes generan estrés y reducen el aprendizaje",
+    "Que estudiar la noche anterior mejora la calificación",
+    "Que las pruebas estandarizadas miden la inteligencia"
+   ],
+   "correcta": 0,
+   "explicacion": "Práctica de recuperación: preguntas, tarjetas o cuestionarios sin calificación."
   }
  ]
 }

@@ -292,6 +292,100 @@
    ],
    "correcta": 0,
    "explicacion": "Es una de las conclusiones del recorrido por Popper, Kuhn, Lakatos y Feyerabend."
+  },
+  {
+   "id": "ep4-021",
+   "subtema": "4.5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué defendía Feyerabend con la «proliferación de teorías»?",
+   "opciones": [
+    "Que existan teorías alternativas, porque ayudan a ver los puntos débiles de la teoría dominante",
+    "Que solo exista una teoría en cada disciplina",
+    "Que las teorías se traduzcan a muchos idiomas",
+    "Que las teorías antiguas se eliminen de los libros"
+   ],
+   "correcta": 0,
+   "explicacion": "Las alternativas, incluso las que contradicen lo establecido, permiten criticar la teoría dominante."
+  },
+  {
+   "id": "ep4-022",
+   "subtema": "4.5",
+   "tipo": "verdadero_falso",
+   "pregunta": "Feyerabend propuso que, en una sociedad libre, la ciencia fuera una tradición más entre otras y que los ciudadanos decidieran democráticamente qué tradiciones enseñar.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Criticó que la ciencia ocupara el lugar de autoridad indiscutible que antes tuvo la religión."
+  },
+  {
+   "id": "ep4-023",
+   "subtema": "4.5",
+   "tipo": "caso",
+   "pregunta": "Una maestra dice: «Todos los proyectos deben seguir exactamente los mismos pasos para ser científicos». ¿Qué autor del Tema 4 la cuestionaría con más fuerza?",
+   "opciones": [
+    "Paul Feyerabend",
+    "Auguste Comte",
+    "Ninguno, porque todos defendían un método único",
+    "El Círculo de Viena"
+   ],
+   "correcta": 0,
+   "explicacion": "Feyerabend sostuvo que imponer un método único empobrece el conocimiento."
+  },
+  {
+   "id": "ep4-024",
+   "subtema": "4.6",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuáles son las tres operaciones del paradigma de simplificación según Morin?",
+   "opciones": [
+    "Disyunción, reducción y abstracción",
+    "Observación, hipótesis y experimentación",
+    "Tesis, antítesis y síntesis",
+    "Verificación, falsación y revolución"
+   ],
+   "correcta": 0,
+   "explicacion": "Separar lo unido, explicar el todo por sus partes y aislar el objeto de su contexto."
+  },
+  {
+   "id": "ep4-025",
+   "subtema": "4.6",
+   "tipo": "verdadero_falso",
+   "pregunta": "Morin escribió Los siete saberes necesarios para la educación del futuro por encargo de la UNESCO.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Morin (1999) lo escribió para la UNESCO y se volvió referencia en las reformas de América Latina."
+  },
+  {
+   "id": "ep4-026",
+   "subtema": "4.7",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué ejemplo usa el compendio para mostrar que los conceptos de las ciencias sociales regresan a la sociedad y la transforman?",
+   "opciones": [
+    "La palabra «bullying», que cambió la manera en que alumnos y maestros viven ciertos conflictos",
+    "La ley de la gravedad",
+    "El movimiento de los planetas",
+    "La fórmula química del agua"
+   ],
+   "correcta": 0,
+   "explicacion": "Esto no ocurre con las piedras o los planetas: es la doble hermenéutica de Giddens."
+  },
+  {
+   "id": "ep4-027",
+   "subtema": "4.7",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué criterios propios de rigor ha desarrollado la investigación cualitativa?",
+   "opciones": [
+    "Credibilidad, transferibilidad, consistencia y confirmabilidad",
+    "Solo la validez estadística",
+    "Rapidez, costo y popularidad",
+    "Ninguno: la investigación cualitativa no tiene criterios de rigor"
+   ],
+   "correcta": 0,
+   "explicacion": "No son los de la física, pero son exigentes."
   }
  ]
 }

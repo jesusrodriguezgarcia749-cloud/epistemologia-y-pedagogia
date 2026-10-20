@@ -251,6 +251,156 @@
    ],
    "correcta": 0,
    "explicacion": "Las de 40 palabras o más van en bloque aparte, con sangría y sin comillas."
+  },
+  {
+   "id": "ep5-017",
+   "subtema": "5.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué dijo Max Planck sobre cómo triunfan las nuevas verdades científicas?",
+   "opciones": [
+    "Cuando crece una generación familiarizada con ellas",
+    "En cuanto se publican en una revista",
+    "Cuando las aprueba el gobierno",
+    "Nunca llegan a triunfar"
+   ],
+   "correcta": 0,
+   "explicacion": "La inercia mental también es colectiva."
+  },
+  {
+   "id": "ep5-018",
+   "subtema": "5.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "La intuición de Bachelard sobre las ideas previas de los alumnos fue retomada décadas después por la investigación sobre:",
+   "opciones": [
+    "Concepciones alternativas y cambio conceptual",
+    "Estilos de aprendizaje",
+    "El cerebro triuno",
+    "La inteligencia artificial"
+   ],
+   "correcta": 0,
+   "explicacion": "Los alumnos llegan con ideas previas que resisten al conocimiento nuevo."
+  },
+  {
+   "id": "ep5-019",
+   "subtema": "5.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "«Con tabletas en el salón se resuelve todo» es un ejemplo del obstáculo epistemológico llamado:",
+   "opciones": [
+    "Conocimiento unitario y pragmático",
+    "Fusión de horizontes",
+    "Doble hermenéutica",
+    "Reflexividad"
+   ],
+   "correcta": 0,
+   "explicacion": "Querer explicarlo todo con un solo principio o solo por su utilidad."
+  },
+  {
+   "id": "ep5-020",
+   "subtema": "5.2",
+   "tipo": "caso",
+   "pregunta": "Una tesista cambia sus preguntas de entrevista cuando descubre un tema inesperado. ¿Cómo se llama esto en investigación cualitativa?",
+   "opciones": [
+    "Diseño emergente",
+    "Plagio",
+    "Error de método",
+    "Falsación"
+   ],
+   "correcta": 0,
+   "explicacion": "El plan se ajusta conforme aparecen hallazgos."
+  },
+  {
+   "id": "ep5-021",
+   "subtema": "5.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según Martínez Miguélez, primero se estudia la naturaleza del fenómeno y después se elige el camino, es decir, el método adecuado.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Del griego méthodos, «camino»: el camino depende del terreno."
+  },
+  {
+   "id": "ep5-022",
+   "subtema": "5.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estos es un supuesto del método tradicional que el compendio pone en duda?",
+   "opciones": [
+    "Que la observación es neutral",
+    "Que en la ciencia hay que leer",
+    "Que los científicos usan palabras",
+    "Que a veces se investiga en equipo"
+   ],
+   "correcta": 0,
+   "explicacion": "Hanson mostró que toda observación está cargada de teoría."
+  },
+  {
+   "id": "ep5-023",
+   "subtema": "5.2",
+   "tipo": "completar",
+   "pregunta": "Cuando un investigador declara sus propios supuestos y su posición, en lugar de fingir neutralidad, practica la _______.",
+   "opciones": [
+    "reflexividad",
+    "triangulación",
+    "generalización",
+    "memorización"
+   ],
+   "correcta": 0,
+   "explicacion": "Reflexividad: el investigador se reconoce como parte."
+  },
+  {
+   "id": "ep5-024",
+   "subtema": "5.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Las ilusiones ópticas muestran que el cerebro:",
+   "opciones": [
+    "Completa, interpreta y anticipa lo que percibe",
+    "Copia la realidad tal como es",
+    "No recibe información de los ojos",
+    "Siempre se equivoca"
+   ],
+   "correcta": 0,
+   "explicacion": "Percibir no es recibir pasivamente."
+  },
+  {
+   "id": "ep5-025",
+   "subtema": "5.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "Para la epistemología actual, el conocimiento es producto de un ser humano completo, con cuerpo, emociones e historia, y no de una razón pura y desapasionada.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la consecuencia que el compendio saca del trabajo de Damasio."
+  },
+  {
+   "id": "ep5-026",
+   "subtema": "5.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Para Freire, el diálogo en la educación es:",
+   "opciones": [
+    "Una postura epistemológica: el educando también sabe y el conocimiento se construye entre ambos",
+    "Una técnica para que el grupo no se aburra",
+    "El momento en que el maestro dicta",
+    "Una forma de evaluar"
+   ],
+   "correcta": 0,
+   "explicacion": "Freire (1970/2005): el diálogo exige humildad, fe en las personas y pensamiento crítico."
+  },
+  {
+   "id": "ep5-027",
+   "subtema": "5.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "El principio dialógico de Morin consiste en:",
+   "opciones": [
+    "Mantener juntas ideas aparentemente opuestas, como orden y desorden",
+    "Hablar más fuerte que el otro",
+    "Eliminar todas las contradicciones",
+    "Conversar solo con quien piensa igual"
+   ],
+   "correcta": 0,
+   "explicacion": "Es el diálogo entre ideas; el de Freire y Habermas es el diálogo entre personas."
   }
  ]
 }

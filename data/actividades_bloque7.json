@@ -240,6 +240,156 @@
    ],
    "correcta": 0,
    "explicacion": "Ejemplo: (Pashler et al., 2008). En la lista de referencias sí se escriben todos los autores hasta 20."
+  },
+  {
+   "id": "ep7-017",
+   "subtema": "7.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué propuso Donald Hebb en 1949?",
+   "opciones": [
+    "Que las neuronas que se activan juntas tienden a conectarse entre sí",
+    "Que solo usamos el 10 % del cerebro",
+    "Que el cerebro tiene tres capas evolutivas",
+    "Que cada recuerdo se guarda en un solo lugar"
+   ],
+   "correcta": 0,
+   "explicacion": "Por eso la práctica repetida consolida un aprendizaje."
+  },
+  {
+   "id": "ep7-018",
+   "subtema": "7.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Dónde guarda el cerebro la información, según el compendio?",
+   "opciones": [
+    "Distribuida en redes de neuronas que se activan juntas",
+    "En un solo lugar, como un archivero",
+    "Solo en el hemisferio izquierdo",
+    "En el cerebro reptiliano"
+   ],
+   "correcta": 0,
+   "explicacion": "El cerebro tiene unos 86 000 millones de neuronas conectadas por billones de sinapsis."
+  },
+  {
+   "id": "ep7-019",
+   "subtema": "7.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué sostiene Francisco Mora en su libro Neuroeducación (2013)?",
+   "opciones": [
+    "Que solo se puede aprender aquello que se ama: la emoción y la curiosidad son la puerta del aprendizaje",
+    "Que la memoria es lo único que importa",
+    "Que los hemisferios se deben entrenar por separado",
+    "Que la emoción estorba al aprendizaje"
+   ],
+   "correcta": 0,
+   "explicacion": "Lo resume en el subtítulo de su obra."
+  },
+  {
+   "id": "ep7-020",
+   "subtema": "7.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "El cerebro humano es profundamente social: aprendemos observando, imitando, conversando y colaborando.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Esto conecta con Vygotsky y con la dimensión dialógica del Tema 5."
+  },
+  {
+   "id": "ep7-021",
+   "subtema": "7.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según la neurociencia actual, la «armonía» entre las partes del cerebro consiste en:",
+   "opciones": [
+    "La integración de redes que trabajan coordinadas",
+    "Usar solo un hemisferio a la vez",
+    "Dormir mucho",
+    "Escuchar música mientras se estudia"
+   ],
+   "correcta": 0,
+   "explicacion": "Redes de atención, control ejecutivo, memoria, lenguaje y emoción."
+  },
+  {
+   "id": "ep7-022",
+   "subtema": "7.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es el cuerpo calloso?",
+   "opciones": [
+    "El haz de fibras que conecta los dos hemisferios",
+    "La parte del cerebro que guarda los recuerdos",
+    "Un hueso del cráneo",
+    "La corteza prefrontal"
+   ],
+   "correcta": 0,
+   "explicacion": "En un cerebro sano, los hemisferios trabajan juntos comunicados por el cuerpo calloso."
+  },
+  {
+   "id": "ep7-023",
+   "subtema": "7.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el compendio, ¿por qué es valiosa una educación integral que combine razonamiento, emoción, movimiento, lenguaje y arte?",
+   "opciones": [
+    "Porque el ser humano es una unidad",
+    "Porque activa el hemisferio derecho",
+    "Porque entretiene a los alumnos",
+    "Porque lo exige el cerebro triuno"
+   ],
+   "correcta": 0,
+   "explicacion": "No por «activar un hemisferio», sino porque somos una unidad."
+  },
+  {
+   "id": "ep7-024",
+   "subtema": "7.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Para Dehaene, el error es:",
+   "opciones": [
+    "Información que ayuda a aprender, no un fracaso",
+    "Algo que debe castigarse",
+    "La señal de que el alumno no puede aprender",
+    "Algo que conviene ocultar"
+   ],
+   "correcta": 0,
+   "explicacion": "El cerebro aprende cuando detecta la diferencia entre lo esperado y lo ocurrido."
+  },
+  {
+   "id": "ep7-025",
+   "subtema": "7.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué es la práctica intercalada?",
+   "opciones": [
+    "Alternar tipos de problemas en lugar de practicar uno solo en bloque",
+    "Estudiar con música",
+    "Releer el texto varias veces",
+    "Subrayar con varios colores"
+   ],
+   "correcta": 0,
+   "explicacion": "Ayuda a distinguir cuándo usar cada estrategia."
+  },
+  {
+   "id": "ep7-026",
+   "subtema": "7.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Ante una propuesta comercial «neuro», ¿qué preguntas recomienda hacer el compendio?",
+   "opciones": [
+    "¿Dónde está la evidencia? ¿Quién la produjo? ¿Se ha replicado?",
+    "¿Cuánto cuesta?",
+    "¿Es bonita?",
+    "¿Es nueva?"
+   ],
+   "correcta": 0,
+   "explicacion": "Las mismas que ante cualquier afirmación científica."
+  },
+  {
+   "id": "ep7-027",
+   "subtema": "7.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "Roediger y Karpicke (2006) mostraron que los estudiantes que practicaban recordando retenían más a largo plazo que quienes solo releían el texto.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es el efecto de prueba."
   }
  ]
 }

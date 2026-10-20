@@ -221,6 +221,139 @@
    ],
    "correcta": 0,
    "explicacion": "Ese documento puede ser leído, criticado y aprovechado por otras escuelas."
+  },
+  {
+   "id": "ep6-015",
+   "subtema": "6.1",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada vía de acercarse al conocimiento con su ejemplo.",
+   "pares": [
+    {
+     "izquierda": "Experiencia directa",
+     "derecha": "Conozco el sabor del chile habanero porque lo he probado"
+    },
+    {
+     "izquierda": "Testimonio",
+     "derecha": "Sé que existe la Antártida porque confío en quienes han estado ahí"
+    },
+    {
+     "izquierda": "Razonamiento",
+     "derecha": "Si todos los mamíferos tienen pulmones y la ballena es mamífero, la ballena tiene pulmones"
+    },
+    {
+     "izquierda": "Investigación sistemática",
+     "derecha": "Sé que el tabaco aumenta el riesgo de cáncer porque miles de estudios lo han mostrado"
+    }
+   ],
+   "explicacion": "Ninguna vía es infalible y casi todo lo que sabemos combina varias."
+  },
+  {
+   "id": "ep6-016",
+   "subtema": "6.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué ejemplos usa el compendio para ilustrar el conocimiento tácito?",
+   "opciones": [
+    "Andar en bicicleta y reconocer un rostro sin poder explicar cómo",
+    "Resolver una ecuación",
+    "Leer un manual",
+    "Copiar un texto"
+   ],
+   "correcta": 0,
+   "explicacion": "Polanyi (1966): sabemos más de lo que podemos decir."
+  },
+  {
+   "id": "ep6-017",
+   "subtema": "6.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estas es una característica del conocimiento ordinario o de sentido común?",
+   "opciones": [
+    "Es práctico y se transmite en la familia y la comunidad",
+    "Siempre se pone a prueba en un laboratorio",
+    "Se organiza en teorías explícitas",
+    "Es universal y nunca falla"
+   ],
+   "correcta": 0,
+   "explicacion": "Es práctico, compartido, poco sistemático, poco crítico y contextual."
+  },
+  {
+   "id": "ep6-018",
+   "subtema": "6.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "El sentido común a veces acierta y a veces se equivoca: durante siglos dijo que el Sol giraba alrededor de la Tierra, porque así se ve.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "También muchos descubrimientos científicos partieron de observaciones populares."
+  },
+  {
+   "id": "ep6-019",
+   "subtema": "6.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué le ocurrió a Henri Poincaré, según el compendio?",
+   "opciones": [
+    "La solución a un problema le llegó de pronto al subir a un autobús, tras semanas de trabajo",
+    "Descubrió la gravedad al ver caer una manzana",
+    "Pintó La última cena",
+    "Inventó el microscopio"
+   ],
+   "correcta": 0,
+   "explicacion": "La intuición y la imaginación también juegan un papel en la ciencia."
+  },
+  {
+   "id": "ep6-020",
+   "subtema": "6.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué criticó Schön con la idea de «racionalidad técnica»?",
+   "opciones": [
+    "Que los profesionales solo aplican la teoría científica a la práctica",
+    "El uso de computadoras en la escuela",
+    "Que los maestros tengan vacaciones",
+    "Que los alumnos lean mucho"
+   ],
+   "correcta": 0,
+   "explicacion": "Esa visión no explica lo que hacen los buenos profesionales ante situaciones únicas."
+  },
+  {
+   "id": "ep6-021",
+   "subtema": "6.3",
+   "tipo": "caso",
+   "pregunta": "Al terminar el día, una maestra se pregunta por qué una actividad funcionó en un grupo y no en otro. Según Schön, ¿qué hace?",
+   "opciones": [
+    "Reflexión sobre la acción",
+    "Racionalidad técnica",
+    "Copiar una planeación",
+    "Nada relacionado con su práctica"
+   ],
+   "correcta": 0,
+   "explicacion": "Revisar después lo ocurrido es reflexión sobre la acción."
+  },
+  {
+   "id": "ep6-022",
+   "subtema": "6.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué cambio propone el nuevo paradigma para el papel del docente?",
+   "opciones": [
+    "Pasar de aplicador de programas a docente investigador",
+    "Que el docente deje de planear",
+    "Que el docente solo dicte",
+    "Que el docente no evalúe"
+   ],
+   "correcta": 0,
+   "explicacion": "Un profesional que investiga y transforma su práctica."
+  },
+  {
+   "id": "ep6-023",
+   "subtema": "6.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "La investigación-acción de John Elliott y la ciencia crítica de Carr y Kemmis se relacionan con la idea del docente investigador.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Se suman a la propuesta de Stenhouse."
   }
  ]
 }
