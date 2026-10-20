@@ -3,12 +3,1122 @@
  "titulo": "Examen Final — Integrador de todos los temas del curso (1 a 10)",
  "config": {
   "preguntasPorExamen": 40,
-  "minutos": 60
+  "minutos": 60,
+  "seleccion": "por_subtema"
  },
  "reactivos": [
   {
    "id": "final-001",
+   "subtema": "8.1",
+   "gemela": "ep8-001",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál era la base epistemológica del modelo de rasgos y factores?",
+   "opciones": [
+    "Positivista: rasgos estables y medibles, instrumentos estandarizados, un experto que diagnostica y una respuesta correcta",
+    "Interpretativa: comprender los significados que la persona da a su historia",
+    "Sociocrítica: analizar las barreras y desigualdades del entorno",
+    "Constructivista: la carrera como una historia que la persona escribe"
+   ],
+   "correcta": 0,
+   "explicacion": "El modelo de Parsons buscaba la correspondencia entre rasgos medibles y requisitos de una ocupación."
+  },
+  {
+   "id": "final-002",
+   "subtema": "8.1",
+   "gemela": "ep8-002",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué cambio epistemológico vivió la orientación vocacional?",
+   "opciones": [
+    "Pasar del diagnóstico de rasgos estables para predecir una ocupación a acompañar la construcción de proyectos de vida",
+    "Pasar de las entrevistas a los tests estandarizados",
+    "Dejar de considerar los intereses de la persona",
+    "Eliminar la orientación de las escuelas"
+   ],
+   "correcta": 0,
+   "explicacion": "Las personas cambian y el mundo del trabajo es inestable."
+  },
+  {
+   "id": "final-003",
+   "subtema": "8.1",
+   "gemela": "ep8-003",
+   "tipo": "caso",
+   "pregunta": "Un orientador aplica a un grupo un test de intereses y entrega a cada alumno \"la carrera para la que nació\", sin entrevistas ni contexto. Con lo visto en todo el curso, ¿cuál es la crítica más completa?",
+   "opciones": [
+    "Trabaja desde un supuesto positivista que confunde un momento con un destino; ignora el contexto sistémico y la construcción del proyecto de vida",
+    "Ninguna: los tests estandarizados son el único conocimiento válido sobre una persona",
+    "Su único error es no usar inteligencia artificial para interpretar el test",
+    "Que el test es falsable y por eso no es científico"
+   ],
+   "correcta": 0,
+   "explicacion": "Une el modelo de rasgos y factores (Tema 8) con los paradigmas (Tema 3) y la plasticidad y el cambio (Temas 3 y 7)."
+  },
+  {
+   "id": "final-004",
+   "subtema": "8.1",
+   "gemela": "ep8-004",
+   "tipo": "caso",
+   "pregunta": "Una orientadora acompaña a un alumno durante toda la secundaria revisando cómo cambian sus intereses y la imagen que tiene de sí mismo. ¿Con qué autor se relaciona mejor su enfoque?",
+   "opciones": [
+    "Donald Super",
+    "Frank Parsons",
+    "Carl Rogers",
+    "Rafael Bisquerra"
+   ],
+   "correcta": 0,
+   "explicacion": "Super: el desarrollo vocacional es un proceso de toda la vida, ligado al concepto de sí mismo."
+  },
+  {
+   "id": "final-005",
+   "subtema": "8.1",
+   "gemela": "ep8-014",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué papel tiene el orientador en las propuestas constructivistas de la carrera?",
+   "opciones": [
+    "Ayudar a la persona a dar sentido a su historia e imaginar posibilidades",
+    "Diagnosticar los rasgos y recomendar la ocupación correcta",
+    "Asesorar a los docentes para que ellos decidan por el alumno",
+    "Identificar únicamente las barreras del entorno escolar"
+   ],
+   "correcta": 0,
+   "explicacion": "Del diagnóstico que predice al acompañamiento que construye."
+  },
+  {
+   "id": "final-006",
+   "subtema": "8.1",
+   "gemela": "ep8-015",
+   "tipo": "caso",
+   "pregunta": "Un alumno pregunta: «¿Para qué hago un proyecto de vida, si el test ya me dijo qué estudiar?». Con la crítica del nuevo paradigma, ¿qué argumento es más sólido?",
+   "opciones": [
+    "El test capta un momento, el contexto también decide y el mundo del trabajo cambia: conviene aprender a construir una trayectoria",
+    "El test siempre se equivoca y no debe tomarse en cuenta",
+    "El proyecto de vida sustituye por completo a cualquier instrumento de evaluación",
+    "El test solo es válido si lo interpreta un psicólogo"
+   ],
+   "correcta": 0,
+   "explicacion": "Las personas cambian, el contexto importa y el mundo del trabajo ya no es estable."
+  },
+  {
+   "id": "final-007",
+   "subtema": "8.2",
+   "gemela": "ep8-005",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el compendio, ¿cuál es la principal limitación del modelo clínico o de counseling?",
+   "opciones": [
+    "Llega a pocas personas y suele actuar cuando el problema ya existe",
+    "No permite entrevistas individuales",
+    "Se dirige solo a grupos y no a personas",
+    "Obliga a los docentes a intervenir en lugar del orientador"
+   ],
+   "correcta": 0,
+   "explicacion": "Por eso surgieron los modelos de programas y de consulta."
+  },
+  {
+   "id": "final-008",
+   "subtema": "8.2",
+   "gemela": "ep8-006",
+   "tipo": "caso",
+   "pregunta": "Una orientadora no alcanza a atender a 600 alumnos, así que capacita a los tutores y a las familias para que ellos acompañen a los jóvenes. ¿Qué modelo de Bisquerra aplica?",
+   "opciones": [
+    "Modelo de consulta",
+    "Modelo de programas",
+    "Modelo de servicios",
+    "Modelo clínico o de counseling"
+   ],
+   "correcta": 0,
+   "explicacion": "En el modelo de consulta, el orientador multiplica su alcance asesorando a otros."
+  },
+  {
+   "id": "final-009",
+   "subtema": "8.2",
+   "gemela": "ep8-008",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada principio de la orientación contemporánea con su significado.",
+   "pares": [
+    {
+     "izquierda": "Prevención",
+     "derecha": "Anticiparse a los problemas"
+    },
+    {
+     "izquierda": "Desarrollo",
+     "derecha": "Acompañar el crecimiento integral de todos los alumnos"
+    },
+    {
+     "izquierda": "Intervención social",
+     "derecha": "Intervenir también sobre el contexto"
+    },
+    {
+     "izquierda": "Integración curricular",
+     "derecha": "La orientación forma parte del proyecto educativo de toda la escuela"
+    }
+   ],
+   "explicacion": "Se reflejan en la tutoría y la educación socioemocional en México."
+  },
+  {
+   "id": "final-010",
+   "subtema": "8.2",
+   "gemela": "ep8-007",
+   "tipo": "caso",
+   "pregunta": "Una escuela con problemas graves de violencia en su entorno responde solo con talleres para que los alumnos «aprendan a manejar su enojo». ¿Qué advertencia del compendio aplica?",
+   "opciones": [
+    "La educación emocional no debe usarse para que los alumnos se adapten a situaciones injustas que habría que transformar",
+    "La educación emocional no tiene relación con el aprendizaje",
+    "Solo los alumnos con diagnóstico deben recibir educación emocional",
+    "La educación emocional basta para resolver cualquier problema del contexto"
+   ],
+   "correcta": 0,
+   "explicacion": "Mantener la mirada crítica: también hay que intervenir sobre el contexto."
+  },
+  {
+   "id": "final-011",
+   "subtema": "8.2",
+   "gemela": "ep8-016",
+   "tipo": "opcion_multiple",
+   "pregunta": "En la Nueva Escuela Mexicana, ¿con qué campo formativo se vincula el acompañamiento de los alumnos y su proyecto de vida?",
+   "opciones": [
+    "De lo humano y lo comunitario",
+    "Ética, naturaleza y sociedades",
+    "Lenguajes",
+    "Saberes y pensamiento científico"
+   ],
+   "correcta": 0,
+   "explicacion": "Formar personas capaces de construir su proyecto de vida en relación con su comunidad (SEP, 2022)."
+  },
+  {
+   "id": "final-012",
+   "subtema": "8.2",
+   "gemela": "ep8-017",
+   "tipo": "verdadero_falso",
+   "pregunta": "Para Bisquerra (2000), la educación emocional es una intervención puntual que se aplica solo cuando aparece un problema.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Es un proceso educativo continuo y permanente."
+  },
+  {
+   "id": "final-013",
+   "subtema": "8.2",
+   "gemela": "ep8-018",
+   "tipo": "caso",
+   "pregunta": "Antes de que inicie la elección de bachillerato, un tutor organiza sesiones con todo el grupo sobre toma de decisiones, sin esperar a que alguien pida ayuda. ¿Qué principios aplica?",
+   "opciones": [
+    "Prevención y desarrollo",
+    "Intervención social e integración curricular",
+    "Solo intervención clínica",
+    "Rasgos y factores"
+   ],
+   "correcta": 0,
+   "explicacion": "Se adelanta a los problemas y acompaña a todos, no solo a quien tiene dificultades."
+  },
+  {
+   "id": "final-014",
+   "subtema": "8.3",
+   "gemela": "ep8-009",
+   "tipo": "caso",
+   "pregunta": "Un docente afirma: \"Ese alumno no aprende porque tiene un problema\". Desde el enfoque de Booth y Ainscow, ¿cómo reformularías la pregunta?",
+   "opciones": [
+    "¿Qué barreras en la enseñanza, los materiales, la organización o las actitudes le impiden aprender y participar?",
+    "¿Qué diagnóstico médico tiene para enviarlo a otra escuela?",
+    "¿Cuántos reportes acumula en el ciclo?",
+    "¿Por qué no se esfuerza como los demás?"
+   ],
+   "correcta": 0,
+   "explicacion": "El problema se ve como relacional y sistémico, no solo del alumno."
+  },
+  {
+   "id": "final-015",
+   "subtema": "8.3",
+   "gemela": "ep8-010",
+   "tipo": "caso",
+   "pregunta": "Una escuela atribuye el bajo rendimiento de un grupo a que \"los alumnos no quieren aprender\". Desde la mirada sistémica del Tema 3 y el enfoque de barreras del Tema 8, ¿qué conviene hacer primero?",
+   "opciones": [
+    "Analizar las relaciones entre enseñanza, materiales, organización, familias y comunidad para identificar barreras para el aprendizaje y la participación",
+    "Sancionar a los alumnos con más reportes para que cambien de actitud",
+    "Aplicar un test de inteligencia a cada alumno para clasificarlos",
+    "Esperar a que el problema se resuelva solo con el tiempo"
+   ],
+   "correcta": 0,
+   "explicacion": "Un problema educativo rara vez tiene una sola causa ubicada en el alumno."
+  },
+  {
+   "id": "final-016",
+   "subtema": "8.3",
+   "gemela": "ep8-011",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estos cambios en el papel del psicopedagogo NO corresponde al nuevo paradigma?",
+   "opciones": [
+    "Pasar de apoyar dentro del aula a atender al alumno fuera, en un espacio especializado",
+    "Pasar de etiquetar a identificar barreras y diseñar ajustes",
+    "Pasar de especialista que diagnostica a colaborador de docentes y familias",
+    "Pasar de trabajar con el alumno aislado a trabajar con el sistema escolar"
+   ],
+   "correcta": 0,
+   "explicacion": "El cambio va al revés: de intervenir fuera del aula a apoyar dentro de ella."
+  },
+  {
+   "id": "final-017",
+   "subtema": "8.3",
+   "gemela": "ep8-012",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué condiciones del facilitador propuso Carl Rogers para el aprendizaje significativo?",
+   "opciones": [
+    "Autenticidad, aceptación y comprensión empática",
+    "Disciplina, control y evaluación constante",
+    "Diagnóstico, tratamiento y seguimiento",
+    "Prevención, desarrollo e intervención social"
+   ],
+   "correcta": 0,
+   "explicacion": "Rogers (1969/1975), educación centrada en la persona."
+  },
+  {
+   "id": "final-018",
+   "subtema": "8.3",
+   "gemela": "ep8-013",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada paradigma con la forma en que la orientación \"conoce\" a la persona.",
+   "pares": [
+    {
+     "izquierda": "Positivista",
+     "derecha": "Midiendo rasgos estables con instrumentos estandarizados"
+    },
+    {
+     "izquierda": "Interpretativo",
+     "derecha": "Comprendiendo los significados que la persona da a su historia"
+    },
+    {
+     "izquierda": "Sociocrítico",
+     "derecha": "Analizando las barreras y desigualdades del entorno"
+    }
+   ],
+   "explicacion": "Cada forma de orientar se apoya en una idea distinta de qué es conocer a una persona."
+  },
+  {
+   "id": "final-019",
+   "subtema": "8.3",
+   "gemela": "ep8-019",
+   "tipo": "caso",
+   "pregunta": "Una escuela regular quiere enviar a otra escuela a un alumno con discapacidad auditiva «porque aquí no tenemos cómo atenderlo». ¿Qué establece el marco de la educación inclusiva en México?",
+   "opciones": [
+    "Que la escuela regular debe hacer los ajustes necesarios para que el alumno aprenda y participe",
+    "Que el alumno debe ir a una escuela especial para recibir tratamiento",
+    "Que la decisión depende solo de la familia",
+    "Que la inclusión aplica solo en preescolar"
+   ],
+   "correcta": 0,
+   "explicacion": "En lugar de enviar a otros espacios a los que no encajan, la escuela se ajusta."
+  },
+  {
+   "id": "final-020",
+   "subtema": "8.3",
+   "gemela": "ep8-020",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué el paso del modelo del déficit al de barreras es «profundamente epistemológico»?",
+   "opciones": [
+    "Porque el problema deja de ubicarse solo en el individuo y se ve como un fenómeno relacional y sistémico",
+    "Porque sustituye los tests por entrevistas",
+    "Porque elimina la evaluación de los aprendizajes",
+    "Porque convierte al psicopedagogo en un especialista que diagnostica"
+   ],
+   "correcta": 0,
+   "explicacion": "Cambia la idea de dónde está el problema y, por tanto, cómo se conoce."
+  },
+  {
+   "id": "final-021",
+   "subtema": "9.1",
+   "gemela": "ep9-001",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál era la preocupación de fondo, de carácter epistemológico, de Van Rensselaer Potter al proponer la bioética?",
+   "opciones": [
+    "Que el conocimiento científico había crecido tan rápido que la reflexión sobre su uso se había quedado atrás",
+    "Que la ética impedía el avance de la medicina",
+    "Que la ciencia debía someterse a la autoridad religiosa",
+    "Que la biología debía sustituir a la filosofía"
+   ],
+   "correcta": 0,
+   "explicacion": "Potter (1971) la concibió como puente entre la ciencia y los valores."
+  },
+  {
+   "id": "final-022",
+   "subtema": "9.1",
+   "gemela": "ep9-002",
+   "tipo": "caso",
+   "pregunta": "Una tesista reparte los talleres de su investigación solo entre los grupos de mejor promedio y deja fuera a los demás, que también podrían beneficiarse. ¿Qué principio de Beauchamp y Childress se ve más comprometido?",
+   "opciones": [
+    "Justicia",
+    "Autonomía",
+    "Beneficencia",
+    "No maleficencia"
+   ],
+   "correcta": 0,
+   "explicacion": "Justicia: distribuir con equidad los beneficios y las cargas."
+  },
+  {
+   "id": "final-023",
+   "subtema": "9.1",
+   "gemela": "ep9-004",
+   "tipo": "caso",
+   "pregunta": "Para tu tesis vas a entrevistar a alumnos de secundaria. ¿Qué conjunto de medidas éticas corresponde?",
+   "opciones": [
+    "Consentimiento de los tutores, asentimiento de los menores, confidencialidad con seudónimos, no daño y devolución de resultados",
+    "Solo pedir permiso al director",
+    "Publicar los nombres reales para dar credibilidad",
+    "Grabar sin avisar para no influir en las respuestas"
+   ],
+   "correcta": 0,
+   "explicacion": "La ética de la investigación con menores es una aplicación concreta de la bioética."
+  },
+  {
+   "id": "final-024",
+   "subtema": "9.1",
+   "gemela": "ep9-003",
+   "tipo": "opcion_multiple",
+   "pregunta": "En el caso de la practicante que publicó fotos de los niños, ¿por qué el problema era más grave que un simple descuido de permisos?",
+   "opciones": [
+    "Porque algunos niños podían estar en situación de riesgo y su ubicación no debía hacerse pública: se comprometía el no daño",
+    "Porque las fotos tenían baja calidad",
+    "Porque violaba los derechos de autor de la escuela",
+    "Porque no citó la fuente en formato APA"
+   ],
+   "correcta": 0,
+   "explicacion": "La bioética empieza en lo cotidiano."
+  },
+  {
+   "id": "final-025",
+   "subtema": "9.1",
+   "gemela": "ep9-005",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué distingue la ética de Hans Jonas de una ética que solo atiende las consecuencias inmediatas?",
+   "opciones": [
+    "Que exige pensar en las generaciones futuras, por el enorme poder de la tecnología moderna",
+    "Que se centra en la autonomía del paciente",
+    "Que propone cuatro principios para la investigación biomédica",
+    "Que deja las decisiones éticas a los científicos"
+   ],
+   "correcta": 0,
+   "explicacion": "Jonas (1979/1995), El principio de responsabilidad."
+  },
+  {
+   "id": "final-026",
+   "subtema": "9.1",
+   "gemela": "ep9-019",
+   "tipo": "completar",
+   "pregunta": "Compartir los resultados de una investigación con la comunidad que participó en ella se llama _______.",
+   "opciones": [
+    "devolución",
+    "triangulación",
+    "asentimiento",
+    "confidencialidad"
+   ],
+   "correcta": 0,
+   "explicacion": "Junto con consentimiento, asentimiento, confidencialidad y no daño."
+  },
+  {
+   "id": "final-027",
+   "subtema": "9.1",
+   "gemela": "ep9-020",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué problema bioético se hizo evidente durante la pandemia de COVID-19, según el compendio?",
+   "opciones": [
+    "La distribución desigual de los avances científicos entre países ricos y pobres, como el acceso a las vacunas",
+    "La edición genética de embriones",
+    "Las decisiones sobre el final de la vida",
+    "El uso de inteligencia artificial en diagnósticos médicos"
+   ],
+   "correcta": 0,
+   "explicacion": "Todos son temas bioéticos, pero el de la pandemia fue la desigualdad en el acceso."
+  },
+  {
+   "id": "final-028",
+   "subtema": "9.2",
+   "gemela": "ep9-006",
+   "tipo": "completar",
+   "pregunta": "El Informe Brundtland define el desarrollo sostenible como el que satisface las necesidades del presente sin comprometer la capacidad de las _______ para satisfacer las suyas.",
+   "opciones": [
+    "generaciones futuras",
+    "economías emergentes",
+    "comunidades indígenas",
+    "empresas locales"
+   ],
+   "correcta": 0,
+   "explicacion": "Comisión Mundial sobre el Medio Ambiente y el Desarrollo (1987/1988)."
+  },
+  {
+   "id": "final-029",
+   "subtema": "9.2",
+   "gemela": "ep9-007",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué el desarrollo sustentable es un problema \"complejo\" en el sentido de Morin?",
+   "opciones": [
+    "Porque sus dimensiones ambiental, social y económica están entrelazadas y no pueden resolverse por separado",
+    "Porque es un problema matemático difícil",
+    "Porque solo lo entienden los especialistas",
+    "Porque no tiene relación con la educación"
+   ],
+   "correcta": 0,
+   "explicacion": "Una solución técnica a un problema ambiental puede generar problemas sociales."
+  },
+  {
+   "id": "final-030",
+   "subtema": "9.2",
+   "gemela": "ep9-008",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué pide una de las metas del Objetivo 4 de la Agenda 2030?",
+   "opciones": [
+    "Que todos los estudiantes adquieran los conocimientos necesarios para promover el desarrollo sostenible",
+    "Que todas las escuelas tengan computadoras",
+    "Que se elimine la evaluación estandarizada",
+    "Que la educación sea obligatoria solo hasta primaria"
+   ],
+   "correcta": 0,
+   "explicacion": "El Objetivo 4 busca una educación inclusiva, equitativa y de calidad."
+  },
+  {
+   "id": "final-031",
+   "subtema": "9.2",
+   "gemela": "ep9-009",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué crítica se le hace al concepto de desarrollo sustentable, según el compendio?",
+   "opciones": [
+    "Que mantiene la idea de un crecimiento económico ilimitado, incompatible con un planeta finito",
+    "Que ignora por completo la dimensión ambiental",
+    "Que fue propuesto por comunidades indígenas sin respaldo científico",
+    "Que prohíbe toda actividad económica"
+   ],
+   "correcta": 0,
+   "explicacion": "De ahí propuestas latinoamericanas como el buen vivir."
+  },
+  {
+   "id": "final-032",
+   "subtema": "9.2",
+   "gemela": "ep9-021",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué un proyecto escolar sobre el cuidado de los cenotes de Campeche ilustra a la vez el pensamiento complejo y la ecología de saberes?",
+   "opciones": [
+    "Porque el problema une dimensiones ambientales, sociales y económicas, y puede integrar el conocimiento científico con el saber de la comunidad",
+    "Porque solo requiere conocimiento científico de laboratorio",
+    "Porque se resuelve con una sola disciplina y una sola causa",
+    "Porque los saberes comunitarios sustituyen por completo a la ciencia"
+   ],
+   "correcta": 0,
+   "explicacion": "Integra el desarrollo sustentable (Tema 9) con Morin (Tema 4) y Sousa Santos (Tema 6)."
+  },
+  {
+   "id": "final-033",
+   "subtema": "9.2",
+   "gemela": "ep9-022",
+   "tipo": "opcion_multiple",
+   "pregunta": "En la Nueva Escuela Mexicana, ¿dónde aparece la relación con la naturaleza, según el compendio?",
+   "opciones": [
+    "En el campo «Ética, naturaleza y sociedades» y en ejes como vida saludable",
+    "Solo en el campo «Saberes y pensamiento científico»",
+    "En el campo «Lenguajes» y en el eje de lectura y escritura",
+    "Solo en la asignatura de Geografía"
+   ],
+   "correcta": 0,
+   "explicacion": "SEP (2022)."
+  },
+  {
+   "id": "final-034",
+   "subtema": "9.3",
+   "gemela": "ep9-010",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada perspectiva con la crítica principal que recibe.",
+   "pares": [
+    {
+     "izquierda": "Capital humano",
+     "derecha": "Reduce la educación a su valor económico"
+    },
+    {
+     "izquierda": "Teorías de la reproducción",
+     "derecha": "Pueden ser deterministas y no explicar el cambio"
+    },
+    {
+     "izquierda": "Enfoque de capacidades",
+     "derecha": "Es difícil de medir y operativizar"
+    },
+    {
+     "izquierda": "Educación como derecho",
+     "derecha": "Puede quedarse en declaración sin recursos"
+    }
+   ],
+   "explicacion": "Cada perspectiva lleva a políticas educativas distintas."
+  },
+  {
+   "id": "final-035",
+   "subtema": "9.3",
+   "gemela": "ep9-011",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según Bowles y Gintis, ¿cómo reproduce la escuela las desigualdades?",
+   "opciones": [
+    "Mediante una correspondencia entre las relaciones sociales de la escuela y las del trabajo: prepara a unos para obedecer y a otros para dirigir",
+    "Premiando el capital cultural que los alumnos privilegiados traen de casa",
+    "Midiendo solo el ingreso futuro de los egresados",
+    "Negando el derecho a la educación en la Constitución"
+   ],
+   "correcta": 0,
+   "explicacion": "El capital cultural es la tesis de Bourdieu y Passeron, no la de Bowles y Gintis."
+  },
+  {
+   "id": "final-036",
+   "subtema": "9.3",
+   "gemela": "ep9-012",
+   "tipo": "caso",
+   "pregunta": "Una maestra califica mejor a los alumnos que «hablan bien» y conocen museos, y lo atribuye a su talento. Según Bourdieu y Passeron, ¿qué ocurre?",
+   "opciones": [
+    "La escuela premia el capital cultural heredado y lo presenta como mérito personal",
+    "Es una aplicación del enfoque de capacidades de Sen",
+    "Es un ejemplo de capital humano que aumenta la productividad",
+    "Es la correspondencia entre escuela y trabajo de Bowles y Gintis"
+   ],
+   "correcta": 0,
+   "explicacion": "Así la escuela legitima las desigualdades."
+  },
+  {
+   "id": "final-037",
+   "subtema": "9.3",
+   "gemela": "ep9-013",
+   "tipo": "opcion_multiple",
+   "pregunta": "En la referencia «Schultz, T. W. (1961). Investment in human capital. The American Economic Review, 51(1), 1-17.», ¿qué va en cursivas según APA 7?",
+   "opciones": [
+    "El nombre de la revista y el volumen (51)",
+    "El título del artículo",
+    "El número entre paréntesis (1)",
+    "El apellido del autor"
+   ],
+   "correcta": 0,
+   "explicacion": "El volumen va en cursivas y el número entre paréntesis, sin cursivas."
+  },
+  {
+   "id": "final-038",
+   "subtema": "9.3",
+   "gemela": "ep9-018",
+   "tipo": "caso",
+   "pregunta": "Una tesis evalúa un programa de becas midiendo solo el salario de los egresados cinco años después. Desde la lectura epistemológica del Tema 9, ¿qué limitación tiene?",
+   "opciones": [
+    "Solo encontrará lo que la teoría del capital humano sabe ver; deja fuera, por ejemplo, la ampliación de libertades o la reproducción de desigualdades",
+    "Ninguna: el salario es la única evidencia válida del valor de la educación",
+    "Que no usa ningún dato numérico",
+    "Que pertenece al paradigma interpretativo"
+   ],
+   "correcta": 0,
+   "explicacion": "Elegir qué medir ya es tomar una postura epistemológica."
+  },
+  {
+   "id": "final-039",
+   "subtema": "9.3",
+   "gemela": "ep9-023",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué economista propuso que el desarrollo se mida por la expansión de las capacidades o libertades reales de las personas?",
+   "opciones": [
+    "Amartya Sen",
+    "Gary S. Becker",
+    "Theodore W. Schultz",
+    "Samuel Bowles"
+   ],
+   "correcta": 0,
+   "explicacion": "Su enfoque inspiró el Índice de Desarrollo Humano del PNUD."
+  },
+  {
+   "id": "final-040",
+   "subtema": "9.3",
+   "gemela": "ep9-024",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué tienen en común la teoría del capital humano y la manera en que la OCDE concibe PISA?",
+   "opciones": [
+    "Ambas tratan las competencias de los estudiantes como indicador del potencial económico de un país",
+    "Ambas miden la ampliación de libertades reales",
+    "Ambas buscan demostrar que la escuela reproduce desigualdades",
+    "Ambas entienden la educación sobre todo como un derecho humano"
+   ],
+   "correcta": 0,
+   "explicacion": "Schultz (1961) y Becker (1964) influyeron en el Banco Mundial y la OCDE."
+  },
+  {
+   "id": "final-041",
+   "subtema": "9.4",
+   "gemela": "ep9-014",
+   "tipo": "opcion_multiple",
+   "pregunta": "Además del software educativo, ¿a qué se refería el subtema de «programas computacionales» en el contexto de la epistemología de los noventa?",
+   "opciones": [
+    "A los programas de análisis de datos, sobre todo los primeros para analizar datos cualitativos",
+    "A la inteligencia artificial generativa",
+    "A las redes sociales educativas",
+    "A las plataformas de videollamadas"
+   ],
+   "correcta": 0,
+   "explicacion": "Martínez Miguélez discutió si cambiaban la naturaleza de la interpretación o solo la facilitaban."
+  },
+  {
+   "id": "final-042",
+   "subtema": "9.4",
+   "gemela": "ep9-015",
+   "tipo": "opcion_multiple",
+   "pregunta": "Seymour Papert criticó que la computadora se usara para \"programar al niño\". ¿Qué propuso a cambio?",
+   "opciones": [
+    "Que el niño programara a la computadora y construyera conocimiento al hacerlo, con el lenguaje Logo",
+    "Que se eliminaran las computadoras de las escuelas",
+    "Que la computadora sustituyera al maestro",
+    "Que se usaran solo enciclopedias en disco compacto"
+   ],
+   "correcta": 0,
+   "explicacion": "Era una propuesta constructivista, heredera de Piaget."
+  },
+  {
+   "id": "final-043",
+   "subtema": "9.4",
+   "gemela": "ep9-016",
+   "tipo": "opcion_multiple",
+   "pregunta": "En el caso del «ensayo perfecto», ¿por qué el maestro pidió una explicación oral en lugar de acusar al alumno?",
+   "opciones": [
+    "Porque así podía comprobar si el alumno sabía lo que decía el texto y verificar sus fuentes",
+    "Porque las reglas prohíben revisar trabajos escritos",
+    "Porque la inteligencia artificial no comete errores",
+    "Porque el ensayo tenía errores de ortografía"
+   ],
+   "correcta": 0,
+   "explicacion": "Después rediseñó sus tareas: entregas por etapas, bitácora y defensa oral."
+  },
+  {
+   "id": "final-044",
+   "subtema": "9.4",
+   "gemela": "ep9-017",
+   "tipo": "caso",
+   "pregunta": "Un compañero pide a una IA \"cinco artículos sobre neuromitos con DOI\" y los pega directamente en su lista de referencias. ¿Qué problema epistemológico y qué norma del curso incumple?",
+   "opciones": [
+    "La IA puede inventar fuentes; nunca debe citarse una referencia sin localizarla y leerla",
+    "Ninguno: las referencias generadas por IA siempre son correctas",
+    "Solo incumple el formato de sangría francesa",
+    "Ninguno, siempre que el DOI tenga números"
+   ],
+   "correcta": 0,
+   "explicacion": "Verificar fuentes es parte de la práctica epistemológica de citar."
+  },
+  {
+   "id": "final-045",
+   "subtema": "9.4",
+   "gemela": "ep9-025",
+   "tipo": "caso",
+   "pregunta": "Una inteligencia artificial responde correctamente una pregunta de examen. Usando la definición clásica de conocimiento del Tema 1, ¿qué es lo más preciso afirmar?",
+   "opciones": [
+    "Produce una afirmación verdadera, pero no tiene creencias ni justificación en el sentido humano; quien copia la respuesta tampoco demuestra saberla",
+    "La IA sabe exactamente como un ser humano, porque acertó",
+    "La respuesta es falsa por haber sido generada por una máquina",
+    "La definición clásica de conocimiento no tiene relación con la IA"
+   ],
+   "correcta": 0,
+   "explicacion": "Creencia, verdad y justificación: acertar no es lo mismo que saber."
+  },
+  {
+   "id": "final-046",
+   "subtema": "9.4",
+   "gemela": "ep9-026",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estas NO es una recomendación de la guía de la UNESCO (2023) sobre IA generativa?",
+   "opciones": [
+    "Dejar que la IA tome las decisiones educativas para evitar sesgos humanos",
+    "Proteger los datos de los estudiantes",
+    "Establecer edades mínimas de uso",
+    "Desarrollar la capacidad crítica de docentes y alumnos"
+   ],
+   "correcta": 0,
+   "explicacion": "La guía pide mantener a las personas en el centro de las decisiones."
+  },
+  {
+   "id": "final-047",
+   "subtema": "9.4",
+   "gemela": "ep9-027",
+   "tipo": "verdadero_falso",
+   "pregunta": "Para Selwyn (2019), la enseñanza implica relaciones humanas, juicio moral y cuidado, que no se automatizan.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Por eso la pregunta no es si la tecnología reemplazará a los maestros."
+  },
+  {
+   "id": "final-048",
+   "subtema": "9.4",
+   "gemela": "ep9-028",
+   "tipo": "opcion_multiple",
+   "pregunta": "Si citas un texto generado por una inteligencia artificial, ¿quién figura como autor según la recomendación de la APA?",
+   "opciones": [
+    "El desarrollador de la herramienta, con la versión del modelo",
+    "El estudiante que hizo la pregunta",
+    "La inteligencia artificial, con su nombre comercial como persona",
+    "Nadie: se cita como anónimo"
+   ],
+   "correcta": 0,
+   "explicacion": "Desarrollador. (Año). Nombre de la herramienta (versión) [Modelo de lenguaje extenso]. URL"
+  },
+  {
+   "id": "final-049",
+   "subtema": "10.1",
+   "gemela": "ep10-001",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de los siguientes NO es un campo formativo de la NEM?",
+   "opciones": [
+    "Matemáticas y tecnología",
+    "Lenguajes",
+    "Ética, naturaleza y sociedades",
+    "De lo humano y lo comunitario"
+   ],
+   "correcta": 0,
+   "explicacion": "Los cuatro campos son Lenguajes; Saberes y pensamiento científico; Ética, naturaleza y sociedades; y De lo humano y lo comunitario."
+  },
+  {
+   "id": "final-050",
+   "subtema": "10.1",
+   "gemela": "ep10-002",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada elemento de la NEM con su descripción.",
+   "pares": [
+    {
+     "izquierda": "Programa sintético",
+     "derecha": "Programa nacional con los contenidos básicos"
+    },
+    {
+     "izquierda": "Programa analítico",
+     "derecha": "Contextualización que hace el colectivo docente"
+    },
+    {
+     "izquierda": "Codiseño",
+     "derecha": "Participación docente en el diseño curricular"
+    },
+    {
+     "izquierda": "Ejes articuladores",
+     "derecha": "Siete temas que atraviesan todos los campos formativos"
+    }
+   ],
+   "explicacion": "La NEM reconoce la autonomía profesional del magisterio."
+  },
+  {
+   "id": "final-051",
+   "subtema": "10.1",
+   "gemela": "ep10-003",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuántos ejes articuladores tiene la NEM y cuál de estos sí es uno de ellos?",
+   "opciones": [
+    "Siete; entre ellos, artes y experiencias estéticas",
+    "Cuatro; entre ellos, competitividad económica",
+    "Siete; entre ellos, educación financiera",
+    "Cinco; entre ellos, tecnología digital"
+   ],
+   "correcta": 0,
+   "explicacion": "Inclusión, pensamiento crítico, interculturalidad crítica, igualdad de género, vida saludable, lectura y escritura, y artes."
+  },
+  {
+   "id": "final-052",
+   "subtema": "10.1",
+   "gemela": "ep10-004",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál es el marco legal y curricular de la Nueva Escuela Mexicana?",
+   "opciones": [
+    "La reforma al artículo 3.º de 2019, la Ley General de Educación de 2019 y el Plan de Estudio 2022",
+    "La Constitución de 1857 y el Plan de Once Años",
+    "El Acuerdo Nacional para la Modernización de 1992 únicamente",
+    "Las recomendaciones de PISA"
+   ],
+   "correcta": 0,
+   "explicacion": "El Plan de Estudio 2022 se implementó a partir del ciclo 2023-2024."
+  },
+  {
+   "id": "final-053",
+   "subtema": "10.1",
+   "gemela": "ep10-014",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estas NO es una de las metodologías sugeridas por el Plan de Estudio 2022?",
+   "opciones": [
+    "Enseñanza programada con máquinas de enseñar",
+    "Aprendizaje basado en indagación",
+    "Aprendizaje servicio",
+    "Aprendizaje basado en problemas"
+   ],
+   "correcta": 0,
+   "explicacion": "Las máquinas de enseñar son de Skinner (Tema 9), no de la NEM."
+  },
+  {
+   "id": "final-054",
+   "subtema": "10.1",
+   "gemela": "ep10-015",
+   "tipo": "caso",
+   "pregunta": "Un docente de una comunidad pesquera planea su proyecto de Ciencias a partir de la veda del pulpo y de lo que saben los pescadores. ¿Qué principio de la NEM aplica?",
+   "opciones": [
+    "La comunidad como núcleo integrador",
+    "La autonomía curricular de cada alumno",
+    "El programa sintético como única guía",
+    "La evaluación estandarizada nacional"
+   ],
+   "correcta": 0,
+   "explicacion": "Los procesos de enseñanza parten de los problemas y saberes de la comunidad."
+  },
+  {
+   "id": "final-055",
+   "subtema": "10.2",
+   "gemela": "ep10-005",
+   "tipo": "relacionar",
+   "pregunta": "Relaciona cada concepto de la NEM con su fuente epistemológica.",
+   "pares": [
+    {
+     "izquierda": "Interculturalidad crítica",
+     "derecha": "Diálogo de saberes y epistemologías del Sur"
+    },
+    {
+     "izquierda": "Comunidad como núcleo integrador",
+     "derecha": "Paradigma sociocrítico y pensamiento sistémico"
+    },
+    {
+     "izquierda": "Pensamiento crítico",
+     "derecha": "Cánones de cientificidad y crítica de la evidencia"
+    },
+    {
+     "izquierda": "Campos formativos",
+     "derecha": "Pensamiento complejo"
+    }
+   ],
+   "explicacion": "El propio Plan de Estudio 2022 menciona varias de estas corrientes."
+  },
+  {
+   "id": "final-056",
+   "subtema": "10.2",
+   "gemela": "ep10-006",
+   "tipo": "jerarquizar",
+   "pregunta": "Un colectivo docente elabora su programa analítico como un ciclo de investigación-acción. ¿Cuál es el orden correcto de las fases?",
+   "opciones": [
+    "Diagnóstico → planificación → acción → observación → reflexión",
+    "Acción → diagnóstico → reflexión → planificación → observación",
+    "Reflexión → observación → acción → diagnóstico → planificación",
+    "Planificación → reflexión → diagnóstico → observación → acción"
+   ],
+   "correcta": 0,
+   "explicacion": "El programa analítico conecta con Elliott, Stenhouse y Carr y Kemmis (Temas 1 y 6)."
+  },
+  {
+   "id": "final-057",
+   "subtema": "10.2",
+   "gemela": "ep10-007",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué autor sustenta la idea de que el programa analítico convierte al docente en investigador de su contexto?",
+   "opciones": [
+    "Lawrence Stenhouse, con el currículo como hipótesis a poner a prueba",
+    "Auguste Comte, con la ley de los tres estadios",
+    "Frank Parsons, con el modelo de rasgos y factores",
+    "B. F. Skinner, con las máquinas de enseñar"
+   ],
+   "correcta": 0,
+   "explicacion": "También se relacionan Elliott, Carr y Kemmis, y Schön."
+  },
+  {
+   "id": "final-058",
+   "subtema": "10.2",
+   "gemela": "ep10-016",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según el compendio, aplicar a la NEM el término «paradigma» en el sentido técnico de Kuhn es directo y no admite discusión.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 1,
+   "explicacion": "Kuhn lo usó para comunidades científicas; aplicado a una reforma, el término se usa de forma más amplia."
+  },
+  {
+   "id": "final-059",
+   "subtema": "10.2",
+   "gemela": "ep10-017",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué concepción de la educación, criticada por Freire, rechaza la NEM al pensar la educación como un proceso dialógico ligado a la comunidad?",
+   "opciones": [
+    "La educación bancaria, que deposita contenidos en los alumnos",
+    "La praxis, que une reflexión y acción",
+    "El diálogo liberador",
+    "La problematización de la realidad"
+   ],
+   "correcta": 0,
+   "explicacion": "Las otras tres son propuestas de Freire, no lo que critica."
+  },
+  {
+   "id": "final-060",
+   "subtema": "10.3",
+   "gemela": "ep10-008",
+   "tipo": "verdadero_falso",
+   "pregunta": "Entre los argumentos críticos sobre la NEM está el riesgo de que, sin rigor, el diálogo de saberes debilite la enseñanza del conocimiento científico.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Recuerda la distinción entre ecología de saberes y relativismo ingenuo."
+  },
+  {
+   "id": "final-061",
+   "subtema": "10.3",
+   "gemela": "ep10-009",
+   "tipo": "caso",
+   "pregunta": "Un maestro dice: \"La NEM es perfecta y cualquier crítica es política\". Otro dice: \"La NEM no sirve y punto\". Con los criterios del curso, ¿qué harías?",
+   "opciones": [
+    "Distinguir fundamentos de implementación, pedir evidencia, explicitar supuestos y dialogar con quien piensa distinto",
+    "Apoyar al primero porque defiende la reforma vigente",
+    "Apoyar al segundo porque criticar siempre es mejor",
+    "Evitar el tema porque no es pedagógico"
+   ],
+   "correcta": 0,
+   "explicacion": "La actitud epistemológica examina fundamentos, argumentos y evidencia."
+  },
+  {
+   "id": "final-062",
+   "subtema": "10.3",
+   "gemela": "ep10-018",
+   "tipo": "caso",
+   "pregunta": "Un maestro dice: «La idea de partir de la comunidad es buena, pero en mi escuela no hubo formación ni tiempo para el codiseño». Con los criterios del Tema 10, ¿qué está haciendo?",
+   "opciones": [
+    "Distinguir los fundamentos de la implementación",
+    "Caer en el relativismo ingenuo",
+    "Rechazar la reforma por razones políticas",
+    "Confundir la NEM con el programa sintético"
+   ],
+   "correcta": 0,
+   "explicacion": "Una idea puede ser valiosa y estar mal implementada."
+  },
+  {
+   "id": "final-063",
+   "subtema": "10.3",
+   "gemela": "ep10-019",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Por qué algunos críticos señalan que es difícil saber si la NEM mejora los aprendizajes?",
+   "opciones": [
+    "Porque se necesita evidencia sistemática y se han reducido o cambiado los instrumentos de medición",
+    "Porque la NEM prohíbe evaluar",
+    "Porque los aprendizajes no pueden estudiarse científicamente",
+    "Porque la reforma todavía no se aplica en ninguna escuela"
+   ],
+   "correcta": 0,
+   "explicacion": "Evaluar una reforma exige evidencia sistemática."
+  },
+  {
+   "id": "final-064",
+   "subtema": "10.4",
+   "gemela": "ep10-010",
+   "tipo": "completar",
+   "pregunta": "Según la respuesta posible del Tema 10, la pedagogía sería una ciencia social y humana, práctica, plural, dialógica y con una dimensión _______ inevitable.",
+   "opciones": [
+    "ética",
+    "matemática",
+    "religiosa",
+    "experimental"
+   ],
+   "correcta": 0,
+   "explicacion": "Porque su objeto no es solo describir cómo se educa, sino pensar cómo se debe educar."
+  },
+  {
+   "id": "final-065",
+   "subtema": "10.4",
+   "gemela": "ep10-011",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el Tema 10, ¿qué se espera del alumno frente a la respuesta posible a la pregunta guía?",
+   "opciones": [
+    "Que pueda argumentar su propia posición con autores, conceptos y ejemplos, aunque no coincida con ella",
+    "Que la memorice para el examen",
+    "Que la adopte como la única válida",
+    "Que la rechace para mostrar pensamiento crítico"
+   ],
+   "correcta": 0,
+   "explicacion": "Puedes estar de acuerdo, matizarla o rechazarla, pero argumentando."
+  },
+  {
+   "id": "final-066",
+   "subtema": "10.4",
+   "gemela": "ep10-020",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué aporta la epistemología a un pedagogo, según el epílogo?",
+   "opciones": [
+    "Una manera de hacer preguntas: sobre el origen, la evidencia y los supuestos de lo que se afirma en educación",
+    "Un conjunto cerrado de respuestas correctas",
+    "Un método único para enseñar cualquier contenido",
+    "Una lista de autores para memorizar"
+   ],
+   "correcta": 0,
+   "explicacion": "Pensar lo que hacemos mientras lo hacemos."
+  },
+  {
+   "id": "final-067",
+   "subtema": "10.4",
+   "gemela": "ep10-021",
+   "tipo": "caso",
+   "pregunta": "El epílogo vuelve a la junta de Consejo Técnico donde se afirmaba que «los alumnos son visuales» y que «la música clásica mejora la concentración». ¿Qué haría un pedagogo formado en el curso?",
+   "opciones": [
+    "Preguntar de dónde viene cada afirmación, qué evidencia la respalda y qué supuestos la sostienen",
+    "Aceptarlas porque son ideas muy difundidas entre docentes",
+    "Rechazarlas todas sin revisarlas, porque vienen de la costumbre",
+    "Votar en la junta para decidir cuáles son verdaderas"
+   ],
+   "correcta": 0,
+   "explicacion": "Distinguir un neuromito de un hallazgo sólido, una inercia de un argumento."
+  },
+  {
+   "id": "final-068",
+   "subtema": "10.5",
+   "gemela": "ep10-012",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según la estructura sugerida para el ensayo final, ¿en qué parte debe aparecer al menos un contraargumento con su respuesta?",
+   "opciones": [
+    "En el desarrollo, junto con al menos cinco autores del curso",
+    "En la introducción, antes de la tesis",
+    "En la conclusión, como pregunta abierta",
+    "En las referencias, como nota"
+   ],
+   "correcta": 0,
+   "explicacion": "Introducción con tesis, desarrollo con autores y contraargumento, aplicación, conclusión y referencias."
+  },
+  {
+   "id": "final-069",
+   "subtema": "10.5",
+   "gemela": "ep10-013",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estas preguntas NO forma parte de la lista de verificación APA del compendio?",
+   "opciones": [
+    "¿Usé al menos cincuenta citas textuales?",
+    "¿Cada cita tiene su referencia en la lista, y viceversa?",
+    "¿Las citas textuales llevan comillas y número de página?",
+    "¿Verifiqué que todas las fuentes existen?"
+   ],
+   "correcta": 0,
+   "explicacion": "Al contrario: una tesis llena de citas textuales muestra que el autor no digirió sus lecturas."
+  },
+  {
+   "id": "final-070",
+   "subtema": "10.5",
+   "gemela": "ep10-022",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el Taller APA, ¿cuál es la diferencia entre \"Referencias\" y \"Bibliografía\"?",
+   "opciones": [
+    "Referencias incluye solo las obras citadas; Bibliografía designa obras consultadas, aunque no se hayan citado",
+    "Son exactamente lo mismo en APA 7",
+    "Referencias se ordena por fecha y Bibliografía por tema",
+    "Bibliografía solo incluye libros y Referencias solo artículos"
+   ],
+   "correcta": 0,
+   "explicacion": "En APA la lista se titula \"Referencias\"."
+  },
+  {
+   "id": "final-071",
+   "subtema": "10.5",
+   "gemela": "ep10-023",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estos requisitos del ensayo final es correcto?",
+   "opciones": [
+    "Al menos ocho fuentes en APA 7, de las cuales al menos dos son artículos académicos",
+    "Al menos tres fuentes, todas de internet",
+    "Al menos ocho fuentes, sin necesidad de artículos académicos",
+    "Al menos dos fuentes, ambas libros de texto"
+   ],
+   "correcta": 0,
+   "explicacion": "Requisitos del Tema 10.5."
+  },
+  {
+   "id": "final-072",
    "subtema": "1.1",
+   "gemela": "ep1-007",
    "tipo": "caso",
    "pregunta": "Un alumno responde bien todas las preguntas de un examen, pero en la revisión oral no puede explicar ninguna respuesta. Usando la definición clásica de conocimiento, ¿qué conclusión es más defendible?",
    "opciones": [
@@ -21,8 +1131,9 @@
    "explicacion": "Creencia, verdad y justificación son las tres condiciones de la definición clásica."
   },
   {
-   "id": "final-002",
+   "id": "final-073",
    "subtema": "1.3",
+   "gemela": "ep1-019",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada enfoque de investigación con su supuesto epistemológico.",
    "pares": [
@@ -46,8 +1157,9 @@
    "explicacion": "Ningún enfoque es superior en abstracto: cada uno responde a preguntas distintas."
   },
   {
-   "id": "final-003",
+   "id": "final-074",
    "subtema": "3.1",
+   "gemela": "ep3-004",
    "tipo": "caso",
    "pregunta": "Una tesista quiere comprender cómo viven las madres de familia la evaluación de sus hijos y, además, que ellas mismas propongan cambios que se pongan en práctica. ¿Qué combinación de paradigmas describe mejor su proyecto?",
    "opciones": [
@@ -60,8 +1172,9 @@
    "explicacion": "Los paradigmas pueden dialogar cuando la pregunta lo exige."
   },
   {
-   "id": "final-004",
+   "id": "final-075",
    "subtema": "3.2",
+   "gemela": "ep3-009",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué aporta la mirada sistémica al análisis de un problema de conducta en un grupo?",
    "opciones": [
@@ -74,8 +1187,9 @@
    "explicacion": "Una escuela es un sistema con clima, normas no escritas e historia."
   },
   {
-   "id": "final-005",
+   "id": "final-076",
    "subtema": "4.2",
+   "gemela": "ep4-005",
    "tipo": "caso",
    "pregunta": "Un equipo docente afirma que su estrategia \"siempre funciona\": si los alumnos mejoran, es por la estrategia; si no mejoran, es por factores externos. ¿Qué crítica haría Popper y qué propondría Lakatos?",
    "opciones": [
@@ -88,8 +1202,9 @@
    "explicacion": "Explicar cualquier resultado es una debilidad, no una fortaleza."
   },
   {
-   "id": "final-006",
+   "id": "final-077",
    "subtema": "4.3",
+   "gemela": "ep4-008",
    "tipo": "caso",
    "pregunta": "La NEM se presenta como un \"cambio de paradigma\". ¿Qué tendría que mostrarse para hablar de revolución en el sentido técnico de Kuhn?",
    "opciones": [
@@ -102,8 +1217,9 @@
    "explicacion": "En Kuhn, paradigma tiene un sentido técnico ligado a las comunidades."
   },
   {
-   "id": "final-007",
+   "id": "final-078",
    "subtema": "4.3",
+   "gemela": "ep4-009",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada autor con su forma de explicar cómo avanza la ciencia.",
    "pares": [
@@ -131,8 +1247,9 @@
    "explicacion": "Es el núcleo del Tema 4."
   },
   {
-   "id": "final-008",
+   "id": "final-079",
    "subtema": "4.6",
+   "gemela": "ep4-024",
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué crítica central hace Morin a la ciencia clásica?",
    "opciones": [
@@ -145,8 +1262,9 @@
    "explicacion": "Disyunción, reducción y abstracción dieron frutos, pero fragmentaron el conocimiento."
   },
   {
-   "id": "final-009",
+   "id": "final-080",
    "subtema": "4.7",
+   "gemela": "ep4-020",
    "tipo": "verdadero_falso",
    "pregunta": "Según lo estudiado, defender la cientificidad de la pedagogía exige que imite exactamente el método experimental de la física.",
    "opciones": [
@@ -157,8 +1275,9 @@
    "explicacion": "Ni la física sigue un método único; las ciencias sociales tienen criterios de rigor propios."
   },
   {
-   "id": "final-010",
+   "id": "final-081",
    "subtema": "5.1",
+   "gemela": "ep5-001",
    "tipo": "opcion_multiple",
    "pregunta": "¿Cómo se relaciona la inercia mental con el cambio en las escuelas?",
    "opciones": [
@@ -171,8 +1290,9 @@
    "explicacion": "Hay que distinguir los argumentos de los hábitos."
   },
   {
-   "id": "final-011",
+   "id": "final-082",
    "subtema": "5.2",
+   "gemela": "ep5-023",
    "tipo": "caso",
    "pregunta": "Un investigador cualitativo explica en su tesis su relación con la escuela que estudia, sus supuestos y cómo pudieron influir en su interpretación. ¿Qué práctica aplica?",
    "opciones": [
@@ -185,8 +1305,9 @@
    "explicacion": "En lugar de fingir neutralidad, explicita su posición."
   },
   {
-   "id": "final-012",
+   "id": "final-083",
    "subtema": "6.2",
+   "gemela": "ep6-005",
    "tipo": "caso",
    "pregunta": "En un proyecto sobre plantas medicinales, unos alumnos proponen \"comprobar\" un remedio tradicional para la diabetes de un familiar dejando su tratamiento médico. ¿Qué respuesta es coherente con la ecología de saberes y con la bioética?",
    "opciones": [
@@ -199,8 +1320,9 @@
    "explicacion": "Se evitan a la vez el relativismo ingenuo y el cientificismo, y se respeta el principio de no maleficencia."
   },
   {
-   "id": "final-013",
+   "id": "final-084",
    "subtema": "6.3",
+   "gemela": "ep6-009",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada autor con su idea sobre ciencia, arte y práctica.",
    "pares": [
@@ -224,8 +1346,9 @@
    "explicacion": "La ciencia necesita imaginación para proponer y rigor para comprobar."
   },
   {
-   "id": "final-014",
+   "id": "final-085",
    "subtema": "7.4",
+   "gemela": "ep7-014",
    "tipo": "caso",
    "pregunta": "Una escuela compra un programa que promete \"sincronizar los hemisferios\" con ejercicios físicos para mejorar las calificaciones. ¿Cómo evaluarlo con lo aprendido?",
    "opciones": [
@@ -238,8 +1361,9 @@
    "explicacion": "La actividad física en general favorece el bienestar, pero no esos efectos prometidos."
   },
   {
-   "id": "final-015",
+   "id": "final-086",
    "subtema": "7.4",
+   "gemela": "ep7-012",
    "tipo": "relacionar",
    "pregunta": "Relaciona cada estrategia con su respaldo.",
    "pares": [
@@ -263,403 +1387,274 @@
    "explicacion": "Enseñar a estudiar es una tarea pedagógica fundamentada."
   },
   {
-   "id": "final-016",
-   "subtema": "8.1",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Qué cambio epistemológico vivió la orientación vocacional?",
-   "opciones": [
-    "Pasar del diagnóstico de rasgos estables para predecir una ocupación a acompañar la construcción de proyectos de vida",
-    "Pasar de las entrevistas a los tests estandarizados",
-    "Dejar de considerar los intereses de la persona",
-    "Eliminar la orientación de las escuelas"
-   ],
-   "correcta": 0,
-   "explicacion": "Las personas cambian y el mundo del trabajo es inestable."
-  },
-  {
-   "id": "final-017",
-   "subtema": "8.3",
+   "id": "final-087",
+   "subtema": "1.0",
+   "gemela": "ep1-002",
    "tipo": "caso",
-   "pregunta": "Un docente afirma: \"Ese alumno no aprende porque tiene un problema\". Desde el enfoque de Booth y Ainscow, ¿cómo reformularías la pregunta?",
+   "pregunta": "Una escuela decide evaluar todo el ciclo con portafolios de evidencias. Desde la epistemología, ¿qué supone sobre el conocimiento?",
    "opciones": [
-    "¿Qué barreras en la enseñanza, los materiales, la organización o las actitudes le impiden aprender y participar?",
-    "¿Qué diagnóstico médico tiene para enviarlo a otra escuela?",
-    "¿Cuántos reportes acumula en el ciclo?",
-    "¿Por qué no se esfuerza como los demás?"
+    "Que el conocimiento se construye en un proceso que vale la pena documentar",
+    "Que saber es elegir la respuesta correcta entre varias",
+    "Que el conocimiento solo se demuestra en un desempeño final",
+    "Que no hay ninguna forma válida de evaluar el conocimiento"
    ],
    "correcta": 0,
-   "explicacion": "El problema se ve como relacional y sistémico, no solo del alumno."
+   "explicacion": "Toda forma de evaluar descansa en un supuesto epistemológico."
   },
   {
-   "id": "final-018",
-   "subtema": "8.2",
-   "tipo": "relacionar",
-   "pregunta": "Relaciona cada principio de la orientación contemporánea con su significado.",
-   "pares": [
-    {
-     "izquierda": "Prevención",
-     "derecha": "Anticiparse a los problemas"
-    },
-    {
-     "izquierda": "Desarrollo",
-     "derecha": "Acompañar el crecimiento integral de todos los alumnos"
-    },
-    {
-     "izquierda": "Intervención social",
-     "derecha": "Intervenir también sobre el contexto"
-    },
-    {
-     "izquierda": "Integración curricular",
-     "derecha": "La orientación forma parte del proyecto educativo de toda la escuela"
-    }
-   ],
-   "explicacion": "Se reflejan en la tutoría y la educación socioemocional en México."
-  },
-  {
-   "id": "final-019",
-   "subtema": "9.1",
+   "id": "final-088",
+   "subtema": "1.2",
+   "gemela": "ep1-013",
    "tipo": "caso",
-   "pregunta": "Para tu tesis vas a entrevistar a alumnos de secundaria. ¿Qué conjunto de medidas éticas corresponde?",
+   "pregunta": "Una tesista pregunta: «¿Qué hace que mi estudio de caso sea científico y no una simple opinión?». ¿A qué campo pertenece su pregunta?",
    "opciones": [
-    "Consentimiento de los tutores, asentimiento de los menores, confidencialidad con seudónimos, no daño y devolución de resultados",
-    "Solo pedir permiso al director",
-    "Publicar los nombres reales para dar credibilidad",
-    "Grabar sin avisar para no influir en las respuestas"
+    "A la epistemología, que estudia el conocimiento científico",
+    "A la teoría del conocimiento, que estudia todo conocimiento humano en general",
+    "A la filosofía de la ciencia entendida solo como historia de los inventos",
+    "A ninguno: es una pregunta técnica de metodología"
    ],
    "correcta": 0,
-   "explicacion": "La ética de la investigación con menores es una aplicación concreta de la bioética."
+   "explicacion": "La epistemología se pregunta qué hace científico a un conocimiento."
   },
   {
-   "id": "final-020",
-   "subtema": "9.2",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Por qué el desarrollo sustentable es un problema \"complejo\" en el sentido de Morin?",
-   "opciones": [
-    "Porque sus dimensiones ambiental, social y económica están entrelazadas y no pueden resolverse por separado",
-    "Porque es un problema matemático difícil",
-    "Porque solo lo entienden los especialistas",
-    "Porque no tiene relación con la educación"
-   ],
-   "correcta": 0,
-   "explicacion": "Una solución técnica a un problema ambiental puede generar problemas sociales."
-  },
-  {
-   "id": "final-021",
-   "subtema": "9.3",
-   "tipo": "relacionar",
-   "pregunta": "Relaciona cada perspectiva con la crítica principal que recibe.",
-   "pares": [
-    {
-     "izquierda": "Capital humano",
-     "derecha": "Reduce la educación a su valor económico"
-    },
-    {
-     "izquierda": "Teorías de la reproducción",
-     "derecha": "Pueden ser deterministas y no explicar el cambio"
-    },
-    {
-     "izquierda": "Enfoque de capacidades",
-     "derecha": "Es difícil de medir y operativizar"
-    },
-    {
-     "izquierda": "Educación como derecho",
-     "derecha": "Puede quedarse en declaración sin recursos"
-    }
-   ],
-   "explicacion": "Cada perspectiva lleva a políticas educativas distintas."
-  },
-  {
-   "id": "final-022",
-   "subtema": "9.3",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Qué economista propuso que el desarrollo se mida por la expansión de las capacidades o libertades reales de las personas?",
-   "opciones": [
-    "Amartya Sen",
-    "Gary S. Becker",
-    "Theodore W. Schultz",
-    "Samuel Bowles"
-   ],
-   "correcta": 0,
-   "explicacion": "Su enfoque inspiró el Índice de Desarrollo Humano del PNUD."
-  },
-  {
-   "id": "final-023",
-   "subtema": "9.4",
+   "id": "final-089",
+   "subtema": "2.1",
+   "gemela": "ep2-002",
    "tipo": "caso",
-   "pregunta": "Un compañero pide a una IA \"cinco artículos sobre neuromitos con DOI\" y los pega directamente en su lista de referencias. ¿Qué problema epistemológico y qué norma del curso incumple?",
+   "pregunta": "Una abuela de Hecelchakán sabe, por la forma de las nubes, cuándo va a llover, y casi siempre acierta. Un alumno dice que eso «ya es ciencia, porque predice». ¿Qué responderías?",
    "opciones": [
-    "La IA puede inventar fuentes; nunca debe citarse una referencia sin localizarla y leerla",
-    "Ninguno: las referencias generadas por IA siempre son correctas",
-    "Solo incumple el formato de sangría francesa",
-    "Ninguno, siempre que el DOI tenga números"
+    "Es conocimiento empírico: práctico y preciso, pero no sistematizado ni sometido a crítica pública",
+    "Es ciencia, porque toda predicción correcta es científica",
+    "Es conocimiento religioso, porque se transmite por tradición",
+    "Es conocimiento filosófico, porque reflexiona sobre la naturaleza"
    ],
    "correcta": 0,
-   "explicacion": "Verificar fuentes es parte de la práctica epistemológica de citar."
+   "explicacion": "Acertar no basta: la ciencia se valida por comprobación y crítica de la comunidad."
   },
   {
-   "id": "final-024",
-   "subtema": "9.4",
+   "id": "final-090",
+   "subtema": "2.2",
+   "gemela": "ep2-008",
    "tipo": "opcion_multiple",
-   "pregunta": "Seymour Papert criticó que la computadora se usara para \"programar al niño\". ¿Qué propuso a cambio?",
+   "pregunta": "Según la definición de trabajo del curso, ¿qué permite que la historia sea ciencia aunque no pueda repetir sus hechos en un laboratorio?",
    "opciones": [
-    "Que el niño programara a la computadora y construyera conocimiento al hacerlo, con el lenguaje Logo",
-    "Que se eliminaran las computadoras de las escuelas",
-    "Que la computadora sustituyera al maestro",
-    "Que se usaran solo enciclopedias en disco compacto"
+    "Que somete sus afirmaciones a prueba con métodos adecuados a su objeto y a la crítica pública",
+    "Que sus conclusiones son verdades eternas",
+    "Que sigue los mismos cinco pasos que la física",
+    "Que la practican personas con doctorado"
    ],
    "correcta": 0,
-   "explicacion": "Era una propuesta constructivista, heredera de Piaget."
+   "explicacion": "No existe un método único."
   },
   {
-   "id": "final-025",
-   "subtema": "10.1",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Cuál es el marco legal y curricular de la Nueva Escuela Mexicana?",
-   "opciones": [
-    "La reforma al artículo 3.º de 2019, la Ley General de Educación de 2019 y el Plan de Estudio 2022",
-    "La Constitución de 1857 y el Plan de Once Años",
-    "El Acuerdo Nacional para la Modernización de 1992 únicamente",
-    "Las recomendaciones de PISA"
-   ],
-   "correcta": 0,
-   "explicacion": "El Plan de Estudio 2022 se implementó a partir del ciclo 2023-2024."
-  },
-  {
-   "id": "final-026",
-   "subtema": "10.1",
-   "tipo": "relacionar",
-   "pregunta": "Relaciona cada elemento de la NEM con su descripción.",
-   "pares": [
-    {
-     "izquierda": "Programa sintético",
-     "derecha": "Programa nacional con los contenidos básicos"
-    },
-    {
-     "izquierda": "Programa analítico",
-     "derecha": "Contextualización que hace el colectivo docente"
-    },
-    {
-     "izquierda": "Codiseño",
-     "derecha": "Participación docente en el diseño curricular"
-    },
-    {
-     "izquierda": "Ejes articuladores",
-     "derecha": "Siete temas que atraviesan todos los campos formativos"
-    }
-   ],
-   "explicacion": "La NEM reconoce la autonomía profesional del magisterio."
-  },
-  {
-   "id": "final-027",
-   "subtema": "10.2",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Qué autor sustenta la idea de que el programa analítico convierte al docente en investigador de su contexto?",
-   "opciones": [
-    "Lawrence Stenhouse, con el currículo como hipótesis a poner a prueba",
-    "Auguste Comte, con la ley de los tres estadios",
-    "Frank Parsons, con el modelo de rasgos y factores",
-    "B. F. Skinner, con las máquinas de enseñar"
-   ],
-   "correcta": 0,
-   "explicacion": "También se relacionan Elliott, Carr y Kemmis, y Schön."
-  },
-  {
-   "id": "final-028",
-   "subtema": "10.2",
-   "tipo": "relacionar",
-   "pregunta": "Relaciona cada concepto de la NEM con su fuente epistemológica.",
-   "pares": [
-    {
-     "izquierda": "Interculturalidad crítica",
-     "derecha": "Diálogo de saberes y epistemologías del Sur"
-    },
-    {
-     "izquierda": "Comunidad como núcleo integrador",
-     "derecha": "Paradigma sociocrítico y pensamiento sistémico"
-    },
-    {
-     "izquierda": "Pensamiento crítico",
-     "derecha": "Cánones de cientificidad y crítica de la evidencia"
-    },
-    {
-     "izquierda": "Campos formativos",
-     "derecha": "Pensamiento complejo"
-    }
-   ],
-   "explicacion": "El propio Plan de Estudio 2022 menciona varias de estas corrientes."
-  },
-  {
-   "id": "final-029",
-   "subtema": "10.3",
+   "id": "final-091",
+   "subtema": "2.3",
+   "gemela": "ep2-011",
    "tipo": "caso",
-   "pregunta": "Un maestro dice: \"La NEM es perfecta y cualquier crítica es política\". Otro dice: \"La NEM no sirve y punto\". Con los criterios del curso, ¿qué harías?",
+   "pregunta": "Una página afirma que un suplemento «mejora la memoria un 80 %, según científicos», sin decir quiénes hicieron el estudio ni dónde se publicó. ¿Qué canon de cientificidad falla más claramente?",
    "opciones": [
-    "Distinguir fundamentos de implementación, pedir evidencia, explicitar supuestos y dialogar con quien piensa distinto",
-    "Apoyar al primero porque defiende la reforma vigente",
-    "Apoyar al segundo porque criticar siempre es mejor",
-    "Evitar el tema porque no es pedagógico"
+    "Comunicabilidad: el conocimiento científico se expresa con precisión y se hace público",
+    "Provisionalidad: ningún conocimiento es definitivo",
+    "Sistematicidad: las afirmaciones forman parte de una teoría ordenada",
+    "Equifinalidad: se llega al mismo resultado por caminos distintos"
    ],
    "correcta": 0,
-   "explicacion": "La actitud epistemológica examina fundamentos, argumentos y evidencia."
+   "explicacion": "Sin autor ni publicación, nadie puede revisar la afirmación."
   },
   {
-   "id": "final-030",
-   "subtema": "10.3",
-   "tipo": "verdadero_falso",
-   "pregunta": "Entre los argumentos críticos sobre la NEM está el riesgo de que, sin rigor, el diálogo de saberes debilite la enseñanza del conocimiento científico.",
-   "opciones": [
-    "Verdadero",
-    "Falso"
-   ],
-   "correcta": 0,
-   "explicacion": "Recuerda la distinción entre ecología de saberes y relativismo ingenuo."
-  },
-  {
-   "id": "final-031",
-   "subtema": "10.4",
-   "tipo": "completar",
-   "pregunta": "Según la respuesta posible del Tema 10, la pedagogía sería una ciencia social y humana, práctica, plural, dialógica y con una dimensión _______ inevitable.",
-   "opciones": [
-    "ética",
-    "matemática",
-    "religiosa",
-    "experimental"
-   ],
-   "correcta": 0,
-   "explicacion": "Porque su objeto no es solo describir cómo se educa, sino pensar cómo se debe educar."
-  },
-  {
-   "id": "final-032",
-   "subtema": "10.4",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Qué aporta la epistemología a un pedagogo, según el epílogo?",
-   "opciones": [
-    "Una manera de hacer preguntas: sobre el origen, la evidencia y los supuestos de lo que se afirma en educación",
-    "Un conjunto cerrado de respuestas correctas",
-    "Un método único para enseñar cualquier contenido",
-    "Una lista de autores para memorizar"
-   ],
-   "correcta": 0,
-   "explicacion": "Pensar lo que hacemos mientras lo hacemos."
-  },
-  {
-   "id": "final-033",
-   "subtema": "10.5",
-   "tipo": "opcion_multiple",
-   "pregunta": "Según el Taller APA, ¿cuál es la diferencia entre \"Referencias\" y \"Bibliografía\"?",
-   "opciones": [
-    "Referencias incluye solo las obras citadas; Bibliografía designa obras consultadas, aunque no se hayan citado",
-    "Son exactamente lo mismo en APA 7",
-    "Referencias se ordena por fecha y Bibliografía por tema",
-    "Bibliografía solo incluye libros y Referencias solo artículos"
-   ],
-   "correcta": 0,
-   "explicacion": "En APA la lista se titula \"Referencias\"."
-  },
-  {
-   "id": "final-034",
-   "subtema": "8.3",
-   "tipo": "relacionar",
-   "pregunta": "Relaciona cada paradigma con la forma en que la orientación \"conoce\" a la persona.",
-   "pares": [
-    {
-     "izquierda": "Positivista",
-     "derecha": "Midiendo rasgos estables con instrumentos estandarizados"
-    },
-    {
-     "izquierda": "Interpretativo",
-     "derecha": "Comprendiendo los significados que la persona da a su historia"
-    },
-    {
-     "izquierda": "Sociocrítico",
-     "derecha": "Analizando las barreras y desigualdades del entorno"
-    }
-   ],
-   "explicacion": "Cada forma de orientar se apoya en una idea distinta de qué es conocer a una persona."
-  },
-  {
-   "id": "final-035",
-   "subtema": "9.3",
+   "id": "final-092",
+   "subtema": "2.4",
+   "gemela": "ep2-015",
    "tipo": "caso",
-   "pregunta": "Una tesis evalúa un programa de becas midiendo solo el salario de los egresados cinco años después. Desde la lectura epistemológica del Tema 9, ¿qué limitación tiene?",
+   "pregunta": "Una tesis busca comprender qué significa para los maestros rurales ser «buen maestro». En términos de Dilthey, ¿a qué tipo de ciencia y de método corresponde?",
    "opciones": [
-    "Solo encontrará lo que la teoría del capital humano sabe ver; deja fuera, por ejemplo, la ampliación de libertades o la reproducción de desigualdades",
-    "Ninguna: el salario es la única evidencia válida del valor de la educación",
-    "Que no usa ningún dato numérico",
-    "Que pertenece al paradigma interpretativo"
+    "Ciencias del espíritu: comprensión del sentido desde dentro",
+    "Ciencias de la naturaleza: explicación causal con leyes generales",
+    "Ciencias formales: demostración lógica",
+    "Ciencias fácticas naturales: experimentación controlada"
    ],
    "correcta": 0,
-   "explicacion": "Elegir qué medir ya es tomar una postura epistemológica."
+   "explicacion": "Explicar y comprender."
   },
   {
-   "id": "final-036",
-   "subtema": "8.1",
+   "id": "final-093",
+   "subtema": "3.3",
+   "gemela": "ep3-012",
    "tipo": "caso",
-   "pregunta": "Un orientador aplica a un grupo un test de intereses y entrega a cada alumno \"la carrera para la que nació\", sin entrevistas ni contexto. Con lo visto en todo el curso, ¿cuál es la crítica más completa?",
+   "pregunta": "Un maestro planea fracciones en orden: primero partes iguales, luego equivalencias y después operaciones. ¿Qué lógica usa y es adecuada aquí?",
    "opciones": [
-    "Trabaja desde un supuesto positivista que confunde un momento con un destino; ignora el contexto sistémico y la construcción del proyecto de vida",
-    "Ninguna: los tests estandarizados son el único conocimiento válido sobre una persona",
-    "Su único error es no usar inteligencia artificial para interpretar el test",
-    "Que el test es falsable y por eso no es científico"
+    "Lógica lineal, adecuada para ordenar los prerrequisitos de un aprendizaje",
+    "Lógica dialéctica, porque hay contradicciones entre los temas",
+    "Lógica lineal, pero inadecuada, porque nunca sirve en educación",
+    "Ontología sistémica, porque cada tema es una propiedad emergente"
    ],
    "correcta": 0,
-   "explicacion": "Une el modelo de rasgos y factores (Tema 8) con los paradigmas (Tema 3) y la plasticidad y el cambio (Temas 3 y 7)."
+   "explicacion": "La lógica lineal es útil para planear secuencias."
   },
   {
-   "id": "final-037",
-   "subtema": "8.3",
+   "id": "final-094",
+   "subtema": "3.4",
+   "gemela": "ep3-016",
    "tipo": "caso",
-   "pregunta": "Una escuela atribuye el bajo rendimiento de un grupo a que \"los alumnos no quieren aprender\". Desde la mirada sistémica del Tema 3 y el enfoque de barreras del Tema 8, ¿qué conviene hacer primero?",
+   "pregunta": "Un maestro dicta los contenidos, los alumnos copian y en el examen repiten lo dictado. Freire lo llamaría educación bancaria. ¿Qué propondría en su lugar?",
    "opciones": [
-    "Analizar las relaciones entre enseñanza, materiales, organización, familias y comunidad para identificar barreras para el aprendizaje y la participación",
-    "Sancionar a los alumnos con más reportes para que cambien de actitud",
-    "Aplicar un test de inteligencia a cada alumno para clasificarlos",
-    "Esperar a que el problema se resuelva solo con el tiempo"
+    "Una educación problematizadora y dialógica, que una reflexión y acción (praxis)",
+    "Más exámenes, para asegurar que repitan bien",
+    "Que el alumno estudie solo, sin maestro",
+    "Una educación técnica centrada en la productividad"
    ],
    "correcta": 0,
-   "explicacion": "Un problema educativo rara vez tiene una sola causa ubicada en el alumno."
+   "explicacion": "Freire (1970/2005)."
   },
   {
-   "id": "final-038",
-   "subtema": "9.2",
-   "tipo": "opcion_multiple",
-   "pregunta": "¿Por qué un proyecto escolar sobre el cuidado de los cenotes de Campeche ilustra a la vez el pensamiento complejo y la ecología de saberes?",
-   "opciones": [
-    "Porque el problema une dimensiones ambientales, sociales y económicas, y puede integrar el conocimiento científico con el saber de la comunidad",
-    "Porque solo requiere conocimiento científico de laboratorio",
-    "Porque se resuelve con una sola disciplina y una sola causa",
-    "Porque los saberes comunitarios sustituyen por completo a la ciencia"
-   ],
-   "correcta": 0,
-   "explicacion": "Integra el desarrollo sustentable (Tema 9) con Morin (Tema 4) y Sousa Santos (Tema 6)."
-  },
-  {
-   "id": "final-039",
-   "subtema": "9.4",
+   "id": "final-095",
+   "subtema": "4.1",
+   "gemela": "ep4-002",
    "tipo": "caso",
-   "pregunta": "Una inteligencia artificial responde correctamente una pregunta de examen. Usando la definición clásica de conocimiento del Tema 1, ¿qué es lo más preciso afirmar?",
+   "pregunta": "Un programa se declara «científicamente probado» porque funcionó en 30 escuelas. Desde el problema de la inducción, ¿qué se puede afirmar?",
    "opciones": [
-    "Produce una afirmación verdadera, pero no tiene creencias ni justificación en el sentido humano; quien copia la respuesta tampoco demuestra saberla",
-    "La IA sabe exactamente como un ser humano, porque acertó",
-    "La respuesta es falsa por haber sido generada por una máquina",
-    "La definición clásica de conocimiento no tiene relación con la IA"
+    "Que ningún número de casos garantiza que funcionará en la siguiente escuela",
+    "Que con 30 casos queda verificado para siempre",
+    "Que con 100 escuelas ya habría certeza absoluta",
+    "Que la inducción no tiene ningún valor en la investigación"
    ],
    "correcta": 0,
-   "explicacion": "Creencia, verdad y justificación: acertar no es lo mismo que saber."
+   "explicacion": "Los cisnes blancos no garantizan que no exista uno negro."
   },
   {
-   "id": "final-040",
-   "subtema": "10.2",
-   "tipo": "jerarquizar",
-   "pregunta": "Un colectivo docente elabora su programa analítico como un ciclo de investigación-acción. ¿Cuál es el orden correcto de las fases?",
+   "id": "final-096",
+   "subtema": "4.4",
+   "gemela": "ep4-013",
+   "tipo": "caso",
+   "pregunta": "Un programa de lectura no da resultados; sus autores ajustan la explicación una y otra vez, pero los ajustes nunca predicen nada nuevo. Según Lakatos, ¿cómo es ese programa?",
    "opciones": [
-    "Diagnóstico → planificación → acción → observación → reflexión",
-    "Acción → diagnóstico → reflexión → planificación → observación",
-    "Reflexión → observación → acción → diagnóstico → planificación",
-    "Planificación → reflexión → diagnóstico → observación → acción"
+    "Degenerativo",
+    "Progresivo",
+    "Falsado de manera definitiva",
+    "Inconmensurable"
    ],
    "correcta": 0,
-   "explicacion": "El programa analítico conecta con Elliott, Stenhouse y Carr y Kemmis (Temas 1 y 6)."
+   "explicacion": "Un programa progresivo predice hechos nuevos; uno degenerativo solo se justifica."
+  },
+  {
+   "id": "final-097",
+   "subtema": "4.5",
+   "gemela": "ep4-014",
+   "tipo": "caso",
+   "pregunta": "En un debate, un compañero cita a Feyerabend para decir que «la vacuna y el remedio milagroso valen igual». ¿Qué le responderías?",
+   "opciones": [
+    "Que es una lectura superficial: «todo vale» significa que ninguna regla fija garantiza el progreso, no que toda opinión valga igual",
+    "Que tiene razón: Feyerabend defendía el relativismo extremo",
+    "Que Feyerabend era un positivista lógico",
+    "Que Feyerabend nunca habló del método científico"
+   ],
+   "correcta": 0,
+   "explicacion": "El riesgo de leerlo sin cuidado es el relativismo."
+  },
+  {
+   "id": "final-098",
+   "subtema": "5.3",
+   "gemela": "ep5-009",
+   "tipo": "caso",
+   "pregunta": "Dos testigos de un mismo accidente describen cosas distintas, y ambos están seguros de lo que vieron. ¿Qué idea del Tema 5 lo explica mejor?",
+   "opciones": [
+    "El cerebro no es un espejo: completa, interpreta y anticipa lo que percibe",
+    "Uno de los dos necesariamente miente",
+    "La observación es neutral si se pone atención",
+    "La memoria guarda copias exactas de lo que vemos"
+   ],
+   "correcta": 0,
+   "explicacion": "Percibir no es recibir pasivamente."
+  },
+  {
+   "id": "final-099",
+   "subtema": "5.4",
+   "gemela": "ep5-013",
+   "tipo": "caso",
+   "pregunta": "Al leer un texto antiguo, un alumno dice: «Debo entenderlo exactamente como lo entendía su autor, olvidando todo lo que yo sé». ¿Qué le diría Gadamer?",
+   "opciones": [
+    "Que comprender es una fusión de horizontes en la que el suyo y el del texto se amplían",
+    "Que tiene razón: hay que abandonar el propio horizonte",
+    "Que debe imponer su propia interpretación al texto",
+    "Que la comprensión de un texto antiguo es imposible"
+   ],
+   "correcta": 0,
+   "explicacion": "Gadamer (1960/1977)."
+  },
+  {
+   "id": "final-100",
+   "subtema": "6.1",
+   "gemela": "ep6-001",
+   "tipo": "caso",
+   "pregunta": "Un practicante leyó todos los manuales de manejo de grupo, pero en el salón no sabe cuándo intervenir. Según Polanyi, ¿qué explica su dificultad?",
+   "opciones": [
+    "Hay un saber tácito que se aprende en la práctica, junto a quien lo domina, y no solo en los libros",
+    "Le faltó leer más manuales",
+    "El manejo de grupo no se puede aprender",
+    "Es un obstáculo verbal de Bachelard"
+   ],
+   "correcta": 0,
+   "explicacion": "La formación no puede hacerse solo con libros."
+  },
+  {
+   "id": "final-101",
+   "subtema": "6.4",
+   "gemela": "ep6-014",
+   "tipo": "caso",
+   "pregunta": "Un colectivo sistematiza durante un ciclo su estrategia de comprensión lectora y comparte lo que aprendió. ¿Qué respuesta a la pregunta guía respalda?",
+   "opciones": [
+    "Que la pedagogía también es ciencia por lo que los maestros investigan y sistematizan en sus aulas",
+    "Que solo las universidades producen conocimiento pedagógico",
+    "Que la pedagogía es solo un arte",
+    "Que la experiencia docente no es conocimiento"
+   ],
+   "correcta": 0,
+   "explicacion": "Stenhouse y el docente investigador."
+  },
+  {
+   "id": "final-102",
+   "subtema": "7.1",
+   "gemela": "ep7-001",
+   "tipo": "caso",
+   "pregunta": "Un orientador dice de un alumno de secundaria: «Es así y no va a cambiar». ¿Qué evidencia del Tema 7 contradice esa afirmación?",
+   "opciones": [
+    "La plasticidad cerebral: el cerebro modifica sus conexiones con la experiencia durante toda la vida",
+    "El cerebro triuno: el cerebro reptiliano domina en la adolescencia",
+    "Los estilos de aprendizaje, que son fijos",
+    "La dominancia de un hemisferio como rasgo de personalidad"
+   ],
+   "correcta": 0,
+   "explicacion": "Nadie está condenado por su cerebro."
+  },
+  {
+   "id": "final-103",
+   "subtema": "7.2",
+   "gemela": "ep7-006",
+   "tipo": "caso",
+   "pregunta": "Un alumno que vive violencia en casa no logra concentrarse y lo reportan por «mala actitud». ¿Qué conclusión integra mejor los Temas 7 y 8?",
+   "opciones": [
+    "El estrés intenso afecta el aprendizaje; conviene un clima seguro e identificar barreras del contexto, no solo sancionar",
+    "Es falta de voluntad que se corrige con más reportes",
+    "Debe ir a una escuela especial",
+    "La emoción no influye en la atención"
+   ],
+   "correcta": 0,
+   "explicacion": "Emoción y cognición no se separan; el problema no está solo en el alumno."
+  },
+  {
+   "id": "final-104",
+   "subtema": "7.3",
+   "gemela": "ep7-008",
+   "tipo": "caso",
+   "pregunta": "Un taller promete «activar el cerebro derecho» para que los alumnos sean más creativos. Con los cánones de cientificidad, ¿qué preguntarías primero?",
+   "opciones": [
+    "¿Dónde está la evidencia y se ha replicado?, sabiendo que en un cerebro sano los hemisferios trabajan juntos",
+    "¿Cuántos ejercicios incluye el taller?",
+    "¿Lo recomienda algún personaje famoso?",
+    "¿Usa imágenes del cerebro en sus materiales?"
+   ],
+   "correcta": 0,
+   "explicacion": "Ante cualquier propuesta «neuro», preguntar por la evidencia."
   }
  ]
 }

@@ -211,6 +211,142 @@
    ],
    "correcta": 0,
    "explicacion": "En APA la lista va en orden alfabético con sangría francesa."
+  },
+  {
+   "id": "ep10-014",
+   "subtema": "10.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estas metodologías sugiere la NEM?",
+   "opciones": [
+    "Aprendizaje basado en proyectos comunitarios",
+    "Memorización de definiciones",
+    "Dictado",
+    "Planas de caligrafía"
+   ],
+   "correcta": 0,
+   "explicacion": "También indagación, problemas y aprendizaje servicio."
+  },
+  {
+   "id": "ep10-015",
+   "subtema": "10.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "En la NEM, la escuela se concibe en relación con su comunidad, y la enseñanza debe partir de los problemas y saberes de esa comunidad.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "La comunidad como núcleo integrador."
+  },
+  {
+   "id": "ep10-016",
+   "subtema": "10.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el compendio, ¿qué pregunta kuhniana conviene hacerse sobre la NEM como «cambio de paradigma»?",
+   "opciones": [
+    "Si es una revolución, con nuevos problemas y conceptos, o un ajuste dentro del mismo paradigma escolar",
+    "Si los libros de texto son atractivos",
+    "Si es más barata que la reforma anterior",
+    "Si es popular en redes sociales"
+   ],
+   "correcta": 0,
+   "explicacion": "La respuesta no es obvia: es un buen tema de discusión."
+  },
+  {
+   "id": "ep10-017",
+   "subtema": "10.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "La idea de que la educación debe transformar la realidad y no solo adaptarse a ella conecta la NEM con:",
+   "opciones": [
+    "La pedagogía de Paulo Freire y la tradición sociocrítica",
+    "El modelo de rasgos y factores",
+    "El cerebro triuno",
+    "El positivismo lógico"
+   ],
+   "correcta": 0,
+   "explicacion": "Tema 3 y Tema 5."
+  },
+  {
+   "id": "ep10-018",
+   "subtema": "10.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estos es un argumento crítico sobre la NEM?",
+   "opciones": [
+    "La carga de trabajo del codiseño sin tiempo ni formación",
+    "Que reconoce los saberes de los pueblos originarios",
+    "Que parte de la realidad de la comunidad",
+    "Que integra los saberes en torno a problemas"
+   ],
+   "correcta": 0,
+   "explicacion": "Los otros tres son argumentos a favor."
+  },
+  {
+   "id": "ep10-019",
+   "subtema": "10.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "Los libros de texto distribuidos a partir de 2023 recibieron críticas públicas por errores y por su enfoque.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es parte de las brechas de implementación."
+  },
+  {
+   "id": "ep10-020",
+   "subtema": "10.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el epílogo, ¿qué le ofrece la epistemología a un pedagogo?",
+   "opciones": [
+    "Una manera de hacer preguntas",
+    "Un recetario de técnicas",
+    "Una lista de respuestas correctas",
+    "Un examen de admisión"
+   ],
+   "correcta": 0,
+   "explicacion": "No un conjunto de respuestas, sino una manera de hacer preguntas."
+  },
+  {
+   "id": "ep10-021",
+   "subtema": "10.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Al final del curso, frente a una afirmación como «los alumnos son visuales», lo que se espera de un pedagogo es:",
+   "opciones": [
+    "Preguntar qué evidencia la respalda",
+    "Aceptarla porque todos la dicen",
+    "Ignorarla",
+    "Someterla a votación"
+   ],
+   "correcta": 0,
+   "explicacion": "Es la escena del epílogo."
+  },
+  {
+   "id": "ep10-022",
+   "subtema": "10.5",
+   "tipo": "opcion_multiple",
+   "pregunta": "En APA, la lista al final de un trabajo se titula «Referencias» e incluye:",
+   "opciones": [
+    "Solo las obras citadas en el texto, y todas ellas",
+    "Todo lo que leíste, aunque no lo cites",
+    "Solo libros",
+    "Solo páginas web"
+   ],
+   "correcta": 0,
+   "explicacion": "«Bibliografía» designa obras consultadas aunque no se citen."
+  },
+  {
+   "id": "ep10-023",
+   "subtema": "10.5",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué extensión debe tener el ensayo final del curso?",
+   "opciones": [
+    "Entre 2500 y 3500 palabras",
+    "Entre 100 y 200 palabras",
+    "Más de 10 000 palabras",
+    "No tiene extensión mínima"
+   ],
+   "correcta": 0,
+   "explicacion": "Con formato APA 7."
   }
  ]
 }

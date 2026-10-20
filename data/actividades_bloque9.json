@@ -299,6 +299,140 @@
     }
    ],
    "explicacion": "Cada teoría económica de la educación es también una postura epistemológica."
+  },
+  {
+   "id": "ep9-019",
+   "subtema": "9.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "En la ética de la investigación, la devolución consiste en compartir los resultados con la comunidad que participó.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Es una de las cinco consideraciones del compendio."
+  },
+  {
+   "id": "ep9-020",
+   "subtema": "9.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Cuál de estos es un tema de la agenda bioética contemporánea?",
+   "opciones": [
+    "La edición genética",
+    "La ortografía",
+    "El horario escolar",
+    "La música"
+   ],
+   "correcta": 0,
+   "explicacion": "También el final de la vida, los datos personales y la IA en medicina."
+  },
+  {
+   "id": "ep9-021",
+   "subtema": "9.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué ejemplos de problemas para proyectos escolares de sustentabilidad en la península menciona el compendio?",
+   "opciones": [
+    "El cuidado del agua de los cenotes, la deforestación, los incendios forestales y la erosión de las costas",
+    "El tráfico de las grandes ciudades",
+    "El deshielo de los glaciares",
+    "Los terremotos"
+   ],
+   "correcta": 0,
+   "explicacion": "Oportunidades para integrar ciencia, saberes comunitarios y acción ciudadana."
+  },
+  {
+   "id": "ep9-022",
+   "subtema": "9.2",
+   "tipo": "verdadero_falso",
+   "pregunta": "En la NEM, la relación con la naturaleza aparece en el campo formativo «Ética, naturaleza y sociedades».",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "También en ejes articuladores como vida saludable."
+  },
+  {
+   "id": "ep9-023",
+   "subtema": "9.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué propuso Amartya Sen sobre el desarrollo?",
+   "opciones": [
+    "Que debe medirse por la expansión de las libertades reales de las personas",
+    "Que solo importa el ingreso",
+    "Que la educación es un gasto",
+    "Que la escuela debe preparar para obedecer"
+   ],
+   "correcta": 0,
+   "explicacion": "Sen (1999/2000), Desarrollo y libertad."
+  },
+  {
+   "id": "ep9-024",
+   "subtema": "9.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué evaluación internacional se apoya en la idea de que las competencias de los estudiantes indican el potencial económico de un país?",
+   "opciones": [
+    "PISA, de la OCDE",
+    "El Informe Brundtland",
+    "El Índice de inclusión",
+    "La Agenda 2030"
+   ],
+   "correcta": 0,
+   "explicacion": "Es una huella de la teoría del capital humano."
+  },
+  {
+   "id": "ep9-025",
+   "subtema": "9.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "Según el compendio, un modelo de lenguaje genera textos:",
+   "opciones": [
+    "Probables, a partir de patrones estadísticos",
+    "Que siempre son verdaderos",
+    "Que expresan sus propias creencias",
+    "Copiados de un solo libro"
+   ],
+   "correcta": 0,
+   "explicacion": "No tiene creencias en el sentido humano ni justifica lo que dice como una persona."
+  },
+  {
+   "id": "ep9-026",
+   "subtema": "9.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué recomienda la guía de la UNESCO (2023) sobre la IA generativa?",
+   "opciones": [
+    "Proteger los datos de los estudiantes y mantener a las personas en el centro de las decisiones",
+    "Usarla sin ninguna regla",
+    "Prohibirla en todos los países",
+    "Que califique los exámenes"
+   ],
+   "correcta": 0,
+   "explicacion": "También establecer edades mínimas y desarrollar la capacidad crítica."
+  },
+  {
+   "id": "ep9-027",
+   "subtema": "9.4",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué sostiene Neil Selwyn sobre si los robots deben reemplazar a los maestros?",
+   "opciones": [
+    "Que la pregunta es qué educación queremos y qué papel debe jugar la tecnología en ella",
+    "Que los robots ya reemplazaron a los maestros",
+    "Que la tecnología debe prohibirse",
+    "Que solo importa el costo"
+   ],
+   "correcta": 0,
+   "explicacion": "Selwyn (2019), Should Robots Replace Teachers?"
+  },
+  {
+   "id": "ep9-028",
+   "subtema": "9.4",
+   "tipo": "verdadero_falso",
+   "pregunta": "Según la APA, si usas inteligencia artificial en un trabajo académico debes declararlo de manera transparente.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "En la metodología o en una nota."
   }
  ]
 }

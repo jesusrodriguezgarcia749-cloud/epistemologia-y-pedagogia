@@ -211,6 +211,100 @@
    ],
    "correcta": 0,
    "explicacion": "Diagnosticar, acompañar o eliminar barreras responden a ideas distintas sobre qué es conocer a una persona."
+  },
+  {
+   "id": "ep8-014",
+   "subtema": "8.1",
+   "tipo": "opcion_multiple",
+   "pregunta": "Las propuestas recientes de corte constructivista entienden la carrera como:",
+   "opciones": [
+    "Una historia que la persona va escribiendo e interpretando",
+    "Un destino marcado desde el nacimiento",
+    "Una elección que deben hacer los padres",
+    "El resultado de un solo test"
+   ],
+   "correcta": 0,
+   "explicacion": "El orientador ayuda a dar sentido y a imaginar posibilidades."
+  },
+  {
+   "id": "ep8-015",
+   "subtema": "8.1",
+   "tipo": "verdadero_falso",
+   "pregunta": "Hoy elegir «la» profesión correcta tiene menos sentido que aprender a construir una trayectoria, porque las ocupaciones cambian a gran velocidad.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Cuando Parsons escribió, era común tener un solo oficio toda la vida."
+  },
+  {
+   "id": "ep8-016",
+   "subtema": "8.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué espacio curricular de la secundaria mexicana refleja los principios de la orientación contemporánea?",
+   "opciones": [
+    "La tutoría, a cargo de un docente que acompaña a un grupo",
+    "La clase de Educación Física",
+    "El recreo",
+    "La dirección escolar"
+   ],
+   "correcta": 0,
+   "explicacion": "También la educación socioemocional."
+  },
+  {
+   "id": "ep8-017",
+   "subtema": "8.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "¿Qué competencias busca desarrollar la educación emocional que propone Bisquerra?",
+   "opciones": [
+    "Conciencia y regulación emocional, autonomía, competencias sociales, habilidades de vida y bienestar",
+    "Cálculo mental y ortografía",
+    "Velocidad lectora",
+    "Fuerza y resistencia física"
+   ],
+   "correcta": 0,
+   "explicacion": "Bisquerra (2000)."
+  },
+  {
+   "id": "ep8-018",
+   "subtema": "8.2",
+   "tipo": "opcion_multiple",
+   "pregunta": "Anticiparse a los problemas en lugar de esperar a que aparezcan es el principio de:",
+   "opciones": [
+    "Prevención",
+    "Sanción",
+    "Diagnóstico tardío",
+    "Improvisación"
+   ],
+   "correcta": 0,
+   "explicacion": "Uno de los principios de la orientación contemporánea."
+  },
+  {
+   "id": "ep8-019",
+   "subtema": "8.3",
+   "tipo": "verdadero_falso",
+   "pregunta": "La Ley General de Educación de 2019 estableció la educación inclusiva como principio y retomó el concepto de barreras para el aprendizaje y la participación.",
+   "opciones": [
+    "Verdadero",
+    "Falso"
+   ],
+   "correcta": 0,
+   "explicacion": "Ley General de Educación (2019)."
+  },
+  {
+   "id": "ep8-020",
+   "subtema": "8.3",
+   "tipo": "opcion_multiple",
+   "pregunta": "En el modelo del déficit, cuando un alumno no aprende se busca:",
+   "opciones": [
+    "Qué le falta o qué tiene mal, para clasificarlo y darle tratamiento",
+    "Qué barreras hay en la escuela",
+    "Cómo cambiar el currículo",
+    "Qué saben sus compañeros"
+   ],
+   "correcta": 0,
+   "explicacion": "A menudo, con tratamiento fuera del aula regular."
   }
  ]
 }
