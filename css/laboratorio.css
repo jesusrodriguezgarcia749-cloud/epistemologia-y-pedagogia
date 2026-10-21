@@ -202,3 +202,11 @@ html[data-theme="dark"] .era{color:var(--saffron);}
 @media (max-width:600px){ .k-lbl{font-size:17px;} .k-num{font-size:22px;} .br-etq{font-size:18px;} }
 
 .tema-nota{font-size:.84rem; color:var(--ink-soft); margin:-4px 0 10px;}
+
+.ficha-cita-par{margin:0 0 12px;}
+.ficha-cita-lbl{font-size:.78rem; font-weight:700; color:var(--ink-soft); margin:8px 0 4px;}
+.ficha-ref{font-size:.88rem; line-height:1.55; padding:8px 10px 8px 26px; text-indent:-16px; background:var(--parchment); border-radius:8px; margin:0;}
+.ficha-cita-nota{font-size:.88rem; color:var(--ink-soft);}
+.ficha-cita-ayuda{font-size:.85rem; margin:6px 0 0;}
+.ficha-cita-ayuda summary{cursor:pointer; font-weight:700; color:var(--saffron-dark);}
+html[data-theme="dark"] .ficha-cita-ayuda summary{color:var(--saffron);}

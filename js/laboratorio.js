@@ -140,6 +140,12 @@
       <p>¿No sabes por dónde empezar? Recorre el corazón del curso en orden: <button class="link-btn" data-ir="viena">Círculo de Viena</button> → <button class="link-btn" data-ir="popper">Popper</button> → <button class="link-btn" data-ir="kuhn">Kuhn</button> → <button class="link-btn" data-ir="lakatos">Lakatos</button> → <button class="link-btn" data-ir="feyerabend">Feyerabend</button> → <button class="link-btn" data-ir="morin">Morin</button>.</p>`;
     $$('#ficha [data-ir]').forEach(b => b.addEventListener('click', () => elegirAutor(b.dataset.ir, true)));
   }
+  function citar(a) {
+    if (!a.refs || !a.refs.length) return `<p class="ficha-cita-nota">${md(a.cita)} Si lo usas en un trabajo, cita la obra original que hayas consultado.</p>`;
+    return a.refs.map(r => `<div class="ficha-cita-par"><p class="ficha-cita-lbl">En el texto, junto a la idea:</p><p class="ficha-cita">${esc(r.cita)}</p>
+      ${r.apa ? `<p class="ficha-cita-lbl">En la lista de referencias, al final del trabajo:</p><p class="ficha-ref">${md(r.apa)}</p>` : ''}</div>`).join('') +
+      `<details class="ficha-cita-ayuda"><summary>¿Por qué dos años, como 1934/2008?</summary><p>El primer año es el de la publicación original de la obra; el segundo, el de la edición en español que se consultó. La cita corta del texto solo lleva autor y año; el título del libro va completo en la lista de referencias, donde el lector lo encuentra por el apellido.</p></details>`;
+  }
   function elegirAutor(id, desplazar) {
     const a = POR_ID[id]; if (!a) return; selec = id;
     svgC.classList.remove('filtrado'); $$('.astro.en-tema, .enlace.en-tema', svgC).forEach(g => g.classList.remove('en-tema'));
@@ -170,7 +176,7 @@
         <aside>
           <h3>Conceptos clave</h3><dl class="ficha-conceptos">${a.conceptos.map(c => `<dt>${md(c.t)}</dt><dd>${md(c.d)}</dd>`).join('')}</dl>
           <h3>Obras</h3><ul class="ficha-obras">${a.obras.map(o => `<li>${md(o)}</li>`).join('')}</ul>
-          <h3>Cómo citarlo</h3><p class="ficha-cita">${md(a.cita)}</p>
+          <h3>Cómo citarlo en APA 7</h3>${citar(a)}
           ${rel ? `<h3>Con quién dialoga</h3><ul class="ficha-rel">${rel}</ul>` : ''}
           <div class="ficha-pensar"><strong>Para pensar:</strong> ${md(a.pregunta)}</div>
         </aside>
