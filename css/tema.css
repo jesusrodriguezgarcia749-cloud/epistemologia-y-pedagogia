@@ -110,3 +110,9 @@
 
 .tema-recuadro-conexion{background:#EAF4F6; border-left-color:#2A7F8E;}
 .tema-recuadro-conexion .tema-recuadro-tag{color:#22697A;}
+
+.tema-lab{margin:26px 0 0; padding:14px 18px; border-radius:12px; background:rgba(168,50,62,.08); border-left:5px solid #A8323E; font-size:.92rem; display:flex; flex-wrap:wrap; gap:6px 16px; align-items:baseline;}
+.tema-lab a{font-weight:700; color:#A8323E; text-decoration:none;}
+.tema-lab-aut{flex-basis:100%; font-size:.88rem;}
+.tema-lab-aut a{font-weight:600;}
+html[data-theme="dark"] .tema-lab a{color:#E58A93;}
