@@ -145,3 +145,5 @@ html[data-theme="dark"] .t-avisos, html[data-theme="dark"] .t-aviso, html[data-t
   .t-banco-meta { margin-left: 0; }
   .t-banco-usar { margin-left: 0; width: 100%; }
 }
+html[data-theme="dark"] .t-pn { background: var(--saffron); color: var(--charcoal); }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .t-pn { background: var(--saffron); color: var(--charcoal); } }
