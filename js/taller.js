@@ -166,6 +166,13 @@ function revisar(q) {
 function etapaPregunta(c) {
   c.insertAdjacentHTML('beforeend', `
     <p class="lab-ayuda">Una investigación es tan buena como su pregunta. Vamos del tema amplio al problema concreto y, de ahí, a una pregunta que se pueda investigar. Esto te resuelve las preguntas 1 y 2 de tu proyecto.</p>
+    <h3 class="t-h3">La fórmula de una buena pregunta</h3>
+    <p class="lab-ayuda">Casi toda buena pregunta de investigación junta cinco piezas. Si a la tuya le falta una, el revisor te lo dirá.</p>
+    <div class="t-tabla-wrap"><table class="t-formula"><thead><tr><th>Pieza</th><th>Pregunta que responde</th><th>Ejemplo</th><th>Para qué sirve</th></tr></thead><tbody>
+      ${D.guia.formula.filas.map(([a, b, c2, d]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td><i>${esc(c2)}</i></td><td>${esc(d)}</td></tr>`).join('')}</tbody></table></div>
+    <p class="t-formula-res"><b>Resultado:</b> <i>${esc(D.guia.formula.resultado)}</i></p>
+    <h3 class="t-h3">Antes de elegir: cuatro advertencias</h3>
+    <div class="t-advert">${D.guia.advertencias.map(([t, x], i) => `<div><span class="t-paso">${i + 1}</span><b>${esc(t)}</b><p>${esc(x)}</p></div>`).join('')}</div>
     <details class="t-banco" id="banco"><summary><b>¿No sabes por dónde empezar?</b> Explora 160 preguntas de ejemplo</summary>
       <p class="lab-ayuda">Son puntos de partida, no preguntas terminadas. Elige una que te interese y que puedas investigar en un lugar al que tengas acceso; luego <b>cámbiale el lugar, los sujetos y el tiempo por los tuyos</b> y deja que el revisor te ayude a afinarla. Si te interesa el tema pero no el enfoque, cambia la entrada: «¿Qué relación existe…?» mide, «¿Cómo viven…?» comprende y «¿Cómo puede… junto con…?» transforma.</p>
       <div class="t-banco-filtros">
@@ -182,6 +189,18 @@ function etapaPregunta(c) {
       <div class="t-campo"><label for="f-pregunta"><span class="t-paso">3</span> Tu pregunta de investigación</label><textarea id="f-pregunta" rows="3" placeholder="¿…?">${esc(T.pregunta)}</textarea></div>
     </div>
     <div class="t-revisor" id="revisor"></div>
+    <h3 class="t-h3" id="tipos-fondo">Los tres tipos de pregunta, a fondo</h3>
+    <p class="lab-ayuda">La palabra con la que empieza tu pregunta casi decide el paradigma, el enfoque, las técnicas y hasta cómo se verán tus resultados. Elige un tipo para conocerlo a fondo.</p>
+    <div class="lab-chips" id="tf-tabs" role="tablist">${['P', 'I', 'S'].map((k, i) => `<button type="button" role="tab" class="chip-lab" data-k="${k}" aria-pressed="${i === 0}">${D.guia.tipos[k].letra} · ${D.guia.tipos[k].nombre}</button>`).join('')}</div>
+    <div id="tf-ficha"></div>
+    <p class="t-nota">${md(D.guia.mixta)}</p>
+    <h3 class="t-h3">Un mismo tema, tres preguntas distintas</h3>
+    <p class="lab-ayuda">Tema: <b>${esc(D.guia.comparativa.tema)}</b>. Fíjate cómo cambia todo al cambiar solo la entrada de la pregunta.</p>
+    <div class="t-compara">${D.guia.comparativa.filas.map(([k, q, r, t]) => `<article style="--c:${D.tipos[k].color}"><span class="t-tipo" style="--c:${D.tipos[k].color}">${D.tipos[k].nombre}</span><p class="t-compara-q">${esc(q)}</p><p><b>Lo que obtendrías:</b> ${esc(r)}</p><p><b>Con qué:</b> ${esc(t)}</p></article>`).join('')}</div>
+    <h3 class="t-h3">Pon a prueba tu ojo</h3>
+    <p class="lab-ayuda">¿Qué tipo es cada pregunta? Elige y revisa la explicación.</p>
+    <ol class="t-prueba" id="tp">${D.guia.prueba.map(([q], i) => `<li data-i="${i}"><p>${esc(q)}</p><div class="t-prueba-ops">${['P', 'I', 'S'].map(k => `<button type="button" class="chip-lab" data-k="${k}">${D.tipos[k].nombre}</button>`).join('')}</div><p class="t-prueba-fb" hidden></p></li>`).join('')}</ol>
+    <p class="t-nota" id="tp-total"></p>
     <h3 class="t-h3">Ocho rasgos de una buena pregunta</h3>
     <div class="t-criterios">${D.criterios.map(([t, x]) => `<div><b>${esc(t)}</b><p>${esc(x)}</p></div>`).join('')}</div>
     <h3 class="t-h3">De una pregunta débil a una fuerte</h3>
@@ -190,6 +209,34 @@ function etapaPregunta(c) {
   enlazar('#f-pregunta', v => T.pregunta = v, pintarRevisor);
   pintarRevisor();
   iniciarBanco();
+  iniciarTipos();
+}
+function fichaTipo(k) {
+  const t = D.guia.tipos[k], fila = (r, x) => `<div class="t-ff"><dt>${r}</dt><dd>${md(x)}</dd></div>`;
+  $('#tf-ficha').innerHTML = `<article class="t-ficha-tipo" style="--c:${D.tipos[k].color}">
+    <header><span class="t-letra">${t.letra}</span><div><h4>Pregunta ${t.nombre.toLowerCase()}</h4><p>Paradigma <b>${esc(t.paradigma)}</b> · Enfoque <b>${esc(t.enfoque)}</b></p></div></header>
+    <p class="t-ficha-idea">${md(t.idea)}</p>
+    <p><b>Cómo suele empezar:</b></p><ul class="t-entradas">${t.entradas.map(e => `<li>${esc(e)}</li>`).join('')}</ul>
+    <p class="t-ficha-clave"><b>La clave para reconocerla.</b> ${md(t.clave)}</p>
+    <dl class="t-ff-lista">${fila('Qué tipo de respuesta produce', t.produce)}${fila('Técnicas que usa', t.tecnicas)}${fila('Papel del investigador', t.investigador)}${fila('Cómo se cuida el rigor', t.rigor)}${fila('¿Hipótesis?', t.hipotesis)}${fila('De dónde viene', t.raices)}</dl>
+    <p class="t-ficha-tuya"><b>Es tu tipo si…</b> ${md(t.esTuya)}</p>
+    <p class="aviso-lab"><b>Confusión común:</b> ${md(t.confusion)}</p>
+    <p><b>Ejemplo:</b> <i>${esc(t.ejemplo)}</i></p></article>`;
+}
+function iniciarTipos() {
+  const elegir = k => { $$('#tf-tabs .chip-lab').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === k))); fichaTipo(k); };
+  $$('#tf-tabs .chip-lab').forEach(b => b.addEventListener('click', () => elegir(b.dataset.k)));
+  const t0 = T.tipoManual || tipoDe(T.pregunta); elegir(['P', 'I', 'S'].includes(t0) ? t0 : 'P');
+  let bien = 0, hechas = 0;
+  $$('#tp li').forEach(li => li.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    if (li.dataset.ok) return;
+    const [, k, por] = D.guia.prueba[+li.dataset.i], ok = b.dataset.k === k;
+    li.dataset.ok = '1'; hechas++; if (ok) bien++;
+    li.querySelectorAll('button').forEach(x => { x.disabled = true; if (x.dataset.k === k) x.classList.add('t-ok'); else if (x === b) x.classList.add('t-mal'); });
+    const fb = li.querySelector('.t-prueba-fb'); fb.hidden = false;
+    fb.innerHTML = `<b>${ok ? '¡Correcto!' : `Es ${D.tipos[k].nombre.toLowerCase()}.`}</b> ${esc(por)}`;
+    $('#tp-total').textContent = `Llevas ${bien} de ${hechas} correctas${hechas === D.guia.prueba.length ? (bien === hechas ? '. ¡Excelente ojo!' : '. Repasa la ficha del tipo que más se te dificultó.') : '.'}`;
+  })));
 }
 const TIPO_BANCO = { E: 'P', C: 'I', T: 'S' };
 function iniciarBanco() {
@@ -229,8 +276,10 @@ function pintarRevisor() {
     <ul class="t-rev">${r.lista.map(x => `<li class="${x.ok ? 'ok' : 'mal'}"><span>${x.ok ? '✓' : '!'}</span><div><b>${esc(x.msg)}</b>${x.ok ? '' : `<p>${esc(x.consejo)}</p>`}</div></li>`).join('')}</ul>
     <div class="t-tipo-box"><p><b>Tipo de pregunta:</b> ${tipo ? `<span class="t-tipo" style="--c:${D.tipos[tipo].color}">${D.tipos[tipo].nombre}</span> ${esc(D.tipos[tipo].txt)}` : 'todavía no se distingue si es explicativa, comprensiva o transformadora.'}</p>
       <label>¿No es correcto? Elige tú: <select id="f-tipo"><option value="">Detectar automáticamente</option>${Object.entries(D.tipos).map(([k, v]) => `<option value="${k}" ${T.tipoManual === k ? 'selected' : ''}>${v.nombre}</option>`).join('')}</select></label>
+      ${tipo && tipo !== 'M' ? `<p><button type="button" class="link-btn" id="rev-ver-tipo">Ver qué significa una pregunta ${D.tipos[tipo].nombre.toLowerCase()} →</button></p>` : ''}
       <p class="t-nota">La revisión es automática y orientadora: busca palabras y formas comunes. Tu docente y tu asesor tienen la última palabra.</p></div>`;
   $('#f-tipo').addEventListener('change', e => { T.tipoManual = e.target.value; cambio(); pintarRevisor(); });
+  const vt = $('#rev-ver-tipo'); if (vt) vt.addEventListener('click', () => { const k = T.tipoManual || tipoDe(T.pregunta); $(`#tf-tabs [data-k="${k}"]`).click(); $('#tipos-fondo').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 }
 
 // ------------------------------------------------ Etapa 2: brújula

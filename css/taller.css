@@ -147,3 +147,42 @@ html[data-theme="dark"] .t-avisos, html[data-theme="dark"] .t-aviso, html[data-t
 }
 html[data-theme="dark"] .t-pn { background: var(--saffron); color: var(--charcoal); }
 @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .t-pn { background: var(--saffron); color: var(--charcoal); } }
+
+/* Fórmula, advertencias y tipos a fondo */
+.t-tabla-wrap { overflow-x: auto; }
+.t-formula { width: 100%; border-collapse: collapse; font-size: .92rem; background: var(--cream); border-radius: 10px; overflow: hidden; }
+.t-formula th, .t-formula td { text-align: left; vertical-align: top; padding: .55rem .7rem; border-bottom: 1px solid var(--line); }
+.t-formula thead th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-soft); }
+.t-formula tbody th { color: var(--saffron-dark); white-space: nowrap; }
+.t-formula-res { background: var(--cream); border-left: 4px solid var(--saffron); padding: .6rem .8rem; border-radius: 0 8px 8px 0; }
+.t-advert { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: .6rem; }
+.t-advert div { background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: .7rem .8rem; }
+.t-advert p { margin: .35rem 0 0; font-size: .9rem; color: var(--ink-soft); }
+.t-ficha-tipo { border: 1px solid var(--line); border-top: 5px solid var(--c); border-radius: 10px; background: var(--cream); padding: 1rem 1.1rem; margin-top: .6rem; }
+.t-ficha-tipo header { display: flex; gap: .8rem; align-items: center; margin-bottom: .5rem; }
+.t-ficha-tipo h4 { margin: 0; font-size: 1.15rem; }
+.t-ficha-tipo header p { margin: .15rem 0 0; font-size: .9rem; color: var(--ink-soft); }
+.t-letra { flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #fff; font-weight: 800; font-size: 1.2rem; }
+.t-ficha-idea { font-size: 1.02rem; line-height: 1.6; }
+.t-entradas { margin: .2rem 0 .6rem; }
+.t-entradas li { font-style: italic; }
+.t-ficha-clave, .t-ficha-tuya { background: color-mix(in srgb, var(--c) 10%, transparent); border-left: 3px solid var(--c); padding: .55rem .75rem; border-radius: 0 8px 8px 0; }
+.t-ff-lista { display: grid; gap: .45rem; margin: .8rem 0; }
+.t-ff { display: grid; grid-template-columns: 190px 1fr; gap: .6rem; border-bottom: 1px dashed var(--line); padding-bottom: .45rem; }
+.t-ff dt { font-weight: 700; font-size: .9rem; }
+.t-ff dd { margin: 0; font-size: .92rem; }
+.t-compara { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .7rem; }
+.t-compara article { background: var(--cream); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 10px; padding: .8rem; }
+.t-compara p { font-size: .9rem; margin: .45rem 0; }
+.t-compara .t-compara-q { font-style: italic; font-size: .95rem; }
+.t-prueba { padding-left: 1.3rem; display: grid; gap: .7rem; }
+.t-prueba li p { margin: 0 0 .4rem; }
+.t-prueba-ops { display: flex; flex-wrap: wrap; gap: .4rem; }
+.t-prueba-ops .chip-lab:disabled { opacity: .55; cursor: default; }
+.t-prueba-ops .chip-lab.t-ok { opacity: 1; background: #2e7d32; color: #fff; border-color: #2e7d32; }
+.t-prueba-ops .chip-lab.t-mal { opacity: 1; background: #b3261e; color: #fff; border-color: #b3261e; }
+.t-prueba-fb { font-size: .9rem; margin-top: .4rem !important; }
+@media (max-width: 600px) {
+  .t-ff { grid-template-columns: 1fr; gap: .15rem; }
+  .t-formula { font-size: .85rem; }
+}
