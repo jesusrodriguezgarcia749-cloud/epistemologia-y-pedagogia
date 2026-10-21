@@ -125,3 +125,23 @@ html[data-theme="dark"] .t-avisos, html[data-theme="dark"] .t-aviso, html[data-t
   .t-mz-grid { grid-template-columns: 1fr; }
   .t-nav-etapas button { flex: 1; font-size: .88rem; }
 }
+
+/* Banco de preguntas de ejemplo */
+.t-banco { background: var(--cream); border: 1px solid var(--line); border-left: 4px solid #2e7d32; border-radius: 0 10px 10px 0; padding: .7rem 1rem; margin: .8rem 0 1rem; }
+.t-banco > summary { cursor: pointer; line-height: 1.5; }
+.t-banco[open] > summary { margin-bottom: .6rem; }
+.t-banco-filtros { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin: .6rem 0; }
+.t-banco-filtros label { display: grid; gap: .25rem; font-size: .88rem; font-weight: 600; }
+.t-banco-filtros select, .t-banco-filtros input { width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); background: var(--parchment); border: 1px solid var(--line); border-radius: 8px; padding: .5rem .6rem; }
+.t-banco-lista { list-style: none; margin: .4rem 0 0; padding: 0; display: grid; gap: .5rem; max-height: 560px; overflow-y: auto; }
+.t-banco-lista li { background: var(--parchment); border: 1px solid var(--line); border-radius: 8px; padding: .6rem .7rem; }
+.t-banco-q { display: flex; gap: .55rem; margin: 0; line-height: 1.5; }
+.t-banco-q .t-pn { width: 1.9rem; height: 1.9rem; font-size: .75rem; }
+.t-banco-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; margin: .45rem 0 0 2.45rem; }
+.t-banco-meta small { color: var(--ink-soft); }
+.t-banco-usar { margin-left: auto; padding: .3rem .8rem; font-size: .85rem; }
+@media (max-width: 600px) {
+  .t-banco-filtros { grid-template-columns: 1fr; }
+  .t-banco-meta { margin-left: 0; }
+  .t-banco-usar { margin-left: 0; width: 100%; }
+}

@@ -133,8 +133,8 @@ const enlazar = (sel, campo, fn) => { const el = $(sel); el.addEventListener('in
 // ------------------------------------------------ Etapa 1: la pregunta
 function tipoDe(q) {
   const t = q.toLowerCase();
-  const P = /(relaci[oó]n|efecto|influ|impacto|diferencia|cu[aá]nto|en qu[eé] medida|nivel de|correlaci|frecuencia|porcentaje|compar)/.test(t);
-  const I = /(c[oó]mo viven|significad|percepci|experiencia|perciben|sentido|interpretan|qu[eé] piensan|narrativ|vivencia|c[oó]mo describen|c[oó]mo explican|representacion)/.test(t);
+  const P = /(relaci[oó]n|efecto|influ|impacto|diferencia|cu[aá]nto|en qu[eé] medida|nivel de|correlaci|frecuencia|porcentaje|compar|factores|se asocia)/.test(t);
+  const I = /(c[oó]mo viven|c[oó]mo vive\b|significad|percepci|experiencia|perciben|sentido|interpretan|qu[eé] piensan|narrativ|vivencia|c[oó]mo describen|c[oó]mo explican|representacion|creencias|estereotipos|qu[eé] aprenden|qu[eé] aprendizajes|qu[eé] esperan|qu[eé] valores|qu[eé] estrategias|qu[eé] barreras|qu[eé] se gan[oó]|^¿\s*c[oó]mo (?!puede|podemos|pueden|se puede|mejorar|fomentar|impulsar|lograr|aumentar|desarrollar)\S+)/.test(t);
   const S = /(c[oó]mo (puede|podemos|pueden)|transformar|propuesta|intervenci|construir|junto con|participativ|investigaci[oó]n-acci[oó]n|dise[nñ]ar y poner a prueba|colectiv)/.test(t);
   if (S) return 'S'; if (P && I) return 'M'; if (I) return 'I'; if (P) return 'P'; return '';
 }
@@ -153,11 +153,11 @@ function revisar(q) {
   add(!opinion, !opinion ? 'No es una pregunta de opinión' : 'Parece una pregunta de opinión o de valor', 'Investigar no es decidir si algo es bueno: pregunta por relaciones, experiencias o transformaciones observables.');
   const sesgo = /\b(negativamente|positivamente|perjudica|beneficia|da[nñ]a|lamentable|grave problema)\b/.test(tl);
   add(!sesgo, !sesgo ? 'No da por hecha la respuesta' : 'Ya da por hecha la respuesta', 'Quita adjetivos como «negativamente» o «perjudica»: deja que los datos digan hacia dónde va el efecto.');
-  const sujetos = /\b(alumnos|alumnas|estudiantes|docentes|maestros|maestras|profesores|padres|madres|familias|directivos|ni[nñ]os|ni[nñ]as|j[oó]venes|adolescentes|orientadores|colectivo)\b/.test(tl);
+  const sujetos = /\b(alumnos?|alumnas?|estudiantes?|docentes?|maestros?|maestras?|profesores|profesoras|educadoras?|educadores|padres|madres|familias|directivos|directores|directoras|supervisores|ni[nñ]os?|ni[nñ]as?|beb[eé]s|j[oó]venes|adolescentes|orientadores|colectivo|grupo|empleados|trabajadores|trabajadoras|pacientes|adultos|adultas|personas|abuelos|abuelas|l[ií]deres|asesores|asesoras|gu[ií]as|guardaparques|m[eé]dicos|enfermeras|enfermeros|mujeres|hombres|tutores|pedagogos?|comit[eé]|egresados|hijos|hijas|visitantes|usuarios)\b/.test(tl);
   add(sujetos, sujetos ? 'Dice quiénes participan' : 'No dice quiénes participan', 'Nombra a los sujetos: alumnos, docentes, familias…');
-  const contexto = /\b(grado|secundaria|primaria|preescolar|bachillerato|preparatoria|universidad|licenciatura|telesecundaria|escuela|plantel|campeche|carmen|champot[oó]n|calkin[ií]|escárcega|hopelch[eé]n|municipio|comunidad|rural|urbana|ind[ií]gena|ciclo|cuatrimestre|semestre|turno|grupo)\b/.test(tl);
+  const contexto = /\b(grados?|secundarias?|primarias?|preescolar(es)?|bachillerato|preparatoria|universidad|universitari[oa]s|licenciatura|telesecundarias?|escuelas?|planteles?|campeche|carmen|champot[oó]n|calkin[ií]|esc[aá]rcega|hopelch[eé]n|calakmul|candelaria|tenabo|hecelchak[aá]n|palizada|seybaplaya|dzitbalch[eé]|municipio|comunidad(es)?|localidad(es)?|rurales?|urbanas?|ind[ií]genas?|ciclo|cuatrimestre|semestre|turno|grupo|hospital(es)?|cl[ií]nica|centro de salud|empresas?|hotel(es)?|industria|cadena comercial|inea|conafe|museos?|bibliotecas?|dif|casa hogar|reserva|colonias?|centro penitenciario|c[ií]rculo de estudio|educaci[oó]n b[aá]sica|usaer|cam|centro de atenci[oó]n|jard[ií]n de ni[nñ]os|normal|ciudad|pa[ií]s|estado|consejo t[eé]cnico|pediatr[ií]a|aula hospitalaria)\b/.test(tl);
   add(contexto, contexto ? 'Tiene contexto (nivel, lugar o tiempo)' : 'Le falta contexto', 'Agrega el grado o nivel, el tipo de escuela y el lugar; si sirve, el periodo (ciclo escolar).');
-  const vaga = /\b(la educaci[oó]n|el aprendizaje en general|la sociedad|los j[oó]venes de hoy|todo|todos los)\b/.test(tl);
+  const vaga = /\b(la educaci[oó]n(?! (para|de|escolar|financiera|ambiental|especial|comunitaria|ind[ií]gena|inicial|socioemocional|b[aá]sica|media|superior))|el aprendizaje en general|la sociedad|los j[oó]venes de hoy|todos los|todas las)\b|(?<!sobre )\btodo\b/.test(tl);
   add(!vaga, !vaga ? 'Evita expresiones demasiado amplias' : 'Usa expresiones demasiado amplias', 'Cambia «la educación» o «todos» por algo que puedas observar en tu escuela.');
   const objetivo = /^¿\s*c[oó]mo\s+(mejorar|fomentar|impulsar|lograr|aumentar|desarrollar)\b/i.test(t);
   add(!objetivo, !objetivo ? 'Es una pregunta, no un deseo' : 'Suena a deseo u objetivo («¿cómo mejorar…?»)', 'Di quién transforma qué, con quién y cómo lo pondrás a prueba, o conviértelo en un objetivo.');
@@ -166,6 +166,16 @@ function revisar(q) {
 function etapaPregunta(c) {
   c.insertAdjacentHTML('beforeend', `
     <p class="lab-ayuda">Una investigación es tan buena como su pregunta. Vamos del tema amplio al problema concreto y, de ahí, a una pregunta que se pueda investigar. Esto te resuelve las preguntas 1 y 2 de tu proyecto.</p>
+    <details class="t-banco" id="banco"><summary><b>¿No sabes por dónde empezar?</b> Explora 160 preguntas de ejemplo</summary>
+      <p class="lab-ayuda">Son puntos de partida, no preguntas terminadas. Elige una que te interese y que puedas investigar en un lugar al que tengas acceso; luego <b>cámbiale el lugar, los sujetos y el tiempo por los tuyos</b> y deja que el revisor te ayude a afinarla. Si te interesa el tema pero no el enfoque, cambia la entrada: «¿Qué relación existe…?» mide, «¿Cómo viven…?» comprende y «¿Cómo puede… junto con…?» transforma.</p>
+      <div class="t-banco-filtros">
+        <label>Lugar o problema<select id="bk-amb"><option value="">Todos</option><optgroup label="Por lugar de trabajo">${D.banco.ambitos.filter(a => a.grupo === 'lugar').map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}</optgroup><optgroup label="Por tipo de problema">${D.banco.ambitos.filter(a => a.grupo === 'problema').map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}</optgroup></select></label>
+        <label>Buscar<input id="bk-q" type="search" placeholder="Ejemplo: lectura, autismo, hospital…"></label>
+      </div>
+      <div class="lab-chips" id="bk-tipo">${[['', 'Todos los tipos'], ['E', 'Explicativas'], ['C', 'Comprensivas'], ['T', 'Transformadoras']].map(([k, n]) => `<button type="button" class="chip-lab" data-t="${k}" aria-pressed="${k === ''}">${n}</button>`).join('')}</div>
+      <p class="t-nota" id="bk-cuenta"></p>
+      <ol class="t-banco-lista" id="bk-lista"></ol>
+    </details>
     <div class="t-embudo">
       <div class="t-campo"><label for="f-tema"><span class="t-paso">1</span> Tu tema, en pocas palabras</label><input id="f-tema" type="text" placeholder="Ejemplo: la comprensión lectora en secundaria" value="${esc(T.tema)}"></div>
       <div class="t-campo"><label for="f-problema"><span class="t-paso">2</span> El problema: ¿qué observaste?, ¿dónde?, ¿a quiénes afecta?, ¿por qué importa?</label><textarea id="f-problema" rows="4" placeholder="Ejemplo: en mis prácticas en una secundaria de Campeche vi que muchos alumnos de primero leen en voz alta con fluidez, pero no pueden explicar lo que leyeron.">${esc(T.problema)}</textarea></div>
@@ -179,6 +189,36 @@ function etapaPregunta(c) {
   enlazar('#f-tema', v => T.tema = v); enlazar('#f-problema', v => T.problema = v);
   enlazar('#f-pregunta', v => T.pregunta = v, pintarRevisor);
   pintarRevisor();
+  iniciarBanco();
+}
+const TIPO_BANCO = { E: 'P', C: 'I', T: 'S' };
+function iniciarBanco() {
+  let tipo = '';
+  const norm = x => x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  // cada palabra buscada debe aparecer; las largas también por su raíz (autismo ~ autista)
+  const coincide = (texto, q) => q.split(/\s+/).every(w => texto.includes(w) || (w.length >= 6 && texto.includes(w.slice(0, 5))));
+  const nombreAmb = Object.fromEntries(D.banco.ambitos.map(a => [a.id, a.nombre]));
+  const pintar = () => {
+    const amb = $('#bk-amb').value, q = norm($('#bk-q').value.trim());
+    const lista = D.banco.preguntas.filter(p => (!amb || p.a === amb) && (!tipo || p.t === tipo) && (!q || coincide(norm(p.q + ' ' + nombreAmb[p.a]), q)));
+    $('#bk-cuenta').textContent = lista.length ? `${lista.length} pregunta${lista.length === 1 ? '' : 's'}` : 'Ninguna pregunta coincide. Prueba con otra palabra o quita un filtro.';
+    $('#bk-lista').innerHTML = lista.map(p => { const k = TIPO_BANCO[p.t]; return `<li><p class="t-banco-q"><span class="t-pn">${p.n}</span>${esc(p.q)}</p>
+      <p class="t-banco-meta"><span class="t-tipo" style="--c:${D.tipos[k].color}">${D.tipos[k].nombre}</span> <small>${esc(nombreAmb[p.a])}</small>
+      <button type="button" class="btn-lab-l t-banco-usar" data-n="${p.n}">Usar como punto de partida</button></p></li>`; }).join('');
+    $$('#bk-lista .t-banco-usar').forEach(b => b.addEventListener('click', () => {
+      const p = D.banco.preguntas[+b.dataset.n - 1];
+      if (T.pregunta.trim() && T.pregunta.trim() !== p.q && !confirm('Ya tienes una pregunta escrita. ¿La reemplazas por esta para adaptarla?')) return;
+      T.pregunta = p.q; T.tipoManual = ''; $('#f-pregunta').value = p.q; cambio(); pintarRevisor();
+      $('#banco').open = false;
+      const f = $('#f-pregunta'); f.scrollIntoView({ behavior: 'smooth', block: 'center' }); f.focus();
+      let av = $('#bk-aviso'); if (!av) { av = document.createElement('p'); av.id = 'bk-aviso'; av.className = 'aviso-lab'; f.parentElement.appendChild(av); }
+      av.innerHTML = '<b>Ahora hazla tuya:</b> cambia el lugar, los sujetos y, si quieres, el tiempo por los de tu realidad (tu escuela de prácticas, tu trabajo, tu comunidad). Una pregunta copiada tal cual no es tu pregunta.';
+    }));
+  };
+  $('#bk-amb').addEventListener('change', pintar);
+  $('#bk-q').addEventListener('input', pintar);
+  $$('#bk-tipo .chip-lab').forEach(b => b.addEventListener('click', () => { tipo = b.dataset.t; $$('#bk-tipo .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x === b))); pintar(); }));
+  pintar();
 }
 function pintarRevisor() {
   const r = revisar(T.pregunta), box = $('#revisor');
