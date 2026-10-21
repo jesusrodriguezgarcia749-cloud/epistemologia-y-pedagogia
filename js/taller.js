@@ -349,18 +349,70 @@ function pintarCuaderno() {
   $$('.t-usar').forEach(b => b.addEventListener('click', () => { const p = D.preguntas.find(x => x.n === +b.dataset.n), t = $(`.t-resp[data-n="${p.n}"]`); t.value = (t.value.trim() ? t.value.trim() + '\n\n' : '') + apoyo(p); t.dispatchEvent(new Event('input')); t.focus(); }));
   $('#c-word').addEventListener('click', () => descargarWord(entregaSel));
 }
+// ---- Word (.docx) real, armado en el navegador sin librerías: un ZIP sin
+// compresión con los XML mínimos de Office Open XML. Abre en Word de
+// computadora y de celular, Google Docs, Pages y LibreOffice.
+const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+function zip(archivos) {
+  const enc = new TextEncoder(), partes = [], central = []; let off = 0;
+  const d = new Date(), hora = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1), dia = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+  for (const [nombre, texto] of archivos) {
+    const n = enc.encode(nombre), b = enc.encode(texto), c = crc32(b);
+    const h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true);
+    h.setUint16(10, hora, true); h.setUint16(12, dia, true); h.setUint32(14, c, true); h.setUint32(18, b.length, true); h.setUint32(22, b.length, true);
+    h.setUint16(26, n.length, true); h.setUint16(28, 0, true);
+    partes.push(new Uint8Array(h.buffer), n, b);
+    const k = new DataView(new ArrayBuffer(46));
+    k.setUint32(0, 0x02014b50, true); k.setUint16(4, 20, true); k.setUint16(6, 20, true); k.setUint16(8, 0x0800, true); k.setUint16(10, 0, true);
+    k.setUint16(12, hora, true); k.setUint16(14, dia, true); k.setUint32(16, c, true); k.setUint32(20, b.length, true); k.setUint32(24, b.length, true);
+    k.setUint16(28, n.length, true); k.setUint32(42, off, true);
+    central.push(new Uint8Array(k.buffer), n);
+    off += 30 + n.length + b.length;
+  }
+  const tam = central.reduce((s, x) => s + x.length, 0), f = new DataView(new ArrayBuffer(22));
+  f.setUint32(0, 0x06054b50, true); f.setUint16(8, archivos.length, true); f.setUint16(10, archivos.length, true); f.setUint32(12, tam, true); f.setUint32(16, off, true);
+  return new Blob([...partes, ...central, new Uint8Array(f.buffer)], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+}
+const xe = s => String(s ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+function wP(texto, { centro = false, negrita = false, cursiva = false, sangria = false, espacioAntes = 0 } = {}) {
+  const pPr = `<w:pPr>${espacioAntes ? `<w:spacing w:before="${espacioAntes}"/>` : ''}${sangria ? '<w:ind w:firstLine="720"/>' : ''}${centro ? '<w:jc w:val="center"/>' : ''}</w:pPr>`;
+  const rPr = negrita || cursiva ? `<w:rPr>${negrita ? '<w:b/>' : ''}${cursiva ? '<w:i/>' : ''}</w:rPr>` : '';
+  return `<w:p>${pPr}${texto ? `<w:r>${rPr}<w:t xml:space="preserve">${xe(texto)}</w:t></w:r>` : ''}</w:p>`;
+}
 function descargarWord(ent) {
   const hasta = D.preguntas.filter(p => p.entrega === ent).slice(-1)[0].n;
   const lista = D.preguntas.filter(p => p.n <= hasta), e = D.entregas[ent];
-  const parr = t => String(t || '').split(/\n+/).filter(x => x.trim()).map(x => `<p class="txt">${esc(x.trim())}</p>`).join('') || '<p class="txt"><i>(sin respuesta)</i></p>';
-  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>${esc(e.nombre)}</title>
-    <style>@page{size:21.59cm 27.94cm;margin:2.54cm} body{font-family:'Times New Roman';font-size:12pt;line-height:200%} p{margin:0} .txt{text-indent:1.27cm} h1{font-size:12pt;text-align:center;font-weight:bold} h2{font-size:12pt;font-weight:bold;margin-top:12pt} .port{text-align:center}</style></head><body>
-    <p class="port"><b>Pienso, luego investigo</b></p><p class="port">${esc(sesion.anon ? '' : sesion.nombre)}</p><p class="port">Epistemología y Pedagogía · ITES René Descartes</p><p class="port">${esc(e.nombre)} · ${esc(e.fecha)}</p><br>
-    <h1>${esc(T.pregunta || 'Pregunta de investigación')}</h1>
-    ${lista.map(p => `<h2>${p.n}. ${esc(p.texto)}</h2>${parr(T.respuestas[p.n])}`).join('')}
-    <h1 style="margin-top:24pt">Referencias</h1><p class="txt"><i>Agrega aquí tus referencias en orden alfabético y con sangría francesa.</i></p></body></html>`;
-  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿', html], { type: 'application/msword' }));
-  a.download = `Pienso_luego_investigo_${ent}_${slug(sesion.anon ? 'borrador' : sesion.nombre)}.doc`; document.body.appendChild(a); a.click(); a.remove();
+  const cuerpo = [
+    wP('Pienso, luego investigo', { centro: true, negrita: true }),
+    wP(sesion.anon ? '' : sesion.nombre, { centro: true }),
+    wP('Epistemología y Pedagogía · ITES René Descartes', { centro: true }),
+    wP(`${e.nombre} · ${e.fecha}`, { centro: true }),
+    wP(''),
+    wP(T.pregunta || 'Pregunta de investigación', { centro: true, negrita: true }),
+  ];
+  lista.forEach(p => {
+    cuerpo.push(wP(`${p.n}. ${p.texto}`, { negrita: true, espacioAntes: 240 }));
+    const parrafos = String(T.respuestas[p.n] || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
+    if (parrafos.length) parrafos.forEach(x => cuerpo.push(wP(x, { sangria: true })));
+    else cuerpo.push(wP('(sin respuesta)', { sangria: true, cursiva: true }));
+  });
+  cuerpo.push(wP('Referencias', { centro: true, negrita: true, espacioAntes: 480 }));
+  cuerpo.push(wP('Agrega aquí tus referencias en orden alfabético y con sangría francesa.', { cursiva: true }));
+  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
+  const documento = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${W}><w:body>${cuerpo.join('')}<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+  const estilos = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ${W}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="es-MX"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="480" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style></w:styles>`;
+  const blob = zip([
+    ['[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>'],
+    ['_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
+    ['word/_rels/document.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
+    ['word/document.xml', documento],
+    ['word/styles.xml', estilos],
+  ]);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `Pienso_luego_investigo_${ent}_${slug(sesion.anon ? 'borrador' : sesion.nombre)}.docx`; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
 
 // ------------------------------------------------ Etapa 6: ética, APA y defensa
