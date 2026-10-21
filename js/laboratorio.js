@@ -130,6 +130,7 @@
     const subtemas = a => a.temas.filter(s => s.split('.')[0] === t).join(', ');
     info.hidden = false;
     info.innerHTML = `<p class="ficha-kicker">Tema ${t} · ${lista.length} autor${lista.length === 1 ? '' : 'es'}</p><h3>${esc(L.temas[t] || '')}</h3>
+      <p class="tema-nota">Las líneas doradas unen solo a los autores de este tema que se influyeron o discutieron entre sí. Si un autor no tiene línea, es porque sus relaciones son con autores de otros temas: ábrelo para verlas.</p>
       <div class="tema-autores">${lista.map(a => `<button type="button" data-ir="${a.id}" style="--fam:${L.familias[a.fam].color}"><i></i>${esc(a.nombre)}<small>${esc(subtemas(a))}</small></button>`).join('')}</div>`;
     $$('#tema-info [data-ir]').forEach(x => x.addEventListener('click', () => elegirAutor(x.dataset.ir, true)));
   }

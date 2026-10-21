@@ -200,3 +200,5 @@ html[data-theme="dark"] .era{color:var(--saffron);}
 .aviso{padding:12px 16px; border-radius:12px; border-left:5px solid; background:var(--cream);}
 .aviso.mal{border-color:#A8323E;}
 @media (max-width:600px){ .k-lbl{font-size:17px;} .k-num{font-size:22px;} .br-etq{font-size:18px;} }
+
+.tema-nota{font-size:.84rem; color:var(--ink-soft); margin:-4px 0 10px;}
