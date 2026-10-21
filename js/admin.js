@@ -727,7 +727,49 @@ async function cargarProyecto() {
   if (!grupoActivo) { empty.hidden = false; empty.textContent = 'Elige un grupo primero.'; return; }
   if (alumnosCache.length === 0) { empty.hidden = false; empty.textContent = 'Este grupo aún no tiene alumnos.'; return; }
   empty.hidden = true;
+  cargarAvanceTaller();
   for (const entrega of ENTREGAS_PROYECTO) { await cargarEntregaProyecto(entrega); }
+}
+
+// ---- Avance en el Taller del investigador (grupos/{g}/alumnos/{a}/investigacion/taller)
+let TALLER_DATA = null;
+async function cargarAvanceTaller() {
+  const cont = document.getElementById('taller-avance');
+  if (!cont) return;
+  cont.innerHTML = '<p class="empty-inline">Cargando…</p>';
+  try { TALLER_DATA = TALLER_DATA || await fetch('data/taller.json').then(r => r.json()); } catch { cont.innerHTML = '<p class="empty-inline">No se pudo cargar el taller.</p>'; return; }
+  const totales = {}; TALLER_DATA.preguntas.forEach(p => { totales[p.entrega] = (totales[p.entrega] || 0) + 1; });
+  const filas = await Promise.all(alumnosCache.map(async a => {
+    try { const s = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, 'investigacion', 'taller')); return [a, s.exists() ? s.data() : null]; }
+    catch { return [a, null]; }
+  }));
+  const fecha = t => t && t.toDate ? t.toDate().toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+  const N = { P: 'Positivista', I: 'Interpretativo', S: 'Sociocrítico', M: 'Mixto' };
+  const empezaron = filas.filter(([, d]) => d).length;
+  cont.innerHTML = `<p class="field-hint"><b>${empezaron} de ${filas.length}</b> alumnos ya entraron al taller.</p>
+    <div class="taller-tabla-wrap"><table class="taller-tabla"><thead><tr><th>Alumno</th><th>Pregunta de investigación</th><th>Etapas</th><th>E1</th><th>E2</th><th>Final</th><th>Última vez</th><th></th></tr></thead><tbody>
+    ${filas.map(([a, d]) => {
+      if (!d) return `<tr class="sin"><td>${escaparHTML(a.nombre)}</td><td colspan="7"><i>Aún no entra al taller</i></td></tr>`;
+      const av = d.avance || {}, r = av.respuestas || {}, et = (av.etapas || []).filter(Boolean).length;
+      const c = k => `<td class="${(r[k] || 0) === totales[k] ? 'ok' : ''}">${r[k] || 0}/${totales[k]}</td>`;
+      return `<tr><td>${escaparHTML(a.nombre)}</td><td class="preg">${escaparHTML(d.pregunta || '—')}${d.paradigma ? `<br><small>${N[d.paradigma] || ''}</small>` : ''}</td><td>${et}/6</td>${c('entrega1')}${c('entrega2')}${c('entregaFinal')}<td>${fecha(d.actualizado)}</td><td><button type="button" class="btn btn-small taller-ver" data-id="${a.id}">Ver</button></td></tr>
+        <tr class="taller-det" id="tdet-${a.id}" hidden><td colspan="8"></td></tr>`;
+    }).join('')}</tbody></table></div>`;
+  const datos = Object.fromEntries(filas.map(([a, d]) => [a.id, d]));
+  cont.querySelectorAll('.taller-ver').forEach(b => b.addEventListener('click', () => {
+    const tr = document.getElementById('tdet-' + b.dataset.id), d = datos[b.dataset.id].datos || {};
+    if (!tr.hidden) { tr.hidden = true; b.textContent = 'Ver'; return; }
+    const o = d.objetivos || {}, e = x => escaparHTML(x || '—');
+    const pal = t => (String(t || '').trim().match(/\S+/g) || []).length;
+    tr.firstElementChild.innerHTML = `<div class="taller-detalle">
+      <p><b>Tema:</b> ${e(d.tema)}</p><p><b>Problema:</b> ${e(d.problema)}</p><p><b>Pregunta:</b> ${e(d.pregunta)}</p>
+      <p><b>Objetivo general:</b> ${e(o.general)}</p><p><b>Específicos:</b></p><ol>${(o.especificos || []).filter(x => x.trim()).map(x => `<li>${e(x)}</li>`).join('') || '<li>—</li>'}</ol>
+      <p><b>Hipótesis o supuesto:</b> ${e(o.hipotesis)} <b>Me desmentiría que:</b> ${e(o.refutaria)}</p>
+      ${(d.matriz || []).length ? `<p><b>Matriz:</b></p><ul>${d.matriz.map(f => `<li>${e(f.objetivo)} → ${e(f.tecnica)} · ${e(f.instrumento)} · ${e(f.participantes)}</li>`).join('')}</ul>` : ''}
+      ${TALLER_DATA.preguntas.map(p => `<details><summary>${p.n}. ${escaparHTML(p.texto)} <small>(${pal((d.respuestas || {})[p.n])} palabras)</small></summary><p class="taller-resp">${e((d.respuestas || {})[p.n])}</p></details>`).join('')}
+      ${d.guion ? `<details><summary>Guion de defensa</summary><p class="taller-resp">${e(d.guion)}</p></details>` : ''}</div>`;
+    tr.hidden = false; b.textContent = 'Ocultar';
+  }));
 }
 
 async function cargarEntregaProyecto(entrega) {

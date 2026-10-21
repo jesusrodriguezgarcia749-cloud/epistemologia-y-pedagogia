@@ -357,7 +357,7 @@
   function iniciarBrujula() {
     const B = L.brujula, p = $('#panel-brujula');
     let borrador = ''; try { borrador = lee('lab_pregunta') || ''; } catch (e) {}
-    p.innerHTML = `<p class="lab-ayuda">Responde cinco preguntas sobre tu investigación. La brújula te mostrará con qué paradigma encaja mejor tu postura (tema 3.1), qué enfoque, técnicas y criterios de rigor le corresponden y qué autores puedes citar para fundamentarla. Es un punto de partida para conversar con tu asesor, no un veredicto.</p>
+    p.innerHTML = `<div class="t-cta"><div><b>¿Quieres ir más a fondo?</b> El <a href="taller.html">Taller del investigador</a> te acompaña paso a paso: plantear una buena pregunta, objetivos e hipótesis, matriz de congruencia y las 18 preguntas del proyecto, con tu avance guardado en tu cuenta.</div><a class="btn-lab" href="taller.html">Ir al taller →</a></div><p class="lab-ayuda">Responde cinco preguntas sobre tu investigación. La brújula te mostrará con qué paradigma encaja mejor tu postura (tema 3.1), qué enfoque, técnicas y criterios de rigor le corresponden y qué autores puedes citar para fundamentarla. Es un punto de partida para conversar con tu asesor, no un veredicto.</p>
       <label class="br-label" for="b-preg">Tu pregunta de investigación (opcional)</label>
       <textarea id="b-preg" rows="2" placeholder="Ejemplo: ¿Cómo viven los docentes de secundaria la elaboración del programa analítico?">${esc(borrador)}</textarea>
       <form id="b-form">${B.preguntas.map((q, i) => `<fieldset class="b-q"><legend>${i + 1}. ${esc(q.t)}</legend>${q.o.map(([t, v], j) => `<label><input type="radio" name="q${i}" value="${v}" ${''}> ${esc(t)}</label>`).join('')}</fieldset>`).join('')}

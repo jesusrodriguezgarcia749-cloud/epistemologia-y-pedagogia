@@ -210,3 +210,7 @@ html[data-theme="dark"] .era{color:var(--saffron);}
 .ficha-cita-ayuda{font-size:.85rem; margin:6px 0 0;}
 .ficha-cita-ayuda summary{cursor:pointer; font-weight:700; color:var(--saffron-dark);}
 html[data-theme="dark"] .ficha-cita-ayuda summary{color:var(--saffron);}
+.t-cta { display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; align-items: center; justify-content: space-between; background: color-mix(in srgb, #2e7d32 10%, var(--parchment)); border: 1px solid color-mix(in srgb, #2e7d32 45%, var(--line)); border-radius: var(--radius); padding: .9rem 1.1rem; margin: 0 0 1.2rem; }
+.t-cta > div { flex: 1 1 320px; line-height: 1.5; }
+.t-cta a:not(.btn-lab) { color: var(--saffron-dark); font-weight: 600; }
+.t-cta .btn-lab { text-decoration: none; white-space: nowrap; }
