@@ -48,6 +48,7 @@
     const temas = [...new Set(L.autores.flatMap(a => a.temas.map(t => t.split('.')[0])))].sort((a, b) => a - b);
     p.innerHTML = `<p class="lab-ayuda">Cada estrella es un autor del curso, ubicado según la época de su obra principal y agrupado por su corriente. Las líneas muestran quién influyó en quién o con quién discutió. Toca un autor para leer su ficha completa. También puedes ver solo los autores de un tema.</p>
       <div class="lab-chips" id="c-temas"><button class="chip-lab" aria-pressed="true" data-t="">Todos</button>${temas.map(t => `<button class="chip-lab" aria-pressed="false" data-t="${t}">Tema ${t}</button>`).join('')}</div>
+      <div class="tema-info" id="tema-info" hidden></div>
       <div class="const-caja"><svg id="const-svg" class="const-svg" role="img" aria-label="Constelación de pensadores del curso"></svg></div>
       <div class="const-leyenda">${Object.entries(L.familias).map(([k, f]) => `<span><i style="background:${f.color}"></i>${esc(f.nombre)}</span>`).join('')}</div>
       <article class="ficha" id="ficha" aria-live="polite"></article>
@@ -66,7 +67,7 @@
   const corto = n => n.replace(/^(Georg W\. F\. |Jean |Lev |Karl |Thomas S\. |Imre |Paul |Michael |Mario |Luis |Ludwig von |Ilya |Edgar |Miguel |Hans-Georg |Jürgen |Paulo |Donald |Lawrence |Antonio |Stanislas |Pierre |Amartya |Hans |Gaston |René |John |David |Immanuel |Auguste |Émile |Wilhelm |Max |Boaventura de )/, '').replace('Humberto Maturana y Francisco Varela', 'Maturana y Varela').replace('Wilfred Carr y Stephen Kemmis', 'Carr y Kemmis').replace('Tony Booth y Mel Ainscow', 'Booth y Ainscow');
   function dibujarConstelacion() {
     svgC = $('#const-svg');
-    const fams = Object.keys(L.familias), W = 1500, IZQ = 150, DER = 60, CARRIL = 132, ARR = 34, H = ARR + CARRIL * fams.length + 10;
+    const fams = Object.keys(L.familias), W = 1500, IZQ = 150, DER = 60, CARRIL = 118, ARR = 34, H = ARR + CARRIL * fams.length + 10;
     svgC.setAttribute('viewBox', `0 0 ${W} ${H}`);
     sv('rect', { class: 'cielo', x: 0, y: 0, width: W, height: H, rx: 14 }, svgC);
     // eje de épocas
@@ -111,10 +112,26 @@
       g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); elegirAutor(a.id, true); } });
     });
   }
+  function limpiarSeleccion() {
+    svgC.classList.remove('con-selec');
+    $$('.enlace.activo', svgC).forEach(p => p.classList.remove('activo'));
+    $$('.astro', svgC).forEach(g => g.classList.remove('sel', 'vecino'));
+  }
   function filtrarTema(t) {
     $$('#c-temas .chip-lab').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.t === t)));
+    limpiarSeleccion();
     svgC.classList.toggle('filtrado', !!t);
-    $$('.astro', svgC).forEach(g => g.classList.toggle('en-tema', !!t && POR_ID[g.dataset.id].temas.some(s => s.split('.')[0] === t)));
+    const del = a => a.temas.some(s => s.split('.')[0] === t);
+    $$('.astro', svgC).forEach(g => g.classList.toggle('en-tema', !!t && del(POR_ID[g.dataset.id])));
+    $$('.enlace', svgC).forEach(p => p.classList.toggle('en-tema', !!t && del(POR_ID[p.dataset.de]) && del(POR_ID[p.dataset.a])));
+    const info = $('#tema-info');
+    if (!t) { info.hidden = true; return; }
+    const lista = orden.filter(del);
+    const subtemas = a => a.temas.filter(s => s.split('.')[0] === t).join(', ');
+    info.hidden = false;
+    info.innerHTML = `<p class="ficha-kicker">Tema ${t} · ${lista.length} autor${lista.length === 1 ? '' : 'es'}</p><h3>${esc(L.temas[t] || '')}</h3>
+      <div class="tema-autores">${lista.map(a => `<button type="button" data-ir="${a.id}" style="--fam:${L.familias[a.fam].color}"><i></i>${esc(a.nombre)}<small>${esc(subtemas(a))}</small></button>`).join('')}</div>`;
+    $$('#tema-info [data-ir]').forEach(x => x.addEventListener('click', () => elegirAutor(x.dataset.ir, true)));
   }
   function fichaInicial() {
     $('#ficha').innerHTML = `<p class="ficha-kicker">Constelación de pensadores · ${L.autores.length} autores</p><h2>Elige un autor</h2>
@@ -124,6 +141,8 @@
   }
   function elegirAutor(id, desplazar) {
     const a = POR_ID[id]; if (!a) return; selec = id;
+    svgC.classList.remove('filtrado'); $$('.astro.en-tema, .enlace.en-tema', svgC).forEach(g => g.classList.remove('en-tema'));
+    $$('#c-temas .chip-lab').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.t === '')));
     svgC.classList.add('con-selec');
     const vecinos = new Set([id]);
     $$('.enlace', svgC).forEach(p => { const on = p.dataset.de === id || p.dataset.a === id; p.classList.toggle('activo', on); if (on) { vecinos.add(p.dataset.de); vecinos.add(p.dataset.a); } });

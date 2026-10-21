@@ -45,8 +45,19 @@ html[data-theme="dark"] .link-btn{color:var(--saffron);}
 .const-svg .astro.sel .halo{opacity:.6;}
 .const-svg .astro.sel .nucleo{stroke:var(--ink); stroke-width:2.5;}
 .const-svg .astro.sel .astro-t{font-weight:800;}
-.const-svg.filtrado .astro:not(.en-tema){opacity:.15;}
-.const-svg.filtrado .enlace{opacity:.08;}
+.const-svg.filtrado .astro:not(.en-tema){opacity:.12;}
+.const-svg.filtrado .enlace{opacity:.05;}
+.const-svg.filtrado .enlace.en-tema{opacity:.9; stroke:var(--saffron); stroke-width:1.8;}
+.const-svg .astro.en-tema .halo{opacity:.55;}
+.const-svg .astro.en-tema .nucleo{stroke:var(--ink); stroke-width:2;}
+.const-svg .astro.en-tema .astro-t{font-weight:800;}
+.tema-info{background:var(--cream); border-radius:var(--radius); padding:16px 18px; margin:0 0 14px; border-left:6px solid var(--saffron); box-shadow:var(--shadow-card);}
+.tema-info h3{margin:0 0 10px; font-size:1.1rem;}
+.tema-autores{display:flex; flex-wrap:wrap; gap:8px;}
+.tema-autores button{display:inline-flex; align-items:center; gap:7px; padding:7px 12px; border-radius:999px; border:1px solid var(--line); background:var(--parchment); color:var(--ink); font:600 .86rem var(--font-body); cursor:pointer;}
+.tema-autores button:hover{border-color:var(--fam);}
+.tema-autores i{width:10px; height:10px; border-radius:50%; background:var(--fam);}
+.tema-autores small{font-weight:500; color:var(--ink-soft);}
 .const-leyenda{display:flex; flex-wrap:wrap; gap:6px 18px; margin:12px 0 0; font-size:.82rem; color:var(--ink-soft);}
 .const-leyenda i{display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:6px; vertical-align:-1px;}
 
