@@ -7,6 +7,7 @@ import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, co
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV } from "./tareas-datos.js";
 import { DocITES } from "./docx-ites.js";
+import { brillar, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
 const db = getFirestore(initializeApp(firebaseConfig));
@@ -22,6 +23,7 @@ const barajar = a => { const c = [...a]; for (let i = c.length - 1; i > 0; i--) 
 const punto = t => /\.$/.test(t) ? t : t + '.';
 const fechaHora = ts => { const d = ts && ts.toDate ? ts.toDate() : typeof ts === 'number' ? new Date(ts) : null; return d ? d.toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''; };
 let sesion = null; try { sesion = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); } catch { sesion = null; }
+recordarAlumno(sesion);
 let EQS = null, GDATA = {}, ESTADO = {}, unsubGrupo = null, detener = null;
 const abierta = id => !(ESTADO[id] && ESTADO[id].abierta === false);
 
@@ -44,7 +46,7 @@ function formAcceso(cont, alEntrar, titulo = 'Entra con tu nombre y PIN') {
     try {
       const id = slug(n), s = await getDoc(doc(db, 'grupos', g, 'alumnos', id));
       if (!s.exists() || String(s.data().pin) !== pin) { err.textContent = 'No encontramos ese nombre y PIN en el grupo elegido. Verifica con tu docente.'; err.hidden = false; return; }
-      sesion = { grupoId: g, alumnoId: id, nombre: s.data().nombre, pin };
+      sesion = { grupoId: g, alumnoId: id, nombre: s.data().nombre, pin }; recordarAlumno(sesion);
       try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(sesion)); } catch { /* */ }
       EQS = null; escucharGrupo(); alEntrar();
     } catch (e2) { err.textContent = 'No se pudo entrar: ' + (e2.message || e2); err.hidden = false; }
@@ -114,13 +116,18 @@ function insignia(a, st) {
   if (!abierta(a.id)) return '<span class="tq tq-cerr">🔒 Cerrada</span>';
   return st.avance ? '<span class="tq tq-prog">En progreso</span>' : '<span class="tq tq-pend">Pendiente</span>';
 }
+function tarjetaCielo() {
+  const n = encendidas(cieloLocal()), R = rango(n);
+  return `<a class="ar-tarjeta cielo-tarjeta" href="laboratorio.html#constelacion"><span>🌌</span><div><b>Mi cielo · ${n} de ${TOTAL_ESTRELLAS} estrellas</b><small>${R.ico} ${esc(R.nombre)}. Cada acierto en los juegos y en la Arena enciende la estrella de ese autor en la Constelación del Laboratorio.</small></div><em>Ver mi cielo →</em></a>`;
+}
 async function portada() {
   const d0 = new Date(), hoy = `${d0.getFullYear()}-${String(d0.getMonth() + 1).padStart(2, '0')}-${String(d0.getDate()).padStart(2, '0')}`;
   const actual = [...TEMAS_TAREAS].reverse().find(t => t.fecha <= hoy) || TEMAS_TAREAS[0];
   $('#cl-acceso').innerHTML = (sesion ? `<div class="tq-quien">👤 <b>${esc(sesion.nombre)}</b> · aquí ves tu avance y tus calificaciones <button type="button" class="ma-link" id="tq-salir">Salir</button></div>`
     : `<div class="tq-quien">Entra con tu nombre y PIN para ver tu avance, entregar y conocer tus calificaciones. <button type="button" class="btn-at" id="tq-entrar">Entrar</button></div>`)
-    + `<a class="ar-tarjeta" href="#arena"><span>⚡</span><div><b>Arena en vivo</b><small>Cuando tu maestro abra la Arena, entra aquí: preguntas en vivo contra el reloj, con podio.</small></div><em>Entrar →</em></a>`;
-  if (sesion) $('#tq-salir').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } sesion = null; EQS = null; if (unsubGrupo) unsubGrupo(); portada(); });
+    + `<a class="ar-tarjeta" href="#arena"><span>⚡</span><div><b>Arena en vivo</b><small>Cuando tu maestro abra la Arena, entra aquí: preguntas en vivo contra el reloj, con podio.</small></div><em>Entrar →</em></a>`
+    + tarjetaCielo();
+  if (sesion) $('#tq-salir').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } olvidarAlumno(); sesion = null; EQS = null; if (unsubGrupo) unsubGrupo(); portada(); });
   else $('#tq-entrar').addEventListener('click', () => formAcceso($('#cl-acceso'), portada));
   $('#cl-sesiones').innerHTML = TEMAS_TAREAS.map((t, i) => `<details class="tq-tema" data-tema="${i}" ${t === actual ? 'open' : ''}><summary><span class="tq-num">${esc(t.tema)}</span><span><b>${esc(t.titulo)}</b><small>${esc(t.fechaTexto)} · ${t.acts.filter(califica).length} tarea${t.acts.filter(califica).length === 1 ? '' : 's'}</small></span></summary>
     <div class="cl-cards">${t.acts.map(a => `<a class="cl-card ${a.tipo === 'pronto' ? 'cl-pronto' : ''}" href="${a.tipo === 'pronto' ? '#' : '#' + a.id}" data-act="${a.id}"><span class="cl-ico">${a.icono}</span><b>${esc(a.nombre)}</b><small>${esc(a.modo)}</small><p>${esc(a.desc)}</p><span class="cl-estado" data-st="${a.id}">${insignia(a, null)}</span><p class="cl-avance" data-av="${a.id}"></p></a>`).join('')}</div></details>`).join('');
@@ -317,9 +324,17 @@ function cuadro(cont, eq, a) {
 
 // ======================================================= JUEGOS DE PRÁCTICA del 3.2 (segunda parte)
 // Motor común: niveles, modo reto con reloj, mejor marca, repaso de fallos y tabla para estudiar.
+// Aviso pequeño bajo la explicación: qué estrella se encendió o ganó brillo, y si subió de rango.
+function avisoBrillo(r, nombre) {
+  const nombreDe = id => (nombre && nombre(id)) || id;
+  const ids = Object.keys(r.despues).filter(id => r.despues[id] !== (r.antes[id] || 0));
+  if (!ids.length) return '';
+  const linea = id => { const n = r.despues[id]; return r.nuevas.includes(id) ? `🌟 <b>¡Encendiste la estrella de ${esc(nombreDe(id))}!</b>` : n === NOVA ? `💥 <b>¡${esc(nombreDe(id))} es supernova!</b>` : n === BRILLA ? `✨ <b>${esc(nombreDe(id))} ya brilla</b>` : `✦ ${esc(nombreDe(id))} +1 brillo <small>(${Math.min(n, NOVA)}/${NOVA})</small>`; };
+  return `<div class="ci-aviso ${r.nuevas.length ? 'nueva' : ''}">${ids.map(linea).join('<br>')}<small>Tu cielo: ${r.total} de ${TOTAL_ESTRELLAS}</small></div>${r.subeRango ? `<div class="ci-rango">${r.subeRango.ico} <b>¡Subiste de rango: ${esc(r.subeRango.nombre)}!</b></div>` : ''}`;
+}
 function juegoPreguntas(cont, C) {
   const SEG = C.seg || 15;
-  let reto = lsGet('clase_' + C.clave + '_reto') === '1', N = null, items = [], i = 0, bien = 0, pts = 0, racha = 0, mejorRacha = 0, fallos = [], reloj = null, t0 = 0, malos = 0;
+  let reto = lsGet('clase_' + C.clave + '_reto') === '1', nuevasRonda = new Set(), N = null, items = [], i = 0, bien = 0, pts = 0, racha = 0, mejorRacha = 0, fallos = [], reloj = null, t0 = 0, malos = 0;
   const parar = () => { clearInterval(reloj); reloj = null; };
   detener = parar;
   const mejor = id => lsGet(`clase_${C.clave}_mejor_${id}`) || '—';
@@ -333,7 +348,7 @@ function juegoPreguntas(cont, C) {
     $$('.ap-nivel', cont).forEach(b => b.addEventListener('click', () => { N = C.niveles.find(x => x.id === b.dataset.n); nueva(); }));
     $('#ap-estudiar').addEventListener('click', estudiar);
   };
-  const nueva = () => { items = barajar(C.items.filter(N.filtro)).slice(0, N.preg); i = 0; bien = 0; pts = 0; racha = 0; mejorRacha = 0; fallos = []; malos = 0; pregunta(); };
+  const nueva = () => { items = barajar(C.items.filter(N.filtro)).slice(0, N.preg); nuevasRonda = new Set(); i = 0; bien = 0; pts = 0; racha = 0; mejorRacha = 0; fallos = []; malos = 0; pregunta(); };
   const marcador = () => `${C.cabecera ? C.cabecera(bien, malos) : ''}<div class="ap-marcador"><span>${N.ico} ${N.n} · ${C.termina ? `pregunta ${i + 1}` : `${Math.min(i + 1, items.length)} de ${items.length}`}</span><span>✅ ${bien}</span>${reto ? `<span>⭐ ${pts} pts · 🔥 racha ${racha}</span>` : ''}</div>`;
   const terminado = () => i >= items.length || (C.termina && C.termina(bien, malos));
   const pregunta = () => {
@@ -355,6 +370,7 @@ function juegoPreguntas(cont, C) {
     const tit = v === null ? '⏱ Se acabó el tiempo.' : ok ? (C.bien ? C.bien(x, bien) : '¡Correcto!') : (C.mal ? C.mal(x, malos) : 'No es esa.');
     $('#ap-fb').innerHTML = `<div class="aviso ${ok ? 'ok' : 'mal'}"><strong>${tit}</strong>${C.explicar(x, ok)}</div><div id="jp-extra"></div><button class="btn-at" id="ap-sig" type="button">${terminado() || i + 1 >= items.length ? 'Ver resultado' : 'Siguiente →'}</button>`;
     if (C.despues) C.despues(x, v, $('#jp-extra'));
+    if (ok && C.estrellas) { const ex = $('#jp-extra'); brillar(db, sesion, C.estrellas(x)).then(r => { r.nuevas.forEach(id => nuevasRonda.add(id)); if (ex && ex.isConnected) ex.insertAdjacentHTML('beforeend', avisoBrillo(r, C.nombreAutor)); }).catch(() => {}); }
     $('#ap-mk').innerHTML = marcador();
     if (C.escena) C.escena(ok, bien, malos);
     $('#ap-sig').addEventListener('click', () => { i++; pregunta(); }); $('#ap-sig').focus({ preventScroll: true });
@@ -364,7 +380,9 @@ function juegoPreguntas(cont, C) {
     if (C.escenaFinal) { const e = C.escenaFinal(bien, malos); if (e) { cont.innerHTML = ''; await e; } }
     const marca = reto ? pts : bien, clave = `clase_${C.clave}_mejor_${N.id}`, previa = Number((lsGet(clave) || '0').split(/[ /]/)[0]) || 0, record = marca > previa;
     if (record) lsSet(clave, reto ? `${pts} pts` : `${bien}/${Math.min(i, items.length)}`);
-    cont.innerHTML = `<div class="resumen">${C.final ? C.final(bien, malos) : ''}<h3>${N.ico} ${N.n}: ${bien} acierto${bien === 1 ? '' : 's'} de ${Math.min(i, items.length)}</h3>
+    const tot = encendidas(cieloLocal()), Rg = rango(tot);
+    const cielo = C.estrellas ? `<a class="ci-fin" href="laboratorio.html#constelacion"><span>🌌</span><div><b>${nuevasRonda.size ? `¡${nuevasRonda.size} estrella${nuevasRonda.size === 1 ? '' : 's'} nueva${nuevasRonda.size === 1 ? '' : 's'} en esta ronda!` : 'Tu cielo'}</b><small>${tot} de ${TOTAL_ESTRELLAS} encendidas · ${Rg.ico} ${esc(Rg.nombre)}${Rg.sig ? ` · te faltan ${Rg.sig.faltan} para ${Rg.sig.ico} ${esc(Rg.sig.nombre)}` : ''}</small></div><em>Ver mi cielo →</em></a>` : '';
+    cont.innerHTML = `<div class="resumen">${C.final ? C.final(bien, malos) : ''}${cielo}<h3>${N.ico} ${N.n}: ${bien} acierto${bien === 1 ? '' : 's'} de ${Math.min(i, items.length)}</h3>
       <p>${reto ? `⭐ <b>${pts} puntos</b> · mejor racha: ${mejorRacha}. ` : ''}${record ? '🏅 ¡Nueva mejor marca!' : ''}</p>
       <p>${!fallos.length ? '¡Sin errores! Ya dominas este nivel.' : 'Estudia los que fallaste:'}</p>
       ${fallos.length ? `<ul class="ap-fallos">${fallos.map(x => `<li>${C.repaso(x)}</li>`).join('')}</ul>` : ''}
@@ -395,7 +413,10 @@ function juegoPreguntas(cont, C) {
 }
 
 // ======================================================= 🧭 ¿QUÉ PARADIGMA ES? (práctica)
+// Si el ejemplo no nombra a nadie, se enciende el autor que mejor representa esa respuesta.
+const REPRESENTA = { par: { P: 'comte', I: 'weber', S: 'habermas' }, lin: { L: 'descartes', S: 'bertalanffy' } };
 function actQueParadigma(cont) {
+  cargarLab();
   const nom = (g, c) => (PARADIGMAS_OP[g].find(x => x[0] === c) || [])[1];
   juegoPreguntas(cont, {
     clave: 'paradigma', seg: 15,
@@ -406,6 +427,7 @@ function actQueParadigma(cont) {
       { id: 'experto', n: 'Experto', ico: '🏆', preg: 16, desc: 'Todo mezclado, con los autores y los tres intereses de Habermas.', filtro: () => true },
     ],
     items: QUE_PARADIGMA,
+    estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : [REPRESENTA[x.g][x.c]]; }, nombreAutor,
     preparar: x => ({ carta: `<span class="ap-emo">${x.e}</span><b class="jp-q">${esc(x.q)}</b>`, opciones: PARADIGMAS_OP[x.g].map(([k, n, col]) => ({ v: k, t: esc(n), style: `--c:${col}` })), correctas: [x.c], clase: 'jp-infl' }),
     mal: x => `No: es ${nom(x.g, x.c).toLowerCase()}.`,
     explicar: x => `<p class="ap-dato">${esc(x.x)}</p>`,
@@ -426,6 +448,7 @@ function actArena(cont) {
   if (!sesion) { formAcceso(cont, () => actArena(cont), 'Entra con tu nombre y PIN para jugar en la Arena'); return; }
   const g = sesion.grupoId, salaRef = doc(db, 'grupos', g, 'arena', 'sala'), yoRef = doc(db, 'grupos', g, 'arena', 'sala', 'jugadores', sesion.alumnoId);
   let S = null, YO = null, J = [], visto = { clave: '', t: 0 }, reloj = null;
+  const brillados = new Set(), avisos = {}; cargarLab();
   const subs = [];
   const parar = () => { clearInterval(reloj); reloj = null; };
   detener = () => { parar(); subs.forEach(u => u()); };
@@ -455,10 +478,11 @@ function actArena(cont) {
       return;
     }
     if (S.estado === 'revela' && P) {
-      const mia = (YO.r || {})[S.idx], ok = mia && mia.o === 0, gan = arPuntos(mia, S.dur);
+      const mia = (YO.r || {})[S.idx], ok = mia && mia.o === 0, gan = arPuntos(mia, S.dur), cl = S.ronda + ':' + S.idx;
+      if (ok && !brillados.has(cl)) { brillados.add(cl); brillar(db, sesion, autoresEn(P.q, P.o[0], P.x)).then(r => { avisos[cl] = avisoBrillo(r, nombreAutor); const c = $('#ar-cielo', cont); if (c) c.innerHTML = avisos[cl]; }).catch(() => {}); }
       cont.innerHTML = `<div class="ar-res ${ok ? 'ok' : 'mal'}"><span>${ok ? '✅' : mia ? '❌' : '⏱'}</span><b>${ok ? `¡Correcto! +${gan}` : mia ? 'Incorrecto' : 'No respondiste a tiempo'}</b>
         <p>La respuesta era: <b>${esc(P.o[0])}</b></p><p class="ap-dato">${esc(P.x)}</p>
-        <p class="ar-num">⭐ ${L.mio} puntos · vas en el lugar <b>${L.pos}</b> de ${L.de}</p></div>`;
+        <p class="ar-num">⭐ ${L.mio} puntos · vas en el lugar <b>${L.pos}</b> de ${L.de}</p><div id="ar-cielo">${avisos[cl] || ''}</div></div>`;
       return;
     }
     if (S.estado === 'fin') {
@@ -505,10 +529,12 @@ function actCoev(cont) {
 }
 
 // ======================================================= 💬 ¿QUIÉN LO DIJO? (práctica, con los 55 autores de la Constelación)
-let LAB = null;
+let LAB = null, LAB_P = null;
+const cargarLab = () => LAB_P || (LAB_P = fetch('data/laboratorio.json').then(r => r.json()).then(d => (LAB = d)).catch(() => { LAB_P = null; return null; }));
+const nombreAutor = id => { const a = LAB && LAB.autores.find(x => x.id === id); return a ? a.nombre : id; };
 async function actQuienLoDijo(cont) {
   cont.innerHTML = '<p class="atlas-ayuda">Cargando a los autores…</p>';
-  try { LAB = LAB || await fetch('data/laboratorio.json').then(r => r.json()); } catch { cont.innerHTML = '<p class="ma-msg mal">No se pudieron cargar los autores.</p>'; return; }
+  try { LAB = LAB || await cargarLab(); if (!LAB) throw 0; } catch { cont.innerHTML = '<p class="ma-msg mal">No se pudieron cargar los autores.</p>'; return; }
   const A = LAB.autores, F = LAB.familias, tema = (a, n) => (a.temas || []).some(t => n.includes(t.split('.')[0]));
   const items = [...A.map(a => ({ tipo: 'frase', a })), ...A.filter(a => (a.obras || []).length).map(a => ({ tipo: 'obra', a }))];
   const distractores = a => { const misma = barajar(A.filter(x => x.id !== a.id && x.fam === a.fam)), otras = barajar(A.filter(x => x.id !== a.id && x.fam !== a.fam)); return [...misma, ...otras].slice(0, 3); };
@@ -521,6 +547,7 @@ async function actQuienLoDijo(cont) {
       { id: 'experto', n: 'Experto', ico: '🏆', preg: 20, desc: 'Los 55 autores, y también por sus obras.', filtro: () => true },
     ],
     items,
+    estrellas: x => [x.a.id], nombreAutor,
     preparar: x => { const ops = barajar([x.a, ...distractores(x.a)]); return { carta: x.tipo === 'frase' ? `<span class="ap-emo">💬</span><b class="jp-q">«${esc(x.a.frase)}»</b>` : `<span class="ap-emo">📖</span><small class="jp-pista">¿Quién escribió…?</small><b class="jp-q">${esc(x.a.obras[0])}</b>`, opciones: ops.map(a => ({ v: a.id, t: esc(a.nombre), style: `--c:${(F[a.fam] || {}).color || '#3E5BA8'}` })), correctas: [x.a.id], clase: 'jp-infl jp-autores' }; },
     mal: x => `No: es de ${esc(x.a.nombre)}.`,
     explicar: x => `<p class="ap-orig"><b>${esc(x.a.nombre)}</b> (${esc(x.a.vida || '')}) · ${esc((F[x.a.fam] || {}).nombre || '')}</p><p class="ap-dato">${esc((x.a.obras || [])[0] || '')}${x.tipo === 'obra' ? ` · «${esc(x.a.frase)}»` : ''} · Temas ${esc((x.a.temas || []).join(', '))}. <a href="laboratorio.html" target="_blank" rel="noopener">Ver su ficha en la Constelación ↗</a></p>`,

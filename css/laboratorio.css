@@ -214,3 +214,59 @@ html[data-theme="dark"] .ficha-cita-ayuda summary{color:var(--saffron);}
 .t-cta > div { flex: 1 1 320px; line-height: 1.5; }
 .t-cta a:not(.btn-lab) { color: var(--saffron-dark); font-weight: 600; }
 .t-cta .btn-lab { text-decoration: none; white-space: nowrap; }
+
+/* ============ 🌌 MI CIELO ============ */
+.cielo-panel{margin:0 0 14px; padding:16px 18px; border-radius:14px; background:linear-gradient(135deg,#0E1428,#24305C 70%,#3B2F6B); color:#EEF1F8; box-shadow:var(--shadow-card);}
+.cielo-panel .ficha-kicker{color:#AFC0E0;}
+.cielo-panel h3{color:#F6E7B8; margin:0 0 4px; font-size:1.35rem;}
+.cielo-panel p{margin:4px 0; font-size:.92rem;}
+.cielo-panel a,.cielo-panel .link-btn{color:#F2C35B;}
+.cielo-panel h4{font:700 .74rem var(--font-body); letter-spacing:.08em; text-transform:uppercase; color:#AFC0E0; margin:10px 0 6px;}
+.cp-cab{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+.cp-cab > div{flex:1 1 260px;}
+.cp-cab .btn-lab-l{background:rgba(255,255,255,.1); color:#fff; border-color:rgba(255,255,255,.3);}
+.cp-ico{font-size:2.6rem; line-height:1;}
+.cp-barra{height:8px; border-radius:99px; background:rgba(255,255,255,.14); overflow:hidden; margin:8px 0 2px; max-width:420px;}
+.cp-barra i{display:block; height:100%; background:linear-gradient(90deg,#D9A441,#F6E7B8); border-radius:99px; transition:width .8s ease;}
+.cp-insignias{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 4px;}
+.cp-ins{font-size:.78rem; padding:4px 10px; border-radius:99px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:#C8D1E4;}
+.cp-ins i{display:inline-block; width:9px; height:9px; border-radius:50%; background:var(--fam); margin-right:6px; opacity:.5;}
+.cp-ins b{color:#fff;}
+.cp-ins.lista{background:var(--fam); color:#0E1428; border-color:transparent; box-shadow:0 0 14px var(--fam);}
+.cp-ins.lista i{background:#fff; opacity:1;} .cp-ins.lista b{color:#0E1428;} .cp-ins.lista::before{content:'🏅 ';}
+.cp-nuevas{padding:8px 12px; border-radius:10px; background:rgba(217,164,65,.18); border-left:4px solid #D9A441;}
+.cp-como,.cp-sug{color:#C8D1E4;}
+.cp-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:4px 22px;}
+.cp-rank{margin:0; padding:0; list-style:none; columns:2 200px; column-gap:18px;}
+.cp-rank li{display:flex; gap:8px; align-items:center; padding:3px 0; break-inside:avoid;}
+.cp-rank li b{margin-left:auto; color:#F6E7B8;}
+.cp-nadie{color:#C8D1E4; font-size:.88rem;}
+.ficha-estrella{margin:4px 0 10px; padding:8px 12px; border-radius:10px; background:rgba(217,164,65,.14); border-left:4px solid #D9A441; font-size:.9rem;}
+.ficha-estrella.apagada{background:rgba(120,130,150,.12); border-left-color:#7A8399;}
+
+/* el cielo se hace de noche */
+.const-svg.mi-cielo .cielo{fill:#0B1124; transition:fill .6s;}
+.const-svg.mi-cielo .carril{fill:#121A33; opacity:.9;}
+.const-svg.mi-cielo .eje{stroke:#24305A;}
+.const-svg.mi-cielo .eje-t{fill:#8D9AB8;}
+.const-svg.mi-cielo .enlace{stroke:#3A4A78;}
+.const-svg.mi-cielo .astro-t{fill:#E6EAF4; stroke:#0B1124;}
+.const-svg.mi-cielo .astro .nucleo{stroke:#0B1124;}
+.const-svg.mi-cielo .astro.apagada .nucleo{fill:#3A425C !important; stroke:#566080; stroke-dasharray:2 2;}
+.const-svg.mi-cielo .astro.apagada .halo{opacity:0;}
+.const-svg.mi-cielo .astro.apagada .astro-t{fill:#6E7896; font-weight:500;}
+.const-svg.mi-cielo .astro.encendida .halo{opacity:.35;}
+.const-svg.mi-cielo .astro.brilla .halo{opacity:.6; filter:drop-shadow(0 0 6px #F6E7B8);}
+.const-svg.mi-cielo .astro.brilla .nucleo{filter:drop-shadow(0 0 4px #fff);}
+.const-svg.mi-cielo .astro.nova .halo{opacity:.75; transform-box:fill-box; transform-origin:center; animation:ci-titila 2.4s ease-in-out infinite;}
+.const-svg.mi-cielo .astro.nova .nucleo{fill:#FFF6D8 !important; filter:drop-shadow(0 0 7px #F6E7B8);}
+.const-svg.mi-cielo .astro.recien .halo{transform-box:fill-box; transform-origin:center; animation:ci-nace 1.6s ease-out 3;}
+.const-svg .cg-n{font:800 11px var(--font-body); fill:#F6E7B8; paint-order:stroke; stroke:#0B1124; stroke-width:3px;}
+@keyframes ci-titila{0%,100%{transform:scale(1); opacity:.75;} 50%{transform:scale(1.45); opacity:.35;}}
+@keyframes ci-nace{0%{transform:scale(.4); opacity:1;} 70%{transform:scale(2.6); opacity:.15;} 100%{transform:scale(1); opacity:.35;}}
+@media (prefers-reduced-motion: reduce){.const-svg.mi-cielo .astro.nova .halo,.const-svg.mi-cielo .astro.recien .halo{animation:none;}}
+#panel-constelacion:fullscreen{background:#0B1124; padding:18px; overflow:auto;}
+#panel-constelacion:fullscreen .const-svg{min-width:0;}
+#panel-constelacion:fullscreen .lab-ayuda,#panel-constelacion:fullscreen .ficha,#panel-constelacion:fullscreen .const-lista,#panel-constelacion:fullscreen #c-temas{display:none;}
+#panel-constelacion:fullscreen .const-leyenda{color:#C8D1E4;}
+body.cielo-grupo .lab-hero,body.cielo-grupo .lab-tabs,body.cielo-grupo #panel-constelacion > .lab-ayuda{display:none;}

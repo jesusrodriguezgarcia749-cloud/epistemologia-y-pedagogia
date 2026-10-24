@@ -49,6 +49,7 @@
     p.innerHTML = `<p class="lab-ayuda">Cada estrella es un autor del curso, ubicado según la época de su obra principal y agrupado por su corriente. Las líneas muestran quién influyó en quién o con quién discutió. Toca un autor para leer su ficha completa. También puedes ver solo los autores de un tema.</p>
       <div class="lab-chips" id="c-temas"><button class="chip-lab" aria-pressed="true" data-t="">Todos</button>${temas.map(t => `<button class="chip-lab" aria-pressed="false" data-t="${t}">Tema ${t}</button>`).join('')}</div>
       <div class="tema-info" id="tema-info" hidden></div>
+      <section class="cielo-panel" id="cielo-panel" hidden aria-live="polite"></section>
       <div class="const-caja"><svg id="const-svg" class="const-svg" role="img" aria-label="Constelación de pensadores del curso"></svg></div>
       <div class="const-leyenda">${Object.entries(L.familias).map(([k, f]) => `<span><i style="background:${f.color}"></i>${esc(f.nombre)}</span>`).join('')}</div>
       <article class="ficha" id="ficha" aria-live="polite"></article>
@@ -63,6 +64,7 @@
       lista.appendChild(col);
     });
     if (extra && POR_ID[extra]) elegirAutor(extra, false); else fichaInicial();
+    if (window.EP_CIELO) aplicarCielo(window.EP_CIELO);
   }
   const corto = n => n.replace(/^(Georg W\. F\. |Jean |Lev |Karl |Thomas S\. |Imre |Paul |Michael |Mario |Luis |Ludwig von |Ilya |Edgar |Miguel |Hans-Georg |Jürgen |Paulo |Donald |Lawrence |Antonio |Stanislas |Pierre |Amartya |Hans |Gaston |René |John |David |Immanuel |Auguste |Émile |Wilhelm |Max |Boaventura de )/, '').replace('Humberto Maturana y Francisco Varela', 'Maturana y Varela').replace('Wilfred Carr y Stephen Kemmis', 'Carr y Kemmis').replace('Tony Booth y Mel Ainscow', 'Booth y Ainscow');
   function dibujarConstelacion() {
@@ -161,7 +163,7 @@
     const i = orden.indexOf(a), ant = orden[i - 1], sig = orden[i + 1];
     const f = $('#ficha'); f.style.setProperty('--fam', fam.color);
     f.innerHTML = `<p class="ficha-kicker">${esc(fam.nombre)}</p>
-      <h2>${esc(a.nombre)}</h2>
+      <h2>${esc(a.nombre)}</h2>${estadoEstrella(id)}
       <p class="ficha-datos">${esc(a.vida)} · ${esc(a.lugar)}</p>
       <p class="ficha-temas">Lo ves en: ${a.temas.map(enlaceTema).join(' ')}</p>
       <blockquote class="ficha-frase">${md(a.frase)}</blockquote>
@@ -186,6 +188,64 @@
     history.replaceState(null, '', '#constelacion=' + id);
     if (desplazar) f.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
   }
+
+  // ======================= 1b. 🌌 MI CIELO (datos de js/cielo-lab.js, evento «ep-cielo»)
+  let CI = null, verMiCielo = true;
+  const VISTO0 = (() => { try { return JSON.parse(localStorage.getItem('ep_cielo_visto') || '{}'); } catch (e) { return {}; } })();
+  function estadoEstrella(id) {
+    if (!CI || CI.modo !== 'mio') return CI && CI.modo === 'grupo' && CI.cuenta ? `<p class="ficha-estrella">🌌 ${CI.cuenta[id] || 0} de ${CI.alumnos} alumnos encendieron esta estrella</p>` : '';
+    const n = (CI.estrellas || {})[id] || 0;
+    if (!n) return `<p class="ficha-estrella apagada">🌑 <b>Estrella apagada.</b> Enciéndela acertando sobre este autor en <a href="tareas.html#quien-lo-dijo">¿Quién lo dijo?</a>, en ¿Qué paradigma es? o en la Arena.</p>`;
+    return `<p class="ficha-estrella">${n >= CI.NOVA ? '💥 <b>Supernova</b>' : n >= CI.BRILLA ? '✨ <b>Estrella brillante</b>' : '🌟 <b>Estrella encendida</b>'} · brillo ${Math.min(n, CI.NOVA)} de ${CI.NOVA}${n < CI.NOVA ? ' · cada acierto sobre este autor le suma brillo' : ''}</p>`;
+  }
+  function aplicarCielo(d) {
+    CI = d; if (!svgC) return;
+    const P = $('#cielo-panel'); P.hidden = false;
+    const astros = $$('.astro', svgC);
+    astros.forEach(g => g.classList.remove('apagada', 'encendida', 'brilla', 'nova', 'recien'));
+    $$('.cg-n', svgC).forEach(t => t.remove());
+    if (d.modo === 'grupo') {
+      svgC.classList.add('mi-cielo'); if (!document.body.classList.contains('cielo-grupo')) { document.body.classList.add('cielo-grupo'); setTimeout(() => P.scrollIntoView({ block: 'start' }), 50); }
+      if (d.error) { P.innerHTML = `<p class="aviso mal">${esc(d.error)}</p>`; return; }
+      astros.forEach(g => {
+        const k = (d.cuenta || {})[g.dataset.id] || 0, fr = d.alumnos ? k / d.alumnos : 0;
+        g.classList.add(!k ? 'apagada' : fr >= 0.5 ? 'nova' : fr >= 0.25 ? 'brilla' : 'encendida');
+        if (k) { const c = $('.nucleo', g); const t = sv('text', { class: 'cg-n', x: +c.getAttribute('cx') + 11, y: +c.getAttribute('cy') - 9 }, g); t.textContent = k; }
+      });
+      const ids = Object.keys(d.cuenta || {}), nadie = orden.filter(a => !(d.cuenta || {})[a.id] && a.temas.some(t => ['1', '2', '3', '4'].includes(t.split('.')[0])));
+      const top = ids.sort((x, y) => d.cuenta[y] - d.cuenta[x])[0];
+      P.innerHTML = `<div class="cp-cab"><span class="cp-ico">🌌</span><div><p class="ficha-kicker">Cielo del grupo · en vivo</p><h3>${esc(d.nombre || 'Grupo')}</h3>
+          <p>${d.jugando} de ${d.alumnos} alumnos ya encendieron estrellas · <b>${ids.length} de ${d.TOTAL}</b> estrellas encendidas por alguien${top ? ` · la más brillante: <b>${esc(POR_ID[top] ? POR_ID[top].nombre : top)}</b> (${d.cuenta[top]})` : ''}</p></div>
+          <button type="button" class="btn-lab-l" id="cp-full">⛶ Pantalla completa</button></div>
+        <div class="cp-grid"><div><h4>Exploradores del cielo</h4><ol class="cp-rank">${d.ranking.slice(0, 10).map(x => `<li><span>${x.r.ico}</span>${esc(x.nombre)}<b>${x.n}</b></li>`).join('') || '<li>Aún nadie. ¡Jueguen en Tareas!</li>'}</ol></div>
+          <div><h4>Nadie ha encendido todavía (Temas 1 a 4)</h4><p class="cp-nadie">${nadie.slice(0, 18).map(a => esc(corto(a.nombre))).join(' · ') || '¡Todas encendidas! 🎉'}</p></div></div>`;
+      $('#cp-full').addEventListener('click', () => { const el = $('#panel-constelacion'); if (document.fullscreenElement) document.exitFullscreen(); else if (el.requestFullscreen) el.requestFullscreen(); });
+      return;
+    }
+    svgC.classList.toggle('mi-cielo', verMiCielo);
+    const E = d.estrellas || {}, V = VISTO0, recien = [];
+    astros.forEach(g => {
+      const n = E[g.dataset.id] || 0;
+      g.classList.add(!n ? 'apagada' : n >= d.NOVA ? 'nova' : n >= d.BRILLA ? 'brilla' : 'encendida');
+      if (n && !V[g.dataset.id] && verMiCielo) { g.classList.add('recien'); recien.push(g.dataset.id); }
+    });
+    try { localStorage.setItem('ep_cielo_visto', JSON.stringify(Object.fromEntries(Object.keys(E).filter(k => E[k] > 0).map(k => [k, 1])))); } catch (e) {}
+    const R = d.rango, pct = R.sig ? Math.round(100 * (d.total - R.sig.desde) / (R.sig.hasta - R.sig.desde)) : 100;
+    const insignias = Object.entries(L.familias).map(([k, f]) => { const xs = L.autores.filter(a => a.fam === k), on = xs.filter(a => E[a.id] > 0).length; return `<span class="cp-ins ${on === xs.length ? 'lista' : ''}" style="--fam:${f.color}" title="${esc(f.nombre)}: ${on} de ${xs.length}"><i></i>${esc(f.nombre)} <b>${on}/${xs.length}</b></span>`; }).join('');
+    const sugeridas = orden.filter(a => !E[a.id] && a.temas.some(t => t.split('.')[0] === '4')).slice(0, 6);
+    P.innerHTML = `<div class="cp-cab"><span class="cp-ico">${R.ico}</span><div><p class="ficha-kicker">Mi cielo${d.yo ? ' · ' + esc(d.yo.nombre) : ''}</p><h3>${esc(R.nombre)}</h3>
+        <p><b>${d.total} de ${d.TOTAL}</b> estrellas encendidas${R.sig ? ` · te faltan <b>${R.sig.faltan}</b> para ${R.sig.ico} ${esc(R.sig.nombre)}` : ' · ¡completaste la Constelación!'}</p>
+        <div class="cp-barra"><i style="width:${pct}%"></i></div></div>
+        <button type="button" class="btn-lab-l" id="cp-ver">${verMiCielo ? '☀️ Ver el cielo completo' : '🌌 Ver mi cielo'}</button></div>
+      ${recien.length ? `<p class="cp-nuevas">✨ ${recien.length === 1 ? 'Se encendió una estrella nueva' : `Se encendieron ${recien.length} estrellas nuevas`} desde tu última visita: ${recien.slice(0, 6).map(id => `<button class="link-btn" data-ir="${id}">${esc(corto(POR_ID[id].nombre))}</button>`).join(', ')}${recien.length > 6 ? ` y ${recien.length - 6} más` : ''}. ¡Búscalas titilando!</p>` : ''}
+      <div class="cp-insignias" aria-label="Insignias por corriente">${insignias}</div>
+      <p class="cp-como">Cada acierto en <a href="tareas.html#quien-lo-dijo">¿Quién lo dijo?</a>, <a href="tareas.html#que-paradigma">¿Qué paradigma es?</a> o la <a href="tareas.html#arena">Arena</a> enciende la estrella de ese autor; con ${d.BRILLA} aciertos brilla y con ${d.NOVA} es supernova. Completa una corriente y ganas su insignia.${d.yo ? '' : ' <b>Entra en Tareas con tu nombre y PIN</b> para que tu cielo se guarde y lo vea tu maestro.'}</p>
+      ${sugeridas.length ? `<p class="cp-sug">🔭 Por encender del Tema 4: ${sugeridas.map(a => `<button class="link-btn" data-ir="${a.id}">${esc(corto(a.nombre))}</button>`).join(' · ')}</p>` : ''}`;
+    $('#cp-ver').addEventListener('click', () => { verMiCielo = !verMiCielo; aplicarCielo(CI); });
+    $$('#cielo-panel [data-ir]').forEach(b => b.addEventListener('click', () => elegirAutor(b.dataset.ir, true)));
+    if (selec) { const e = $('#ficha .ficha-estrella'), h = $('#ficha h2'); if (e) e.outerHTML = estadoEstrella(selec); else if (h) h.insertAdjacentHTML('afterend', estadoEstrella(selec)); }
+  }
+  window.addEventListener('ep-cielo', e => aplicarCielo(e.detail));
 
   // ======================= 2. ¿ESTO ES CIENCIA?
   const VERED = { si: 'Es ciencia', no: 'No es ciencia', dep: 'Depende' };

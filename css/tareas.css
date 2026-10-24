@@ -293,3 +293,14 @@ html[data-theme="dark"] .cu-positivista > span { color: #8DB6E0; } html[data-the
 .co-niv button b { font-size: 1.2rem; } .co-niv button small { font-size: .68rem; color: var(--ink-soft); }
 .co-niv button[aria-pressed="true"] { background: #3E5BA8; border-color: #3E5BA8; color: #fff; } .co-niv button[aria-pressed="true"] small { color: #E3E8F4; }
 .jp-autores .jp-op { font-size: .95rem; }
+
+/* ---------- 🌌 Mi cielo: avisos de estrellas en los juegos */
+.ci-aviso { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; background: linear-gradient(135deg, #131C33, #23356A); color: #F3E9C6; font-size: .92rem; line-height: 1.5; text-align: left; animation: ci-entra .5s ease-out; }
+.ci-aviso small { display: block; opacity: .75; font-size: .8rem; margin-top: 2px; }
+.ci-aviso.nueva { box-shadow: 0 0 0 2px #D9A441, 0 0 22px rgba(217,164,65,.55); }
+.ci-rango { margin: 8px 0 0; padding: 10px 14px; border-radius: 12px; background: #D9A441; color: #1B1408; text-align: center; animation: ci-entra .6s ease-out; }
+.ci-fin { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; padding: 12px 16px; border-radius: 14px; background: linear-gradient(135deg, #131C33, #2E4A85); color: #fff; text-decoration: none; text-align: left; }
+.ci-fin > span { font-size: 2rem; } .ci-fin b { display: block; } .ci-fin small { opacity: .85; } .ci-fin em { margin-left: auto; font-style: normal; font-weight: 700; white-space: nowrap; }
+.cielo-tarjeta { background: linear-gradient(135deg, #0E1428, #3B2F6B); }
+@keyframes ci-entra { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ci-aviso, .ci-rango { animation: none; } }

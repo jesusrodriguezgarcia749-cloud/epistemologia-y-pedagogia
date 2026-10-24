@@ -1989,6 +1989,10 @@ const AR_COL = [['▲', '#C0503F'], ['◆', '#2E6FA8'], ['●', '#D9A441'], ['�
 const arPts = (r, dur) => r && r.o === 0 ? Math.round(500 + 500 * Math.max(0, 1 - (r.ms || 0) / ((dur || 20) * 1000))) : 0;
 const arTot = j => Object.values((j.ronda === (AR.sala || {}).ronda && j.r) || {}).reduce((s, r) => s + arPts(r, (AR.sala || {}).dur), 0);
 const arRef = () => doc(db, 'grupos', grupoActivo, 'arena', 'sala');
+document.getElementById('cielo-proyectar')?.addEventListener('click', () => {
+  if (!grupoActivo) { alert('Elige un grupo primero.'); return; }
+  window.open(`laboratorio.html?cielo=${encodeURIComponent(grupoActivo)}#constelacion`, '_blank', 'noopener');
+});
 function iniciarArena() {
   const cont = document.getElementById('ar-panel'); if (!cont) return;
   if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
