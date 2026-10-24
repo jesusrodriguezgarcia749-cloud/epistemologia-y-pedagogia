@@ -1991,10 +1991,11 @@ const arPts = (r, dur) => r && r.o === 0 ? Math.round(500 + 500 * Math.max(0, 1 
 const arTot = j => Object.values((j.ronda === (AR.sala || {}).ronda && j.r) || {}).reduce((s, r) => s + arPts(r, (AR.sala || {}).dur), 0);
 const arRef = () => doc(db, 'grupos', grupoActivo, 'arena', 'sala');
 // ---- 🧪 Probar como alumno: abre Tareas como «Docente (prueba)» en el grupo elegido (ver tareas.js, arrancar()).
-on('prueba-abrir', 'click', () => {
+function probarComo(destino = '') {
   if (!grupoActivo) { alert('Elige un grupo primero.'); return; }
-  window.open(`tareas.html?prueba=${encodeURIComponent(grupoActivo)}#`, '_blank');
-});
+  window.open(`tareas.html?prueba=${encodeURIComponent(grupoActivo)}#${destino}`, '_blank');
+}
+on('prueba-abrir', 'click', () => probarComo(''));
 on('prueba-borrar', 'click', async () => {
   if (!grupoActivo) { alert('Elige un grupo primero.'); return; }
   if (!confirm('¿Borrar todo lo que hiciste como alumno de prueba en este grupo? (cuadros, estrellas, votos de Arena y Tribunal, coevaluaciones y tu lugar en los equipos)')) return;
@@ -2058,8 +2059,10 @@ function pintarArena(soloJug) {
   }
   const P = ARENA[S.set].preguntas[S.idx] || null;
   cont.innerHTML = `<div class="bloques-activos-card"><p><b>⚡ ${escaparHTML(ARENA[S.set].titulo)}</b> · ${js.length} jugador${js.length === 1 ? '' : 'es'} · estado: <b>${{ espera: 'esperando jugadores', pregunta: `pregunta ${S.idx + 1} de ${S.n}`, revela: `respuesta ${S.idx + 1} de ${S.n}`, fin: 'terminada' }[S.estado]}</b></p>
-    <div class="eq-acciones"><button type="button" class="btn btn-primary" id="ar-ver">📽️ Proyectar</button><button type="button" class="btn" id="ar-cerrar">Cerrar la Arena</button></div></div>`;
+    <div class="eq-acciones"><button type="button" class="btn btn-primary" id="ar-ver">📽️ Proyectar</button><button type="button" class="btn" id="ar-yo">🧪 Jugar como alumno</button><button type="button" class="btn" id="ar-cerrar">Cerrar la Arena</button></div>
+    <p class="field-hint">Los alumnos responden en su celular: Tareas → ⚡ Arena en vivo, o con el QR de la proyección. Para probarla tú, «🧪 Jugar como alumno» abre otra pestaña ya dentro de la Arena (fuera de concurso).</p></div>`;
   document.getElementById('ar-ver').addEventListener('click', abrirProyArena);
+  document.getElementById('ar-yo').addEventListener('click', () => probarComo('arena'));
   document.getElementById('ar-cerrar').addEventListener('click', async () => { if (confirm('¿Cerrar la Arena? Se borra el marcador de esta ronda en las pantallas.')) { await arEstado({ estado: 'cerrada' }); } });
   // proyección
   const cuerpo = document.getElementById('ar-proy-cuerpo'), url = new URL('tareas.html#arena', location.href).href;
@@ -2143,8 +2146,10 @@ function pintarTribunal(soloJug) {
     return;
   }
   cont.innerHTML = `<div class="bloques-activos-card"><p><b>⚖️ Tribunal de la ciencia</b> · ${js.length} juez${js.length === 1 ? '' : 'es'} · ${{ espera: 'esperando jueces', caso: `deliberando el caso ${S.idx + 1} de ${S.casos.length}`, sentencia: `sentencia del caso ${S.idx + 1} de ${S.casos.length}`, fin: 'sesión terminada' }[S.estado] || ''}</p>
-    <div class="eq-acciones"><button type="button" class="btn btn-primary" id="tr-ver">📽️ Proyectar</button><button type="button" class="btn" id="tr-cerrar">Cerrar el Tribunal</button></div></div>`;
+    <div class="eq-acciones"><button type="button" class="btn btn-primary" id="tr-ver">📽️ Proyectar</button><button type="button" class="btn" id="tr-yo">🧪 Votar como alumno</button><button type="button" class="btn" id="tr-cerrar">Cerrar el Tribunal</button></div>
+    <p class="field-hint">Los alumnos votan en su celular: Tareas → ⚖️ Tribunal, o con el QR de la proyección. Para probarlo tú, «🧪 Votar como alumno» abre otra pestaña ya dentro del Tribunal (fuera de concurso).</p></div>`;
   document.getElementById('tr-ver').addEventListener('click', abrirProyTribunal);
+  document.getElementById('tr-yo').addEventListener('click', () => probarComo('tribunal'));
   document.getElementById('tr-cerrar').addEventListener('click', async () => { if (confirm('¿Cerrar el Tribunal? Se borra el marcador de esta sesión en las pantallas.')) await trEstado({ estado: 'cerrada' }); });
   const cuerpo = document.getElementById('tr-proy-cuerpo'), url = new URL('tareas.html#tribunal', location.href).href;
   const ranking = () => js.filter(j => j.id !== PRUEBA_ID).map(j => ({ n: j.nombre, p: trTot(j) })).sort((a, b) => b.p - a.p);
