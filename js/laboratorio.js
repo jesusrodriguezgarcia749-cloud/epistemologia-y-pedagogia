@@ -184,9 +184,9 @@
           <div class="ficha-pensar"><strong>Para pensar:</strong> ${md(a.pregunta)}</div>
         </aside>
       </div>
-      <nav class="ficha-nav">${ant ? `<button class="btn-lab-l" data-ir="${ant.id}">← ${esc(ant.nombre)}</button>` : '<span></span>'}${sig ? `<button class="btn-lab-l" data-ir="${sig.id}">${esc(sig.nombre)} →</button>` : ''}</nav>`;
+      <nav class="ficha-nav">${ant ? `<button class="btn-lab-l" data-ir="${ant.id}">← ${esc(ant.nombre)}</button>` : '<span></span>'}${desdeMapa ? '<button type="button" class="btn-lab ficha-volver-b" data-volver>🗺️ Volver a Autores por tema</button>' : ''}${sig ? `<button class="btn-lab-l" data-ir="${sig.id}">${esc(sig.nombre)} →</button>` : ''}</nav>`;
     $$('#ficha [data-ir]').forEach(b => b.addEventListener('click', () => elegirAutor(b.dataset.ir, true)));
-    const fv = $('#ficha-volver'); if (fv) fv.addEventListener('click', volverAlMapa);
+    $$('#ficha-volver, #ficha [data-volver]').forEach(x => x.addEventListener('click', volverAlMapa));
     history.replaceState(null, '', '#constelacion=' + id);
     if (desplazar) f.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
   }

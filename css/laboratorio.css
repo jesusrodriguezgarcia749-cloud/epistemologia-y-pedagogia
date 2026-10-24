@@ -309,3 +309,5 @@ html[data-theme="dark"] .mapa-sub b{color:var(--saffron);}
 .ficha-volver{margin:0 0 12px;}
 .mapa-fila{transition:background .4s;}
 .mapa-fila.mapa-aqui{background:rgba(217,164,65,.22); border-radius:10px;}
+.ficha-nav{align-items:center;}
+@media (max-width:640px){.ficha-nav .ficha-volver-b{order:-1; width:100%;}}
