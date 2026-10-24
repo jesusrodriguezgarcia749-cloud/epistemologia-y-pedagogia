@@ -22,6 +22,7 @@
     if (!MODULOS[nombre]) nombre = 'constelacion';
     tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === nombre)));
     $$('.lab-panel').forEach(p => { p.hidden = p.id !== 'panel-' + nombre; });
+    if (nombre === 'mapa' && listo.mapa && desdeMapa) { const fila = desdeMapa; desdeMapa = null; $$('.lab-panel').forEach(p => { p.hidden = p.id !== 'panel-mapa'; }); fila.scrollIntoView({ block: 'center' }); fila.classList.add('mapa-aqui'); setTimeout(() => fila.classList.remove('mapa-aqui'), 1600); return; }
     if (!listo[nombre]) { listo[nombre] = true; MODULOS[nombre](extra); }
     else if (extra && nombre === 'constelacion') elegirAutor(extra, false);
     else if (extra && nombre === 'ciencia') elegirCaso(extra);
@@ -162,7 +163,7 @@
       : `<li><button class="link-btn" data-ir="${r.de}">${esc(POR_ID[r.de].nombre)}</button> ${esc(r.r)} <strong>${esc(a.nombre)}</strong></li>`).join('');
     const i = orden.indexOf(a), ant = orden[i - 1], sig = orden[i + 1];
     const f = $('#ficha'); f.style.setProperty('--fam', fam.color);
-    f.innerHTML = `<p class="ficha-kicker">${esc(fam.nombre)}</p>
+    f.innerHTML = `${desdeMapa ? '<button type="button" class="btn-lab-l ficha-volver" id="ficha-volver">← Volver a Autores por tema</button>' : ''}<p class="ficha-kicker">${esc(fam.nombre)}</p>
       <h2>${esc(a.nombre)}</h2>${estadoEstrella(id)}${ganchoFicha(a)}
       <p class="ficha-datos">${esc(a.vida)} · ${esc(a.lugar)}</p>
       <p class="ficha-temas">Lo ves en: ${a.temas.map(enlaceTema).join(' ')}</p>
@@ -185,6 +186,7 @@
       </div>
       <nav class="ficha-nav">${ant ? `<button class="btn-lab-l" data-ir="${ant.id}">← ${esc(ant.nombre)}</button>` : '<span></span>'}${sig ? `<button class="btn-lab-l" data-ir="${sig.id}">${esc(sig.nombre)} →</button>` : ''}</nav>`;
     $$('#ficha [data-ir]').forEach(b => b.addEventListener('click', () => elegirAutor(b.dataset.ir, true)));
+    const fv = $('#ficha-volver'); if (fv) fv.addEventListener('click', volverAlMapa);
     history.replaceState(null, '', '#constelacion=' + id);
     if (desplazar) f.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
   }
@@ -262,6 +264,12 @@
   window.addEventListener('ep-cielo', e => aplicarCielo(e.detail));
 
   // ======================= 1c. 🗺️ AUTORES POR TEMA: qué autores sostienen cada subtema del programa
+  let desdeMapa = null;
+  function volverAlMapa() {
+    const fila = desdeMapa; desdeMapa = null;
+    history.pushState(null, '', '#mapa'); abrir('mapa');
+    if (fila) { fila.scrollIntoView({ behavior: 'auto', block: 'center' }); fila.classList.add('mapa-aqui'); setTimeout(() => fila.classList.remove('mapa-aqui'), 1600); }
+  }
   function iniciarMapa() {
     if (!orden.length) { L.autores.forEach(a => { POR_ID[a.id] = a; }); orden = L.autores.slice().sort((x, y) => x.anio - y.anio); }
     const subs = L.subtemas || {}, del = id => orden.filter(a => a.temas.includes(id));
@@ -272,7 +280,11 @@
         ${Object.keys(subs).filter(k => k.split('.')[0] === t).map(k => { const as = del(k); return `<div class="mapa-fila ${as.length ? '' : 'vacia'}"><a class="mapa-sub" href="tema.html?id=${encodeURIComponent(k)}"><b>${esc(k)}</b> ${esc(subs[k])}</a>
           <div class="mapa-autores">${as.length ? as.map(a => `<button type="button" data-ir="${a.id}" style="--fam:${L.familias[a.fam].color}" title="${esc(L.familias[a.fam].nombre)}"><i></i>${esc(corto(a.nombre))}</button>`).join('') : '<small>Subtema de síntesis: retoma a los autores de los temas anteriores.</small>'}</div></div>`; }).join('')}</section>`).join('')}</div>
       <div class="const-leyenda">${Object.values(L.familias).map(f => `<span><i style="background:${f.color}"></i>${esc(f.nombre)}</span>`).join('')}</div>`;
-    $$('#panel-mapa [data-ir]').forEach(b => b.addEventListener('click', () => { history.replaceState(null, '', '#constelacion=' + b.dataset.ir); abrir('constelacion', b.dataset.ir); const f = $('#ficha'); if (f) f.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' }); }));
+    $$('#panel-mapa [data-ir]').forEach(b => b.addEventListener('click', () => {
+      desdeMapa = b.closest('.mapa-fila');
+      history.pushState(null, '', '#constelacion=' + b.dataset.ir); // el botón «atrás» del celular regresa al mapa
+      abrir('constelacion', b.dataset.ir); const f = $('#ficha'); if (f) f.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }));
     $$('#mapa-temas .chip-lab').forEach(b => b.addEventListener('click', () => { $$('#mapa-temas .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x === b))); $$('#panel-mapa .mapa-tema').forEach(s => { s.hidden = !!b.dataset.t && s.dataset.t !== b.dataset.t; }); }));
   }
 

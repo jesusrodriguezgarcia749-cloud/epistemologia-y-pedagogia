@@ -306,3 +306,6 @@ html[data-theme="dark"] .mapa-sub b{color:var(--saffron);}
 .mapa-autores button:hover{background:color-mix(in srgb,var(--fam) 16%,var(--cream));}
 .mapa-autores small{color:var(--ink-soft); font-style:italic;}
 @media (max-width:640px){.mapa-fila{grid-template-columns:1fr;}}
+.ficha-volver{margin:0 0 12px;}
+.mapa-fila{transition:background .4s;}
+.mapa-fila.mapa-aqui{background:rgba(217,164,65,.22); border-radius:10px;}
