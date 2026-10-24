@@ -212,3 +212,9 @@ const nPal = t => (String(t || '').trim().match(/\S+/g) || []).length;
 // 100 si coincide con lo que diría su autor; +50 si argumentó con al menos TR_MIN_ARG palabras.
 export const trPuntos = (r, caso) => !r || !caso ? 0 : (r.v === (caso.v[r.l] || [])[0] ? 100 : 0) + (nPal(r.arg) >= TR_MIN_ARG ? 50 : 0);
 export const TR_CASOS_SUGERIDOS = ['astro', 'psico', 'vak', 'homeo', 'milpa', 'ia'];
+
+// ---------- 🧪 Modo prueba del docente: un «alumno» que no existe en la lista del grupo (no hay documento
+// grupos/{g}/alumnos/prueba-docente), así no aparece en listas, calificaciones, reportes ni Coordinación.
+// Escribe con la sesión del docente (las reglas ya le permiten todo). En los rankings va «fuera de concurso».
+export const PRUEBA_ID = 'prueba-docente';
+export const PRUEBA_NOMBRE = 'Docente (prueba)';

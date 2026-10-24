@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css?v=2026102602">
-<link rel="stylesheet" href="css/admin.css?v=2026102604">
+<link rel="stylesheet" href="css/admin.css?v=2026102605">
 <link rel="stylesheet" href="css/progreso.css?v=2026102602">
 <link rel="stylesheet" href="css/index.css?v=2026102602">
 <link rel="stylesheet" href="css/extra.css?v=2026102602">
@@ -125,6 +125,11 @@
     <div class="bloques-activos-card td-card">
       <h3 class="section-title" style="margin-top:0;">📌 Tareas digitales</h3>
       <p class="field-hint">Las actividades de la página <a href="tareas.html" target="_blank" rel="noopener">Tareas</a>. Cada una, al <b>agregarla al catálogo</b>, cuenta como una tarea más del Parcial 2 (quien no la entregue tiene cero). Puedes <b>cerrarla</b> para que ya no se hagan cambios, elegir con qué <b>👥 equipos</b> se hace y <b>calificarla</b> con la sugerencia según qué tan completo está el trabajo.</p>
+      <div class="prueba-caja">
+        <p><b>🧪 Probar como alumno</b> · Abre Tareas ya dentro como «Docente (prueba)» en el grupo elegido: juega, entra a la Arena o al Tribunal, llena cuadros o únete a un equipo. No apareces en la lista, ni en calificaciones, reportes o podios.</p>
+        <div class="eq-acciones"><button type="button" class="btn btn-primary" id="prueba-abrir">🧪 Probar como alumno</button><button type="button" class="btn" id="prueba-borrar">🧹 Borrar mi rastro de prueba</button></div>
+        <p class="field-hint" id="prueba-msg" hidden></p>
+      </div>
       <div id="td-lista"></div>
       <div id="td-calificar" hidden></div>
     </div>

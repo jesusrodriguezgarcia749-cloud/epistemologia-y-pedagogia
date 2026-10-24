@@ -3,14 +3,15 @@
 // · Cuadros comparativos: en equipo (grupos/{g}/equipos/{e}/atlas/{id}) o individual (alumnos/{a}/atlas/{ind}).
 // · Arena en vivo: grupos/{g}/arena/sala (la controla el docente) y .../sala/jugadores/{alumno}.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE } from "./tareas-datos.js";
 import { DocITES } from "./docx-ites.js";
 import { brillar, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
-const db = getFirestore(initializeApp(firebaseConfig));
+const app = initializeApp(firebaseConfig), db = getFirestore(app), auth = getAuth(app);
 const SESSION_KEY = 'ep_sesion_alumno';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -455,7 +456,7 @@ function actArena(cont) {
   const parar = () => { clearInterval(reloj); reloj = null; };
   detener = () => { parar(); subs.forEach(u => u()); };
   const unirme = async () => { try { await setDoc(yoRef, { nombre: sesion.nombre, pinVerificado: sesion.pin, ronda: S.ronda, r: {}, unido: serverTimestamp() }); } catch (e) { cont.innerHTML = `<p class="ma-msg mal">No se pudo entrar a la Arena: ${esc(e.message || e)}</p>`; } };
-  const lugar = () => { const ts = J.filter(j => j.ronda === S.ronda).map(j => ({ id: j.id, n: j.nombre, p: arTotal(j, S) })).sort((a, b) => b.p - a.p); return { pos: ts.findIndex(x => x.id === sesion.alumnoId) + 1, de: ts.length, top: ts.slice(0, 5), mio: arTotal(YO, S) }; };
+  const lugar = () => { const ts = J.filter(j => j.ronda === S.ronda && j.id !== PRUEBA_ID).map(j => ({ id: j.id, n: j.nombre, p: arTotal(j, S) })).sort((a, b) => b.p - a.p); return { pos: ts.findIndex(x => x.id === sesion.alumnoId) + 1, de: ts.length, top: ts.slice(0, 5), mio: arTotal(YO, S) }; };
   const pintar = () => {
     parar();
     if (!S || !S.estado || S.estado === 'cerrada') { cont.innerHTML = '<div class="ar-espera"><span>⚡</span><b>La Arena está cerrada</b><p>Cuando tu maestro la abra, esta pantalla cambiará sola. No cierres la página.</p></div>'; return; }
@@ -484,11 +485,11 @@ function actArena(cont) {
       if (ok && !brillados.has(cl)) { brillados.add(cl); brillar(db, sesion, autoresEn(P.q, P.o[0], P.x)).then(r => { avisos[cl] = avisoBrillo(r, nombreAutor); const c = $('#ar-cielo', cont); if (c) c.innerHTML = avisos[cl]; }).catch(() => {}); }
       cont.innerHTML = `<div class="ar-res ${ok ? 'ok' : 'mal'}"><span>${ok ? '✅' : mia ? '❌' : '⏱'}</span><b>${ok ? `¡Correcto! +${gan}` : mia ? 'Incorrecto' : 'No respondiste a tiempo'}</b>
         <p>La respuesta era: <b>${esc(P.o[0])}</b></p><p class="ap-dato">${esc(P.x)}</p>
-        <p class="ar-num">⭐ ${L.mio} puntos · vas en el lugar <b>${L.pos}</b> de ${L.de}</p><div id="ar-cielo">${avisos[cl] || ''}</div></div>`;
+        <p class="ar-num">⭐ ${L.mio} puntos · ${L.pos ? `vas en el lugar <b>${L.pos}</b> de ${L.de}` : '👁 fuera de concurso'}</p><div id="ar-cielo">${avisos[cl] || ''}</div></div>`;
       return;
     }
     if (S.estado === 'fin') {
-      cont.innerHTML = `<div class="ar-res ok"><span>🏁</span><b>¡Terminó la Arena!</b><p class="ar-num">Hiciste <b>${L.mio} puntos</b> · quedaste en el lugar <b>${L.pos}</b> de ${L.de}</p>
+      cont.innerHTML = `<div class="ar-res ok"><span>🏁</span><b>¡Terminó la Arena!</b><p class="ar-num">Hiciste <b>${L.mio} puntos</b> · ${L.pos ? `quedaste en el lugar <b>${L.pos}</b> de ${L.de}` : '👁 fuera de concurso'}</p>
         <ol class="ar-podio">${L.top.map((x, k) => `<li class="${x.id === sesion.alumnoId ? 'yo' : ''}"><span>${['🥇', '🥈', '🥉', '4.º', '5.º'][k]}</span>${esc(x.n)}<b>${x.p}</b></li>`).join('')}</ol></div>`;
     }
   };
@@ -512,7 +513,7 @@ function actTribunal(cont) {
   const lenteDe = id => LAB.lentes.find(l => l.id === id) || { nombre: id, pregunta: '' };
   const casoDe = id => LAB.casos.find(c => c.id === id);
   const total = j => Object.entries((j && j.ronda === S.ronda && j.v) || {}).reduce((t, [c, r]) => t + (S.revelados || []).includes(c) * trPuntos(r, casoDe(c)), 0);
-  const lugar = () => { const ts = J.filter(j => j.ronda === S.ronda).map(j => ({ id: j.id, n: j.nombre, p: total(j) })).sort((a, b) => b.p - a.p); return { pos: ts.findIndex(x => x.id === sesion.alumnoId) + 1, de: ts.length, top: ts.slice(0, 5), mio: total(YO) }; };
+  const lugar = () => { const ts = J.filter(j => j.ronda === S.ronda && j.id !== PRUEBA_ID).map(j => ({ id: j.id, n: j.nombre, p: total(j) })).sort((a, b) => b.p - a.p); return { pos: ts.findIndex(x => x.id === sesion.alumnoId) + 1, de: ts.length, top: ts.slice(0, 5), mio: total(YO) }; };
   const unirme = async () => { try { await setDoc(yoRef, { nombre: sesion.nombre, pinVerificado: sesion.pin, ronda: S.ronda, v: {}, unido: serverTimestamp() }); } catch (e) { cont.innerHTML = `<p class="ma-msg mal">No se pudo entrar al Tribunal: ${esc(e.message || e)}</p>`; } };
   const enviar = async (caso, l) => {
     const m = $('#tr-msg');
@@ -554,12 +555,12 @@ function actTribunal(cont) {
       cont.innerHTML = `<div class="ar-res ${ok ? 'ok' : 'mal'}"><span>${ok ? '⚖️' : mio ? '❌' : '⏱'}</span><b>${ok ? `¡Juzgaste como ${esc(autor(rL).nombre)}! +${pts}` : mio ? `${esc(autor(rL).nombre)} habría dicho otra cosa${pts ? ` · +${pts} por argumentar` : ''}` : 'No votaste en este caso'}</b>
         <p>Veredicto de ${esc(autor(rL).nombre)}: <b>${V[1] || ''} ${esc(V[2] || '')}</b></p><p class="ap-dato">${mdTxt(exp || '')}</p>
         ${caso.nota ? `<p class="tr-nota">💡 ${mdTxt(caso.nota)}</p>` : ''}
-        <p class="ar-num">⭐ ${L.mio} puntos · vas en el lugar <b>${L.pos}</b> de ${L.de}</p><div id="tr-cielo">${avisos[clave] || ''}</div></div>`;
+        <p class="ar-num">⭐ ${L.mio} puntos · ${L.pos ? `vas en el lugar <b>${L.pos}</b> de ${L.de}` : '👁 fuera de concurso'}</p><div id="tr-cielo">${avisos[clave] || ''}</div></div>`;
       return;
     }
     if (S.estado === 'fin') {
       const L = lugar();
-      cont.innerHTML = `<div class="ar-res ok"><span>🏛️</span><b>¡Se levanta la sesión!</b><p class="ar-num">Hiciste <b>${L.mio} puntos</b> · quedaste en el lugar <b>${L.pos}</b> de ${L.de}</p>
+      cont.innerHTML = `<div class="ar-res ok"><span>🏛️</span><b>¡Se levanta la sesión!</b><p class="ar-num">Hiciste <b>${L.mio} puntos</b> · ${L.pos ? `quedaste en el lugar <b>${L.pos}</b> de ${L.de}` : '👁 fuera de concurso'}</p>
         <ol class="ar-podio">${L.top.map((x, k) => `<li class="${x.id === sesion.alumnoId ? 'yo' : ''}"><span>${['🥇', '🥈', '🥉', '4.º', '5.º'][k]}</span>${esc(x.n)}<b>${x.p}</b></li>`).join('')}</ol>
         <p><a href="laboratorio.html#ciencia">Repasa todos los casos en el Laboratorio → ¿Esto es ciencia? ↗</a></p></div>`;
     }
@@ -636,5 +637,29 @@ async function actQuienLoDijo(cont) {
   });
 }
 
-window.addEventListener('hashchange', ruta);
-ruta();
+// 🧪 tareas.html?prueba=GRUPO: el docente (con su sesión del panel abierta en este navegador) entra como alumno de prueba.
+function bandaPrueba() {
+  let b = $('#banda-prueba');
+  if (!sesion || !sesion.prueba) { if (b) b.remove(); return; }
+  if (!b) { b = document.createElement('div'); b.id = 'banda-prueba'; b.className = 'banda-prueba'; document.body.prepend(b); }
+  b.innerHTML = `🧪 <b>Modo prueba del docente</b><span>No apareces en listas, calificaciones ni podios.</span><button type="button" id="bp-salir">Salir</button>`;
+  $('#bp-salir').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } olvidarAlumno(); sesion = null; EQS = null; if (unsubGrupo) unsubGrupo(); bandaPrueba(); location.hash = ''; portada(); });
+}
+async function arrancar() {
+  const g = new URLSearchParams(location.search).get('prueba');
+  if (g) {
+    const u = await new Promise(r => { let hecho = false; const off = onAuthStateChanged(auth, x => { if (hecho) return; hecho = true; r(x); setTimeout(() => off && off(), 0); }); setTimeout(() => { if (!hecho) { hecho = true; r(null); } }, 6000); });
+    history.replaceState(null, '', location.pathname + location.hash);
+    if (u && u.email !== 'coordinacion@ites.local') {
+      sesion = { grupoId: g, alumnoId: PRUEBA_ID, nombre: PRUEBA_NOMBRE, pin: 'docente', prueba: true };
+      try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(sesion)); } catch { /* */ }
+      recordarAlumno(sesion); EQS = null;
+    } else {
+      $('#cl-acceso').insertAdjacentHTML('afterbegin', '<p class="ma-msg mal">Para probar como alumno, primero entra al Panel docente en este mismo navegador.</p>');
+    }
+  }
+  bandaPrueba();
+  window.addEventListener('hashchange', ruta);
+  ruta();
+}
+arrancar();

@@ -13,7 +13,7 @@ import { firebaseConfig } from "./firebase-config.js";
 import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { vistaRapida } from "./matriz.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE } from "./tareas-datos.js";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -1674,7 +1674,7 @@ function pintarEquipos() {
   const ab = document.getElementById('eq-abierto');
   ab.setAttribute('aria-pressed', String(!!f.abiertas)); ab.textContent = f.abiertas ? '🔓 Inscripciones abiertas' : '🔒 Inscripciones cerradas';
   const mios = eqDeF(FSEL);
-  const nombreDe = id => (alumnosCache.find(a => a.id === id) || {}).nombre || id;
+  const nombreDe = id => id === PRUEBA_ID ? '🧪 ' + PRUEBA_NOMBRE : (alumnosCache.find(a => a.id === id) || {}).nombre || id;
   const enEq = new Set(mios.flatMap(e => e.integrantes || []));
   const sin = alumnosCache.filter(a => !enEq.has(a.id));
   document.getElementById('eq-sin-lista').textContent = sin.length ? sin.map(a => a.nombre).join(', ') : 'nadie, ¡todos tienen equipo!';
@@ -1731,7 +1731,7 @@ function pintarFormEquipo(eq) {
   const mios = new Set(eq ? eq.integrantes || [] : []);
   document.getElementById('equipo-alumnos').innerHTML = alumnosCache.map(a => `<label class="${enOtro[a.id] ? 'en-otro' : ''}"><input type="checkbox" value="${a.id}" ${mios.has(a.id) ? 'checked' : ''}> ${escaparHTML(a.nombre)}${enOtro[a.id] ? ` <small>(en «${escaparHTML(enOtro[a.id])}»)</small>` : ''}</label>`).join('');
 }
-const nombresDe = ids => ids.map(i => (alumnosCache.find(a => a.id === i) || {}).nombre || i);
+const nombresDe = ids => ids.map(i => i === PRUEBA_ID ? PRUEBA_NOMBRE : (alumnosCache.find(a => a.id === i) || {}).nombre || i);
 on('equipo-cancelar', 'click', () => pintarFormEquipo(null));
 on('equipo-form', 'submit', async ev => {
   ev.preventDefault();
@@ -1990,6 +1990,32 @@ const AR_COL = [['▲', '#C0503F'], ['◆', '#2E6FA8'], ['●', '#D9A441'], ['�
 const arPts = (r, dur) => r && r.o === 0 ? Math.round(500 + 500 * Math.max(0, 1 - (r.ms || 0) / ((dur || 20) * 1000))) : 0;
 const arTot = j => Object.values((j.ronda === (AR.sala || {}).ronda && j.r) || {}).reduce((s, r) => s + arPts(r, (AR.sala || {}).dur), 0);
 const arRef = () => doc(db, 'grupos', grupoActivo, 'arena', 'sala');
+// ---- 🧪 Probar como alumno: abre Tareas como «Docente (prueba)» en el grupo elegido (ver tareas.js, arrancar()).
+on('prueba-abrir', 'click', () => {
+  if (!grupoActivo) { alert('Elige un grupo primero.'); return; }
+  window.open(`tareas.html?prueba=${encodeURIComponent(grupoActivo)}#`, '_blank');
+});
+on('prueba-borrar', 'click', async () => {
+  if (!grupoActivo) { alert('Elige un grupo primero.'); return; }
+  if (!confirm('¿Borrar todo lo que hiciste como alumno de prueba en este grupo? (cuadros, estrellas, votos de Arena y Tribunal, coevaluaciones y tu lugar en los equipos)')) return;
+  const msg = document.getElementById('prueba-msg'); msg.hidden = false; msg.textContent = 'Borrando…';
+  let n = 0;
+  try {
+    for (const sub of ['atlas', 'tareas', 'actividades', 'investigacion']) {
+      const sn = await getDocs(collection(db, 'grupos', grupoActivo, 'alumnos', PRUEBA_ID, sub)).catch(() => null);
+      if (sn) for (const d of sn.docs) { await deleteDoc(d.ref); n++; }
+    }
+    for (const sala of ['sala', 'tribunal']) { const r = doc(db, 'grupos', grupoActivo, 'arena', sala, 'jugadores', PRUEBA_ID); if ((await getDoc(r)).exists()) { await deleteDoc(r); n++; } }
+    const eqs = await getDocs(collection(db, 'grupos', grupoActivo, 'equipos'));
+    for (const d of eqs.docs) {
+      const e = d.data(), i = (e.integrantes || []).indexOf(PRUEBA_ID);
+      if (i < 0) continue;
+      const integrantes = e.integrantes.filter(x => x !== PRUEBA_ID), nombres = (e.nombres || []).filter(x => x !== PRUEBA_NOMBRE);
+      await updateDoc(d.ref, { integrantes, nombres }); n++;
+    }
+    msg.textContent = n ? `✓ Listo: ${n === 1 ? 'se borró 1 registro' : `se borraron ${n} registros`} de prueba. Si tenías Tareas abierto como alumno de prueba, dale «Salir» para limpiar también ese navegador.` : 'No había nada de prueba en este grupo.';
+  } catch (e) { msg.textContent = 'No se pudo borrar todo: ' + (e.message || e); }
+});
 document.getElementById('cielo-proyectar')?.addEventListener('click', () => {
   if (!grupoActivo) { alert('Elige un grupo primero.'); return; }
   window.open(`laboratorio.html?cielo=${encodeURIComponent(grupoActivo)}#constelacion`, '_blank', 'noopener');
@@ -2037,7 +2063,7 @@ function pintarArena(soloJug) {
   document.getElementById('ar-cerrar').addEventListener('click', async () => { if (confirm('¿Cerrar la Arena? Se borra el marcador de esta ronda en las pantallas.')) { await arEstado({ estado: 'cerrada' }); } });
   // proyección
   const cuerpo = document.getElementById('ar-proy-cuerpo'), url = new URL('tareas.html#arena', location.href).href;
-  const ranking = () => js.map(j => ({ n: j.nombre, p: arTot(j) })).sort((a, b) => b.p - a.p);
+  const ranking = () => js.filter(j => j.id !== PRUEBA_ID).map(j => ({ n: j.nombre, p: arTot(j) })).sort((a, b) => b.p - a.p);
   if (S.estado === 'espera') {
     cuerpo.innerHTML = `<div class="arp-espera"><div><h2>⚡ ${escaparHTML(ARENA[S.set].titulo)}</h2><p>Entra desde tu celular: <b>Aula Virtual → Tareas → ⚡ Arena en vivo</b>, o escanea el código.</p><div id="ar-unidos" class="arp-unidos">${arUnidosHTML(js)}</div>
       <button type="button" class="btn btn-primary arp-boton" id="ar-empezar">▶ Empezar</button></div><div class="arp-qr">${qrSvg(url, { titulo: 'Arena' })}</div></div>`;
@@ -2067,7 +2093,7 @@ function pintarArena(soloJug) {
     document.getElementById('ar-otra').addEventListener('click', () => arEstado({ estado: 'cerrada' }));
   }
 }
-function arUnidosHTML(js) { return `<p class="arp-n">${js.length} jugador${js.length === 1 ? '' : 'es'} en la sala</p><div class="arp-nombres">${js.map(j => `<span>${escaparHTML((j.nombre || '').split(' ')[0])}</span>`).join('')}</div>`; }
+function arUnidosHTML(js) { return `<p class="arp-n">${js.length} jugador${js.length === 1 ? '' : 'es'} en la sala</p><div class="arp-nombres">${js.map(j => j.id === PRUEBA_ID ? '<span>👁 Docente</span>' : `<span>${escaparHTML((j.nombre || '').split(' ')[0])}</span>`).join('')}</div>`; }
 let arRevelando = false;
 async function arRevelar() { if (arRevelando || !AR.sala || AR.sala.estado !== 'pregunta') return; arRevelando = true; clearInterval(AR.reloj); try { await arEstado({ estado: 'revela' }); } finally { arRevelando = false; } }
 function abrirProyArena() { document.getElementById('ar-proy').hidden = false; document.body.classList.add('con-qr'); pintarArena(); }
@@ -2121,7 +2147,7 @@ function pintarTribunal(soloJug) {
   document.getElementById('tr-ver').addEventListener('click', abrirProyTribunal);
   document.getElementById('tr-cerrar').addEventListener('click', async () => { if (confirm('¿Cerrar el Tribunal? Se borra el marcador de esta sesión en las pantallas.')) await trEstado({ estado: 'cerrada' }); });
   const cuerpo = document.getElementById('tr-proy-cuerpo'), url = new URL('tareas.html#tribunal', location.href).href;
-  const ranking = () => js.map(j => ({ n: j.nombre, p: trTot(j) })).sort((a, b) => b.p - a.p);
+  const ranking = () => js.filter(j => j.id !== PRUEBA_ID).map(j => ({ n: j.nombre, p: trTot(j) })).sort((a, b) => b.p - a.p);
   const banca = (l, interior) => { const A = trAutor(l), Lt = TR.L.lentes.find(x => x.id === l) || {}, col = (TR.L.familias[A.fam] || {}).color || '#2E4A85'; return `<div class="trp-banca" data-banca="${l}" style="--c:${col}"><div class="trp-toga"><b>${escaparHTML(A.nombre)}</b><small>${escaparHTML(Lt.pregunta || '')}</small></div>${interior}</div>`; };
   if (S.estado === 'espera') {
     cuerpo.innerHTML = `<div class="arp-espera"><div><h2>⚖️ Tribunal de la ciencia</h2><p>Entra desde tu celular: <b>Aula Virtual → Tareas → ⚖️ Tribunal</b>, o escanea el código. Te pondrán la toga de un autor y juzgarás <b>como él</b>.</p><div id="ar-unidos" class="arp-unidos">${arUnidosHTML(js)}</div>
@@ -2142,7 +2168,7 @@ function pintarTribunal(soloJug) {
       <div class="trp-bancas trp-sent">${TR_LENTES.map(l => {
         const [ver, exp] = caso.v[l] || [], vs = js.map(j => (j.v || {})[caso.id]).filter(r => r && r.l === l), n = vs.length;
         const cuenta = TR_VER.map(([k]) => vs.filter(r => r.v === k).length), V = TR_VER.find(x => x[0] === ver) || [];
-        const mejor = vs.filter(r => r.v === ver && trPal(r.arg) >= TR_MIN_ARG).sort((a, b) => trPal(b.arg) - trPal(a.arg))[0];
+        const mejor = vs.filter(r => r.v === ver && trPal(r.arg) >= TR_MIN_ARG && (js.find(j => (j.v || {})[caso.id] === r) || {}).id !== PRUEBA_ID).sort((a, b) => trPal(b.arg) - trPal(a.arg))[0];
         const quien = mejor ? (js.find(j => (j.v || {})[caso.id] === mejor) || {}).nombre : '';
         return banca(l, `<div class="trp-votos">${TR_VER.map(([k, ico], i) => `<span class="${k === ver ? 'ok' : ''}" style="--c:${TR_VER[i][3]}"><i style="height:${n ? Math.round(100 * cuenta[i] / n) : 0}%"></i><b>${cuenta[i]}</b>${ico}</span>`).join('')}</div>
           <p class="trp-ver" style="--c:${V[3]}">${V[1] || ''} ${escaparHTML(V[2] || '')}</p><p class="trp-exp">${mdA(exp)}</p>

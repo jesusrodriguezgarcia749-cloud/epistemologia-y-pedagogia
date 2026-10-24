@@ -765,3 +765,5 @@ body.mon-completo .mon-grid { grid-template-columns: repeat(auto-fill, minmax(21
 .trp-arg cite { display: block; font-style: normal; font-size: .8rem; opacity: .8; margin-top: 4px; }
 .trp-pie { text-align: center; }
 @media (max-width: 1000px) { .trp-bancas { grid-template-columns: repeat(2, 1fr); } }
+.prueba-caja { margin: 6px 0 14px; padding: 12px 14px; border-radius: 12px; background: rgba(91,63,160,.09); border-left: 4px solid #5B3FA0; }
+.prueba-caja p { margin: 0 0 8px; font-size: .92rem; }
