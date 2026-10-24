@@ -5,7 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos } from "./tareas-datos.js";
 import { DocITES } from "./docx-ites.js";
 import { brillar, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
@@ -126,6 +126,7 @@ async function portada() {
   $('#cl-acceso').innerHTML = (sesion ? `<div class="tq-quien">👤 <b>${esc(sesion.nombre)}</b> · aquí ves tu avance y tus calificaciones <button type="button" class="ma-link" id="tq-salir">Salir</button></div>`
     : `<div class="tq-quien">Entra con tu nombre y PIN para ver tu avance, entregar y conocer tus calificaciones. <button type="button" class="btn-at" id="tq-entrar">Entrar</button></div>`)
     + `<a class="ar-tarjeta" href="#arena"><span>⚡</span><div><b>Arena en vivo</b><small>Cuando tu maestro abra la Arena, entra aquí: preguntas en vivo contra el reloj, con podio.</small></div><em>Entrar →</em></a>`
+    + `<a class="ar-tarjeta tr-tarjeta" href="#tribunal"><span>⚖️</span><div><b>Tribunal de la ciencia</b><small>En vivo: te ponen la toga de un autor (Popper, Kuhn, Lakatos…) y dictas si un caso es ciencia o no, con tu argumento.</small></div><em>Entrar →</em></a>`
     + tarjetaCielo();
   if (sesion) $('#tq-salir').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } olvidarAlumno(); sesion = null; EQS = null; if (unsubGrupo) unsubGrupo(); portada(); });
   else $('#tq-entrar').addEventListener('click', () => formAcceso($('#cl-acceso'), portada));
@@ -162,6 +163,7 @@ function ruta() {
   if (detener) { detener(); detener = null; }
   const mu = location.hash.match(/^#unir-([A-Z0-9]{4})$/i);
   if (mu) return unirPorQR(mu[1].toUpperCase());
+  if (id === 'tribunal') { $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true; $('#cl-actividad').innerHTML = '<a class="cl-volver" href="#">← Todas las tareas</a><h2 class="cl-h2">⚖️ Tribunal de la ciencia</h2><div id="cl-cuerpo"></div>'; actTribunal($('#cl-cuerpo')); window.scrollTo({ top: 0 }); return; }
   if (id === 'arena') { $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true; $('#cl-actividad').innerHTML = '<a class="cl-volver" href="#">← Todas las tareas</a><h2 class="cl-h2">⚡ Arena en vivo</h2><div id="cl-cuerpo"></div>'; actArena($('#cl-cuerpo')); window.scrollTo({ top: 0 }); return; }
   const a = TAREAS_DIG[id];
   if (!a || a.tipo === 'pronto') { $('#cl-sesiones').hidden = false; $('#cl-acceso').hidden = false; $('#cl-actividad').innerHTML = ''; portada(); return; }
@@ -493,6 +495,82 @@ function actArena(cont) {
   subs.push(onSnapshot(salaRef, sn => { S = sn.exists() ? sn.data() : null; pintar(); }, () => { cont.innerHTML = '<p class="ma-msg mal">Sin conexión. Revisa tu internet.</p>'; }));
   subs.push(onSnapshot(yoRef, sn => { YO = sn.exists() ? sn.data() : null; pintar(); }, () => {}));
   subs.push(onSnapshot(collection(db, 'grupos', g, 'arena', 'sala', 'jugadores'), sn => { J = sn.docs.map(d => ({ id: d.id, ...d.data() })); if (S && (S.estado === 'espera' || S.estado === 'revela' || S.estado === 'fin')) pintar(); }, () => {}));
+}
+
+// ======================================================= ⚖️ TRIBUNAL DE LA CIENCIA (alumno)
+// El docente controla grupos/{g}/arena/tribunal: {estado: cerrada|espera|caso|sentencia|fin, ronda, casos[], idx, dur}.
+// Cada alumno escribe .../tribunal/jugadores/{alumno}: v.{casoId} = {l (su toga), v (si|no|dep), arg}.
+const mdTxt = t => esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<em>$1</em>');
+function actTribunal(cont) {
+  if (!sesion) { formAcceso(cont, () => actTribunal(cont), 'Entra con tu nombre y PIN para ser juez del Tribunal'); return; }
+  const g = sesion.grupoId, salaRef = doc(db, 'grupos', g, 'arena', 'tribunal'), yoRef = doc(db, 'grupos', g, 'arena', 'tribunal', 'jugadores', sesion.alumnoId);
+  let S = null, YO = null, J = [], pintado = '', t0 = 0, reloj = null, borrador = { v: '', arg: '' };
+  const subs = [], brillados = new Set(), avisos = {};
+  const parar = () => { clearInterval(reloj); reloj = null; };
+  detener = () => { parar(); subs.forEach(u => u()); };
+  const autor = id => (LAB.autores.find(a => a.id === id) || { nombre: id, frase: '' });
+  const lenteDe = id => LAB.lentes.find(l => l.id === id) || { nombre: id, pregunta: '' };
+  const casoDe = id => LAB.casos.find(c => c.id === id);
+  const total = j => Object.entries((j && j.ronda === S.ronda && j.v) || {}).reduce((t, [c, r]) => t + (S.revelados || []).includes(c) * trPuntos(r, casoDe(c)), 0);
+  const lugar = () => { const ts = J.filter(j => j.ronda === S.ronda).map(j => ({ id: j.id, n: j.nombre, p: total(j) })).sort((a, b) => b.p - a.p); return { pos: ts.findIndex(x => x.id === sesion.alumnoId) + 1, de: ts.length, top: ts.slice(0, 5), mio: total(YO) }; };
+  const unirme = async () => { try { await setDoc(yoRef, { nombre: sesion.nombre, pinVerificado: sesion.pin, ronda: S.ronda, v: {}, unido: serverTimestamp() }); } catch (e) { cont.innerHTML = `<p class="ma-msg mal">No se pudo entrar al Tribunal: ${esc(e.message || e)}</p>`; } };
+  const enviar = async (caso, l) => {
+    const m = $('#tr-msg');
+    if (!borrador.v) { m.textContent = 'Elige tu veredicto.'; m.className = 'ma-msg mal'; return; }
+    try { await updateDoc(yoRef, new FieldPath('v', caso.id), { l, v: borrador.v, arg: borrador.arg.trim() }, 'pinVerificado', sesion.pin); m.textContent = `✓ Voto registrado${palabras(borrador.arg) >= TR_MIN_ARG ? ' con argumento' : ''}. Puedes corregirlo mientras el Tribunal delibera.`; m.className = 'ma-msg ok'; }
+    catch (e) { m.textContent = 'No se pudo enviar: ' + (e.message || e); m.className = 'ma-msg mal'; }
+  };
+  const pintar = () => {
+    if (!LAB) return;
+    if (!S || !S.estado || S.estado === 'cerrada') { parar(); pintado = ''; cont.innerHTML = '<div class="ar-espera"><span>⚖️</span><b>El Tribunal está en receso</b><p>Cuando tu maestro abra la sesión, esta pantalla cambiará sola. No cierres la página.</p></div>'; return; }
+    if (!YO || YO.ronda !== S.ronda) { pintado = ''; cont.innerHTML = '<p class="atlas-ayuda">Entrando al Tribunal…</p>'; unirme(); return; }
+    const caso = casoDe((S.casos || [])[S.idx]), l = trLente(sesion.alumnoId, S.idx), A = autor(l), Lt = lenteDe(l), mio = caso && (YO.v || {})[caso.id];
+    const clave = `${S.estado}:${S.ronda}:${S.idx}`;
+    if (S.estado === 'espera') { pintado = clave; const L = lugar(); cont.innerHTML = `<div class="ar-espera"><span>✅</span><b>¡Estás en la sala, ${esc(sesion.nombre.split(' ')[0])}!</b><p>En cada caso te pondrán la toga de un autor: tendrás que juzgar <b>como él</b> si algo es ciencia, aunque tú pienses distinto.</p><p class="ar-num">${L.de} juez${L.de === 1 ? '' : 'es'} en la sala</p></div>`; return; }
+    if (S.estado === 'caso' && caso) {
+      if (pintado === clave) { const e = $('#tr-estado'); if (e) e.innerHTML = mio ? `🗳️ Tu voto: <b>${esc((TR_VER.find(x => x[0] === mio.v) || [])[2] || '')}</b>` : 'Aún no votas'; return; }
+      pintado = clave; parar(); t0 = performance.now(); borrador = { v: mio ? mio.v : '', arg: mio ? mio.arg || '' : '' };
+      cont.innerHTML = `<div class="tr-toga" style="--c:${(LAB.familias[A.fam] || {}).color || '#2E4A85'}"><span>⚖️</span><div><small>Caso ${S.idx + 1} de ${S.casos.length} · hoy tu toga es de</small><b>${esc(A.nombre)}</b><em>${esc(Lt.pregunta)}</em></div></div>
+        <div class="ap-tiempo"><i id="tr-t"></i></div>
+        <article class="tr-caso"><h3>${esc(caso.titulo)}</h3><p>${mdTxt(caso.texto)}</p></article>
+        <p class="tr-frase">Recuerda cómo piensa ${esc(A.nombre.split(' ').pop())}: <i>«${esc(A.frase)}»</i></p>
+        <p class="tr-pide">Según <b>${esc(A.nombre)}</b>, ¿esto es ciencia?</p>
+        <div class="tr-ver">${TR_VER.map(([k, ico, t, c]) => `<button type="button" data-v="${k}" style="--c:${c}" aria-pressed="${borrador.v === k}"><span>${ico}</span>${t}</button>`).join('')}</div>
+        <label class="de-lbl">Tu argumento como ${esc(A.nombre)} <small>(${TR_MIN_ARG} palabras o más: +50 puntos)</small><textarea id="tr-arg" rows="3" placeholder="Para ${esc(A.nombre.split(' ').pop())} esto ${'(no) es ciencia porque…'}">${esc(borrador.arg)}</textarea></label>
+        <p class="ap-cuenta" id="tr-cuenta"></p>
+        <button type="button" class="btn-at" id="tr-enviar">🗳️ Dictar mi voto</button><p class="ma-msg" id="tr-msg" ${mio ? '' : 'hidden'}>${mio ? '✓ Ya votaste. Puedes corregir tu voto mientras el Tribunal delibera.' : ''}</p><p class="tr-estado" id="tr-estado"></p>`;
+      const cuenta = () => { const n = palabras(borrador.arg); $('#tr-cuenta').textContent = n >= TR_MIN_ARG ? `✓ ${n} palabras: tu argumento suma 50 puntos` : `${n} de ${TR_MIN_ARG} palabras para el bono`; };
+      $$('.tr-ver button', cont).forEach(b => b.addEventListener('click', () => { borrador.v = b.dataset.v; $$('.tr-ver button', cont).forEach(x => x.setAttribute('aria-pressed', String(x === b))); }));
+      $('#tr-arg').addEventListener('input', e => { borrador.arg = e.target.value; cuenta(); }); cuenta();
+      $('#tr-enviar').addEventListener('click', () => { $('#tr-msg').hidden = false; enviar(caso, l); });
+      const dur = (S.dur || 90) * 1000;
+      reloj = setInterval(() => { const q = dur - (performance.now() - t0), t = $('#tr-t'); if (t) t.style.width = Math.max(0, 100 * q / dur) + '%'; if (q <= 0) { parar(); if (!$('.ar-tarde', cont)) cont.insertAdjacentHTML('beforeend', '<p class="ar-tarde">⏱ Se acabó el tiempo de deliberar: si ya votaste, espera la sentencia.</p>'); } }, 200);
+      return;
+    }
+    parar(); pintado = clave;
+    if (S.estado === 'sentencia' && caso) {
+      const rL = mio ? mio.l : l, [ver, exp] = caso.v[rL] || [], ok = mio && mio.v === ver, pts = trPuntos(mio, caso), L = lugar(), V = TR_VER.find(x => x[0] === ver) || [];
+      if (ok && !brillados.has(clave)) { brillados.add(clave); brillar(db, sesion, [rL]).then(r => { avisos[clave] = avisoBrillo(r, nombreAutor); const c = $('#tr-cielo', cont); if (c) c.innerHTML = avisos[clave]; }).catch(() => {}); }
+      cont.innerHTML = `<div class="ar-res ${ok ? 'ok' : 'mal'}"><span>${ok ? '⚖️' : mio ? '❌' : '⏱'}</span><b>${ok ? `¡Juzgaste como ${esc(autor(rL).nombre)}! +${pts}` : mio ? `${esc(autor(rL).nombre)} habría dicho otra cosa${pts ? ` · +${pts} por argumentar` : ''}` : 'No votaste en este caso'}</b>
+        <p>Veredicto de ${esc(autor(rL).nombre)}: <b>${V[1] || ''} ${esc(V[2] || '')}</b></p><p class="ap-dato">${mdTxt(exp || '')}</p>
+        ${caso.nota ? `<p class="tr-nota">💡 ${mdTxt(caso.nota)}</p>` : ''}
+        <p class="ar-num">⭐ ${L.mio} puntos · vas en el lugar <b>${L.pos}</b> de ${L.de}</p><div id="tr-cielo">${avisos[clave] || ''}</div></div>`;
+      return;
+    }
+    if (S.estado === 'fin') {
+      const L = lugar();
+      cont.innerHTML = `<div class="ar-res ok"><span>🏛️</span><b>¡Se levanta la sesión!</b><p class="ar-num">Hiciste <b>${L.mio} puntos</b> · quedaste en el lugar <b>${L.pos}</b> de ${L.de}</p>
+        <ol class="ar-podio">${L.top.map((x, k) => `<li class="${x.id === sesion.alumnoId ? 'yo' : ''}"><span>${['🥇', '🥈', '🥉', '4.º', '5.º'][k]}</span>${esc(x.n)}<b>${x.p}</b></li>`).join('')}</ol>
+        <p><a href="laboratorio.html#ciencia">Repasa todos los casos en el Laboratorio → ¿Esto es ciencia? ↗</a></p></div>`;
+    }
+  };
+  cont.innerHTML = '<p class="atlas-ayuda">Preparando la sala…</p>';
+  cargarLab().then(() => {
+    if (!LAB) { cont.innerHTML = '<p class="ma-msg mal">No se pudieron cargar los casos. Revisa tu conexión.</p>'; return; }
+    subs.push(onSnapshot(salaRef, sn => { S = sn.exists() ? sn.data() : null; pintar(); }, () => { cont.innerHTML = '<p class="ma-msg mal">Sin conexión. Revisa tu internet.</p>'; }));
+    subs.push(onSnapshot(yoRef, sn => { YO = sn.exists() ? sn.data() : null; if (S) pintar(); }, () => {}));
+    subs.push(onSnapshot(collection(db, 'grupos', g, 'arena', 'tribunal', 'jugadores'), sn => { J = sn.docs.map(d => ({ id: d.id, ...d.data() })); if (S && S.estado !== 'caso') pintar(); }, () => {}));
+  });
 }
 
 // ======================================================= 🗣️ COEVALUACIÓN DE LAS EXPOSICIONES (alumno)

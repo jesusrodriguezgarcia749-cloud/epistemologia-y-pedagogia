@@ -736,3 +736,32 @@ body.mon-completo .mon-grid { grid-template-columns: repeat(auto-fill, minmax(21
 .cop-barras div { grid-template-columns: 300px 1fr 60px; font-size: 1.3rem; margin: 12px 0; }
 .cop-barras i { height: 22px; background: rgba(255,255,255,.15); } .cop-barras em { background: #F2D27A; }
 .cop h3 { color: #fff; margin-top: 26px; } .cop-preg { font-size: 1.25rem; line-height: 1.5; }
+
+/* ---------- ⚖️ Tribunal de la ciencia (proyección) */
+.tr-elige { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px 14px; margin: 4px 0 10px; }
+.tr-elige label { display: flex; gap: 8px; align-items: center; font-size: .92rem; }
+.tr-proy { background: radial-gradient(ellipse at top, #2B2347, #120E1C 70%); }
+.trp-caso { max-width: 1150px; margin: 14px auto 18px; text-align: center; }
+.trp-caso h2 { font-size: clamp(1.8rem, 3.4vw, 2.8rem); margin: 0 0 8px; color: #F6E7B8; }
+.trp-caso p { font-size: clamp(1.1rem, 1.8vw, 1.45rem); line-height: 1.45; margin: 0; opacity: .95; }
+.trp-seg { width: auto; min-width: 110px; height: 70px; border-radius: 16px; font-size: 2.2rem; padding: 0 14px; }
+.trp-seg.fin { color: #F0866F; animation: trp-late 1s ease-in-out infinite; }
+@keyframes trp-late { 50% { opacity: .4; } }
+.trp-bancas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 0 auto 14px; max-width: 1500px; }
+.trp-banca { background: rgba(255,255,255,.07); border-radius: 14px; border-top: 6px solid var(--c); padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 8px; animation: arp-entra .5s ease both; }
+.trp-banca:nth-child(2) { animation-delay: .1s; } .trp-banca:nth-child(3) { animation-delay: .2s; } .trp-banca:nth-child(4) { animation-delay: .3s; } .trp-banca:nth-child(5) { animation-delay: .4s; }
+.trp-toga b { display: block; font-size: 1.25rem; color: #fff; }
+.trp-toga small { display: block; font-size: .85rem; opacity: .75; line-height: 1.3; margin-top: 2px; }
+.trp-delib { font-size: 1.3rem; margin: auto 0 0; } .trp-delib .trp-n { font-weight: 800; color: #F2D27A; font-size: 1.8rem; }
+.trp-votos { display: flex; gap: 8px; align-items: flex-end; height: 90px; }
+.trp-votos span { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; opacity: .45; font-size: 1.05rem; }
+.trp-votos span.ok { opacity: 1; }
+.trp-votos i { display: block; width: 100%; background: var(--c); border-radius: 6px 6px 0 0; min-height: 4px; transition: height .7s ease; }
+.trp-votos b { order: -1; font-size: 1.15rem; }
+.trp-ver { margin: 0; padding: 6px 10px; border-radius: 10px; background: var(--c); color: #fff; font-weight: 800; font-size: 1.1rem; text-align: center; animation: trp-mazo .6s cubic-bezier(.3,1.6,.5,1) both; animation-delay: .6s; }
+@keyframes trp-mazo { from { transform: scale(2.2) rotate(-6deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.trp-exp { font-size: .92rem; line-height: 1.4; margin: 0; opacity: .9; }
+.trp-arg { margin: 0; padding: 8px 10px; border-left: 3px solid #F2D27A; background: rgba(242,210,122,.1); font-style: italic; font-size: .92rem; border-radius: 0 8px 8px 0; }
+.trp-arg cite { display: block; font-style: normal; font-size: .8rem; opacity: .8; margin-top: 4px; }
+.trp-pie { text-align: center; }
+@media (max-width: 1000px) { .trp-bancas { grid-template-columns: repeat(2, 1fr); } }

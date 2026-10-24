@@ -61,8 +61,9 @@ export function brillar(db, sesion, ids) {
   const tarea = COLA.then(async () => {
     const quien = sesion ? sesion.grupoId + '/' + sesion.alumnoId : '';
     if (CACHE === null || CACHE_DE !== quien) {
+      if (sesion) recordarAlumno(sesion);
       CACHE = cieloLocal(); CACHE_DE = quien;
-      if (sesion) { recordarAlumno(sesion); try { const s = await getDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', CIELO_DOC)); if (s.exists()) CACHE = mezclar(CACHE, s.data().estrellas); } catch { /* sin red: seguimos con lo local */ } }
+      if (sesion) { try { const s = await getDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', CIELO_DOC)); if (s.exists()) CACHE = mezclar(CACHE, s.data().estrellas); } catch { /* sin red: seguimos con lo local */ } }
     }
     const antes = { ...CACHE }, nAntes = encendidas(antes);
     ids.forEach(id => { CACHE[id] = (CACHE[id] || 0) + 1; });

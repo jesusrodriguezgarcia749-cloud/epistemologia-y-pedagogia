@@ -200,3 +200,15 @@ export const ARENA = {
     { q: '¿Para qué sí sirve el pensamiento lineal en educación?', o: ['Para planificar una secuencia didáctica e identificar prerrequisitos', 'Para entender el clima de una escuela', 'Para explicar relaciones circulares', 'Para nada'], x: 'Se queda corto ante fenómenos complejos, con causas múltiples que se influyen entre sí.' },
   ] },
 };
+
+// ---------- ⚖️ Tribunal de la ciencia (en vivo): los casos y los veredictos vienen de data/laboratorio.json (casos, lentes).
+// Cada alumno es juez con la «toga» de un autor; la toga cambia en cada caso para que todos pasen por varios autores.
+export const TR_LENTES = ['viena', 'popper', 'kuhn', 'lakatos', 'feyerabend'];
+export const TR_VER = [['si', '✅', 'Es ciencia', '#3F7A4F'], ['no', '❌', 'No es ciencia', '#C0503F'], ['dep', '🤔', 'Depende', '#C8952E']];
+export const TR_MIN_ARG = 8;
+const hashTxt = s => [...String(s)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+export const trLente = (alumnoId, idx) => TR_LENTES[(hashTxt(alumnoId) + idx) % TR_LENTES.length];
+const nPal = t => (String(t || '').trim().match(/\S+/g) || []).length;
+// 100 si coincide con lo que diría su autor; +50 si argumentó con al menos TR_MIN_ARG palabras.
+export const trPuntos = (r, caso) => !r || !caso ? 0 : (r.v === (caso.v[r.l] || [])[0] ? 100 : 0) + (nPal(r.arg) >= TR_MIN_ARG ? 50 : 0);
+export const TR_CASOS_SUGERIDOS = ['astro', 'psico', 'vak', 'homeo', 'milpa', 'ia'];

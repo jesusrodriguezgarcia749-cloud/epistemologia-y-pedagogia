@@ -13,7 +13,7 @@ import { firebaseConfig } from "./firebase-config.js";
 import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { vistaRapida } from "./matriz.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS } from "./tareas-datos.js";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -122,6 +122,7 @@ function cargarTabActiva() {
   if (tab === 'equipos') cargarEquiposTab();
   if (tab === 'monitor') iniciarMonitor(); else detenerMonitor();
   if (tab === 'arena') iniciarArena(); else detenerArena();
+  if (tab === 'tribunal') iniciarTribunal(); else detenerTribunal();
   if (tab === 'coev') iniciarCoev(); else detenerCoev();
   if (tab === 'participacion') cargarCatalogo('participaciones');
   if (tab === 'proyecto') cargarProyecto();
@@ -2071,6 +2072,97 @@ let arRevelando = false;
 async function arRevelar() { if (arRevelando || !AR.sala || AR.sala.estado !== 'pregunta') return; arRevelando = true; clearInterval(AR.reloj); try { await arEstado({ estado: 'revela' }); } finally { arRevelando = false; } }
 function abrirProyArena() { document.getElementById('ar-proy').hidden = false; document.body.classList.add('con-qr'); pintarArena(); }
 on('ar-proy-cerrar', 'click', () => { document.getElementById('ar-proy').hidden = true; document.body.classList.remove('con-qr'); });
+
+// ---- ⚖️ Tribunal de la ciencia: grupos/{g}/arena/tribunal = {estado, ronda, casos[], idx, dur, t0, revelados[]};
+// cada alumno en .../tribunal/jugadores/{a}: v.{caso} = {l, v, arg}. Casos y veredictos: data/laboratorio.json.
+const TR = { sala: null, jug: [], subs: [], reloj: null, L: null };
+const trRef = () => doc(db, 'grupos', grupoActivo, 'arena', 'tribunal');
+const mdA = t => escaparHTML(t || '').replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<em>$1</em>');
+const trPal = t => (String(t || '').trim().match(/\S+/g) || []).length;
+async function iniciarTribunal() {
+  const cont = document.getElementById('tr-panel'); if (!cont) return;
+  if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  detenerTribunal();
+  if (!TR.L) { try { TR.L = await fetch('data/laboratorio.json').then(r => r.json()); } catch { cont.innerHTML = '<p class="empty-inline">No se pudieron cargar los casos.</p>'; return; } }
+  TR.subs.push(onSnapshot(trRef(), sn => { TR.sala = sn.exists() ? sn.data() : null; pintarTribunal(); }, () => {}));
+  TR.subs.push(onSnapshot(collection(db, 'grupos', grupoActivo, 'arena', 'tribunal', 'jugadores'), sn => { TR.jug = sn.docs.map(d => ({ id: d.id, ...d.data() })); pintarTribunal(true); }, () => {}));
+}
+function detenerTribunal() { TR.subs.forEach(u => u()); TR.subs = []; clearInterval(TR.reloj); TR.reloj = null; }
+const trJug = () => TR.jug.filter(j => TR.sala && j.ronda === TR.sala.ronda);
+const trCaso = id => TR.L.casos.find(c => c.id === id);
+const trAutor = id => TR.L.autores.find(a => a.id === id) || { nombre: id, fam: '' };
+const trTot = j => Object.entries(j.v || {}).reduce((t, [c, r]) => t + ((TR.sala.revelados || []).includes(c) ? trPuntos(r, trCaso(c)) : 0), 0);
+async function trEstado(c) { await setDoc(trRef(), c, { merge: true }); }
+function pintarTribunal(soloJug) {
+  const cont = document.getElementById('tr-panel'); if (!cont || !TR.L) return;
+  const S = TR.sala, js = S ? trJug() : [];
+  const caso = S && trCaso((S.casos || [])[S.idx]);
+  if (soloJug && S && S.estado === 'caso' && caso) { const el = document.getElementById('tr-votos'); if (el) { el.textContent = `${js.filter(j => (j.v || {})[caso.id]).length} de ${js.length} jueces votaron`; TR_LENTES.forEach(l => { const b = document.querySelector(`[data-banca="${l}"] .trp-n`); if (b) b.textContent = js.filter(j => ((j.v || {})[caso.id] || {}).l === l).length; }); } return; }
+  if (soloJug && S && S.estado === 'espera') { const el = document.getElementById('ar-unidos'); if (el) el.innerHTML = arUnidosHTML(js); return; }
+  clearInterval(TR.reloj); TR.reloj = null;
+  const proy = document.getElementById('tr-proy');
+  if (!S || !S.estado || S.estado === 'cerrada') {
+    cont.innerHTML = `<div class="bloques-activos-card"><h3 class="section-title" style="margin-top:0">⚖️ Abrir el Tribunal de la ciencia</h3>
+      <p class="field-hint">Proyectas un caso; cada alumno, desde su celular (Tareas → ⚖️ Tribunal), recibe la «toga» de un autor —Círculo de Viena, Popper, Kuhn, Lakatos o Feyerabend— y vota si el caso es ciencia <b>según ese autor</b>, con su argumento. La toga cambia en cada caso. Al dictar sentencia se ve cómo votó cada banca, qué habría dicho de verdad cada autor y el mejor argumento. Puntos: 100 por juzgar como su autor y 50 por argumentar con ${TR_MIN_ARG} palabras o más; cada acierto enciende la estrella de ese autor en su cielo.</p>
+      <p class="field-label">Casos (en este orden)</p><div class="tr-elige">${TR.L.casos.map(c => `<label><input type="checkbox" value="${c.id}" ${TR_CASOS_SUGERIDOS.includes(c.id) ? 'checked' : ''}> ${escaparHTML(c.titulo)}</label>`).join('')}</div>
+      <label class="field-label" for="tr-dur">Tiempo para deliberar</label><select id="tr-dur"><option value="60">1 minuto</option><option value="90" selected>1 minuto y medio</option><option value="120">2 minutos</option><option value="180">3 minutos</option></select>
+      <button type="button" class="btn btn-primary btn-block" id="tr-abrir" style="margin-top:12px">Abrir la sala y proyectar</button></div>`;
+    document.getElementById('tr-abrir').addEventListener('click', async () => {
+      const casos = [...document.querySelectorAll('.tr-elige input:checked')].map(x => x.value);
+      if (!casos.length) { alert('Elige al menos un caso.'); return; }
+      await setDoc(trRef(), { estado: 'espera', casos, idx: 0, dur: Number(document.getElementById('tr-dur').value), ronda: 't' + Date.now().toString(36), revelados: [] });
+      abrirProyTribunal();
+    });
+    proy.hidden = true; document.body.classList.remove('con-qr');
+    return;
+  }
+  cont.innerHTML = `<div class="bloques-activos-card"><p><b>⚖️ Tribunal de la ciencia</b> · ${js.length} juez${js.length === 1 ? '' : 'es'} · ${{ espera: 'esperando jueces', caso: `deliberando el caso ${S.idx + 1} de ${S.casos.length}`, sentencia: `sentencia del caso ${S.idx + 1} de ${S.casos.length}`, fin: 'sesión terminada' }[S.estado] || ''}</p>
+    <div class="eq-acciones"><button type="button" class="btn btn-primary" id="tr-ver">📽️ Proyectar</button><button type="button" class="btn" id="tr-cerrar">Cerrar el Tribunal</button></div></div>`;
+  document.getElementById('tr-ver').addEventListener('click', abrirProyTribunal);
+  document.getElementById('tr-cerrar').addEventListener('click', async () => { if (confirm('¿Cerrar el Tribunal? Se borra el marcador de esta sesión en las pantallas.')) await trEstado({ estado: 'cerrada' }); });
+  const cuerpo = document.getElementById('tr-proy-cuerpo'), url = new URL('tareas.html#tribunal', location.href).href;
+  const ranking = () => js.map(j => ({ n: j.nombre, p: trTot(j) })).sort((a, b) => b.p - a.p);
+  const banca = (l, interior) => { const A = trAutor(l), Lt = TR.L.lentes.find(x => x.id === l) || {}, col = (TR.L.familias[A.fam] || {}).color || '#2E4A85'; return `<div class="trp-banca" data-banca="${l}" style="--c:${col}"><div class="trp-toga"><b>${escaparHTML(A.nombre)}</b><small>${escaparHTML(Lt.pregunta || '')}</small></div>${interior}</div>`; };
+  if (S.estado === 'espera') {
+    cuerpo.innerHTML = `<div class="arp-espera"><div><h2>⚖️ Tribunal de la ciencia</h2><p>Entra desde tu celular: <b>Aula Virtual → Tareas → ⚖️ Tribunal</b>, o escanea el código. Te pondrán la toga de un autor y juzgarás <b>como él</b>.</p><div id="ar-unidos" class="arp-unidos">${arUnidosHTML(js)}</div>
+      <button type="button" class="btn btn-primary arp-boton" id="tr-empezar">▶ Primer caso</button></div><div class="arp-qr">${qrSvg(url, { titulo: 'Tribunal' })}</div></div>`;
+    document.getElementById('tr-empezar').addEventListener('click', () => trEstado({ estado: 'caso', idx: 0, t0: Date.now() }));
+  } else if (S.estado === 'caso' && caso) {
+    const fin = (S.t0 || Date.now()) + S.dur * 1000, votos = js.filter(j => (j.v || {})[caso.id]);
+    cuerpo.innerHTML = `<div class="arp-cab"><span>⚖️ Caso ${S.idx + 1} de ${S.casos.length}</span><span class="arp-seg trp-seg" id="tr-seg"></span><span id="tr-votos">${votos.length} de ${js.length} jueces votaron</span></div>
+      <div class="trp-caso"><h2>${escaparHTML(caso.titulo)}</h2><p>${mdA(caso.texto)}</p></div>
+      <div class="trp-bancas">${TR_LENTES.map(l => banca(l, `<p class="trp-delib">🗳️ <span class="trp-n">${votos.filter(j => j.v[caso.id].l === l).length}</span> votos</p>`)).join('')}</div>
+      <div class="trp-pie"><button type="button" class="btn btn-primary arp-boton" id="tr-sentencia">⚖️ Dictar sentencia</button></div>`;
+    document.getElementById('tr-sentencia').addEventListener('click', () => trEstado({ estado: 'sentencia', revelados: [...new Set([...(S.revelados || []), caso.id])] }));
+    const seg = () => { const q = Math.max(0, Math.ceil((fin - Date.now()) / 1000)), el = document.getElementById('tr-seg'); if (el) { el.textContent = q ? `${Math.floor(q / 60)}:${String(q % 60).padStart(2, '0')}` : '⏱'; el.classList.toggle('fin', !q); } };
+    seg(); TR.reloj = setInterval(seg, 500);
+  } else if (S.estado === 'sentencia' && caso) {
+    const rk = ranking().slice(0, 5);
+    cuerpo.innerHTML = `<div class="arp-cab"><span>⚖️ Sentencia · caso ${S.idx + 1} de ${S.casos.length}</span><span>${escaparHTML(caso.titulo)}</span></div>
+      <div class="trp-bancas trp-sent">${TR_LENTES.map(l => {
+        const [ver, exp] = caso.v[l] || [], vs = js.map(j => (j.v || {})[caso.id]).filter(r => r && r.l === l), n = vs.length;
+        const cuenta = TR_VER.map(([k]) => vs.filter(r => r.v === k).length), V = TR_VER.find(x => x[0] === ver) || [];
+        const mejor = vs.filter(r => r.v === ver && trPal(r.arg) >= TR_MIN_ARG).sort((a, b) => trPal(b.arg) - trPal(a.arg))[0];
+        const quien = mejor ? (js.find(j => (j.v || {})[caso.id] === mejor) || {}).nombre : '';
+        return banca(l, `<div class="trp-votos">${TR_VER.map(([k, ico], i) => `<span class="${k === ver ? 'ok' : ''}" style="--c:${TR_VER[i][3]}"><i style="height:${n ? Math.round(100 * cuenta[i] / n) : 0}%"></i><b>${cuenta[i]}</b>${ico}</span>`).join('')}</div>
+          <p class="trp-ver" style="--c:${V[3]}">${V[1] || ''} ${escaparHTML(V[2] || '')}</p><p class="trp-exp">${mdA(exp)}</p>
+          ${mejor ? `<blockquote class="trp-arg">«${escaparHTML(mejor.arg)}»<cite>— ${escaparHTML((quien || '').split(' ')[0])}</cite></blockquote>` : ''}`);
+      }).join('')}</div>
+      ${caso.nota ? `<p class="arp-x">💡 ${mdA(caso.nota)}</p>` : ''}
+      <div class="arp-pie"><ol class="arp-top">${rk.map((x, k) => `<li><span>${['🥇', '🥈', '🥉', '4.º', '5.º'][k]}</span>${escaparHTML(x.n)}<b>${x.p}</b></li>`).join('')}</ol>
+      <button type="button" class="btn btn-primary arp-boton" id="tr-sig">${S.idx + 1 < S.casos.length ? 'Siguiente caso →' : '🏛️ Levantar la sesión'}</button></div>`;
+    document.getElementById('tr-sig').addEventListener('click', () => S.idx + 1 < S.casos.length ? trEstado({ estado: 'caso', idx: S.idx + 1, t0: Date.now() }) : trEstado({ estado: 'fin' }));
+  } else if (S.estado === 'fin') {
+    const rk = ranking().slice(0, 5);
+    cuerpo.innerHTML = `<div class="arp-fin"><h2>🏛️ ¡Se levanta la sesión!</h2><p>Los mejores jueces del Tribunal de la ciencia · ${js.length} jueces · ${S.casos.length} casos</p>
+      <ol class="arp-podio">${rk.map((x, k) => `<li class="p${k + 1}"><span>${['🥇', '🥈', '🥉', '4.º', '5.º'][k]}</span><b>${escaparHTML(x.n)}</b><em>${x.p} pts</em></li>`).join('')}</ol>
+      <p class="arp-x">No hay una sola respuesta para todos: cada autor traza la frontera de la ciencia en un lugar distinto. Ese es el corazón del Tema 4.</p>
+      <button type="button" class="btn arp-boton" id="tr-otra">Nueva sesión</button></div>`;
+    document.getElementById('tr-otra').addEventListener('click', () => trEstado({ estado: 'cerrada' }));
+  }
+}
+function abrirProyTribunal() { document.getElementById('tr-proy').hidden = false; document.body.classList.add('con-qr'); pintarTribunal(); }
+on('tr-proy-cerrar', 'click', () => { document.getElementById('tr-proy').hidden = true; document.body.classList.remove('con-qr'); });
 
 // ---- 🗣️ Coevaluación de las exposiciones: grupos/{g}.coev = {equipo, abierta}; cada alumno en alumnos/{a}/atlas/tarea-coev-{equipo}
 const CO = { subs: [], equipos: [], g: {}, evals: {}, fichas: {} };

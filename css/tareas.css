@@ -304,3 +304,22 @@ html[data-theme="dark"] .cu-positivista > span { color: #8DB6E0; } html[data-the
 .cielo-tarjeta { background: linear-gradient(135deg, #0E1428, #3B2F6B); }
 @keyframes ci-entra { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ci-aviso, .ci-rango { animation: none; } }
+
+/* ---------- ⚖️ Tribunal de la ciencia (alumno) */
+.tr-tarjeta { background: linear-gradient(135deg, #2B1D12, #6B3F1F); }
+.tr-toga { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: linear-gradient(135deg, #16213A, #2B2347); color: #fff; border-left: 6px solid var(--c); box-shadow: var(--shadow-card); animation: ci-entra .5s ease-out; }
+.tr-toga > span { font-size: 2.2rem; }
+.tr-toga small { display: block; opacity: .75; font-size: .8rem; }
+.tr-toga b { display: block; font-family: var(--font-display, serif); font-size: 1.35rem; color: #F6E7B8; }
+.tr-toga em { display: block; font-style: normal; font-size: .9rem; opacity: .9; }
+.tr-caso { margin: 12px 0 8px; padding: 14px 16px; border-radius: 14px; background: var(--cream); border: 1px solid var(--line); }
+.tr-caso h3 { margin: 0 0 6px; font-size: 1.2rem; }
+.tr-caso p { margin: 0; line-height: 1.55; }
+.tr-frase { font-size: .9rem; color: var(--ink-soft); margin: 6px 0; }
+.tr-pide { font-weight: 700; margin: 12px 0 8px; }
+.tr-ver { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+.tr-ver button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 6px; border-radius: 12px; border: 2px solid var(--c); background: var(--cream); color: var(--ink); font: 700 .92rem var(--font-body); cursor: pointer; }
+.tr-ver button span { font-size: 1.5rem; }
+.tr-ver button[aria-pressed="true"] { background: var(--c); color: #fff; box-shadow: 0 4px 0 rgba(0,0,0,.2); transform: translateY(-2px); }
+.tr-nota { text-align: left; font-size: .9rem; padding: 10px 12px; border-radius: 10px; background: rgba(217,164,65,.14); }
+.tr-estado { font-size: .88rem; color: var(--ink-soft); }
