@@ -2017,6 +2017,12 @@ on('prueba-borrar', 'click', async () => {
     msg.textContent = n ? `✓ Listo: ${n === 1 ? 'se borró 1 registro' : `se borraron ${n} registros`} de prueba. Si tenías Tareas abierto como alumno de prueba, dale «Salir» para limpiar también ese navegador.` : 'No había nada de prueba en este grupo.';
   } catch (e) { msg.textContent = 'No se pudo borrar todo: ' + (e.message || e); }
 });
+on('cielo-mision', 'change', async e => {
+  if (!grupoActivo) return;
+  const m = document.getElementById('cielo-mision-msg'); m.hidden = false;
+  try { await setDoc(doc(db, 'grupos', grupoActivo), { cieloMision: e.target.value }, { merge: true }); m.textContent = '✓ Misión guardada: tus alumnos la verán en Tareas → 🔭 Misión de la semana y en su cielo.'; }
+  catch (err) { m.textContent = 'No se pudo guardar: ' + (err.message || err); }
+});
 document.getElementById('cielo-proyectar')?.addEventListener('click', () => {
   if (!grupoActivo) { alert('Elige un grupo primero.'); return; }
   window.open(`laboratorio.html?cielo=${encodeURIComponent(grupoActivo)}#constelacion`, '_blank', 'noopener');
@@ -2024,6 +2030,7 @@ document.getElementById('cielo-proyectar')?.addEventListener('click', () => {
 function iniciarArena() {
   const cont = document.getElementById('ar-panel'); if (!cont) return;
   if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  getDoc(doc(db, 'grupos', grupoActivo)).then(g => { const sel = document.getElementById('cielo-mision'); if (sel) sel.value = (g.exists() && g.data().cieloMision) || 'auto'; }).catch(() => {});
   detenerArena();
   AR.grupo = grupoActivo;
   AR.subs.push(onSnapshot(arRef(), sn => { AR.sala = sn.exists() ? sn.data() : null; pintarArena(); }, () => {}));

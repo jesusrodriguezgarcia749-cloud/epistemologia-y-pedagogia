@@ -8,7 +8,7 @@ import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, co
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE } from "./tareas-datos.js";
 import { DocITES } from "./docx-ites.js";
-import { brillar, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA } from "./cielo.js";
+import { brillar, descubrir, miCielo, estadoAutor, misionPorFecha, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA, TIPOS_PARA_ENCENDER, NOMBRE_TIPO, CLAVES_AUTOR } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig), db = getFirestore(app), auth = getAuth(app);
@@ -126,9 +126,11 @@ async function portada() {
   const actual = [...TEMAS_TAREAS].reverse().find(t => t.fecha <= hoy) || TEMAS_TAREAS[0];
   $('#cl-acceso').innerHTML = (sesion ? `<div class="tq-quien">👤 <b>${esc(sesion.nombre)}</b> · aquí ves tu avance y tus calificaciones <button type="button" class="ma-link" id="tq-salir">Salir</button></div>`
     : `<div class="tq-quien">Entra con tu nombre y PIN para ver tu avance, entregar y conocer tus calificaciones. <button type="button" class="btn-at" id="tq-entrar">Entrar</button></div>`)
+    + `<a class="ar-tarjeta mi-tarjeta" href="#mision"><span>🔭</span><div><b>Misión de la semana</b><small id="mi-tarjeta-txt">Descubre a los autores del tema con su gancho para recordarlos y enciende sus estrellas.</small></div><em>Empezar →</em></a>`
     + `<a class="ar-tarjeta" href="#arena"><span>⚡</span><div><b>Arena en vivo</b><small>Cuando tu maestro abra la Arena, entra aquí: preguntas en vivo contra el reloj, con podio.</small></div><em>Entrar →</em></a>`
     + `<a class="ar-tarjeta tr-tarjeta" href="#tribunal"><span>⚖️</span><div><b>Tribunal de la ciencia</b><small>En vivo: te ponen la toga de un autor (Popper, Kuhn, Lakatos…) y dictas si un caso es ciencia o no, con tu argumento.</small></div><em>Entrar →</em></a>`
     + tarjetaCielo();
+  textoMision();
   if (sesion) $('#tq-salir').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } olvidarAlumno(); sesion = null; EQS = null; if (unsubGrupo) unsubGrupo(); portada(); });
   else $('#tq-entrar').addEventListener('click', () => formAcceso($('#cl-acceso'), portada));
   $('#cl-sesiones').innerHTML = TEMAS_TAREAS.map((t, i) => `<details class="tq-tema" data-tema="${i}" ${t === actual ? 'open' : ''}><summary><span class="tq-num">${esc(t.tema)}</span><span><b>${esc(t.titulo)}</b><small>${esc(t.fechaTexto)} · ${t.acts.filter(califica).length} tarea${t.acts.filter(califica).length === 1 ? '' : 's'}</small></span></summary>
@@ -164,6 +166,7 @@ function ruta() {
   if (detener) { detener(); detener = null; }
   const mu = location.hash.match(/^#unir-([A-Z0-9]{4})$/i);
   if (mu) return unirPorQR(mu[1].toUpperCase());
+  if (id === 'mision') { $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true; $('#cl-actividad').innerHTML = '<a class="cl-volver" href="#">← Todas las tareas</a><h2 class="cl-h2">🔭 Misión de la semana</h2><div id="cl-cuerpo"></div>'; actMision($('#cl-cuerpo')); window.scrollTo({ top: 0 }); return; }
   if (id === 'tribunal') { $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true; $('#cl-actividad').innerHTML = '<a class="cl-volver" href="#">← Todas las tareas</a><h2 class="cl-h2">⚖️ Tribunal de la ciencia</h2><div id="cl-cuerpo"></div>'; actTribunal($('#cl-cuerpo')); window.scrollTo({ top: 0 }); return; }
   if (id === 'arena') { $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true; $('#cl-actividad').innerHTML = '<a class="cl-volver" href="#">← Todas las tareas</a><h2 class="cl-h2">⚡ Arena en vivo</h2><div id="cl-cuerpo"></div>'; actArena($('#cl-cuerpo')); window.scrollTo({ top: 0 }); return; }
   const a = TAREAS_DIG[id];
@@ -330,10 +333,16 @@ function cuadro(cont, eq, a) {
 // Aviso pequeño bajo la explicación: qué estrella se encendió o ganó brillo, y si subió de rango.
 function avisoBrillo(r, nombre) {
   const nombreDe = id => (nombre && nombre(id)) || id;
-  const ids = Object.keys(r.despues).filter(id => r.despues[id] !== (r.antes[id] || 0));
-  if (!ids.length) return '';
-  const linea = id => { const n = r.despues[id]; return r.nuevas.includes(id) ? `🌟 <b>¡Encendiste la estrella de ${esc(nombreDe(id))}!</b>` : n === NOVA ? `💥 <b>¡${esc(nombreDe(id))} es supernova!</b>` : n === BRILLA ? `✨ <b>${esc(nombreDe(id))} ya brilla</b>` : `✦ ${esc(nombreDe(id))} +1 brillo <small>(${Math.min(n, NOVA)}/${NOVA})</small>`; };
-  return `<div class="ci-aviso ${r.nuevas.length ? 'nueva' : ''}">${ids.map(linea).join('<br>')}<small>Tu cielo: ${r.total} de ${TOTAL_ESTRELLAS}</small></div>${r.subeRango ? `<div class="ci-rango">${r.subeRango.ico} <b>¡Subiste de rango: ${esc(r.subeRango.nombre)}!</b></div>` : ''}`;
+  if (!r || !r.progreso || !r.progreso.length) return '';
+  const linea = x => {
+    const n = esc(nombreDe(x.id)), a = x.ahora;
+    if (x.nueva) return `🌟 <b>¡Encendiste la estrella de ${n}!</b>`;
+    if (a.est === 'nova' && x.antes.est !== 'nova') return `💥 <b>¡${n} es supernova!</b>`;
+    if (a.est === 'brilla' && x.antes.est !== 'brilla') return `✨ <b>${n} ya brilla</b>`;
+    if (!a.encendida) return x.tipo === 'pista' ? `💡 ${n}: acierto con pista, medio brillo <small>(con pista no cuenta como forma nueva)</small>` : `✦ <b>${n}</b>: chispa ${a.tipos} de ${TIPOS_PARA_ENCENDER} <small>(${x.tipoNuevo ? `ya acertaste ${NOMBRE_TIPO[x.tipo] || 'aquí'}` : `otra vez ${NOMBRE_TIPO[x.tipo] || 'aquí'}`}; acierta sobre él en otra forma —su frase, su idea, su concepto, su ejemplo, la Arena…— para encenderla)</small>`;
+    return `✦ ${n} +${x.tipo === 'pista' ? '½' : '1'} brillo <small>(${Math.min(a.pts, NOVA)}/${NOVA})</small>`;
+  };
+  return `<div class="ci-aviso ${r.nuevas.length ? 'nueva' : ''}">${r.progreso.map(linea).join('<br>')}<small>Tu cielo: ${r.total} de ${TOTAL_ESTRELLAS} encendidas</small></div>${r.subeRango ? `<div class="ci-rango">${r.subeRango.ico} <b>¡Subiste de rango: ${esc(r.subeRango.nombre)}!</b></div>` : ''}`;
 }
 function juegoPreguntas(cont, C) {
   const SEG = C.seg || 15;
@@ -361,7 +370,9 @@ function juegoPreguntas(cont, C) {
     cont.innerHTML = `<div id="ap-mk">${marcador()}</div>${reto ? '<div class="ap-tiempo"><i id="ap-t"></i></div>' : ''}
       <div class="ap-carta jp-carta">${P.carta}</div>
       <div class="jp-opciones ${P.clase || ''}">${P.opciones.map(o => `<button type="button" class="ap-bot jp-op" data-v="${esc(o.v)}" ${o.style ? `style="${o.style}"` : ''}>${o.t}</button>`).join('')}</div>
+      ${C.pista && C.pista(x) ? `<button type="button" class="jp-pista-b" id="jp-pista">💡 Pista <small>(el acierto vale medio)</small></button><div class="jp-pista-caja" id="jp-pista-t" hidden></div>` : ''}
       <div id="ap-fb" aria-live="polite"></div>`;
+    const bp = $('#jp-pista'); if (bp) bp.addEventListener('click', () => { P.pista = true; bp.hidden = true; const t = $('#jp-pista-t'); t.hidden = false; t.innerHTML = C.pista(x); });
     $$('.jp-op', cont).forEach(b => b.addEventListener('click', () => responder(b.dataset.v, P)));
     if (reto) { t0 = Date.now(); reloj = setInterval(() => { const q = Math.max(0, SEG - (Date.now() - t0) / 1000), b = $('#ap-t'); if (b) b.style.width = (100 * q / SEG) + '%'; if (q <= 0) { parar(); responder(null, P); } }, 100); }
   };
@@ -373,7 +384,9 @@ function juegoPreguntas(cont, C) {
     const tit = v === null ? '⏱ Se acabó el tiempo.' : ok ? (C.bien ? C.bien(x, bien) : '¡Correcto!') : (C.mal ? C.mal(x, malos) : 'No es esa.');
     $('#ap-fb').innerHTML = `<div class="aviso ${ok ? 'ok' : 'mal'}"><strong>${tit}</strong>${C.explicar(x, ok)}</div><div id="jp-extra"></div><button class="btn-at" id="ap-sig" type="button">${terminado() || i + 1 >= items.length ? 'Ver resultado' : 'Siguiente →'}</button>`;
     if (C.despues) C.despues(x, v, $('#jp-extra'));
-    if (ok && C.estrellas) { const ex = $('#jp-extra'); brillar(db, sesion, C.estrellas(x)).then(r => { r.nuevas.forEach(id => nuevasRonda.add(id)); if (ex && ex.isConnected) ex.insertAdjacentHTML('beforeend', avisoBrillo(r, C.nombreAutor)); }).catch(() => {}); }
+    const pb = $('#jp-pista'); if (pb) pb.hidden = true;
+    if (!ok && C.tarjeta) $('#jp-extra').insertAdjacentHTML('beforeend', C.tarjeta(x));
+    if (ok && C.estrellas) { const ex = $('#jp-extra'); brillar(db, sesion, C.estrellas(x), C.tipo ? C.tipo(x) : C.clave, { pista: !!P.pista }).then(r => { r.nuevas.forEach(id => nuevasRonda.add(id)); if (ex && ex.isConnected) ex.insertAdjacentHTML('beforeend', avisoBrillo(r, C.nombreAutor)); }).catch(() => {}); }
     $('#ap-mk').innerHTML = marcador();
     if (C.escena) C.escena(ok, bien, malos);
     $('#ap-sig').addEventListener('click', () => { i++; pregunta(); }); $('#ap-sig').focus({ preventScroll: true });
@@ -430,7 +443,7 @@ function actQueParadigma(cont) {
       { id: 'experto', n: 'Experto', ico: '🏆', preg: 16, desc: 'Todo mezclado, con los autores y los tres intereses de Habermas.', filtro: () => true },
     ],
     items: QUE_PARADIGMA,
-    estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : [REPRESENTA[x.g][x.c]]; }, nombreAutor,
+    estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : [REPRESENTA[x.g][x.c]]; }, tipo: () => 'paradigma', nombreAutor,
     preparar: x => ({ carta: `<span class="ap-emo">${x.e}</span><b class="jp-q">${esc(x.q)}</b>`, opciones: PARADIGMAS_OP[x.g].map(([k, n, col]) => ({ v: k, t: esc(n), style: `--c:${col}` })), correctas: [x.c], clase: 'jp-infl' }),
     mal: x => `No: es ${nom(x.g, x.c).toLowerCase()}.`,
     explicar: x => `<p class="ap-dato">${esc(x.x)}</p>`,
@@ -482,7 +495,7 @@ function actArena(cont) {
     }
     if (S.estado === 'revela' && P) {
       const mia = (YO.r || {})[S.idx], ok = mia && mia.o === 0, gan = arPuntos(mia, S.dur), cl = S.ronda + ':' + S.idx;
-      if (ok && !brillados.has(cl)) { brillados.add(cl); brillar(db, sesion, autoresEn(P.q, P.o[0], P.x)).then(r => { avisos[cl] = avisoBrillo(r, nombreAutor); const c = $('#ar-cielo', cont); if (c) c.innerHTML = avisos[cl]; }).catch(() => {}); }
+      if (ok && !brillados.has(cl)) { brillados.add(cl); brillar(db, sesion, autoresEn(P.q, P.o[0], P.x), 'arena').then(r => { avisos[cl] = avisoBrillo(r, nombreAutor); const c = $('#ar-cielo', cont); if (c) c.innerHTML = avisos[cl]; }).catch(() => {}); }
       const ms = x => x && (x.toMillis ? x.toMillis() : typeof x === 'number' ? x : 0);
       if (!mia && ms(YO.unido) && S.t0 && ms(YO.unido) > S.t0) { cont.innerHTML = `<div class="ar-espera"><span>👋</span><b>Llegaste a media pregunta</b><p>Ya estás dentro de la Arena. En la siguiente pregunta juegas: mira la pantalla del salón.</p><p class="ap-dato">La respuesta de esta era: <b>${esc(P.o[0])}</b></p></div>`; return; }
       cont.innerHTML = `<div class="ar-res ${ok ? 'ok' : 'mal'}"><span>${ok ? '✅' : mia ? '❌' : '⏱'}</span><b>${ok ? `¡Correcto! +${gan}` : mia ? 'Incorrecto' : 'No respondiste a tiempo'}</b>
@@ -553,7 +566,7 @@ function actTribunal(cont) {
     parar(); pintado = clave;
     if (S.estado === 'sentencia' && caso) {
       const rL = mio ? mio.l : l, [ver, exp] = caso.v[rL] || [], ok = mio && mio.v === ver, pts = trPuntos(mio, caso), L = lugar(), V = TR_VER.find(x => x[0] === ver) || [];
-      if (ok && !brillados.has(clave)) { brillados.add(clave); brillar(db, sesion, [rL]).then(r => { avisos[clave] = avisoBrillo(r, nombreAutor); const c = $('#tr-cielo', cont); if (c) c.innerHTML = avisos[clave]; }).catch(() => {}); }
+      if (ok && !brillados.has(clave)) { brillados.add(clave); brillar(db, sesion, [rL], 'tribunal').then(r => { avisos[clave] = avisoBrillo(r, nombreAutor); const c = $('#tr-cielo', cont); if (c) c.innerHTML = avisos[clave]; }).catch(() => {}); }
       cont.innerHTML = `<div class="ar-res ${ok ? 'ok' : 'mal'}"><span>${ok ? '⚖️' : mio ? '❌' : '⏱'}</span><b>${ok ? `¡Juzgaste como ${esc(autor(rL).nombre)}! +${pts}` : mio ? `${esc(autor(rL).nombre)} habría dicho otra cosa${pts ? ` · +${pts} por argumentar` : ''}` : 'No votaste en este caso'}</b>
         <p>Veredicto de ${esc(autor(rL).nombre)}: <b>${V[1] || ''} ${esc(V[2] || '')}</b></p><p class="ap-dato">${mdTxt(exp || '')}</p>
         ${caso.nota ? `<p class="tr-nota">💡 ${mdTxt(caso.nota)}</p>` : ''}
@@ -574,6 +587,116 @@ function actTribunal(cont) {
     subs.push(onSnapshot(yoRef, sn => { YO = sn.exists() ? sn.data() : null; if (S) pintar(); }, () => {}));
     subs.push(onSnapshot(collection(db, 'grupos', g, 'arena', 'tribunal', 'jugadores'), sn => { J = sn.docs.map(d => ({ id: d.id, ...d.data() })); if (S && S.estado !== 'caso') pintar(); }, () => {}));
   });
+}
+
+// ======================================================= 🔭 MISIÓN DE LA SEMANA: descubre → practica → enciende
+// Pocos autores (los del tema), cada uno con su gancho de memoria (data/laboratorio.json: autores[].gancho, misiones[]).
+// Una estrella se enciende al acertar sobre el autor en dos formas distintas; con pista vale medio.
+const famColor = a => ((LAB && LAB.familias[a.fam]) || {}).color || '#2E4A85';
+function tarjetaAutor(a, mini) {
+  const g = a.gancho;
+  if (!g) return `<div class="gt-tarjeta ${mini ? 'mini' : ''}" style="--c:${famColor(a)}"><span class="gt-ico">✦</span><div><small>${mini ? 'Era…' : 'Autor'}</small><b>${esc(a.nombre)}</b><p>«${esc(a.frase)}»</p>${(a.ideas || [])[0] ? `<p class="gt-aula">💡 ${mdTxt(a.ideas[0].t)}: ${mdTxt(a.ideas[0].x)}</p>` : ''}</div></div>`;
+  return `<div class="gt-tarjeta ${mini ? 'mini' : ''}" style="--c:${famColor(a)}"><span class="gt-ico">${g.ico}</span><div><small>${mini ? 'Era… recuérdalo así:' : 'Su gancho'}</small><b>${esc(a.nombre)}</b><em>«${esc(g.img)}» · palabra llave: <strong>${esc(g.llave)}</strong></em>
+    <p>${esc(g.idea)}</p>${mini ? '' : `<p class="gt-aula">🏫 ${esc(g.aula)}</p>`}<p class="gt-rec">🧠 ${esc(g.recuerda)}</p></div></div>`;
+}
+const pistaDe = (a, tipo) => a.gancho ? (tipo === 'gancho' ? `Su palabra llave: <b>${esc(a.gancho.llave)}</b>` : `Piensa en… <b>${a.gancho.ico} ${esc(a.gancho.img)}</b>`) : `Es de la corriente: <b>${esc(((LAB.familias[a.fam]) || {}).nombre || '')}</b>`;
+let RE_NOMBRES = null;
+const tapar = t => { RE_NOMBRES = RE_NOMBRES || new RegExp(`(${Object.values(CLAVES_AUTOR).flat().map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})\\p{L}*`, 'gu'); return String(t || '').replace(RE_NOMBRES, '[este autor]').replace(/\*\*?/g, ''); };
+const EST_TXT = { apagada: ['🌑', 'Sin descubrir'], descubierta: ['👀', 'Descubierta'], chispa: ['✨', 'Chispa'], encendida: ['🌟', 'Encendida'], brilla: ['💫', 'Brilla'], nova: ['💥', 'Supernova'] };
+async function misionActiva() {
+  if (sesion) { try { const g = await getDoc(doc(db, 'grupos', sesion.grupoId)); const m = g.exists() && g.data().cieloMision; if (m && m !== 'auto') return m; } catch { /* */ } }
+  return misionPorFecha();
+}
+async function textoMision() {
+  const el = $('#mi-tarjeta-txt'); if (!el) return;
+  await cargarLab(); if (!LAB || !LAB.misiones) return;
+  const mid = await misionActiva(), M = LAB.misiones.find(m => m.id === mid) || LAB.misiones[0], S = await miCielo(db, sesion);
+  const on = M.autores.filter(id => estadoAutor(S, id).encendida).length;
+  if ($('#mi-tarjeta-txt')) $('#mi-tarjeta-txt').innerHTML = `<b>${esc(M.titulo)}</b> · ${on} de ${M.autores.length} estrellas encendidas. Descubre a cada autor con su gancho y enciéndelo.`;
+}
+function itemsMision(M) {
+  const out = [];
+  M.autores.map(id => LAB.autores.find(a => a.id === id)).filter(Boolean).forEach(a => {
+    out.push({ a, tipo: 'frase', q: `«${a.frase}»`, ico: '💬', pre: '¿Quién lo dijo?' });
+    if (a.gancho) out.push({ a, tipo: 'gancho', q: `${a.gancho.ico} «${a.gancho.img}»`, ico: '🧠', pre: '¿De quién es este gancho?' });
+    (a.ideas || []).forEach(x => out.push({ a, tipo: 'idea', q: `${tapar(x.t)}: ${tapar(x.x)}`, ico: '💡', pre: '¿De quién es esta idea?' }));
+    (a.conceptos || []).forEach(c => out.push({ a, tipo: 'concepto', q: `«${tapar(c.t)}»: ${tapar(c.d)}`, ico: '🔑', pre: '¿Qué autor propuso este concepto?' }));
+    if (a.aula) out.push({ a, tipo: 'aula', q: tapar(a.gancho ? a.gancho.aula : a.aula), ico: '🏫', pre: '¿Qué autor está detrás de este ejemplo?' });
+    if ((a.obras || [])[0]) out.push({ a, tipo: 'obra', q: a.obras[0], ico: '📖', pre: '¿Quién escribió…?' });
+  });
+  return out;
+}
+async function actMision(cont, elegida) {
+  cont.innerHTML = '<p class="atlas-ayuda">Preparando la misión…</p>';
+  await cargarLab(); if (!LAB || !LAB.misiones) { cont.innerHTML = '<p class="ma-msg mal">No se pudo cargar la misión. Revisa tu conexión.</p>'; return; }
+  const activa = await misionActiva(), M = LAB.misiones.find(m => m.id === (elegida || activa)) || LAB.misiones[0];
+  const A = id => LAB.autores.find(a => a.id === id);
+  let S = await miCielo(db, sesion);
+  const inicio = async () => {
+    if (detener) { detener(); detener = null; }
+    S = await miCielo(db, sesion);
+    const est = id => estadoAutor(S, id), on = M.autores.filter(id => est(id).encendida).length, porDesc = M.autores.filter(id => est(id).est === 'apagada');
+    cont.innerHTML = `${LAB.misiones.length > 1 ? `<div class="atlas-zoom mi-chips">${LAB.misiones.map(m => `<button type="button" class="chip-at" data-m="${m.id}" aria-pressed="${m.id === M.id}">${m.id === activa ? '⭐ ' : ''}${esc(m.titulo.split('·')[0].trim())}</button>`).join('')}</div>` : ''}
+      <div class="mi-cab"><b>${esc(M.titulo)}</b><p>${esc(M.desc)}</p><div class="cp-barra mi-barra"><i style="width:${Math.round(100 * on / M.autores.length)}%"></i></div><small>${on} de ${M.autores.length} estrellas encendidas</small></div>
+      <ol class="mi-pasos"><li><b>1. Descubre</b> a cada autor con su gancho: una imagen para no olvidarlo.</li><li><b>2. Practica</b>: frases, ideas, conceptos y ejemplos. Para encender una estrella hay que acertar sobre el autor en <b>${TIPOS_PARA_ENCENDER} formas distintas</b>: adivinar no alcanza.</li><li><b>3. Brilla</b>: cada acierto le suma brillo (con 💡 pista vale medio).</li></ol>
+      <div class="mi-btns"><button type="button" class="btn-at" id="mi-desc">1️⃣ Descubrir${porDesc.length ? ` (${porDesc.length} sin descubrir)` : ' de nuevo'}</button><button type="button" class="btn-ruta" id="mi-prac">2️⃣ Practicar y encender</button></div>
+      <div class="mi-autores">${M.autores.map(id => { const a = A(id), e = est(id), [ico, t] = EST_TXT[e.est]; return `<button type="button" class="mi-autor est-${e.est}" data-id="${id}" style="--c:${famColor(a)}"><span>${a.gancho ? a.gancho.ico : '✦'}</span><b>${esc(a.nombre)}</b><small>${ico} ${t}${!e.encendida && e.tipos ? ` · ${e.tipos} de ${TIPOS_PARA_ENCENDER}` : e.encendida ? ` · brillo ${Math.min(e.pts, NOVA)}/${NOVA}` : ''}</small></button>`; }).join('')}</div>
+      <p class="atlas-ayuda">Toca un autor para ver su tarjeta. Su ficha completa está en el <a href="laboratorio.html#constelacion">Laboratorio → Constelación</a>, junto con los ${LAB.autores.length} autores del curso, para quien quiera estudiar más.</p>`;
+    $$('.mi-chips [data-m]', cont).forEach(b => b.addEventListener('click', () => actMision(cont, b.dataset.m)));
+    $('#mi-desc').addEventListener('click', () => descubre(porDesc.length ? porDesc : M.autores, 0));
+    $('#mi-prac').addEventListener('click', practica);
+    $$('.mi-autor', cont).forEach(b => b.addEventListener('click', () => descubre([b.dataset.id], 0)));
+  };
+  const volver = '<button type="button" class="ma-link" id="mi-volver">← Volver a la misión</button>';
+  const descubre = (lista, k) => {
+    if (k >= lista.length) return inicio();
+    const a = A(lista[k]); descubrir(db, sesion, a.id);
+    cont.innerHTML = `${volver}<p class="mi-n">Autor ${k + 1} de ${lista.length}</p>${tarjetaAutor(a)}
+      <button type="button" class="btn-at" id="mi-listo">¡Lo tengo! Ponme a prueba →</button>`;
+    $('#mi-volver').addEventListener('click', inicio);
+    $('#mi-listo').addEventListener('click', () => {
+      // comprobación inmediata: una forma distinta de la tarjeta (su frase o un concepto), entre los autores de la misión
+      const conceptos = (a.conceptos || []), usarC = conceptos.length && Math.random() < .5, c = usarC ? conceptos[Math.floor(Math.random() * conceptos.length)] : null;
+      const x = usarC ? { a, tipo: 'concepto', ico: '🔑', pre: '¿Qué autor propuso este concepto?', q: `«${tapar(c.t)}»: ${tapar(c.d)}` } : { a, tipo: 'frase', ico: '💬', pre: '¿Quién lo dijo?', q: `«${a.frase}»` };
+      const ops = barajar([a, ...barajar(M.autores.filter(id => id !== a.id).map(A)).slice(0, 3)]);
+      cont.innerHTML = `${volver}<p class="mi-n">Autor ${k + 1} de ${lista.length} · ¿lo recuerdas?</p><div class="ap-carta jp-carta"><span class="ap-emo">${x.ico}</span><small class="jp-pista">${x.pre}</small><b class="jp-q">${esc(x.q)}</b></div>
+        <div class="jp-opciones jp-autores">${ops.map(o => `<button type="button" class="ap-bot jp-op" data-v="${o.id}" style="--c:${famColor(o)}">${esc(o.nombre)}</button>`).join('')}</div><div id="ap-fb"></div>`;
+      $('#mi-volver').addEventListener('click', inicio);
+      $$('.jp-op', cont).forEach(b => b.addEventListener('click', () => {
+        const ok = b.dataset.v === a.id;
+        $$('.jp-op', cont).forEach(o => { o.disabled = true; if (o.dataset.v === a.id) o.classList.add('ok'); else if (o === b) o.classList.add('mal'); });
+        $('#ap-fb').innerHTML = `<div class="aviso ${ok ? 'ok' : 'mal'}"><strong>${ok ? '¡Eso es!' : `Era ${esc(a.nombre)}.`}</strong>${a.gancho ? `<p class="ap-dato">🧠 ${esc(a.gancho.recuerda)}</p>` : ''}</div><div id="jp-extra"></div><button type="button" class="btn-at" id="mi-sig">${k + 1 < lista.length ? 'Siguiente autor →' : 'Ver mi misión'}</button>`;
+        if (ok) { const ex = $('#jp-extra'); brillar(db, sesion, [a.id], x.tipo).then(r => { if (ex.isConnected) ex.innerHTML = avisoBrillo(r, nombreAutor); }).catch(() => {}); }
+        $('#mi-sig').addEventListener('click', () => descubre(lista, k + 1));
+      }));
+    });
+    window.scrollTo({ top: 0 });
+  };
+  const practica = () => {
+    cont.innerHTML = `${volver}<div id="mi-juego"></div>`;
+    $('#mi-volver').addEventListener('click', inicio);
+    const opsDe = a => barajar([a, ...barajar(M.autores.filter(id => id !== a.id).map(A)).slice(0, 3)]);
+    juegoPreguntas($('#mi-juego'), {
+      clave: 'mision-' + M.id, seg: 20,
+      intro: `Preguntas solo de los ${M.autores.length} autores de la misión, de muchas formas. Recuerda: una estrella se enciende cuando aciertas sobre ese autor en <b>${TIPOS_PARA_ENCENDER} formas distintas</b>. Si fallas, verás su tarjeta: léela, porque vuelve a salir.`,
+      niveles: [
+        { id: 'mision', n: 'Misión', ico: '🔭', preg: 10, desc: 'Ganchos, frases, ideas, conceptos y ejemplos.', filtro: () => true },
+        { id: 'sin', n: 'Sin ganchos', ico: '🏆', preg: 12, desc: 'Solo ideas, conceptos y ejemplos en el aula: aquí se ve si de verdad lo sabes.', filtro: x => ['idea', 'concepto', 'aula'].includes(x.tipo) },
+      ],
+      items: itemsMision(M),
+      preparar: x => ({ carta: `<span class="ap-emo">${x.ico}</span><small class="jp-pista">${x.pre}</small><b class="jp-q">${esc(x.q)}</b>`, opciones: opsDe(x.a).map(o => ({ v: o.id, t: esc(o.nombre), style: `--c:${famColor(o)}` })), correctas: [x.a.id], clase: 'jp-autores' }),
+      mal: x => `No: es de ${esc(x.a.nombre)}.`,
+      bien: x => `¡Correcto! ${esc(x.a.nombre)}.`,
+      explicar: (x, ok) => ok && x.a.gancho ? `<p class="ap-dato">🧠 ${esc(x.a.gancho.recuerda)}</p>` : '',
+      tarjeta: x => tarjetaAutor(x.a, true),
+      pista: x => pistaDe(x.a, x.tipo),
+      estrellas: x => [x.a.id], tipo: x => x.tipo, nombreAutor,
+      repaso: x => `${x.a.gancho ? x.a.gancho.ico + ' ' : ''}<b>${esc(x.a.nombre)}</b>: ${esc(x.q).slice(0, 140)}`,
+      estudiar: { boton: 'Ver las tarjetas', intro: 'Las tarjetas de los autores de la misión. Su ficha completa está en el Laboratorio.', uno: 'autor', varios: 'autores', texto: x => x.a.nombre + ' ' + (x.a.gancho ? x.a.gancho.img + ' ' + x.a.gancho.llave : ''),
+        filtros: [['todos', 'Todos', x => x.tipo === 'frase']], fila: x => tarjetaAutor(x.a) },
+    });
+  };
+  inicio();
 }
 
 // ======================================================= 🗣️ COEVALUACIÓN DE LAS EXPOSICIONES (alumno)
@@ -628,7 +751,8 @@ async function actQuienLoDijo(cont) {
       { id: 'experto', n: 'Experto', ico: '🏆', preg: 20, desc: 'Los 55 autores, y también por sus obras.', filtro: () => true },
     ],
     items,
-    estrellas: x => [x.a.id], nombreAutor,
+    estrellas: x => [x.a.id], tipo: x => x.tipo, nombreAutor, tarjeta: x => tarjetaAutor(x.a, true),
+    pista: x => pistaDe(x.a, x.tipo),
     preparar: x => { const ops = barajar([x.a, ...distractores(x.a)]); return { carta: x.tipo === 'frase' ? `<span class="ap-emo">💬</span><b class="jp-q">«${esc(x.a.frase)}»</b>` : `<span class="ap-emo">📖</span><small class="jp-pista">¿Quién escribió…?</small><b class="jp-q">${esc(x.a.obras[0])}</b>`, opciones: ops.map(a => ({ v: a.id, t: esc(a.nombre), style: `--c:${(F[a.fam] || {}).color || '#3E5BA8'}` })), correctas: [x.a.id], clase: 'jp-infl jp-autores' }; },
     mal: x => `No: es de ${esc(x.a.nombre)}.`,
     explicar: x => `<p class="ap-orig"><b>${esc(x.a.nombre)}</b> (${esc(x.a.vida || '')}) · ${esc((F[x.a.fam] || {}).nombre || '')}</p><p class="ap-dato">${esc((x.a.obras || [])[0] || '')}${x.tipo === 'obra' ? ` · «${esc(x.a.frase)}»` : ''} · Temas ${esc((x.a.temas || []).join(', '))}. <a href="laboratorio.html" target="_blank" rel="noopener">Ver su ficha en la Constelación ↗</a></p>`,

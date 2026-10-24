@@ -270,3 +270,23 @@ html[data-theme="dark"] .ficha-cita-ayuda summary{color:var(--saffron);}
 #panel-constelacion:fullscreen .lab-ayuda,#panel-constelacion:fullscreen .ficha,#panel-constelacion:fullscreen .const-lista,#panel-constelacion:fullscreen #c-temas{display:none;}
 #panel-constelacion:fullscreen .const-leyenda{color:#C8D1E4;}
 body.cielo-grupo .lab-hero,body.cielo-grupo .lab-tabs,body.cielo-grupo #panel-constelacion > .lab-ayuda{display:none;}
+
+/* ---------- estados nuevos: descubierta, chispa, niebla y anillo de misión */
+.const-svg.mi-cielo .astro.descubierta .nucleo{fill:#56607E !important; stroke:#9AA6C8; stroke-dasharray:none;}
+.const-svg.mi-cielo .astro.descubierta .astro-t{fill:#A9B3CC;}
+.const-svg.mi-cielo .astro.chispa .halo{opacity:.22;}
+.const-svg.mi-cielo .astro.chispa .nucleo{opacity:.7; stroke:#F6E7B8; stroke-dasharray:2 2;}
+.const-svg.mi-cielo .astro.niebla{opacity:.38;}
+.const-svg.mi-cielo .astro.niebla .astro-t{font-weight:400;}
+.const-svg .astro.mision .nucleo{stroke:#F2C35B !important; stroke-width:3px; stroke-dasharray:none;}
+.const-svg.mi-cielo .astro.mision .astro-t{fill:#F6E7B8; font-weight:800;}
+.cp-mision{margin:10px 0; padding:10px 12px; border-radius:12px; background:rgba(242,195,91,.12); border:1px solid rgba(242,195,91,.35);}
+.cp-mision b{color:#F6E7B8;}
+.cp-mis-autores{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0;}
+.cp-mis-a{font:600 .82rem var(--font-body); padding:4px 10px; border-radius:99px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); color:#EEF1F8; cursor:pointer;}
+.cp-ir{font-weight:700;}
+.ficha-gancho{display:flex; gap:12px; align-items:flex-start; margin:6px 0 14px; padding:12px 14px; border-radius:12px; background:rgba(217,164,65,.12); border-left:5px solid var(--fam,#D9A441);}
+.ficha-gancho > span{font-size:2.4rem; line-height:1;}
+.ficha-gancho b{display:block; font-size:1.02rem;}
+.ficha-gancho p{margin:4px 0; font-size:.92rem;}
+.ficha-gancho-rec{font-weight:700;}

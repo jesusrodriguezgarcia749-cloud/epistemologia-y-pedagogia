@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css?v=2026102602">
-<link rel="stylesheet" href="css/admin.css?v=2026102605">
+<link rel="stylesheet" href="css/admin.css?v=2026102606">
 <link rel="stylesheet" href="css/progreso.css?v=2026102602">
 <link rel="stylesheet" href="css/index.css?v=2026102602">
 <link rel="stylesheet" href="css/extra.css?v=2026102602">
@@ -203,7 +203,10 @@
     <div class="bloques-activos-card cielo-admin">
       <h3 class="section-title" style="margin-top:0">🌌 El cielo del grupo</h3>
       <p class="field-hint">Cada acierto de tus alumnos en ¿Quién lo dijo?, ¿Qué paradigma es? y la Arena enciende la estrella de ese autor en la Constelación del Laboratorio. Proyéctalo en vivo: cada estrella brilla según cuántos alumnos la encendieron, con el ranking de exploradores y las estrellas que nadie ha encendido.</p>
-      <button type="button" class="btn btn-primary" id="cielo-proyectar">🌌 Proyectar el cielo del grupo</button>
+      <label class="field-label" for="cielo-mision">🔭 Misión de la semana (los autores que se estudian ahora, con su gancho)</label>
+      <select id="cielo-mision"><option value="auto">Automática por fecha (Tema 3 hasta el lunes 26; Tema 4 desde el martes 27)</option><option value="t3">Tema 3 · Los paradigmas y la ciencia clásica (8 autores)</option><option value="t4">Tema 4 · La ciencia en debate (6 autores)</option></select>
+      <p class="field-hint" id="cielo-mision-msg" hidden></p>
+      <button type="button" class="btn btn-primary" id="cielo-proyectar" style="margin-top:10px">🌌 Proyectar el cielo del grupo</button>
     </div>
     <div id="ar-panel"></div>
   </div>

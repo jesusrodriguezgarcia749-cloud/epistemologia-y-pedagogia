@@ -328,3 +328,41 @@ html[data-theme="dark"] .cu-positivista > span { color: #8DB6E0; } html[data-the
 .banda-prueba { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 8px 16px; background: #5B3FA0; color: #fff; font-size: .88rem; }
 .banda-prueba span { opacity: .85; }
 .banda-prueba button { margin-left: auto; border: 1px solid rgba(255,255,255,.5); background: transparent; color: #fff; border-radius: 99px; padding: 3px 12px; font: 600 .82rem var(--font-body); cursor: pointer; }
+
+/* ---------- 🔭 Misión de la semana y tarjetas con gancho */
+.mi-tarjeta { background: linear-gradient(135deg, #0F2A3A, #1F5A6B); }
+.mi-cab { padding: 14px 16px; border-radius: 14px; background: linear-gradient(135deg, #0E1428, #24305C); color: #EEF1F8; margin: 6px 0 12px; }
+.mi-cab b { font-family: var(--font-display, serif); font-size: 1.2rem; color: #F6E7B8; }
+.mi-cab p { margin: 4px 0 8px; font-size: .9rem; opacity: .9; }
+.mi-cab small { opacity: .8; }
+.mi-barra { height: 8px; border-radius: 99px; background: rgba(255,255,255,.15); overflow: hidden; margin: 4px 0; }
+.mi-barra i { display: block; height: 100%; background: linear-gradient(90deg, #D9A441, #F6E7B8); }
+.mi-pasos { margin: 0 0 12px; padding-left: 0; list-style: none; font-size: .92rem; }
+.mi-pasos li { margin: 4px 0; }
+.mi-btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.mi-autores { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+.mi-autor { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); border-left: 6px solid var(--c); background: var(--cream); color: var(--ink); cursor: pointer; font: inherit; }
+.mi-autor span { font-size: 1.6rem; line-height: 1.1; }
+.mi-autor b { font-size: .95rem; }
+.mi-autor small { font-size: .78rem; color: var(--ink-soft); }
+.mi-autor.est-apagada { opacity: .65; filter: grayscale(.6); }
+.mi-autor.est-encendida, .mi-autor.est-brilla, .mi-autor.est-nova { border-color: #D9A441; box-shadow: 0 0 0 1px #D9A441, 0 0 14px rgba(217,164,65,.35); }
+.mi-autor.est-nova { background: linear-gradient(135deg, var(--cream), rgba(246,231,184,.6)); }
+.mi-n { font-size: .85rem; color: var(--ink-soft); margin: 8px 0 6px; }
+.gt-tarjeta { display: flex; gap: 14px; padding: 16px 18px; border-radius: 16px; background: var(--cream); border: 1px solid var(--line); border-top: 6px solid var(--c); box-shadow: var(--shadow-card); margin: 0 0 14px; text-align: left; animation: ci-entra .5s ease-out; }
+.gt-ico { font-size: 3rem; line-height: 1; }
+.gt-tarjeta small { display: block; color: var(--ink-soft); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; }
+.gt-tarjeta b { display: block; font-family: var(--font-display, serif); font-size: 1.35rem; }
+.gt-tarjeta em { display: block; font-style: normal; color: var(--c); font-weight: 600; margin: 2px 0 8px; }
+.gt-tarjeta em strong { color: var(--ink); }
+.gt-tarjeta p { margin: 6px 0; line-height: 1.5; font-size: .95rem; }
+.gt-aula { color: var(--ink-soft); }
+.gt-rec { font-weight: 700; color: var(--ink); background: rgba(217,164,65,.14); padding: 6px 10px; border-radius: 8px; }
+.gt-tarjeta.mini { margin-top: 10px; padding: 12px 14px; }
+.gt-tarjeta.mini .gt-ico { font-size: 2.2rem; }
+.gt-tarjeta.mini b { font-size: 1.1rem; }
+.jp-pista-b { display: block; margin: 0 auto 10px; border: 1px dashed var(--line); background: transparent; color: var(--ink-soft); border-radius: 99px; padding: 6px 14px; font: 600 .88rem var(--font-body); cursor: pointer; }
+.jp-pista-caja { max-width: 680px; margin: 0 auto 12px; padding: 8px 12px; border-radius: 10px; background: rgba(217,164,65,.14); text-align: center; }
+.jp-autores { grid-template-columns: 1fr 1fr; }
+.jp-autores .jp-op { border-left: 5px solid var(--c); }
+@media (max-width: 520px) { .gt-tarjeta { flex-direction: column; gap: 6px; } }
