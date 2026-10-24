@@ -17,7 +17,7 @@
 
   let L = null; const listo = {};
   const tabs = $$('.lab-tabs button');
-  const MODULOS = { constelacion: iniciarConstelacion, ciencia: iniciarCiencia, kuhn: iniciarKuhn, cerebro: iniciarCerebro, brujula: iniciarBrujula, tiempo: iniciarTiempo };
+  const MODULOS = { constelacion: iniciarConstelacion, mapa: iniciarMapa, ciencia: iniciarCiencia, kuhn: iniciarKuhn, cerebro: iniciarCerebro, brujula: iniciarBrujula, tiempo: iniciarTiempo };
   function abrir(nombre, extra) {
     if (!MODULOS[nombre]) nombre = 'constelacion';
     tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === nombre)));
@@ -46,7 +46,7 @@
     orden = L.autores.slice().sort((x, y) => x.anio - y.anio);
     const p = $('#panel-constelacion');
     const temas = [...new Set(L.autores.flatMap(a => a.temas.map(t => t.split('.')[0])))].sort((a, b) => a - b);
-    p.innerHTML = `<p class="lab-ayuda">Cada estrella es un autor del curso, ubicado según la época de su obra principal y agrupado por su corriente. Las líneas muestran quién influyó en quién o con quién discutió. Toca un autor para leer su ficha completa. También puedes ver solo los autores de un tema.</p>
+    p.innerHTML = `<p class="lab-ayuda">Cada estrella es un autor del curso, ubicado según la época de su obra principal y agrupado por su corriente. Las líneas muestran quién influyó en quién o con quién discutió. Toca un autor para leer su ficha completa. También puedes ver solo los autores de un tema, o la tabla <a href="#mapa">🗺️ Autores por tema</a>: qué autores sostienen cada subtema del programa.</p>
       <div class="lab-chips" id="c-temas"><button class="chip-lab" aria-pressed="true" data-t="">Todos</button>${temas.map(t => `<button class="chip-lab" aria-pressed="false" data-t="${t}">Tema ${t}</button>`).join('')}</div>
       <div class="tema-info" id="tema-info" hidden></div>
       <section class="cielo-panel" id="cielo-panel" hidden aria-live="polite"></section>
@@ -260,6 +260,21 @@
     if (selec) { const e = $('#ficha .ficha-estrella'), h = $('#ficha h2'); if (e) e.outerHTML = estadoEstrella(selec); else if (h) h.insertAdjacentHTML('afterend', estadoEstrella(selec)); }
   }
   window.addEventListener('ep-cielo', e => aplicarCielo(e.detail));
+
+  // ======================= 1c. 🗺️ AUTORES POR TEMA: qué autores sostienen cada subtema del programa
+  function iniciarMapa() {
+    if (!orden.length) { L.autores.forEach(a => { POR_ID[a.id] = a; }); orden = L.autores.slice().sort((x, y) => x.anio - y.anio); }
+    const subs = L.subtemas || {}, del = id => orden.filter(a => a.temas.includes(id));
+    const temas = [...new Set(Object.keys(subs).map(k => k.split('.')[0]))];
+    $('#panel-mapa').innerHTML = `<p class="lab-ayuda">El programa nombra de forma explícita a pocos autores (los del Tema 4: Popper, Kuhn, Lakatos, Feyerabend y Morin). Pero cada subtema pide una teoría, un paradigma o un concepto, y detrás de cada uno están quienes lo propusieron: por eso aparecen en el libro y en la Constelación. Aquí ves, subtema por subtema, qué autores lo sostienen. Toca un autor para abrir su ficha, o el subtema para leerlo en el compendio.</p>
+      <div class="lab-chips" id="mapa-temas"><button class="chip-lab" aria-pressed="true" data-t="">Todos</button>${temas.map(t => `<button class="chip-lab" aria-pressed="false" data-t="${t}">Tema ${t}</button>`).join('')}</div>
+      <div class="mapa">${temas.map(t => `<section class="mapa-tema" data-t="${t}"><h3><span>Tema ${t}</span> ${esc(L.temas[t] || '')}</h3>
+        ${Object.keys(subs).filter(k => k.split('.')[0] === t).map(k => { const as = del(k); return `<div class="mapa-fila ${as.length ? '' : 'vacia'}"><a class="mapa-sub" href="tema.html?id=${encodeURIComponent(k)}"><b>${esc(k)}</b> ${esc(subs[k])}</a>
+          <div class="mapa-autores">${as.length ? as.map(a => `<button type="button" data-ir="${a.id}" style="--fam:${L.familias[a.fam].color}" title="${esc(L.familias[a.fam].nombre)}"><i></i>${esc(corto(a.nombre))}</button>`).join('') : '<small>Subtema de síntesis: retoma a los autores de los temas anteriores.</small>'}</div></div>`; }).join('')}</section>`).join('')}</div>
+      <div class="const-leyenda">${Object.values(L.familias).map(f => `<span><i style="background:${f.color}"></i>${esc(f.nombre)}</span>`).join('')}</div>`;
+    $$('#panel-mapa [data-ir]').forEach(b => b.addEventListener('click', () => { history.replaceState(null, '', '#constelacion=' + b.dataset.ir); abrir('constelacion', b.dataset.ir); const f = $('#ficha'); if (f) f.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' }); }));
+    $$('#mapa-temas .chip-lab').forEach(b => b.addEventListener('click', () => { $$('#mapa-temas .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x === b))); $$('#panel-mapa .mapa-tema').forEach(s => { s.hidden = !!b.dataset.t && s.dataset.t !== b.dataset.t; }); }));
+  }
 
   // ======================= 2. ¿ESTO ES CIENCIA?
   const VERED = { si: 'Es ciencia', no: 'No es ciencia', dep: 'Depende' };
