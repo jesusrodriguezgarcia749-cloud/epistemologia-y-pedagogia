@@ -483,6 +483,8 @@ function actArena(cont) {
     if (S.estado === 'revela' && P) {
       const mia = (YO.r || {})[S.idx], ok = mia && mia.o === 0, gan = arPuntos(mia, S.dur), cl = S.ronda + ':' + S.idx;
       if (ok && !brillados.has(cl)) { brillados.add(cl); brillar(db, sesion, autoresEn(P.q, P.o[0], P.x)).then(r => { avisos[cl] = avisoBrillo(r, nombreAutor); const c = $('#ar-cielo', cont); if (c) c.innerHTML = avisos[cl]; }).catch(() => {}); }
+      const ms = x => x && (x.toMillis ? x.toMillis() : typeof x === 'number' ? x : 0);
+      if (!mia && ms(YO.unido) && S.t0 && ms(YO.unido) > S.t0) { cont.innerHTML = `<div class="ar-espera"><span>👋</span><b>Llegaste a media pregunta</b><p>Ya estás dentro de la Arena. En la siguiente pregunta juegas: mira la pantalla del salón.</p><p class="ap-dato">La respuesta de esta era: <b>${esc(P.o[0])}</b></p></div>`; return; }
       cont.innerHTML = `<div class="ar-res ${ok ? 'ok' : 'mal'}"><span>${ok ? '✅' : mia ? '❌' : '⏱'}</span><b>${ok ? `¡Correcto! +${gan}` : mia ? 'Incorrecto' : 'No respondiste a tiempo'}</b>
         <p>La respuesta era: <b>${esc(P.o[0])}</b></p><p class="ap-dato">${esc(P.x)}</p>
         <p class="ar-num">⭐ ${L.mio} puntos · ${L.pos ? `vas en el lugar <b>${L.pos}</b> de ${L.de}` : '👁 fuera de concurso'}</p><div id="ar-cielo">${avisos[cl] || ''}</div></div>`;
