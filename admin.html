@@ -22,11 +22,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/admin.css">
-<link rel="stylesheet" href="css/progreso.css">
-<link rel="stylesheet" href="css/index.css">
-<link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/styles.css?v=2026102602">
+<link rel="stylesheet" href="css/admin.css?v=2026102602">
+<link rel="stylesheet" href="css/progreso.css?v=2026102602">
+<link rel="stylesheet" href="css/index.css?v=2026102602">
+<link rel="stylesheet" href="css/extra.css?v=2026102602">
 </head>
 <body>
 
@@ -92,6 +92,7 @@
     <button class="tab-btn" data-tab="equipos">👥 Equipos</button>
     <button class="tab-btn" data-tab="monitor">🟢 Monitor en vivo</button>
     <button class="tab-btn" data-tab="arena">⚡ Arena</button>
+    <button class="tab-btn" data-tab="coev">🗣️ Coevaluación</button>
     <button class="tab-btn" data-tab="proyecto">Ensayo final</button>
     <button class="tab-btn" data-tab="asistencia">Asistencia</button>
     <button class="tab-btn" data-tab="uniformes">Uniformes</button>
@@ -194,6 +195,10 @@
 
   <div id="tab-arena" class="tab-panel">
     <div id="ar-panel"></div>
+  </div>
+
+  <div id="tab-coev" class="tab-panel">
+    <div id="co-panel"></div>
   </div>
 
   <div id="tab-participacion" class="tab-panel">
@@ -385,6 +390,10 @@
 <div id="ar-proy" class="qr-proyeccion ar-proy" hidden>
   <button type="button" class="btn ar-proy-cerrar" id="ar-proy-cerrar">Cerrar ✕</button>
   <div id="ar-proy-cuerpo"></div>
+</div>
+<div id="co-proy" class="qr-proyeccion ar-proy" hidden>
+  <button type="button" class="btn ar-proy-cerrar" id="co-proy-cerrar">Cerrar ✕</button>
+  <div id="co-proy-cuerpo"></div>
 </div>
 <script src="js/vendor/qrcode.js"></script>
 <script src="js/app.js"></script>

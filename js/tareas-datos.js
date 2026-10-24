@@ -8,8 +8,10 @@ export const TEMAS_TAREAS = [
     { id: 'que-paradigma', tipo: 'practica', icono: '🧭', nombre: '¿Qué paradigma es?', modo: 'Juego de práctica', desc: 'Títulos de tesis, fragmentos y autores: ¿positivista, interpretativo o sociocrítico? Y una ronda de pensamiento lineal contra sistémico.' },
   ] },
   { tema: '3 y 4', titulo: 'Lógica dialéctica y concepción contemporánea de la ciencia', fecha: '2026-10-27', fechaTexto: 'Mar 27 de octubre', acts: [
-    { id: 'quien-lo-dijo', tipo: 'pronto', icono: '🗣️', nombre: '¿Quién lo dijo?', modo: 'Juego de práctica', desc: 'Frases y conceptos contra su autor: Popper, Kuhn, Lakatos, Feyerabend, Morin… Muy pronto.' },
-    { id: 'ficha-autor', tipo: 'pronto', icono: '🧩', nombre: 'Ficha del autor', modo: 'En equipo · en vivo', desc: 'El rompecabezas del Tema 4: cada equipo se vuelve experto en un autor y lo expone. Muy pronto.' },
+    { id: 'ficha-autor', tipo: 'cuadro', icono: '🧩', nombre: 'Ficha del autor (rompecabezas)', modo: 'En equipo · en vivo', desc: 'Cada equipo se vuelve experto en su autor del Tema 4: idea central, conceptos, cómo avanza la ciencia, críticas y qué le dice a la pedagogía. Con ella exponen.' },
+    { id: 'coevaluacion', tipo: 'coev', icono: '🗣️', nombre: 'Coevaluación de las exposiciones', modo: 'Individual · en vivo', desc: 'Mientras expone cada equipo, califícalo con la rúbrica desde tu celular y déjale una pregunta.' },
+    { id: 'teoricos', tipo: 'cuadro', icono: '📊', nombre: 'Cuadro comparativo de los seis teóricos', modo: 'En equipo · en vivo', desc: 'Positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend y Morin: cómo avanza la ciencia, qué la distingue, conceptos clave, obras y qué le dicen a la educación.' },
+    { id: 'quien-lo-dijo', tipo: 'practica', icono: '💬', nombre: '¿Quién lo dijo?', modo: 'Juego de práctica', desc: 'Frases y obras contra su autor: de Platón a Morin. Los 55 pensadores de la Constelación, con niveles y modo reto.' },
   ] },
 ];
 export const TAREAS_DIG = Object.fromEntries(TEMAS_TAREAS.flatMap(t => t.acts.map(a => [a.id, { ...a, tema: t.tema, titulo: t.titulo, fecha: t.fecha, fechaTexto: t.fechaTexto }])));
@@ -48,6 +50,55 @@ export const CUADROS = {
     },
   },
 };
+CUADROS['ficha-autor'] = {
+  id: 'act-ficha-autor', ind: 'tarea-ficha-autor', clave: 'fichaAutor', sinClave: true,
+  titulo: 'Ficha del autor', kicker: 'Tema 4 · Concepción contemporánea de la ciencia · Rompecabezas', archivo: 'Ficha_autor',
+  ayuda: 'Su equipo es experto en <b>un autor</b> del Tema 4 (4.1 Positivismo lógico, 4.2 Popper, 4.3 Kuhn o 4.4 Lakatos). Llenen la ficha con el compendio y el Laboratorio (Constelación); con ella van a exponer en 6 o 7 minutos. La última fila es una cita textual con su fuente.',
+  columnas: [['ficha', 'Lo que escribe el equipo', '#3E5BA8']],
+  filas: [
+    ['autor', 'Su autor', '¿Cuál les tocó? Positivismo lógico, Popper, Kuhn o Lakatos.'],
+    ['quien', 'Quién fue', 'Época, país, formación y su obra principal (con año).'],
+    ['idea', 'Idea central', 'En dos o tres oraciones: ¿qué propone?'],
+    ['conceptos', 'Conceptos clave', 'Al menos tres conceptos con su definición breve.'],
+    ['avanza', 'Cómo avanza la ciencia', '¿Acumulando verdades, refutando, por revoluciones, por programas de investigación?'],
+    ['demarcacion', 'Qué hace científico a un conocimiento', 'Su criterio para distinguir la ciencia de lo que no lo es.'],
+    ['ejemplo', 'Un ejemplo', 'El del compendio (los cisnes, el eclipse de 1919, el pato-conejo, el constructivismo…) u otro suyo.'],
+    ['critica', 'Sus límites', '¿Qué le criticaron o dónde se queda corto? ¿Quién le respondió?'],
+    ['pedagogia', 'Qué le dice a la pedagogía', '¿Cómo cambia la manera de investigar o de enseñar? Un ejemplo de aula.'],
+    ['cita', 'Una cita del compendio', 'Cita textual entre comillas, con (Autor, año).', true],
+  ],
+};
+CUADROS.teoricos = {
+  id: 'act-teoricos', ind: 'tarea-teoricos', clave: 'teoricos',
+  titulo: 'Cuadro comparativo de los teóricos de la ciencia del siglo XX', kicker: 'Tema 4 · Concepción contemporánea de la ciencia', archivo: 'Cuadro_teoricos',
+  ayuda: 'Llénenlo con las exposiciones de los equipos, la clase sobre Feyerabend y Morin, y el compendio (4.1 a 4.6). La fila <b>🔎 Investiga</b> pide la referencia en APA 7 de la obra principal de cada autor (búsquenla y anoten de dónde la sacaron).',
+  columnas: [['viena', 'Positivismo lógico', '#6B5B4B'], ['popper', 'Popper', '#A63D2F'], ['kuhn', 'Kuhn', '#2E6FA8'], ['lakatos', 'Lakatos', '#3F7A4F'], ['feyerabend', 'Feyerabend', '#E07B39'], ['morin', 'Morin', '#8E5BA8']],
+  filas: [
+    ['avanza', 'Cómo avanza la ciencia', '¿Acumulando, refutando, por revoluciones, por programas, sin método fijo, tejiendo?'],
+    ['distingue', 'Qué distingue a la ciencia', 'Su criterio para separar la ciencia de lo que no lo es (o su crítica a ese criterio).'],
+    ['comunidad', 'Papel de la comunidad científica', '¿Qué peso tiene la comunidad en lo que se acepta como ciencia?'],
+    ['concepto', 'Concepto clave', 'El concepto que no puede faltar, con su definición.'],
+    ['educacion', 'Qué le dice a la investigación educativa', 'Un ejemplo de cómo cambia la manera de investigar o de enseñar.'],
+    ['obra', 'Obra principal en APA 7', 'Autor, A. (año). Título en cursivas. Editorial.', true],
+  ],
+  respuestas: {
+    avanza: ['Por inducción: se observan casos, se generaliza una ley y se verifica; el conocimiento crece por acumulación.', 'Por conjeturas y refutaciones: hipótesis audaces que se intentan refutar; las que resisten quedan corroboradas provisionalmente.', 'Por ciclos: preciencia, ciencia normal, anomalías, crisis y revolución científica, y luego una nueva ciencia normal.', 'Por programas de investigación que compiten: los progresivos predicen hechos nuevos y desplazan a los degenerativos.', 'No hay un método único: toda regla ha sido violada con éxito alguna vez; avanza con pluralismo y proliferación de teorías («todo vale»).', 'Superando el paradigma de simplificación (disyunción, reducción, abstracción) con un pensamiento que une lo que está tejido junto.'],
+    distingue: ['El principio de verificación: solo tiene sentido lo verificable con la experiencia o lo lógicamente verdadero.', 'La falsabilidad (criterio de demarcación): debe poder imaginarse una observación que la refute.', 'Una comunidad que comparte un paradigma y resuelve rompecabezas dentro de él (ciencia normal).', 'Ser un programa progresivo: sus ajustes anticipan hechos nuevos que luego se confirman.', 'Niega que exista un criterio fijo; critica que la ciencia ocupe un lugar de autoridad indiscutible.', 'Critica la ciencia fragmentada; pide un conocimiento pertinente que relacione y contextualice.'],
+    comunidad: ['Verifica las afirmaciones con observaciones públicas; su peso no es central en la teoría.', 'Ejerce la crítica: el buen científico expone su teoría a ella (ética del conocimiento, sociedad abierta).', 'Decisivo: el paradigma se aprende en la formación y la comunidad decide, no sin resistencia, cambiar de paradigma.', 'Los investigadores deciden no tocar el núcleo duro y ajustan el cinturón protector.', 'En una sociedad libre, los ciudadanos podrían decidir democráticamente qué tradiciones enseñar.', 'Necesita diálogo entre disciplinas para comprender lo complejo.'],
+    concepto: ['Principio de verificación (y el problema de la inducción).', 'Falsabilidad: la asimetría entre verificar y refutar.', 'Paradigma; también inconmensurabilidad.', 'Núcleo duro y cinturón protector.', 'Anarquismo epistemológico: «todo vale».', 'Complejidad (complexus, «lo que está tejido junto»): principios dialógico, de recursividad y hologramático.'],
+    educacion: ['Su espíritu sigue en las pruebas estandarizadas y los indicadores: obliga a rendir cuentas, con el riesgo de reducir la educación a lo medible.', 'Formular hipótesis falsables: decir qué resultado desmentiría que un programa de lectura funciona.', 'La pedagogía también tiene paradigmas que cambian, por ejemplo del conductismo al constructivismo.', 'El constructivismo como programa: núcleo duro (el conocimiento se construye) y cinturón (conflicto cognitivo, aprendizaje entre pares, zona de desarrollo próximo).', 'No hay recetas: la ciencia es creativa y otros saberes merecen respeto, sin caer en el relativismo.', 'Inspiró los campos formativos y los ejes articuladores de la Nueva Escuela Mexicana; los siete saberes para la educación del futuro.'],
+    obra: ['Hahn, Neurath y Carnap: La concepción científica del mundo (manifiesto del Círculo de Viena, 1929).', 'Popper, K. (1934/2008). La lógica de la investigación científica.', 'Kuhn, T. S. (1962/2013). La estructura de las revoluciones científicas.', 'Lakatos, I. (1978/1989). La metodología de los programas de investigación científica.', 'Feyerabend, P. (1975/1986). Tratado contra el método.', 'Morin, E. (1990/1994). Introducción al pensamiento complejo; y Morin (1999), Los siete saberes necesarios para la educación del futuro.'],
+  },
+};
+// Coevaluación: criterios de 1 a 4
+export const COEV = [
+  ['dominio', 'Dominio del autor', 'Explican sus ideas con seguridad y sin leer todo.'],
+  ['claridad', 'Claridad', 'Se entiende; usan ejemplos y sus propias palabras.'],
+  ['pedagogia', 'Relación con la pedagogía', 'Muestran qué le dice el autor a la educación.'],
+  ['tiempo', 'Tiempo y ficha', 'Respetan el tiempo y su ficha está completa.'],
+];
+export const COEV_NIV = [[1, 'En inicio'], [2, 'En desarrollo'], [3, 'Bien'], [4, 'Excelente']];
+
 export function sugerirCuadro(A, celdas) {
   celdas = celdas || {};
   const total = A.filas.length * A.columnas.length;
@@ -116,6 +167,23 @@ export const ARENA = {
     { q: '¿Dónde queda la pedagogía en la clasificación de Bunge?', o: ['Ciencias fácticas sociales', 'Ciencias formales', 'Ciencias fácticas naturales', 'No es ciencia'], x: 'Junto a la sociología, la psicología, la historia, la economía y la antropología.' },
     { q: '¿Cómo llamó Comte primero a la sociología?', o: ['Física social', 'Ciencia del espíritu', 'Pedagogía general', 'Filosofía positiva'], x: 'Para Comte, todas las ciencias debían seguir el modelo de las ciencias naturales.' },
     { q: '¿Qué tradición impuso la expresión plural «ciencias de la educación»?', o: ['La francesa', 'La alemana', 'La inglesa', 'La estadounidense'], x: 'La alemana defendió la pedagogía como ciencia unitaria; la francesa, desde la segunda mitad del siglo XX, habló de ciencias de la educación.' },
+  ] },
+  tema4: { titulo: 'Tema 4 · Concepción contemporánea de la ciencia', preguntas: [
+    { q: 'Para el Círculo de Viena, una afirmación solo tiene sentido si…', o: ['Puede verificarse con la experiencia o es una verdad lógica', 'Puede refutarse', 'La acepta una comunidad científica', 'Tiene un núcleo duro'], x: 'Es el principio de verificación del positivismo lógico; lo demás sería un sinsentido.' },
+    { q: 'Los europeos vieron millones de cisnes blancos… hasta que encontraron cisnes negros en Australia. ¿Qué problema ilustra?', o: ['El problema de la inducción', 'La inconmensurabilidad', 'La doble hermenéutica', 'El anarquismo epistemológico'], x: 'Por muchos casos que observemos, nunca sabemos si el siguiente será igual. Ya lo había señalado Hume.' },
+    { q: 'Según Popper, una teoría es científica si…', o: ['Es falsable', 'Está verificada', 'Lo explica todo', 'La acepta la mayoría'], x: 'Debe ser posible imaginar una observación que la contradiga: es su criterio de demarcación.' },
+    { q: '«Mil cisnes blancos no prueban que todos sean blancos, pero uno negro prueba que no.» ¿Qué idea de Popper es?', o: ['La asimetría entre verificar y refutar', 'La ciencia normal', 'El cinturón protector', 'El principio hologramático'], x: 'Ningún número de observaciones verifica una teoría universal, pero una sola puede refutarla.' },
+    { q: '⚖️ Tribunal: la astrología, que cuando falla dice que «influyó otro planeta». Según Popper…', o: ['No es ciencia: nunca puede salir mal, no es falsable', 'Es ciencia, porque hace predicciones', 'Es ciencia normal', 'Es un programa progresivo'], x: 'Es su ejemplo clásico: lo que se reinterpreta para que nunca falle no es falsable.' },
+    { q: 'La predicción de Einstein que se comprobó en el eclipse de 1919 le servía a Popper como ejemplo de…', o: ['Una predicción arriesgada que podía fallar', 'Una anomalía', 'Un programa degenerativo', 'Un sinsentido'], x: 'La relatividad se exponía a ser refutada; eso, para Popper, la hacía científica.' },
+    { q: 'Para Kuhn, el periodo en que la comunidad resuelve «rompecabezas» dentro de un paradigma aceptado se llama…', o: ['Ciencia normal', 'Revolución', 'Preciencia', 'Crisis'], x: 'Los científicos no buscan refutar el paradigma, sino ampliarlo.' },
+    { q: 'El ciclo de Kuhn en orden es…', o: ['Preciencia → ciencia normal → anomalías → crisis → revolución', 'Conjetura → refutación → corroboración', 'Núcleo → cinturón → programa', 'Observación → hipótesis → ley'], x: 'Y después de la revolución empieza una nueva ciencia normal.' },
+    { q: 'El dibujo que puede verse como pato o como conejo le sirvió a Kuhn para explicar…', o: ['La inconmensurabilidad entre paradigmas', 'El problema de la inducción', 'La falsabilidad', 'El principio dialógico'], x: 'Los datos son los mismos, pero se ven de otra manera.' },
+    { q: 'Según Lakatos, las hipótesis que los investigadores deciden no poner en duda forman…', o: ['El núcleo duro', 'El cinturón protector', 'La heurística positiva', 'El paradigma'], x: 'El cinturón protector, en cambio, se ajusta cuando llegan datos contrarios.' },
+    { q: 'Un programa de investigación es progresivo cuando…', o: ['Predice hechos nuevos que luego se confirman', 'Solo explica después lo que ya pasó', 'Nunca cambia su cinturón', 'Lo apoya la mayoría'], x: 'Si solo hace ajustes para explicar a posteriori, es degenerativo.' },
+    { q: '«Todo vale» (anything goes) es la provocación de…', o: ['Paul Feyerabend', 'Karl Popper', 'Imre Lakatos', 'Rudolf Carnap'], x: 'Ninguna regla fija garantiza el progreso; no quería decir que cualquier opinión vale lo mismo.' },
+    { q: 'Morin recuerda que complexus significa…', o: ['Lo que está tejido junto', 'Lo que es difícil', 'Lo que se divide en partes', 'Lo que no se puede medir'], x: 'Un ser humano es a la vez biológico, psicológico, social, cultural e histórico.' },
+    { q: '«La sociedad produce a los individuos y los individuos producen la sociedad.» ¿Qué principio de Morin es?', o: ['Recursividad organizacional', 'Dialógico', 'Hologramático', 'Verificación'], x: 'Los productos son, a la vez, productores de aquello que los produce.' },
+    { q: 'Cuando la palabra «bullying» entró a las escuelas, cambió la manera de vivir ciertos conflictos. Es un ejemplo de…', o: ['La doble hermenéutica (Giddens)', 'El problema de la inducción', 'La ciencia normal', 'El cinturón protector'], x: 'Las ciencias sociales interpretan un mundo ya interpretado, y sus conceptos regresan a la sociedad y la transforman.' },
   ] },
   tema3: { titulo: 'Tema 3 · Racionalidad científica clásica', preguntas: [
     { q: '¿Qué imagen del mundo surgió de la revolución científica de los siglos XVI y XVII?', o: ['Mecanicista: el universo como un reloj', 'Sistémica', 'Dialéctica', 'Hermenéutica'], x: 'Conocer era descomponer el todo en sus partes, medirlas y encontrar causas y efectos.' },

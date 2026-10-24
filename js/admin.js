@@ -13,7 +13,7 @@ import { firebaseConfig } from "./firebase-config.js";
 import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { vistaRapida } from "./matriz.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV } from "./tareas-datos.js";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -122,6 +122,7 @@ function cargarTabActiva() {
   if (tab === 'equipos') cargarEquiposTab();
   if (tab === 'monitor') iniciarMonitor(); else detenerMonitor();
   if (tab === 'arena') iniciarArena(); else detenerArena();
+  if (tab === 'coev') iniciarCoev(); else detenerCoev();
   if (tab === 'participacion') cargarCatalogo('participaciones');
   if (tab === 'proyecto') cargarProyecto();
   if (tab === 'asistencia') cargarAsistencia();
@@ -1925,7 +1926,7 @@ function iniciarMonitor() {
   MON.reloj = setInterval(() => document.querySelectorAll('.mon-card').forEach(c => pintarTiempoMon(c, (MON.datos[c.dataset.clave] || {}).actualizado)), 10000);
   pintarMonitor();
 }
-function pintarClaveMon() { const b = document.getElementById('mon-clave'); if (!b || !MON.act) return; MON.clave = !!((MON.g.claves || {})[CUADROS[MON.act].clave]); b.setAttribute('aria-pressed', String(MON.clave)); b.textContent = MON.clave ? '🔒 Ocultar clave a los alumnos' : '🔑 Liberar clave'; }
+function pintarClaveMon() { const b = document.getElementById('mon-clave'); if (!b || !MON.act) return; b.hidden = !!CUADROS[MON.act].sinClave; MON.clave = !!((MON.g.claves || {})[CUADROS[MON.act].clave]); b.setAttribute('aria-pressed', String(MON.clave)); b.textContent = MON.clave ? '🔒 Ocultar clave a los alumnos' : '🔑 Liberar clave'; }
 function filtrarMon() { MON.equipos = equiposDe(MON.todos, formacionDeTarea(MON.g, MON.act)).sort(ordenEqMon); }
 function suscribirMon() {
   MON.eqSubs.forEach(u => u()); MON.eqSubs = []; filtrarMon();
@@ -2013,7 +2014,7 @@ function pintarArena(soloJug) {
   if (!S || !S.estado || S.estado === 'cerrada') {
     cont.innerHTML = `<div class="bloques-activos-card"><h3 class="section-title" style="margin-top:0">⚡ Abrir una Arena</h3>
       <p class="field-hint">Elige las preguntas, abre la sala y proyecta: los alumnos entran desde su celular (Tareas → ⚡ Arena en vivo, o con el QR). Cada pregunta dura el tiempo que elijas; gana más quien responde bien y rápido.</p>
-      <label class="field-label" for="ar-set">Preguntas</label><select id="ar-set">${Object.entries(ARENA).map(([k, v]) => `<option value="${k}">${escaparHTML(v.titulo)} (${v.preguntas.length} preguntas)</option>`).join('')}</select>
+      <label class="field-label" for="ar-set">Preguntas</label><select id="ar-set">${Object.entries(ARENA).sort((x, y) => x[0].localeCompare(y[0])).map(([k, v]) => `<option value="${k}">${escaparHTML(v.titulo)} (${v.preguntas.length} preguntas)</option>`).join('')}</select>
       <label class="field-label" for="ar-dur">Segundos por pregunta</label><select id="ar-dur"><option>15</option><option selected>20</option><option>30</option></select>
       <button type="button" class="btn btn-primary btn-block" id="ar-abrir" style="margin-top:12px">Abrir la sala y proyectar</button></div>`;
     document.getElementById('ar-abrir').addEventListener('click', async () => {
@@ -2066,3 +2067,54 @@ let arRevelando = false;
 async function arRevelar() { if (arRevelando || !AR.sala || AR.sala.estado !== 'pregunta') return; arRevelando = true; clearInterval(AR.reloj); try { await arEstado({ estado: 'revela' }); } finally { arRevelando = false; } }
 function abrirProyArena() { document.getElementById('ar-proy').hidden = false; document.body.classList.add('con-qr'); pintarArena(); }
 on('ar-proy-cerrar', 'click', () => { document.getElementById('ar-proy').hidden = true; document.body.classList.remove('con-qr'); });
+
+// ---- 🗣️ Coevaluación de las exposiciones: grupos/{g}.coev = {equipo, abierta}; cada alumno en alumnos/{a}/atlas/tarea-coev-{equipo}
+const CO = { subs: [], equipos: [], g: {}, evals: {}, fichas: {} };
+function iniciarCoev() {
+  const cont = document.getElementById('co-panel'); if (!cont) return;
+  if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  detenerCoev();
+  CO.subs.push(onSnapshot(doc(db, 'grupos', grupoActivo), sn => { CO.g = sn.exists() ? sn.data() : {}; pintarCoev(); }, () => {}));
+  CO.subs.push(onSnapshot(collection(db, 'grupos', grupoActivo, 'equipos'), sn => {
+    CO.todos = sn.docs.map(d => ({ id: d.id, ...d.data() }));
+    CO.todos.forEach(eq => { if (!(eq.id in CO.fichas)) { CO.fichas[eq.id] = ''; CO.subs.push(onSnapshot(doc(db, 'grupos', grupoActivo, 'equipos', eq.id, 'atlas', CUADROS['ficha-autor'].id), s => { CO.fichas[eq.id] = s.exists() ? ((s.data().celdas || {}).autor_ficha || '') : ''; pintarCoev(); }, () => {})); } });
+    pintarCoev();
+  }, () => {}));
+  // una escucha por alumno y equipo, solo de los equipos de la formación de la ficha
+  CO.subs.push(onSnapshot(collection(db, 'grupos', grupoActivo, 'equipos'), sn => {
+    (CO.evSubs || []).forEach(u => u()); CO.evSubs = [];
+    sn.docs.forEach(d => alumnosCache.forEach(al => CO.evSubs.push(onSnapshot(doc(db, 'grupos', grupoActivo, 'alumnos', al.id, 'atlas', 'tarea-coev-' + d.id), s => { CO.evals[d.id + '/' + al.id] = s.exists() ? s.data() : null; clearTimeout(CO.t); CO.t = setTimeout(pintarCoev, 150); }, () => {}))));
+  }, () => {}));
+}
+function detenerCoev() { CO.subs.forEach(u => u()); CO.subs = []; (CO.evSubs || []).forEach(u => u()); CO.evSubs = []; CO.fichas = {}; }
+function resumenCoev(eqId) {
+  const evs = Object.entries(CO.evals).filter(([k, v]) => v && k.startsWith(eqId + '/')).map(([, v]) => v);
+  const prom = Object.fromEntries(COEV.map(([k]) => { const xs = evs.map(e => (e.cal || {})[k]).filter(Boolean); return [k, xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0]; }));
+  const general = COEV.reduce((s, [k]) => s + prom[k], 0) / COEV.length;
+  return { evs, prom, general, sobre10: Math.round(general / 4 * 100) / 10, preguntas: evs.map(e => e.pregunta).filter(Boolean) };
+}
+function pintarCoev() {
+  const cont = document.getElementById('co-panel'); if (!cont || !grupoActivo) return;
+  const fid = formacionDeTarea(CO.g, 'ficha-autor'), eqs = equiposDe(CO.todos || [], fid).sort((x, y) => (x.numero || 999) - (y.numero || 999)), C = CO.g.coev || {};
+  const act = document.activeElement; if (act && cont.contains(act) && act.tagName === 'TEXTAREA') return;
+  cont.innerHTML = `<p class="field-hint">Cuando un equipo pase a exponer, toca <b>▶ Expone ahora</b>: a los demás les aparece la rúbrica en su celular (Tareas → Coevaluación de las exposiciones). Ves los promedios y las preguntas en vivo; <b>📽️ Proyectar</b> muestra los resultados y las preguntas al grupo. Los equipos son los de la ficha del autor («${escaparHTML((formaciones(CO.g)[fid] || {}).nombre || '')}»).</p>
+    ${eqs.length ? `<div class="co-equipos">${eqs.map(eq => { const r = resumenCoev(eq.id), vivo = C.abierta && C.equipo === eq.id; return `<div class="bloques-activos-card co-eq ${vivo ? 'vivo' : ''}">
+      <div class="co-eq-cab"><div><b>${escaparHTML(eq.nombre)}</b><small>${escaparHTML(CO.fichas[eq.id] || 'sin autor en su ficha')} · ${escaparHTML((eq.nombres || []).join(', '))}</small></div>
+        <div class="co-eq-bot">${vivo ? '<span class="co-vivo">● Evaluando</span><button type="button" class="btn btn-small" data-co-cerrar>■ Cerrar evaluación</button>' : `<button type="button" class="btn btn-small btn-primary" data-co-abrir="${eq.id}">▶ Expone ahora</button>`}<button type="button" class="btn btn-small" data-co-proy="${eq.id}">📽️ Proyectar</button></div></div>
+      <p class="co-num"><b>${r.evs.length}</b> evaluación${r.evs.length === 1 ? '' : 'es'}${r.evs.length ? ` · promedio <b>${r.general.toFixed(1)} de 4</b> (≈ ${r.sobre10} de 10)` : ''}</p>
+      ${r.evs.length ? `<div class="co-barras">${COEV.map(([k, t]) => `<div><span>${escaparHTML(t)}</span><i><em style="width:${Math.round(100 * r.prom[k] / 4)}%"></em></i><b>${r.prom[k].toFixed(1)}</b></div>`).join('')}</div>` : ''}
+      ${r.preguntas.length ? `<details><summary>${r.preguntas.length} pregunta${r.preguntas.length === 1 ? '' : 's'} del grupo</summary><ul>${r.preguntas.map(q => `<li>${escaparHTML(q)}</li>`).join('')}</ul></details>` : ''}</div>`; }).join('')}</div>`
+      : '<p class="empty-inline">Todavía no hay equipos para la ficha del autor. Fórmalos en 👥 Equipos o en Tareas → Tareas digitales → 👥.</p>'}`;
+  cont.querySelectorAll('[data-co-abrir]').forEach(b => b.addEventListener('click', () => setDoc(doc(db, 'grupos', grupoActivo), { coev: { equipo: b.dataset.coAbrir, abierta: true } }, { merge: true })));
+  cont.querySelectorAll('[data-co-cerrar]').forEach(b => b.addEventListener('click', () => setDoc(doc(db, 'grupos', grupoActivo), { coev: { abierta: false } }, { merge: true })));
+  cont.querySelectorAll('[data-co-proy]').forEach(b => b.addEventListener('click', () => { CO.proy = b.dataset.coProy; document.getElementById('co-proy').hidden = false; document.body.classList.add('con-qr'); pintarProyCoev(); }));
+  if (CO.proy && !document.getElementById('co-proy').hidden) pintarProyCoev();
+}
+function pintarProyCoev() {
+  const eq = (CO.todos || []).find(e => e.id === CO.proy); if (!eq) return;
+  const r = resumenCoev(eq.id);
+  document.getElementById('co-proy-cuerpo').innerHTML = `<div class="cop"><p class="cop-k">Coevaluación</p><h2>${escaparHTML(eq.nombre)}</h2><p class="cop-sub">${escaparHTML(CO.fichas[eq.id] || '')} · ${r.evs.length} evaluaciones · promedio ${r.general.toFixed(1)} de 4</p>
+    <div class="cop-barras">${COEV.map(([k, t]) => `<div><span>${escaparHTML(t)}</span><i><em style="width:${Math.round(100 * r.prom[k] / 4)}%"></em></i><b>${r.prom[k].toFixed(1)}</b></div>`).join('')}</div>
+    <h3>Preguntas del grupo</h3><ol class="cop-preg">${r.preguntas.map(q => `<li>${escaparHTML(q)}</li>`).join('') || '<li><i>Todavía no hay preguntas.</i></li>'}</ol></div>`;
+}
+on('co-proy-cerrar', 'click', () => { document.getElementById('co-proy').hidden = true; document.body.classList.remove('con-qr'); CO.proy = null; });

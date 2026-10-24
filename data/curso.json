@@ -116,26 +116,31 @@
    "fecha": "2026-10-27",
    "fechaTexto": "Mar 27 de octubre",
    "tema": "TEMAS 1 A 4 — REPASO INTENSIVO (contenidos evaluados en el Parcial 1) Y CIERRE DEL TEMA 4 (contenido nuevo, se evalúa en el Parcial 2)",
-   "titulo": "3.4 Lógica dialéctica · 4.1–4.4 Concepción contemporánea de la ciencia (repaso por exposiciones) · 4.5–4.7 Feyerabend, Morin y la cientificidad de las ciencias sociales (contenido nuevo)",
+   "titulo": "3.4 Lógica dialéctica · 4.1–4.4 Rompecabezas por equipos (ficha del autor, exposición y coevaluación) · 4.5–4.7 Feyerabend, Morin y la cientificidad de las ciencias sociales (contenido nuevo) · Arena del Tema 4",
    "docente": [
     "Apertura: lógica dialéctica con ejemplos del aula y la praxis en Freire (3.4).",
-    "Exposiciones de repaso por cuatro equipos: positivismo lógico, Popper, Kuhn y Lakatos (actividad independiente del programa), con retroalimentación del docente.",
+    "Rompecabezas del Tema 4: cada equipo arma en la plataforma la ficha de su autor (positivismo lógico, Popper, Kuhn o Lakatos) en 20 minutos y la expone en 7, proyectada; los demás coevalúan desde el celular con la rúbrica y le dejan una pregunta.",
+    "Después de cada equipo, diapositiva de cierre con lo esencial de su autor.",
     "Exposición del docente (contenido nuevo, se evalúa en el Parcial 2): Feyerabend y el anarquismo epistemológico; Morin y el pensamiento complejo.",
     "Cierre: la cientificidad de las ciencias sociales (doble hermenéutica, criterios propios de rigor), también contenido nuevo del Parcial 2.",
+    "Arena en vivo del Tema 4 (15 preguntas, con el Tribunal de la astrología según Popper).",
     "Taller de proyecto: cómo responder las preguntas 1 a 6 y citarlas en APA 7 (guía APA del Aula Virtual)."
    ],
    "independiente": [
-    "Cuadro comparativo de las posturas de los teóricos del Tema 4 (actividad independiente del programa).",
-    "Lectura analítica del Tema 5."
+    "Cuadro comparativo de los seis teóricos del Tema 4 en la plataforma, en equipo (actividad independiente del programa).",
+    "Jugar «¿Quién lo dijo?» con los 55 autores de la Constelación.",
+    "Lectura analítica del Tema 5.",
+    "Terminar la Entrega 1 del proyecto (preguntas 1 a 6, con referencias APA)."
    ],
    "proyecto": [
     "Pregunta 5: ¿tu hipótesis o supuesto es falsable? ¿Qué resultado lo desmentiría? (Popper)",
     "Pregunta 6: en el sentido de Kuhn, ¿qué paradigma domina en la comunidad que estudia tu tema? ¿Detectas alguna anomalía?"
    ],
    "evaluacion": [
-    "Rúbrica de Exposición por equipos",
-    "Rúbrica de Tarea (cuadro comparativo)",
-    "Participación"
+    "Rúbrica de Exposición por equipos (ficha del autor y exposición)",
+    "Coevaluación del grupo (participación)",
+    "Rúbrica de Tarea (cuadro comparativo de los teóricos en la plataforma)",
+    "Participación (Arena)"
    ],
    "subtemas": [
     "3.4",

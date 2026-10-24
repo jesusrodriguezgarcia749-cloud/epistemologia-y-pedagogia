@@ -282,3 +282,14 @@ body.cp-sin-scroll { overflow: hidden; }
 .cu-positivista > span { color: #2E6FA8; } .cu-interpretativo > span { color: #3F7A4F; } .cu-sociocritico > span { color: #A63D2F; }
 .cu-positivista textarea { border-top: 3px solid #2E6FA8; } .cu-interpretativo textarea { border-top: 3px solid #3F7A4F; } .cu-sociocritico textarea { border-top: 3px solid #A63D2F; }
 html[data-theme="dark"] .cu-positivista > span { color: #8DB6E0; } html[data-theme="dark"] .cu-interpretativo > span { color: #8FD3A0; } html[data-theme="dark"] .cu-sociocritico > span { color: #F0A296; }
+.cu-1col .cu-celdas { grid-template-columns: 1fr !important; } .cu-1col textarea { min-height: 70px; }
+/* coevaluación */
+.co-cab { text-align: center; background: linear-gradient(135deg, #16213A, #2E4A85); color: #fff; border-radius: var(--radius); padding: 14px; margin-bottom: 12px; }
+.co-cab span { display: block; font-size: .8rem; opacity: .8; text-transform: uppercase; letter-spacing: .08em; } .co-cab b { display: block; font-family: var(--font-display, serif); font-size: 1.5rem; } .co-cab small { opacity: .9; }
+.co-crit { background: var(--cream); border-radius: 12px; padding: 10px 12px; margin-bottom: 10px; box-shadow: var(--shadow-card); }
+.co-crit p { margin: 0 0 8px; } .co-crit p small { display: block; color: var(--ink-soft); font-size: .84rem; }
+.co-niv { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.co-niv button { display: grid; gap: 2px; padding: 8px 4px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--parchment); color: var(--ink); cursor: pointer; font: inherit; }
+.co-niv button b { font-size: 1.2rem; } .co-niv button small { font-size: .68rem; color: var(--ink-soft); }
+.co-niv button[aria-pressed="true"] { background: #3E5BA8; border-color: #3E5BA8; color: #fff; } .co-niv button[aria-pressed="true"] small { color: #E3E8F4; }
+.jp-autores .jp-op { font-size: .95rem; }

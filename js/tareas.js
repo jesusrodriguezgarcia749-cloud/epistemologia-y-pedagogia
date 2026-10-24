@@ -5,7 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV } from "./tareas-datos.js";
 import { DocITES } from "./docx-ites.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
@@ -106,6 +106,7 @@ async function estadoDe(a) {
 }
 function insignia(a, st) {
   if (a.tipo === 'practica') return '<span class="tq tq-practica">Práctica · sin calificación</span>';
+  if (a.tipo === 'coev') return '<span class="tq tq-practica">Participación · en vivo</span>';
   if (a.tipo === 'pronto') return '<span class="tq tq-pronto">Próximamente</span>';
   if (!st) return `<span class="tq">${abierta(a.id) ? 'Tarea' : '🔒 Cerrada'}</span>`;
   if (st.cal !== null) return `<span class="tq tq-cal">Calificada: <b>${st.cal}</b></span>`;
@@ -160,9 +161,10 @@ function ruta() {
   $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true;
   const c = $('#cl-actividad');
   c.innerHTML = `<a class="cl-volver" href="#">← Todas las tareas</a><p class="cl-fecha">Tema ${esc(a.tema)} · ${esc(a.titulo)} · ${esc(a.fechaTexto)}</p><h2 class="cl-h2">${a.icono} ${esc(a.nombre)}</h2>
-    ${califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
+    ${a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
   if (a.tipo === 'cuadro') actCuadro($('#cl-cuerpo'), a);
-  else ({ 'que-paradigma': actQueParadigma })[a.id]($('#cl-cuerpo'));
+  else if (a.tipo === 'coev') actCoev($('#cl-cuerpo'));
+  else ({ 'que-paradigma': actQueParadigma, 'quien-lo-dijo': actQuienLoDijo })[a.id]($('#cl-cuerpo'));
   window.scrollTo({ top: 0 });
 }
 // El QR de un equipo abre tareas.html#unir-CODIGO (vía unir.html): entra, se une y va a su tarea.
@@ -233,9 +235,9 @@ function cuadro(cont, eq, a) {
     <p class="atlas-ayuda">${A.ayuda}${eq ? ' Repártanse el trabajo en el equipo.' : ''} Se guarda solo${eq ? ' y todos ven al instante lo que escriben los demás' : ''}.</p>
     <p class="cu-progreso" id="cu-progreso"></p>
     <div class="cu-clave" id="cu-clave" hidden><b>🔑 Su maestro liberó la clave.</b> <button type="button" class="btn-at" id="cu-ver-clave" aria-pressed="false">Comparar con la clave</button></div>
-    <div class="cu-tabla">${A.filas.map(([f, t, ayuda, inv]) => `<section class="cu-fila ${inv ? 'cu-inv' : ''}"><h3>${inv ? '<span class="cu-tag">🔎 Investiga</span>' : ''}${esc(t)}<small>${esc(ayuda)}</small></h3>
+    <div class="cu-tabla ${A.columnas.length === 1 ? 'cu-1col' : ''}">${A.filas.map(([f, t, ayuda, inv]) => `<section class="cu-fila ${inv ? 'cu-inv' : ''}"><h3>${inv ? '<span class="cu-tag">🔎 Investiga</span>' : ''}${esc(t)}<small>${esc(ayuda)}</small></h3>
       <div class="cu-celdas">${A.columnas.map(([c, nc], ci) => `<label class="cu-celda cu-${c}"><span>${esc(nc)} <small class="ma-autor" data-autor="${f}_${c}"></small></span><textarea data-k="${f}_${c}" rows="3"></textarea>
-        <p class="cu-resp" data-resp="${f}_${c}" hidden><b>${inv ? 'Respuesta de referencia' : 'Según el compendio'}:</b> ${esc(A.respuestas[f][ci])}</p></label>`).join('')}</div>
+        ${A.sinClave ? '' : `<p class="cu-resp" data-resp="${f}_${c}" hidden><b>${inv ? 'Respuesta de referencia' : 'Según el compendio'}:</b> ${esc(A.respuestas[f][ci])}</p>`}</label>`).join('')}</div>
       ${inv ? `<label class="cu-fuente"><span>📚 Fuente: ¿de dónde lo sacaron? <small class="ma-autor" data-autor="${f}_fuente"></small></span><input data-k="${f}_fuente" type="text" placeholder="Autor o sitio, título y enlace (URL)"></label>` : ''}</section>`).join('')}</div>`;
   const estado = (t, c = '') => { const e = $('#cu-estado'); if (e) { e.textContent = t; e.className = 'ma-estado ' + c; } };
   const pintar = () => {
@@ -278,7 +280,7 @@ function cuadro(cont, eq, a) {
   const subs = []; let repEntrega = () => {};
   estado('Conectando…');
   subs.push(onSnapshot(ref, sn => { existe = sn.exists(); S = aplicar(sn.exists() ? sn.data() : {}); if (!pend.size && !vuelo.size) estado(eq ? 'Sincronizado con tu equipo ✓' : 'Guardado en tu cuenta ✓', 'ok'); pintar(); repEntrega(); }, () => estado('Sin conexión. Revisa tu internet.', 'mal')));
-  const verClave = d => { clave = !!((d.claves || {})[A.clave]); $('#cu-clave').hidden = !clave; if (!clave) $$('.cu-resp', cont).forEach(p => { p.hidden = true; }); };
+  const verClave = d => { clave = !A.sinClave && !!((d.claves || {})[A.clave]); $('#cu-clave').hidden = !clave; if (!clave) $$('.cu-resp', cont).forEach(p => { p.hidden = true; }); };
   const onEstado = e => verClave(e.detail || {});
   window.addEventListener('estado-tareas', onEstado);
   getDoc(doc(db, 'grupos', sesion.grupoId)).then(s => verClave(s.exists() ? s.data() : {})).catch(() => {});
@@ -300,10 +302,10 @@ function cuadro(cont, eq, a) {
     D.h1('Cuadro comparativo');
     const celda = k => { const t = (S.celdas[k] || '').trim(), au = eq && S.por[k]; return { runs: [[t || '(sin escribir)', t ? {} : { i: true, color: '9A9389' }], ...(au ? [[`\n✍ ${au}`, { color: '3F7A4F', tam: 8 }]] : [])] }; };
     const cab = (f, t, inv) => { const fu = (S.celdas[`${f}_fuente`] || '').trim(); return inv ? { runs: [[t, { b: true }], [`\n🔎 Investigación${fu ? ' · Fuente: ' + fu : ' · sin fuente'}`, { color: '6B6358', tam: 8, i: !fu }]], fondo: 'F4EFE4' } : { t, b: true, fondo: 'F4EFE4' }; };
-    D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t, , inv]) => [cab(f, t, inv), ...A.columnas.map(([c]) => celda(`${f}_${c}`))])], { anchos: [1700, 2560, 2560, 2540] });
+    D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t, , inv]) => [cab(f, t, inv), ...A.columnas.map(([c]) => celda(`${f}_${c}`))])], { anchos: [1700, ...A.columnas.map(() => Math.floor(7660 / A.columnas.length))] });
     if (clave) {
       D.h1('Comparación con la clave', 'La clave que liberó el maestro (del compendio y, en las filas de investigación, respuestas de referencia), para revisar lo que escribimos.');
-      D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t]) => [{ t, b: true, fondo: 'F4EFE4' }, ...A.respuestas[f]])], { anchos: [1700, 2560, 2560, 2540] });
+      D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t]) => [{ t, b: true, fondo: 'F4EFE4' }, ...A.respuestas[f]])], { anchos: [1700, ...A.columnas.map(() => Math.floor(7660 / A.columnas.length))] });
     }
     D.descargar(`${A.archivo}_${slug(eq ? 'equipo ' + eq.nombre : sesion.nombre)}`);
   });
@@ -467,6 +469,66 @@ function actArena(cont) {
   subs.push(onSnapshot(salaRef, sn => { S = sn.exists() ? sn.data() : null; pintar(); }, () => { cont.innerHTML = '<p class="ma-msg mal">Sin conexión. Revisa tu internet.</p>'; }));
   subs.push(onSnapshot(yoRef, sn => { YO = sn.exists() ? sn.data() : null; pintar(); }, () => {}));
   subs.push(onSnapshot(collection(db, 'grupos', g, 'arena', 'sala', 'jugadores'), sn => { J = sn.docs.map(d => ({ id: d.id, ...d.data() })); if (S && (S.estado === 'espera' || S.estado === 'revela' || S.estado === 'fin')) pintar(); }, () => {}));
+}
+
+// ======================================================= 🗣️ COEVALUACIÓN DE LAS EXPOSICIONES (alumno)
+// El docente pone en grupos/{g}.coev = {equipo, abierta}; cada alumno califica en alumnos/{a}/atlas/tarea-coev-{equipo}.
+function actCoev(cont) {
+  if (!sesion) { formAcceso(cont, () => actCoev(cont), 'Entra con tu nombre y PIN para evaluar las exposiciones'); return; }
+  const g = sesion.grupoId; let C = {}, eqs = [], mia = null, unsubMia = null, autorDe = {};
+  const subs = [];
+  detener = () => { subs.forEach(u => u()); if (unsubMia) unsubMia(); };
+  const pintar = async () => {
+    const id = C.equipo, eq = eqs.find(e => e.id === id);
+    if (!C.abierta || !eq) { cont.innerHTML = '<div class="ar-espera"><span>🗣️</span><b>Esperando la siguiente exposición</b><p>Cuando tu maestro indique qué equipo expone, aquí aparecerá la rúbrica para evaluarlo. No cierres la página.</p></div>'; return; }
+    if (!(id in autorDe)) { try { const s = await getDoc(doc(db, 'grupos', g, 'equipos', id, 'atlas', CUADROS['ficha-autor'].id)); autorDe[id] = s.exists() ? ((s.data().celdas || {}).autor_ficha || '') : ''; } catch { autorDe[id] = ''; } }
+    if ((eq.integrantes || []).includes(sesion.alumnoId)) { cont.innerHTML = `<div class="ar-espera"><span>🎤</span><b>¡Expone tu equipo, «${esc(eq.nombre)}»!</b><p>Tus compañeros los están evaluando. ¡Mucho éxito!</p></div>`; return; }
+    const ref = doc(db, 'grupos', g, 'alumnos', sesion.alumnoId, 'atlas', 'tarea-coev-' + id);
+    if (!mia || mia._eq !== id) { try { const s = await getDoc(ref); mia = { ...(s.exists() ? s.data() : {}), _eq: id }; } catch { mia = { _eq: id }; } }
+    const cal = mia.cal || {};
+    cont.innerHTML = `<div class="co-cab"><span>Expone</span><b>${esc(eq.nombre)}</b>${autorDe[id] ? `<small>${esc(autorDe[id])}</small>` : ''}</div>
+      <p class="atlas-ayuda">Califica cada aspecto de 1 a 4 y déjales una pregunta. Puedes corregir mientras la evaluación esté abierta. Tu evaluación es anónima para el equipo.</p>
+      ${COEV.map(([k, t, d]) => `<div class="co-crit"><p><b>${esc(t)}</b><small>${esc(d)}</small></p><div class="co-niv">${COEV_NIV.map(([n, nn]) => `<button type="button" data-k="${k}" data-n="${n}" aria-pressed="${cal[k] === n}"><b>${n}</b><small>${nn}</small></button>`).join('')}</div></div>`).join('')}
+      <label class="de-lbl">Tu pregunta para el equipo<textarea id="co-preg" rows="2" placeholder="¿Qué diría tu autor sobre…?">${esc(mia.pregunta || '')}</textarea></label>
+      <button type="button" class="btn-at" id="co-enviar">📤 Enviar mi evaluación</button><p class="ma-msg" id="co-msg" ${mia.t ? '' : 'hidden'}>${mia.t ? '✓ Evaluación enviada. Puedes corregirla.' : ''}</p>`;
+    $$('.co-niv button', cont).forEach(b => b.addEventListener('click', () => { cal[b.dataset.k] = Number(b.dataset.n); mia.cal = cal; $$(`.co-niv button[data-k="${b.dataset.k}"]`, cont).forEach(x => x.setAttribute('aria-pressed', String(x === b))); }));
+    $('#co-enviar').addEventListener('click', async () => {
+      const m = $('#co-msg'), faltan = COEV.filter(([k]) => !cal[k]);
+      if (faltan.length) { m.textContent = `Te falta calificar: ${faltan.map(x => x[1].toLowerCase()).join(', ')}.`; m.className = 'ma-msg mal'; m.hidden = false; return; }
+      mia.pregunta = $('#co-preg').value.trim();
+      try { await setDoc(ref, { pinVerificado: sesion.pin, nombre: sesion.nombre, equipo: id, cal, pregunta: mia.pregunta, t: serverTimestamp() }); mia.t = Date.now(); m.textContent = '✓ Evaluación enviada. Puedes corregirla mientras siga abierta.'; m.className = 'ma-msg ok'; m.hidden = false; }
+      catch (e) { m.textContent = 'No se pudo enviar: ' + (e.message || e); m.className = 'ma-msg mal'; m.hidden = false; }
+    });
+  };
+  subs.push(onSnapshot(doc(db, 'grupos', g), sn => { const n = (sn.exists() && sn.data().coev) || {}; const cambio = n.equipo !== C.equipo || n.abierta !== C.abierta; C = n; GDATA = sn.exists() ? sn.data() : {}; if (cambio) pintar(); }, () => {}));
+  subs.push(onSnapshot(collection(db, 'grupos', g, 'equipos'), sn => { eqs = sn.docs.map(d => ({ id: d.id, ...d.data() })); pintar(); }, () => {}));
+}
+
+// ======================================================= 💬 ¿QUIÉN LO DIJO? (práctica, con los 55 autores de la Constelación)
+let LAB = null;
+async function actQuienLoDijo(cont) {
+  cont.innerHTML = '<p class="atlas-ayuda">Cargando a los autores…</p>';
+  try { LAB = LAB || await fetch('data/laboratorio.json').then(r => r.json()); } catch { cont.innerHTML = '<p class="ma-msg mal">No se pudieron cargar los autores.</p>'; return; }
+  const A = LAB.autores, F = LAB.familias, tema = (a, n) => (a.temas || []).some(t => n.includes(t.split('.')[0]));
+  const items = [...A.map(a => ({ tipo: 'frase', a })), ...A.filter(a => (a.obras || []).length).map(a => ({ tipo: 'obra', a }))];
+  const distractores = a => { const misma = barajar(A.filter(x => x.id !== a.id && x.fam === a.fam)), otras = barajar(A.filter(x => x.id !== a.id && x.fam !== a.fam)); return [...misma, ...otras].slice(0, 3); };
+  juegoPreguntas(cont, {
+    clave: 'quien', seg: 15,
+    intro: 'Aparece una frase (o una obra) y eliges quién la dijo o la escribió. Son los <b>55 pensadores de la Constelación</b> del Laboratorio. Empieza por el Tema 4, que es el de mañana… y del examen.',
+    niveles: [
+      { id: 'tema4', n: 'Tema 4', ico: '🔭', preg: 10, desc: 'Positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend, Morin y compañía.', filtro: x => x.tipo === 'frase' && tema(x.a, ['4']) },
+      { id: 'temas14', n: 'Temas 1 a 4', ico: '📚', preg: 15, desc: 'Todos los autores del repaso: de Platón a Morin.', filtro: x => x.tipo === 'frase' && tema(x.a, ['1', '2', '3', '4']) },
+      { id: 'experto', n: 'Experto', ico: '🏆', preg: 20, desc: 'Los 55 autores, y también por sus obras.', filtro: () => true },
+    ],
+    items,
+    preparar: x => { const ops = barajar([x.a, ...distractores(x.a)]); return { carta: x.tipo === 'frase' ? `<span class="ap-emo">💬</span><b class="jp-q">«${esc(x.a.frase)}»</b>` : `<span class="ap-emo">📖</span><small class="jp-pista">¿Quién escribió…?</small><b class="jp-q">${esc(x.a.obras[0])}</b>`, opciones: ops.map(a => ({ v: a.id, t: esc(a.nombre), style: `--c:${(F[a.fam] || {}).color || '#3E5BA8'}` })), correctas: [x.a.id], clase: 'jp-infl jp-autores' }; },
+    mal: x => `No: es de ${esc(x.a.nombre)}.`,
+    explicar: x => `<p class="ap-orig"><b>${esc(x.a.nombre)}</b> (${esc(x.a.vida || '')}) · ${esc((F[x.a.fam] || {}).nombre || '')}</p><p class="ap-dato">${esc((x.a.obras || [])[0] || '')}${x.tipo === 'obra' ? ` · «${esc(x.a.frase)}»` : ''} · Temas ${esc((x.a.temas || []).join(', '))}. <a href="laboratorio.html" target="_blank" rel="noopener">Ver su ficha en la Constelación ↗</a></p>`,
+    repaso: x => `<b>${esc(x.a.nombre)}</b>: ${x.tipo === 'frase' ? `«${esc(x.a.frase)}»` : esc(x.a.obras[0])}`,
+    estudiar: { boton: 'Estudiar a los autores', intro: 'Los 55 pensadores con su frase, su obra principal y los temas donde aparecen. Su ficha completa está en el Laboratorio → Constelación.', uno: 'autor', varios: 'autores', texto: x => x.a.nombre + ' ' + x.a.frase,
+      filtros: [['todos', 'Todos', x => x.tipo === 'frase'], ['t4', 'Tema 4', x => x.tipo === 'frase' && tema(x.a, ['4'])], ...Object.entries(F).map(([k, f]) => [k, f.nombre, x => x.tipo === 'frase' && x.a.fam === k])],
+      fila: x => `<div class="ap-fila" style="border-left-color:${(F[x.a.fam] || {}).color || '#3E5BA8'}"><span class="ap-fe">✦</span><div><b>${esc(x.a.nombre)}</b> <small class="ap-tag">${esc(x.a.vida || '')} · Temas ${esc((x.a.temas || []).join(', '))}</small><p class="ap-orig">«${esc(x.a.frase)}»</p><p class="ap-dato">${esc((x.a.obras || [])[0] || '')}</p></div></div>` },
+  });
 }
 
 window.addEventListener('hashchange', ruta);
