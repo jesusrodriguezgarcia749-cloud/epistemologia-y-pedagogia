@@ -13,6 +13,8 @@ import { firebaseConfig } from "./firebase-config.js";
 import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { vistaRapida } from "./matriz.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA } from "./tareas-datos.js";
+import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -116,7 +118,10 @@ function cargarTabActiva() {
   if (tab !== 'enlinea') detenerIntentosEnVivo();
   // Tabla de alumnos contra actividades, arriba de la captura de siempre.
   vistaRapida(tab, { db, grupoActivo, alumnos: alumnosCache, datosDeAlumno });
-  if (tab === 'tareas') cargarCatalogo('tareas');
+  if (tab === 'tareas') { cargarCatalogo('tareas'); cargarTareasDig(); }
+  if (tab === 'equipos') cargarEquiposTab();
+  if (tab === 'monitor') iniciarMonitor(); else detenerMonitor();
+  if (tab === 'arena') iniciarArena(); else detenerArena();
   if (tab === 'participacion') cargarCatalogo('participaciones');
   if (tab === 'proyecto') cargarProyecto();
   if (tab === 'asistencia') cargarAsistencia();
@@ -1601,3 +1606,463 @@ async function publicarAviso() {
   marcarResultado('btn-publicar-aviso', 'aviso-msg', true, '✓ Aviso publicado.', '');
   cargarAvisos();
 }
+
+// ---- Equipos (grupos/{g}/equipos/{id}; su trabajo en .../equipos/{id}/atlas/{tarea})
+// Se arman por «formaciones»: cada vez que formas equipos (con QR o a mano) queda una
+// formación, y cada tarea en equipo usa una (grupos/{g}.equiposTarea[tarea] = formación).
+// Así reutilizas los mismos equipos en varias tareas o formas nuevos solo para una.
+const LETRAS_COD = 'ACDEFHJKMNPRTUVWXY3479';
+let ATLAS_DATA = null;
+let EQUIPOS = [], eqUnsub = null, gEqUnsub = null, eqGrupo = null, G_DATA = {}, FSEL = BASE, QR_FID = BASE, NUEVA_PARA = '';
+const ordenEq = (a, b) => (a.numero || 999) - (b.numero || 999) || (a.nombre || '').localeCompare(b.nombre || '', 'es');
+const eqDeF = fid => equiposDe(EQUIPOS, fid).sort(ordenEq);
+const nombreF = fid => (formaciones(G_DATA)[fid] || {}).nombre || 'Equipos';
+const tareasF = fid => tareasDeFormacion(G_DATA, fid, TAREAS_DIG);
+const nombreTareaCorto = a => `${a.tema} · ${a.nombre}`;
+function codigoNuevo(usados) { let c; do { c = Array.from({ length: 4 }, () => LETRAS_COD[Math.floor(Math.random() * LETRAS_COD.length)]).join(''); } while (usados.has(c)); usados.add(c); return c; }
+function escucharEquiposAdmin() {
+  if (!grupoActivo) return;
+  if (eqGrupo === grupoActivo && eqUnsub) return;
+  if (eqUnsub) eqUnsub(); if (gEqUnsub) gEqUnsub();
+  eqGrupo = grupoActivo; EQUIPOS = []; G_DATA = {}; FSEL = BASE;
+  gEqUnsub = onSnapshot(doc(db, 'grupos', grupoActivo), sn => { G_DATA = sn.exists() ? sn.data() : {}; if (!formaciones(G_DATA)[FSEL]) FSEL = BASE; refrescarEquiposUI(); }, () => {});
+  eqUnsub = onSnapshot(collection(db, 'grupos', grupoActivo, 'equipos'), sn => { EQUIPOS = sn.docs.map(d => ({ id: d.id, ...d.data() })).sort(ordenEq); refrescarEquiposUI(); }, () => {});
+}
+function refrescarEquiposUI() {
+  pintarEquipos();
+  pintarTdEquipos();
+  if (!document.getElementById('qr-proyeccion').hidden) pintarProyeccion();
+}
+function cargarEquiposTab() {
+  const cont = document.getElementById('equipos-lista'); if (!cont) return;
+  if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  escucharEquiposAdmin(); pintarEquipos();
+}
+function irAEquipos(fid, nuevaPara) {
+  FSEL = fid || FSEL; NUEVA_PARA = nuevaPara || '';
+  const b = document.querySelector('.tab-btn[data-tab="equipos"]'); if (b) b.click();
+  pintarEquipos();
+  if (nuevaPara) { const f = document.getElementById('eqn-nombre'); if (f) setTimeout(() => f.focus(), 50); }
+  document.getElementById('tab-equipos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function pintarEquipos() {
+  const lista = document.getElementById('equipos-lista'); if (!lista || !grupoActivo) return;
+  const F = formaciones(G_DATA), f = F[FSEL] || F[BASE];
+  // formaciones
+  document.getElementById('eq-formaciones').innerHTML = ordenFormaciones(G_DATA).map(([fid, x]) => `<button type="button" class="chip-mon" data-f="${fid}" aria-pressed="${fid === FSEL}">${x.abiertas ? '🔓' : '🔒'} ${escaparHTML(x.nombre)} <small>· ${eqDeF(fid).length} equipo${eqDeF(fid).length === 1 ? '' : 's'}</small></button>`).join('')
+    + `<button type="button" class="chip-mon eq-nueva-btn" id="eq-nueva-abrir" aria-pressed="${!!NUEVA_PARA || document.getElementById('eq-nueva').hidden === false}">➕ Formar equipos nuevos</button>`;
+  document.querySelectorAll('#eq-formaciones [data-f]').forEach(b => b.addEventListener('click', () => { FSEL = b.dataset.f; NUEVA_PARA = ''; document.getElementById('eq-nueva').hidden = true; pintarFormEquipo(null); pintarEquipos(); }));
+  document.getElementById('eq-nueva-abrir').addEventListener('click', () => { const n = document.getElementById('eq-nueva'); n.hidden = !n.hidden; if (!n.hidden) pintarNueva(); pintarEquipos(); });
+  if (NUEVA_PARA) { document.getElementById('eq-nueva').hidden = false; pintarNueva(); }
+  // cabecera de la formación elegida
+  const usan = tareasF(FSEL);
+  document.getElementById('eq-f-cab').innerHTML = `<div class="eq-f-tit"><h3 class="section-title" style="margin:0">👥 ${escaparHTML(f.nombre)}</h3><button type="button" class="btn btn-small" id="eq-f-ren">✏️ Renombrar</button>${FSEL !== BASE && !usan.length ? '<button type="button" class="btn btn-small" id="eq-f-del">Eliminar</button>' : ''}</div>
+    <p class="eq-f-usan"><b>La usan:</b> ${usan.length ? usan.map(a => `<span class="eq-tag">${a.icono} ${escaparHTML(nombreTareaCorto(a))}</span>`).join(' ') : '<i>ninguna tarea todavía</i> (asígnala en Tareas → Tareas digitales, botón 👥)'}</p>`;
+  document.getElementById('eq-f-ren').addEventListener('click', async () => {
+    const n = prompt('Nombre de esta formación de equipos:', f.nombre); if (!n || !n.trim()) return;
+    await setDoc(doc(db, 'grupos', grupoActivo), { formaciones: { [FSEL]: { nombre: n.trim() } } }, { merge: true });
+  });
+  const bd = document.getElementById('eq-f-del');
+  if (bd) bd.addEventListener('click', async () => {
+    if (!confirm(`¿Eliminar «${f.nombre}» y sus ${eqDeF(FSEL).length} equipos? Ninguna tarea la usa.`)) return;
+    const fid = FSEL; FSEL = BASE;
+    await Promise.all(eqDeF(fid).map(e => deleteDoc(doc(db, 'grupos', grupoActivo, 'equipos', e.id))));
+    await updateDoc(doc(db, 'grupos', grupoActivo), { [`formaciones.${fid}`]: deleteField() });
+  });
+  const ab = document.getElementById('eq-abierto');
+  ab.setAttribute('aria-pressed', String(!!f.abiertas)); ab.textContent = f.abiertas ? '🔓 Inscripciones abiertas' : '🔒 Inscripciones cerradas';
+  const mios = eqDeF(FSEL);
+  const nombreDe = id => (alumnosCache.find(a => a.id === id) || {}).nombre || id;
+  const enEq = new Set(mios.flatMap(e => e.integrantes || []));
+  const sin = alumnosCache.filter(a => !enEq.has(a.id));
+  document.getElementById('eq-sin-lista').textContent = sin.length ? sin.map(a => a.nombre).join(', ') : 'nadie, ¡todos tienen equipo!';
+  lista.innerHTML = mios.length ? `<div class="equipos-grid">${mios.map(eq => {
+    const n = (eq.integrantes || []).length, lleno = eq.max && n >= eq.max;
+    return `<div class="equipo-card"><div class="eq-card-cab"><div><b>${escaparHTML(eq.nombre)}</b>${eq.codigo ? `<span class="eq-codigo">${escaparHTML(eq.codigo)}</span>` : ''}</div>${eq.codigo ? `<button type="button" class="eq-qr-mini" data-eq-qr="${eq.id}" title="Ver el QR en grande">${qrSvg(urlUnir(eq.codigo), { titulo: eq.nombre })}</button>` : ''}</div>
+      <p class="eq-cupo ${lleno ? 'lleno' : ''}">${n}${eq.max ? ` de ${eq.max}` : ''} integrante${n === 1 && !eq.max ? '' : 's'}${lleno ? ' · completo' : ''}</p>
+      <p>${(eq.integrantes || []).map(i => escaparHTML(nombreDe(i))).join(', ') || '<i>sin integrantes</i>'}</p>
+      <div><button type="button" class="btn btn-small" data-eq-edit="${eq.id}">Editar</button> <button type="button" class="btn btn-small" data-eq-del="${eq.id}">Eliminar</button></div></div>`;
+  }).join('')}</div>` : '<p class="empty-inline">Esta formación todavía no tiene equipos: genéralos con QR o ármalos a mano.</p>';
+  if (!document.getElementById('equipo-id').value) pintarFormEquipo(null);
+  lista.querySelectorAll('[data-eq-qr]').forEach(b => b.addEventListener('click', () => abrirProyeccion(FSEL, false, b.dataset.eqQr)));
+  lista.querySelectorAll('[data-eq-edit]').forEach(b => b.addEventListener('click', () => { pintarFormEquipo(EQUIPOS.find(x => x.id === b.dataset.eqEdit)); document.getElementById('equipo-nombre').focus(); }));
+  lista.querySelectorAll('[data-eq-del]').forEach(b => b.addEventListener('click', async () => {
+    const eq = EQUIPOS.find(x => x.id === b.dataset.eqDel);
+    if (!confirm(`¿Eliminar el equipo «${eq.nombre}»? Sus integrantes ya no verán el trabajo del equipo (lo que escribieron no se borra).`)) return;
+    await deleteDoc(doc(db, 'grupos', grupoActivo, 'equipos', eq.id));
+  }));
+}
+// formulario «Formar equipos nuevos»: nombre, para qué tarea, cuántos y de cuántos
+function pintarNueva() {
+  const caja = document.getElementById('eq-nueva'); if (caja._para === NUEVA_PARA && caja.innerHTML) return; caja._para = NUEVA_PARA;
+  const equipo = Object.values(TAREAS_DIG).filter(enEquipo);
+  const hoy = new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long' });
+  const sug = NUEVA_PARA ? `Equipos para ${TAREAS_DIG[NUEVA_PARA].nombre}` : `Equipos del ${hoy}`;
+  caja.innerHTML = `<h4 class="eq-sub" style="margin-top:0">➕ Formar equipos nuevos</h4>
+    <p class="field-hint">Los equipos que ya tienes no se tocan: las tareas que los usan los siguen usando. Los nuevos tendrán sus propios códigos QR.</p>
+    <label class="field-label" for="eqn-nombre">Nombre de esta formación</label><input id="eqn-nombre" type="text" maxlength="60" value="${escaparHTML(sug)}">
+    <label class="field-label" for="eqn-tarea">¿Para qué tarea?</label><select id="eqn-tarea"><option value="">Ninguna por ahora (la asigno después)</option>${equipo.map(a => `<option value="${a.id}" ${a.id === NUEVA_PARA ? 'selected' : ''}>${escaparHTML(nombreTareaCorto(a))} — hoy usa «${escaparHTML(nombreF(formacionDeTarea(G_DATA, a.id)))}»</option>`).join('')}</select>
+    <div class="eq-generar"><span>Generar</span><input id="eqn-n" type="number" min="1" max="20" value="6" aria-label="Número de equipos"><span>equipos de máximo</span><input id="eqn-max" type="number" min="1" max="15" value="4" aria-label="Máximo de integrantes"><span>integrantes, con código QR</span></div>
+    <div class="equipo-botones"><button type="button" class="btn btn-primary" id="eqn-crear">Crear y generar los QR</button><button type="button" class="btn" id="eqn-cancelar">Cancelar</button></div>`;
+  document.getElementById('eqn-cancelar').addEventListener('click', () => { NUEVA_PARA = ''; caja.hidden = true; caja._para = null; pintarEquipos(); });
+  document.getElementById('eqn-crear').addEventListener('click', async () => {
+    const nombre = document.getElementById('eqn-nombre').value.trim() || sug, tarea = document.getElementById('eqn-tarea').value;
+    const n = Math.min(20, Math.max(1, parseInt(document.getElementById('eqn-n').value, 10) || 0)), max = Math.min(15, Math.max(1, parseInt(document.getElementById('eqn-max').value, 10) || 0));
+    if (tarea && !confirm(`«${TAREAS_DIG[tarea].nombre}» va a usar estos equipos nuevos. Lo que ya hayan trabajado en ella con los equipos anteriores no se borra (vuelve a aparecer si regresas a esos equipos). ¿Continuar?`)) return;
+    const fid = 'f' + Date.now().toString(36);
+    await setDoc(doc(db, 'grupos', grupoActivo), { formaciones: { [fid]: { nombre, creada: Date.now(), abiertas: true } }, ...(tarea ? { equiposTarea: { [tarea]: fid } } : {}) }, { merge: true });
+    await generarEquipos(fid, n, max);
+    FSEL = fid; NUEVA_PARA = ''; caja.hidden = true; caja._para = null; pintarEquipos();
+  });
+}
+async function generarEquipos(fid, n, max) {
+  const base = Math.max(0, ...eqDeF(fid).map(x => x.numero || 0)), usados = new Set(EQUIPOS.map(e => e.codigo));
+  await Promise.all(Array.from({ length: n }, (_, i) => setDoc(doc(db, 'grupos', grupoActivo, 'equipos', 'e' + Date.now().toString(36) + i),
+    { nombre: `Equipo ${base + i + 1}`, numero: base + i + 1, codigo: codigoNuevo(usados), max, formacion: fid, integrantes: [], nombres: [], actualizado: serverTimestamp() })));
+}
+function pintarFormEquipo(eq) {
+  document.getElementById('equipo-id').value = eq ? eq.id : '';
+  document.getElementById('equipo-nombre').value = eq ? eq.nombre : '';
+  document.getElementById('equipo-guardar').textContent = eq ? 'Guardar cambios' : 'Crear equipo';
+  document.getElementById('equipo-cancelar').hidden = !eq;
+  const enOtro = {}; eqDeF(FSEL).forEach(x => { if (!eq || x.id !== eq.id) (x.integrantes || []).forEach(i => { enOtro[i] = x.nombre; }); });
+  const mios = new Set(eq ? eq.integrantes || [] : []);
+  document.getElementById('equipo-alumnos').innerHTML = alumnosCache.map(a => `<label class="${enOtro[a.id] ? 'en-otro' : ''}"><input type="checkbox" value="${a.id}" ${mios.has(a.id) ? 'checked' : ''}> ${escaparHTML(a.nombre)}${enOtro[a.id] ? ` <small>(en «${escaparHTML(enOtro[a.id])}»)</small>` : ''}</label>`).join('');
+}
+const nombresDe = ids => ids.map(i => (alumnosCache.find(a => a.id === i) || {}).nombre || i);
+on('equipo-cancelar', 'click', () => pintarFormEquipo(null));
+on('equipo-form', 'submit', async ev => {
+  ev.preventDefault();
+  const msg = document.getElementById('equipo-msg');
+  const nombre = document.getElementById('equipo-nombre').value.trim();
+  const ids = [...document.querySelectorAll('#equipo-alumnos input:checked')].map(i => i.value);
+  if (!nombre || !ids.length) { msg.textContent = 'Escribe el nombre del equipo y elige al menos un integrante.'; msg.hidden = false; return; }
+  const idEd = document.getElementById('equipo-id').value, id = idEd || ('e' + Date.now().toString(36));
+  const previo = EQUIPOS.find(x => x.id === idEd) || {}, fid = idEd ? formacionDe(previo) : FSEL;
+  try {
+    // en una misma formación, un alumno solo puede estar en un equipo: se quita de los demás
+    await Promise.all(eqDeF(fid).filter(x => x.id !== id && (x.integrantes || []).some(i => ids.includes(i))).map(x => {
+      const integ = x.integrantes.filter(i => !ids.includes(i));
+      return updateDoc(doc(db, 'grupos', grupoActivo, 'equipos', x.id), { integrantes: integ, nombres: nombresDe(integ) });
+    }));
+    await setDoc(doc(db, 'grupos', grupoActivo, 'equipos', id), {
+      nombre, integrantes: ids, nombres: nombresDe(ids), codigo: previo.codigo || codigoNuevo(new Set(EQUIPOS.map(e => e.codigo))), max: Math.max(previo.max || 0, ids.length) || ids.length,
+      numero: previo.numero || (Math.max(0, ...eqDeF(fid).map(x => x.numero || 0)) + 1), formacion: fid, actualizado: serverTimestamp()
+    }, { merge: true });
+    pintarFormEquipo(null);
+    msg.textContent = 'Equipo guardado ✓'; msg.hidden = false; setTimeout(() => { msg.hidden = true; }, 2500);
+  } catch (e) { msg.textContent = 'No se pudo guardar: ' + (e.message || e); msg.hidden = false; }
+});
+on('eq-generar', 'click', async () => {
+  if (!grupoActivo) return;
+  const n = Math.min(20, Math.max(1, parseInt(document.getElementById('eq-n').value, 10) || 0)), max = Math.min(15, Math.max(1, parseInt(document.getElementById('eq-max').value, 10) || 0));
+  if (!confirm(`¿Agregar ${n} equipo${n === 1 ? '' : 's'} de máximo ${max} integrantes a «${nombreF(FSEL)}», cada uno con su código QR?${eqDeF(FSEL).length ? ' Los equipos que ya tiene se conservan.' : ''}`)) return;
+  await generarEquipos(FSEL, n, max);
+  if (!formaciones(G_DATA)[FSEL].abiertas) await alternarInscripciones(FSEL, true);
+});
+async function alternarInscripciones(fid, valor) {
+  const v = typeof valor === 'boolean' ? valor : !formaciones(G_DATA)[fid].abiertas;
+  await setDoc(doc(db, 'grupos', grupoActivo), { formaciones: { [fid]: { abiertas: v } }, ...(fid === BASE ? { equiposAbiertos: v } : {}) }, { merge: true });
+}
+on('eq-abierto', 'click', () => alternarInscripciones(FSEL));
+function pintarProyeccion() {
+  const grid = document.getElementById('qr-grid'), solo = grid.dataset.solo || '';
+  const conCod = eqDeF(QR_FID).filter(e => e.codigo && (!solo || e.id === solo));
+  const usan = tareasF(QR_FID);
+  document.getElementById('qr-tit').textContent = `Únete a tu equipo · ${nombreF(QR_FID)}`;
+  document.getElementById('qr-sub').textContent = `${usan.length ? 'Para: ' + usan.map(a => a.nombre).join(', ') + '. ' : ''}Escanea el código de tu equipo con la cámara del celular, o entra a Tareas y escribe sus 4 letras.${formaciones(G_DATA)[QR_FID].abiertas ? '' : ' (Las inscripciones están cerradas.)'}`;
+  grid.classList.toggle('qr-uno', !!solo);
+  grid.innerHTML = conCod.length ? conCod.map(eq => { const n = (eq.integrantes || []).length; return `<div class="qr-card"><h3>${escaparHTML(eq.nombre)}</h3>${qrSvg(urlUnir(eq.codigo), { titulo: eq.nombre })}<p class="qr-cod">${escaparHTML(eq.codigo)}</p><p class="qr-cupo">${n}${eq.max ? ` / ${eq.max}` : ''} integrantes${eq.max && n >= eq.max ? ' · completo' : ''}</p></div>`; }).join('')
+    : '<p>Primero genera los equipos de esta formación.</p>';
+}
+function abrirProyeccion(fid, imprimir, solo) {
+  escucharEquiposAdmin();
+  QR_FID = fid || FSEL; document.getElementById('qr-grid').dataset.solo = solo || '';
+  pintarProyeccion(); document.getElementById('qr-proyeccion').hidden = false; document.body.classList.add('con-qr');
+  if (imprimir) setTimeout(() => window.print(), 400);
+}
+on('eq-proyectar', 'click', () => abrirProyeccion(FSEL, false));
+on('eq-imprimir', 'click', () => abrirProyeccion(FSEL, true));
+on('qr-cerrar', 'click', () => { document.getElementById('qr-proyeccion').hidden = true; document.body.classList.remove('con-qr'); });
+// en Tareas digitales: qué equipos usa cada tarea en equipo
+function pintarTdEquipos() {
+  document.querySelectorAll('[data-eqt]').forEach(b => { const fid = formacionDeTarea(G_DATA, b.dataset.eqt); b.innerHTML = `👥 ${escaparHTML(nombreF(fid))} <small>(${eqDeF(fid).length})</small>`; });
+  const caja = document.querySelector('.td-eqbox'); if (caja) pintarTdCaja(caja);
+}
+function pintarTdCaja(caja) {
+  const id = caja.dataset.t, a = TAREAS_DIG[id], fid = formacionDeTarea(G_DATA, id), f = formaciones(G_DATA)[fid];
+  const act = document.activeElement; if (act && caja.contains(act) && act.tagName === 'SELECT') return;
+  caja.innerHTML = `<p><b>${a.icono} ${escaparHTML(a.nombre)}</b> usa los equipos de:</p>
+    <select class="td-eqsel" aria-label="Formación de equipos de esta tarea">${ordenFormaciones(G_DATA).map(([k, x]) => `<option value="${k}" ${k === fid ? 'selected' : ''}>${escaparHTML(x.nombre)} (${eqDeF(k).length} equipo${eqDeF(k).length === 1 ? '' : 's'})</option>`).join('')}</select>
+    <p class="field-hint" style="margin:6px 0">${eqDeF(fid).length} equipo${eqDeF(fid).length === 1 ? '' : 's'} · inscripciones ${f.abiertas ? 'abiertas 🔓' : 'cerradas 🔒'}. Lo que un equipo trabaja en esta tarea se queda con ese equipo.</p>
+    <div class="td-eqacc"><button type="button" class="btn btn-small btn-primary" data-x="nueva">➕ Formar equipos nuevos solo para esta tarea</button><button type="button" class="btn btn-small" data-x="proy">📽️ Proyectar sus QR</button><button type="button" class="btn btn-small" data-x="imp">🖨️ Imprimir</button><button type="button" class="btn btn-small" data-x="ab">${f.abiertas ? '🔒 Cerrar inscripciones' : '🔓 Abrir inscripciones'}</button><button type="button" class="btn btn-small" data-x="ver">Editar equipos →</button></div>`;
+  caja.querySelector('.td-eqsel').addEventListener('change', async e => {
+    const nf = e.target.value;
+    if (!confirm(`¿«${a.nombre}» usará los equipos de «${nombreF(nf)}»? Lo que ya hayan trabajado con los equipos anteriores no se borra.`)) { e.target.value = fid; return; }
+    await setDoc(doc(db, 'grupos', grupoActivo), { equiposTarea: { [id]: nf } }, { merge: true });
+  });
+  caja.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => {
+    const x = b.dataset.x;
+    if (x === 'nueva') irAEquipos(fid, id);
+    else if (x === 'proy') abrirProyeccion(fid, false);
+    else if (x === 'imp') abrirProyeccion(fid, true);
+    else if (x === 'ab') alternarInscripciones(fid);
+    else irAEquipos(fid);
+  }));
+}
+
+
+// ---- Tareas digitales: catálogo, abrir/cerrar y calificar con sugerencia
+async function cargarTareasDig() {
+  const cont = document.getElementById('td-lista'); if (!cont) return;
+  if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  cont.innerHTML = '<p class="empty-inline">Cargando…</p>';
+  let est = {}, enCat = new Set();
+  try { const g = await getDoc(doc(db, 'grupos', grupoActivo)); est = (g.exists() && g.data().tareasDig) || {}; } catch { /* */ }
+  try { const sn = await getDocs(collection(db, 'grupos', grupoActivo, 'tareas_catalogo')); sn.forEach(d => { if (d.id.startsWith('dig-')) enCat.add(d.id); }); } catch { /* */ }
+  cont.innerHTML = TEMAS_TAREAS.map(t => `<div class="td-tema"><p class="td-tit"><b>${escaparHTML(t.tema)} · ${escaparHTML(t.titulo)}</b> <small>${escaparHTML(t.fechaTexto)}</small></p>${t.acts.filter(califica).map(a => {
+    const cat = enCat.has(catalogoId(a.id)), ab = !(est[a.id] && est[a.id].abierta === false);
+    return `<div class="td-fila"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)}</span>
+      <button type="button" class="btn btn-small td-cat ${cat ? 'si' : ''}" data-cat="${a.id}" ${cat ? 'disabled' : ''}>${cat ? '✓ En el catálogo' : '+ Agregar al catálogo'}</button>
+      <button type="button" class="btn btn-small td-ab ${ab ? 'si' : 'no'}" data-ab="${a.id}">${ab ? '🔓 Abierta' : '🔒 Cerrada'}</button>
+      ${enEquipo(a) ? `<button type="button" class="btn btn-small td-eq" data-eqt="${a.id}" aria-expanded="false">👥 Equipos</button>` : ''}
+      <button type="button" class="btn btn-small btn-primary" data-cal="${a.id}">Calificar</button></div>`;
+  }).join('')}</div>`).join('');
+  cont.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', async () => {
+    const a = TAREAS_DIG[b.dataset.cat];
+    if (!confirm(`¿Agregar «${nombreCatalogo(a)}» a las tareas del Parcial 2?\n\nDesde este momento cuenta para la calificación: a quien no la entregue le contará como cero en el promedio de tareas.`)) return;
+    await setDoc(doc(db, 'grupos', grupoActivo, 'tareas_catalogo', catalogoId(a.id)), { nombre: nombreCatalogo(a), fecha: a.fecha, parcial: 'p2', digital: a.id, creado: serverTimestamp() });
+    cargarTareasDig(); cargarCatalogo('tareas');
+  }));
+  cont.querySelectorAll('[data-ab]').forEach(b => b.addEventListener('click', async () => {
+    const id = b.dataset.ab, ab = !(est[id] && est[id].abierta === false);
+    if (ab && !confirm('¿Cerrar la tarea? Los alumnos ya no podrán hacer cambios (lo que llevan se conserva).')) return;
+    await setDoc(doc(db, 'grupos', grupoActivo), { tareasDig: { [id]: { abierta: !ab } } }, { merge: true });
+    cargarTareasDig();
+  }));
+  escucharEquiposAdmin(); pintarTdEquipos();
+  cont.querySelectorAll('[data-eqt]').forEach(b => b.addEventListener('click', () => {
+    const previa = cont.querySelector('.td-eqbox'), mismo = previa && previa.dataset.t === b.dataset.eqt;
+    if (previa) previa.remove(); cont.querySelectorAll('[data-eqt]').forEach(x => x.setAttribute('aria-expanded', 'false'));
+    if (mismo) return;
+    const caja = document.createElement('div'); caja.className = 'td-eqbox'; caja.dataset.t = b.dataset.eqt;
+    b.closest('.td-fila').after(caja); b.setAttribute('aria-expanded', 'true'); pintarTdCaja(caja);
+  }));
+  cont.querySelectorAll('[data-cal]').forEach(b => b.addEventListener('click', () => calificarTareaDig(TAREAS_DIG[b.dataset.cal], enCat.has(catalogoId(b.dataset.cal)))));
+}
+
+async function calificarTareaDig(a, enCatalogo) {
+  const wrap = document.getElementById('td-calificar'); wrap.hidden = false;
+  wrap.innerHTML = '<p class="empty-inline">Reuniendo el trabajo de cada alumno…</p>';
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const g = grupoActivo, A = CUADROS[a.id];
+  let equipos = [];
+  try { const [gs, sn] = await Promise.all([getDoc(doc(db, 'grupos', g)), getDocs(collection(db, 'grupos', g, 'equipos'))]); equipos = equiposDe(sn.docs.map(d => ({ id: d.id, ...d.data() })), formacionDeTarea(gs.exists() ? gs.data() : {}, a.id)); } catch { /* */ }
+  const cacheEq = {};
+  const docEquipo = async eq => { if (!(eq.id in cacheEq)) { try { const s = await getDoc(doc(db, 'grupos', g, 'equipos', eq.id, 'atlas', A.id)); cacheEq[eq.id] = s.exists() ? s.data() : null; } catch { cacheEq[eq.id] = null; } } return cacheEq[eq.id]; };
+  const filas = await Promise.all(alumnosCache.map(async al => {
+    const eq = equipos.find(e => (e.integrantes || []).includes(al.id)) || null;
+    let sug = { nota: 0, detalle: 'Sin trabajo' }, entregado = null, resumen = '', cal = '';
+    try { const c = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'tareas', catalogoId(a.id))); if (c.exists()) cal = c.data().calificacion ?? ''; } catch { /* */ }
+    try {
+      let datos = eq ? await docEquipo(eq) : null;
+      if (!datos) { const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'atlas', A.ind)); datos = s.exists() ? s.data() : null; }
+      if (datos) { sug = sugerirCuadro(A, datos.celdas); entregado = datos.entregado || null; resumen = A.filas.map(([f, t]) => `${t}: ${A.columnas.map(([c]) => ((datos.celdas || {})[`${f}_${c}`] || '').trim().split(/\s+/).filter(Boolean).length >= MIN_PALABRAS_CELDA ? '●' : '○').join('')}`).join(' · '); }
+    } catch { /* */ }
+    return { al, eq, sug, entregado, resumen, cal };
+  }));
+  const f = t => t && t.toDate ? t.toDate().toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : typeof t === 'number' ? new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+  const inv = A.filas.filter(x => x[3]).length;
+  wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
+    ${enCatalogo ? '' : '<p class="aviso-td">⚠️ Esta tarea todavía no está en el catálogo: las calificaciones se guardan, pero no cuentan en el promedio hasta que la agregues.</p>'}
+    <p class="field-hint">La calificación sugerida sale de qué tan completo está el cuadro: ${inv ? `8 puntos por las ${A.filas.length * A.columnas.length} celdas llenas (cuenta la que tiene ${MIN_PALABRAS_CELDA} palabras o más) y 2 por ${inv === 1 ? 'la fuente de la fila' : 'las fuentes de las filas'} de investigación` : 'celdas llenas'}. En equipo, todos reciben la misma sugerencia; puedes ajustar a quien no aportó (en el Monitor ves quién escribió qué).</p>
+    <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button></div>
+    <div class="taller-tabla-wrap"><table class="taller-tabla td-tabla"><thead><tr><th>Alumno</th><th>Trabajo</th><th>Entrega</th><th>Sugerida</th><th>Calificación</th></tr></thead><tbody>
+    ${filas.map(x => `<tr data-id="${x.al.id}"><td><b>${escaparHTML(x.al.nombre)}</b>${x.eq ? `<br><small>👥 ${escaparHTML(x.eq.nombre)}</small>` : ''}</td>
+      <td><small>${escaparHTML(x.sug.detalle)}</small>${x.resumen ? `<details><summary>Ver</summary><small>${escaparHTML(x.resumen)}</small></details>` : ''}</td>
+      <td>${x.entregado ? `<span class="td-ok">✓ ${escaparHTML(f(x.entregado.t))}</span>` : '<span class="td-no">No entregada</span>'}</td>
+      <td><b class="td-sug">${x.sug.nota}</b></td>
+      <td><input type="number" min="0" max="10" step="0.1" class="calif-input td-in" value="${x.cal}" placeholder="0-10" data-sug="${x.sug.nota}"></td></tr>`).join('')}</tbody></table></div>
+    <button type="button" class="btn btn-primary btn-block" id="td-guardar">Guardar calificaciones</button><p class="save-msg" id="td-msg" hidden></p>`;
+  document.getElementById('td-cerrar').addEventListener('click', () => { wrap.hidden = true; });
+  document.getElementById('td-usar').addEventListener('click', () => wrap.querySelectorAll('.td-in').forEach(i => { if (i.value === '') i.value = i.dataset.sug; }));
+  document.getElementById('td-guardar').addEventListener('click', async () => {
+    const msg = document.getElementById('td-msg'), escr = [];
+    wrap.querySelectorAll('tr[data-id]').forEach(tr => {
+      const i = tr.querySelector('.td-in'), ref = doc(db, 'grupos', g, 'alumnos', tr.dataset.id, 'tareas', catalogoId(a.id));
+      if (i.value === '') escr.push(deleteDoc(ref).catch(() => {}));
+      else escr.push(setDoc(ref, { parcial: 'p2', nombre: nombreCatalogo(a), fecha: a.fecha, calificacion: Math.max(0, Math.min(10, parseFloat(i.value))), actualizado: serverTimestamp() }));
+    });
+    try { await Promise.all(escr); msg.textContent = '✓ Calificaciones guardadas. Ya se ven en Mi progreso.'; msg.hidden = false; }
+    catch (e) { msg.textContent = 'No se pudo guardar: ' + (e.message || e); msg.hidden = false; }
+  });
+}
+
+// ---- Monitor en vivo de los cuadros: equipos y alumnos solos, celdas llenas al instante, detalle y clave
+const MON = { act: null, subs: [], eqSubs: [], datos: {}, todos: [], equipos: [], g: {}, grupo: null, reloj: null, abierto: null, clave: false };
+const MON_ACTS = () => Object.values(TAREAS_DIG).filter(a => a.tipo === 'cuadro');
+const ordenEqMon = (x, y) => (x.numero || 999) - (y.numero || 999) || (x.nombre || '').localeCompare(y.nombre || '', 'es');
+function iniciarMonitor() {
+  const grid = document.getElementById('mon-grid'); if (!grid) return;
+  if (!grupoActivo) { grid.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  const acts = MON_ACTS(); MON.act = MON.act || acts[0].id;
+  const ca = document.getElementById('mon-act');
+  if (!ca._listo) {
+    ca._listo = true;
+    ca.innerHTML = '<span>Actividad:</span>' + acts.map(a => `<button type="button" class="chip-mon" data-a="${a.id}" aria-pressed="${a.id === MON.act}">${a.icono} ${escaparHTML(a.nombre)}</button>`).join('')
+      + '<button type="button" class="chip-mon mon-clave" id="mon-clave" aria-pressed="false">🔑 Liberar clave</button><button type="button" class="chip-mon" id="mon-qr">🔳 Códigos QR</button><button type="button" class="chip-mon" id="mon-full" aria-pressed="false">⛶ Pantalla completa</button>';
+    ca.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => { MON.act = b.dataset.a; ca.querySelectorAll('[data-a]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); Object.keys(MON.datos).forEach(k => delete MON.datos[k]); pintarClaveMon(); suscribirMon(); pintarMonitor(); }));
+    document.getElementById('mon-clave').addEventListener('click', async () => { const k = CUADROS[MON.act].clave; await setDoc(doc(db, 'grupos', grupoActivo), { claves: { [k]: !MON.clave } }, { merge: true }); });
+    document.getElementById('mon-qr').addEventListener('click', () => abrirProyeccion(formacionDeTarea(MON.g, MON.act), false));
+    document.getElementById('mon-full').addEventListener('click', e => { const on = document.body.classList.toggle('mon-completo'); e.currentTarget.setAttribute('aria-pressed', String(on)); e.currentTarget.textContent = on ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa'; });
+    document.getElementById('mon-det-cerrar').addEventListener('click', cerrarDetalle);
+    document.getElementById('mon-detalle').addEventListener('click', e => { if (e.target.id === 'mon-detalle') cerrarDetalle(); });
+  }
+  detenerMonitor();
+  MON.grupo = grupoActivo; MON.datos = {}; MON.todos = []; MON.equipos = []; MON.g = {};
+  MON.subs.push(onSnapshot(doc(db, 'grupos', grupoActivo), sn => { MON.g = sn.exists() ? sn.data() : {}; pintarClaveMon(); const antes = MON.equipos.map(e => e.id).join(); filtrarMon(); if (antes !== MON.equipos.map(e => e.id).join()) { suscribirMon(); pintarMonitor(); } }, () => {}));
+  MON.subs.push(onSnapshot(collection(db, 'grupos', grupoActivo, 'equipos'), sn => { MON.todos = sn.docs.map(d => ({ id: d.id, ...d.data() })); suscribirMon(); pintarMonitor(); }, () => {}));
+  MON.reloj = setInterval(() => document.querySelectorAll('.mon-card').forEach(c => pintarTiempoMon(c, (MON.datos[c.dataset.clave] || {}).actualizado)), 10000);
+  pintarMonitor();
+}
+function pintarClaveMon() { const b = document.getElementById('mon-clave'); if (!b || !MON.act) return; MON.clave = !!((MON.g.claves || {})[CUADROS[MON.act].clave]); b.setAttribute('aria-pressed', String(MON.clave)); b.textContent = MON.clave ? '🔒 Ocultar clave a los alumnos' : '🔑 Liberar clave'; }
+function filtrarMon() { MON.equipos = equiposDe(MON.todos, formacionDeTarea(MON.g, MON.act)).sort(ordenEqMon); }
+function suscribirMon() {
+  MON.eqSubs.forEach(u => u()); MON.eqSubs = []; filtrarMon();
+  const A = CUADROS[MON.act];
+  MON.equipos.forEach(eq => MON.eqSubs.push(onSnapshot(doc(db, 'grupos', MON.grupo, 'equipos', eq.id, 'atlas', A.id), sn => { MON.datos['e:' + eq.id] = sn.exists() ? sn.data() : null; actualizarMon('e:' + eq.id); }, () => {})));
+  alumnosCache.forEach(al => MON.eqSubs.push(onSnapshot(doc(db, 'grupos', MON.grupo, 'alumnos', al.id, 'atlas', A.ind), sn => { MON.datos['i:' + al.id] = sn.exists() ? { ...sn.data(), ultimoNombre: sn.data().ultimoNombre || al.nombre } : null; actualizarMon('i:' + al.id); }, () => {})));
+}
+function detenerMonitor() {
+  document.body.classList.remove('mon-completo');
+  MON.subs.forEach(u => u()); MON.subs = []; MON.eqSubs.forEach(u => u()); MON.eqSubs = [];
+  clearInterval(MON.reloj); MON.reloj = null;
+}
+function tarjetasMon() {
+  const out = MON.equipos.map(eq => ({ clave: 'e:' + eq.id, titulo: eq.nombre, sub: (eq.nombres || []).join(', ') || 'sin integrantes', tipo: 'equipo' }));
+  alumnosCache.forEach(a => { if (MON.datos['i:' + a.id]) out.push({ clave: 'i:' + a.id, titulo: a.nombre, sub: 'trabajo individual', tipo: 'alumno' }); });
+  return out;
+}
+function haceMon(ts) { const t = ts && ts.toMillis ? ts.toMillis() : typeof ts === 'number' ? ts : 0; if (!t) return { txt: 'sin actividad', cls: 'gris' }; const s = Math.max(0, (Date.now() - t) / 1000); return { txt: s < 60 ? `hace ${Math.round(s)} s` : s < 3600 ? `hace ${Math.round(s / 60)} min` : new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), cls: s < 120 ? 'verde' : s < 300 ? 'amarillo' : 'gris' }; }
+function pintarTiempoMon(card, ts) { const h = haceMon(ts), p = card.querySelector('[data-punto]'); if (p) { p.className = 'mon-punto ' + h.cls; p.textContent = h.txt; } }
+function pintarMonitor() {
+  const grid = document.getElementById('mon-grid'); if (!grid || !MON.act) return;
+  const ts = tarjetasMon(), A = CUADROS[MON.act];
+  document.getElementById('mon-resumen').innerHTML = `${escaparHTML(TAREAS_DIG[MON.act].nombre)} · ${ts.length} en total · 👥 ${escaparHTML((formaciones(MON.g)[formacionDeTarea(MON.g, MON.act)] || {}).nombre || '')}`;
+  grid.innerHTML = ts.length ? ts.map(t => `<button type="button" class="mon-card" data-clave="${t.clave}"><div class="mon-card-cab"><span class="mon-tipo">${t.tipo === 'equipo' ? '👥' : '👤'}</span><div><b>${escaparHTML(t.titulo)}</b><small>${escaparHTML(t.sub)}</small></div><span class="mon-punto" data-punto></span></div>
+      <div class="mon-mapa" data-mapa></div><div class="mon-barra"><i data-barra></i></div><p class="mon-num" data-num></p><p class="mon-ult" data-ult></p></button>`).join('')
+    : '<p class="empty-inline">Todavía no hay equipos para esta actividad ni alumnos trabajándola solos. Forma los equipos en Tareas → Tareas digitales → 👥, o desde 🔳 Códigos QR si ya existen.</p>';
+  grid.querySelectorAll('.mon-card').forEach(b => { actualizarMon(b.dataset.clave, true); b.addEventListener('click', () => abrirDetalle(b.dataset.clave)); });
+  const sin = alumnosCache.filter(a => !MON.datos['i:' + a.id] && !MON.equipos.some(e => (e.integrantes || []).includes(a.id)));
+  document.getElementById('mon-sin').textContent = sin.length ? `Sin equipo y sin empezar: ${sin.map(a => a.nombre).join(', ')}.` : '';
+  void A;
+}
+function actualizarMon(clave, nuevo) {
+  const card = document.querySelector(`.mon-card[data-clave="${clave}"]`);
+  if (!card) { if (clave.startsWith('i:') && MON.datos[clave]) pintarMonitor(); return; }
+  const A = CUADROS[MON.act], d = MON.datos[clave] || {}, cel = d.celdas || {};
+  const ok = k => ((cel[k] || '').trim().match(/\S+/g) || []).length >= MIN_PALABRAS_CELDA;
+  const total = A.filas.length * A.columnas.length, llenas = A.filas.flatMap(([f]) => A.columnas.map(([c]) => ok(`${f}_${c}`))).filter(Boolean).length;
+  card.querySelector('[data-mapa]').innerHTML = `<div class="cu-mini" style="grid-template-columns:repeat(${A.columnas.length},1fr)">${A.filas.map(([f]) => A.columnas.map(([c, , col]) => `<i style="${ok(`${f}_${c}`) ? `background:${col}` : (cel[`${f}_${c}`] || '').trim() ? `background:${col};opacity:.35` : ''}"></i>`).join('')).join('')}</div>`;
+  card.querySelector('[data-barra]').style.width = Math.round(100 * llenas / total) + '%';
+  card.querySelector('[data-num]').innerHTML = `<b>${llenas}/${total}</b> celdas · sugerida <b>${sugerirCuadro(A, cel).nota}</b>${d.entregado ? ' · ✅ entregada' : ''}`;
+  card.querySelector('[data-ult]').innerHTML = d.ultimoCambio ? `✍️ <b>${escaparHTML(d.ultimoNombre || '')}</b> ${escaparHTML(d.ultimoCambio)}` : '<i>todavía no empiezan</i>';
+  pintarTiempoMon(card, d.actualizado || null);
+  if (!nuevo) { card.classList.remove('mon-latido'); void card.offsetWidth; card.classList.add('mon-latido'); }
+  if (MON.abierto === clave) pintarDetalle();
+}
+function abrirDetalle(clave) { MON.abierto = clave; document.getElementById('mon-detalle').hidden = false; document.body.classList.add('con-qr'); pintarDetalle(); }
+function cerrarDetalle() { MON.abierto = null; document.getElementById('mon-detalle').hidden = true; document.body.classList.remove('con-qr'); }
+function pintarDetalle() {
+  const clave = MON.abierto; if (!clave) return;
+  const A = CUADROS[MON.act], t = tarjetasMon().find(x => x.clave === clave) || { titulo: '', sub: '' }, d = MON.datos[clave] || {}, cel = d.celdas || {}, por = d.por || {};
+  const e = x => escaparHTML(x || '').replace(/\n/g, '<br>');
+  document.getElementById('mon-det-titulo').textContent = t.titulo;
+  document.getElementById('mon-det-sub').textContent = `${t.sub} · ${TAREAS_DIG[MON.act].nombre} · ${haceMon(d.actualizado).txt}`;
+  document.getElementById('mon-det-cuerpo').innerHTML = `<div class="taller-tabla-wrap"><table class="cu-det"><thead><tr><th></th>${A.columnas.map(([, n, col]) => `<th style="color:${col}">${n}</th>`).join('')}</tr></thead><tbody>${A.filas.map(([f, n, , inv]) => `<tr><th>${inv ? '🔎 ' : ''}${n}${inv ? `<br><small class="mon-autor">📚 ${(cel[f + '_fuente'] || '').trim() ? escaparHTML(cel[f + '_fuente']) : '<i>sin fuente</i>'}</small>` : ''}</th>${A.columnas.map(([c]) => { const k = `${f}_${c}`; return `<td>${(cel[k] || '').trim() ? e(cel[k]) : '<span class="mon-vacio">—</span>'}${por[k] ? `<br><small class="mon-autor">✍️ ${escaparHTML(por[k])}</small>` : ''}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+
+// ---- ⚡ Arena en vivo (docente): grupos/{g}/arena/sala y .../sala/jugadores/{alumno}
+const AR = { sala: null, jug: [], subs: [], reloj: null, auto: null };
+const AR_COL = [['▲', '#C0503F'], ['◆', '#2E6FA8'], ['●', '#D9A441'], ['■', '#3F7A4F']];
+const arPts = (r, dur) => r && r.o === 0 ? Math.round(500 + 500 * Math.max(0, 1 - (r.ms || 0) / ((dur || 20) * 1000))) : 0;
+const arTot = j => Object.values((j.ronda === (AR.sala || {}).ronda && j.r) || {}).reduce((s, r) => s + arPts(r, (AR.sala || {}).dur), 0);
+const arRef = () => doc(db, 'grupos', grupoActivo, 'arena', 'sala');
+function iniciarArena() {
+  const cont = document.getElementById('ar-panel'); if (!cont) return;
+  if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  detenerArena();
+  AR.grupo = grupoActivo;
+  AR.subs.push(onSnapshot(arRef(), sn => { AR.sala = sn.exists() ? sn.data() : null; pintarArena(); }, () => {}));
+  AR.subs.push(onSnapshot(collection(db, 'grupos', grupoActivo, 'arena', 'sala', 'jugadores'), sn => { AR.jug = sn.docs.map(d => ({ id: d.id, ...d.data() })); pintarArena(true); }, () => {}));
+}
+function detenerArena() { AR.subs.forEach(u => u()); AR.subs = []; clearInterval(AR.reloj); AR.reloj = null; }
+const arJug = () => AR.jug.filter(j => AR.sala && j.ronda === AR.sala.ronda);
+async function arEstado(cambios) { await setDoc(arRef(), cambios, { merge: true }); }
+async function arPregunta(idx) {
+  const P = ARENA[AR.sala.set].preguntas[idx], orden = [0, 1, 2, 3].slice(0, P.o.length).sort(() => Math.random() - .5);
+  await arEstado({ estado: 'pregunta', idx, orden, t0: Date.now() });
+}
+function pintarArena(soloJug) {
+  const cont = document.getElementById('ar-panel'); if (!cont) return;
+  const S = AR.sala, js = S ? arJug() : [];
+  if (soloJug && S && S.estado === 'pregunta') { const n = js.filter(j => (j.r || {})[S.idx]).length, el = document.getElementById('ar-resp'); if (el) el.textContent = `${n} de ${js.length} respondieron`; if (n && n === js.length) arRevelar(); return; }
+  if (soloJug && S && S.estado === 'espera') { const el = document.getElementById('ar-unidos'); if (el) el.innerHTML = arUnidosHTML(js); return; }
+  clearInterval(AR.reloj); AR.reloj = null;
+  const proy = document.getElementById('ar-proy');
+  if (!S || !S.estado || S.estado === 'cerrada') {
+    cont.innerHTML = `<div class="bloques-activos-card"><h3 class="section-title" style="margin-top:0">⚡ Abrir una Arena</h3>
+      <p class="field-hint">Elige las preguntas, abre la sala y proyecta: los alumnos entran desde su celular (Tareas → ⚡ Arena en vivo, o con el QR). Cada pregunta dura el tiempo que elijas; gana más quien responde bien y rápido.</p>
+      <label class="field-label" for="ar-set">Preguntas</label><select id="ar-set">${Object.entries(ARENA).map(([k, v]) => `<option value="${k}">${escaparHTML(v.titulo)} (${v.preguntas.length} preguntas)</option>`).join('')}</select>
+      <label class="field-label" for="ar-dur">Segundos por pregunta</label><select id="ar-dur"><option>15</option><option selected>20</option><option>30</option></select>
+      <button type="button" class="btn btn-primary btn-block" id="ar-abrir" style="margin-top:12px">Abrir la sala y proyectar</button></div>`;
+    document.getElementById('ar-abrir').addEventListener('click', async () => {
+      const set = document.getElementById('ar-set').value;
+      await setDoc(arRef(), { estado: 'espera', set, n: ARENA[set].preguntas.length, dur: Number(document.getElementById('ar-dur').value), idx: 0, ronda: 'r' + Date.now().toString(36), orden: [0, 1, 2, 3] });
+      abrirProyArena();
+    });
+    proy.hidden = true; document.body.classList.remove('con-qr');
+    return;
+  }
+  const P = ARENA[S.set].preguntas[S.idx] || null;
+  cont.innerHTML = `<div class="bloques-activos-card"><p><b>⚡ ${escaparHTML(ARENA[S.set].titulo)}</b> · ${js.length} jugador${js.length === 1 ? '' : 'es'} · estado: <b>${{ espera: 'esperando jugadores', pregunta: `pregunta ${S.idx + 1} de ${S.n}`, revela: `respuesta ${S.idx + 1} de ${S.n}`, fin: 'terminada' }[S.estado]}</b></p>
+    <div class="eq-acciones"><button type="button" class="btn btn-primary" id="ar-ver">📽️ Proyectar</button><button type="button" class="btn" id="ar-cerrar">Cerrar la Arena</button></div></div>`;
+  document.getElementById('ar-ver').addEventListener('click', abrirProyArena);
+  document.getElementById('ar-cerrar').addEventListener('click', async () => { if (confirm('¿Cerrar la Arena? Se borra el marcador de esta ronda en las pantallas.')) { await arEstado({ estado: 'cerrada' }); } });
+  // proyección
+  const cuerpo = document.getElementById('ar-proy-cuerpo'), url = new URL('tareas.html#arena', location.href).href;
+  const ranking = () => js.map(j => ({ n: j.nombre, p: arTot(j) })).sort((a, b) => b.p - a.p);
+  if (S.estado === 'espera') {
+    cuerpo.innerHTML = `<div class="arp-espera"><div><h2>⚡ ${escaparHTML(ARENA[S.set].titulo)}</h2><p>Entra desde tu celular: <b>Aula Virtual → Tareas → ⚡ Arena en vivo</b>, o escanea el código.</p><div id="ar-unidos" class="arp-unidos">${arUnidosHTML(js)}</div>
+      <button type="button" class="btn btn-primary arp-boton" id="ar-empezar">▶ Empezar</button></div><div class="arp-qr">${qrSvg(url, { titulo: 'Arena' })}</div></div>`;
+    document.getElementById('ar-empezar').addEventListener('click', () => arPregunta(0));
+  } else if (S.estado === 'pregunta' && P) {
+    const fin = (S.t0 || Date.now()) + S.dur * 1000;
+    cuerpo.innerHTML = `<div class="arp-cab"><span>Pregunta ${S.idx + 1} de ${S.n}</span><span class="arp-seg" id="ar-seg">${S.dur}</span><span id="ar-resp">${js.filter(j => (j.r || {})[S.idx]).length} de ${js.length} respondieron</span></div>
+      <h2 class="arp-q">${escaparHTML(P.q)}</h2><div class="arp-ops">${S.orden.map((o, k) => `<div class="arp-op" style="--c:${AR_COL[k][1]}"><span>${AR_COL[k][0]}</span>${escaparHTML(P.o[o])}</div>`).join('')}</div>
+      <button type="button" class="btn arp-boton" id="ar-ya">Mostrar respuesta</button>`;
+    document.getElementById('ar-ya').addEventListener('click', arRevelar);
+    AR.reloj = setInterval(() => { const q = Math.ceil((fin - Date.now()) / 1000), el = document.getElementById('ar-seg'); if (el) el.textContent = Math.max(0, q); if (q <= 0) arRevelar(); }, 250);
+  } else if (S.estado === 'revela' && P) {
+    const cuenta = [0, 0, 0, 0]; js.forEach(j => { const r = (j.r || {})[S.idx]; if (r) cuenta[r.o]++; });
+    const max = Math.max(1, ...cuenta), rk = ranking().slice(0, 5);
+    cuerpo.innerHTML = `<div class="arp-cab"><span>Pregunta ${S.idx + 1} de ${S.n}</span><span>${cuenta.reduce((a, b) => a + b, 0)} respuestas</span></div>
+      <h2 class="arp-q">${escaparHTML(P.q)}</h2>
+      <div class="arp-barras">${S.orden.map((o, k) => `<div class="arp-barra ${o === 0 ? 'ok' : ''}" style="--c:${AR_COL[k][1]}"><i style="height:${Math.round(100 * cuenta[o] / max)}%"></i><b>${cuenta[o]}</b><span>${AR_COL[k][0]} ${escaparHTML(P.o[o])}${o === 0 ? ' ✓' : ''}</span></div>`).join('')}</div>
+      <p class="arp-x">${escaparHTML(P.x)}</p>
+      <div class="arp-pie"><ol class="arp-top">${rk.map((x, k) => `<li><span>${['🥇', '🥈', '🥉', '4.º', '5.º'][k]}</span>${escaparHTML(x.n)}<b>${x.p}</b></li>`).join('')}</ol>
+      <button type="button" class="btn btn-primary arp-boton" id="ar-sig">${S.idx + 1 < S.n ? 'Siguiente pregunta →' : '🏁 Ver resultados'}</button></div>`;
+    document.getElementById('ar-sig').addEventListener('click', () => S.idx + 1 < S.n ? arPregunta(S.idx + 1) : arEstado({ estado: 'fin' }));
+  } else if (S.estado === 'fin') {
+    const rk = ranking().slice(0, 5);
+    cuerpo.innerHTML = `<div class="arp-fin"><h2>🏁 ¡Terminó la Arena!</h2><p>${escaparHTML(ARENA[S.set].titulo)} · ${js.length} jugadores</p>
+      <ol class="arp-podio">${rk.map((x, k) => `<li class="p${k + 1}"><span>${['🥇', '🥈', '🥉', '4.º', '5.º'][k]}</span><b>${escaparHTML(x.n)}</b><em>${x.p} pts</em></li>`).join('')}</ol>
+      <button type="button" class="btn arp-boton" id="ar-otra">Nueva Arena</button></div>`;
+    document.getElementById('ar-otra').addEventListener('click', () => arEstado({ estado: 'cerrada' }));
+  }
+}
+function arUnidosHTML(js) { return `<p class="arp-n">${js.length} jugador${js.length === 1 ? '' : 'es'} en la sala</p><div class="arp-nombres">${js.map(j => `<span>${escaparHTML((j.nombre || '').split(' ')[0])}</span>`).join('')}</div>`; }
+let arRevelando = false;
+async function arRevelar() { if (arRevelando || !AR.sala || AR.sala.estado !== 'pregunta') return; arRevelando = true; clearInterval(AR.reloj); try { await arEstado({ estado: 'revela' }); } finally { arRevelando = false; } }
+function abrirProyArena() { document.getElementById('ar-proy').hidden = false; document.body.classList.add('con-qr'); pintarArena(); }
+on('ar-proy-cerrar', 'click', () => { document.getElementById('ar-proy').hidden = true; document.body.classList.remove('con-qr'); });

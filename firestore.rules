@@ -4,8 +4,10 @@ rules_version = '2';
 // Coordinación Académica: solo lee (como cualquier visitante). Aunque algún
 // día se le dé de alta un usuario aquí, ese correo nunca puede escribir.
 // Alumno (sin sesión, entra con nombre y PIN): solo lee, y solo escribe
-// su intento de examen, la calificación de su examen en línea y los
-// temas de repaso que termina, y su avance en el Taller del investigador.
+// su intento de examen, la calificación de su examen en línea, los
+// temas de repaso que termina, su avance en el Taller del investigador,
+// sus tareas digitales (individuales y de equipo) y sus respuestas en la
+// Arena en vivo.
 service cloud.firestore {
   match /databases/{database}/documents {
     function esDocente() {
@@ -20,6 +22,59 @@ service cloud.firestore {
       match /{coleccion}/{docId} {
         allow read: if true;
         allow write: if esDocente();
+      }
+
+      // Equipos: el docente los crea, agrupados en «formaciones» (campo
+      // formacion; sin él es la formación «actual», la de antes). Mientras las
+      // inscripciones de SU formación estén abiertas, un alumno (con su PIN)
+      // solo puede unirse él mismo sin pasar el máximo, o salirse él mismo.
+      // Un integrante puede cambiar el nombre. Nadie más que el docente
+      // cambia la formación de un equipo.
+      function inscripcionAbierta(f) {
+        let g = get(/databases/$(database)/documents/grupos/$(grupoId)).data;
+        return g.get('formaciones', {}).get(f, {}).get('abiertas', f == 'actual' && g.get('equiposAbiertos', true) == true) == true;
+      }
+      match /equipos/{equipoId} {
+        allow read: if true;
+        allow write: if esDocente();
+        allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['integrantes', 'nombres', 'nombre', 'ultimoAutor', 'ultimoPin'])
+          && request.resource.data.ultimoPin == get(/databases/$(database)/documents/grupos/$(grupoId)/alumnos/$(request.resource.data.ultimoAutor)).data.pin
+          && (
+            // cambiar el nombre: lo hace un integrante, sin tocar la lista
+            (request.resource.data.integrantes == resource.data.integrantes
+              && request.resource.data.ultimoAutor in resource.data.integrantes)
+            || (inscripcionAbierta(resource.data.get('formacion', 'actual'))
+              && (
+                // unirse: agrega solo a sí mismo
+                (request.resource.data.integrantes.size() == resource.data.integrantes.size() + 1
+                  && request.resource.data.integrantes.hasAll(resource.data.integrantes)
+                  && request.resource.data.ultimoAutor in request.resource.data.integrantes
+                  && !(request.resource.data.ultimoAutor in resource.data.integrantes)
+                  && request.resource.data.integrantes.size() <= resource.data.get('max', 100))
+                // salirse: se quita solo a sí mismo
+                || (request.resource.data.integrantes.size() == resource.data.integrantes.size() - 1
+                  && resource.data.integrantes.hasAll(request.resource.data.integrantes)
+                  && request.resource.data.ultimoAutor in resource.data.integrantes
+                  && !(request.resource.data.ultimoAutor in request.resource.data.integrantes))
+              ))
+          );
+      }
+
+      // Atlas de equipo: lo escriben solo los integrantes del equipo
+      // (el docente arma los equipos), cada uno con su PIN correcto.
+      match /equipos/{equipoId}/atlas/{continente} {
+        allow read: if true;
+        allow write: if esDocente();
+        allow create, update: if request.resource.data.ultimoAutor in get(/databases/$(database)/documents/grupos/$(grupoId)/equipos/$(equipoId)).data.integrantes
+          && request.resource.data.ultimoPin == get(/databases/$(database)/documents/grupos/$(grupoId)/alumnos/$(request.resource.data.ultimoAutor)).data.pin;
+      }
+
+      // Arena en vivo: el docente controla la sala; cada alumno escribe solo
+      // su propio documento de jugador, con su PIN correcto.
+      match /arena/{salaId}/jugadores/{alumnoId} {
+        allow read: if true;
+        allow write: if esDocente();
+        allow create, update: if request.resource.data.pinVerificado == get(/databases/$(database)/documents/grupos/$(grupoId)/alumnos/$(alumnoId)).data.pin;
       }
 
       match /alumnos/{alumnoId} {
@@ -40,6 +95,12 @@ service cloud.firestore {
         // avance (solo el documento «taller») y debe enviar su PIN correcto.
         match /investigacion/{docId} {
           allow create, update: if docId == 'taller'
+            && request.resource.data.pinVerificado == get(/databases/$(database)/documents/grupos/$(grupoId)/alumnos/$(alumnoId)).data.pin;
+        }
+        // Tareas digitales individuales: el alumno guarda y actualiza solo su
+        // propio trabajo («tarea-…») y debe enviar su PIN correcto.
+        match /atlas/{docId} {
+          allow create, update: if docId.matches('tarea-[a-z0-9-]+')
             && request.resource.data.pinVerificado == get(/databases/$(database)/documents/grupos/$(grupoId)/alumnos/$(alumnoId)).data.pin;
         }
         // Actividades de repaso: el alumno solo puede marcar un tema como

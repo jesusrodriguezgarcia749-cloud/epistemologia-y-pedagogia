@@ -42,6 +42,7 @@
       <a href="calendario.html">Calendario</a>
       <a href="proyecto.html">Proyecto</a>
       <a href="actividades.html">Actividades</a>
+      <a href="tareas.html">Tareas</a>
       <a href="laboratorio.html">Laboratorio</a>
       <a href="biblioteca.html">Biblioteca</a>
       <a href="examen.html">Examen</a>
@@ -88,6 +89,9 @@
     <button class="tab-btn active" data-tab="alumnos">Alumnos</button>
     <button class="tab-btn" data-tab="tareas">Tareas</button>
     <button class="tab-btn" data-tab="participacion">Participación</button>
+    <button class="tab-btn" data-tab="equipos">👥 Equipos</button>
+    <button class="tab-btn" data-tab="monitor">🟢 Monitor en vivo</button>
+    <button class="tab-btn" data-tab="arena">⚡ Arena</button>
     <button class="tab-btn" data-tab="proyecto">Ensayo final</button>
     <button class="tab-btn" data-tab="asistencia">Asistencia</button>
     <button class="tab-btn" data-tab="uniformes">Uniformes</button>
@@ -116,6 +120,12 @@
 
   <!-- ===== TAREAS ===== -->
   <div id="tab-tareas" class="tab-panel">
+    <div class="bloques-activos-card td-card">
+      <h3 class="section-title" style="margin-top:0;">📌 Tareas digitales</h3>
+      <p class="field-hint">Las actividades de la página <a href="tareas.html" target="_blank" rel="noopener">Tareas</a>. Cada una, al <b>agregarla al catálogo</b>, cuenta como una tarea más del Parcial 2 (quien no la entregue tiene cero). Puedes <b>cerrarla</b> para que ya no se hagan cambios, elegir con qué <b>👥 equipos</b> se hace y <b>calificarla</b> con la sugerencia según qué tan completo está el trabajo.</p>
+      <div id="td-lista"></div>
+      <div id="td-calificar" hidden></div>
+    </div>
     <label for="tareas-parcial" class="field-label">Parcial</label>
     <select id="tareas-parcial">
       <option value="p1">Parcial 1</option>
@@ -144,6 +154,48 @@
   </div>
 
   <!-- ===== PARTICIPACIÓN ===== -->
+  <div id="tab-equipos" class="tab-panel">
+    <p class="field-hint">Aquí formas los equipos para las tareas en equipo. Cada vez que armas equipos queda una <b>formación</b> con sus códigos QR. Cada tarea usa una formación: puedes repetir los mismos equipos en varias tareas o formar nuevos solo para una (en Tareas → Tareas digitales, botón 👥 de cada tarea). Lo que trabaja un equipo se queda guardado con ese equipo.</p>
+    <div class="mon-chips eq-formaciones" id="eq-formaciones"></div>
+    <div class="bloques-activos-card eq-nueva" id="eq-nueva" hidden></div>
+    <div class="bloques-activos-card">
+      <div id="eq-f-cab"></div>
+      <div class="eq-acciones">
+        <button type="button" class="btn" id="eq-abierto" aria-pressed="true">🔓 Inscripciones abiertas</button>
+        <button type="button" class="btn" id="eq-proyectar">📽️ Proyectar códigos</button>
+        <button type="button" class="btn" id="eq-imprimir">🖨️ Imprimir tarjetas</button>
+      </div>
+      <div class="eq-generar">
+        <span>Agregar</span><input id="eq-n" type="number" min="1" max="20" value="1" aria-label="Número de equipos"><span>equipo(s) de máximo</span><input id="eq-max" type="number" min="1" max="15" value="4" aria-label="Máximo de integrantes"><span>integrantes</span>
+        <button type="button" class="btn" id="eq-generar">Generar con QR</button>
+      </div>
+      <p class="field-hint" id="eq-sin">Sin equipo en esta formación: <span id="eq-sin-lista"></span></p>
+      <div id="equipos-lista"></div>
+      <h4 class="eq-sub">Armar o editar un equipo a mano</h4>
+      <form id="equipo-form" class="equipo-form">
+        <input type="hidden" id="equipo-id">
+        <label class="field-label" for="equipo-nombre">Nombre del equipo</label>
+        <input id="equipo-nombre" type="text" maxlength="40" placeholder="Ejemplo: Los Popperianos">
+        <p class="field-label" style="margin-top:10px">Integrantes</p>
+        <div id="equipo-alumnos" class="equipo-alumnos"></div>
+        <div class="equipo-botones"><button type="submit" class="btn btn-primary" id="equipo-guardar">Crear equipo</button><button type="button" class="btn" id="equipo-cancelar" hidden>Cancelar</button></div>
+        <p id="equipo-msg" class="save-msg" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="tab-monitor" class="tab-panel">
+    <p class="field-hint">Lo que los equipos y los alumnos están escribiendo en los cuadros, en vivo. Elige la actividad; ahí mismo liberas la clave cuando terminen. Toca una tarjeta para ver todo lo que escribieron y quién escribió cada celda.</p>
+    <div class="mon-chips mon-act" id="mon-act"></div>
+    <p class="mon-resumen" id="mon-resumen"></p>
+    <div class="mon-grid" id="mon-grid"></div>
+    <p class="field-hint" id="mon-sin"></p>
+  </div>
+
+  <div id="tab-arena" class="tab-panel">
+    <div id="ar-panel"></div>
+  </div>
+
   <div id="tab-participacion" class="tab-panel">
     <label for="part-parcial" class="field-label">Parcial</label>
     <select id="part-parcial">
@@ -320,6 +372,21 @@
 </audio>
 <button id="bg-music-toggle" class="music-toggle" aria-label="Activar música de fondo" aria-pressed="false">🎵</button>
 
+<div id="mon-detalle" class="mon-detalle" hidden role="dialog" aria-modal="true" aria-labelledby="mon-det-titulo">
+  <div class="mon-det-caja">
+    <div class="mon-det-cab"><div><h2 id="mon-det-titulo"></h2><p id="mon-det-sub"></p></div><button type="button" class="btn" id="mon-det-cerrar">Cerrar ✕</button></div>
+    <div class="mon-det-cuerpo" id="mon-det-cuerpo"></div>
+  </div>
+</div>
+<div id="qr-proyeccion" class="qr-proyeccion" hidden>
+  <div class="qr-cab"><div><b id="qr-tit">Únete a tu equipo</b><span id="qr-sub"></span></div><button type="button" class="btn" id="qr-cerrar">Cerrar ✕</button></div>
+  <div class="qr-grid" id="qr-grid"></div>
+</div>
+<div id="ar-proy" class="qr-proyeccion ar-proy" hidden>
+  <button type="button" class="btn ar-proy-cerrar" id="ar-proy-cerrar">Cerrar ✕</button>
+  <div id="ar-proy-cuerpo"></div>
+</div>
+<script src="js/vendor/qrcode.js"></script>
 <script src="js/app.js"></script>
 <script type="module" src="js/admin.js"></script>
 </body>

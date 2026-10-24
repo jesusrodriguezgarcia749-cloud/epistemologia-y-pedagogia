@@ -1,9 +1,9 @@
 // sw.js — permite instalar el Aula Virtual como app y leerla sin conexión.
 // Estrategia "primero la red": siempre se pide la versión en línea; solo si
 // no hay internet se usa la copia guardada. Firebase y Google nunca se cachean.
-const CACHE = 'aula-v9';
+const CACHE = 'aula-v10';
 const BASICOS = ['./', 'index.html', 'compendio.html', 'tema.html', 'calendario.html', 'proyecto.html', 'rubricas.html',
-  'biblioteca.html', 'laboratorio.html', 'css/laboratorio.css', 'js/laboratorio.js', 'data/laboratorio.json', 'taller.html', 'css/taller.css', 'js/taller.js', 'data/taller.json', 'actividades.html', 'css/styles.css', 'css/index.css', 'css/extra.css', 'css/compendio.css',
+  'biblioteca.html', 'laboratorio.html', 'css/laboratorio.css', 'js/laboratorio.js', 'data/laboratorio.json', 'taller.html', 'css/taller.css', 'js/taller.js', 'data/taller.json', 'actividades.html', 'tareas.html', 'unir.html', 'css/atlas.css', 'css/tareas.css', 'js/tareas.js', 'js/tareas-datos.js', 'js/equipos.js', 'js/docx-ites.js', 'js/vendor/qrcode.js', 'css/styles.css', 'css/index.css', 'css/extra.css', 'css/compendio.css',
   'css/tema.css', 'js/app.js', 'js/curso.js', 'js/compendio.js', 'js/tema.js', 'js/lector.js', 'data/curso.json', 'assets/icon-192.png'];
 
 self.addEventListener('install', (e) => {
@@ -22,6 +22,6 @@ self.addEventListener('fetch', (e) => {
     fetch(req).then(res => {
       if (res.ok) { const copia = res.clone(); caches.open(CACHE).then(c => c.put(req, copia)); }
       return res;
-    }).catch(() => caches.match(req, { ignoreSearch: req.mode === 'navigate' }).then(r => r || caches.match('index.html')))
+    }).catch(() => caches.match(req, { ignoreSearch: true }).then(r => r || caches.match('index.html')))
   );
 });
