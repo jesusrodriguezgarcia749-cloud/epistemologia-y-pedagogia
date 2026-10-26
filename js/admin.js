@@ -13,7 +13,7 @@ import { firebaseConfig } from "./firebase-config.js";
 import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { vistaRapida } from "./matriz.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe } from "./tareas-datos.js";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -1941,8 +1941,9 @@ function detenerMonitor() {
   clearInterval(MON.reloj); MON.reloj = null;
 }
 function tarjetasMon() {
-  const out = MON.equipos.map(eq => ({ clave: 'e:' + eq.id, titulo: eq.nombre, sub: (eq.nombres || []).join(', ') || 'sin integrantes', tipo: 'equipo' }));
-  alumnosCache.forEach(a => { if (MON.datos['i:' + a.id]) out.push({ clave: 'i:' + a.id, titulo: a.nombre, sub: 'trabajo individual', tipo: 'alumno' }); });
+  const A = CUADROS[MON.act], vDe = eq => { const v = varianteDe(A, eq); return v ? `${v.ico} ${v.afirmacion} · ` : ''; };
+  const out = MON.equipos.map(eq => ({ clave: 'e:' + eq.id, titulo: eq.nombre, sub: vDe(eq) + ((eq.nombres || []).join(', ') || 'sin integrantes'), tipo: 'equipo' }));
+  alumnosCache.forEach(a => { if (MON.datos['i:' + a.id]) { const v = varianteDe(A, null, a.id); out.push({ clave: 'i:' + a.id, titulo: a.nombre, sub: (v ? `${v.ico} ${v.afirmacion} · ` : '') + 'trabajo individual', tipo: 'alumno' }); } });
   return out;
 }
 function haceMon(ts) { const t = ts && ts.toMillis ? ts.toMillis() : typeof ts === 'number' ? ts : 0; if (!t) return { txt: 'sin actividad', cls: 'gris' }; const s = Math.max(0, (Date.now() - t) / 1000); return { txt: s < 60 ? `hace ${Math.round(s)} s` : s < 3600 ? `hace ${Math.round(s / 60)} min` : new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }), cls: s < 120 ? 'verde' : s < 300 ? 'amarillo' : 'gris' }; }

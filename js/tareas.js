@@ -6,7 +6,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js";
 import { DocITES } from "./docx-ites.js";
 import { brillar, descubrir, miCielo, estadoAutor, misionPorFecha, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA, TIPOS_PARA_ENCENDER, NOMBRE_TIPO, CLAVES_AUTOR } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
@@ -239,18 +239,19 @@ function actCuadro(cont, a) {
   if (sesion) entrar(); else formAcceso(cont, entrar, 'Entra con tu nombre y PIN para trabajar en esta tarea');
 }
 function cuadro(cont, eq, a) {
-  const A = CUADROS[a.id], claves = A.filas.flatMap(([f]) => A.columnas.map(([c]) => `${f}_${c}`));
+  const A = CUADROS[a.id], claves = A.filas.flatMap(([f]) => A.columnas.map(([c]) => `${f}_${c}`)), V = varianteDe(A, eq, sesion.alumnoId), R = respuestasDe(A, V);
   let S = { celdas: {}, por: {}, entregado: null }, clave = false, pend = new Map(), vuelo = new Map(), pendT = null, existe = false, ultima = '';
   const ref = eq ? doc(db, 'grupos', sesion.grupoId, 'equipos', eq.id, 'atlas', A.id) : doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', A.ind);
   cont.innerHTML = `<div class="ma-barra"><span>${eq ? `👥 <b>${esc(eq.nombre)}</b>: ${esc((eq.nombres || []).join(', '))}` : `👤 <b>${esc(sesion.nombre)}</b> (individual)`}</span><span class="ma-estado" id="cu-estado"></span>
       <button type="button" class="btn-ruta" id="cu-word">⬇ Descargar en Word</button></div>
+    ${V ? `<div class="cu-afirma"><span>${V.ico}</span><div><small>${eq ? 'La afirmación que le tocó a su equipo por sorteo' : 'Tu afirmación'}</small><b>${esc(V.afirmacion)}</b></div></div>` : ''}
     <div data-entrega></div>
     <p class="atlas-ayuda">${A.ayuda}${eq ? ' Repártanse el trabajo en el equipo.' : ''} Se guarda solo${eq ? ' y todos ven al instante lo que escriben los demás' : ''}.</p>
     <p class="cu-progreso" id="cu-progreso"></p>
     <div class="cu-clave" id="cu-clave" hidden><b>🔑 Su maestro liberó la clave.</b> <button type="button" class="btn-at" id="cu-ver-clave" aria-pressed="false">Comparar con la clave</button></div>
     <div class="cu-tabla ${A.columnas.length === 1 ? 'cu-1col' : ''}">${A.filas.map(([f, t, ayuda, inv]) => `<section class="cu-fila ${inv ? 'cu-inv' : ''}"><h3>${inv ? '<span class="cu-tag">🔎 Investiga</span>' : ''}${esc(t)}<small>${esc(ayuda)}</small></h3>
       <div class="cu-celdas">${A.columnas.map(([c, nc], ci) => `<label class="cu-celda cu-${c}"><span>${esc(nc)} <small class="ma-autor" data-autor="${f}_${c}"></small></span><textarea data-k="${f}_${c}" rows="3"></textarea>
-        ${A.sinClave ? '' : `<p class="cu-resp" data-resp="${f}_${c}" hidden><b>${inv ? 'Respuesta de referencia' : 'Según el compendio'}:</b> ${esc(A.respuestas[f][ci])}</p>`}</label>`).join('')}</div>
+        ${A.sinClave ? '' : `<p class="cu-resp" data-resp="${f}_${c}" hidden><b>${inv || V ? 'Respuesta posible' : 'Según el compendio'}:</b> ${esc(R[f][ci])}</p>`}</label>`).join('')}</div>
       ${inv ? `<label class="cu-fuente"><span>📚 Fuente: ¿de dónde lo sacaron? <small class="ma-autor" data-autor="${f}_fuente"></small></span><input data-k="${f}_fuente" type="text" placeholder="Autor o sitio, título y enlace (URL)"></label>` : ''}</section>`).join('')}</div>`;
   const estado = (t, c = '') => { const e = $('#cu-estado'); if (e) { e.textContent = t; e.className = 'ma-estado ' + c; } };
   const pintar = () => {
@@ -311,14 +312,15 @@ function cuadro(cont, eq, a) {
   $('#cu-word').addEventListener('click', async () => {
     await flush();
     const D = new DocITES(); await D.cargarLogo();
-    D.portada({ kicker: A.kicker, titulo: A.titulo, subtitulo: 'Cuadro comparativo', etiqueta: eq ? `Equipo «${eq.nombre}»` : 'Alumno', personas: eq ? eq.nombres || [] : [sesion.nombre] });
-    D.h1('Cuadro comparativo');
+    D.portada({ kicker: A.kicker, titulo: A.titulo, subtitulo: V ? 'Análisis de una afirmación con los autores del Tema 4' : 'Cuadro comparativo', etiqueta: eq ? `Equipo «${eq.nombre}»` : 'Alumno', personas: eq ? eq.nombres || [] : [sesion.nombre] });
+    if (V) D.h1('La afirmación analizada', V.afirmacion);
+    D.h1(V ? 'Nuestro análisis' : 'Cuadro comparativo');
     const celda = k => { const t = (S.celdas[k] || '').trim(), au = eq && S.por[k]; return { runs: [[t || '(sin escribir)', t ? {} : { i: true, color: '9A9389' }], ...(au ? [[`\n✍ ${au}`, { color: '3F7A4F', tam: 8 }]] : [])] }; };
     const cab = (f, t, inv) => { const fu = (S.celdas[`${f}_fuente`] || '').trim(); return inv ? { runs: [[t, { b: true }], [`\n🔎 Investigación${fu ? ' · Fuente: ' + fu : ' · sin fuente'}`, { color: '6B6358', tam: 8, i: !fu }]], fondo: 'F4EFE4' } : { t, b: true, fondo: 'F4EFE4' }; };
     D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t, , inv]) => [cab(f, t, inv), ...A.columnas.map(([c]) => celda(`${f}_${c}`))])], { anchos: [1700, ...A.columnas.map(() => Math.floor(7660 / A.columnas.length))] });
     if (clave) {
-      D.h1('Comparación con la clave', 'La clave que liberó el maestro (del compendio y, en las filas de investigación, respuestas de referencia), para revisar lo que escribimos.');
-      D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t]) => [{ t, b: true, fondo: 'F4EFE4' }, ...A.respuestas[f]])], { anchos: [1700, ...A.columnas.map(() => Math.floor(7660 / A.columnas.length))] });
+      D.h1('Comparación con la clave', V ? 'Las respuestas posibles que liberó el maestro, para comparar con lo que escribimos. No son las únicas válidas: cuenta que el análisis esté bien argumentado.' : 'La clave que liberó el maestro (del compendio y, en las filas de investigación, respuestas de referencia), para revisar lo que escribimos.');
+      D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t]) => [{ t, b: true, fondo: 'F4EFE4' }, ...R[f]])], { anchos: [1700, ...A.columnas.map(() => Math.floor(7660 / A.columnas.length))] });
     }
     D.descargar(`${A.archivo}_${slug(eq ? 'equipo ' + eq.nombre : sesion.nombre)}`);
   });

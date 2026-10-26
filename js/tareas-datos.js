@@ -8,6 +8,7 @@ export const TEMAS_TAREAS = [
     { id: 'que-paradigma', tipo: 'practica', icono: '🧭', nombre: '¿Qué paradigma es?', modo: 'Juego de práctica', desc: 'Títulos de tesis, fragmentos y autores: ¿positivista, interpretativo o sociocrítico? Y una ronda de pensamiento lineal contra sistémico.' },
   ] },
   { tema: '3 y 4', titulo: 'Lógica dialéctica y concepción contemporánea de la ciencia', fecha: '2026-10-27', fechaTexto: 'Mar 27 de octubre', acts: [
+    { id: 'pon-a-prueba', tipo: 'cuadro', icono: '⚖️', nombre: 'Pon a prueba una idea', modo: 'En equipo · en vivo', desc: 'A cada equipo le toca por sorteo una afirmación que se oye en las escuelas. La analizan con los seis autores del Tema 4, buscan evidencia en el momento y dan su veredicto: ¿es ciencia?' },
     { id: 'ficha-autor', tipo: 'cuadro', icono: '🧩', nombre: 'Ficha del autor (rompecabezas)', modo: 'En equipo · en vivo', desc: 'Cada equipo se vuelve experto en su autor del Tema 4: idea central, conceptos, cómo avanza la ciencia, críticas y qué le dice a la pedagogía. Con ella exponen.' },
     { id: 'coevaluacion', tipo: 'coev', icono: '🗣️', nombre: 'Coevaluación de las exposiciones', modo: 'Individual · en vivo', desc: 'Mientras expone cada equipo, califícalo con la rúbrica desde tu celular y déjale una pregunta.' },
     { id: 'teoricos', tipo: 'cuadro', icono: '📊', nombre: 'Cuadro comparativo de los seis teóricos', modo: 'En equipo · en vivo', desc: 'Positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend y Morin: cómo avanza la ciencia, qué la distingue, conceptos clave, obras y qué le dicen a la educación.' },
@@ -90,6 +91,93 @@ CUADROS.teoricos = {
     obra: ['Hahn, Neurath y Carnap: La concepción científica del mundo (manifiesto del Círculo de Viena, 1929).', 'Popper, K. (1934/2008). La lógica de la investigación científica.', 'Kuhn, T. S. (1962/2013). La estructura de las revoluciones científicas.', 'Lakatos, I. (1978/1989). La metodología de los programas de investigación científica.', 'Feyerabend, P. (1975/1986). Tratado contra el método.', 'Morin, E. (1990/1994). Introducción al pensamiento complejo; y Morin (1999), Los siete saberes necesarios para la educación del futuro.'],
   },
 };
+// ⚖️ Pon a prueba una idea: una sola columna, pero cada equipo recibe por sorteo una afirmación distinta
+// (variantes), con su propia clave de respuestas de referencia.
+CUADROS['pon-a-prueba'] = {
+  id: 'act-pon-a-prueba', ind: 'tarea-pon-a-prueba', clave: 'ponAPrueba',
+  titulo: 'Pon a prueba una idea', kicker: 'Tema 4 · Concepción contemporánea de la ciencia', archivo: 'Pon_a_prueba',
+  ayuda: 'A su equipo le tocó por sorteo la afirmación de arriba. Analícenla con los autores que acabamos de leer (4.1 a 4.6). No se trata de memorizar: piensen qué diría cada uno. La fila <b>🔎 Investiga</b> pide buscar en el celular un dato o un estudio real que la apoye o la contradiga, con su fuente.',
+  columnas: [['equipo', 'Lo que escribe el equipo', '#3E5BA8']],
+  filas: [
+    ['viena', 'Círculo de Viena', '¿Se puede verificar con la experiencia? ¿Cómo lo comprobarían?'],
+    ['popper', 'Popper', '¿Qué resultado la desmentiría? ¿Es falsable?'],
+    ['kuhn', 'Kuhn', '¿Desde qué paradigma se dice? ¿Ven alguna anomalía, algo que no cuadra?'],
+    ['lakatos', 'Lakatos', '¿Cuál sería su núcleo duro y qué ajustarían (cinturón protector) si falla?'],
+    ['feyerabend', 'Feyerabend', '¿Qué otro saber o método podría aportar algo que el método científico deja fuera?'],
+    ['morin', 'Morin', '¿Qué se pierde si se mira solo por partes? ¿Qué está «tejido junto»?'],
+    ['evidencia', 'La evidencia', 'Un dato o un estudio real que la apoye o la contradiga: qué dice, quién lo hizo y cuándo.', true],
+    ['veredicto', 'Veredicto del equipo', '¿Es ciencia, un neuromito, una creencia, una propuesta política? ¿Qué tipo de conocimiento es? Justifíquenlo.'],
+  ],
+  variantes: [
+    { id: 'vak', ico: '👁️', afirmacion: '«Cada alumno aprende mejor según su estilo: visual, auditivo o kinestésico.»', respuestas: {
+      viena: ['Sí se puede poner a prueba: se identifica el estilo de cada alumno y se compara si aprende más cuando la clase coincide con su estilo que cuando no coincide.'],
+      popper: ['La desmiente que los alumnos enseñados «en su estilo» no aprendan más que los enseñados en otro. Eso es justo lo que han encontrado las revisiones de la evidencia.'],
+      kuhn: ['Viene del paradigma de las diferencias individuales y de la psicología popular. La anomalía: aunque es muy popular entre docentes, los experimentos no encuentran el efecto prometido.'],
+      lakatos: ['Núcleo duro: «las personas tienen estilos fijos que determinan cómo aprenden». Cuando falla, se ajusta el cinturón (más estilos, otros cuestionarios) sin predecir hechos nuevos: un programa degenerativo.'],
+      feyerabend: ['Lo que el docente observa en su grupo (a quién le sirve un esquema, a quién la práctica) tiene valor, pero como diversidad de preferencias y estrategias, no como estilos fijos.'],
+      morin: ['Reduce al alumno a un solo canal. Aprender integra todos los sentidos, la emoción, el contexto y el contenido: hay temas que piden imagen y otros que piden hacer, para todos.'],
+      evidencia: ['Por ejemplo, la revisión de Pashler, McDaniel, Rohrer y Bjork (2008) en Psychological Science in the Public Interest no encontró evidencia sólida de que adaptar la enseñanza al estilo mejore el aprendizaje.'],
+      veredicto: ['Es un neuromito: se presenta como científico y se puede poner a prueba, pero cuando se prueba, no se sostiene. Lo valioso es variar las estrategias según el contenido, no etiquetar al alumno.'] } },
+    { id: 'voz-alta', ico: '📖', afirmacion: '«Leer en voz alta todos los días mejora la comprensión lectora.»', respuestas: {
+      viena: ['Sí: se mide la comprensión antes y después en un grupo que lee en voz alta a diario y en otro que no, con la misma prueba.'],
+      popper: ['La desmentiría que, después de un tiempo razonable, el grupo que lee en voz alta no comprenda mejor que el otro. Hay que decirlo antes de aplicar el programa.'],
+      kuhn: ['Paradigma de la lectura como habilidad que se entrena (enfoque cognitivo). Anomalía posible: alumnos que leen en voz alta con fluidez pero no comprenden lo que leen.'],
+      lakatos: ['Núcleo: «la fluidez libera atención para comprender». Cinturón: cuánto tiempo, qué textos, quién lee (docente o alumno). Es progresivo si predice mejoras que luego se confirman.'],
+      feyerabend: ['La tradición oral de las comunidades (contar historias, leyendas, la lectura en familia) también forma lectores y no siempre cabe en una prueba estandarizada.'],
+      morin: ['La comprensión depende también del vocabulario, el gusto por leer, el contexto familiar y la emoción. Medir solo la fluidez deja fuera lo que está tejido junto.'],
+      evidencia: ['Por ejemplo, Westbrook, Sutherland, Oakhill y Sullivan (2019) encontraron que leer novelas completas en voz alta en clase mejoró la comprensión de alumnos de 12 y 13 años, sobre todo la de los lectores con más dificultades.'],
+      veredicto: ['Es una hipótesis científica razonable y con evidencia a favor, si se mide bien. Conocimiento fáctico, de las ciencias de la educación; su alcance depende de cómo, cuánto y con qué textos se lee.'] } },
+    { id: 'nem', ico: '🏫', afirmacion: '«La Nueva Escuela Mexicana es un cambio de paradigma.»', respuestas: {
+      viena: ['Así dicha es difícil de verificar: «paradigma» no se observa directamente. Habría que traducirla a cambios medibles (en qué se enseña, cómo se evalúa, qué pasa en las aulas).'],
+      popper: ['La desmentiría encontrar que las prácticas de aula siguen siendo las mismas (mismos contenidos, misma evaluación) aunque cambien los documentos. Así se vuelve falsable.'],
+      kuhn: ['Kuhn habla de comunidades científicas, no de reformas. Si se usa su idea: ¿qué anomalías tenía el modelo anterior (por competencias), hubo crisis y cambió la manera de ver la educación de toda la comunidad docente?'],
+      lakatos: ['Núcleo duro de la NEM: la comunidad como centro, el pensamiento crítico y la educación integral. Cinturón: programas analíticos, libros, proyectos. ¿Predice mejoras que luego se confirman?'],
+      feyerabend: ['La propia NEM invita al diálogo de saberes: incluir los saberes comunitarios junto a los científicos. Feyerabend estaría de acuerdo en no imponer un solo método.'],
+      morin: ['Los campos formativos y los ejes articuladores buscan unir lo que estaba separado en asignaturas: es justo la crítica de Morin a la fragmentación.'],
+      evidencia: ['Por ejemplo, el Plan de Estudio 2022 de la SEP (documento oficial) o estudios y artículos recientes que analicen cómo la viven los docentes. Distingan lo que dice el documento de lo que muestran los datos.'],
+      veredicto: ['Es una propuesta política y pedagógica, no una teoría científica. Puede estudiarse científicamente (con datos sobre su aplicación), pero llamarla «cambio de paradigma» es una interpretación discutible que hay que argumentar.'] } },
+    { id: 'videojuegos', ico: '🎮', afirmacion: '«Los videojuegos bajan el rendimiento escolar.»', respuestas: {
+      viena: ['Sí: se compara el tiempo de juego con las calificaciones, o se hace un estudio donde unos alumnos reciben una consola y otros no.'],
+      popper: ['La desmentiría que los alumnos que juegan no tengan peor rendimiento que los que no juegan, cuando se comparan en igualdad de condiciones.'],
+      kuhn: ['Viene de un paradigma que ve la pantalla como amenaza. Anomalía: estudios que encuentran que algunos juegos mejoran la atención o habilidades espaciales.'],
+      lakatos: ['Núcleo: «el tiempo de juego le quita tiempo al estudio». Cinturón: qué tipo de juego, cuántas horas, a qué edad. Si solo se ajusta después de cada estudio que no cuadra, se vuelve degenerativo.'],
+      feyerabend: ['Lo que saben los propios jugadores y sus familias (qué aprenden jugando, con quién juegan) también es un saber que vale escuchar.'],
+      morin: ['No es solo el juego: influyen el sueño, la supervisión familiar, el tipo de juego y la motivación. Una relación no es necesariamente una causa.'],
+      evidencia: ['Por ejemplo, Weis y Cerankosky (2010) encontraron que niños a quienes se les dio una consola bajaron en lectura y escritura; otros estudios (Bavelier y colaboradores) reportan mejoras en atención visual. La evidencia es mixta.'],
+      veredicto: ['Es una hipótesis científica que se puede probar, pero así de general es demasiado simple: depende de cuánto, qué y cómo se juega. Conocimiento fáctico en construcción, no una verdad cerrada.'] } },
+    { id: 'mozart', ico: '🎻', afirmacion: '«Escuchar música clásica mejora la concentración y la inteligencia.»', respuestas: {
+      viena: ['Sí: se mide la concentración o una prueba de razonamiento después de escuchar música clásica, comparada con silencio u otra música.'],
+      popper: ['La desmiente que quienes escuchan música clásica no rindan mejor que quienes están en silencio. Al repetir los experimentos, el efecto no aparece o es mínimo y pasajero.'],
+      kuhn: ['Nació de un experimento de 1993 que se volvió fama popular («efecto Mozart»). Anomalía: los estudios posteriores no lograron repetirlo.'],
+      lakatos: ['Núcleo: «la música clásica activa el cerebro». Cinturón: «solo Mozart», «solo en bebés», «solo para tareas espaciales»: ajustes para salvarla sin predecir nada nuevo.'],
+      feyerabend: ['La música sí tiene valor en la escuela (emociones, gusto, cultura), y lo que sienten alumnos y maestros al escucharla importa, aunque no «aumente la inteligencia».'],
+      morin: ['Concentrarse depende del ambiente, la tarea, el descanso y la emoción. Atribuirlo todo a un tipo de música reduce un fenómeno complejo a una sola causa.'],
+      evidencia: ['Por ejemplo, Rauscher, Shaw y Ky (1993) reportaron un efecto breve en tareas espaciales; el metaanálisis de Pietschnig, Voracek y Formann (2010) concluyó que no hay un efecto Mozart confiable.'],
+      veredicto: ['Es un neuromito: la idea popular exagera un resultado pequeño que no se replicó. La música puede ambientar y motivar, pero no «sube la inteligencia».'] } },
+    { id: 'comunidad', ico: '🌽', afirmacion: '«El saber de la comunidad también debe enseñarse en la escuela.»', respuestas: {
+      viena: ['Tal como está, es una afirmación de valor («debe»), no verificable. Lo que sí se puede verificar es si incluir esos saberes mejora la participación o el aprendizaje.'],
+      popper: ['La parte del «debe» no es falsable. La parte empírica sí: la desmentiría que los alumnos no aprendan más ni participen más cuando la escuela incorpora saberes de su comunidad.'],
+      kuhn: ['Viene del paradigma sociocrítico y del diálogo de saberes. Anomalía del modelo anterior: escuelas que enseñaban contenidos ajenos a la vida de sus alumnos.'],
+      lakatos: ['Núcleo: «el aprendizaje es más significativo cuando parte de la realidad del alumno». Cinturón: qué saberes, cómo se integran, con quién. Progresivo si predice mejoras que se comprueban.'],
+      feyerabend: ['Es su idea central: la ciencia es una tradición entre otras y no debe excluir otros saberes de antemano. La milpa, la apicultura o la medicina tradicional también son conocimiento.'],
+      morin: ['Unir el saber escolar con el de la comunidad es «tejer junto». El riesgo es idealizar: también hay que ponerlo a dialogar con la ciencia.'],
+      evidencia: ['Por ejemplo, el enfoque de los «fondos de conocimiento» de Moll, Amanti, Neff y González (1992), o la «ecología de saberes» de Sousa Santos, que está en la Constelación.'],
+      veredicto: ['Es una postura ética y política (un «debe»), con una parte que sí se puede investigar científicamente. Conocimiento de tipo sociocrítico; coincide con la propuesta de la NEM.'] } },
+  ],
+};
+// Sorteo de la afirmación: la misma formación de equipos baraja las variantes con su propio orden,
+// y cada equipo toma la de su número (equipo 1 → primera del sorteo, equipo 2 → segunda…).
+const semilla = s => [...String(s)].reduce((h, c) => (Math.imul(h ^ c.charCodeAt(0), 16777619)) >>> 0, 2166136261);
+export function varianteDe(A, eq, alumnoId) {
+  if (!A || !A.variantes) return null;
+  const n = A.variantes.length, idx = [...Array(n).keys()];
+  let r = semilla((eq ? eq.formacion || 'actual' : 'individual') + '|' + A.clave);
+  for (let i = n - 1; i > 0; i--) { r = (Math.imul(r, 1103515245) + 12345) >>> 0; const j = r % (i + 1); [idx[i], idx[j]] = [idx[j], idx[i]]; }
+  const num = eq ? (Number(eq.numero) || (semilla(eq.id) % n) + 1) : (semilla(alumnoId || '') % n) + 1;
+  return A.variantes[idx[(num - 1) % n]];
+}
+export const respuestasDe = (A, V) => (V && V.respuestas) || A.respuestas || {};
+
 // Coevaluación: criterios de 1 a 4
 export const COEV = [
   ['dominio', 'Dominio del autor', 'Explican sus ideas con seguridad y sin leer todo.'],

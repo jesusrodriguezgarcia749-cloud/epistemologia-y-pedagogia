@@ -366,3 +366,9 @@ html[data-theme="dark"] .cu-positivista > span { color: #8DB6E0; } html[data-the
 .jp-autores { grid-template-columns: 1fr 1fr; }
 .jp-autores .jp-op { border-left: 5px solid var(--c); }
 @media (max-width: 520px) { .gt-tarjeta { flex-direction: column; gap: 6px; } }
+
+/* ---------- ⚖️ Pon a prueba una idea: la afirmación del equipo */
+.cu-afirma { display: flex; gap: 12px; align-items: center; margin: 10px 0 12px; padding: 14px 16px; border-radius: 14px; background: linear-gradient(135deg, #16213A, #2B2347); color: #fff; box-shadow: var(--shadow-card); }
+.cu-afirma > span { font-size: 2.2rem; }
+.cu-afirma small { display: block; opacity: .75; font-size: .8rem; }
+.cu-afirma b { display: block; font-family: var(--font-display, serif); font-size: 1.15rem; line-height: 1.35; color: #F6E7B8; }
