@@ -321,47 +321,52 @@ function parrafoBrujula() {
 // ------------------------------------------------ Etapa 3: objetivos e hipótesis
 function etapaObjetivos(c) {
   const k = T.brujula.clave || T.tipoManual || tipoDe(T.pregunta) || 'I';
-  const o = T.objetivos;
+  const o = T.objetivos, kk = PASOS_ESP[k] ? k : 'I';
+  // Lo que el alumno arma en cuadritos. Si ya tenía texto escrito, empieza en «Prefiero escribirlo yo» para no tocarlo.
+  const A = o.arma = Object.assign({ mg: o.general.trim() ? 'libre' : 'armar', me: o.especificos.some(x => x.trim()) ? 'libre' : 'armar', mh: o.hipotesis.trim() ? 'libre' : 'armar', g: {}, e: [], h: {} }, o.arma || {});
+  A.g.con = A.g.con || CONECTOR[k] || 'en';
+  const nPasos = Math.max(PASOS_ESP[kk].length, A.e.length);
+  while (A.e.length < nPasos) A.e.push({});
+  const sug = sugerenciasPregunta(T.pregunta);
+  const nombreH = k === 'I' ? 'supuesto inicial' : k === 'S' ? 'supuesto de acción' : 'hipótesis';
+  const modo = (id, m) => `<div class="t-modo" role="group" aria-label="Cómo quieres escribirlo"><button type="button" data-m="armar" data-s="${id}" aria-pressed="${m === 'armar'}">🧩 Armar con cuadritos</button><button type="button" data-m="libre" data-s="${id}" aria-pressed="${m === 'libre'}">✍️ Prefiero escribirlo yo</button></div>`;
+
   c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">El <b>objetivo general</b> es tu pregunta convertida en una meta; los <b>específicos</b> son los pasos para lograrla. Empiezan con un verbo en infinitivo que debe ser coherente con tu paradigma. Te ayuda con la pregunta 5.</p>
     ${guiaObjetivos(k)}
     ${T.pregunta ? `<p class="t-recuerda"><b>Tu pregunta:</b> ${esc(T.pregunta)}</p>` : ''}
-    <div class="t-campo"><label for="o-general">Objetivo general</label>
+    <h3 class="t-h3">Objetivo general</h3>
+    ${modo('g', A.mg)}
+    <div id="og-armar" ${A.mg === 'armar' ? '' : 'hidden'}>${armadorHTML('g', piezasGeneral(k, sug), A.g)}<div class="t-arma-prev" id="og-prev"></div></div>
+    <div id="og-libre" class="t-campo" ${A.mg === 'libre' ? '' : 'hidden'}><label for="o-general">Objetivo general</label>
       ${selVerbo('g', 'general', k)}
       <textarea id="o-general" rows="2" placeholder="${esc((EJ_OBJ[k] || EJ_OBJ.I).g.split(' ')[0])} …">${esc(o.general)}</textarea></div>
-    <div id="o-esp"></div>
-    <button type="button" class="btn-lab-l" id="o-mas">+ Agregar objetivo específico</button>
+    <h3 class="t-h3">Objetivos específicos: los pasos</h3>
+    ${modo('e', A.me)}
+    <div id="oe-armar" ${A.me === 'armar' ? '' : 'hidden'}>
+      <p class="t-nota">Cada objetivo específico es un paso para lograr el general, en orden. Solo escribe el verbo y qué harás: los participantes y el lugar ya están en tu objetivo general.</p>
+      <div id="oe-pasos"></div>
+      <button type="button" class="btn-lab-l" id="oe-mas">+ Agregar otro paso</button>
+      <div class="t-arma-prev" id="oe-prev"></div></div>
+    <div id="oe-libre" ${A.me === 'libre' ? '' : 'hidden'}><div id="o-esp"></div>
+      <button type="button" class="btn-lab-l" id="o-mas">+ Agregar objetivo específico</button></div>
     <div class="t-verif" id="o-verif"></div>
     <h3 class="t-h3">Hipótesis o supuesto, y la prueba de Popper</h3>
     <p class="lab-ayuda">En la investigación cuantitativa escribe una <b>hipótesis</b>; en la cualitativa, un <b>supuesto inicial</b>. En ambos casos, di qué resultado te obligaría a replantearlo: eso la vuelve honesta y, en el caso de la hipótesis, falsable.</p>
     ${guiaHipotesis(k)}
-    <div class="t-campo"><label for="o-hip">Mi ${k === 'I' ? 'supuesto inicial' : k === 'S' ? 'supuesto de acción' : 'hipótesis'}</label><textarea id="o-hip" rows="3" placeholder="${esc((EJ_HIP[k] || EJ_HIP.I).inicio)}">${esc(o.hipotesis)}</textarea></div>
+    <p class="t-h4">Mi ${nombreH}</p>
+    ${modo('h', A.mh)}
+    <div id="oh-armar" ${A.mh === 'armar' ? '' : 'hidden'}>${armadorHTML('h', piezasHip(k), A.h)}<div class="t-arma-prev" id="oh-prev"></div></div>
+    <div id="oh-libre" class="t-campo" ${A.mh === 'libre' ? '' : 'hidden'}><label for="o-hip">Mi ${nombreH}</label><textarea id="o-hip" rows="3" placeholder="${esc((EJ_HIP[k] || EJ_HIP.I).inicio)}">${esc(o.hipotesis)}</textarea></div>
     <div class="t-campo"><label for="o-ref">Me desmentiría que…</label><textarea id="o-ref" rows="2" placeholder="${esc((EJ_HIP[k] || EJ_HIP.I).r)}">${esc(o.refutaria)}</textarea></div>
     <div class="t-verif" id="o-verif2"></div>`);
+
+  // ---------- modo libre (como antes)
   const pintarEsp = () => {
     $('#o-esp').innerHTML = o.especificos.map((x, i) => `<div class="t-campo t-esp"><label for="o-e${i}">Objetivo específico ${i + 1}</label>${selVerbo('e' + i, 'esp', k)}<div class="t-fila"><textarea id="o-e${i}" rows="2">${esc(x)}</textarea>${o.especificos.length > 1 ? `<button type="button" class="btn-lab-l t-quitar" data-i="${i}" aria-label="Quitar objetivo ${i + 1}">✕</button>` : ''}</div></div>`).join('');
     o.especificos.forEach((x, i) => { enlazar(`#o-e${i}`, v => o.especificos[i] = v, verificar); });
     $$('#o-esp .t-selverbo').forEach(conVerbo);
     $$('#o-esp .t-quitar').forEach(b => b.addEventListener('click', () => { o.especificos.splice(+b.dataset.i, 1); cambio(); pintarEsp(); verificar(); }));
   };
-  const verificar = () => {
-    const P = Object.values(D.verbos).flat(), avisos = [];
-    const inicio = s => s.trim().toLowerCase().split(/\s+/)[0] || '';
-    if (o.general.trim() && /^¿|\?$/.test(o.general.trim())) avisos.push('El objetivo general no se escribe como pregunta: empieza con un verbo en infinitivo.');
-    if (o.general.trim() && !/(ar|er|ir)$/.test(inicio(o.general))) avisos.push('El objetivo general debería empezar con un verbo en infinitivo (comprender, determinar, diseñar…).');
-    o.especificos.forEach((x, i) => { if (x.trim() && !/(ar|er|ir)$/.test(inicio(x))) avisos.push(`El objetivo específico ${i + 1} debería empezar con un verbo en infinitivo.`); });
-    if (o.especificos.filter(x => x.trim()).length < 2) avisos.push('Escribe al menos dos objetivos específicos.');
-    const malos = { P: /^(comprender|interpretar|reconstruir)/, I: /^(medir|determinar|correlacionar)/ };
-    if (malos[k] && [o.general, ...o.especificos].some(x => malos[k].test(x.trim().toLowerCase()))) avisos.push(`Algún verbo no encaja con un enfoque ${D.tipos[k].nombre.toLowerCase()}. Revísalo o considera un enfoque mixto.`);
-    $('#o-verif').innerHTML = avisos.length ? `<ul class="t-avisos">${avisos.map(a => `<li>${esc(a)}</li>`).join('')}</ul>` : (o.general.trim() ? '<p class="t-bien">✓ Tus objetivos están bien planteados en la forma.</p>' : '');
-    const av2 = [];
-    if (o.hipotesis.trim() && !o.refutaria.trim()) av2.push('Te falta decir qué resultado te desmentiría. Sin eso, la hipótesis no es falsable.');
-    if (/\b(siempre|nunca|todos|ninguno)\b/i.test(o.hipotesis)) av2.push('Cuidado con «siempre», «nunca» o «todos»: son afirmaciones fáciles de refutar con un solo caso. ¿Es lo que quieres decir?');
-    if (o.refutaria.trim() && /(necesitan más tiempo|no se aplicó bien|depende)/i.test(o.refutaria)) av2.push('Tu condición de refutación deja una salida: si cualquier resultado puede explicarse a tu favor, la hipótesis se protege sola (tema 4.2).');
-    $('#o-verif2').innerHTML = av2.length ? `<ul class="t-avisos">${av2.map(a => `<li>${esc(a)}</li>`).join('')}</ul>` : (o.refutaria.trim() ? '<p class="t-bien">✓ Dijiste qué te desmentiría: buena señal de falsabilidad.</p>' : '');
-  };
-  enlazar('#o-general', v => o.general = v, verificar);
-  ['#o-hip', '#o-ref'].forEach((s, i) => enlazar(s, v => { if (i) o.refutaria = v; else o.hipotesis = v; }, verificar));
-  // Desplegable de verbos: pone el verbo al inicio del objetivo (si ya había uno, lo cambia).
   function conVerbo(sel) {
     sel.addEventListener('change', () => {
       const v = sel.value; if (!v) return;
@@ -369,10 +374,180 @@ function etapaObjetivos(c) {
       sel.value = ''; el.focus(); el.setSelectionRange(el.value.length, el.value.length);
     });
   }
-  conVerbo($('#sv-g'));
 
+  // ---------- modo armar
+  const prev = (sel, txt, vacioTxt) => { $(sel).innerHTML = txt ? `<p class="t-ej-k">Así queda</p><p>${esc(txt)}</p>` : `<p class="t-nota">${vacioTxt}</p>`; };
+  const sugHip = () => {
+    const el = $('#arma-h .t-sug-gen'); if (!el) return;
+    const q = [limpia(A.g.quien) && minus(limpia(A.g.quien)), conEn(A.g.donde), k === 'S' && minus(limpia(A.g.cuando))].filter(Boolean).join(' ');
+    el.hidden = !q; if (!q) return;
+    el.dataset.v = k === 'P' && !/^en\s/i.test(q) ? 'en ' + q : q; el.textContent = '📌 De tu objetivo general: «' + el.dataset.v + '»';
+  };
+  const armarG = () => {
+    sugHip();
+    const t = oracionGeneral(A.g); prev('#og-prev', t, o.general.trim() ? `Llena los cuadritos. Mientras tanto se conserva lo que tenías: «${esc(o.general)}»` : 'Llena los cuadritos y aquí verás tu objetivo general completo.');
+    if (t && A.mg === 'armar') { o.general = t; $('#o-general').value = t; }
+  };
+  const armarH = () => {
+    const t = oracionHip(k, A.h); prev('#oh-prev', t, o.hipotesis.trim() ? `Llena los cuadritos. Mientras tanto se conserva lo que tenías: «${esc(o.hipotesis)}»` : `Llena los cuadritos y aquí verás tu ${nombreH} completo.`);
+    if (t && A.mh === 'armar') { o.hipotesis = t; $('#o-hip').value = t; }
+  };
+  const armarE = () => {
+    const L = A.e.map(oracionEsp).filter(Boolean);
+    $('#oe-prev').innerHTML = L.length ? `<p class="t-ej-k">Así quedan tus objetivos específicos</p><ol>${L.map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : '<p class="t-nota">Llena cada paso y aquí verás tus objetivos específicos en orden.</p>';
+    if (L.length && A.me === 'armar') { o.especificos = L; }
+  };
+  const pintarPasosEsp = () => {
+    $('#oe-pasos').innerHTML = A.e.map((p, i) => {
+      const P = PASOS_ESP[kk][i] || ['Otro paso', 'Algo más que necesites hacer para lograr el general.', [], ''];
+      return `<article class="t-paso-esp"><p class="t-paso-n">Paso ${i + 1} · ${esc(P[0])}${i >= PASOS_ESP[kk].length ? ` <button type="button" class="t-quitar-paso" data-i="${i}" aria-label="Quitar paso ${i + 1}">✕</button>` : ''}</p>
+        <p class="t-pieza-ayuda">${esc(P[1])}</p>
+        <div class="t-paso-fila">${selPaso(i, k, P[2], p.verbo)}<textarea rows="2" id="oe-q${i}" placeholder="${esc(P[3] ? 'Ej.: ' + P[3] : 'qué vas a hacer')}" aria-label="Qué harás en el paso ${i + 1}">${esc(p.que || '')}</textarea></div></article>`;
+    }).join('');
+    A.e.forEach((p, i) => {
+      $(`#oe-v${i}`).addEventListener('change', e => { p.verbo = e.target.value; armarE(); cambio(); verificar(); });
+      $(`#oe-q${i}`).addEventListener('input', e => { p.que = e.target.value; armarE(); cambio(); verificar(); });
+    });
+    $$('#oe-pasos .t-quitar-paso').forEach(b => b.addEventListener('click', () => { A.e.splice(+b.dataset.i, 1); pintarPasosEsp(); armarE(); cambio(); verificar(); }));
+  };
+  const ligarArmador = (id, datos, despues) => {
+    const caja = $(`#arma-${id}`), piezas = [...caja.querySelectorAll('.t-pieza')];
+    const revelar = () => { let ok = true; piezas.forEach(el => { el.hidden = !ok; const v = datos[el.dataset.k]; if (!el.dataset.opc && !(v && String(v).trim())) ok = false; }); };
+    caja.querySelectorAll('[data-campo]').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { datos[el.dataset.campo] = el.value; revelar(); despues(); cambio(); verificar(); }));
+    caja.querySelectorAll('.t-sug').forEach(b => b.addEventListener('click', () => { const el = caja.querySelector(`[data-campo="${b.dataset.k}"]`); el.value = b.dataset.v; el.dispatchEvent(new Event('input')); el.focus(); }));
+    revelar(); despues();
+  };
+
+  // ---------- revisión
+  const verificar = () => {
+    const avisos = [];
+    const inicio = s => s.trim().toLowerCase().split(/\s+/)[0] || '';
+    if (o.general.trim() && /^¿|\?$/.test(o.general.trim())) avisos.push('El objetivo general no se escribe como pregunta: empieza con un verbo en infinitivo.');
+    if (o.general.trim() && !/(ar|er|ir)$/.test(inicio(o.general))) avisos.push('El objetivo general debería empezar con un verbo en infinitivo (comprender, determinar, diseñar…).');
+    o.especificos.forEach((x, i) => { if (x.trim() && !/(ar|er|ir)$/.test(inicio(x))) avisos.push(`El objetivo específico ${i + 1} debería empezar con un verbo en infinitivo.`); });
+    if (o.especificos.filter(x => x.trim()).length < 2) avisos.push('Escribe al menos dos objetivos específicos.');
+    const malos = { P: /^(comprender|interpretar|reconstruir)/, I: /^(medir|determinar|correlacionar)/ };
+    if (malos[k] && [o.general, ...o.especificos].some(x => malos[k].test(x.trim().toLowerCase()))) avisos.push(`Algún verbo no encaja con un enfoque ${D.tipos[k].nombre.toLowerCase()}. Revísalo o considera un enfoque mixto.`);
+    if (o.general.trim() && !A.g.quien && A.mg === 'libre' && o.general.trim().split(/\s+/).length < 9) avisos.push('Tu objetivo general parece corto: revisa que diga en quiénes, dónde y cuándo.');
+    if (k === 'S' && o.especificos.filter(x => x.trim()).length >= 2 && !o.especificos.some(x => /^(evaluar|valorar|sistematizar)/i.test(x.trim()))) avisos.push('En una investigación transformadora falta un paso para ver si funcionó (evaluar o valorar participativamente).');
+    if (/ciber\s+acoso/i.test([o.general, ...o.especificos, o.hipotesis].join(' '))) avisos.push('Ortografía: «ciberacoso» se escribe junto.');
+    $('#o-verif').innerHTML = avisos.length ? `<ul class="t-avisos">${avisos.map(a => `<li>${esc(a)}</li>`).join('')}</ul>` : (o.general.trim() ? '<p class="t-bien">✓ Tus objetivos están bien planteados en la forma.</p>' : '');
+    const av2 = [];
+    if (o.hipotesis.trim() && !o.refutaria.trim()) av2.push('Te falta decir qué resultado te desmentiría. Sin eso, la hipótesis no es falsable.');
+    if (/\b(siempre|nunca|todos|ninguno)\b/i.test(o.hipotesis)) av2.push('Cuidado con «siempre», «nunca» o «todos»: son afirmaciones fáciles de refutar con un solo caso. ¿Es lo que quieres decir?');
+    if (/\bdeber[íi]a/i.test(o.hipotesis)) av2.push('«Debería» expresa un deseo, no una hipótesis: di lo que crees que pasa o pasará.');
+    if (o.refutaria.trim() && /(necesitan más tiempo|no se aplicó bien|depende)/i.test(o.refutaria)) av2.push('Tu condición de refutación deja una salida: si cualquier resultado puede explicarse a tu favor, la hipótesis se protege sola (tema 4.2).');
+    $('#o-verif2').innerHTML = av2.length ? `<ul class="t-avisos">${av2.map(a => `<li>${esc(a)}</li>`).join('')}</ul>` : (o.refutaria.trim() ? '<p class="t-bien">✓ Dijiste qué te desmentiría: buena señal de falsabilidad.</p>' : '');
+  };
+
+  // ---------- cambiar de modo
+  $$('.t-modo button').forEach(b => b.addEventListener('click', () => {
+    const s = b.dataset.s, m = b.dataset.m; A['m' + s] = m;
+    b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    $(`#o${s}-armar`).hidden = m !== 'armar'; $(`#o${s}-libre`).hidden = m !== 'libre';
+    if (m === 'armar') { if (s === 'g') armarG(); else if (s === 'h') armarH(); else armarE(); }
+    if (s === 'e' && m === 'libre') { if (!o.especificos.length) o.especificos = ['']; pintarEsp(); }
+    cambio(); verificar();
+  }));
+
+  enlazar('#o-general', v => o.general = v, verificar);
+  ['#o-hip', '#o-ref'].forEach((s, i) => enlazar(s, v => { if (i) o.refutaria = v; else o.hipotesis = v; }, verificar));
+  conVerbo($('#sv-g'));
   $('#o-mas').addEventListener('click', () => { if (o.especificos.length < 6) { o.especificos.push(''); cambio(); pintarEsp(); } });
-  pintarEsp(); verificar();
+  $('#oe-mas').addEventListener('click', () => { if (A.e.length < 6) { A.e.push({}); cambio(); pintarPasosEsp(); armarE(); } });
+  ligarArmador('g', A.g, armarG);
+  ligarArmador('h', A.h, armarH);
+  // En la hipótesis, proponer los participantes del objetivo general.
+  pintarPasosEsp(); armarE(); pintarEsp(); verificar();
+}
+
+// ---------- piezas de los cuadritos
+const CONECTOR = { P: 'en', I: 'de', S: 'junto con', M: 'en' };
+function piezasGeneral(k, sug) {
+  const ej = { P: ['la relación entre las horas de sueño y el promedio escolar', 'los alumnos de segundo grado'], I: ['cómo viven su primer año frente a grupo', 'los docentes de nuevo ingreso'], S: ['la forma en que previenen y enfrentan el ciberacoso', 'los alumnos de segundo grado'] }[k === 'M' ? 'P' : k] || [];
+  return [
+    { k: 'verbo', tipo: 'verbo', label: 'Verbo en infinitivo', ayuda: 'Es la meta: lo que lograrás al final. Elige uno de la lista; los primeros encajan con tu tipo de pregunta.', cual: 'general' },
+    { k: 'que', label: '¿Qué vas a estudiar o lograr?', ayuda: 'El fenómeno de tu pregunta, sin signos de interrogación. Suele ser casi igual a tu pregunta.', ej: ej[0] },
+    { k: 'quien', label: '¿En quiénes o con quiénes?', ayuda: 'Los participantes: quiénes y de qué grado o grupo.', ej: ej[1], con: true, sug: sug.quien },
+    { k: 'donde', label: '¿Dónde?', ayuda: 'La escuela, comunidad o lugar.', ej: 'en la Secundaria Técnica 17 de Campeche', sug: sug.donde },
+    { k: 'cuando', label: '¿Cuándo?', ayuda: 'El periodo en el que harás la investigación.', ej: 'durante el ciclo escolar 2026-2027', sug: sug.cuando },
+  ];
+}
+function piezasHip(k) {
+  if (k === 'I') return [
+    { k: 'quien', label: 'Supongo que… (¿quiénes?)', ayuda: 'Los participantes de tu investigación.', ej: 'los docentes de nuevo ingreso de secundarias públicas de Campeche', gen: true },
+    { k: 'como', label: '¿Cómo crees que lo viven o lo entienden?', ayuda: 'Tu idea previa, dicha con honestidad. Empieza con un verbo: viven, entienden, sienten, perciben…', ej: 'viven su primer año con una sensación de soledad' },
+    { k: 'aunque', label: 'Aunque… (opcional)', ayuda: 'Lo que podría sorprenderte. Te recuerda que vas a escuchar, no a confirmar.', ej: 'puede que encuentre experiencias muy distintas entre escuelas', opc: true },
+  ];
+  if (k === 'S') return [
+    { k: 'si', label: 'Si… (¿qué acción harán?)', ayuda: 'Lo que el grupo hará junto contigo: tu estrategia o propuesta.', ej: 'el grupo construye con su tutor un reglamento basado en acuerdos' },
+    { k: 'entonces', label: 'Entonces… (¿qué cambiará?)', ayuda: 'El cambio concreto que esperas y que se puede observar.', ej: 'los conflictos que llegan a orientación disminuirán' },
+    { k: 'quien', label: '¿En quiénes, dónde y cuándo?', ayuda: 'Participantes, lugar y periodo.', ej: 'en el grupo de segundo grado durante el segundo trimestre', gen: true },
+  ];
+  return [
+    { k: 'quien', label: 'En… (¿quiénes y dónde?)', ayuda: 'Los participantes y el lugar.', ej: 'en los alumnos de segundo grado de la Secundaria Técnica 17', gen: true },
+    { k: 'causa', label: '¿Qué crees que influye?', ayuda: 'La primera variable: la que crees que provoca o se relaciona con el cambio.', ej: 'quienes duermen menos de siete horas entre semana' },
+    { k: 'efecto', label: '¿Qué le pasa a lo otro?', ayuda: 'La segunda variable y en qué dirección cambia: más, menos, mayor, menor.', ej: 'tienen un promedio escolar más bajo' },
+    { k: 'compara', label: 'Comparado con… (opcional)', ayuda: 'El grupo o la situación contra la que comparas.', ej: 'que quienes duermen siete horas o más', opc: true },
+  ];
+}
+function armadorHTML(id, piezas, datos) {
+  return `<div class="t-arma" id="arma-${id}">${piezas.map((p, i) => `<div class="t-pieza" data-k="${p.k}"${p.opc ? ' data-opc="1"' : ''}>
+    <p class="t-pieza-t"><span class="t-pieza-n">${i + 1}</span>${esc(p.label)}</p>
+    <p class="t-pieza-ayuda">${esc(p.ayuda)}</p>
+    ${p.tipo === 'verbo' ? selVerbo(`a${id}`, p.cual, T.brujula.clave || T.tipoManual || tipoDe(T.pregunta) || 'I').replace('class="t-selverbo"', `class="t-selverbo" data-campo="verbo"`).replace(/<option value="([^"]*)">/g, (m, v) => v && v === datos.verbo ? `<option value="${v}" selected>` : m)
+      : `<div class="t-paso-fila">${p.con ? `<select data-campo="con" aria-label="Palabra que une">${['en', 'de', 'con', 'junto con', ''].map(x => `<option value="${x}" ${x === (datos.con ?? '') ? 'selected' : ''}>${x || '(ninguna)'}</option>`).join('')}</select>` : ''}<textarea rows="2" data-campo="${p.k}" placeholder="${esc(p.ej ? 'Ej.: ' + p.ej : '')}">${esc(datos[p.k] || '')}</textarea></div>`}
+    ${p.sug ? `<button type="button" class="t-sug chip-lab" data-k="${p.k}" data-v="${esc(p.sug)}">📌 De tu pregunta: «${esc(p.sug)}»</button>` : ''}
+    ${p.gen ? `<button type="button" class="t-sug t-sug-gen chip-lab" data-k="${p.k}" data-v="" hidden></button>` : ''}
+  </div>`).join('')}</div>`;
+}
+function selPaso(i, k, recomendados, actual) {
+  const L = VERBOS_OBJ.esp[k] || VERBOS_OBJ.esp.I, todos = Object.values(VERBOS_OBJ.esp).flat();
+  const rec = recomendados.map(v => todos.find(x => x[0] === v) || [v, '']), resto = [...new Map(todos.filter(x => !recomendados.includes(x[0])).map(x => [x[0], x])).values()];
+  const op = v => `<option value="${esc(v[0])}" ${v[0] === actual ? 'selected' : ''}>${esc(v[0])}${v[1] ? ' — ' + esc(v[1]) : ''}</option>`;
+  return `<select class="t-selverbo" id="oe-v${i}" aria-label="Verbo del paso ${i + 1}"><option value="">📋 Verbo…</option>${rec.length ? `<optgroup label="✓ Recomendados para este paso">${rec.map(op).join('')}</optgroup>` : ''}<optgroup label="Otros verbos">${resto.map(op).join('')}</optgroup></select>`;
+}
+// Pasos de los objetivos específicos según el tipo de pregunta: [nombre, ayuda, verbos recomendados, ejemplo de «qué»].
+const PASOS_ESP = {
+  P: [['Medir lo primero', 'Obtén los datos de lo que crees que influye.', ['medir', 'identificar', 'describir'], 'las horas de sueño entre semana de los alumnos'],
+    ['Medir lo segundo', 'Obtén los datos de lo que crees que cambia.', ['identificar', 'medir', 'describir'], 'el promedio escolar del primer trimestre'],
+    ['Comparar o relacionar', 'Junta las dos cosas para responder tu pregunta.', ['comparar', 'relacionar', 'calcular'], 'el promedio de quienes duermen menos de siete horas con el de quienes duermen más']],
+  I: [['Describir lo que viven', 'Primero conoce la experiencia tal como la cuentan.', ['describir', 'identificar', 'caracterizar', 'documentar'], 'los retos que enfrentan en el aula durante su primer año'],
+    ['Interpretar lo que significa', 'Después busca el sentido que le dan.', ['interpretar', 'analizar'], 'el significado que le dan al acompañamiento de sus compañeros y directivos'],
+    ['Contrastar o reconstruir', 'Al final, compara visiones o reconstruye la historia completa.', ['reconstruir', 'contrastar'], 'los momentos que consideran decisivos en su formación']],
+  S: [['Conocer el problema', 'Antes de cambiar algo, diagnostica con el grupo cómo está.', ['diagnosticar', 'identificar'], 'las formas y la frecuencia del ciberacoso que viven en sus redes sociales'],
+    ['Planear', 'Diseña la propuesta junto con los participantes.', ['diseñar', 'acordar'], 'con el grupo estrategias de prevención y de respuesta ante el ciberacoso'],
+    ['Actuar', 'Pon en marcha lo que planearon.', ['implementar'], 'las estrategias durante el primer trimestre'],
+    ['Ver si funcionó', 'Valora qué cambió y qué no. Sin este paso no puedes responder tu pregunta.', ['evaluar', 'valorar participativamente', 'sistematizar'], 'qué cambió en la frecuencia del ciberacoso y en la forma de responder del grupo']],
+};
+PASOS_ESP.M = [PASOS_ESP.P[0], PASOS_ESP.P[2], PASOS_ESP.I[1]];
+// ---------- armar las oraciones
+const limpia = s => (s || '').trim().replace(/[.\s]+$/, '').replace(/^¿|\?$/g, '');
+const mayus = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
+const minus = s => s && !/^[A-ZÁÉÍÓÚÑ]{2}|^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s+[A-ZÁÉÍÓÚÑ0-9]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+const conEn = s => { s = limpia(s); return !s ? '' : /^(en|de|del|dentro|durante)\s/i.test(s) ? minus(s) : 'en ' + s; };
+function oracionGeneral(g) {
+  if (!g.verbo || !limpia(g.que)) return '';
+  const quien = limpia(g.quien) ? [g.con, minus(limpia(g.quien))].filter(Boolean).join(' ') : '';
+  return [mayus(g.verbo), minus(limpia(g.que)), quien, conEn(g.donde), minus(limpia(g.cuando))].filter(Boolean).join(' ') + '.';
+}
+const oracionEsp = p => p.verbo && limpia(p.que) ? mayus(p.verbo) + ' ' + minus(limpia(p.que)) + '.' : '';
+function oracionHip(k, h) {
+  const q = minus(limpia(h.quien));
+  if (k === 'I') return q && limpia(h.como) ? `Supongo que ${q} ${minus(limpia(h.como))}${limpia(h.aunque) ? ', aunque ' + minus(limpia(h.aunque)) : ''}.` : '';
+  if (k === 'S') return limpia(h.si) && limpia(h.entonces) ? `Si ${minus(limpia(h.si))}, entonces ${minus(limpia(h.entonces))}${q ? ' ' + (/^(en|con|de|durante)\s/i.test(q) ? q : 'en ' + q) : ''}.` : '';
+  return q && limpia(h.causa) && limpia(h.efecto) ? `${mayus(/^en\s/i.test(q) ? q : 'en ' + q)}, ${minus(limpia(h.causa))} ${minus(limpia(h.efecto))}${limpia(h.compara) ? ' ' + minus(limpia(h.compara)) : ''}.` : '';
+}
+// Toma de la pregunta de investigación los participantes, el lugar y el periodo, si los trae.
+function sugerenciasPregunta(q) {
+  q = (q || '').replace(/[¿?]/g, ' ').replace(/\s+/g, ' ');
+  const cap = w => `[${w[0]}${w[0].toUpperCase()}]${w.slice(1)}`;
+  const gente = ['alumnos', 'alumnas', 'estudiantes', 'docentes', 'maestros', 'maestras', 'profesores', 'padres', 'madres', 'familias', 'niños', 'niñas', 'jóvenes', 'adolescentes', 'directivos', 'tutores'].join('|');
+  const lugar = ['secundaria', 'escuela', 'primaria', 'telesecundaria', 'preparatoria', 'bachillerato', 'universidad', 'instituto', 'colegio', 'comunidad', 'licenciatura', 'normal'].map(cap).join('|');
+  const mq = q.match(new RegExp(`\\b((?:los|las|sus)\\s+(?:${gente})(?:\\s+(?:de|del)\\s+(?:(?:primer|segundo|tercer|primero|tercero|cuarto|quinto|sexto|séptimo|\\d+\\.?[°º]?)\\s+(?:grado|año|semestre|cuatrimestre)|nuevo\\s+ingreso))?)`, 'iu'));
+  const md = q.match(new RegExp(`\\b((?:una|un|la|el)\\s+(?:${lugar})(?:\\s+(?:[Tt]écnica|[Gg]eneral|[Pp]ública|[Pp]rivada|[Rr]ural|[Uu]rbana|[Ii]ndígena|[Nn]o\\.|[Nn]úm\\.|\\d+|[A-ZÁÉÍÓÚÑ][\\p{L}]+))*(?:\\s+de\\s+[A-ZÁÉÍÓÚÑ][\\p{L}]+(?:\\s+[A-ZÁÉÍÓÚÑ][\\p{L}]+)*)?)`, 'u'));
+  const mc = q.match(/\b((?:durante|a lo largo de|en)\s+(?:el|la|un|una)\s+(?:ciclo escolar|ciclo|periodo|semestre|cuatrimestre|trimestre|curso|año|bimestre)(?:\s+[\d\-–]+)?)/iu);
+  return { quien: mq ? mq[1].trim() : '', donde: md ? 'en ' + md[1].trim() : '', cuando: mc ? mc[1].trim() : '' };
 }
 
 // Verbos para los objetivos, con lo que significa cada uno. El general usa verbos amplios (la meta);
@@ -459,7 +634,7 @@ const EJ_OBJ = {
     e: ['Describir los retos que enfrentan en el aula durante su primer año.', 'Interpretar el significado que le dan al acompañamiento de sus compañeros y directivos.', 'Reconstruir los momentos que consideran decisivos en su formación como docentes.'] },
   S: { q: '¿Cómo puede un grupo de segundo grado, junto con su tutor, construir un reglamento de aula basado en acuerdos y no en castigos?',
     g: 'Construir colectivamente, con un grupo de segundo grado y su tutor, un reglamento de aula basado en acuerdos.',
-    e: ['Diagnosticar con los alumnos los conflictos más frecuentes del grupo.', 'Diseñar con ellos los acuerdos y la forma de reparar cuando no se cumplen.', 'Evaluar participativamente si el reglamento redujo los conflictos.'] },
+    e: ['Diagnosticar con los alumnos los conflictos más frecuentes del grupo.', 'Diseñar con ellos los acuerdos y la forma de reparar cuando no se cumplen.', 'Implementar los acuerdos durante el segundo trimestre.', 'Evaluar participativamente si el reglamento redujo los conflictos.'] },
 };
 EJ_OBJ.M = EJ_OBJ.P;
 function guiaObjetivos(k) {
@@ -474,7 +649,7 @@ function guiaObjetivos(k) {
     <div class="t-ejemplo"><p class="t-ej-k">Ejemplo con una pregunta como la tuya (${esc((D.tipos[k] || D.tipos.I).nombre.toLowerCase())})</p>
       <p><b>Pregunta:</b> ${esc(ej.q)}</p><p><b>Objetivo general:</b> ${esc(ej.g)}</p>
       <p><b>Objetivos específicos:</b></p><ol>${ej.e.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>
-    <p class="t-nota">👇 Abajo, arriba de cada recuadro, hay un desplegable con <b>verbos que encajan</b> y lo que significa cada uno. Elige uno y se pone al inicio de tu objetivo.</p>
+    <p class="t-nota">👇 Abajo puedes <b>armar tu objetivo con cuadritos</b>, uno por cada parte de la fórmula, o escribirlo tú mismo. En ambos casos hay un desplegable con <b>verbos que encajan</b> y lo que significa cada uno.</p>
     <p class="t-errores"><b>Errores comunes:</b> escribirlo como pregunta · usar verbos de actividad (<i>aplicar, realizar, investigar, hacer una encuesta</i>: esas son tareas, no objetivos) · que el general no responda tu pregunta · poner más de un objetivo general.</p>
   </details>`;
 }
