@@ -186,3 +186,46 @@ html[data-theme="dark"] .t-pn { background: var(--saffron); color: var(--charcoa
   .t-ff { grid-template-columns: 1fr; gap: .15rem; }
   .t-formula { font-size: .85rem; }
 }
+
+/* ---------- Entrega 1 pregunta por pregunta */
+.e1-pasos { display: flex; flex-wrap: wrap; gap: .4rem; margin: .8rem 0 .4rem; }
+.e1-pasos button { min-width: 2.6rem; height: 2.6rem; border-radius: 999px; border: 1.5px solid var(--line); background: var(--cream); color: var(--ink); font: 700 .95rem var(--font-body); cursor: pointer; padding: 0 .8rem; }
+.e1-pasos button.hecha { border-color: #3F7A4F; color: #2e7d32; background: color-mix(in srgb, #3F7A4F 10%, var(--cream)); }
+.e1-pasos button.actual { background: var(--ink); color: var(--parchment); border-color: var(--ink); }
+.e1-pasos .e1-desc { font-size: .85rem; }
+.t-preg.e1 { border-top: 0; }
+.e1-n { font: 700 .74rem var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin: .6rem 0 .2rem; }
+.t-preg.e1 h3 { font-size: 1.15rem; display: block; }
+.e1-base { margin: .9rem 0 1.1rem; padding: 1rem 1.15rem; border-radius: 12px; background: color-mix(in srgb, var(--saffron) 14%, var(--cream)); border: 2px solid var(--saffron); }
+.e1-base.vacia { border-style: dashed; }
+.e1-base .e1-k { font-weight: 800; margin: 0 0 .35rem; }
+.e1-base p { margin: 0 0 .4rem; line-height: 1.6; font-size: 1rem; }
+.e1-base small { color: var(--ink-soft); font-size: .82rem; }
+.e1-h { font-size: 1.02rem; margin: 1.2rem 0 .5rem; }
+.e1-sub { display: block; margin: 0 0 .8rem; }
+.e1-sub > span { display: block; margin-bottom: .3rem; }
+.e1-sub b { display: block; font-size: .95rem; }
+.e1-sub small { display: block; color: var(--ink-soft); font-size: .84rem; line-height: 1.4; }
+.e1-sub textarea { width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: .55rem .7rem; }
+.e1-sub textarea:focus { outline: 2px solid var(--saffron); outline-offset: 1px; }
+#e1-armar { margin: .2rem 0 .6rem; }
+.e1-checks { list-style: none; padding: 0; margin: .5rem 0 1rem; font-size: .9rem; }
+.e1-checks li { padding: .15rem 0; color: var(--ink-soft); }
+.e1-checks li.ok { color: #2e7d32; }
+.e1-nav { display: flex; justify-content: space-between; gap: .6rem; flex-wrap: wrap; margin: 1rem 0 .5rem; }
+.e1-refs { display: grid; gap: .45rem; margin: .6rem 0 1rem; }
+.e1-refs label { display: flex; gap: .5rem; align-items: flex-start; font-size: .9rem; padding: .5rem .6rem; border: 1px solid var(--line); border-radius: 8px; background: var(--cream); cursor: pointer; }
+.e1-refs input { margin-top: .25rem; }
+.e1-word { width: 100%; padding: .9rem 1rem !important; font-size: 1rem !important; }
+html[data-theme="dark"] .e1-checks li.ok, html[data-theme="dark"] .e1-pasos button.hecha { color: #81c784; }
+/* Guía para escribir objetivos */
+.t-guia-obj { margin: .6rem 0 1rem; border: 1px solid var(--line); border-left: 4px solid #2E5E8C; border-radius: 0 10px 10px 0; background: var(--cream); padding: .6rem .9rem; }
+.t-guia-obj summary { font-weight: 700; cursor: pointer; }
+.t-guia-dos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .4rem 1.2rem; }
+.t-guia-dos h4 { margin: .7rem 0 .2rem; font-size: .98rem; }
+.t-guia-dos p { margin: .25rem 0; font-size: .9rem; }
+.t-formula { background: color-mix(in srgb, #2E5E8C 10%, var(--cream)); border-radius: 8px; padding: .4rem .6rem; }
+.t-ejemplo { margin: .7rem 0 .3rem; padding: .6rem .8rem; border-radius: 8px; background: var(--parchment); font-size: .9rem; }
+.t-ejemplo p { margin: .25rem 0; } .t-ejemplo ol { margin: .2rem 0 .2rem 1.2rem; padding: 0; }
+.t-ej-k { font: 700 .74rem var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.t-errores { font-size: .86rem; color: var(--ink-soft); margin: .5rem 0 .2rem; }

@@ -5,6 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
+import { descargarAPA } from "./apa-word.js";
 
 const db = getFirestore(initializeApp(firebaseConfig));
 const SESSION_KEY = 'ep_sesion_alumno';
@@ -47,7 +48,7 @@ $('#t-sin-cuenta').addEventListener('click', () => { sesion = { anon: true, nomb
 $('#t-salir').addEventListener('click', async () => { await guardarYa(); try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } location.reload(); });
 
 const claveLocal = () => sesion.anon ? 'taller_invitado' : `taller_${sesion.grupoId}_${sesion.alumnoId}`;
-const vacio = () => ({ tema: '', problema: '', pregunta: '', tipoManual: '', brujula: { resp: [], clave: '' }, objetivos: { general: '', especificos: ['', '', ''], hipotesis: '', refutaria: '' }, matriz: [], respuestas: {}, etica: [], apa: [], guion: '', etapaMax: 0 });
+const vacio = () => ({ tema: '', problema: '', pregunta: '', tipoManual: '', brujula: { resp: [], clave: '' }, objetivos: { general: '', especificos: ['', '', ''], hipotesis: '', refutaria: '' }, matriz: [], respuestas: {}, etica: [], apa: [], guion: '', etapaMax: 0, e1: {}, e1paso: 0, refs: { sel: [], otras: '' } });
 
 async function entrar() {
   $('#t-acceso').hidden = true; $('#t-app').hidden = false;
@@ -322,6 +323,7 @@ function etapaObjetivos(c) {
   const k = T.brujula.clave || T.tipoManual || tipoDe(T.pregunta) || 'I';
   const o = T.objetivos;
   c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">El <b>objetivo general</b> es tu pregunta convertida en una meta; los <b>específicos</b> son los pasos para lograrla. Empiezan con un verbo en infinitivo que debe ser coherente con tu paradigma. Te ayuda con la pregunta 5.</p>
+    ${guiaObjetivos(k)}
     ${T.pregunta ? `<p class="t-recuerda"><b>Tu pregunta:</b> ${esc(T.pregunta)}</p>` : ''}
     <p class="t-verbos-t">Verbos que encajan con tu enfoque (${esc(D.tipos[k].nombre.toLowerCase())}): ${D.verbos[k].map(v => `<button type="button" class="chip-lab t-verbo" data-v="${esc(v)}">${esc(v)}</button>`).join(' ')}</p>
     <p class="t-nota">Toca un verbo para agregarlo al campo donde estás escribiendo.</p>
@@ -362,6 +364,35 @@ function etapaObjetivos(c) {
   $$('.t-verbo').forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
   $$('.t-verbo').forEach(b => b.addEventListener('click', () => { const v = b.dataset.v; const el = foco; el.value = (el.value.trim() ? el.value.replace(/\s*$/, ' ') : '') + v.charAt(0).toUpperCase() + v.slice(1) + ' '; el.dispatchEvent(new Event('input')); el.focus(); }));
   pintarEsp(); verificar();
+}
+
+// Guía para escribir objetivos: fórmula, ejemplo de su mismo tipo de pregunta y errores comunes.
+const EJ_OBJ = {
+  P: { q: '¿Qué relación existe entre las horas de sueño y el promedio escolar de los alumnos de segundo grado de la Secundaria Técnica 17 de Campeche durante el ciclo 2026-2027?',
+    g: 'Determinar la relación entre las horas de sueño y el promedio escolar de los alumnos de segundo grado de la Secundaria Técnica 17 de Campeche durante el ciclo 2026-2027.',
+    e: ['Medir las horas de sueño entre semana de los alumnos de segundo grado.', 'Identificar el promedio escolar de esos alumnos en el primer trimestre.', 'Comparar el promedio de quienes duermen menos de siete horas con el de quienes duermen más.'] },
+  I: { q: '¿Cómo viven los docentes de nuevo ingreso su primer año frente a grupo en secundarias públicas de Campeche?',
+    g: 'Comprender cómo viven los docentes de nuevo ingreso su primer año frente a grupo en secundarias públicas de Campeche.',
+    e: ['Describir los retos que enfrentan en el aula durante su primer año.', 'Interpretar el significado que le dan al acompañamiento de sus compañeros y directivos.', 'Reconstruir los momentos que consideran decisivos en su formación como docentes.'] },
+  S: { q: '¿Cómo puede un grupo de segundo grado, junto con su tutor, construir un reglamento de aula basado en acuerdos y no en castigos?',
+    g: 'Construir colectivamente, con un grupo de segundo grado y su tutor, un reglamento de aula basado en acuerdos.',
+    e: ['Diagnosticar con los alumnos los conflictos más frecuentes del grupo.', 'Diseñar con ellos los acuerdos y la forma de reparar cuando no se cumplen.', 'Evaluar participativamente si el reglamento redujo los conflictos.'] },
+};
+EJ_OBJ.M = EJ_OBJ.P;
+function guiaObjetivos(k) {
+  const ej = EJ_OBJ[k] || EJ_OBJ.I;
+  return `<details class="t-guia-obj" open><summary>📐 ¿Cómo se escribe un objetivo? (ábrelo si te atoras)</summary>
+    <div class="t-guia-dos">
+      <div><h4>Objetivo general</h4><p>Es <b>tu pregunta de investigación convertida en meta</b>. Si la pregunta es «¿Cómo viven…?», el objetivo es «Comprender cómo viven…». Es uno solo.</p>
+        <p class="t-formula"><b>Verbo en infinitivo</b> + <b>qué</b> vas a estudiar + <b>en quiénes</b> + <b>dónde</b> + <b>cuándo</b></p></div>
+      <div><h4>Objetivos específicos</h4><p>Son <b>los pasos</b> para lograr el general: de 2 a 4. Cada uno con su verbo y algo concreto que puedas lograr. Si los cumples todos, cumples el general.</p>
+        <p class="t-formula">Pregúntate: <b>¿qué necesito saber o hacer primero, después y al final</b> para responder mi pregunta?</p></div>
+    </div>
+    <div class="t-ejemplo"><p class="t-ej-k">Ejemplo con una pregunta como la tuya (${esc((D.tipos[k] || D.tipos.I).nombre.toLowerCase())})</p>
+      <p><b>Pregunta:</b> ${esc(ej.q)}</p><p><b>Objetivo general:</b> ${esc(ej.g)}</p>
+      <p><b>Objetivos específicos:</b></p><ol>${ej.e.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>
+    <p class="t-errores"><b>Errores comunes:</b> escribirlo como pregunta · usar verbos de actividad (<i>aplicar, realizar, investigar, hacer una encuesta</i>: esas son tareas, no objetivos) · que el general no responda tu pregunta · poner más de un objetivo general.</p>
+  </details>`;
 }
 
 // ------------------------------------------------ Etapa 4: matriz de congruencia
@@ -421,7 +452,123 @@ function etapaCuaderno(c) {
   $$('#c-ent .chip-lab').forEach(b => b.addEventListener('click', () => { entregaSel = b.dataset.e; $$('#c-ent .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x === b))); pintarCuaderno(); }));
   pintarCuaderno();
 }
+// ---- Entrega 1, pregunta por pregunta: respuesta base (con lo que ya hizo en el Taller) + «Ahora hazla tuya»
+// (indicaciones cortas con su propio espacio) → la plataforma arma su respuesta final, que él corrige.
+const TIPO_VERBO = { P: 'explicar: encontrar causas, relaciones o efectos que se puedan medir', I: 'comprender: entender los significados y las experiencias de las personas', S: 'transformar: cambiar una situación junto con quienes la viven', M: 'explicar y comprender a la vez' };
+const tipoActual = () => T.tipoManual || tipoDe(T.pregunta) || T.brujula.clave || '';
+const GUIA_E1 = {
+  1: { titulo: 'Tema y pregunta de investigación', base: () => apoyo(D.preguntas[0]), sinBase: 'Primero termina la Etapa 1 (De la idea a la pregunta): con tu pregunta aquí aparecerá tu respuesta base.',
+    pasos: [['¿Qué viste que te llevó a este tema?', 'Una situación concreta de tus prácticas, tu escuela o tu comunidad: qué pasó, con quién, dónde.'],
+      ['¿Por qué importa? ¿A quién le serviría la respuesta?', 'Alumnos, docentes, familias, la escuela, la comunidad…'],
+      ['¿Por qué te interesa a ti?', 'Tu experiencia, lo que quieres aportar como pedagoga o pedagogo.']] },
+  2: { titulo: 'Tipo de conocimiento que quiero producir', base: () => { const t = tipoActual(); return t ? `Con mi investigación quiero ${TIPO_VERBO[t]}. Mi pregunta es de tipo ${D.tipos[t].nombre.toLowerCase()}: ${D.tipos[t].txt.charAt(0).toLowerCase() + D.tipos[t].txt.slice(1)}` : ''; }, sinBase: 'Cuando tengas tu pregunta en la Etapa 1, aquí aparecerá si explica, comprende o transforma.',
+    pasos: [['¿Qué palabra o parte de tu pregunta lo demuestra?', 'Por ejemplo: «¿Cómo viven…?» busca significados; «¿Qué relación…?» busca medir; «¿Cómo puede… junto con…?» busca transformar.'],
+      ['¿Qué NO busca tu investigación?', 'Decir lo que no haces aclara lo que sí haces. Por ejemplo: «No busco medir cuántos…, sino entender cómo…».'],
+      ['¿Qué autor lo sostiene? Escribe su idea con su cita', 'Dilthey distingue explicar y comprender (Dilthey, 1883/1949); Habermas, los intereses técnico, práctico y emancipatorio (Habermas, 1968/1982).']] },
+  3: { titulo: 'Ubicación en la clasificación de las ciencias', base: () => { const t = tipoActual(); if (!T.pregunta) return '';
+      const extra = { P: 'Como busca explicar con medición, se acerca al modelo de ciencia que proponía Comte: estudiar la sociedad con el mismo espíritu que la física.', I: 'Desde la distinción de Dilthey, se ubica en las ciencias del espíritu, que no buscan explicar con leyes, sino comprender la vida humana.', S: 'Al buscar transformar una situación junto con sus participantes, se ubica en una ciencia social crítica, que no solo explica o comprende, sino que busca cambiar la realidad.', M: 'Como combina medir y comprender, toma algo del modelo explicativo de Comte y algo de las ciencias del espíritu de Dilthey.' }[t] || '';
+      return `Según la clasificación de Bunge, mi investigación pertenece a las ciencias fácticas, porque estudia hechos de la realidad y no relaciones entre signos, como la lógica o las matemáticas; y, dentro de ellas, a las ciencias sociales, porque estudia un fenómeno educativo en el que participan personas. ${extra}`.trim(); },
+    sinBase: 'Cuando tengas tu pregunta en la Etapa 1, aquí aparecerá tu ubicación.',
+    pasos: [['¿Por qué es fáctica y no formal?', '¿Qué hechos reales vas a observar, medir o escuchar en tu investigación?'],
+      ['¿Por qué es social y no natural?', 'Aunque midas algo, ¿quiénes son los protagonistas de tu estudio?'],
+      ['¿Qué autor la ubicaría ahí? Escribe su idea con su cita', 'Bunge: ciencias formales y fácticas (Bunge, 1960); Dilthey: ciencias del espíritu (Dilthey, 1883/1949); Comte: la física social (Comte, 1844/1980).']] },
+  4: { titulo: 'Paradigma de la investigación', base: () => parrafoBrujula(), sinBase: 'Primero contesta la Etapa 2 (La brújula): aquí aparecerá tu paradigma explicado.',
+    pasos: [['Rasgo 1 de TU protocolo que lo demuestra: ¿para qué investigas?', 'Explicar y predecir (positivista), comprender (interpretativo) o transformar (sociocrítico): dilo con tu propio tema.'],
+      ['Rasgo 2: ¿cómo te relacionas con los participantes o qué técnicas usarás?', 'Distancia y encuestas, convivencia y entrevistas, o trabajo junto con ellos en talleres.'],
+      ['¿Qué autor sostiene tu postura? Escribe su idea con su cita', 'Comte (Comte, 1844/1980), Weber (Weber, 1922/1973), Habermas (Habermas, 1968/1982) o Carr y Kemmis (Carr y Kemmis, 1986/1988).']] },
+  5: { titulo: 'Hipótesis o supuesto y falsabilidad', base: () => apoyo(D.preguntas[4]), sinBase: 'Primero escribe tu hipótesis o supuesto y «Me desmentiría que…» en la Etapa 3: aquí aparecerán.',
+    pasos: [['¿Por qué es falsable? ¿Qué observarías exactamente?', 'Di qué dato, qué resultado o qué comportamiento verías si estuvieras equivocado.'],
+      ['¿Qué excusas NO vas a usar si sale mal?', 'Por ejemplo: «No diré que faltó tiempo». Así tu hipótesis no se protege sola (tema 4.2). Si es cualitativa: ¿qué te haría replantear tu supuesto?'],
+      ['Popper o Lakatos con su cita', 'Popper: una teoría es científica si puede ser refutada (Popper, 1934/2008). Lakatos: núcleo duro y cinturón protector (Lakatos, 1978/1989).']] },
+  6: { titulo: 'Paradigma dominante y anomalías', base: () => '', guia: 'Frase guía para empezar: «En mi tema suelen investigar con ____. Eso supone que ____. Algo que esos estudios no logran explicar es ____. Como diría Kuhn, ____.»',
+    pasos: [['¿Cómo se suele investigar tu tema?', 'Revisa tus antecedentes: ¿la mayoría son encuestas, experimentos, entrevistas, estudios de caso?'],
+      ['¿Qué supuesto comparten esos estudios? Ese es el paradigma dominante', 'Por ejemplo: «suponen que la comprensión se mide con una prueba» o «que el problema está solo en el alumno».'],
+      ['¿Qué no logran explicar? Esa es la anomalía', 'Algo que no cuadra. Por ejemplo: alumnos que leen bien en voz alta pero no comprenden.'],
+      ['Kuhn con su cita', 'La ciencia normal trabaja dentro de un paradigma hasta que las anomalías provocan una crisis (Kuhn, 1962/2013).']] },
+};
+const oracion = x => { let t = String(x || '').trim(); if (!t) return ''; t = t.charAt(0).toUpperCase() + t.slice(1); return /[.!?»]$/.test(t) ? t : t + '.'; };
+const armarE1 = n => { const G = GUIA_E1[n], b = G.base(), ps = (T.e1[n] || []).map(oracion).filter(Boolean); return [b, ps.join(' ')].filter(x => x && x.trim()).join('\n\n'); };
+const tieneCita = t => /\([^()]*\d{4}[^()]*\)/.test(t || '');
+const refsSugeridas = () => { const ids = [...new Set(D.preguntas.filter(p => p.n <= 6).flatMap(p => p.autores))]; return ids.flatMap(id => ((LAB.autores.find(a => a.id === id) || {}).refs || []).map((r, i) => ({ id: `${id}-${i}`, apa: r.apa }))); };
+const refsElegidas = () => { const S = new Set(T.refs.sel); return [...refsSugeridas().filter(r => S.has(r.id)).map(r => r.apa), ...String(T.refs.otras || '').split('\n').map(x => x.trim()).filter(Boolean)]; };
+
+function pintarE1() {
+  T.e1paso = Math.max(0, Math.min(6, T.e1paso || 0));
+  const paso = T.e1paso, e = D.entregas.entrega1;
+  const hecha = n => palabras(T.respuestas[n]) >= 150;
+  $('#c-lista').innerHTML = `<div class="t-entrega"><b>${esc(e.nombre)}</b> · ${esc(e.fecha)}<p>${esc(e.req)}</p><p>Vas pregunta por pregunta. <b>Todo se guarda solo</b> mientras escribes.</p></div>
+    <nav class="e1-pasos" aria-label="Preguntas de la Entrega 1">${[1, 2, 3, 4, 5, 6].map(n => `<button type="button" data-p="${n - 1}" class="${paso === n - 1 ? 'actual' : ''} ${hecha(n) ? 'hecha' : ''}">${hecha(n) ? '✓' : n}</button>`).join('')}<button type="button" data-p="6" class="e1-desc ${paso === 6 ? 'actual' : ''}">📄 Referencias y Word</button></nav>
+    <div id="e1-cuerpo"></div>`;
+  $$('.e1-pasos button').forEach(b => b.addEventListener('click', () => { T.e1paso = +b.dataset.p; cambio(); pintarE1(); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
+  const cuerpo = $('#e1-cuerpo');
+  if (paso === 6) return pintarE1Final(cuerpo);
+  const n = paso + 1, p = D.preguntas[paso], G = GUIA_E1[n], base = G.base();
+  T.e1[n] = T.e1[n] || G.pasos.map(() => '');
+  cuerpo.innerHTML = `<article class="t-preg e1">
+    <p class="e1-n">Pregunta ${n} de 6 · ${esc(G.titulo)}</p><h3>${esc(p.texto)}</h3>
+    <p class="t-pide"><b>Qué te piden:</b> ${esc(p.pide)}</p>
+    <div class="e1-base ${base ? '' : 'vacia'}"><p class="e1-k">${base ? `💡 Tu respuesta base a la pregunta ${n}` : n === 6 ? '💡 Cómo empezar' : '💡 Tu respuesta base'}</p>
+      <p>${base ? esc(base) : esc(G.guia || G.sinBase)}</p>
+      ${base ? '<small>Sale de lo que hiciste en el Taller. Es tu punto de partida: entra como primer párrafo, pero sola no llega a las 150 palabras. Abajo la argumentas con tus palabras.</small>' : ''}</div>
+    <h4 class="e1-h">✍️ Ahora hazla tuya: argumenta y profundiza</h4>
+    ${G.pasos.map(([t, a], i) => `<label class="e1-sub"><span><b>${['①', '②', '③', '④'][i]} ${esc(t)}</b><small>${esc(a)}</small></span><textarea data-i="${i}" rows="3">${esc(T.e1[n][i] || '')}</textarea></label>`).join('')}
+    <details class="t-pistas"><summary>Pistas, error común y autores</summary><ul>${p.pistas.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="t-error-comun"><b>Error común:</b> ${esc(p.error)}</p>
+      <p class="t-aut"><b>Autores:</b> ${p.autores.map(a => `<a href="laboratorio.html#constelacion=${a}" target="_blank" rel="noopener">${esc(NOMBRES_AUT[a] || a)}</a>`).join(' · ')} · <b>Compendio:</b> ${p.temas.map(t => `<a href="tema.html?id=${t}" target="_blank" rel="noopener">${t}</a>`).join(' · ')}</p></details>
+    <h4 class="e1-h">📝 Tu respuesta final</h4>
+    <p class="lab-ayuda">Toca <b>Armar mi respuesta</b> para juntar tu respuesta base con lo que escribiste arriba. Después léela completa, corrígela y une las ideas para que suene a ti: esto es lo que va al Word.</p>
+    <button type="button" class="btn-lab-l" id="e1-armar">🧩 Armar mi respuesta con lo anterior</button>
+    <textarea class="t-resp" id="e1-final" rows="10" placeholder="Aquí queda tu respuesta completa.">${esc(T.respuestas[n] || '')}</textarea>
+    <ul class="e1-checks" id="e1-checks"></ul>
+    <div class="e1-nav">${paso ? '<button type="button" class="btn-lab-l" id="e1-ant">← Pregunta anterior</button>' : '<span></span>'}<button type="button" class="btn-lab" id="e1-sig">${n < 6 ? `Siguiente: pregunta ${n + 1} →` : 'Siguiente: referencias y Word →'}</button></div>
+  </article>`;
+  const checks = () => {
+    const t = T.respuestas[n] || '', w = palabras(t), sub = (T.e1[n] || []).filter(x => palabras(x) >= 5).length;
+    $('#e1-checks').innerHTML = [
+      [w >= 150 && w <= 250, w < 150 ? `${w} palabras: te faltan ${150 - w} para el mínimo de 150` : w > 250 ? `${w} palabras: pasaste el máximo de 250, recorta` : `${w} palabras ✓ dentro del rango`],
+      [sub === G.pasos.length, `Argumentaste ${sub} de ${G.pasos.length} puntos de «Ahora hazla tuya»`],
+      [tieneCita(t), tieneCita(t) ? 'Incluye al menos una cita (Autor, año) ✓' : 'Falta al menos una cita en APA: (Autor, año)'],
+    ].map(([ok, txt]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(txt)}</li>`).join('');
+  };
+  $$('.e1-sub textarea', cuerpo).forEach(ta => ta.addEventListener('input', () => { T.e1[n][+ta.dataset.i] = ta.value; cambio(); checks(); }));
+  $('#e1-final').addEventListener('input', e2 => { T.respuestas[n] = e2.target.value; cambio(); checks(); });
+  $('#e1-armar').addEventListener('click', () => {
+    const nuevo = armarE1(n); if (!nuevo.trim()) { alert('Primero escribe en «Ahora hazla tuya».'); return; }
+    if ((T.respuestas[n] || '').trim() && !confirm('Ya tienes una respuesta final. ¿Reemplazarla por una nueva armada con tu respuesta base y lo que escribiste arriba?')) return;
+    T.respuestas[n] = nuevo; $('#e1-final').value = nuevo; cambio(); checks(); $('#e1-final').focus();
+  });
+  const ir = d => { T.e1paso = paso + d; cambio(); pintarE1(); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  const ba = $('#e1-ant'); if (ba) ba.addEventListener('click', () => ir(-1));
+  $('#e1-sig').addEventListener('click', () => ir(1));
+  checks();
+}
+function pintarE1Final(cuerpo) {
+  const sug = refsSugeridas(), S = new Set(T.refs.sel);
+  const md2 = t => esc(t).replace(/\*([^*]+)\*/g, '<i>$1</i>');
+  cuerpo.innerHTML = `<article class="t-preg e1">
+    <p class="e1-n">Último paso</p><h3>Referencias y descarga de la primera parte del ensayo</h3>
+    <p class="lab-ayuda">La Entrega 1 pide <b>al menos 3 referencias en APA 7</b>. Marca las obras de los autores que citaste (vienen del compendio, ya en formato APA) y agrega las que tú encontraste, una por renglón.</p>
+    <div class="e1-refs">${sug.map(r => `<label><input type="checkbox" data-r="${r.id}" ${S.has(r.id) ? 'checked' : ''}> <span>${md2(r.apa)}</span></label>`).join('')}</div>
+    <label class="e1-sub"><span><b>Otras referencias</b><small>Una por renglón, en APA 7. Para poner un título en cursivas, enciérralo entre asteriscos: *Título del libro*.</small></span><textarea id="e1-otras" rows="4">${esc(T.refs.otras || '')}</textarea></label>
+    <h4 class="e1-h">Antes de descargar</h4><ul class="e1-checks" id="e1-rev"></ul>
+    <button type="button" class="btn-lab e1-word" id="e1-word">⬇ Descargar la primera parte del ensayo (preguntas 1 a 6) en Word</button>
+    <p class="t-nota">Sale en formato APA 7: portada con el escudo, Times New Roman 12, doble espacio, sangría, número de página y referencias con sangría francesa. Puedes descargarlo las veces que quieras.</p>
+    <div class="e1-nav"><button type="button" class="btn-lab-l" id="e1-ant">← Pregunta 6</button><span></span></div></article>`;
+  const rev = () => {
+    const faltan = [1, 2, 3, 4, 5, 6].filter(n => palabras(T.respuestas[n]) < 150), sinCita = [1, 2, 3, 4, 5, 6].filter(n => !tieneCita(T.respuestas[n])), nr = refsElegidas().length;
+    $('#e1-rev').innerHTML = [
+      [!faltan.length, faltan.length ? `Preguntas con menos de 150 palabras: ${faltan.join(', ')}` : 'Las 6 respuestas tienen al menos 150 palabras ✓'],
+      [!sinCita.length, sinCita.length ? `Preguntas sin cita (Autor, año): ${sinCita.join(', ')}` : 'Las 6 respuestas tienen al menos una cita ✓'],
+      [nr >= 3, `${nr} referencia${nr === 1 ? '' : 's'} ${nr >= 3 ? '✓' : `· te faltan ${3 - nr} para el mínimo de 3`}`],
+    ].map(([ok, txt]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(txt)}</li>`).join('');
+  };
+  $$('.e1-refs input', cuerpo).forEach(ch => ch.addEventListener('change', () => { const set = new Set(T.refs.sel); ch.checked ? set.add(ch.dataset.r) : set.delete(ch.dataset.r); T.refs.sel = [...set]; cambio(); rev(); }));
+  $('#e1-otras').addEventListener('input', ev => { T.refs.otras = ev.target.value; cambio(); rev(); });
+  $('#e1-ant').addEventListener('click', () => { T.e1paso = 5; cambio(); pintarE1(); });
+  $('#e1-word').addEventListener('click', () => descargarWord('entrega1'));
+  rev();
+}
 function pintarCuaderno() {
+  if (entregaSel === 'entrega1') return pintarE1();
   const e = D.entregas[entregaSel], lista = D.preguntas.filter(p => p.entrega === entregaSel);
   const hechas = lista.filter(p => palabras(T.respuestas[p.n]) >= 150).length;
   $('#c-lista').innerHTML = `<div class="t-entrega"><b>${esc(e.nombre)}</b> · ${esc(e.fecha)}<p>${esc(e.req)}</p><p>Llevas <b>${hechas} de ${lista.length}</b> respuestas con al menos 150 palabras.</p>
@@ -438,70 +585,18 @@ function pintarCuaderno() {
   $$('.t-usar').forEach(b => b.addEventListener('click', () => { const p = D.preguntas.find(x => x.n === +b.dataset.n), t = $(`.t-resp[data-n="${p.n}"]`); t.value = (t.value.trim() ? t.value.trim() + '\n\n' : '') + apoyo(p); t.dispatchEvent(new Event('input')); t.focus(); }));
   $('#c-word').addEventListener('click', () => descargarWord(entregaSel));
 }
-// ---- Word (.docx) real, armado en el navegador sin librerías: un ZIP sin
-// compresión con los XML mínimos de Office Open XML. Abre en Word de
-// computadora y de celular, Google Docs, Pages y LibreOffice.
-const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
-const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
-function zip(archivos) {
-  const enc = new TextEncoder(), partes = [], central = []; let off = 0;
-  const d = new Date(), hora = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1), dia = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
-  for (const [nombre, texto] of archivos) {
-    const n = enc.encode(nombre), b = enc.encode(texto), c = crc32(b);
-    const h = new DataView(new ArrayBuffer(30));
-    h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true);
-    h.setUint16(10, hora, true); h.setUint16(12, dia, true); h.setUint32(14, c, true); h.setUint32(18, b.length, true); h.setUint32(22, b.length, true);
-    h.setUint16(26, n.length, true); h.setUint16(28, 0, true);
-    partes.push(new Uint8Array(h.buffer), n, b);
-    const k = new DataView(new ArrayBuffer(46));
-    k.setUint32(0, 0x02014b50, true); k.setUint16(4, 20, true); k.setUint16(6, 20, true); k.setUint16(8, 0x0800, true); k.setUint16(10, 0, true);
-    k.setUint16(12, hora, true); k.setUint16(14, dia, true); k.setUint32(16, c, true); k.setUint32(20, b.length, true); k.setUint32(24, b.length, true);
-    k.setUint16(28, n.length, true); k.setUint32(42, off, true);
-    central.push(new Uint8Array(k.buffer), n);
-    off += 30 + n.length + b.length;
-  }
-  const tam = central.reduce((s, x) => s + x.length, 0), f = new DataView(new ArrayBuffer(22));
-  f.setUint32(0, 0x06054b50, true); f.setUint16(8, archivos.length, true); f.setUint16(10, archivos.length, true); f.setUint32(12, tam, true); f.setUint32(16, off, true);
-  return new Blob([...partes, ...central, new Uint8Array(f.buffer)], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-}
-const xe = s => String(s ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-function wP(texto, { centro = false, negrita = false, cursiva = false, sangria = false, espacioAntes = 0 } = {}) {
-  const pPr = `<w:pPr>${espacioAntes ? `<w:spacing w:before="${espacioAntes}"/>` : ''}${sangria ? '<w:ind w:firstLine="720"/>' : ''}${centro ? '<w:jc w:val="center"/>' : ''}</w:pPr>`;
-  const rPr = negrita || cursiva ? `<w:rPr>${negrita ? '<w:b/>' : ''}${cursiva ? '<w:i/>' : ''}</w:rPr>` : '';
-  return `<w:p>${pPr}${texto ? `<w:r>${rPr}<w:t xml:space="preserve">${xe(texto)}</w:t></w:r>` : ''}</w:p>`;
-}
-function descargarWord(ent) {
-  const hasta = D.preguntas.filter(p => p.entrega === ent).slice(-1)[0].n;
-  const lista = D.preguntas.filter(p => p.n <= hasta), e = D.entregas[ent];
-  const cuerpo = [
-    wP('Pienso, luego investigo', { centro: true, negrita: true }),
-    wP(sesion.anon ? '' : sesion.nombre, { centro: true }),
-    wP('Epistemología y Pedagogía · ITES René Descartes', { centro: true }),
-    wP(`${e.nombre} · ${e.fecha}`, { centro: true }),
-    wP(''),
-    wP(T.pregunta || 'Pregunta de investigación', { centro: true, negrita: true }),
-  ];
-  lista.forEach(p => {
-    cuerpo.push(wP(`${p.n}. ${p.texto}`, { negrita: true, espacioAntes: 240 }));
-    const parrafos = String(T.respuestas[p.n] || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
-    if (parrafos.length) parrafos.forEach(x => cuerpo.push(wP(x, { sangria: true })));
-    else cuerpo.push(wP('(sin respuesta)', { sangria: true, cursiva: true }));
+async function descargarWord(ent) {
+  await guardarYa();
+  const hasta = D.preguntas.filter(p => p.entrega === ent).slice(-1)[0].n, e = D.entregas[ent];
+  await descargarAPA({
+    titulo: `Pienso, luego investigo: ${ent === 'entrega1' ? 'primera parte del ensayo' : e.nombre.replace(/^Entrega[^·]*·\s*/, '').toLowerCase()}`,
+    autor: sesion.anon ? '' : sesion.nombre,
+    programa: 'Licenciatura en Pedagogía', institucion: 'ITES René Descartes',
+    curso: 'Epistemología y Pedagogía', docente: 'Mtro. Jesús Rodríguez García',
+    secciones: D.preguntas.filter(p => p.n <= hasta).map(p => ({ titulo: `${p.n}. ${(GUIA_E1[p.n] && GUIA_E1[p.n].titulo) || p.texto}`, parrafos: String(T.respuestas[p.n] || '').split(/\n+/) })),
+    referencias: refsElegidas().length ? refsElegidas() : ['Agrega aquí tus referencias en APA 7, en orden alfabético y con sangría francesa.'],
+    archivo: `Pienso_luego_investigo_${ent === 'entrega1' ? 'preguntas_1_a_6' : ent}_${slug(sesion.anon ? 'borrador' : sesion.nombre)}`,
   });
-  cuerpo.push(wP('Referencias', { centro: true, negrita: true, espacioAntes: 480 }));
-  cuerpo.push(wP('Agrega aquí tus referencias en orden alfabético y con sangría francesa.', { cursiva: true }));
-  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
-  const documento = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${W}><w:body>${cuerpo.join('')}<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>`;
-  const estilos = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ${W}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="es-MX"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="0" w:line="480" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style></w:styles>`;
-  const blob = zip([
-    ['[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>'],
-    ['_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
-    ['word/_rels/document.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
-    ['word/document.xml', documento],
-    ['word/styles.xml', estilos],
-  ]);
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = `Pienso_luego_investigo_${ent}_${slug(sesion.anon ? 'borrador' : sesion.nombre)}.docx`; document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
 
 // ------------------------------------------------ Etapa 6: ética, APA y defensa
