@@ -325,21 +325,22 @@ function etapaObjetivos(c) {
   c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">El <b>objetivo general</b> es tu pregunta convertida en una meta; los <b>específicos</b> son los pasos para lograrla. Empiezan con un verbo en infinitivo que debe ser coherente con tu paradigma. Te ayuda con la pregunta 5.</p>
     ${guiaObjetivos(k)}
     ${T.pregunta ? `<p class="t-recuerda"><b>Tu pregunta:</b> ${esc(T.pregunta)}</p>` : ''}
-    <p class="t-verbos-t">Verbos que encajan con tu enfoque (${esc(D.tipos[k].nombre.toLowerCase())}): ${D.verbos[k].map(v => `<button type="button" class="chip-lab t-verbo" data-v="${esc(v)}">${esc(v)}</button>`).join(' ')}</p>
-    <p class="t-nota">Toca un verbo para agregarlo al campo donde estás escribiendo.</p>
-    <div class="t-campo"><label for="o-general">Objetivo general</label><textarea id="o-general" rows="2" placeholder="Comprender cómo…">${esc(o.general)}</textarea></div>
+    <div class="t-campo"><label for="o-general">Objetivo general</label>
+      ${selVerbo('g', 'general', k)}
+      <textarea id="o-general" rows="2" placeholder="${esc((EJ_OBJ[k] || EJ_OBJ.I).g.split(' ')[0])} …">${esc(o.general)}</textarea></div>
     <div id="o-esp"></div>
     <button type="button" class="btn-lab-l" id="o-mas">+ Agregar objetivo específico</button>
     <div class="t-verif" id="o-verif"></div>
     <h3 class="t-h3">Hipótesis o supuesto, y la prueba de Popper</h3>
     <p class="lab-ayuda">En la investigación cuantitativa escribe una <b>hipótesis</b>; en la cualitativa, un <b>supuesto inicial</b>. En ambos casos, di qué resultado te obligaría a replantearlo: eso la vuelve honesta y, en el caso de la hipótesis, falsable.</p>
-    <div class="t-campo"><label for="o-hip">Mi hipótesis o supuesto</label><textarea id="o-hip" rows="2" placeholder="Los alumnos que…">${esc(o.hipotesis)}</textarea></div>
-    <div class="t-campo"><label for="o-ref">Me desmentiría que…</label><textarea id="o-ref" rows="2" placeholder="…después de un ciclo escolar, el grupo que participó no supere en comprensión a un grupo comparable.">${esc(o.refutaria)}</textarea></div>
+    ${guiaHipotesis(k)}
+    <div class="t-campo"><label for="o-hip">Mi ${k === 'I' ? 'supuesto inicial' : k === 'S' ? 'supuesto de acción' : 'hipótesis'}</label><textarea id="o-hip" rows="3" placeholder="${esc((EJ_HIP[k] || EJ_HIP.I).inicio)}">${esc(o.hipotesis)}</textarea></div>
+    <div class="t-campo"><label for="o-ref">Me desmentiría que…</label><textarea id="o-ref" rows="2" placeholder="${esc((EJ_HIP[k] || EJ_HIP.I).r)}">${esc(o.refutaria)}</textarea></div>
     <div class="t-verif" id="o-verif2"></div>`);
-  let foco = $('#o-general');
   const pintarEsp = () => {
-    $('#o-esp').innerHTML = o.especificos.map((x, i) => `<div class="t-campo t-esp"><label for="o-e${i}">Objetivo específico ${i + 1}</label><div class="t-fila"><textarea id="o-e${i}" rows="2">${esc(x)}</textarea>${o.especificos.length > 1 ? `<button type="button" class="btn-lab-l t-quitar" data-i="${i}" aria-label="Quitar objetivo ${i + 1}">✕</button>` : ''}</div></div>`).join('');
-    o.especificos.forEach((x, i) => { const el = enlazar(`#o-e${i}`, v => o.especificos[i] = v, verificar); el.addEventListener('focus', () => foco = el); });
+    $('#o-esp').innerHTML = o.especificos.map((x, i) => `<div class="t-campo t-esp"><label for="o-e${i}">Objetivo específico ${i + 1}</label>${selVerbo('e' + i, 'esp', k)}<div class="t-fila"><textarea id="o-e${i}" rows="2">${esc(x)}</textarea>${o.especificos.length > 1 ? `<button type="button" class="btn-lab-l t-quitar" data-i="${i}" aria-label="Quitar objetivo ${i + 1}">✕</button>` : ''}</div></div>`).join('');
+    o.especificos.forEach((x, i) => { enlazar(`#o-e${i}`, v => o.especificos[i] = v, verificar); });
+    $$('#o-esp .t-selverbo').forEach(conVerbo);
     $$('#o-esp .t-quitar').forEach(b => b.addEventListener('click', () => { o.especificos.splice(+b.dataset.i, 1); cambio(); pintarEsp(); verificar(); }));
   };
   const verificar = () => {
@@ -358,12 +359,94 @@ function etapaObjetivos(c) {
     if (o.refutaria.trim() && /(necesitan más tiempo|no se aplicó bien|depende)/i.test(o.refutaria)) av2.push('Tu condición de refutación deja una salida: si cualquier resultado puede explicarse a tu favor, la hipótesis se protege sola (tema 4.2).');
     $('#o-verif2').innerHTML = av2.length ? `<ul class="t-avisos">${av2.map(a => `<li>${esc(a)}</li>`).join('')}</ul>` : (o.refutaria.trim() ? '<p class="t-bien">✓ Dijiste qué te desmentiría: buena señal de falsabilidad.</p>' : '');
   };
-  const g = enlazar('#o-general', v => o.general = v, verificar); g.addEventListener('focus', () => foco = g);
-  ['#o-hip', '#o-ref'].forEach((s, i) => { const el = enlazar(s, v => { if (i) o.refutaria = v; else o.hipotesis = v; }, verificar); el.addEventListener('focus', () => foco = el); });
+  enlazar('#o-general', v => o.general = v, verificar);
+  ['#o-hip', '#o-ref'].forEach((s, i) => enlazar(s, v => { if (i) o.refutaria = v; else o.hipotesis = v; }, verificar));
+  // Desplegable de verbos: pone el verbo al inicio del objetivo (si ya había uno, lo cambia).
+  function conVerbo(sel) {
+    sel.addEventListener('change', () => {
+      const v = sel.value; if (!v) return;
+      const el = $('#' + sel.dataset.para); el.value = ponerVerbo(el.value, v); el.dispatchEvent(new Event('input'));
+      sel.value = ''; el.focus(); el.setSelectionRange(el.value.length, el.value.length);
+    });
+  }
+  conVerbo($('#sv-g'));
+
   $('#o-mas').addEventListener('click', () => { if (o.especificos.length < 6) { o.especificos.push(''); cambio(); pintarEsp(); } });
-  $$('.t-verbo').forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
-  $$('.t-verbo').forEach(b => b.addEventListener('click', () => { const v = b.dataset.v; const el = foco; el.value = (el.value.trim() ? el.value.replace(/\s*$/, ' ') : '') + v.charAt(0).toUpperCase() + v.slice(1) + ' '; el.dispatchEvent(new Event('input')); el.focus(); }));
   pintarEsp(); verificar();
+}
+
+// Verbos para los objetivos, con lo que significa cada uno. El general usa verbos amplios (la meta);
+// los específicos, verbos concretos (los pasos). P = explicativa, I = comprensiva, S = transformadora.
+const VERBOS_OBJ = {
+  general: {
+    P: [['determinar', 'establecer con datos si algo ocurre y cuánto'], ['explicar', 'mostrar por qué ocurre algo'], ['analizar la relación entre', 'ver si dos cosas se mueven juntas'], ['evaluar el efecto de', 'medir qué cambia por algo'], ['comparar', 'medir las diferencias entre dos grupos o momentos'], ['establecer', 'fijar con evidencia una relación o un nivel']],
+    I: [['comprender', 'entender el sentido que algo tiene para las personas'], ['interpretar', 'descifrar los significados detrás de lo que dicen y hacen'], ['analizar', 'descomponer una experiencia para entenderla a fondo'], ['explorar', 'acercarse a algo poco estudiado'], ['reconstruir', 'contar de nuevo, con las voces de los participantes, cómo pasó algo'], ['describir en profundidad', 'retratar con detalle cómo se vive algo']],
+    S: [['transformar', 'cambiar una situación junto con quienes la viven'], ['construir colectivamente', 'crear algo con los participantes, no para ellos'], ['mejorar', 'hacer que una práctica funcione mejor, con evidencia'], ['fortalecer', 'hacer más sólida una práctica que ya existe'], ['diseñar e implementar con', 'crear una propuesta y ponerla en marcha con el grupo'], ['sistematizar', 'ordenar y reflexionar una experiencia para aprender de ella']],
+    M: [['analizar y comprender', 'medir algo y entender su sentido'], ['evaluar e interpretar', 'medir resultados y explicar lo que significan'], ['describir y explicar', 'retratar un fenómeno y dar sus causas']],
+  },
+  esp: {
+    P: [['medir', 'obtener un número con un instrumento'], ['identificar', 'reconocer cuál, cuánto o quién'], ['describir', 'decir cómo es algo con datos'], ['comparar', 'poner lado a lado dos grupos o momentos'], ['calcular', 'obtener un resultado con operaciones'], ['relacionar', 'ver si dos variables se mueven juntas'], ['clasificar', 'ordenar en categorías'], ['estimar', 'calcular de forma aproximada']],
+    I: [['describir', 'contar cómo es algo según los participantes'], ['identificar', 'reconocer temas, momentos o actores'], ['caracterizar', 'señalar los rasgos propios de algo'], ['interpretar', 'descifrar lo que significa lo que dicen'], ['analizar', 'examinar por partes'], ['reconstruir', 'contar de nuevo una historia con sus voces'], ['contrastar', 'ver semejanzas y diferencias entre visiones'], ['documentar', 'registrar con evidencia lo que pasa']],
+    S: [['diagnosticar', 'conocer con el grupo el problema de partida'], ['diseñar', 'crear con ellos la propuesta'], ['implementar', 'ponerla en marcha'], ['evaluar', 'valorar qué cambió y qué no'], ['acordar', 'llegar a decisiones con los participantes'], ['reflexionar con', 'pensar juntos sobre lo vivido'], ['sistematizar', 'ordenar la experiencia para aprender de ella'], ['valorar participativamente', 'que el grupo juzgue los resultados']],
+  },
+};
+VERBOS_OBJ.esp.M = [...VERBOS_OBJ.esp.P.slice(0, 4), ...VERBOS_OBJ.esp.I.slice(2, 6)];
+const NOMBRE_ENF = { P: 'Explicativas (cuantitativo)', I: 'Comprensivas (cualitativo)', S: 'Transformadoras (sociocrítico)', M: 'Mixtas' };
+function selVerbo(id, cual, k) {
+  const L = VERBOS_OBJ[cual], orden = [k, ...['P', 'I', 'S', 'M'].filter(x => x !== k && L[x])];
+  const op = v => `<option value="${esc(v[0])}">${esc(v[0])} — ${esc(v[1])}</option>`;
+  return `<select class="t-selverbo" id="sv-${id}" data-para="${id === 'g' ? 'o-general' : 'o-' + id}" aria-label="Elegir verbo para el objetivo ${cual === 'general' ? 'general' : 'específico'}">
+    <option value="">📋 Elige un verbo que encaje…</option>
+    ${orden.map((x, i) => `<optgroup label="${i ? 'Otros enfoques · ' : '✓ Encajan con tu pregunta · '}${esc(NOMBRE_ENF[x])}">${L[x].map(op).join('')}</optgroup>`).join('')}
+  </select>`;
+}
+// Cambia el verbo inicial si ya había uno de la lista; si no, lo antepone.
+function ponerVerbo(texto, v) {
+  const todos = [...new Set(Object.values(VERBOS_OBJ).flatMap(o => Object.values(o).flat().map(x => x[0])))].sort((a, b) => b.length - a.length);
+  let t = texto.trim(); const bajo = t.toLowerCase();
+  const ya = todos.find(x => bajo === x || bajo.startsWith(x + ' '));
+  if (ya) t = t.slice(ya.length).trim();
+  else if (t && /^\p{L}+(ar|er|ir)\b/iu.test(t)) t = t.replace(/^\p{L}+\s*/u, '');
+  if (t) t = t.charAt(0).toLowerCase() + t.slice(1);
+  return v.charAt(0).toUpperCase() + v.slice(1) + ' ' + t;
+}
+
+// Guía para la hipótesis o el supuesto, según el tipo de pregunta.
+const EJ_HIP = {
+  P: { nombre: 'Hipótesis', que: 'Es una <b>respuesta tentativa</b> a tu pregunta que vas a poner a prueba con datos. Relaciona dos cosas que puedes medir (variables): una que crees que influye y otra que crees que cambia.',
+    formula: '<b>En</b> [quiénes, dónde] <b>,</b> [la variable que influye] <b>se relaciona con / produce</b> [la variable que cambia] <b>de esta forma:</b> [más, menos, mayor, menor…]',
+    h: 'En los alumnos de segundo grado de la Secundaria Técnica 17, quienes duermen menos de siete horas entre semana tienen un promedio escolar más bajo que quienes duermen siete horas o más.',
+    r: 'el promedio de quienes duermen menos de siete horas sea igual o mayor que el de quienes duermen más.',
+    inicio: 'En los alumnos de…, quienes… tienen…' },
+  I: { nombre: 'Supuesto inicial', que: 'En una investigación comprensiva <b>no se comprueba una hipótesis</b>: se parte de un <b>supuesto inicial</b>, una idea previa honesta de lo que crees que vas a encontrar. Sirve para que reconozcas tus ideas previas desde el principio (Gadamer las llama «prejuicios»), no para defenderlos.',
+    formula: '<b>Supongo que</b> [los participantes] <b>viven / entienden</b> [el fenómeno] <b>como</b> [lo que crees], <b>aunque</b> [lo que podría sorprenderte].',
+    h: 'Supongo que los docentes de nuevo ingreso viven su primer año con una sensación de soledad, y que el acompañamiento de sus compañeros pesa más que el de los directivos, aunque puede que encuentre experiencias muy distintas entre escuelas.',
+    r: 'la mayoría de los docentes describan su primer año sin sentirse solos, o que el acompañamiento que más valoran sea el de los directivos.',
+    inicio: 'Supongo que… viven… como…, aunque…' },
+  S: { nombre: 'Supuesto de acción', que: 'En una investigación transformadora el supuesto es una <b>apuesta de cambio</b>: qué crees que pasará si el grupo hace algo juntos. Se pone a prueba en la práctica, en ciclos de planear, actuar, observar y reflexionar (Carr y Kemmis).',
+    formula: '<b>Si</b> [el grupo hace esta acción] <b>, entonces</b> [esto cambiará] <b>en</b> [quiénes, dónde].',
+    h: 'Si el grupo de segundo grado construye con su tutor un reglamento basado en acuerdos y formas de reparar, entonces los conflictos que llegan a orientación disminuirán durante el segundo trimestre.',
+    r: 'los reportes a orientación se mantengan iguales o aumenten, o que el grupo deje de usar los acuerdos a las pocas semanas.',
+    inicio: 'Si el grupo…, entonces… en…' },
+};
+EJ_HIP.M = EJ_HIP.P;
+function guiaHipotesis(k) {
+  const e = EJ_HIP[k] || EJ_HIP.I;
+  const fila = x => `<tr${x === k ? ' class="t-hip-tuyo"' : ''}><th>${esc(EJ_HIP[x].nombre)}${x === k ? ' ← el tuyo' : ''}<small>pregunta ${esc(D.tipos[x].nombre.toLowerCase())}</small></th><td>${x === 'P' ? 'Se comprueba o se rechaza con datos' : x === 'I' ? 'Se confirma, se matiza o se abandona al escuchar a los participantes' : 'Se pone a prueba al actuar y reflexionar con el grupo'}</td></tr>`;
+  return `<details class="t-guia-obj t-guia-hip" open><summary>🔎 ¿Qué es una hipótesis y cómo se escribe? (ábrelo si te atoras)</summary>
+    <p>Tu hipótesis o supuesto <b>responde por adelantado a tu pregunta</b>: es lo que crees que vas a encontrar. La investigación sirve para ver si tenías razón. No es una pregunta ni una opinión de lo que «debería» ser; es una afirmación que la realidad puede confirmar o desmentir.</p>
+    <div class="t-tabla-scroll"><table class="t-hip-tabla"><thead><tr><th>Qué escribes</th><th>Qué pasa con ella</th></tr></thead><tbody>${['P', 'I', 'S'].map(fila).join('')}</tbody></table></div>
+    <h4>Tu caso: ${esc(e.nombre.toLowerCase())}</h4>
+    <p>${e.que}</p>
+    <p class="t-formula">${e.formula}</p>
+    <div class="t-ejemplo"><p class="t-ej-k">Ejemplo, con la misma pregunta del ejemplo de objetivos</p>
+      <p><b>${esc(e.nombre)}:</b> ${esc(e.h)}</p>
+      <p><b>Me desmentiría que…</b> ${esc(e.r)}</p></div>
+    <h4>La prueba de Popper: «me desmentiría que…»</h4>
+    <p>Popper (tema 4) dice que una idea es científica si se puede decir <b>qué resultado la haría falsa</b>. Por eso escribes también qué te desmentiría. Si ningún resultado posible te haría cambiar de idea, no estás investigando: solo estás confirmando lo que ya creías.</p>
+    <p class="t-errores"><b>Errores comunes:</b> escribirla como pregunta · que sea obvia («la lectura ayuda a aprender») · usar «debería» (eso es un deseo, no una hipótesis) · usar «siempre», «nunca» o «todos» · que no tenga nada que ver con tu objetivo general · que el «me desmentiría» deje salida («a menos que no se haya aplicado bien»).</p>
+    <p class="t-nota">Revisa que tu hipótesis o supuesto y tu objetivo general hablen de lo mismo: los mismos participantes, el mismo lugar y el mismo fenómeno.</p>
+  </details>`;
 }
 
 // Guía para escribir objetivos: fórmula, ejemplo de su mismo tipo de pregunta y errores comunes.
@@ -391,6 +474,7 @@ function guiaObjetivos(k) {
     <div class="t-ejemplo"><p class="t-ej-k">Ejemplo con una pregunta como la tuya (${esc((D.tipos[k] || D.tipos.I).nombre.toLowerCase())})</p>
       <p><b>Pregunta:</b> ${esc(ej.q)}</p><p><b>Objetivo general:</b> ${esc(ej.g)}</p>
       <p><b>Objetivos específicos:</b></p><ol>${ej.e.map(x => `<li>${esc(x)}</li>`).join('')}</ol></div>
+    <p class="t-nota">👇 Abajo, arriba de cada recuadro, hay un desplegable con <b>verbos que encajan</b> y lo que significa cada uno. Elige uno y se pone al inicio de tu objetivo.</p>
     <p class="t-errores"><b>Errores comunes:</b> escribirlo como pregunta · usar verbos de actividad (<i>aplicar, realizar, investigar, hacer una encuesta</i>: esas son tareas, no objetivos) · que el general no responda tu pregunta · poner más de un objetivo general.</p>
   </details>`;
 }
