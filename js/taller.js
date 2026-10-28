@@ -5,7 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { descargarAPA } from "./apa-word.js?v=2026102706";
+import { descargarAPA } from "./apa-word.js?v=2026102707";
 
 const db = getFirestore(initializeApp(firebaseConfig));
 const SESSION_KEY = 'ep_sesion_alumno';
