@@ -5,7 +5,7 @@
 .t-login h2 { margin-top: 0; }
 #t-form { display: grid; gap: .5rem; }
 #t-form label { font-weight: 600; font-size: .92rem; margin-top: .4rem; }
-#t-form input, #t-form select, .t-campo input, .t-campo textarea, .t-mz-grid input, .t-mz-grid select, .t-tipo-box select, #g-texto, .t-resp {
+#t-form input, #t-form select, .t-campo input, .t-campo textarea, .t-mz-grid input, .t-mz-grid select, .t-mz-grid textarea, .t-tipo-box select, #g-texto, .t-resp {
   width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); background: var(--cream);
   border: 1px solid var(--line); border-radius: 8px; padding: .6rem .7rem;
 }
@@ -262,3 +262,10 @@ html[data-theme="dark"] .e1-checks li.ok, html[data-theme="dark"] .e1-pasos butt
 .t-arma-prev { margin: .7rem 0 .4rem; padding: .7rem .9rem; border-radius: 10px; border: 2px solid var(--saffron); background: color-mix(in srgb, var(--saffron) 12%, var(--cream)); }
 .t-arma-prev p { margin: .15rem 0; } .t-arma-prev ol { margin: .2rem 0 .1rem 1.2rem; padding: 0; }
 html[data-theme="dark"] .t-paso-n { color: #8fb8e0; }
+/* Matriz guiada */
+.t-mz-ancho { grid-column: 1 / -1; }
+.t-mz-grid label > span small { display: block; font-weight: 400; font-size: .8rem; color: var(--ink-soft); }
+.t-mz-grid textarea { resize: vertical; line-height: 1.4; }
+.t-tec-info { font-weight: 400; font-size: .82rem; color: var(--ink-soft); line-height: 1.35; }
+.t-mz-grid .t-sug { justify-self: start; font-weight: 600; }
+.t-ir-mz { margin-left: .4rem; }

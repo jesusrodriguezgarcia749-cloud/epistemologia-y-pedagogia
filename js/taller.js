@@ -66,6 +66,8 @@ async function entrar() {
   T = Object.assign(vacio(), (t(local) > t(remoto) ? local : remoto) || local || remoto || {});
   estado(sesion.anon ? 'Se guarda solo en este dispositivo' : 'Tu avance se guarda en tu cuenta');
   etapa = Math.min(T.etapaMax || 0, D.etapas.length - 1);
+  // La matriz es para la Entrega 2: si alguien se quedó ahí, abre en las 18 preguntas.
+  if (D.etapas[etapa].id === 'matriz' && !T.matriz.some(f => f.tecnica)) etapa = D.etapas.findIndex(e => e.id === 'cuaderno');
   pintarPasos(); pintarEtapa();
 }
 
@@ -102,14 +104,15 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 function completas() {
   const r = revisar(T.pregunta);
   const o = T.objetivos;
-  return [
-    !!T.pregunta && r.problemas === 0,
-    !!T.brujula.clave,
-    !!o.general.trim() && o.especificos.filter(x => x.trim()).length >= 2 && !!o.hipotesis.trim() && !!o.refutaria.trim(),
-    T.matriz.length > 0 && T.matriz.every(f => f.tecnica && f.instrumento.trim() && f.participantes.trim()),
-    D.preguntas.every(p => palabras(T.respuestas[p.n]) >= 150),
-    T.etica.length === D.etica.length && T.etica.every(Boolean),
-  ];
+  const hecho = {
+    pregunta: !!T.pregunta && r.problemas === 0,
+    brujula: !!T.brujula.clave,
+    objetivos: !!o.general.trim() && o.especificos.filter(x => x.trim()).length >= 2 && !!o.hipotesis.trim() && !!o.refutaria.trim(),
+    cuaderno: D.preguntas.every(p => palabras(T.respuestas[p.n]) >= 150),
+    matriz: T.matriz.length > 0 && T.matriz.every(f => f.tecnica && f.instrumento.trim() && f.participantes.trim()),
+    cierre: T.etica.length === D.etica.length && T.etica.every(Boolean),
+  };
+  return D.etapas.map(e => hecho[e.id]);
 }
 function pintarPasos(todo = true) {
   const c = completas();
@@ -654,42 +657,150 @@ function guiaObjetivos(k) {
   </details>`;
 }
 
-// ------------------------------------------------ Etapa 4: matriz de congruencia
+// ------------------------------------------------ Etapa 5: matriz de congruencia (para la Entrega 2: preguntas 8 y 10)
 function grupoTec(t) { for (const [g, l] of Object.entries(D.tecnicas)) if (l.includes(t)) return g; return ''; }
+// Qué es cada técnica y qué instrumento se usa con ella.
+const TEC_INFO = {
+  'Cuestionario o encuesta cerrada': ['Preguntas con opciones fijas que contestan muchas personas; da números y porcentajes.', 'Cuestionario de 15 a 20 preguntas cerradas'],
+  'Prueba o examen estandarizado': ['Un examen igual para todos que mide un aprendizaje o una habilidad.', 'Prueba de comprensión lectora con sus respuestas correctas'],
+  'Escala tipo Likert': ['Afirmaciones que se califican de «totalmente de acuerdo» a «totalmente en desacuerdo»; mide actitudes.', 'Escala de 20 afirmaciones con 5 opciones de respuesta'],
+  'Registro estadístico o de calificaciones': ['Datos que ya existen: calificaciones, asistencias, reportes.', 'Hoja de registro de calificaciones o reportes por alumno'],
+  'Diseño experimental o cuasiexperimental': ['Comparar un grupo que recibe algo con otro que no, antes y después.', 'Prueba antes y después (pretest y postest) para dos grupos'],
+  'Entrevista a profundidad': ['Conversación larga, una a una, para conocer una experiencia a fondo.', 'Guion de entrevista con 6 a 8 temas abiertos'],
+  'Entrevista semiestructurada': ['Conversación con preguntas preparadas, pero con libertad para preguntar más.', 'Guion de entrevista de 8 a 10 preguntas abiertas'],
+  'Grupo focal': ['Conversación guiada con 6 a 10 personas a la vez sobre un tema.', 'Guía de grupo focal con 5 o 6 preguntas detonadoras'],
+  'Observación participante': ['Estar dentro del grupo y registrar lo que pasa mientras participas.', 'Guía de observación y notas de campo'],
+  'Diario de campo': ['Registro diario de lo que observas, lo que pasa y lo que piensas.', 'Formato de diario de campo (fecha, hecho, reflexión)'],
+  'Historia de vida': ['Una persona cuenta su vida o una etapa de ella.', 'Guion de entrevista biográfica por etapas'],
+  'Análisis de documentos': ['Revisar documentos existentes: planeaciones, reglamentos, trabajos de alumnos.', 'Ficha de análisis de documentos'],
+  'Taller participativo': ['Sesión de trabajo donde el grupo analiza y crea algo junto.', 'Carta descriptiva del taller y registro de productos'],
+  'Diagnóstico participativo': ['El grupo identifica sus propios problemas con dinámicas (árbol de problemas, lluvia de ideas).', 'Guía de diagnóstico con árbol de problemas'],
+  'Ciclo de investigación-acción': ['Planear, actuar, observar y reflexionar, y volver a empezar (Carr y Kemmis).', 'Plan de acción y bitácora de cada ciclo'],
+  'Diario del investigador': ['Tu registro personal de cómo va la intervención y qué vas aprendiendo.', 'Formato de diario reflexivo'],
+  'Asamblea o círculo de diálogo': ['Reunión del grupo para dialogar, decidir o valorar juntos.', 'Guía de asamblea y acta de acuerdos'],
+};
+// Técnicas recomendadas según el verbo del objetivo específico.
+const TEC_POR_VERBO = [
+  [/^(medir|estimar|calcular)/, ['Cuestionario o encuesta cerrada', 'Prueba o examen estandarizado', 'Escala tipo Likert']],
+  [/^(comparar|relacionar)/, ['Registro estadístico o de calificaciones', 'Diseño experimental o cuasiexperimental', 'Cuestionario o encuesta cerrada']],
+  [/^(diagnosticar)/, ['Diagnóstico participativo', 'Cuestionario o encuesta cerrada', 'Grupo focal']],
+  [/^(identificar|describir|caracterizar|clasificar)/, ['Entrevista semiestructurada', 'Cuestionario o encuesta cerrada', 'Observación participante']],
+  [/^(interpretar|analizar)/, ['Entrevista a profundidad', 'Grupo focal', 'Análisis de documentos']],
+  [/^(reconstruir)/, ['Historia de vida', 'Entrevista a profundidad']],
+  [/^(contrastar)/, ['Grupo focal', 'Entrevista semiestructurada']],
+  [/^(documentar)/, ['Diario de campo', 'Observación participante', 'Análisis de documentos']],
+  [/^(diseñar|acordar|construir)/, ['Taller participativo', 'Asamblea o círculo de diálogo']],
+  [/^(implementar)/, ['Ciclo de investigación-acción', 'Diario del investigador', 'Observación participante']],
+  [/^(evaluar|valorar)/, ['Grupo focal', 'Asamblea o círculo de diálogo', 'Registro estadístico o de calificaciones']],
+  [/^(sistematizar|reflexionar)/, ['Diario del investigador', 'Asamblea o círculo de diálogo']],
+];
+const tecRecomendadas = obj => { const v = (obj || '').trim().toLowerCase(); const r = TEC_POR_VERBO.find(([re]) => re.test(v)); return r ? r[1] : []; };
+// Propone una pregunta específica a partir del objetivo («Diagnosticar las formas…» → «¿Cuáles son las formas…?»).
+function preguntaDeObjetivo(obj) {
+  const t = (obj || '').trim().replace(/[.\s]+$/, ''); if (!t) return '';
+  const m = t.match(/^(\S+)\s+(.*)$/); if (!m) return '';
+  const v = m[1].toLowerCase(); let r = m[2].replace(/^(participativamente|colectivamente|con el grupo|junto con el grupo)\s+/i, '');
+  const may = s => s.charAt(0).toUpperCase() + s.slice(1);
+  if (/^(qué|cómo|cuál|cuáles|cuánto|cuántos|cuántas|por qué|en qué|quiénes)(?=\s|$)/i.test(r)) return `¿${may(r)}?`;
+  const art = s => /^(los|las)\s/i.test(s) ? `¿Cuáles son ${s}?` : /^(el|la|lo)\s/i.test(s) ? `¿Cuál es ${s}?` : '';
+  if (/^(comparar)/.test(v)) return `¿Qué diferencias hay al comparar ${r}?`;
+  if (/^(relacionar)/.test(v)) return `¿Qué relación hay entre ${r.replace(/^(la relación entre)\s+/i, '')}?`;
+  if (/^(contrastar)/.test(v)) return `¿En qué coinciden y en qué difieren ${r}?`;
+  if (/^(diseñar|construir)/.test(v)) return `¿Cómo diseñar ${m[2].replace(/^con el grupo\s+/i, 'con el grupo ')}?`.replace('¿Cómo diseñar', /^construir/.test(v) ? '¿Cómo construir' : '¿Cómo diseñar');
+  if (/^(implementar)/.test(v)) return `¿Qué ocurre al implementar ${r}?`;
+  if (/^(acordar)/.test(v)) return `¿Qué acuerdos logra el grupo sobre ${r}?`;
+  if (/^(sistematizar|reflexionar)/.test(v)) return `¿Qué aprendizajes deja ${r}?`;
+  if (/^(evaluar|valorar)/.test(v)) return art(r) || `¿Qué resultados hubo en ${r}?`;
+  if (/^(reconstruir)/.test(v)) return art(r).replace('¿Cuáles son', '¿Cómo fueron').replace('¿Cuál es', '¿Cómo fue') || `¿Cómo fue ${r}?`;
+  return art(r) || `¿Cómo se presenta ${r}?`;
+}
+const EJ_MZ = {
+  P: [['Medir las horas de sueño entre semana de los alumnos de segundo grado.', '¿Cuántas horas duermen entre semana?', 'Cuestionario o encuesta cerrada', 'Cuestionario de 12 preguntas cerradas', '120 alumnos de segundo grado'],
+    ['Identificar el promedio escolar de esos alumnos en el primer trimestre.', '¿Cuál es su promedio del primer trimestre?', 'Registro estadístico o de calificaciones', 'Hoja de registro de calificaciones', 'Boletas de los 120 alumnos (con permiso de la escuela)'],
+    ['Comparar el promedio de quienes duermen menos de siete horas con el de quienes duermen más.', '¿Qué diferencias hay entre ambos grupos?', 'Registro estadístico o de calificaciones', 'Tabla comparativa de promedios', 'Los mismos 120 alumnos, en dos grupos']],
+  I: [['Describir los retos que enfrentan en el aula durante su primer año.', '¿Cuáles son los retos que enfrentan?', 'Entrevista semiestructurada', 'Guion de entrevista de 10 preguntas abiertas', '6 docentes de nuevo ingreso'],
+    ['Interpretar el significado que le dan al acompañamiento.', '¿Qué significado le dan al acompañamiento?', 'Entrevista a profundidad', 'Guion con 6 temas abiertos', '3 de esos 6 docentes'],
+    ['Reconstruir los momentos que consideran decisivos.', '¿Cómo fueron los momentos decisivos?', 'Historia de vida', 'Guion de entrevista biográfica', '2 docentes con experiencias contrastantes']],
+  S: [['Diagnosticar con los alumnos los conflictos más frecuentes del grupo.', '¿Cuáles son los conflictos más frecuentes?', 'Diagnóstico participativo', 'Guía de diagnóstico con árbol de problemas', 'El grupo de 2.º B (32 alumnos) y su tutor'],
+    ['Diseñar con ellos los acuerdos y la forma de reparar.', '¿Cómo diseñar acuerdos que el grupo respete?', 'Taller participativo', 'Carta descriptiva de 3 sesiones', 'El mismo grupo y su tutor'],
+    ['Implementar los acuerdos durante el segundo trimestre.', '¿Qué ocurre al implementar los acuerdos?', 'Ciclo de investigación-acción', 'Plan de acción y bitácora', 'El grupo, su tutor y orientación'],
+    ['Evaluar participativamente si el reglamento redujo los conflictos.', '¿Qué cambió en los conflictos del grupo?', 'Asamblea o círculo de diálogo', 'Guía de asamblea y comparación de reportes de orientación', 'El grupo, su tutor y orientación']],
+};
+EJ_MZ.M = EJ_MZ.P;
+function guiaMatriz(k) {
+  const ej = EJ_MZ[k] || EJ_MZ.I;
+  return `<details class="t-guia-obj" open><summary>🧭 ¿Qué es la matriz y cómo se llena? (ábrelo si te atoras)</summary>
+    <p>La matriz es una tabla que muestra que <b>todo cuadra</b>: para cada objetivo específico dices qué pregunta vas a responder, con qué método, con qué herramienta y con quiénes. Si una fila no cuadra, tu proyecto tiene un hueco.</p>
+    <div class="t-guia-dos">
+      <div><h4>Pregunta específica</h4><p>Tu objetivo específico convertido en pregunta. Debe poder contestarse con lo que vas a hacer, y no con sí o no.</p></div>
+      <div><h4>Técnica</h4><p>El <b>método</b> para obtener la información: entrevista, cuestionario, grupo focal, taller…</p></div>
+      <div><h4>Instrumento</h4><p>La <b>herramienta concreta</b> que vas a preparar: el guion de la entrevista, el cuestionario con sus preguntas, la guía de observación.</p></div>
+      <div><h4>Participantes o fuentes</h4><p><b>Con quiénes</b> (y cuántos) o de dónde sale la información: alumnos, docentes, boletas, documentos.</p></div>
+    </div>
+    <p class="t-formula">Truco: la <b>técnica</b> es lo que <i>haces</i> (entrevistar); el <b>instrumento</b> es lo que <i>llevas en la mano</i> (el guion).</p>
+    <div class="t-ejemplo"><p class="t-ej-k">Ejemplo con una pregunta como la tuya (${esc((D.tipos[k] || D.tipos.I).nombre.toLowerCase())})</p>
+      ${ej.map((f, i) => `<p><b>${i + 1}. ${esc(f[0])}</b><br>Pregunta: ${esc(f[1])} · Técnica: ${esc(f[2])} · Instrumento: ${esc(f[3])} · Participantes: ${esc(f[4])}</p>`).join('')}</div>
+    <p class="t-errores"><b>Errores comunes:</b> confundir técnica con instrumento · usar la misma técnica para todo sin pensarlo · una técnica que no encaja con tu paradigma (un cuestionario cerrado para «comprender» experiencias) · no decir cuántos participantes.</p>
+  </details>`;
+}
 function etapaMatriz(c) {
+  const k = T.brujula.clave || T.tipoManual || tipoDe(T.pregunta) || 'I';
   const esp = T.objetivos.especificos.filter(x => x.trim());
   if (!T.matriz.length || T.matriz.length !== Math.max(1, esp.length)) {
     const vieja = T.matriz; T.matriz = (esp.length ? esp : ['']).map((x, i) => Object.assign({ objetivo: x, pregunta: '', tecnica: '', instrumento: '', participantes: '' }, vieja[i] || {}, { objetivo: x }));
   } else T.matriz.forEach((f, i) => { f.objetivo = esp[i] || f.objetivo; });
-  const opciones = sel => Object.entries({ cuanti: 'Cuantitativas', cuali: 'Cualitativas', part: 'Participativas' }).map(([g, n]) => `<optgroup label="${n}">${D.tecnicas[g].map(t => `<option ${t === sel ? 'selected' : ''}>${esc(t)}</option>`).join('')}</optgroup>`).join('');
-  c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">La matriz de congruencia muestra que todo cuadra: cada objetivo específico tiene una pregunta, una técnica, un instrumento y unos participantes. Es lo que un sínodo revisa primero. Te sirve para las preguntas 8 y 10.</p>
-    ${esp.length ? '' : '<p class="aviso-lab">Primero escribe tus objetivos específicos en la Etapa 3: aquí aparecerá una fila por cada uno.</p>'}
-    <div class="t-matriz" id="mz">${T.matriz.map((f, i) => `<article class="t-mz"><p class="ficha-kicker">Objetivo específico ${i + 1}</p><p class="t-mz-obj">${esc(f.objetivo || '(sin escribir)')}</p>
-      <div class="t-mz-grid"><label>Pregunta específica<input data-i="${i}" data-c="pregunta" value="${esc(f.pregunta)}" placeholder="¿…?"></label>
-      <label>Técnica<select data-i="${i}" data-c="tecnica"><option value="">— Elige —</option>${opciones(f.tecnica)}</select></label>
-      <label>Instrumento<input data-i="${i}" data-c="instrumento" value="${esc(f.instrumento)}" placeholder="Guion de entrevista, cuestionario de 20 reactivos…"></label>
-      <label>Participantes o fuentes<input data-i="${i}" data-c="participantes" value="${esc(f.participantes)}" placeholder="6 docentes de 1.º, 2.º y 3.º…"></label></div>
-      <div class="t-mz-av" id="mz-av${i}"></div></article>`).join('')}</div>
+  // Participantes sugeridos: del objetivo general armado o, si no, de la pregunta.
+  const g = (T.objetivos.arma || {}).g || {}, sp = sugerenciasPregunta(T.pregunta);
+  const partSug = [g.quien || sp.quien, g.donde ? conEn(g.donde) : sp.donde].filter(Boolean).join(' ');
+  const opciones = (sel, rec) => {
+    const op = t => `<option value="${esc(t)}" ${t === sel ? 'selected' : ''}>${esc(t)}</option>`;
+    return (rec.length ? `<optgroup label="✓ Recomendadas para este objetivo">${rec.map(op).join('')}</optgroup>` : '')
+      + Object.entries({ cuanti: 'Cuantitativas', cuali: 'Cualitativas', part: 'Participativas' }).map(([gr, n]) => `<optgroup label="${n}">${D.tecnicas[gr].filter(t => !rec.includes(t)).map(op).join('')}</optgroup>`).join('');
+  };
+  c.insertAdjacentHTML('beforeend', `<p class="t-recuerda"><b>📌 Esta etapa es para la Entrega 2</b> (preguntas 8 y 10). Si todavía estás en la Entrega 1, regresa a la etapa anterior y descarga tu Word.</p>
+    <p class="lab-ayuda">La matriz de congruencia muestra que todo cuadra: cada objetivo específico tiene una pregunta, una técnica, un instrumento y unos participantes. Es lo que un sínodo revisa primero. Te sirve para las preguntas 8 y 10.</p>
+    ${guiaMatriz(k)}
+    ${esp.length ? '' : '<p class="aviso-lab">Primero escribe tus objetivos específicos en la Etapa 3 (Objetivos e hipótesis): aquí aparecerá una fila por cada uno.</p>'}
+    <div class="t-matriz" id="mz">${T.matriz.map((f, i) => { const rec = tecRecomendadas(f.objetivo), pq = preguntaDeObjetivo(f.objetivo); return `<article class="t-mz"><p class="ficha-kicker">Objetivo específico ${i + 1}</p><p class="t-mz-obj">${esc(f.objetivo || '(sin escribir)')}</p>
+      <div class="t-mz-grid">
+        <label class="t-mz-ancho"><span>1 · Pregunta específica <small>Tu objetivo convertido en pregunta.</small></span><textarea rows="2" data-i="${i}" data-c="pregunta" placeholder="¿…?">${esc(f.pregunta)}</textarea>
+          ${pq ? `<button type="button" class="t-sug chip-lab" data-i="${i}" data-c="pregunta" data-v="${esc(pq)}">💡 Propuesta: «${esc(pq)}»</button>` : ''}</label>
+        <label><span>2 · Técnica <small>El método: lo que harás para obtener la información.</small></span><select data-i="${i}" data-c="tecnica"><option value="">— Elige —</option>${opciones(f.tecnica, rec)}</select>
+          <small class="t-tec-info" id="mz-ti${i}"></small></label>
+        <label><span>3 · Instrumento <small>La herramienta que vas a preparar.</small></span><input data-i="${i}" data-c="instrumento" value="${esc(f.instrumento)}" placeholder="Guion de entrevista, cuestionario de 20 preguntas…">
+          <button type="button" class="t-sug chip-lab" data-i="${i}" data-c="instrumento" id="mz-is${i}" hidden></button></label>
+        <label class="t-mz-ancho"><span>4 · Participantes o fuentes <small>Con quiénes y cuántos, o de dónde sale la información.</small></span><input data-i="${i}" data-c="participantes" value="${esc(f.participantes)}" placeholder="6 docentes de 1.º, 2.º y 3.º…">
+          ${partSug ? `<button type="button" class="t-sug chip-lab" data-i="${i}" data-c="participantes" data-v="${esc(partSug)}">📌 De tu objetivo general: «${esc(partSug)}» (agrega cuántos)</button>` : ''}</label></div>
+      <div class="t-mz-av" id="mz-av${i}"></div></article>`; }).join('')}</div>
     <div id="mz-global"></div>`);
+  const infoTec = i => {
+    const f = T.matriz[i], inf = TEC_INFO[f.tecnica], b = $('#mz-is' + i);
+    $('#mz-ti' + i).textContent = inf ? inf[0] : '';
+    if (inf && f.instrumento.trim() !== inf[1]) { b.dataset.v = inf[1]; b.textContent = `💡 Instrumento sugerido: «${inf[1]}»`; b.hidden = false; } else b.hidden = true;
+  };
   const revisarMz = () => {
-    const k = T.brujula.clave, esperado = { P: ['cuanti'], I: ['cuali'], S: ['part', 'cuali'], M: ['cuanti', 'cuali'] }[k] || null;
+    const esperado = { P: ['cuanti'], I: ['cuali'], S: ['part', 'cuali'], M: ['cuanti', 'cuali'] }[T.brujula.clave] || null;
     T.matriz.forEach((f, i) => {
       const av = [];
       if (!f.pregunta.trim() || !f.tecnica || !f.instrumento.trim() || !f.participantes.trim()) av.push(['mal', 'Faltan datos en esta fila.']);
       if (f.tecnica && esperado && !esperado.includes(grupoTec(f.tecnica))) av.push(['mal', `«${f.tecnica}» es una técnica ${{ cuanti: 'cuantitativa', cuali: 'cualitativa', part: 'participativa' }[grupoTec(f.tecnica)]}, y tu brújula apunta al ${perfil().nombre.toLowerCase()}. O ajustas la técnica, o justificas un enfoque mixto.`]);
       if (f.pregunta.trim() && /^¿\s*(es|hay|existe|influye|afecta|puede)\b/i.test(f.pregunta.trim())) av.push(['mal', 'La pregunta específica se responde con sí o no: ábrela.']);
+      if (f.instrumento.trim() && D.tecnicas && Object.values(D.tecnicas).flat().some(t => t.toLowerCase() === f.instrumento.trim().toLowerCase())) av.push(['mal', 'En «Instrumento» escribiste una técnica. El instrumento es la herramienta: el guion, el cuestionario, la guía.']);
+      if (f.participantes.trim() && !/\d|todos|todas|el grupo|un grupo/i.test(f.participantes)) av.push(['mal', 'Di cuántos participantes son (por ejemplo, «6 docentes» o «el grupo de 32 alumnos»).']);
       if (!av.length && f.tecnica) av.push(['ok', 'Esta fila es congruente.']);
-      $('#mz-av' + i).innerHTML = av.map(([c, t]) => `<p class="t-${c === 'ok' ? 'bien' : 'aviso'}">${c === 'ok' ? '✓' : '!'} ${esc(t)}</p>`).join('');
+      $('#mz-av' + i).innerHTML = av.map(([cl, t]) => `<p class="t-${cl === 'ok' ? 'bien' : 'aviso'}">${cl === 'ok' ? '✓' : '!'} ${esc(t)}</p>`).join('');
+      infoTec(i);
     });
     const grupos = new Set(T.matriz.map(f => grupoTec(f.tecnica)).filter(Boolean));
-    $('#mz-global').innerHTML = !k ? '<p class="aviso-lab">Completa la brújula (Etapa 2) para revisar la congruencia con tu paradigma.</p>'
-      : grupos.size > 1 && k !== 'M' ? '<p class="aviso-lab">Usas técnicas de más de un tipo. Puede estar bien si lo justificas como un diseño mixto o como triangulación (pregunta 10).</p>' : '';
+    $('#mz-global').innerHTML = !T.brujula.clave ? '<p class="aviso-lab">Completa la brújula (Etapa 2) para revisar la congruencia con tu paradigma.</p>'
+      : grupos.size > 1 && T.brujula.clave !== 'M' ? '<p class="aviso-lab">Usas técnicas de más de un tipo. Puede estar bien si lo justificas como un diseño mixto o como triangulación (pregunta 10).</p>' : '';
   };
-  $$('#mz input, #mz select').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { T.matriz[+el.dataset.i][el.dataset.c] = el.value; cambio(); revisarMz(); }));
+  $$('#mz input, #mz select, #mz textarea').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { T.matriz[+el.dataset.i][el.dataset.c] = el.value; cambio(); revisarMz(); }));
+  $$('#mz .t-sug').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const el = $(`#mz [data-i="${b.dataset.i}"][data-c="${b.dataset.c}"]:not(button)`); el.value = b.dataset.v; el.dispatchEvent(new Event('input')); el.focus(); }));
   revisarMz();
 }
 
-// ------------------------------------------------ Etapa 5: las 18 preguntas
+// ------------------------------------------------ Etapa 4: las 18 preguntas
 let entregaSel = 'entrega1';
 function apoyo(p) {
   const o = T.objetivos, pf = perfil();
@@ -811,6 +922,7 @@ function pintarE1Final(cuerpo) {
     <h4 class="e1-h">Antes de descargar</h4><ul class="e1-checks" id="e1-rev"></ul>
     <button type="button" class="btn-lab e1-word" id="e1-word">⬇ Descargar la primera parte del ensayo (preguntas 1 a 6) en Word</button>
     <p class="t-nota">Sale en formato APA 7: portada con el escudo, Times New Roman 12, doble espacio, sangría, número de página y referencias con sangría francesa. Puedes descargarlo las veces que quieras.</p>
+    <p class="t-recuerda">🎉 Con esto terminas la Entrega 1. Lo que sigue (la Matriz de congruencia y la Entrega 2) lo verás cuando tu docente lo indique.</p>
     <div class="e1-nav"><button type="button" class="btn-lab-l" id="e1-ant">← Pregunta 6</button><span></span></div></article>`;
   const rev = () => {
     const faltan = [1, 2, 3, 4, 5, 6].filter(n => palabras(T.respuestas[n]) < 150), sinCita = [1, 2, 3, 4, 5, 6].filter(n => !tieneCita(T.respuestas[n])), nr = refsElegidas().length;
@@ -830,7 +942,9 @@ function pintarCuaderno() {
   if (entregaSel === 'entrega1') return pintarE1();
   const e = D.entregas[entregaSel], lista = D.preguntas.filter(p => p.entrega === entregaSel);
   const hechas = lista.filter(p => palabras(T.respuestas[p.n]) >= 150).length;
-  $('#c-lista').innerHTML = `<div class="t-entrega"><b>${esc(e.nombre)}</b> · ${esc(e.fecha)}<p>${esc(e.req)}</p><p>Llevas <b>${hechas} de ${lista.length}</b> respuestas con al menos 150 palabras.</p>
+  const iMz = D.etapas.findIndex(x => x.id === 'matriz'), usaMz = lista.filter(p => p.usa === 'matriz' || p.n === 8 || p.n === 10).map(p => p.n);
+  const avisoMz = usaMz.length ? `<p class="t-recuerda">🧭 Las preguntas ${usaMz.join(' y ')} usan tu <b>Matriz de congruencia</b>. Llénala primero en la Etapa ${iMz + 1}: aquí aparecerá como punto de partida. <button type="button" class="btn-lab-l t-ir-mz">Ir a la matriz →</button></p>` : '';
+  $('#c-lista').innerHTML = `<div class="t-entrega"><b>${esc(e.nombre)}</b> · ${esc(e.fecha)}<p>${esc(e.req)}</p><p>Llevas <b>${hechas} de ${lista.length}</b> respuestas con al menos 150 palabras.</p>${avisoMz}
       <button type="button" class="btn-lab" id="c-word">Descargar en Word (preguntas 1 a ${lista[lista.length - 1].n})</button></div>
     ${lista.map(p => { const ap = apoyo(p); return `<article class="t-preg" id="preg-${p.n}"><h3><span class="t-pn">${p.n}</span>${esc(p.texto)}</h3>
       <p class="t-pide"><b>Qué te piden:</b> ${esc(p.pide)}</p>
@@ -843,6 +957,7 @@ function pintarCuaderno() {
   $$('.t-resp').forEach(t => { cuenta(t.dataset.n); t.addEventListener('input', () => { T.respuestas[t.dataset.n] = t.value; cuenta(t.dataset.n); cambio(); }); });
   $$('.t-usar').forEach(b => b.addEventListener('click', () => { const p = D.preguntas.find(x => x.n === +b.dataset.n), t = $(`.t-resp[data-n="${p.n}"]`); t.value = (t.value.trim() ? t.value.trim() + '\n\n' : '') + apoyo(p); t.dispatchEvent(new Event('input')); t.focus(); }));
   $('#c-word').addEventListener('click', () => descargarWord(entregaSel));
+  $$('.t-ir-mz').forEach(b => b.addEventListener('click', () => irA(D.etapas.findIndex(x => x.id === 'matriz'))));
 }
 async function descargarWord(ent) {
   await guardarYa();
