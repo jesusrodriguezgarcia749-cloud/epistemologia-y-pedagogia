@@ -269,3 +269,8 @@ html[data-theme="dark"] .t-paso-n { color: #8fb8e0; }
 .t-tec-info { font-weight: 400; font-size: .82rem; color: var(--ink-soft); line-height: 1.35; }
 .t-mz-grid .t-sug { justify-self: start; font-weight: 600; }
 .t-ir-mz { margin-left: .4rem; }
+/* Entregar y guía extra */
+.t-entregada { display: inline-block; margin-left: .3rem; font-weight: 700; font-size: .85rem; }
+.e1-guia2 { margin: .6rem 0 0 !important; font-size: .9rem !important; color: var(--ink-soft); }
+.t-entregar { margin: 1rem 0 .4rem; padding: .8rem .9rem; border-radius: 10px; border: 1.5px dashed var(--line); background: var(--cream); }
+.t-entregar p { margin: 0 0 .5rem; }

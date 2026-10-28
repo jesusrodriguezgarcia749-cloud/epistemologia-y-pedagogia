@@ -767,3 +767,10 @@ body.mon-completo .mon-grid { grid-template-columns: repeat(auto-fill, minmax(21
 @media (max-width: 1000px) { .trp-bancas { grid-template-columns: repeat(2, 1fr); } }
 .prueba-caja { margin: 6px 0 14px; padding: 12px 14px; border-radius: 12px; background: rgba(91,63,160,.09); border-left: 4px solid #5B3FA0; }
 .prueba-caja p { margin: 0 0 8px; font-size: .92rem; }
+/* Descargas del docente */
+.taller-bajar { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin: .4rem 0 .8rem; }
+.taller-bajar > span:first-child { font-weight: 700; font-size: .88rem; }
+.taller-tabla td.mal { color: #b3261e; font-weight: 700; }
+.taller-tabla td.taller-acc { white-space: nowrap; }
+.taller-tabla .taller-word { padding: 4px 10px; font-size: .82rem; margin-left: 4px; }
+.mon-det-acc { margin: 0 0 .6rem; }

@@ -5,7 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { descargarAPA } from "./apa-word.js?v=2026102707";
+import { wordTaller, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026102708";
 
 const db = getFirestore(initializeApp(firebaseConfig));
 const SESSION_KEY = 'ep_sesion_alumno';
@@ -48,7 +48,7 @@ $('#t-sin-cuenta').addEventListener('click', () => { sesion = { anon: true, nomb
 $('#t-salir').addEventListener('click', async () => { await guardarYa(); try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } location.reload(); });
 
 const claveLocal = () => sesion.anon ? 'taller_invitado' : `taller_${sesion.grupoId}_${sesion.alumnoId}`;
-const vacio = () => ({ tema: '', problema: '', pregunta: '', tipoManual: '', brujula: { resp: [], clave: '' }, objetivos: { general: '', especificos: ['', '', ''], hipotesis: '', refutaria: '' }, matriz: [], respuestas: {}, etica: [], apa: [], guion: '', etapaMax: 0, e1: {}, e1paso: 0, refs: { sel: [], otras: '' } });
+const vacio = () => ({ tema: '', problema: '', pregunta: '', tipoManual: '', brujula: { resp: [], clave: '' }, objetivos: { general: '', especificos: ['', '', ''], hipotesis: '', refutaria: '' }, matriz: [], respuestas: {}, etica: [], apa: [], guion: '', etapaMax: 0, e1: {}, e1paso: 0, pasos: {}, refs: { sel: [], otras: '' }, intro: '', introPasos: [], entregado: {}, plat: {} });
 
 async function entrar() {
   $('#t-acceso').hidden = true; $('#t-app').hidden = false;
@@ -822,155 +822,235 @@ function etapaCuaderno(c) {
   $$('#c-ent .chip-lab').forEach(b => b.addEventListener('click', () => { entregaSel = b.dataset.e; $$('#c-ent .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x === b))); pintarCuaderno(); }));
   pintarCuaderno();
 }
-// ---- Entrega 1, pregunta por pregunta: respuesta base (con lo que ya hizo en el Taller) + «Ahora hazla tuya»
+// ---- Las tres entregas, pregunta por pregunta: respuesta base (con lo que ya hizo en el Taller) + «Ahora hazla tuya»
 // (indicaciones cortas con su propio espacio) → la plataforma arma su respuesta final, que él corrige.
 const TIPO_VERBO = { P: 'explicar: encontrar causas, relaciones o efectos que se puedan medir', I: 'comprender: entender los significados y las experiencias de las personas', S: 'transformar: cambiar una situación junto con quienes la viven', M: 'explicar y comprender a la vez' };
 const tipoActual = () => T.tipoManual || tipoDe(T.pregunta) || T.brujula.clave || '';
-const GUIA_E1 = {
-  1: { titulo: 'Tema y pregunta de investigación', base: () => apoyo(D.preguntas[0]), sinBase: 'Primero termina la Etapa 1 (De la idea a la pregunta): con tu pregunta aquí aparecerá tu respuesta base.',
+const sinPunto = s => String(s || '').trim().replace(/[.\s]+$/, '');
+const primeraOracion = t => { const m = String(t || '').replace(/\s+/g, ' ').trim().match(/^(.+?[.!?])(\s|$)/); return m ? m[1] : String(t || '').trim(); };
+const GUIA = {
+  1: { base: () => apoyo(D.preguntas[0]), sinBase: 'Primero termina la Etapa 1 (De la idea a la pregunta): con tu pregunta aquí aparecerá tu respuesta base.',
     pasos: [['¿Qué viste que te llevó a este tema?', 'Una situación concreta de tus prácticas, tu escuela o tu comunidad: qué pasó, con quién, dónde.'],
       ['¿Por qué importa? ¿A quién le serviría la respuesta?', 'Alumnos, docentes, familias, la escuela, la comunidad…'],
       ['¿Por qué te interesa a ti?', 'Tu experiencia, lo que quieres aportar como pedagoga o pedagogo.']] },
-  2: { titulo: 'Tipo de conocimiento que quiero producir', base: () => { const t = tipoActual(); return t ? `Con mi investigación quiero ${TIPO_VERBO[t]}. Mi pregunta es de tipo ${D.tipos[t].nombre.toLowerCase()}: ${D.tipos[t].txt.charAt(0).toLowerCase() + D.tipos[t].txt.slice(1)}` : ''; }, sinBase: 'Cuando tengas tu pregunta en la Etapa 1, aquí aparecerá si explica, comprende o transforma.',
+  2: { base: () => { const t = tipoActual(); return t ? `Con mi investigación quiero ${TIPO_VERBO[t]}. Mi pregunta es de tipo ${D.tipos[t].nombre.toLowerCase()}: ${D.tipos[t].txt.charAt(0).toLowerCase() + D.tipos[t].txt.slice(1)}` : ''; }, sinBase: 'Cuando tengas tu pregunta en la Etapa 1, aquí aparecerá si explica, comprende o transforma.',
     pasos: [['¿Qué palabra o parte de tu pregunta lo demuestra?', 'Por ejemplo: «¿Cómo viven…?» busca significados; «¿Qué relación…?» busca medir; «¿Cómo puede… junto con…?» busca transformar.'],
       ['¿Qué NO busca tu investigación?', 'Decir lo que no haces aclara lo que sí haces. Por ejemplo: «No busco medir cuántos…, sino entender cómo…».'],
       ['¿Qué autor lo sostiene? Escribe su idea con su cita', 'Dilthey distingue explicar y comprender (Dilthey, 1883/1949); Habermas, los intereses técnico, práctico y emancipatorio (Habermas, 1968/1982).']] },
-  3: { titulo: 'Ubicación en la clasificación de las ciencias', base: () => { const t = tipoActual(); if (!T.pregunta) return '';
+  3: { base: () => { const t = tipoActual(); if (!T.pregunta) return '';
       const extra = { P: 'Como busca explicar con medición, se acerca al modelo de ciencia que proponía Comte: estudiar la sociedad con el mismo espíritu que la física.', I: 'Desde la distinción de Dilthey, se ubica en las ciencias del espíritu, que no buscan explicar con leyes, sino comprender la vida humana.', S: 'Al buscar transformar una situación junto con sus participantes, se ubica en una ciencia social crítica, que no solo explica o comprende, sino que busca cambiar la realidad.', M: 'Como combina medir y comprender, toma algo del modelo explicativo de Comte y algo de las ciencias del espíritu de Dilthey.' }[t] || '';
       return `Según la clasificación de Bunge, mi investigación pertenece a las ciencias fácticas, porque estudia hechos de la realidad y no relaciones entre signos, como la lógica o las matemáticas; y, dentro de ellas, a las ciencias sociales, porque estudia un fenómeno educativo en el que participan personas. ${extra}`.trim(); },
     sinBase: 'Cuando tengas tu pregunta en la Etapa 1, aquí aparecerá tu ubicación.',
     pasos: [['¿Por qué es fáctica y no formal?', '¿Qué hechos reales vas a observar, medir o escuchar en tu investigación?'],
       ['¿Por qué es social y no natural?', 'Aunque midas algo, ¿quiénes son los protagonistas de tu estudio?'],
       ['¿Qué autor la ubicaría ahí? Escribe su idea con su cita', 'Bunge: ciencias formales y fácticas (Bunge, 1960); Dilthey: ciencias del espíritu (Dilthey, 1883/1949); Comte: la física social (Comte, 1844/1980).']] },
-  4: { titulo: 'Paradigma de la investigación', base: () => parrafoBrujula(), sinBase: 'Primero contesta la Etapa 2 (La brújula): aquí aparecerá tu paradigma explicado.',
+  4: { base: () => parrafoBrujula(), sinBase: 'Primero contesta la Etapa 2 (La brújula): aquí aparecerá tu paradigma explicado.',
     pasos: [['Rasgo 1 de TU protocolo que lo demuestra: ¿para qué investigas?', 'Explicar y predecir (positivista), comprender (interpretativo) o transformar (sociocrítico): dilo con tu propio tema.'],
       ['Rasgo 2: ¿cómo te relacionas con los participantes o qué técnicas usarás?', 'Distancia y encuestas, convivencia y entrevistas, o trabajo junto con ellos en talleres.'],
       ['¿Qué autor sostiene tu postura? Escribe su idea con su cita', 'Comte (Comte, 1844/1980), Weber (Weber, 1922/1973), Habermas (Habermas, 1968/1982) o Carr y Kemmis (Carr y Kemmis, 1986/1988).']] },
-  5: { titulo: 'Hipótesis o supuesto y falsabilidad', base: () => apoyo(D.preguntas[4]), sinBase: 'Primero escribe tu hipótesis o supuesto y «Me desmentiría que…» en la Etapa 3: aquí aparecerán.',
+  5: { base: () => apoyo(D.preguntas[4]), sinBase: 'Primero escribe tu hipótesis o supuesto y «Me desmentiría que…» en la Etapa 3: aquí aparecerán.',
     pasos: [['¿Por qué es falsable? ¿Qué observarías exactamente?', 'Di qué dato, qué resultado o qué comportamiento verías si estuvieras equivocado.'],
       ['¿Qué excusas NO vas a usar si sale mal?', 'Por ejemplo: «No diré que faltó tiempo». Así tu hipótesis no se protege sola (tema 4.2). Si es cualitativa: ¿qué te haría replantear tu supuesto?'],
       ['Popper o Lakatos con su cita', 'Popper: una teoría es científica si puede ser refutada (Popper, 1934/2008). Lakatos: núcleo duro y cinturón protector (Lakatos, 1978/1989).']] },
-  6: { titulo: 'Paradigma dominante y anomalías', base: () => '', guia: 'Frase guía para empezar: «En mi tema suelen investigar con ____. Eso supone que ____. Algo que esos estudios no logran explicar es ____. Como diría Kuhn, ____.»',
+  6: { base: () => '', guia: 'Frase guía para empezar: «En mi tema suelen investigar con ____. Eso supone que ____. Algo que esos estudios no logran explicar es ____. Como diría Kuhn, ____.»',
     pasos: [['¿Cómo se suele investigar tu tema?', 'Revisa tus antecedentes: ¿la mayoría son encuestas, experimentos, entrevistas, estudios de caso?'],
       ['¿Qué supuesto comparten esos estudios? Ese es el paradigma dominante', 'Por ejemplo: «suponen que la comprensión se mide con una prueba» o «que el problema está solo en el alumno».'],
       ['¿Qué no logran explicar? Esa es la anomalía', 'Algo que no cuadra. Por ejemplo: alumnos que leen bien en voz alta pero no comprenden.'],
       ['Kuhn con su cita', 'La ciencia normal trabaja dentro de un paradigma hasta que las anomalías provocan una crisis (Kuhn, 1962/2013).']] },
+  7: { base: () => T.objetivos.hipotesis.trim() ? `Llego a mi investigación con una idea previa: ${sinPunto(T.objetivos.hipotesis)}. Esa idea puede convertirse en un obstáculo si solo busco lo que la confirma.` : '',
+    guia: 'Frase guía para empezar: «Llego a mi investigación pensando que ____. Eso podría ser lo que Bachelard llama ____, porque ____. Para controlarlo, ____.»',
+    sinBase: 'Cuando escribas tu hipótesis o supuesto (Etapa 3), aquí aparecerá como punto de partida.',
+    pasos: [['¿Qué idea previa o experiencia tuya podría sesgarte?', 'Lo que ya crees sobre tu tema, lo que viviste en tus prácticas, lo que «todo mundo sabe».'],
+      ['¿Qué obstáculo de Bachelard es? Escribe su idea con su cita', 'Experiencia primera, generalización apresurada, obstáculo verbal, conocimiento unitario… (Bachelard, 1938/2000).'],
+      ['¿Qué harás para controlarlo?', 'Diario reflexivo, triangulación, pedir que alguien revise tus datos, buscar casos que contradigan tu idea (Martínez Miguélez, 2004).']] },
+  8: { base: () => { const o = T.objetivos, pf = perfil(), m = apoyo(D.preguntas[7]); if (!o.general.trim() && !m) return '';
+      return [o.general.trim() && `Mi objetivo general es ${minus(sinPunto(o.general))}.`, pf && `Por eso mi enfoque es ${pf.enfoque.toLowerCase()}.`, m].filter(Boolean).join(' '); },
+    sinBase: 'Primero llena tu Matriz de congruencia (Etapa 5): aquí aparecerán tus técnicas, instrumentos y participantes.',
+    pasos: [['Diseño y participantes: ¿quiénes, cuántos y cómo los eliges?', 'Por ejemplo: «6 docentes de nuevo ingreso, elegidos porque…». Di por qué ellos y no otros.'],
+      ['¿Qué harás con cada técnica y en qué orden?', 'Cuenta el camino: primero…, después…, al final… (usa tu matriz).'],
+      ['¿Por qué ese camino es el adecuado para tu objeto? Con cita', 'El método se adecua a la naturaleza del objeto, no al revés (Martínez Miguélez, 2004); no hay un método único y universal (Feyerabend, 1975/1986).']] },
+  9: { base: () => '', guia: 'Frase guía para empezar: «Alrededor de mi tema, ____ saben que ____. Ese saber no es científico, pero ____. Lo incorporaría ____.»',
+    pasos: [['¿Qué saber no científico toca tu tema? Da un ejemplo concreto', 'De docentes, familias, alumnos o la comunidad: un saber práctico, una costumbre, una creencia, un remedio, una forma de enseñar.'],
+      ['¿Qué vale de ese saber y qué límites tiene?', 'Evita los dos extremos: despreciarlo (cientificismo) o creerlo todo (relativismo ingenuo).'],
+      ['¿Cómo lo incorporarías a tu investigación? Con cita', 'Ecología de saberes (Sousa Santos, 2009); el saber tácito del docente (Polanyi, 1966); el diálogo de saberes (Freire, 1970/2005).']] },
+  10: { base: () => apoyo(D.preguntas[9]), sinBase: 'Primero contesta la Etapa 2 (La brújula): aquí aparecerán los criterios de rigor de tu enfoque.',
+    pasos: [['¿Qué significa cada criterio en TU investigación?', 'Cuantitativo: validez, confiabilidad, objetividad. Cualitativo: credibilidad, transferibilidad, consistencia, confirmabilidad. Explica uno con tu tema.'],
+      ['¿Qué acciones concretas harás para lograrlos?', 'Prueba piloto, triangulación, revisión por pares, devolver resultados a los participantes, diario reflexivo.'],
+      ['¿Qué autor lo respalda? Con cita', 'El rigor cualitativo (Martínez Miguélez, 2004); la contrastación (Popper, 1934/2008); la comprensión como vía propia (Dilthey, 1883/1949).']] },
+  11: { base: () => '', guia: 'Frase guía para empezar: «Cerca de mi tema circula la idea de que ____. La evidencia muestra que ____ (Autor, año). Por eso, en mi investigación ____.» Si no encuentras ninguno, explica cómo lo buscaste.',
+    pasos: [['¿Qué creencia sin evidencia circula cerca de tu tema?', 'Estilos de aprendizaje visual-auditivo-kinestésico, «usamos el 10 % del cerebro», hemisferio creativo y lógico, efecto Mozart, gimnasia cerebral…'],
+      ['¿Qué dice la evidencia? Con cita', 'Cómo aprende el cerebro (Dehaene, 2018/2019); la neuroeducación (Mora, 2013). Revisa también el juego de neuromitos del Laboratorio.'],
+      ['¿Cómo evitarás que tu investigación lo repita?', 'Por ejemplo: no usar instrumentos basados en el mito, revisar tus fuentes, explicar el mito a tus participantes.']] },
+  12: { base: () => { const t = T.brujula.clave || tipoActual(); const x = { P: ['técnico', 'busco explicar y predecir para poder intervenir con eficacia'], I: ['práctico', 'busco el entendimiento entre las personas que viven el fenómeno'], S: ['emancipatorio', 'busco que los participantes se liberen de condiciones que limitan su aprendizaje o su vida escolar'], M: ['técnico y práctico a la vez', 'busco medir y también comprender'] }[t];
+      return x ? `Siguiendo a Habermas, mi investigación responde a un interés ${x[0]}, porque ${x[1]}.` : ''; },
+    sinBase: 'Primero contesta la Etapa 2 (La brújula): aquí aparecerá el interés que corresponde a tu paradigma.',
+    pasos: [['¿Por qué ese interés y no los otros dos?', 'Técnico: controlar y predecir. Práctico: entendimiento entre personas. Emancipatorio: liberar de la dominación. Di por qué no es cada uno de los otros.'],
+      ['¿Cómo se nota en tu protocolo?', 'En tu pregunta, en tus objetivos o en tu método: señala dónde.'],
+      ['¿Es coherente con tu paradigma (pregunta 4)? Con cita', 'Técnico con las ciencias empírico-analíticas; práctico con las histórico-hermenéuticas; emancipatorio con la ciencia crítica (Habermas, 1968/1982).']] },
+  13: { base: () => '', guia: 'Frase guía para empezar: «Feyerabend (o Morin) objetaría a mi método que ____ (Autor, año). Tiene razón en que ____. Sin embargo, ____, y por eso ajustaría ____.»',
+    pasos: [['Elige al crítico y formula su objeción más fuerte a tu método, con cita', 'Feyerabend: tu método es rígido o excluye otros saberes (Feyerabend, 1975/1986). Morin: tu método fragmenta lo que está tejido junto (Morin, 1990/1994).'],
+      ['¿Qué parte de la crítica aceptas?', 'Una buena respuesta reconoce lo que el crítico ve bien.'],
+      ['¿Qué ajustarías y por qué tu método se sostiene?', 'Un cambio concreto, y el argumento de por qué tu camino sigue siendo válido.']] },
+  14: { base: () => '', guia: 'Frase guía para empezar: «Sostengo que mi investigación sobre ____ es ____, porque ____ (Autor, año). Además, ____ (Autor, año).» Las cuatro posturas del tema 1.3: arte, ciencia aplicada, ciencia propia o ciencia crítica.',
+    pasos: [['Tu tesis en una oración: ¿es ciencia y de qué tipo?', 'Arte, ciencia aplicada, ciencia propia o ciencia crítica (tema 1.3). Dilo con tu tema.'],
+      ['Primer argumento, con su autor y su cita', 'Por ejemplo: la falsabilidad (Popper, 1934/2008) o la comprensión (Dilthey, 1883/1949).'],
+      ['Segundo argumento, con otro autor y su cita', 'Por ejemplo: los paradigmas (Kuhn, 1962/2013) o la ciencia crítica (Carr y Kemmis, 1986/1988).']] },
+  15: { base: () => '', guia: 'Frase guía para empezar: «Mi investigación podría mostrar barreras como ____ (Booth y Ainscow, 2000). Pero mi propio diseño podría reproducir ____, porque ____ (Bourdieu y Passeron, 1970/1977). Para evitarlo, ____.»',
+    pasos: [['¿Qué barreras o desigualdades podría revelar tu estudio?', 'Barreras en el currículo, los materiales, la evaluación o las actitudes (Booth y Ainscow, 2000).'],
+      ['¿Cómo podría tu propio diseño reproducirlas?', '¿Tus instrumentos premian el capital cultural de algunos? (Bourdieu y Passeron, 1970/1977). ¿Quién queda fuera de tu muestra?'],
+      ['¿Qué harás para evitarlo?', 'Por ejemplo: instrumentos en lenguaje sencillo, incluir a quienes suelen quedar fuera, otras formas de participar.']] },
+  16: { base: () => apoyo(D.preguntas[15]), sinBase: 'Marca la lista de ética en la Etapa 6: aquí aparecerá lo que ya tienes resuelto.',
+    pasos: [['¿Cuál es el riesgo ético más concreto de TU estudio?', 'Menores de edad, datos personales, una relación de poder (si eres su docente), el uso de inteligencia artificial…'],
+      ['¿Cómo lo resolverás, paso a paso?', 'Consentimiento, asentimiento, permisos, seudónimos, resguardo y borrado de datos.'],
+      ['¿Qué autor lo respalda? Con cita', 'La responsabilidad por las consecuencias (Jonas, 1979/1995); la bioética como puente entre ciencia y valores (Potter, 1971).']] },
+  17: { base: () => '', guia: 'Frase guía para empezar: «Mi investigación se relaciona con ____ de la Nueva Escuela Mexicana, porque ____. Aporta ____, aunque ____.»',
+    pasos: [['¿Con qué elemento concreto de la NEM se conecta?', 'Un campo formativo, un eje articulador, el programa analítico, el trabajo con la comunidad o el diálogo de saberes.'],
+      ['¿Cómo se conecta? Explícalo con tu tema', 'No basta con decir que «se relaciona»: muestra el vínculo.'],
+      ['¿Qué aporta tu investigación o qué le criticarías? Con cita', 'Los saberes para la educación del futuro (Morin, 1999); el diálogo (Freire, 1970/2005); el docente investigador (Stenhouse, 1975/1984); la ecología de saberes (Sousa Santos, 2009).']] },
+  18: { base: () => { const t = primeraOracion(T.respuestas[14]); return t ? `En mi tesis provisional sostuve: «${sinPunto(t)}».` : ''; },
+    sinBase: 'Primero escribe tu tesis provisional (pregunta 14): aquí aparecerá para que la compares.',
+    pasos: [['¿Cambió tu tesis? ¿Qué te hizo cambiar o qué la confirmó?', 'Un tema del curso, un autor, algo que viviste al plantear tu protocolo.'],
+      ['¿Qué cambiarías concretamente de tu protocolo?', 'La pregunta, el método, los participantes, la ética: di qué y por qué.'],
+      ['Tu respuesta final: ¿tu investigación es ciencia? Con cita', 'Cierra con tu propia voz y apóyate en Kuhn (1962/2013), Morin (1990/1994) o Carr y Kemmis (1986/1988).']] },
 };
+const INTRO = [['¿De qué trata tu investigación?', 'Tu tema y tu pregunta en dos o tres oraciones.'],
+  ['¿Qué sostienes en este ensayo?', 'Tu tesis: si tu investigación es ciencia y de qué tipo (lo que concluyes en la pregunta 18).'],
+  ['¿Cómo está organizado el ensayo?', 'Por ejemplo: «Primero ubico mi investigación…; después explico mi método…; al final…».']];
 const oracion = x => { let t = String(x || '').trim(); if (!t) return ''; t = t.charAt(0).toUpperCase() + t.slice(1); return /[.!?»]$/.test(t) ? t : t + '.'; };
-const armarE1 = n => { const G = GUIA_E1[n], b = G.base(), ps = (T.e1[n] || []).map(oracion).filter(Boolean); return [b, ps.join(' ')].filter(x => x && x.trim()).join('\n\n'); };
-const tieneCita = t => /\([^()]*\d{4}[^()]*\)/.test(t || '');
-const refsSugeridas = () => { const ids = [...new Set(D.preguntas.filter(p => p.n <= 6).flatMap(p => p.autores))]; return ids.flatMap(id => ((LAB.autores.find(a => a.id === id) || {}).refs || []).map((r, i) => ({ id: `${id}-${i}`, apa: r.apa }))); };
-const refsElegidas = () => { const S = new Set(T.refs.sel); return [...refsSugeridas().filter(r => S.has(r.id)).map(r => r.apa), ...String(T.refs.otras || '').split('\n').map(x => x.trim()).filter(Boolean)]; };
+const armarResp = n => { const G = GUIA[n], b = G.base(), ps = (T.e1[n] || []).map(oracion).filter(Boolean); return [b, ps.join(' ')].filter(x => x && x.trim()).join('\n\n'); };
+const NUMS = ent => numsDe(D, ent);
+const pasoDe = ent => ent === 'entrega1' ? (T.e1paso || 0) : ((T.pasos || {})[ent] || 0);
+const fijarPaso = (ent, v) => { if (ent === 'entrega1') T.e1paso = v; else { T.pasos = T.pasos || {}; T.pasos[ent] = v; } };
+// Qué tanto de la respuesta es texto de la plataforma (la respuesta base), para que el alumno escriba lo suyo.
+const MAX_PLAT = 50;
+const platDe = n => porcentajePlataforma(T.respuestas[n], (GUIA[n] && GUIA[n].base()) || '');
+function guardarPlat(n) { T.plat = T.plat || {}; T.plat[n] = platDe(n); }
 
-function pintarE1() {
-  T.e1paso = Math.max(0, Math.min(6, T.e1paso || 0));
-  const paso = T.e1paso, e = D.entregas.entrega1;
+function pintarGuiada(ent) {
+  const NS = NUMS(ent), tot = NS.length;
+  const paso = Math.max(0, Math.min(tot, pasoDe(ent))); fijarPaso(ent, paso);
+  const e = D.entregas[ent], E = ENTREGAS[ent];
   const hecha = n => palabras(T.respuestas[n]) >= 150;
-  $('#c-lista').innerHTML = `<div class="t-entrega"><b>${esc(e.nombre)}</b> · ${esc(e.fecha)}<p>${esc(e.req)}</p><p>Vas pregunta por pregunta. <b>Todo se guarda solo</b> mientras escribes.</p></div>
-    <nav class="e1-pasos" aria-label="Preguntas de la Entrega 1">${[1, 2, 3, 4, 5, 6].map(n => `<button type="button" data-p="${n - 1}" class="${paso === n - 1 ? 'actual' : ''} ${hecha(n) ? 'hecha' : ''}">${hecha(n) ? '✓' : n}</button>`).join('')}<button type="button" data-p="6" class="e1-desc ${paso === 6 ? 'actual' : ''}">📄 Referencias y Word</button></nav>
+  const est = estadoEntrega(T, D, ent);
+  $('#c-lista').innerHTML = `<div class="t-entrega"><b>${esc(e.nombre)}</b> · ${esc(e.fecha)}<p>${esc(e.req)}</p><p>Vas pregunta por pregunta. <b>Todo se guarda solo</b> mientras escribes.${est.entregada ? ` <span class="t-entregada">${est.modificada ? '✏️ Entregada y modificada después' : '📬 Entregada'} el ${new Date(est.t).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}</span>` : ''}</p>
+      ${ent === 'entrega2' ? `<p class="t-recuerda">🧭 Las preguntas 8 y 10 usan tu <b>Matriz de congruencia</b>${T.matriz.some(f => f.tecnica) ? ' ✓' : ': llénala primero y aquí aparecerá como punto de partida'}. <button type="button" class="btn-lab-l t-ir-mz">Ir a la matriz →</button></p>` : ''}
+      ${ent !== 'entrega1' ? `<p class="t-nota">Las preguntas ${ent === 'entrega2' ? '1 a 6' : '1 a 14'} ya las trabajaste en ${ent === 'entrega2' ? 'la Entrega 1' : 'las entregas anteriores'}: entran solas al Word. Puedes corregirlas en su pestaña.</p>` : ''}</div>
+    <nav class="e1-pasos" aria-label="Preguntas de la ${esc(e.nombre)}">${NS.map((n, i) => `<button type="button" data-p="${i}" class="${paso === i ? 'actual' : ''} ${hecha(n) ? 'hecha' : ''}">${hecha(n) ? '✓' : n}</button>`).join('')}<button type="button" data-p="${tot}" class="e1-desc ${paso === tot ? 'actual' : ''}">📄 ${E.intro ? 'Introducción, ' : ''}Referencias y Word</button></nav>
     <div id="e1-cuerpo"></div>`;
-  $$('.e1-pasos button').forEach(b => b.addEventListener('click', () => { T.e1paso = +b.dataset.p; cambio(); pintarE1(); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
+  const ir = v => { fijarPaso(ent, v); cambio(); pintarGuiada(ent); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  $$('.e1-pasos button').forEach(b => b.addEventListener('click', () => ir(+b.dataset.p)));
+  $$('.t-ir-mz').forEach(b => b.addEventListener('click', () => irA(D.etapas.findIndex(x => x.id === 'matriz'))));
   const cuerpo = $('#e1-cuerpo');
-  if (paso === 6) return pintarE1Final(cuerpo);
-  const n = paso + 1, p = D.preguntas[paso], G = GUIA_E1[n], base = G.base();
+  if (paso === tot) return pintarFinal(ent, cuerpo, ir);
+  const n = NS[paso], p = D.preguntas.find(x => x.n === n), G = GUIA[n], base = G.base();
   T.e1[n] = T.e1[n] || G.pasos.map(() => '');
   cuerpo.innerHTML = `<article class="t-preg e1">
-    <p class="e1-n">Pregunta ${n} de 6 · ${esc(G.titulo)}</p><h3>${esc(p.texto)}</h3>
+    <p class="e1-n">Pregunta ${n} · ${paso + 1} de ${tot} · ${esc(TITULOS[n])}</p><h3>${esc(p.texto)}</h3>
     <p class="t-pide"><b>Qué te piden:</b> ${esc(p.pide)}</p>
-    <div class="e1-base ${base ? '' : 'vacia'}"><p class="e1-k">${base ? `💡 Tu respuesta base a la pregunta ${n}` : n === 6 ? '💡 Cómo empezar' : '💡 Tu respuesta base'}</p>
+    <div class="e1-base ${base ? '' : 'vacia'}"><p class="e1-k">${base ? `💡 Tu respuesta base a la pregunta ${n}` : G.guia ? '💡 Cómo empezar' : '💡 Tu respuesta base'}</p>
       <p>${base ? esc(base) : esc(G.guia || G.sinBase)}</p>
-      ${base ? '<small>Sale de lo que hiciste en el Taller. Es tu punto de partida: entra como primer párrafo, pero sola no llega a las 150 palabras. Abajo la argumentas con tus palabras.</small>' : ''}</div>
+      ${base ? `<small>Sale de lo que hiciste en el Taller. Es tu punto de partida: entra como primer párrafo, pero sola no basta. Abajo la argumentas con tus palabras: al menos la mitad de tu respuesta debe ser tuya.</small>${G.guia ? `<p class="e1-guia2">${esc(G.guia)}</p>` : ''}` : ''}</div>
     <h4 class="e1-h">✍️ Ahora hazla tuya: argumenta y profundiza</h4>
     ${G.pasos.map(([t, a], i) => `<label class="e1-sub"><span><b>${['①', '②', '③', '④'][i]} ${esc(t)}</b><small>${esc(a)}</small></span><textarea data-i="${i}" rows="3">${esc(T.e1[n][i] || '')}</textarea></label>`).join('')}
     <details class="t-pistas"><summary>Pistas, error común y autores</summary><ul>${p.pistas.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="t-error-comun"><b>Error común:</b> ${esc(p.error)}</p>
       <p class="t-aut"><b>Autores:</b> ${p.autores.map(a => `<a href="laboratorio.html#constelacion=${a}" target="_blank" rel="noopener">${esc(NOMBRES_AUT[a] || a)}</a>`).join(' · ')} · <b>Compendio:</b> ${p.temas.map(t => `<a href="tema.html?id=${t}" target="_blank" rel="noopener">${t}</a>`).join(' · ')}</p></details>
     <h4 class="e1-h">📝 Tu respuesta final</h4>
-    <p class="lab-ayuda">Toca <b>Armar mi respuesta</b> para juntar tu respuesta base con lo que escribiste arriba. Después léela completa, corrígela y une las ideas para que suene a ti: esto es lo que va al Word.</p>
+    <p class="lab-ayuda">Toca <b>Armar mi respuesta</b> para juntar ${base ? 'tu respuesta base con ' : ''}lo que escribiste arriba. Después léela completa, corrígela y une las ideas para que suene a ti: esto es lo que va al Word.</p>
     <button type="button" class="btn-lab-l" id="e1-armar">🧩 Armar mi respuesta con lo anterior</button>
     <textarea class="t-resp" id="e1-final" rows="10" placeholder="Aquí queda tu respuesta completa.">${esc(T.respuestas[n] || '')}</textarea>
     <ul class="e1-checks" id="e1-checks"></ul>
-    <div class="e1-nav">${paso ? '<button type="button" class="btn-lab-l" id="e1-ant">← Pregunta anterior</button>' : '<span></span>'}<button type="button" class="btn-lab" id="e1-sig">${n < 6 ? `Siguiente: pregunta ${n + 1} →` : 'Siguiente: referencias y Word →'}</button></div>
+    <div class="e1-nav">${paso ? '<button type="button" class="btn-lab-l" id="e1-ant">← Pregunta anterior</button>' : '<span></span>'}<button type="button" class="btn-lab" id="e1-sig">${paso < tot - 1 ? `Siguiente: pregunta ${NS[paso + 1]} →` : `Siguiente: ${E.intro ? 'introducción, ' : ''}referencias y Word →`}</button></div>
   </article>`;
   const checks = () => {
-    const t = T.respuestas[n] || '', w = palabras(t), sub = (T.e1[n] || []).filter(x => palabras(x) >= 5).length;
+    const t = T.respuestas[n] || '', w = palabras(t), sub = (T.e1[n] || []).filter(x => palabras(x) >= 5).length, pl = base ? platDe(n) : 0;
     $('#e1-checks').innerHTML = [
       [w >= 150 && w <= 250, w < 150 ? `${w} palabras: te faltan ${150 - w} para el mínimo de 150` : w > 250 ? `${w} palabras: pasaste el máximo de 250, recorta` : `${w} palabras ✓ dentro del rango`],
       [sub === G.pasos.length, `Argumentaste ${sub} de ${G.pasos.length} puntos de «Ahora hazla tuya»`],
       [tieneCita(t), tieneCita(t) ? 'Incluye al menos una cita (Autor, año) ✓' : 'Falta al menos una cita en APA: (Autor, año)'],
-    ].map(([ok, txt]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(txt)}</li>`).join('');
+      ...(base && w ? [[pl <= MAX_PLAT, pl <= MAX_PLAT ? `Texto tuyo: ${100 - pl} % ✓` : `Solo ${100 - pl} % es texto tuyo: el ${pl} % es la respuesta base de la plataforma. Agrega tus argumentos o reescribe la base con tus palabras (al menos la mitad debe ser tuya).`]] : []),
+    ].map(([ok, txt]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(txt.replace(/\s*✓$/, ''))}</li>`).join('');
   };
   $$('.e1-sub textarea', cuerpo).forEach(ta => ta.addEventListener('input', () => { T.e1[n][+ta.dataset.i] = ta.value; cambio(); checks(); }));
-  $('#e1-final').addEventListener('input', e2 => { T.respuestas[n] = e2.target.value; cambio(); checks(); });
+  $('#e1-final').addEventListener('input', e2 => { T.respuestas[n] = e2.target.value; guardarPlat(n); cambio(); checks(); });
   $('#e1-armar').addEventListener('click', () => {
-    const nuevo = armarE1(n); if (!nuevo.trim()) { alert('Primero escribe en «Ahora hazla tuya».'); return; }
+    const nuevo = armarResp(n); if (!nuevo.trim() || !(T.e1[n] || []).some(x => x.trim())) { alert('Primero escribe en «Ahora hazla tuya».'); return; }
     if ((T.respuestas[n] || '').trim() && !confirm('Ya tienes una respuesta final. ¿Reemplazarla por una nueva armada con tu respuesta base y lo que escribiste arriba?')) return;
-    T.respuestas[n] = nuevo; $('#e1-final').value = nuevo; cambio(); checks(); $('#e1-final').focus();
+    T.respuestas[n] = nuevo; $('#e1-final').value = nuevo; guardarPlat(n); cambio(); checks(); $('#e1-final').focus();
   });
-  const ir = d => { T.e1paso = paso + d; cambio(); pintarE1(); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-  const ba = $('#e1-ant'); if (ba) ba.addEventListener('click', () => ir(-1));
-  $('#e1-sig').addEventListener('click', () => ir(1));
+  const ba = $('#e1-ant'); if (ba) ba.addEventListener('click', () => ir(paso - 1));
+  $('#e1-sig').addEventListener('click', () => ir(paso + 1));
   checks();
 }
-function pintarE1Final(cuerpo) {
-  const sug = refsSugeridas(), S = new Set(T.refs.sel);
+function pintarFinal(ent, cuerpo, ir) {
+  const E = ENTREGAS[ent], hasta = hastaDe(D, ent), NS = NUMS(ent), todas = D.preguntas.filter(p => p.n <= hasta).map(p => p.n);
+  const sug = refsSugeridas(D, LAB, hasta), S = new Set(T.refs.sel);
   const md2 = t => esc(t).replace(/\*([^*]+)\*/g, '<i>$1</i>');
+  T.introPasos = T.introPasos || INTRO.map(() => '');
   cuerpo.innerHTML = `<article class="t-preg e1">
-    <p class="e1-n">Último paso</p><h3>Referencias y descarga de la primera parte del ensayo</h3>
-    <p class="lab-ayuda">La Entrega 1 pide <b>al menos 3 referencias en APA 7</b>. Marca las obras de los autores que citaste (vienen del compendio, ya en formato APA) y agrega las que tú encontraste, una por renglón.</p>
+    <p class="e1-n">Último paso</p><h3>${E.intro ? 'Introducción, referencias' : 'Referencias'} y descarga ${ent === 'entregaFinal' ? 'del ensayo final' : ent === 'entrega2' ? 'del borrador completo' : 'de la primera parte del ensayo'}</h3>
+    ${E.intro ? `<h4 class="e1-h">✍️ Introducción del ensayo</h4><p class="lab-ayuda">Un ensayo empieza presentando el tema, la tesis y el camino. Escríbela al final, cuando ya sabes qué concluiste.</p>
+      ${INTRO.map(([t, a], i) => `<label class="e1-sub"><span><b>${['①', '②', '③'][i]} ${esc(t)}</b><small>${esc(a)}</small></span><textarea data-ii="${i}" rows="3">${esc(T.introPasos[i] || '')}</textarea></label>`).join('')}
+      <button type="button" class="btn-lab-l" id="in-armar">🧩 Armar mi introducción</button>
+      <textarea class="t-resp" id="in-final" rows="7" placeholder="Aquí queda tu introducción (de 150 a 250 palabras).">${esc(T.intro || '')}</textarea><p class="t-cuenta" id="in-cnt"></p>` : ''}
+    <h4 class="e1-h">📚 Referencias</h4>
+    <p class="lab-ayuda">${esc(D.entregas[ent].nombre)} pide <b>al menos ${E.minRefs} referencias en APA 7</b>${E.minArticulos ? `, de ellas <b>al menos ${E.minArticulos} artículos académicos</b> (de revista, con volumen y número o DOI)` : ''}. Marca las obras de los autores que citaste (vienen del compendio, ya en formato APA) y agrega las que tú encontraste, una por renglón.</p>
     <div class="e1-refs">${sug.map(r => `<label><input type="checkbox" data-r="${r.id}" ${S.has(r.id) ? 'checked' : ''}> <span>${md2(r.apa)}</span></label>`).join('')}</div>
-    <label class="e1-sub"><span><b>Otras referencias</b><small>Una por renglón, en APA 7. Para poner un título en cursivas, enciérralo entre asteriscos: *Título del libro*.</small></span><textarea id="e1-otras" rows="4">${esc(T.refs.otras || '')}</textarea></label>
-    <h4 class="e1-h">Antes de descargar</h4><ul class="e1-checks" id="e1-rev"></ul>
-    <button type="button" class="btn-lab e1-word" id="e1-word">⬇ Descargar la primera parte del ensayo (preguntas 1 a 6) en Word</button>
-    <p class="t-nota">Sale en formato APA 7: portada con el escudo, Times New Roman 12, doble espacio, sangría, número de página y referencias con sangría francesa. Puedes descargarlo las veces que quieras.</p>
-    <p class="t-recuerda">🎉 Con esto terminas la Entrega 1. Lo que sigue (la Matriz de congruencia y la Entrega 2) lo verás cuando tu docente lo indique.</p>
-    <div class="e1-nav"><button type="button" class="btn-lab-l" id="e1-ant">← Pregunta 6</button><span></span></div></article>`;
+    <label class="e1-sub"><span><b>Otras referencias</b><small>Una por renglón, en APA 7. Para poner un título en cursivas, enciérralo entre asteriscos: *Título del libro*. Un artículo: Apellido, N. (año). Título del artículo. *Nombre de la revista*, *volumen*(número), páginas. https://doi.org/…</small></span><textarea id="e1-otras" rows="4">${esc(T.refs.otras || '')}</textarea></label>
+    <h4 class="e1-h">Antes de entregar</h4><ul class="e1-checks" id="e1-rev"></ul>
+    <button type="button" class="btn-lab e1-word" id="e1-word">⬇ Descargar ${esc(E.boton)} en Word</button>
+    <p class="t-nota">Sale con la portada oficial del ITES y en formato APA 7: Times New Roman 12, doble espacio, sangría, número de página y referencias con sangría francesa. Puedes descargarlo las veces que quieras.</p>
+    <div class="t-entregar" id="t-entregar"></div>
+    ${ent === 'entregaFinal' ? '<p class="t-recuerda">🎤 La entrega final incluye una defensa oral de 3 minutos: arma y ensaya tu guion en la Etapa 6.</p>' : ''}
+    <div class="e1-nav"><button type="button" class="btn-lab-l" id="e1-ant">← Pregunta ${NS[NS.length - 1]}</button><span></span></div></article>`;
   const rev = () => {
-    const faltan = [1, 2, 3, 4, 5, 6].filter(n => palabras(T.respuestas[n]) < 150), sinCita = [1, 2, 3, 4, 5, 6].filter(n => !tieneCita(T.respuestas[n])), nr = refsElegidas().length;
-    $('#e1-rev').innerHTML = [
-      [!faltan.length, faltan.length ? `Preguntas con menos de 150 palabras: ${faltan.join(', ')}` : 'Las 6 respuestas tienen al menos 150 palabras ✓'],
-      [!sinCita.length, sinCita.length ? `Preguntas sin cita (Autor, año): ${sinCita.join(', ')}` : 'Las 6 respuestas tienen al menos una cita ✓'],
-      [nr >= 3, `${nr} referencia${nr === 1 ? '' : 's'} ${nr >= 3 ? '✓' : `· te faltan ${3 - nr} para el mínimo de 3`}`],
-    ].map(([ok, txt]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(txt)}</li>`).join('');
+    const faltan = todas.filter(n => palabras(T.respuestas[n]) < 150), sinCita = todas.filter(n => !tieneCita(T.respuestas[n]));
+    const muchaPlat = todas.filter(n => palabras(T.respuestas[n]) && GUIA[n].base() && platDe(n) > MAX_PLAT);
+    const refs = refsElegidas(T, D, LAB, hasta), nr = refs.length, na = refs.filter(esArticulo).length;
+    const total = textosDe(T, D, ent).reduce((s, [, t]) => s + palabras(t), 0);
+    const L = [
+      [!faltan.length, faltan.length ? `Preguntas con menos de 150 palabras: ${faltan.join(', ')}` : `Las ${todas.length} respuestas tienen al menos 150 palabras ✓`],
+      [!sinCita.length, sinCita.length ? `Preguntas sin cita (Autor, año): ${sinCita.join(', ')}` : `Las ${todas.length} respuestas tienen al menos una cita ✓`],
+      [!muchaPlat.length, muchaPlat.length ? `Preguntas donde más de la mitad es la respuesta base de la plataforma: ${muchaPlat.join(', ')}. Escríbelas más con tus palabras.` : 'En todas las respuestas, al menos la mitad del texto es tuyo ✓'],
+      [nr >= E.minRefs, `${nr} referencia${nr === 1 ? '' : 's'} ${nr >= E.minRefs ? '✓' : `· te faltan ${E.minRefs - nr} para el mínimo de ${E.minRefs}`}`],
+    ];
+    if (E.minArticulos) L.push([na >= E.minArticulos, `${na} artículo${na === 1 ? '' : 's'} académico${na === 1 ? '' : 's'} ${na >= E.minArticulos ? '✓' : `· te faltan ${E.minArticulos - na} (de revista, con volumen y número o DOI)`}`]);
+    if (E.intro) L.push([palabras(T.intro) >= 100, palabras(T.intro) >= 100 ? 'Tiene introducción ✓' : 'Falta la introducción (al menos 100 palabras)']);
+    if (E.minPal) L.push([total >= E.minPal && total <= E.maxPal, `${total.toLocaleString('es-MX')} palabras en total ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500` : total > E.maxPal ? '· pasaste el máximo de 3,500' : '✓ dentro del rango (2,500 a 3,500)'}`]);
+    $('#e1-rev').innerHTML = L.map(([ok, txt]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(txt.replace(/\s*✓$/, ''))}</li>`).join('');
+    const est = estadoEntrega(T, D, ent), fecha = t => new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+    $('#t-entregar').innerHTML = est.entregada
+      ? `<p class="${est.modificada ? 't-aviso' : 't-bien'}">${est.modificada ? `✏️ Entregaste el ${fecha(est.t)}, pero cambiaste tu trabajo después. Tu maestro verá que fue modificado. Si ya terminaste tus cambios, vuelve a entregar.` : `📬 Entregaste el ${fecha(est.t)}. Tu maestro ya puede descargarlo. Si cambias algo, tendrás que volver a entregar.`}</p>${est.modificada ? '<button type="button" class="btn-lab" id="t-entregar-btn">📬 Volver a entregar</button>' : ''}`
+      : `<p class="lab-ayuda">Cuando termines, marca tu trabajo como entregado: tu maestro verá la fecha y podrá descargarlo.${L.some(([ok]) => !ok) ? ' Todavía hay puntos pendientes en la lista de arriba; puedes entregar así, pero revísalos.' : ''}</p><button type="button" class="btn-lab" id="t-entregar-btn">📬 Entregar ${esc(D.entregas[ent].nombre.split('·')[0].trim())}</button>`;
+    const b = $('#t-entregar-btn');
+    if (b) b.addEventListener('click', async () => {
+      if (sesion.anon) { alert('Para entregar necesitas entrar con tu nombre y PIN (sin cuenta solo se guarda en este dispositivo).'); return; }
+      const pend = L.filter(([ok]) => !ok).length;
+      if (!confirm(pend ? `Tienes ${pend} punto${pend === 1 ? '' : 's'} pendiente${pend === 1 ? '' : 's'} en la lista. ¿Entregar de todos modos?` : '¿Entregar tu trabajo? Tu maestro verá la fecha y podrá descargarlo.')) return;
+      T.entregado = T.entregado || {}; T.entregado[ent] = { t: Date.now(), huella: huella(T, D, ent) };
+      cambio(); await guardarYa(); rev(); pintarPasos(false);
+    });
   };
+  if (E.intro) {
+    const cnt = () => { const w = palabras(T.intro); $('#in-cnt').textContent = `${w} palabras ${w < 150 ? `· busca de 150 a 250` : w > 250 ? '· pasaste las 250' : '· ✓'}`; };
+    $$('[data-ii]', cuerpo).forEach(ta => ta.addEventListener('input', () => { T.introPasos[+ta.dataset.ii] = ta.value; cambio(); }));
+    $('#in-final').addEventListener('input', ev => { T.intro = ev.target.value; cambio(); cnt(); rev(); });
+    $('#in-armar').addEventListener('click', () => {
+      const nuevo = T.introPasos.map(oracion).filter(Boolean).join(' '); if (!nuevo) { alert('Primero escribe en los tres puntos de la introducción.'); return; }
+      if ((T.intro || '').trim() && !confirm('¿Reemplazar tu introducción por una nueva armada con los tres puntos?')) return;
+      T.intro = nuevo; $('#in-final').value = nuevo; cambio(); cnt(); rev();
+    });
+    cnt();
+  }
   $$('.e1-refs input', cuerpo).forEach(ch => ch.addEventListener('change', () => { const set = new Set(T.refs.sel); ch.checked ? set.add(ch.dataset.r) : set.delete(ch.dataset.r); T.refs.sel = [...set]; cambio(); rev(); }));
   $('#e1-otras').addEventListener('input', ev => { T.refs.otras = ev.target.value; cambio(); rev(); });
-  $('#e1-ant').addEventListener('click', () => { T.e1paso = 5; cambio(); pintarE1(); });
-  $('#e1-word').addEventListener('click', () => descargarWord('entrega1'));
+  $('#e1-ant').addEventListener('click', () => ir(NS.length - 1));
+  $('#e1-word').addEventListener('click', () => descargarWord(ent));
   rev();
 }
-function pintarCuaderno() {
-  if (entregaSel === 'entrega1') return pintarE1();
-  const e = D.entregas[entregaSel], lista = D.preguntas.filter(p => p.entrega === entregaSel);
-  const hechas = lista.filter(p => palabras(T.respuestas[p.n]) >= 150).length;
-  const iMz = D.etapas.findIndex(x => x.id === 'matriz'), usaMz = lista.filter(p => p.usa === 'matriz' || p.n === 8 || p.n === 10).map(p => p.n);
-  const avisoMz = usaMz.length ? `<p class="t-recuerda">🧭 Las preguntas ${usaMz.join(' y ')} usan tu <b>Matriz de congruencia</b>. Llénala primero en la Etapa ${iMz + 1}: aquí aparecerá como punto de partida. <button type="button" class="btn-lab-l t-ir-mz">Ir a la matriz →</button></p>` : '';
-  $('#c-lista').innerHTML = `<div class="t-entrega"><b>${esc(e.nombre)}</b> · ${esc(e.fecha)}<p>${esc(e.req)}</p><p>Llevas <b>${hechas} de ${lista.length}</b> respuestas con al menos 150 palabras.</p>${avisoMz}
-      <button type="button" class="btn-lab" id="c-word">Descargar en Word (preguntas 1 a ${lista[lista.length - 1].n})</button></div>
-    ${lista.map(p => { const ap = apoyo(p); return `<article class="t-preg" id="preg-${p.n}"><h3><span class="t-pn">${p.n}</span>${esc(p.texto)}</h3>
-      <p class="t-pide"><b>Qué te piden:</b> ${esc(p.pide)}</p>
-      <details class="t-pistas"><summary>Pistas, error común y autores</summary><ul>${p.pistas.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="t-error-comun"><b>Error común:</b> ${esc(p.error)}</p>
-        <p class="t-aut"><b>Autores:</b> ${p.autores.map(a => `<a href="laboratorio.html#constelacion=${a}" target="_blank" rel="noopener">${esc(NOMBRES_AUT[a] || a)}</a>`).join(' · ')} · <b>Compendio:</b> ${p.temas.map(t => `<a href="tema.html?id=${t}" target="_blank" rel="noopener">${t}</a>`).join(' · ')}</p></details>
-      ${ap ? `<div class="t-apoyo"><p><b>Punto de partida con lo que ya hiciste:</b> ${esc(ap)}</p><button type="button" class="btn-lab-l t-usar" data-n="${p.n}">Usarlo en mi respuesta</button></div>` : ''}
-      <textarea class="t-resp" data-n="${p.n}" rows="7" placeholder="Escribe aquí tu respuesta con tus palabras y tus citas en APA.">${esc(T.respuestas[p.n] || '')}</textarea>
-      <p class="t-cuenta" id="cnt-${p.n}"></p></article>`; }).join('')}`;
-  const cuenta = n => { const w = palabras(T.respuestas[n]), el = $('#cnt-' + n); el.textContent = `${w} palabras ${w < 150 ? `· te faltan ${150 - w} para el mínimo` : w > 250 ? '· pasaste el máximo de 250' : '· ✓ dentro del rango'}`; el.className = 't-cuenta ' + (w < 150 ? '' : w > 250 ? 'mal' : 'ok'); };
-  $$('.t-resp').forEach(t => { cuenta(t.dataset.n); t.addEventListener('input', () => { T.respuestas[t.dataset.n] = t.value; cuenta(t.dataset.n); cambio(); }); });
-  $$('.t-usar').forEach(b => b.addEventListener('click', () => { const p = D.preguntas.find(x => x.n === +b.dataset.n), t = $(`.t-resp[data-n="${p.n}"]`); t.value = (t.value.trim() ? t.value.trim() + '\n\n' : '') + apoyo(p); t.dispatchEvent(new Event('input')); t.focus(); }));
-  $('#c-word').addEventListener('click', () => descargarWord(entregaSel));
-  $$('.t-ir-mz').forEach(b => b.addEventListener('click', () => irA(D.etapas.findIndex(x => x.id === 'matriz'))));
-}
+function pintarCuaderno() { pintarGuiada(entregaSel); }
 async function descargarWord(ent) {
   await guardarYa();
-  const hasta = D.preguntas.filter(p => p.entrega === ent).slice(-1)[0].n, e = D.entregas[ent];
-  await descargarAPA({
-    titulo: `Pienso, luego investigo: ${ent === 'entrega1' ? 'primera parte del ensayo' : e.nombre.replace(/^Entrega[^·]*·\s*/, '').toLowerCase()}`,
-    autor: sesion.anon ? '' : sesion.nombre,
-    programa: 'Licenciatura en Pedagogía', institucion: 'ITES René Descartes',
-    curso: 'Epistemología y Pedagogía', docente: 'Mtro. Jesús Rodríguez García',
-    secciones: D.preguntas.filter(p => p.n <= hasta).map(p => ({ titulo: `${p.n}. ${(GUIA_E1[p.n] && GUIA_E1[p.n].titulo) || p.texto}`, parrafos: String(T.respuestas[p.n] || '').split(/\n+/) })),
-    referencias: refsElegidas().length ? refsElegidas() : ['Agrega aquí tus referencias en APA 7, en orden alfabético y con sangría francesa.'],
-    archivo: `Pienso_luego_investigo_${ent === 'entrega1' ? 'preguntas_1_a_6' : ent}_${slug(sesion.anon ? 'borrador' : sesion.nombre)}`,
-  });
+  await wordTaller(T, D, LAB, ent, sesion.anon ? '' : sesion.nombre);
 }
 
 // ------------------------------------------------ Etapa 6: ética, APA y defensa

@@ -161,6 +161,7 @@ export class DocITES {
       ...(this.fondo ? [['word/header2.xml', encabezadoPortada(W)], ['word/_rels/header2.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rFondo" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/portada-ites.png"/></Relationships>'], ['word/media/portada-ites.png', this.fondo]] : []),
     ]);
   }
+  blob() { return this._xml(); }
   descargar(nombre) {
     const a = document.createElement('a'); a.href = URL.createObjectURL(this._xml());
     a.download = nombre.endsWith('.docx') ? nombre : nombre + '.docx'; document.body.appendChild(a); a.click(); a.remove();

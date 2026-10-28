@@ -1,7 +1,7 @@
 // apa-word.js — Trabajo escrito en formato APA 7 (versión de estudiante), en Word (.docx), armado en el navegador.
 // Portada oficial del ITES (fondo con logo y franjas, datos en Questrial) o, si no carga, portada con el escudo; número de página arriba a la derecha, Times New Roman 12, doble espacio,
 // sangría de primera línea, títulos de nivel 1 centrados en negritas y referencias con sangría francesa.
-import { zipDocx } from './docx-ites.js?v=2026102707';
+import { zipDocx } from './docx-ites.js?v=2026102708';
 
 const xe = s => String(s ?? '').replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // *texto* → cursivas (títulos de libros en las referencias)
@@ -18,7 +18,7 @@ const tamPNG = b => { try { const v = new DataView(b.buffer, b.byteOffset); retu
 const PP = (t, tam = 48) => `<w:p><w:pPr><w:spacing w:line="240" w:lineRule="auto"/><w:ind w:left="284" w:right="-943" w:firstLine="0"/><w:jc w:val="center"/></w:pPr>${t ? `<w:r><w:rPr><w:rFonts w:ascii="Questrial" w:hAnsi="Questrial" w:eastAsia="Questrial" w:cs="Questrial"/><w:b/><w:bCs/><w:sz w:val="${tam}"/><w:szCs w:val="${tam}"/></w:rPr><w:t xml:space="preserve">${xe(t)}</w:t></w:r>` : ''}</w:p>`;
 const leer = async u => { try { const r = await fetch(u); return r.ok ? new Uint8Array(await r.arrayBuffer()) : null; } catch { return null; } };
 
-export async function descargarAPA({ titulo, autor, institucion, programa, curso, docente, fecha = new Date(), secciones = [], referencias = [], archivo = 'trabajo', logo = 'assets/escudo.png', portada = 'assets/portada-ites.png' }) {
+export async function descargarAPA({ titulo, autor, institucion, programa, curso, docente, fecha = new Date(), secciones = [], referencias = [], archivo = 'trabajo', logo = 'assets/escudo.png', portada = 'assets/portada-ites.png', soloBlob = false }) {
   const fondo = portada ? await leer(portada) : null;
   const img = fondo ? null : await leer(logo);
   const fechaTxt = fecha.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -65,7 +65,9 @@ export async function descargarAPA({ titulo, autor, institucion, programa, curso
     ...(img ? [['word/media/escudo.png', img]] : []),
     ...(fondo ? [['word/header2.xml', encFondo], ['word/_rels/header2.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rFondo" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/portada-ites.png"/></Relationships>'], ['word/media/portada-ites.png', fondo]] : []),
   ]);
+  const nombre = archivo.endsWith('.docx') ? archivo : archivo + '.docx';
+  if (soloBlob) return { blob, archivo: nombre };
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = archivo.endsWith('.docx') ? archivo : archivo + '.docx'; document.body.appendChild(a); a.click(); a.remove();
+  a.download = nombre; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }

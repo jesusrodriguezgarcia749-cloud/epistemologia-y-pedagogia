@@ -13,7 +13,10 @@ import { firebaseConfig } from "./firebase-config.js";
 import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { vistaRapida } from "./matriz.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe } from "./tareas-datos.js";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js";
+import { zipDocx } from "./docx-ites.js?v=2026102708";
+import { wordTaller, numsDe, estadoEntrega, slugArchivo } from "./taller-word.js?v=2026102708";
+import { docCuadro } from "./cuadro-word.js?v=2026102708";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -739,13 +742,21 @@ async function cargarProyecto() {
 }
 
 // ---- Avance en el Taller del investigador (grupos/{g}/alumnos/{a}/investigacion/taller)
-let TALLER_DATA = null;
+let TALLER_DATA = null, LAB_DATA = null, TALLER_ENT = 'entrega1';
+const bajar = (blob, nombre) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = nombre; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+// Junta varios Word en un .zip (nombres únicos) y lo descarga.
+async function bajarZip(docs, nombre) {
+  const usados = new Set(), arch = [];
+  for (const { blob, archivo } of docs) { let n = archivo, i = 2; while (usados.has(n)) n = archivo.replace(/\.docx$/, `_${i++}.docx`); usados.add(n); arch.push([n, new Uint8Array(await blob.arrayBuffer())]); }
+  bajar(new Blob([zipDocx(arch)], { type: 'application/zip' }), nombre);
+}
+const fechaCorta = t => new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
 async function cargarAvanceTaller() {
   const cont = document.getElementById('taller-avance');
   if (!cont) return;
   cont.innerHTML = '<p class="empty-inline">Cargando…</p>';
-  try { TALLER_DATA = TALLER_DATA || await fetch('data/taller.json').then(r => r.json()); } catch { cont.innerHTML = '<p class="empty-inline">No se pudo cargar el taller.</p>'; return; }
-  const totales = {}; TALLER_DATA.preguntas.forEach(p => { totales[p.entrega] = (totales[p.entrega] || 0) + 1; });
+  try { TALLER_DATA = TALLER_DATA || await fetch('data/taller.json').then(r => r.json()); LAB_DATA = LAB_DATA || await fetch('data/laboratorio.json').then(r => r.json()); } catch { cont.innerHTML = '<p class="empty-inline">No se pudo cargar el taller.</p>'; return; }
+  const D = TALLER_DATA, totales = {}; D.preguntas.forEach(p => { totales[p.entrega] = (totales[p.entrega] || 0) + 1; });
   const filas = await Promise.all(alumnosCache.map(async a => {
     try { const s = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, 'investigacion', 'taller')); return [a, s.exists() ? s.data() : null]; }
     catch { return [a, null]; }
@@ -753,27 +764,48 @@ async function cargarAvanceTaller() {
   const fecha = t => t && t.toDate ? t.toDate().toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
   const N = { P: 'Positivista', I: 'Interpretativo', S: 'Sociocrítico', M: 'Mixto' };
   const empezaron = filas.filter(([, d]) => d).length;
-  cont.innerHTML = `<p class="field-hint"><b>${empezaron} de ${filas.length}</b> alumnos ya entraron al taller.</p>
-    <div class="taller-tabla-wrap"><table class="taller-tabla"><thead><tr><th>Alumno</th><th>Pregunta de investigación</th><th>Etapas</th><th>E1</th><th>E2</th><th>Final</th><th>Última vez</th><th></th></tr></thead><tbody>
+  const pal = t => (String(t || '').trim().match(/\S+/g) || []).length;
+  // Texto propio: promedio de lo que NO es respuesta base, en las preguntas de la entrega que tienen texto.
+  const propio = (d, ent) => { const T = d.datos || {}, pl = T.plat || {}, ns = numsDe(D, ent).filter(n => pal((T.respuestas || {})[n]) && n in pl); return ns.length ? Math.round(ns.reduce((s, n) => s + (100 - pl[n]), 0) / ns.length) : null; };
+  const nEnt = { entrega1: 'Entrega 1', entrega2: 'Entrega 2', entregaFinal: 'Entrega final' };
+  cont.innerHTML = `<p class="field-hint"><b>${empezaron} de ${filas.length}</b> alumnos ya entraron al taller. 📬 = la entregó (con fecha) · ✏️ = la cambió después de entregarla. <b>Propio</b> = qué parte de sus respuestas escribió él y no es la respuesta base de la plataforma (se pide al menos 50 %).</p>
+    <div class="taller-bajar"><span>Descargar en Word:</span>${Object.entries(nEnt).map(([k, n]) => `<button type="button" class="chip-mon" data-ent="${k}" aria-pressed="${k === TALLER_ENT}">${n}</button>`).join('')}
+      <button type="button" class="btn btn-small" id="taller-zip">⬇ Todos en .zip</button><span class="field-hint" id="taller-zip-msg"></span></div>
+    <div class="taller-tabla-wrap"><table class="taller-tabla"><thead><tr><th>Alumno</th><th>Pregunta de investigación</th><th>Etapas</th><th>E1</th><th>E2</th><th>Final</th><th>Propio</th><th>Última vez</th><th></th></tr></thead><tbody>
     ${filas.map(([a, d]) => {
-      if (!d) return `<tr class="sin"><td>${escaparHTML(a.nombre)}</td><td colspan="7"><i>Aún no entra al taller</i></td></tr>`;
-      const av = d.avance || {}, r = av.respuestas || {}, et = (av.etapas || []).filter(Boolean).length;
-      const c = k => `<td class="${(r[k] || 0) === totales[k] ? 'ok' : ''}">${r[k] || 0}/${totales[k]}</td>`;
-      return `<tr><td>${escaparHTML(a.nombre)}</td><td class="preg">${escaparHTML(d.pregunta || '—')}${d.paradigma ? `<br><small>${N[d.paradigma] || ''}</small>` : ''}</td><td>${et}/6</td>${c('entrega1')}${c('entrega2')}${c('entregaFinal')}<td>${fecha(d.actualizado)}</td><td><button type="button" class="btn btn-small taller-ver" data-id="${a.id}">Ver</button></td></tr>
-        <tr class="taller-det" id="tdet-${a.id}" hidden><td colspan="8"></td></tr>`;
+      if (!d) return `<tr class="sin"><td>${escaparHTML(a.nombre)}</td><td colspan="8"><i>Aún no entra al taller</i></td></tr>`;
+      const av = d.avance || {}, r = av.respuestas || {}, et = (av.etapas || []).filter(Boolean).length, T = d.datos || {};
+      const c = k => { const es = estadoEntrega(T, D, k); return `<td class="${(r[k] || 0) === totales[k] ? 'ok' : ''}">${r[k] || 0}/${totales[k]}${es.entregada ? `<br><small title="${es.modificada ? 'La cambió después de entregarla' : 'Entregada'}">${es.modificada ? '✏️' : '📬'} ${fechaCorta(es.t)}</small>` : ''}</td>`; };
+      const pr = propio(d, TALLER_ENT);
+      return `<tr><td>${escaparHTML(a.nombre)}</td><td class="preg">${escaparHTML(d.pregunta || '—')}${d.paradigma ? `<br><small>${N[d.paradigma] || ''}</small>` : ''}</td><td>${et}/6</td>${c('entrega1')}${c('entrega2')}${c('entregaFinal')}<td class="${pr === null ? '' : pr >= 50 ? 'ok' : 'mal'}">${pr === null ? '—' : pr + ' %'}</td><td>${fecha(d.actualizado)}</td><td class="taller-acc"><button type="button" class="btn btn-small taller-ver" data-id="${a.id}">Ver</button><button type="button" class="btn btn-small taller-word" data-id="${a.id}" title="Descargar su Word de la entrega elegida arriba">⬇ Word</button></td></tr>
+        <tr class="taller-det" id="tdet-${a.id}" hidden><td colspan="9"></td></tr>`;
     }).join('')}</tbody></table></div>`;
-  const datos = Object.fromEntries(filas.map(([a, d]) => [a.id, d]));
+  const datos = Object.fromEntries(filas.map(([a, d]) => [a.id, d])), nombreDe = id => (alumnosCache.find(a => a.id === id) || {}).nombre || '';
+  cont.querySelectorAll('[data-ent]').forEach(b => b.addEventListener('click', () => { TALLER_ENT = b.dataset.ent; cargarAvanceTaller(); }));
+  cont.querySelectorAll('.taller-word').forEach(b => b.addEventListener('click', async () => {
+    b.disabled = true; try { await wordTaller(datos[b.dataset.id].datos || {}, D, LAB_DATA, TALLER_ENT, nombreDe(b.dataset.id)); } finally { b.disabled = false; }
+  }));
+  document.getElementById('taller-zip').addEventListener('click', async e => {
+    const b = e.currentTarget, msg = document.getElementById('taller-zip-msg'), con = filas.filter(([, d]) => d && d.datos);
+    if (!con.length) { msg.textContent = 'Nadie ha escrito todavía.'; return; }
+    b.disabled = true; msg.textContent = `Armando ${con.length} documentos…`;
+    try {
+      const docs = []; for (const [a, d] of con) docs.push(await wordTaller(d.datos, D, LAB_DATA, TALLER_ENT, a.nombre, { soloBlob: true }));
+      await bajarZip(docs, `Pienso_luego_investigo_${{ entrega1: 'Entrega_1', entrega2: 'Entrega_2', entregaFinal: 'Entrega_final' }[TALLER_ENT]}_${slugArchivo(grupoActivo)}.zip`);
+      msg.textContent = `✓ ${docs.length} documentos en el .zip`;
+    } catch (er) { msg.textContent = 'No se pudo armar el .zip: ' + (er.message || er); } finally { b.disabled = false; }
+  });
   cont.querySelectorAll('.taller-ver').forEach(b => b.addEventListener('click', () => {
     const tr = document.getElementById('tdet-' + b.dataset.id), d = datos[b.dataset.id].datos || {};
     if (!tr.hidden) { tr.hidden = true; b.textContent = 'Ver'; return; }
-    const o = d.objetivos || {}, e = x => escaparHTML(x || '—');
-    const pal = t => (String(t || '').trim().match(/\S+/g) || []).length;
+    const o = d.objetivos || {}, e = x => escaparHTML(x || '—'), pl = d.plat || {};
     tr.firstElementChild.innerHTML = `<div class="taller-detalle">
       <p><b>Tema:</b> ${e(d.tema)}</p><p><b>Problema:</b> ${e(d.problema)}</p><p><b>Pregunta:</b> ${e(d.pregunta)}</p>
       <p><b>Objetivo general:</b> ${e(o.general)}</p><p><b>Específicos:</b></p><ol>${(o.especificos || []).filter(x => x.trim()).map(x => `<li>${e(x)}</li>`).join('') || '<li>—</li>'}</ol>
       <p><b>Hipótesis o supuesto:</b> ${e(o.hipotesis)} <b>Me desmentiría que:</b> ${e(o.refutaria)}</p>
       ${(d.matriz || []).length ? `<p><b>Matriz:</b></p><ul>${d.matriz.map(f => `<li>${e(f.objetivo)} → ${e(f.tecnica)} · ${e(f.instrumento)} · ${e(f.participantes)}</li>`).join('')}</ul>` : ''}
-      ${TALLER_DATA.preguntas.map(p => `<details><summary>${p.n}. ${escaparHTML(p.texto)} <small>(${pal((d.respuestas || {})[p.n])} palabras)</small></summary><p class="taller-resp">${e((d.respuestas || {})[p.n])}</p></details>`).join('')}
+      ${d.intro ? `<details><summary>Introducción <small>(${pal(d.intro)} palabras)</small></summary><p class="taller-resp">${e(d.intro)}</p></details>` : ''}
+      ${D.preguntas.map(p => { const t = (d.respuestas || {})[p.n], w = pal(t); return `<details><summary>${p.n}. ${escaparHTML(p.texto)} <small>(${w} palabras${w && p.n in pl ? ` · ${100 - pl[p.n]} % propio${pl[p.n] > 50 ? ' ⚠️' : ''}` : ''})</small></summary><p class="taller-resp">${e(t)}</p></details>`; }).join('')}
       ${d.guion ? `<details><summary>Guion de defensa</summary><p class="taller-resp">${e(d.guion)}</p></details>` : ''}</div>`;
     tr.hidden = false; b.textContent = 'Ocultar';
   }));
@@ -1912,11 +1944,18 @@ function iniciarMonitor() {
   if (!ca._listo) {
     ca._listo = true;
     ca.innerHTML = '<span>Actividad:</span>' + acts.map(a => `<button type="button" class="chip-mon" data-a="${a.id}" aria-pressed="${a.id === MON.act}">${a.icono} ${escaparHTML(a.nombre)}</button>`).join('')
-      + '<button type="button" class="chip-mon mon-clave" id="mon-clave" aria-pressed="false">🔑 Liberar clave</button><button type="button" class="chip-mon" id="mon-qr">🔳 Códigos QR</button><button type="button" class="chip-mon" id="mon-full" aria-pressed="false">⛶ Pantalla completa</button>';
+      + '<button type="button" class="chip-mon mon-clave" id="mon-clave" aria-pressed="false">🔑 Liberar clave</button><button type="button" class="chip-mon" id="mon-qr">🔳 Códigos QR</button><button type="button" class="chip-mon" id="mon-zip" title="Un Word por equipo o alumno, con la portada oficial">⬇ Word de todos (.zip)</button><button type="button" class="chip-mon" id="mon-full" aria-pressed="false">⛶ Pantalla completa</button>';
     ca.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => { MON.act = b.dataset.a; ca.querySelectorAll('[data-a]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); Object.keys(MON.datos).forEach(k => delete MON.datos[k]); pintarClaveMon(); suscribirMon(); pintarMonitor(); }));
     document.getElementById('mon-clave').addEventListener('click', async () => { const k = CUADROS[MON.act].clave; await setDoc(doc(db, 'grupos', grupoActivo), { claves: { [k]: !MON.clave } }, { merge: true }); });
     document.getElementById('mon-qr').addEventListener('click', () => abrirProyeccion(formacionDeTarea(MON.g, MON.act), false));
     document.getElementById('mon-full').addEventListener('click', e => { const on = document.body.classList.toggle('mon-completo'); e.currentTarget.setAttribute('aria-pressed', String(on)); e.currentTarget.textContent = on ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa'; });
+    document.getElementById('mon-zip').addEventListener('click', async e => {
+      const b = e.currentTarget, ts = tarjetasMon().filter(t => MON.datos[t.clave]);
+      if (!ts.length) { alert('Todavía nadie ha escrito en esta actividad.'); return; }
+      b.disabled = true; const txt = b.textContent; b.textContent = `Armando ${ts.length} documentos…`;
+      try { const docs = []; for (const t of ts) docs.push(await wordMon(t.clave, true)); await bajarZip(docs, `${CUADROS[MON.act].archivo}_${slugArchivo(grupoActivo)}.zip`); }
+      catch (er) { alert('No se pudo armar el .zip: ' + (er.message || er)); } finally { b.disabled = false; b.textContent = txt; }
+    });
     document.getElementById('mon-det-cerrar').addEventListener('click', cerrarDetalle);
     document.getElementById('mon-detalle').addEventListener('click', e => { if (e.target.id === 'mon-detalle') cerrarDetalle(); });
   }
@@ -1974,6 +2013,15 @@ function actualizarMon(clave, nuevo) {
   if (!nuevo) { card.classList.remove('mon-latido'); void card.offsetWidth; card.classList.add('mon-latido'); }
   if (MON.abierto === clave) pintarDetalle();
 }
+// Word de un equipo o alumno, idéntico al que descarga él (con la clave solo si ya está liberada).
+async function wordMon(clave, soloBlob = false) {
+  const A = CUADROS[MON.act], d = MON.datos[clave] || {}, id = clave.slice(2);
+  const eq = clave.startsWith('e:') ? MON.equipos.find(x => x.id === id) || null : null, al = eq ? null : alumnosCache.find(x => x.id === id) || { nombre: d.ultimoNombre || '' };
+  const V = varianteDe(A, eq, eq ? undefined : id), R = respuestasDe(A, V);
+  const { D, archivo } = await docCuadro({ A, V, R, S: d, eq, nombre: al ? al.nombre : '', conClave: MON.clave });
+  if (soloBlob) return { blob: D.blob(), archivo: archivo + '.docx' };
+  D.descargar(archivo);
+}
 function abrirDetalle(clave) { MON.abierto = clave; document.getElementById('mon-detalle').hidden = false; document.body.classList.add('con-qr'); pintarDetalle(); }
 function cerrarDetalle() { MON.abierto = null; document.getElementById('mon-detalle').hidden = true; document.body.classList.remove('con-qr'); }
 function pintarDetalle() {
@@ -1982,7 +2030,8 @@ function pintarDetalle() {
   const e = x => escaparHTML(x || '').replace(/\n/g, '<br>');
   document.getElementById('mon-det-titulo').textContent = t.titulo;
   document.getElementById('mon-det-sub').textContent = `${t.sub} · ${TAREAS_DIG[MON.act].nombre} · ${haceMon(d.actualizado).txt}`;
-  document.getElementById('mon-det-cuerpo').innerHTML = `<div class="taller-tabla-wrap"><table class="cu-det"><thead><tr><th></th>${A.columnas.map(([, n, col]) => `<th style="color:${col}">${n}</th>`).join('')}</tr></thead><tbody>${A.filas.map(([f, n, , inv]) => `<tr><th>${inv ? '🔎 ' : ''}${n}${inv ? `<br><small class="mon-autor">📚 ${(cel[f + '_fuente'] || '').trim() ? escaparHTML(cel[f + '_fuente']) : '<i>sin fuente</i>'}</small>` : ''}</th>${A.columnas.map(([c]) => { const k = `${f}_${c}`; return `<td>${(cel[k] || '').trim() ? e(cel[k]) : '<span class="mon-vacio">—</span>'}${por[k] ? `<br><small class="mon-autor">✍️ ${escaparHTML(por[k])}</small>` : ''}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>`;
+  document.getElementById('mon-det-cuerpo').innerHTML = `<p class="mon-det-acc"><button type="button" class="btn btn-small" id="mon-det-word">⬇ Descargar su Word</button></p><div class="taller-tabla-wrap"><table class="cu-det"><thead><tr><th></th>${A.columnas.map(([, n, col]) => `<th style="color:${col}">${n}</th>`).join('')}</tr></thead><tbody>${A.filas.map(([f, n, , inv]) => `<tr><th>${inv ? '🔎 ' : ''}${n}${inv ? `<br><small class="mon-autor">📚 ${(cel[f + '_fuente'] || '').trim() ? escaparHTML(cel[f + '_fuente']) : '<i>sin fuente</i>'}</small>` : ''}</th>${A.columnas.map(([c]) => { const k = `${f}_${c}`; return `<td>${(cel[k] || '').trim() ? e(cel[k]) : '<span class="mon-vacio">—</span>'}${por[k] ? `<br><small class="mon-autor">✍️ ${escaparHTML(por[k])}</small>` : ''}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>`;
+  document.getElementById('mon-det-word').addEventListener('click', () => wordMon(clave));
 }
 
 // ---- ⚡ Arena en vivo (docente): grupos/{g}/arena/sala y .../sala/jugadores/{alumno}

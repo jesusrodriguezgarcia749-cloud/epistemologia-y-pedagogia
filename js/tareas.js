@@ -7,7 +7,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js";
-import { DocITES } from "./docx-ites.js?v=2026102707";
+import { docCuadro } from "./cuadro-word.js?v=2026102708";
 import { brillar, descubrir, miCielo, estadoAutor, misionPorFecha, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA, TIPOS_PARA_ENCENDER, NOMBRE_TIPO, CLAVES_AUTOR } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
@@ -311,18 +311,8 @@ function cuadro(cont, eq, a) {
   });
   $('#cu-word').addEventListener('click', async () => {
     await flush();
-    const D = new DocITES(); await D.cargarLogo();
-    D.portada({ kicker: A.kicker, titulo: A.titulo, subtitulo: V ? 'Análisis de una afirmación con los autores del Tema 4' : 'Cuadro comparativo', etiqueta: eq ? `Equipo «${eq.nombre}»` : 'Alumno', personas: eq ? eq.nombres || [] : [sesion.nombre] });
-    if (V) D.h1('La afirmación analizada', V.afirmacion);
-    D.h1(V ? 'Nuestro análisis' : 'Cuadro comparativo');
-    const celda = k => { const t = (S.celdas[k] || '').trim(), au = eq && S.por[k]; return { runs: [[t || '(sin escribir)', t ? {} : { i: true, color: '9A9389' }], ...(au ? [[`\n✍ ${au}`, { color: '3F7A4F', tam: 8 }]] : [])] }; };
-    const cab = (f, t, inv) => { const fu = (S.celdas[`${f}_fuente`] || '').trim(); return inv ? { runs: [[t, { b: true }], [`\n🔎 Investigación${fu ? ' · Fuente: ' + fu : ' · sin fuente'}`, { color: '6B6358', tam: 8, i: !fu }]], fondo: 'F4EFE4' } : { t, b: true, fondo: 'F4EFE4' }; };
-    D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t, , inv]) => [cab(f, t, inv), ...A.columnas.map(([c]) => celda(`${f}_${c}`))])], { anchos: [1700, ...A.columnas.map(() => Math.floor(7660 / A.columnas.length))] });
-    if (clave) {
-      D.h1('Comparación con la clave', V ? 'Las respuestas posibles que liberó el maestro, para comparar con lo que escribimos. No son las únicas válidas: cuenta que el análisis esté bien argumentado.' : 'La clave que liberó el maestro (del compendio y, en las filas de investigación, respuestas de referencia), para revisar lo que escribimos.');
-      D.tabla([['Apartado', ...A.columnas.map(c => c[1])], ...A.filas.map(([f, t]) => [{ t, b: true, fondo: 'F4EFE4' }, ...R[f]])], { anchos: [1700, ...A.columnas.map(() => Math.floor(7660 / A.columnas.length))] });
-    }
-    D.descargar(`${A.archivo}_${slug(eq ? 'equipo ' + eq.nombre : sesion.nombre)}`);
+    const { D, archivo } = await docCuadro({ A, V, R, S, eq, nombre: sesion.nombre, conClave: clave });
+    D.descargar(archivo);
   });
   pintar();
   const salir = () => flush();
