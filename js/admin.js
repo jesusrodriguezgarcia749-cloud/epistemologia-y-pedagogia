@@ -520,10 +520,10 @@ async function calificarItem(tipo, item) {
   document.getElementById(cfg.calificarTitulo).textContent = `Calificar: ${item.nombre}`;
   const cont = document.getElementById(cfg.calificarLista);
   cont.innerHTML = '<p class="empty-inline">Cargando…</p>';
-  const valores = {};
+  const valores = {}, comentarios = {};
   await Promise.all(alumnosCache.map(async (a) => {
-    try { const snap = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, cfg.sub, item.id)); valores[a.id] = snap.exists() ? snap.data().calificacion : ''; }
-    catch { valores[a.id] = ''; }
+    try { const snap = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, cfg.sub, item.id)); valores[a.id] = snap.exists() ? snap.data().calificacion : ''; comentarios[a.id] = snap.exists() ? (snap.data().comentario || '') : ''; }
+    catch { valores[a.id] = ''; comentarios[a.id] = ''; }
   }));
 
   // La PARTICIPACIÓN se registra con palomita, no con número: lo que cuenta
@@ -581,11 +581,11 @@ async function guardarCalificaciones(tipo) {
       }
       return;
     }
-    const input = row.querySelector('.calif-input');
-    if (input.value === '') { escrituras.push(deleteDoc(ref).catch(() => {})); }
+    const input = row.querySelector('.calif-input'), comentario = (row.querySelector('.proy-comentario')?.value || '').trim();
+    if (input.value === '' && !comentario) { escrituras.push(deleteDoc(ref).catch(() => {})); }
     else {
-      const calificacion = parseFloat(input.value);
-      escrituras.push(setDoc(ref, { parcial: item.parcial, nombre: item.nombre, fecha: item.fecha, calificacion, actualizado: serverTimestamp() }));
+      const calificacion = input.value === '' ? null : parseFloat(input.value);
+      escrituras.push(setDoc(ref, { parcial: item.parcial, nombre: item.nombre, fecha: item.fecha, calificacion, comentario, actualizado: serverTimestamp() }));
     }
   });
   try { await Promise.all(escrituras); } catch (err) { marcarResultado(cfg.btnGuardarCalif, cfg.msgCalif, false, '', 'No se pudo guardar: ' + (err.message || err)); return; }
