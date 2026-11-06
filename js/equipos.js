@@ -8,7 +8,7 @@
 
 export const BASE = 'actual';
 export const TIPOS_EQUIPO = ['atlas', 'cuadro', 'influencias'];
-export const enEquipo = a => !!a && TIPOS_EQUIPO.includes(a.tipo);
+export const enEquipo = a => !!a && TIPOS_EQUIPO.includes(a.tipo) && !a.individual;
 export const formacionDe = e => (e && e.formacion) || BASE;
 
 // todas las formaciones del grupo; la «actual» siempre existe

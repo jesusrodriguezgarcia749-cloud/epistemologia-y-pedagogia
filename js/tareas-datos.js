@@ -6,13 +6,26 @@ export const TEMAS_TAREAS = [
   { tema: '2 y 3', titulo: 'Naturaleza del conocimiento y racionalidad científica clásica', fecha: '2026-10-26', fechaTexto: 'Lun 26 de octubre', acts: [
     { id: 'paradigmas', tipo: 'cuadro', icono: '📋', nombre: 'Cuadro de los tres paradigmas', modo: 'En equipo · en vivo', desc: 'Positivista, interpretativo y sociocrítico: finalidad, realidad, métodos, autores y un ejemplo real de tesis que ustedes investigan.' },
     { id: 'que-paradigma', tipo: 'practica', icono: '🧭', nombre: '¿Qué paradigma es?', modo: 'Juego de práctica', desc: 'Títulos de tesis, fragmentos y autores: ¿positivista, interpretativo o sociocrítico? Y una ronda de pensamiento lineal contra sistémico.' },
+    { id: 'arena-t2', tipo: 'vivo', vivo: 'arena', set: 'tema2', icono: '⚡', nombre: 'Arena en vivo del Tema 2', modo: 'En vivo · en clase', desc: 'Preguntas contra el reloj, con podio. Entra cuando tu maestro abra la Arena.' },
   ] },
   { tema: '3 y 4', titulo: 'Lógica dialéctica y concepción contemporánea de la ciencia', fecha: '2026-10-27', fechaTexto: 'Mar 27 de octubre', acts: [
     { id: 'pon-a-prueba', tipo: 'cuadro', icono: '⚖️', nombre: 'Pon a prueba una idea', modo: 'En equipo · en vivo', desc: 'A cada equipo le toca por sorteo una afirmación que se oye en las escuelas. La analizan con los seis autores del Tema 4, buscan evidencia en el momento y dan su veredicto: ¿es ciencia?' },
-    { id: 'ficha-autor', tipo: 'cuadro', icono: '🧩', nombre: 'Ficha del autor (rompecabezas)', modo: 'En equipo · en vivo', desc: 'Cada equipo se vuelve experto en su autor del Tema 4: idea central, conceptos, cómo avanza la ciencia, críticas y qué le dice a la pedagogía. Con ella exponen.' },
-    { id: 'coevaluacion', tipo: 'coev', icono: '🗣️', nombre: 'Coevaluación de las exposiciones', modo: 'Individual · en vivo', desc: 'Mientras expone cada equipo, califícalo con la rúbrica desde tu celular y déjale una pregunta.' },
-    { id: 'teoricos', tipo: 'cuadro', icono: '📊', nombre: 'Cuadro comparativo de los seis teóricos', modo: 'En equipo · en vivo', desc: 'Positivismo lógico, Popper, Kuhn, Lakatos, Feyerabend y Morin: cómo avanza la ciencia, qué la distingue, conceptos clave, obras y qué le dicen a la educación.' },
     { id: 'quien-lo-dijo', tipo: 'practica', icono: '💬', nombre: '¿Quién lo dijo?', modo: 'Juego de práctica', desc: 'Frases y obras contra su autor: de Platón a Morin. Los 55 pensadores de la Constelación, con niveles y modo reto.' },
+  ] },
+  { tema: '4', titulo: 'Cierre del Tema 4: Lakatos, Feyerabend, Morin y las ciencias sociales', fecha: '2026-11-09', fechaTexto: 'Lun 9 de noviembre', acts: [
+    { id: 'quien-avanza', tipo: 'practica', icono: '🎮', nombre: '¿Quién avanza así la ciencia?', modo: 'Juego de 5 minutos', desc: 'Aparece una idea: ¿es del Círculo de Viena, de Popper, Kuhn, Lakatos, Feyerabend o Morin?' },
+    { id: 'mi-autor', tipo: 'cuadro', icono: '🧩', nombre: 'Mi autor en cuatro cuadros', modo: 'En equipo · en vivo', desc: 'A su equipo le toca por sorteo Lakatos, Feyerabend, Morin o la cientificidad de las ciencias sociales: su idea en una frase, un ejemplo en el aula, una crítica y qué le dice a su investigación.' },
+  ] },
+  { tema: '5 y 6', titulo: 'Nuevo paradigma epistemológico y conocimiento ordinario', fecha: '2026-11-10', fechaTexto: 'Mar 10 de noviembre', acts: [
+    { id: 'que-obstaculo', tipo: 'practica', icono: '🎮', nombre: '¿Qué obstáculo es?', modo: 'Juego de 5 minutos', desc: 'Frases que se oyen en la escuela: ¿qué obstáculo epistemológico de Bachelard hay detrás?' },
+    { id: 'mi-inercia', tipo: 'cuadro', individual: true, icono: '🪞', nombre: 'Mi inercia mental', modo: 'Individual', desc: 'Una creencia tuya sobre la educación que nunca habías examinado: de dónde viene, qué obstáculo es y qué la pone en duda.' },
+    { id: 'saberes', tipo: 'cuadro', icono: '🌽', nombre: 'Saberes de la vida', modo: 'En equipo · en vivo', desc: 'A su equipo le toca un saber local (la milpa, la nixtamalización, la herbolaria, la pesca, las parteras, el saber del maestro): compárenlo como saber de la comunidad y como conocimiento científico.' },
+  ] },
+  { tema: '6 y 7', titulo: 'Ciencia y arte, y neurociencia del aprendizaje', fecha: '2026-11-17', fechaTexto: 'Mar 17 de noviembre', acts: [
+    { id: 'neuromito', tipo: 'practica', icono: '🎮', nombre: '¿Neuromito o evidencia?', modo: 'Juego de 5 minutos', desc: 'Lo que se dice del cerebro en las escuelas: ¿es un neuromito o tiene evidencia?' },
+    { id: 'producto-neuro', tipo: 'cuadro', icono: '🧠', nombre: 'Analiza un producto «neuro»', modo: 'En equipo · en vivo', desc: 'A su equipo le toca un producto que se vende a las escuelas (gimnasia cerebral, apps, tests de estilos…): júzguenlo con la evidencia del Tema 7.' },
+    { id: 'arena-repaso', tipo: 'vivo', vivo: 'arena', set: 'repasoP2', icono: '⚡', nombre: 'Arena de repaso del Parcial 2', modo: 'En vivo · en clase', desc: 'Preguntas contra el reloj del cierre del Tema 4 y los Temas 5 a 7, con podio. Entra cuando tu maestro abra la Arena.' },
+    { id: 'tribunal-17', tipo: 'vivo', vivo: 'tribunal', icono: '⚖️', nombre: 'Tribunal de la ciencia', modo: 'En vivo · en clase', desc: 'Te ponen la toga de un autor y dictas si un caso es ciencia. Entra cuando tu maestro abra el Tribunal.' },
   ] },
 ];
 export const TAREAS_DIG = Object.fromEntries(TEMAS_TAREAS.flatMap(t => t.acts.map(a => [a.id, { ...a, tema: t.tema, titulo: t.titulo, fecha: t.fecha, fechaTexto: t.fechaTexto }])));
@@ -240,6 +253,30 @@ export const QUE_PARADIGMA = [
 
 // ---------- ⚡ Arena en vivo: conjuntos de preguntas (o[0] es la correcta; se barajan)
 export const ARENA = {
+  repasoP2: { titulo: 'Repaso del Parcial 2 · cierre del Tema 4 y Temas 5 a 7', preguntas: [
+    {"q": "Para Lakatos, ¿cuándo es progresivo un programa de investigación?", "o": ["Cuando sus ajustes permiten predecir hechos nuevos que luego se confirman", "Cuando ajusta el cinturón para explicar lo que ya sabía", "Cuando nadie lo ha refutado", "Cuando lo acepta toda la comunidad"], "x": "Si solo se justifica después, sin anticipar nada nuevo, es degenerativo."},
+    {"q": "Una maestra dice: «Todos los proyectos deben seguir exactamente los mismos pasos para ser científicos». ¿Qué autor del Tema 4 la cuestionaría con más fuerza?", "o": ["Paul Feyerabend", "Auguste Comte", "Ninguno, porque todos defendían un método único", "El Círculo de Viena"], "x": "Feyerabend sostuvo que imponer un método único empobrece el conocimiento."},
+    {"q": "¿Qué significa complexus, raíz de \"complejidad\" según Morin?", "o": ["Lo que está tejido junto", "Lo que es difícil de entender", "Lo que no tiene orden", "Lo que se divide en partes"], "x": "Un fenómeno complejo tiene elementos entrelazados de manera inseparable."},
+    {"q": "¿Qué criterios propios de rigor ha desarrollado la investigación cualitativa?", "o": ["Credibilidad, transferibilidad, consistencia y confirmabilidad", "Solo la validez estadística", "Rapidez, costo y popularidad", "Ninguno: la investigación cualitativa no tiene criterios de rigor"], "x": "No son los de la física, pero son exigentes."},
+    {"q": "¿Cómo se refleja la influencia de Morin en la Nueva Escuela Mexicana?", "o": ["En los campos formativos y los ejes articuladores que buscan superar la fragmentación", "En la desaparición de la evaluación", "En el uso exclusivo de exámenes estandarizados", "En la separación estricta de las asignaturas"], "x": "El Plan de Estudio 2022 integra saberes en torno a problemas."},
+    {"q": "¿Cuáles son las tres operaciones del paradigma de simplificación según Morin?", "o": ["Disyunción, reducción y abstracción", "Observación, hipótesis y experimentación", "Tesis, antítesis y síntesis", "Verificación, falsación y revolución"], "x": "Separar lo unido, explicar el todo por sus partes y aislar el objeto de su contexto."},
+    {"q": "¿Qué es la inercia mental?", "o": ["La tendencia a seguir pensando como siempre aunque aparezcan razones para cambiar", "La incapacidad biológica de aprender cosas nuevas", "El cansancio que produce estudiar mucho tiempo", "La velocidad con que una comunidad adopta ideas nuevas"], "x": "Martínez Miguélez la señala como uno de los mayores obstáculos para una nueva racionalidad."},
+    {"q": "Una tesista cambia sus preguntas de entrevista cuando descubre un tema inesperado. ¿Cómo se llama esto en investigación cualitativa?", "o": ["Diseño emergente", "Plagio", "Error de método", "Falsación"], "x": "El plan se ajusta conforme aparecen hallazgos."},
+    {"q": "¿Cuál es el aporte central de la neurociencia a la epistemología según el compendio?", "o": ["El cerebro no es un espejo de la realidad, sino un constructor activo de ella", "El cerebro guarda cada recuerdo en un lugar fijo, como un archivero", "El cerebro solo recibe pasivamente la información de los sentidos", "La emoción estorba siempre al razonamiento"], "x": "La percepción completa, interpreta y anticipa."},
+    {"q": "En una discusión de clase cada alumno defendió su opinión sin escuchar a los demás y ganó quien habló más fuerte. Según Habermas, ¿qué faltó?", "o": ["Que todos pudieran hablar y se impusiera el mejor argumento, no la fuerza ni la jerarquía", "Que el maestro diera la respuesta correcta desde el inicio", "Que hubiera menos participantes", "Que se votara para decidir quién tenía razón"], "x": "La situación ideal de habla sirve como criterio para evaluar los diálogos reales."},
+    {"q": "¿Qué dijo Max Planck sobre cómo triunfan las nuevas verdades científicas?", "o": ["Cuando crece una generación familiarizada con ellas", "En cuanto se publican en una revista", "Cuando las aprueba el gobierno", "Nunca llegan a triunfar"], "x": "La inercia mental también es colectiva."},
+    {"q": "Michael Polanyi resumió su idea de conocimiento tácito con la frase:", "o": ["Sabemos más de lo que podemos decir", "Solo sabemos lo que podemos demostrar", "Todo conocimiento puede escribirse en un manual", "Lo que no se dice no se sabe"], "x": "Reconocemos un rostro o andamos en bicicleta sin poder explicar cómo."},
+    {"q": "¿Cuál de estas es una característica del conocimiento ordinario o de sentido común?", "o": ["Es práctico y se transmite en la familia y la comunidad", "Siempre se pone a prueba en un laboratorio", "Se organiza en teorías explícitas", "Es universal y nunca falla"], "x": "Es práctico, compartido, poco sistemático, poco crítico y contextual."},
+    {"q": "¿Qué criticó Schön con la idea de «racionalidad técnica»?", "o": ["Que los profesionales solo aplican la teoría científica a la práctica", "El uso de computadoras en la escuela", "Que los maestros tengan vacaciones", "Que los alumnos lean mucho"], "x": "Esa visión no explica lo que hacen los buenos profesionales ante situaciones únicas."},
+    {"q": "¿Qué sostuvo Lawrence Stenhouse sobre el currículo?", "o": ["Que es una hipótesis que el maestro pone a prueba en su salón", "Que es un programa cerrado que solo se aplica", "Que debe diseñarse sin participación de los docentes", "Que no tiene relación con la investigación"], "x": "Para Stenhouse, no hay desarrollo del currículo sin desarrollo del profesor."},
+    {"q": "¿Qué ejemplos usa el compendio para ilustrar el conocimiento tácito?", "o": ["Andar en bicicleta y reconocer un rostro sin poder explicar cómo", "Resolver una ecuación", "Leer un manual", "Copiar un texto"], "x": "Polanyi (1966): sabemos más de lo que podemos decir."},
+    {"q": "¿Qué ocurre con la memoria durante el sueño?", "o": ["El cerebro reactiva y reorganiza lo aprendido, consolidándolo", "El cerebro borra todo lo aprendido durante el día", "No ocurre nada relevante para el aprendizaje", "Solo se consolidan los recuerdos emocionales negativos"], "x": "Dormir poco perjudica el aprendizaje."},
+    {"q": "Un maestro abre la clase preguntando por qué Campeche tenía murallas. ¿Por qué funciona según el tema?", "o": ["Despierta la curiosidad, y el cerebro se prepara para aprender y recordar mejor", "Porque los alumnos dejan de pensar en el tema", "Porque así se evita explicar el contenido", "Porque la curiosidad sustituye a la información"], "x": "La pregunta inicial no fue un truco motivacional: preparó el aprendizaje."},
+    {"q": "¿Qué estudió Roger Sperry, de donde surgió (mal interpretado) el mito de los hemisferios?", "o": ["Pacientes a quienes se había cortado el cuerpo calloso para tratar epilepsias graves", "Niños que aprendían a leer con música", "Estudiantes con estilos de aprendizaje distintos", "Personas que usaban solo el 10 % del cerebro"], "x": "En esas condiciones excepcionales cada hemisferio procesaba distinto, pero en un cerebro sano trabajan juntos."},
+    {"q": "Según la revisión de Dunlosky y colaboradores (2013), ¿qué técnicas de estudio tienen utilidad alta?", "o": ["La práctica de recuperación y la práctica espaciada", "Releer y subrayar", "Estudiar todo la noche anterior", "Escuchar música clásica mientras se lee"], "x": "Releer y subrayar, las más usadas, resultaron de baja utilidad."},
+    {"q": "¿Qué propuso Donald Hebb en 1949?", "o": ["Que las neuronas que se activan juntas tienden a conectarse entre sí", "Que solo usamos el 10 % del cerebro", "Que el cerebro tiene tres capas evolutivas", "Que cada recuerdo se guarda en un solo lugar"], "x": "Por eso la práctica repetida consolida un aprendizaje."},
+    {"q": "¿Qué sostuvieron Immordino-Yang y Damasio sobre la emoción en la educación?", "o": ["Que forma parte del aprendizaje: aprendemos lo que tiene significado emocional y social", "Que es un obstáculo que hay que dejar fuera del salón", "Que solo importa en el recreo", "Que no tiene relación con la memoria"], "x": "La separación entre salón para pensar y recreo para sentir es artificial."}
+  ] },
   tema2: { titulo: 'Tema 2 · Naturaleza del conocimiento', preguntas: [
     { q: 'El pescador de Champotón sabe en qué temporada sale el pulpo. ¿Qué tipo de conocimiento tiene?', o: ['Empírico o cotidiano', 'Científico', 'Filosófico', 'Religioso'], x: 'Práctico, útil y preciso, pero adquirido por experiencia y tradición, no sistematizado.' },
     { q: '¿Qué tipo de conocimiento se valida por argumentación coherente?', o: ['Filosófico', 'Artístico', 'Empírico', 'Religioso'], x: 'Usa la razón y los argumentos, no los experimentos. La epistemología misma es conocimiento filosófico.' },
@@ -306,3 +343,233 @@ export const TR_CASOS_SUGERIDOS = ['astro', 'psico', 'vak', 'homeo', 'milpa', 'i
 // Escribe con la sesión del docente (las reglas ya le permiten todo). En los rankings va «fuera de concurso».
 export const PRUEBA_ID = 'prueba-docente';
 export const PRUEBA_NOMBRE = 'Docente (prueba)';
+
+// ======================================================= ACTIVIDADES DESDE EL 9 DE NOVIEMBRE (sencillas, como en Orígenes)
+// Cada clase: un juego de 5 minutos para calentar, una actividad corta (en equipo o individual), puesta en común y clave.
+
+// ---------- 🧩 Mi autor en cuatro cuadros (Lun 9 nov · cierre del Tema 4). Una columna; a cada equipo le toca por
+// sorteo un autor o subtema (variantes). La clave sale del compendio (4.4 a 4.7).
+CUADROS['mi-autor'] = {
+  id: 'act-mi-autor', ind: 'tarea-mi-autor', clave: 'miAutor',
+  titulo: 'Mi autor en cuatro cuadros', kicker: 'Tema 4 · Concepción contemporánea de la ciencia (4.4 a 4.7)', archivo: 'Mi_autor',
+  sorteo: 'El autor que le tocó a su equipo por sorteo', sorteoInd: 'Tu autor', nombreVariante: 'El autor',
+  ayuda: 'Lean en el compendio el subtema de su autor y llenen los cuatro cuadros <b>con sus palabras</b>. Al final lo explican al grupo en un minuto.',
+  columnas: [['equipo', 'Lo que escribe el equipo', '#3E5BA8']],
+  filas: [
+    ['idea', 'Su idea en una frase', '¿Qué propone? Díganlo como se lo dirían a un compañero.'],
+    ['aula', 'Un ejemplo en el aula', 'Una situación de una escuela que se explica con esta idea.'],
+    ['critica', 'Una crítica o un riesgo', '¿Dónde se queda corto o qué peligro tiene si se lee mal?'],
+    ['investigo', 'Qué le dice a mi investigación', '¿Qué cambiaría en un protocolo (el suyo o uno de pedagogía) si se toma en serio esta idea?'],
+  ],
+  variantes: [
+    { id: 'lakatos', ico: '🧱', afirmacion: '4.4 · Imre Lakatos: los programas de investigación', respuestas: {
+      idea: ['La ciencia no avanza con teorías sueltas, sino con programas de investigación: un núcleo duro que no se toca y un cinturón protector de hipótesis que se ajusta cuando llegan datos contrarios. Un programa es progresivo si predice hechos nuevos y degenerativo si solo se justifica.'],
+      aula: ['El constructivismo como programa: el núcleo es «el conocimiento se construye activamente»; si una estrategia falla, se ajusta el cinturón (faltó andamiaje, los conocimientos previos no eran los supuestos) en lugar de abandonar el núcleo.'],
+      critica: ['Saber si un programa es progresivo o degenerativo solo se ve con el tiempo; mientras tanto, cualquier ajuste puede usarse para justificar fracasos.'],
+      investigo: ['Distinguir mi supuesto central de mis hipótesis auxiliares, y preguntarme si mis ajustes predicen algo nuevo o solo explican lo que ya pasó.'] } },
+    { id: 'feyerabend', ico: '🎭', afirmacion: '4.5 · Paul Feyerabend: contra el método', respuestas: {
+      idea: ['Ninguna regla metodológica fija garantiza el progreso: en la historia de la ciencia todas se han violado alguna vez con éxito (Galileo). De ahí su «todo vale» y el anarquismo epistemológico: defender la proliferación de teorías y que la ciencia sea una tradición entre otras.'],
+      aula: ['Una maestra exige que todos los proyectos sigan exactamente los mismos pasos del «método científico». Feyerabend diría que imponer un método único empobrece: cada pregunta puede pedir su propio camino.'],
+      critica: ['Leído sin cuidado alimenta el relativismo extremo: «da igual la vacuna que el remedio milagroso». Esa lectura no le hace justicia, pero es un riesgo en tiempos de desinformación.'],
+      investigo: ['No elegir el método «porque siempre se usa»; considerar otros saberes y teorías alternativas que muestren los puntos débiles de mi enfoque.'] } },
+    { id: 'morin', ico: '🕸️', afirmacion: '4.6 · Edgar Morin: el pensamiento complejo', respuestas: {
+      idea: ['La ciencia clásica simplificó con disyunción, reducción y abstracción, y fragmentó el conocimiento. Complexus es «lo que está tejido junto»: hay que pensar con los principios dialógico, de recursividad y hologramático.'],
+      aula: ['Un salón demasiado ordenado no aprende y uno en caos tampoco (dialógico); cada alumno lleva en sí la cultura de su comunidad (hologramático). En la NEM: campos formativos y ejes articuladores.'],
+      critica: ['«Todo está relacionado» puede volverse una frase vacía si no se concreta en métodos; la complejidad también hay que investigarla con rigor.'],
+      investigo: ['No reducir mi fenómeno a una sola dimensión: mirar lo biológico, lo psicológico, lo social y lo cultural, y el contexto en que ocurre.'] } },
+    { id: 'sociales', ico: '🏫', afirmacion: '4.7 · La cientificidad de las ciencias sociales', respuestas: {
+      idea: ['Las ciencias sociales no fracasan por no parecerse a la física: su objeto, el ser humano que da sentido a sus acciones, pide métodos propios. Hay doble hermenéutica (Giddens) y criterios propios de rigor: credibilidad, transferibilidad, consistencia y confirmabilidad.'],
+      aula: ['Cuando la palabra «bullying» entró a las escuelas cambió la manera en que alumnos y maestros viven ciertos conflictos: los conceptos regresan a la sociedad y la transforman. A las piedras no les pasa.'],
+      critica: ['Si no se cuidan los criterios de rigor, «tener otro método» puede servir de excusa para la falta de rigor.'],
+      investigo: ['Dar rigor a mi investigación con los criterios de calidad de la investigación cualitativa (o cuantitativa, según el caso), sin imitar un método idealizado.'] } },
+  ],
+};
+
+// ---------- 🪞 Mi inercia mental (Mar 10 nov · Tema 5). Individual y sin clave: es personal.
+CUADROS['mi-inercia'] = {
+  id: 'act-mi-inercia', ind: 'tarea-mi-inercia', clave: 'miInercia', sinClave: true,
+  titulo: 'Mi inercia mental', kicker: 'Tema 5.1 · Inercia mental y obstáculos epistemológicos', archivo: 'Mi_inercia',
+  ayuda: 'Piensa en algo que das por hecho sobre la educación sin haberlo examinado nunca (por ejemplo, sobre los exámenes, las tareas, la disciplina o «los alumnos de hoy»). Escríbelo con honestidad: no hay respuestas malas.',
+  columnas: [['yo', 'Lo que escribo', '#8E5BA8']],
+  filas: [
+    ['creencia', 'Mi creencia', '¿Qué doy por hecho sobre la educación?'],
+    ['origen', '¿De dónde viene?', '¿La aprendí en mi casa, en mi escuela, de un maestro, de las redes?'],
+    ['obstaculo', '¿Qué obstáculo de Bachelard es?', 'Experiencia primera, generalización apresurada, obstáculo verbal, conocimiento unitario o sustancialista. ¿Por qué?'],
+    ['duda', '¿Qué la pone en duda?', 'Un dato, una experiencia o una lectura del compendio que la cuestione.'],
+    ['cambio', '¿Qué me haría cambiar de opinión?', '¿Y cómo podría sesgar mi propia investigación? (pregunta 7 del proyecto)'],
+  ],
+};
+
+// ---------- 🌽 Saberes de la vida (Mar 10 nov · 6.1 y 6.2). Es el cuadro comparativo del programa (actividad con
+// docente). A cada equipo le toca por sorteo un saber local; la clave es la misma para todos (lo que dice el compendio).
+CUADROS.saberes = {
+  id: 'act-saberes', ind: 'tarea-saberes', clave: 'saberes',
+  titulo: 'Saberes de la vida: conocimiento ordinario y conocimiento científico', kicker: 'Tema 6 · Conocimiento científico y conocimiento ordinario (6.1 y 6.2)', archivo: 'Saberes_de_la_vida',
+  sorteo: 'El saber que le tocó a su equipo por sorteo', sorteoInd: 'Tu saber', nombreVariante: 'El saber',
+  ayuda: 'Comparen su saber visto como <b>conocimiento ordinario o local</b> (como lo sabe la comunidad) y como <b>conocimiento científico</b> (como lo estudia la ciencia). Usen ejemplos de su comunidad o de la escuela. La fila <b>🔎 Investiga</b> pide una fuente de lo que dice la ciencia sobre su saber.',
+  columnas: [['ordinario', 'Como saber de la comunidad', '#C98A2C'], ['cientifico', 'Como conocimiento científico', '#2E6FA8']],
+  filas: [
+    ['origen', 'Origen', '¿De dónde sale? ¿Quién lo produce?'],
+    ['transmision', 'Cómo se transmite', '¿En la familia y la comunidad, o en la escuela, las revistas y los congresos?'],
+    ['validacion', 'Cómo se valida', '¿Porque funciona y se ha hecho siempre, o porque se pone a prueba y se somete a crítica?'],
+    ['alcance', 'Alcance', '¿Local (funciona en su contexto) o universal?'],
+    ['fortalezas', 'Fortalezas', '¿En qué es bueno este saber?'],
+    ['limites', 'Limitaciones', '¿Dónde puede fallar?'],
+    ['dicen', 'Lo que dice la ciencia de este saber', 'Busquen qué ha estudiado la ciencia sobre su saber: qué confirmó, qué explicó o qué no ha comprobado.', true],
+  ],
+  respuestas: {
+    origen: ['La experiencia de generaciones en relación con su territorio: lo produce la comunidad.', 'La investigación sistemática de comunidades científicas, con teorías y métodos explícitos.'],
+    transmision: ['De forma oral y práctica, en la familia y la comunidad: se aprende haciendo junto a quien sabe.', 'Por escrito y de forma pública: libros, revistas, congresos, la escuela y la universidad.'],
+    validacion: ['Porque funciona en la práctica y ha resistido el tiempo; rara vez se pone a prueba deliberadamente (es poco crítico).', 'Se somete a prueba y a crítica pública (cánones de cientificidad): verificable, provisional, comunicable.'],
+    alcance: ['Contextual: funciona muy bien en su territorio, pero puede fallar fuera de él.', 'Busca generalizar, aunque también tiene límites y sus verdades son provisionales.'],
+    fortalezas: ['Práctico, pertinente y probado por generaciones; a veces la ciencia lo explica siglos después (milpa, nixtamalización).', 'Sistemático, crítico y comunicable; puede explicar por qué algo funciona y corregir errores.'],
+    limites: ['Poco sistemático y poco crítico: también puede equivocarse gravemente (el Sol que «gira» alrededor de la Tierra).', 'Puede despreciar otros saberes (cientificismo, epistemicidio) o quedar lejos de la vida de las personas.'],
+    dicen: ['Respuesta abierta: según su saber. Ojo con los dos riesgos del compendio: el cientificismo (solo vale la ciencia) y el relativismo ingenuo (todo vale igual para todo).', 'Respuesta abierta: por ejemplo, la ciencia de la nutrición explicó los beneficios de la nixtamalización; muchos medicamentos salieron de plantas medicinales, aunque no todo remedio resistió la comprobación.'],
+  },
+  variantes: [
+    { id: 'milpa', ico: '🌽', afirmacion: 'La milpa: maíz, frijol y calabaza sembrados juntos' },
+    { id: 'nixtamal', ico: '🫓', afirmacion: 'La nixtamalización: cocer el maíz con cal' },
+    { id: 'herbolaria', ico: '🌿', afirmacion: 'La medicina tradicional y la herbolaria (remedios de plantas)' },
+    { id: 'pesca', ico: '🎣', afirmacion: 'El conocimiento del mar de los pescadores del Golfo (temporadas, mareas, señales)' },
+    { id: 'partera', ico: '🤱', afirmacion: 'El saber de las parteras tradicionales de la península' },
+    { id: 'maestro', ico: '🍎', afirmacion: 'El saber tácito de un buen maestro: saber cuándo un grupo está a punto de desbordarse' },
+  ],
+};
+
+// ---------- 🧠 Analiza un producto «neuro» (Mar 17 nov · Tema 7). Es la tarea del programa (análisis de un producto «neuro»).
+CUADROS['producto-neuro'] = {
+  id: 'act-producto-neuro', ind: 'tarea-producto-neuro', clave: 'productoNeuro',
+  titulo: 'Analiza un producto «neuro»', kicker: 'Tema 7 · El proceso de enseñanza-aprendizaje a la luz de la neurociencia', archivo: 'Producto_neuro',
+  sorteo: 'El producto que le tocó a su equipo por sorteo', sorteoInd: 'Tu producto', nombreVariante: 'El producto',
+  ayuda: 'Imaginen que se lo quieren vender a su escuela. Júzguenlo con lo que dice el Tema 7 y con los cánones de cientificidad del Tema 2. La fila <b>🔎 Investiga</b> pide buscar en el celular un estudio o una revisión real, con su fuente.',
+  columnas: [['equipo', 'Lo que escribe el equipo', '#3E5BA8']],
+  filas: [
+    ['promete', 'Qué promete', '¿Qué dice que logra en los alumnos?'],
+    ['mito', 'La idea que hay detrás', '¿Qué neuromito o qué idea sobre el cerebro lo sostiene?'],
+    ['evidencia', 'Qué dice la evidencia', 'Un estudio o una revisión real: qué encontró, quién lo hizo y cuándo.', true],
+    ['canones', 'Los cánones de cientificidad', '¿Cita investigaciones? ¿Son verificables? ¿Promete demasiado? ¿Vende algo?'],
+    ['mejor', 'Qué usaríamos en su lugar', 'Un principio con evidencia del Tema 7 (pilares de Dehaene, práctica de recuperación, espaciada, sueño…).'],
+    ['veredicto', 'Veredicto del equipo', '¿Lo comprarían para su escuela? ¿Por qué?'],
+  ],
+  variantes: [
+    { id: 'brain-gym', ico: '🤸', afirmacion: '«Gimnasia cerebral»: ejercicios que conectan los dos hemisferios y mejoran el aprendizaje', respuestas: {
+      promete: ['Que ciertos movimientos (cruzar brazos y piernas, botones del cerebro) conectan los hemisferios y mejoran la atención, la lectura y el aprendizaje.'],
+      mito: ['Que los hemisferios trabajan separados y hay que «conectarlos» con ejercicios específicos.'],
+      evidencia: ['El compendio (tabla de neuromitos): no hay evidencia de esos efectos específicos; la actividad física en general sí favorece la salud y el bienestar.'],
+      canones: ['Cita poca investigación verificable, promete mucho y se vende en cursos y certificaciones.'],
+      mejor: ['Pausas activas por bienestar, sin prometer efectos cerebrales, y atención y compromiso activo (Dehaene).'],
+      veredicto: ['No: es un neuromito. Moverse está bien, pero por otras razones.'] } },
+    { id: 'apps', ico: '📱', afirmacion: 'Una app de «entrenamiento cerebral»: 10 minutos diarios de juegos para ser más inteligente', respuestas: {
+      promete: ['Que jugar sus juegos todos los días aumenta la inteligencia, la memoria y el rendimiento escolar.'],
+      mito: ['Que entrenar una tarea mejora el cerebro «en general» (transferencia lejana).'],
+      evidencia: ['Las revisiones muestran que se mejora en los juegos que se practican, pero casi no se transfiere a otras tareas ni a la escuela (por ejemplo, Simons et al., 2016).'],
+      canones: ['Usa palabras científicas para vender una suscripción; promete demasiado.'],
+      mejor: ['Práctica de recuperación y práctica espaciada sobre lo que sí se quiere aprender (Dunlosky et al., 2013).'],
+      veredicto: ['No para mejorar el aprendizaje escolar; como juego, sin promesas, está bien.'] } },
+    { id: 'vak', ico: '👁️', afirmacion: 'Un test para clasificar a cada alumno como visual, auditivo o kinestésico y enseñarle en su estilo', respuestas: {
+      promete: ['Que cada alumno aprende mejor si se le enseña en su estilo, y que el test lo identifica.'],
+      mito: ['Los estilos de aprendizaje como rasgos fijos que determinan cómo aprende cada quien.'],
+      evidencia: ['Pashler et al. (2008): no hay evidencia de que adaptar la enseñanza al estilo preferido mejore el aprendizaje. Sí ayuda presentar la información en varios formatos a todos.'],
+      canones: ['Muy popular, pero cuando se pone a prueba no se sostiene; se vende en cursos para docentes.'],
+      mejor: ['Usar varios formatos para todos, según el contenido, y retroalimentación del error.'],
+      veredicto: ['No: es un neuromito y además etiqueta a los alumnos.'] } },
+    { id: 'hemisferios', ico: '🎨', afirmacion: 'Un curso para «activar el hemisferio derecho» de los alumnos creativos', respuestas: {
+      promete: ['Que hay alumnos de hemisferio izquierdo (lógicos) y derecho (creativos), y que el curso activa el derecho.'],
+      mito: ['El mito de los hemisferios, que salió de los estudios de Sperry mal interpretados.'],
+      evidencia: ['En un cerebro sano los dos hemisferios trabajan juntos por el cuerpo calloso; no hay evidencia de un hemisferio dominante como rasgo de aprendizaje.'],
+      canones: ['Se apoya en una investigación real (Sperry, Nobel 1981) pero la exagera; promete demasiado.'],
+      mejor: ['La neurociencia habla de redes integradas: actividades que integran pensar, sentir y hacer para todos.'],
+      veredicto: ['No: es un neuromito.'] } },
+    { id: 'mozart', ico: '🎻', afirmacion: 'Discos de Mozart para que los bebés y los niños sean más inteligentes', respuestas: {
+      promete: ['Que escuchar música clásica, sobre todo Mozart, hace más inteligentes a los niños.'],
+      mito: ['El «efecto Mozart».'],
+      evidencia: ['Fue un efecto pequeño y pasajero en adultos que no se ha confirmado de manera consistente (compendio, tabla de neuromitos).'],
+      canones: ['Tomó un estudio pequeño y lo convirtió en un producto; no es verificable lo que promete.'],
+      mejor: ['La música vale por sí misma; para aprender: atención, compromiso activo y sueño.'],
+      veredicto: ['No para hacerlos más inteligentes; la música sí, por gusto y cultura.'] } },
+    { id: 'tres-anos', ico: '👶', afirmacion: 'Un programa de estimulación temprana: «todo se juega antes de los tres años»', respuestas: {
+      promete: ['Que si el niño no recibe cierta estimulación antes de los tres años, la oportunidad se pierde para siempre.'],
+      mito: ['Que las «ventanas» del cerebro se cierran para siempre.'],
+      evidencia: ['Hay periodos sensibles (como los sonidos de una lengua), pero la plasticidad dura toda la vida: nadie está condenado por su cerebro.'],
+      canones: ['Usa el miedo de los padres para vender; exagera un hallazgo real.'],
+      mejor: ['Ambientes ricos y afectivos a toda edad; en secundaria, aprovechar la plasticidad y cuidar el sueño.'],
+      veredicto: ['No como lo vende: lo temprano importa, pero no «todo se juega» ahí.'] } },
+  ],
+};
+
+// ---------- 🎮 Juegos de 5 minutos (práctica, sin calificación)
+// ¿Quién avanza así la ciencia? (Lun 9 nov)
+export const AUTORES_T4 = [['viena', 'Círculo de Viena', '#6B5B4B'], ['popper', 'Popper', '#A63D2F'], ['kuhn', 'Kuhn', '#2E6FA8'], ['lakatos', 'Lakatos', '#3F7A4F'], ['feyerabend', 'Feyerabend', '#E07B39'], ['morin', 'Morin', '#8E5BA8']];
+export const QUIEN_AVANZA = [
+  { e: '✅', q: 'La ciencia avanza verificando: solo tiene sentido lo que se puede comprobar con la experiencia.', c: 'viena', niv: 1, x: 'Es el principio de verificación del Círculo de Viena (positivismo lógico).' },
+  { e: '🦢', q: 'Mil cisnes blancos no prueban que todos lo sean; un solo cisne negro lo refuta.', c: 'popper', niv: 1, x: 'La asimetría entre verificar y refutar: por eso Popper propone la falsabilidad.' },
+  { e: '🎯', q: 'Una teoría es científica si se puede imaginar una observación que la desmienta.', c: 'popper', niv: 1, x: 'Es la falsabilidad, el criterio de demarcación de Popper.' },
+  { e: '🔄', q: 'La ciencia pasa por ciencia normal, anomalías, crisis y revoluciones.', c: 'kuhn', niv: 1, x: 'Es el ciclo de La estructura de las revoluciones científicas (1962).' },
+  { e: '🦆', q: 'Después de una revolución, los científicos ven el mundo de otra manera, como el dibujo del pato-conejo.', c: 'kuhn', niv: 1, x: 'Cambiar de paradigma es como un cambio de percepción.' },
+  { e: '🧱', q: 'Hay un núcleo duro que no se toca y un cinturón protector que se ajusta cuando llegan datos contrarios.', c: 'lakatos', niv: 1, x: 'Es la estructura de un programa de investigación.' },
+  { e: '📈', q: 'Un programa es progresivo si predice hechos nuevos; degenerativo si solo se justifica después.', c: 'lakatos', niv: 1, x: 'Es el criterio de Lakatos para elegir entre programas.' },
+  { e: '🎭', q: '«Todo vale»: ninguna regla metodológica fija garantiza el progreso.', c: 'feyerabend', niv: 1, x: 'Es el anarquismo epistemológico del Tratado contra el método (1975).' },
+  { e: '🔭', q: 'Galileo defendió a Copérnico con retórica y propaganda cuando la evidencia no lo favorecía: si hubiera seguido «el método», la ciencia moderna no habría nacido.', c: 'feyerabend', niv: 2, x: 'Es el ejemplo histórico de Feyerabend contra el método único.' },
+  { e: '🕸️', q: 'Complexus: lo que está tejido junto.', c: 'morin', niv: 1, x: 'Es la raíz de «complejidad» en el pensamiento complejo.' },
+  { e: '✂️', q: 'La ciencia clásica simplificó con disyunción, reducción y abstracción.', c: 'morin', niv: 1, x: 'Son las tres operaciones del paradigma de simplificación.' },
+  { e: '📚', q: 'Los siete saberes necesarios para la educación del futuro, por encargo de la UNESCO.', c: 'morin', niv: 1, x: 'Morin (1999).' },
+  { e: '🏫', q: 'Los campos formativos y los ejes articuladores de la NEM buscan superar la fragmentación del conocimiento.', c: 'morin', niv: 2, x: 'Es la influencia de Morin en la Nueva Escuela Mexicana.' },
+  { e: '🌐', q: 'La sociedad produce a los individuos y los individuos producen la sociedad.', c: 'morin', niv: 2, x: 'Es el principio de recursividad organizacional.' },
+  { e: '🧩', q: 'Cada alumno lleva en sí la cultura de su comunidad: el todo está en la parte.', c: 'morin', niv: 2, x: 'Es el principio hologramático.' },
+  { e: '⚖️', q: 'Un salón demasiado ordenado no aprende y uno en caos tampoco: orden y desorden se necesitan.', c: 'morin', niv: 2, x: 'Es el principio dialógico.' },
+  { e: '🌱', q: 'Es bueno que proliferen teorías alternativas, aunque contradigan lo establecido.', c: 'feyerabend', niv: 2, x: 'La proliferación de teorías permite ver los puntos débiles de la dominante.' },
+  { e: '🗳️', q: 'En una sociedad libre, los ciudadanos deberían decidir qué tradiciones enseñar; la ciencia es una más.', c: 'feyerabend', niv: 2, x: 'Feyerabend criticó que la ciencia ocupara el lugar de autoridad que tuvo la religión.' },
+  { e: '🚫', q: 'Heurística negativa: lo que no se debe tocar; heurística positiva: qué problemas investigar.', c: 'lakatos', niv: 2, x: 'Cada programa de investigación tiene las dos.' },
+  { e: '🤝', q: 'Quería un camino intermedio: aceptar que no se abandona una teoría a la primera refutación, pero que elegir entre teorías sea racional.', c: 'lakatos', niv: 2, x: 'Lakatos, entre Popper y Kuhn.' },
+  { e: '🍎', q: 'El constructivismo: su núcleo es que el conocimiento se construye; si una estrategia falla, se ajusta el andamiaje.', c: 'lakatos', niv: 2, x: 'Es el ejemplo del compendio para el aula mexicana.' },
+  { e: '👥', q: 'La comunidad científica decide, no sin resistencia, cambiar de paradigma.', c: 'kuhn', niv: 2, x: 'Para Kuhn, la comunidad es decisiva.' },
+  { e: '📏', q: 'Dos paradigmas no se pueden comparar con una medida común.', c: 'kuhn', niv: 2, x: 'Es la inconmensurabilidad.' },
+  { e: '🌘', q: 'El eclipse de 1919 pudo desmentir a Einstein y no lo hizo: su teoría quedó corroborada.', c: 'popper', niv: 2, x: 'Popper admiraba que Einstein se arriesgara a una predicción que podía fallar.' },
+  { e: '🔮', q: 'La astrología y el psicoanálisis lo explican todo… y por eso no son ciencia.', c: 'popper', niv: 2, x: 'Una teoría que nada puede refutar no es científica.' },
+  { e: '🧪', q: 'De muchos casos observados se generaliza una ley (inducción).', c: 'viena', niv: 2, x: 'Así entendía el avance de la ciencia el positivismo lógico, hasta chocar con el problema de la inducción.' },
+  { e: '📜', q: 'La concepción científica del mundo (1929): solo son significativas las afirmaciones verificables o lógicamente verdaderas.', c: 'viena', niv: 2, x: 'Es el manifiesto del Círculo de Viena.' },
+];
+// ¿Qué obstáculo es? (Mar 10 nov) · los obstáculos epistemológicos de Bachelard (5.1)
+export const OBSTACULOS = [['experiencia', 'Experiencia primera', '#C0503F'], ['generalizacion', 'Generalización apresurada', '#E07B39'], ['verbal', 'Obstáculo verbal', '#2E6FA8'], ['unitario', 'Conocimiento unitario y pragmático', '#3F7A4F'], ['sustancialista', 'Sustancialista', '#8E5BA8']];
+export const QUE_OBSTACULO = [
+  { e: '👀', q: '«Se ve que el Sol gira alrededor de la Tierra: sale por un lado y se mete por el otro.»', c: 'experiencia', niv: 1, x: 'Confiar sin crítica en la primera impresión de los sentidos.' },
+  { e: '🌡️', q: '«El metal está más frío que la madera: tócalo.» (Están a la misma temperatura.)', c: 'experiencia', niv: 1, x: 'La sensación engaña: el metal conduce mejor el calor. Es una idea previa típica de los alumnos.' },
+  { e: '🙋', q: '«Este alumno se ve distraído, seguro no le interesa la clase.»', c: 'experiencia', niv: 2, x: 'Juzgar por la primera impresión, sin indagar.' },
+  { e: '🧒', q: '«Dos alumnos de esa colonia reprobaron: los de esa colonia no estudian.»', c: 'generalizacion', niv: 1, x: 'Sacar una conclusión general de pocos casos.' },
+  { e: '📱', q: '«Mi sobrino usa mucho el celular y saca malas calificaciones: el celular baja el rendimiento de todos.»', c: 'generalizacion', niv: 1, x: 'Un caso no basta para una ley general.' },
+  { e: '🏫', q: '«Probé los proyectos con un grupo y no funcionó: los proyectos no sirven.»', c: 'generalizacion', niv: 2, x: 'Generalizar a partir de una sola experiencia.' },
+  { e: '🏷️', q: '«No aprende porque tiene TDAH.» (Y con eso se da por explicado todo.)', c: 'verbal', niv: 1, x: 'Creer que se explica algo solo por ponerle nombre; la etiqueta no explica qué le pasa ni qué hacer.' },
+  { e: '🧲', q: '«El imán atrae porque tiene fuerza magnética.»', c: 'verbal', niv: 1, x: 'El nombre se vuelve explicación: no dice nada nuevo.' },
+  { e: '💬', q: '«Ese alumno es así por su personalidad.»', c: 'verbal', niv: 2, x: 'La palabra «personalidad» parece explicar, pero solo nombra.' },
+  { e: '🔑', q: '«Todo se explica por la motivación: si el alumno quiere, aprende.»', c: 'unitario', niv: 1, x: 'Querer explicarlo todo con un solo principio.' },
+  { e: '🛠️', q: '«Si una técnica funciona, no importa por qué funciona.»', c: 'unitario', niv: 2, x: 'Valorar el conocimiento solo por su utilidad inmediata.' },
+  { e: '🧬', q: '«Todo es genética: el que nace inteligente, aprende.»', c: 'unitario', niv: 2, x: 'Un solo principio para explicarlo todo (y además, la plasticidad lo desmiente).' },
+  { e: '✨', q: '«Hay niños que tienen “el don” para las matemáticas.»', c: 'sustancialista', niv: 1, x: 'Atribuir una cualidad oculta que estaría «dentro» de la persona.' },
+  { e: '🪨', q: '«La piedra cae porque tiene “pesadez”.»', c: 'sustancialista', niv: 1, x: 'Una cualidad oculta en la cosa, como en la física antigua.' },
+  { e: '💎', q: '«Esa escuela tiene algo especial: ahí los alumnos salen buenos.»', c: 'sustancialista', niv: 2, x: 'Una esencia misteriosa en lugar de buscar qué prácticas lo explican.' },
+  { e: '🔥', q: '«La madera se quema porque tiene fuego dentro.»', c: 'sustancialista', niv: 2, x: 'Es como el viejo «flogisto»: una sustancia oculta.' },
+];
+// ¿Neuromito o evidencia? (Mar 17 nov) · Tema 7
+export const NEURO_OP = [['M', 'Neuromito', '#C0503F'], ['E', 'Con evidencia', '#3F7A4F']];
+export const NEUROMITOS = [
+  { e: '💯', q: 'Solo usamos el 10 % del cerebro.', c: 'M', niv: 1, x: 'Usamos prácticamente todo el cerebro; distintas zonas se activan según la tarea.' },
+  { e: '🎨', q: 'Hay personas de hemisferio izquierdo y personas de hemisferio derecho.', c: 'M', niv: 1, x: 'Los hemisferios trabajan juntos; el mito salió de los estudios de Sperry mal interpretados.' },
+  { e: '👁️', q: 'Se aprende mejor si se enseña según el estilo: visual, auditivo o kinestésico.', c: 'M', niv: 1, x: 'No hay evidencia (Pashler et al., 2008). Sí ayuda presentar la información en varios formatos a todos.' },
+  { e: '🤸', q: 'La «gimnasia cerebral» conecta los dos hemisferios.', c: 'M', niv: 1, x: 'No hay evidencia de esos efectos; la actividad física en general sí favorece la salud.' },
+  { e: '🎻', q: 'Escuchar a Mozart hace más inteligentes a los niños.', c: 'M', niv: 1, x: 'Fue un efecto pequeño y pasajero que no se ha confirmado de manera consistente.' },
+  { e: '👶', q: 'Todo se juega antes de los tres años.', c: 'M', niv: 1, x: 'Hay periodos sensibles, pero la plasticidad dura toda la vida.' },
+  { e: '🍬', q: 'El azúcar provoca hiperactividad.', c: 'M', niv: 2, x: 'Los estudios controlados no han encontrado ese efecto.' },
+  { e: '🦎', q: 'Tenemos un cerebro reptiliano, uno límbico y uno racional superpuestos.', c: 'M', niv: 2, x: 'El cerebro triuno de MacLean es una simplificación que la neurociencia actual no sostiene.' },
+  { e: '🔁', q: 'El cerebro cambia sus conexiones con la experiencia toda la vida.', c: 'E', niv: 1, x: 'Es la plasticidad cerebral: nadie está condenado por su cerebro.' },
+  { e: '😴', q: 'Dormir es necesario para consolidar lo aprendido.', c: 'E', niv: 1, x: 'Durante el sueño el cerebro reactiva y reorganiza lo aprendido.' },
+  { e: '📝', q: 'Intentar recordar con preguntas fortalece la memoria más que releer.', c: 'E', niv: 1, x: 'Es la práctica de recuperación o efecto de prueba (Roediger y Karpicke, 2006).' },
+  { e: '📅', q: 'Estudiar en varias sesiones es mejor que todo la noche antes del examen.', c: 'E', niv: 1, x: 'Es la práctica espaciada, de utilidad alta en la revisión de Dunlosky et al. (2013).' },
+  { e: '❤️', q: 'La emoción forma parte del aprendizaje: aprendemos lo que nos importa.', c: 'E', niv: 1, x: 'Immordino-Yang y Damasio: pensar y sentir no se separan.' },
+  { e: '🔗', q: 'Las neuronas que se activan juntas tienden a conectarse.', c: 'E', niv: 2, x: 'Es la propuesta de Donald Hebb (1949), base de la plasticidad.' },
+  { e: '❓', q: 'La curiosidad prepara al cerebro para aprender mejor.', c: 'E', niv: 2, x: 'Por eso funciona abrir una clase con una pregunta (las murallas de Campeche).' },
+  { e: '😰', q: 'El estrés intenso y prolongado afecta la memoria y el aprendizaje.', c: 'E', niv: 2, x: 'Un poco de tensión moviliza, pero el estrés crónico perjudica.' },
+  { e: '🧑‍🎓', q: 'La corteza prefrontal termina de madurar después de la adolescencia.', c: 'E', niv: 2, x: 'El cerebro adolescente está en plena reorganización.' },
+  { e: '🖍️', q: 'Releer y subrayar son las técnicas de estudio más eficaces.', c: 'M', niv: 2, x: 'Son las más usadas, pero resultaron de baja utilidad en la revisión de Dunlosky et al. (2013).' },
+  { e: '❌', q: 'El error es información: el cerebro aprende de la diferencia entre lo que esperaba y lo que pasó.', c: 'E', niv: 2, x: 'Es la retroalimentación del error, uno de los cuatro pilares de Dehaene.' },
+  { e: '🔀', q: 'Alternar tipos de problemas ayuda a distinguir cuándo usar cada estrategia.', c: 'E', niv: 2, x: 'Es la práctica intercalada.' },
+];

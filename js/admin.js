@@ -16,7 +16,7 @@ import { vistaRapida } from "./matriz.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js";
 import { zipDocx } from "./docx-ites.js?v=2026102708";
 import { wordTaller, numsDe, estadoEntrega, slugArchivo } from "./taller-word.js?v=2026102708";
-import { docCuadro } from "./cuadro-word.js?v=2026102708";
+import { docCuadro } from "./cuadro-word.js?v=2026110601";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -106,17 +106,21 @@ on('login-form', 'submit', async (e) => {
 on('btn-logout', 'click', () => signOut(auth));
 
 document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+// La Arena y el Tribunal ya no son pestañas: se abren desde su actividad del día (Tareas → Tareas digitales).
+let AR_PRESET = null;
+document.querySelectorAll('[data-volver-tareas]').forEach(b => b.addEventListener('click', () => switchTab('tareas')));
 
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.body.dataset.tabSuelta = document.querySelector(`.tab-btn[data-tab="${tab}"]`) ? '' : tab;
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `tab-${tab}`));
   cargarTabActiva();
 }
 
 function cargarTabActiva() {
   const btnActivo = document.querySelector('.tab-btn.active');
-  if (!btnActivo) return;
-  const tab = btnActivo.dataset.tab;
+  const tab = document.body.dataset.tabSuelta || (btnActivo && btnActivo.dataset.tab);
+  if (!tab) return;
   // La tabla en vivo del examen solo escucha mientras esa pestaña está abierta.
   if (tab !== 'enlinea') detenerIntentosEnVivo();
   // Tabla de alumnos contra actividades, arriba de la captura de siempre.
@@ -1854,7 +1858,8 @@ async function cargarTareasDig() {
   let est = {}, enCat = new Set();
   try { const g = await getDoc(doc(db, 'grupos', grupoActivo)); est = (g.exists() && g.data().tareasDig) || {}; } catch { /* */ }
   try { const sn = await getDocs(collection(db, 'grupos', grupoActivo, 'tareas_catalogo')); sn.forEach(d => { if (d.id.startsWith('dig-')) enCat.add(d.id); }); } catch { /* */ }
-  cont.innerHTML = TEMAS_TAREAS.map(t => `<div class="td-tema"><p class="td-tit"><b>${escaparHTML(t.tema)} · ${escaparHTML(t.titulo)}</b> <small>${escaparHTML(t.fechaTexto)}</small></p>${t.acts.filter(califica).map(a => {
+  cont.innerHTML = TEMAS_TAREAS.map(t => `<div class="td-tema"><p class="td-tit"><b>${escaparHTML(t.tema)} · ${escaparHTML(t.titulo)}</b> <small>${escaparHTML(t.fechaTexto)}</small></p>${t.acts.filter(a => califica(a) || a.tipo === 'vivo').map(a => {
+    if (a.tipo === 'vivo') return `<div class="td-fila td-vivo"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)} <small>· en vivo, no se califica</small></span><button type="button" class="btn btn-small btn-primary" data-vivo="${a.id}">▶ Conducir en clase</button></div>`;
     const cat = enCat.has(catalogoId(a.id)), ab = !(est[a.id] && est[a.id].abierta === false);
     return `<div class="td-fila"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)}</span>
       <button type="button" class="btn btn-small td-cat ${cat ? 'si' : ''}" data-cat="${a.id}" ${cat ? 'disabled' : ''}>${cat ? '✓ En el catálogo' : '+ Agregar al catálogo'}</button>
@@ -1882,9 +1887,20 @@ async function cargarTareasDig() {
     const caja = document.createElement('div'); caja.className = 'td-eqbox'; caja.dataset.t = b.dataset.eqt;
     b.closest('.td-fila').after(caja); b.setAttribute('aria-expanded', 'true'); pintarTdCaja(caja);
   }));
+  cont.querySelectorAll('[data-vivo]').forEach(b => b.addEventListener('click', () => { const a = TAREAS_DIG[b.dataset.vivo]; AR_PRESET = a.set || null; switchTab(a.vivo); window.scrollTo({ top: 0 }); }));
   cont.querySelectorAll('[data-cal]').forEach(b => b.addEventListener('click', () => calificarTareaDig(TAREAS_DIG[b.dataset.cal], enCat.has(catalogoId(b.dataset.cal)))));
 }
 
+// ¿Escribió algo este alumno en el trabajo del equipo? Se ve en «aportes» (desde nov 2026) y, para
+// trabajos anteriores, en los «por» (quién escribió por último cada celda) y en el último autor.
+function aporteDe(d, al) {
+  if (!d) return { si: false, n: 0 };
+  let n = 0;
+  const contar = v => { if (typeof v === 'string') { if (v === al.nombre) n++; } else if (v && typeof v === 'object') Object.values(v).forEach(contar); };
+  const andar = o => { if (!o || typeof o !== 'object') return; Object.entries(o).forEach(([k, v]) => { if (k === 'por') contar(v); else if (v && typeof v === 'object' && k !== 'aportes') andar(v); }); };
+  andar(d);
+  return { si: n > 0 || !!(d.aportes && d.aportes[al.id]) || d.ultimoAutor === al.id, n };
+}
 async function calificarTareaDig(a, enCatalogo) {
   const wrap = document.getElementById('td-calificar'); wrap.hidden = false;
   wrap.innerHTML = '<p class="empty-inline">Reuniendo el trabajo de cada alumno…</p>';
@@ -1903,19 +1919,22 @@ async function calificarTareaDig(a, enCatalogo) {
       if (!datos) { const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'atlas', A.ind)); datos = s.exists() ? s.data() : null; }
       if (datos) { sug = sugerirCuadro(A, datos.celdas); entregado = datos.entregado || null; resumen = A.filas.map(([f, t]) => `${t}: ${A.columnas.map(([c]) => ((datos.celdas || {})[`${f}_${c}`] || '').trim().split(/\s+/).filter(Boolean).length >= MIN_PALABRAS_CELDA ? '●' : '○').join('')}`).join(' · '); }
     } catch { /* */ }
-    return { al, eq, sug, entregado, resumen, cal };
+    // Cero automático: en equipo, quien no escribió nada lleva 0; los que aportaron, la sugerencia del equipo.
+    let ap = null;
+    if (eq) { const d = await docEquipo(eq); if (d) { ap = aporteDe(d, al); if (!ap.si) sug = { nota: 0, detalle: '✋ No aportó: no escribió nada en el trabajo del equipo · ' + sug.detalle }; } }
+    return { al, eq, sug, entregado, resumen, cal, ap };
   }));
   const f = t => t && t.toDate ? t.toDate().toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : typeof t === 'number' ? new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
   const inv = A.filas.filter(x => x[3]).length;
   wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
     ${enCatalogo ? '' : '<p class="aviso-td">⚠️ Esta tarea todavía no está en el catálogo: las calificaciones se guardan, pero no cuentan en el promedio hasta que la agregues.</p>'}
-    <p class="field-hint">La calificación sugerida sale de qué tan completo está el cuadro: ${inv ? `8 puntos por las ${A.filas.length * A.columnas.length} celdas llenas (cuenta la que tiene ${MIN_PALABRAS_CELDA} palabras o más) y 2 por ${inv === 1 ? 'la fuente de la fila' : 'las fuentes de las filas'} de investigación` : 'celdas llenas'}. En equipo, todos reciben la misma sugerencia; puedes ajustar a quien no aportó (en el Monitor ves quién escribió qué).</p>
+    <p class="field-hint">La calificación sugerida sale de qué tan completo está el cuadro: ${inv ? `8 puntos por las ${A.filas.length * A.columnas.length} celdas llenas (cuenta la que tiene ${MIN_PALABRAS_CELDA} palabras o más) y 2 por ${inv === 1 ? 'la fuente de la fila' : 'las fuentes de las filas'} de investigación` : 'celdas llenas'}. En equipo, quien <b>no escribió nada</b> sale con sugerida <b>0</b> (✋ No aportó); los que sí aportaron llevan la del equipo. Puedes corregirla a mano si alguien trabajó desde el celular de un compañero.</p>
     <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button></div>
     <div class="taller-tabla-wrap"><table class="taller-tabla td-tabla"><thead><tr><th>Alumno</th><th>Trabajo</th><th>Entrega</th><th>Sugerida</th><th>Calificación</th></tr></thead><tbody>
     ${filas.map(x => `<tr data-id="${x.al.id}"><td><b>${escaparHTML(x.al.nombre)}</b>${x.eq ? `<br><small>👥 ${escaparHTML(x.eq.nombre)}</small>` : ''}</td>
       <td><small>${escaparHTML(x.sug.detalle)}</small>${x.resumen ? `<details><summary>Ver</summary><small>${escaparHTML(x.resumen)}</small></details>` : ''}</td>
       <td>${x.entregado ? `<span class="td-ok">✓ ${escaparHTML(f(x.entregado.t))}</span>` : '<span class="td-no">No entregada</span>'}</td>
-      <td><b class="td-sug">${x.sug.nota}</b></td>
+      <td><b class="td-sug">${x.sug.nota}</b>${x.ap && !x.ap.si ? `<br><small class="td-noap" title="No escribió nada en el trabajo del equipo">✋ No aportó${x.cal !== '' && Number(x.cal) > 0 ? ' · ⚠️ revisa: ya tiene calificación' : ''}</small>` : x.ap && x.ap.n ? `<br><small class="td-siap">✍️ ${x.ap.n} celda${x.ap.n === 1 ? '' : 's'}</small>` : ''}</td>
       <td><input type="number" min="0" max="10" step="0.1" class="calif-input td-in" value="${x.cal}" placeholder="0-10" data-sug="${x.sug.nota}"></td></tr>`).join('')}</tbody></table></div>
     <button type="button" class="btn btn-primary btn-block" id="td-guardar">Guardar calificaciones</button><p class="save-msg" id="td-msg" hidden></p>`;
   document.getElementById('td-cerrar').addEventListener('click', () => { wrap.hidden = true; });
@@ -1961,13 +1980,13 @@ function iniciarMonitor() {
   }
   detenerMonitor();
   MON.grupo = grupoActivo; MON.datos = {}; MON.todos = []; MON.equipos = []; MON.g = {};
-  MON.subs.push(onSnapshot(doc(db, 'grupos', grupoActivo), sn => { MON.g = sn.exists() ? sn.data() : {}; pintarClaveMon(); const antes = MON.equipos.map(e => e.id).join(); filtrarMon(); if (antes !== MON.equipos.map(e => e.id).join()) { suscribirMon(); pintarMonitor(); } }, () => {}));
+  MON.subs.push(onSnapshot(doc(db, 'grupos', grupoActivo), sn => { MON.g = sn.exists() ? sn.data() : {}; pintarClaveMon(); { const sel = document.getElementById('cielo-mision'); if (sel && document.activeElement !== sel) sel.value = MON.g.cieloMision || 'auto'; } const antes = MON.equipos.map(e => e.id).join(); filtrarMon(); if (antes !== MON.equipos.map(e => e.id).join()) { suscribirMon(); pintarMonitor(); } }, () => {}));
   MON.subs.push(onSnapshot(collection(db, 'grupos', grupoActivo, 'equipos'), sn => { MON.todos = sn.docs.map(d => ({ id: d.id, ...d.data() })); suscribirMon(); pintarMonitor(); }, () => {}));
   MON.reloj = setInterval(() => document.querySelectorAll('.mon-card').forEach(c => pintarTiempoMon(c, (MON.datos[c.dataset.clave] || {}).actualizado)), 10000);
   pintarMonitor();
 }
 function pintarClaveMon() { const b = document.getElementById('mon-clave'); if (!b || !MON.act) return; b.hidden = !!CUADROS[MON.act].sinClave; MON.clave = !!((MON.g.claves || {})[CUADROS[MON.act].clave]); b.setAttribute('aria-pressed', String(MON.clave)); b.textContent = MON.clave ? '🔒 Ocultar clave a los alumnos' : '🔑 Liberar clave'; }
-function filtrarMon() { MON.equipos = equiposDe(MON.todos, formacionDeTarea(MON.g, MON.act)).sort(ordenEqMon); }
+function filtrarMon() { MON.equipos = TAREAS_DIG[MON.act] && TAREAS_DIG[MON.act].individual ? [] : equiposDe(MON.todos, formacionDeTarea(MON.g, MON.act)).sort(ordenEqMon); }
 function suscribirMon() {
   MON.eqSubs.forEach(u => u()); MON.eqSubs = []; filtrarMon();
   const A = CUADROS[MON.act];
@@ -2103,7 +2122,7 @@ function pintarArena(soloJug) {
   if (!S || !S.estado || S.estado === 'cerrada') {
     cont.innerHTML = `<div class="bloques-activos-card"><h3 class="section-title" style="margin-top:0">⚡ Abrir una Arena</h3>
       <p class="field-hint">Elige las preguntas, abre la sala y proyecta: los alumnos entran desde su celular (Tareas → ⚡ Arena en vivo, o con el QR). Cada pregunta dura el tiempo que elijas; gana más quien responde bien y rápido.</p>
-      <label class="field-label" for="ar-set">Preguntas</label><select id="ar-set">${Object.entries(ARENA).sort((x, y) => x[0].localeCompare(y[0])).map(([k, v]) => `<option value="${k}">${escaparHTML(v.titulo)} (${v.preguntas.length} preguntas)</option>`).join('')}</select>
+      <label class="field-label" for="ar-set">Preguntas</label><select id="ar-set">${Object.entries(ARENA).sort((x, y) => x[0].localeCompare(y[0])).map(([k, v]) => `<option value="${k}"${k === AR_PRESET ? ' selected' : ''}>${escaparHTML(v.titulo)} (${v.preguntas.length} preguntas)</option>`).join('')}</select>
       <label class="field-label" for="ar-dur">Segundos por pregunta</label><select id="ar-dur"><option>15</option><option selected>20</option><option>30</option></select>
       <button type="button" class="btn btn-primary btn-block" id="ar-abrir" style="margin-top:12px">Abrir la sala y proyectar</button></div>`;
     document.getElementById('ar-abrir').addEventListener('click', async () => {

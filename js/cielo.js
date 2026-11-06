@@ -62,7 +62,7 @@ export function estadoAutor(S, id) {
 }
 export const estrellasDe = S => Object.fromEntries(Object.keys(normal(S).ac).map(id => [id, estadoAutor(normal(S), id)]).filter(([, e]) => e.encendida).map(([id, e]) => [id, e.pts]));
 export const encendidas = S => Object.keys(estrellasDe(S)).length;
-export const NOMBRE_TIPO = { frase: 'su frase', obra: 'su obra', idea: 'su idea', concepto: 'su concepto', aula: 'su ejemplo en el aula', gancho: 'su gancho', arena: 'la Arena', paradigma: '¿Qué paradigma es?', tribunal: 'el Tribunal', antes: 'tus juegos' };
+export const NOMBRE_TIPO = { frase: 'su frase', obra: 'su obra', idea: 'su idea', concepto: 'su concepto', aula: 'su ejemplo en el aula', gancho: 'su gancho', arena: 'la Arena', paradigma: '¿Qué paradigma es?', tribunal: 'el Tribunal', antes: 'tus juegos', quienavanza: '¿Quién avanza así la ciencia?', queobstaculo: '¿Qué obstáculo es?', neuromito: '¿Neuromito o evidencia?' };
 
 // ---------- almacenamiento
 const LS = 'ep_cielo_local', LS_YO = 'ep_cielo_yo';

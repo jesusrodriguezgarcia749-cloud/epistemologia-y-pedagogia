@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 5 · Cierre del Tema 4 · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 5: Lunes 9 de noviembre · 1 hora
+     El martes 3 no hubo clase: esta sesión cierra el Tema 4 (contenido del Parcial 2)
+     4.4 Lakatos · 4.5 Feyerabend · 4.6 Morin · 4.7 La cientificidad de las ciencias sociales
+     Juego de 5 minutos, lectura comentada del compendio, «Mi autor en cuatro cuadros» en equipo,
+     puesta en común y recepción de la Entrega 1.
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulo 4
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Tema 4 · Concepción contemporánea de la ciencia",
+      dia: "Lunes 9 de noviembre · Sesión 5 de 10",
+      titulo: "Cierre del Tema 4",
+      subtitulo: "4.4 Lakatos · 4.5 Feyerabend · 4.6 Morin · 4.7 ¿Son ciencia las ciencias sociales?",
+      duracion: "1 hora",
+      minutos: "0-1",
+      notas: "El martes 3 no hubo clase. Hoy cerramos el Tema 4, que entra al Parcial 2 (lunes 23 de noviembre), y se recibe la Entrega 1." },
+
+    { tipo: "objetivos",
+      intro: "Hoy terminamos la conversación del siglo XX: los autores que vinieron después de Popper y Kuhn.",
+      puntos: [
+        "Calentar con el juego **¿Quién avanza así la ciencia?**",
+        "Entender a **Lakatos**: núcleo duro, cinturón protector y programas progresivos o degenerativos.",
+        "Conocer a **Feyerabend** («todo vale») y a **Morin** (pensamiento complejo).",
+        "Responder: **¿son ciencia las ciencias sociales?** (4.7)",
+        "En equipo: **Mi autor en cuatro cuadros**, y compartirlo con el grupo.",
+        "Entregar la **Entrega 1** del proyecto."
+      ],
+      pasoAPaso: true,
+      minutos: "1-2" },
+
+    { tipo: "plataforma",
+      etiqueta: "Calentamiento", tipoAct: "Individual · juego de 5 minutos",
+      titulo: "¿Quién avanza así la ciencia?",
+      enlace: "../tareas.html#quien-avanza", textoEnlace: "Tareas → ¿Quién avanza así la ciencia?",
+      minutos: "2-7", evaluacion: "Formativo",
+      notas: "Todos en «Básico». Al terminar pregunta quién hizo más puntos. Mientras juegan, recoge la Entrega 1 (o al final, como prefieras). Ten listos los QR de los equipos para «Mi autor en cuatro cuadros»: Panel → Tareas → Tareas digitales → 👥 de «Mi autor en cuatro cuadros».",
+      pasos: [
+        "Escanea el QR: **Tareas → ¿Quién avanza así la ciencia?**",
+        "Aparece una idea: ¿es del **Círculo de Viena**, de **Popper**, **Kuhn**, **Lakatos**, **Feyerabend** o **Morin**?",
+        "Elige **Básico**. Al responder, lee por qué."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tabla",
+      titulo: "Dónde nos quedamos",
+      columnas: ["Autor", "Cómo avanza la ciencia", "La palabra clave"],
+      filas: [
+        ["Círculo de Viena", "Verificando por inducción", "Verificación"],
+        ["Popper", "Por conjeturas y refutaciones", "Falsabilidad"],
+        ["Kuhn", "Por paradigmas que cambian con revoluciones", "Paradigma"],
+        ["Lakatos", "¿?", "Hoy"],
+        ["Feyerabend", "¿?", "Hoy"],
+        ["Morin", "¿?", "Hoy"]
+      ],
+      pasoAPaso: true,
+      minutos: "7-8",
+      notas: "Recordatorio rápido de lo que se vio el 27 de octubre (4.1 a 4.3). Pregunta al grupo antes de mostrar cada fila." },
+
+    { tipo: "tema",
+      titulo: "4.4 Imre Lakatos: un puente entre Popper y Kuhn",
+      etiqueta: "Lectura comentada · compendio 4.4",
+      puntos: [
+        "Húngaro (1922-1974), **discípulo y luego crítico de Popper**.",
+        "Con **Kuhn**: los científicos **no abandonan** su teoría a la primera refutación.",
+        "Con **Popper**: elegir entre teorías **sí es racional**.",
+        "La unidad no es una teoría suelta: es un **programa de investigación científica**."
+      ],
+      pasoAPaso: true,
+      minutos: "8-10" },
+
+    { tipo: "imagen",
+      titulo: "Lo esencial: un programa de investigación",
+      imagen: "img/s4-lakatos.svg",
+      pie: "El núcleo duro no se toca (heurística negativa); el cinturón protector se ajusta cuando llegan los golpes de la experiencia (heurística positiva: qué investigar).",
+      minutos: "10-11" },
+
+    { tipo: "tabla",
+      titulo: "¿Progresivo o degenerativo?",
+      columnas: ["Programa", "Qué hace", "Qué le pasa"],
+      filas: [
+        ["**Progresivo**", "Sus ajustes permiten **predecir hechos nuevos** que luego se confirman", "Sigue creciendo"],
+        ["**Degenerativo**", "Solo hace ajustes para **explicar después** lo que ya sabía", "Se abandona cuando aparece uno progresivo"]
+      ],
+      minutos: "11-12" },
+
+    { tipo: "pregunta",
+      pregunta: "Una estrategia constructivista falla en el aula y el docente dice «faltó andamiaje». ¿Es un programa progresivo o degenerativo?",
+      respuesta: "Depende: si ese ajuste **permite predecir y lograr nuevos aprendizajes**, es progresivo; si solo sirve para **justificar el fracaso**, es degenerativo.",
+      minutos: "12-13",
+      notas: "Es el ejemplo del compendio: el núcleo del constructivismo es «el conocimiento se construye activamente»; el cinturón, el conflicto cognitivo, el aprendizaje entre pares, la zona de desarrollo próximo." },
+
+    { tipo: "tema",
+      titulo: "4.5 Feyerabend: contra el método",
+      etiqueta: "Lectura comentada · compendio 4.5",
+      puntos: [
+        "Austriaco (1924-1994), **amigo y rival de Lakatos**. *Tratado contra el método* (1975).",
+        "En la historia real, **toda regla metodológica** ha sido violada alguna vez **con éxito**.",
+        "**Galileo** defendió a Copérnico con retórica y propaganda cuando la evidencia aún no lo favorecía.",
+        "**«Todo vale»**: no que cualquier opinión valga igual, sino que **ninguna regla fija garantiza el progreso**.",
+        "**Proliferación de teorías** y la ciencia como **una tradición más** en una sociedad libre."
+      ],
+      pasoAPaso: true,
+      minutos: "13-16",
+      notas: "A esta postura la llamó anarquismo epistemológico (Feyerabend, 1975/1986)." },
+
+    { tipo: "tema",
+      titulo: "Feyerabend: incómodo y necesario",
+      puntos: [
+        "**Lo que nos deja:** la ciencia es creativa y humana; no hay recetas; otros saberes merecen respeto.",
+        "**El riesgo:** leído sin cuidado alimenta el **relativismo extremo**: «da igual la vacuna que el remedio milagroso».",
+        "Esa lectura superficial **no le hace justicia**, pero hay que estar atentos, sobre todo en tiempos de **desinformación**."
+      ],
+      pasoAPaso: true,
+      minutos: "16-17" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Debería la escuela enseñar la ciencia como «una tradición más» junto a otros saberes, como proponía Feyerabend?",
+      respuesta: "Se gana **respeto por otros saberes** y una ciencia más humana y creativa. Se arriesga el **relativismo**. El **diálogo de saberes** (lo veremos el martes) busca el punto medio.",
+      minutos: "17-18",
+      evaluacion: "Participación" },
+
+    { tipo: "tabla",
+      titulo: "4.6 Morin: pensamiento complejo",
+      columnas: ["Idea", "Qué significa", "En el aula"],
+      filas: [
+        ["Paradigma de simplificación", "Disyunción, reducción y abstracción: un saber **fragmentado**", "Materias que nunca se tocan entre sí"],
+        ["*Complexus*", "«Lo que está tejido junto»", "El alumno es biológico, psicológico, social, cultural e histórico"],
+        ["Principio dialógico", "Opuestos que se complementan", "Ni un salón demasiado ordenado ni uno en caos aprenden"],
+        ["Recursividad", "Los efectos producen a sus causas", "La sociedad forma individuos que forman la sociedad"],
+        ["Principio hologramático", "El todo está en la parte", "Cada salón refleja el sistema educativo completo"]
+      ],
+      pasoAPaso: true,
+      minutos: "18-22",
+      notas: "Sociólogo y filósofo francés (1921-2026); murió el 29 de mayo de 2026, a los 104 años." },
+
+    { tipo: "video",
+      titulo: "Morin: introducción al pensamiento complejo",
+      youtube: "https://www.youtube.com/watch?v=BM8nfUUVOhg",
+      pie: "Resúmenes Entelekia · en español. Proyecta solo los primeros minutos.",
+      minutos: "22-24",
+      notas: "Detenlo cuando ya presentó la idea de simplificación frente a complejidad. Si el tiempo aprieta, sáltalo." },
+
+    { tipo: "tema",
+      titulo: "Los siete saberes para la educación del futuro",
+      etiqueta: "Morin, para la UNESCO (1999)",
+      puntos: [
+        "Detectar las **cegueras del conocimiento**: el error y la ilusión.",
+        "Un conocimiento **pertinente**, que relacione y contextualice.",
+        "Enseñar la **condición humana** y la **identidad terrenal**.",
+        "**Enfrentar las incertidumbres**.",
+        "Enseñar la **comprensión** y la **ética del género humano**."
+      ],
+      pasoAPaso: true,
+      minutos: "24-25" },
+
+    { tipo: "dato",
+      titulo: "Morin en la Nueva Escuela Mexicana",
+      cifra: "7",
+      texto: "**saberes necesarios para la educación del futuro**. Su huella en la NEM: los **campos formativos** y los **ejes articuladores**, contra la fragmentación del conocimiento.",
+      fuente: "Morin (1999), UNESCO; SEP (2022).",
+      minutos: "25-26" },
+
+    { tipo: "tema",
+      titulo: "4.7 ¿Son ciencia las ciencias sociales?",
+      etiqueta: "Lectura comentada · compendio 4.7",
+      puntos: [
+        "**Distintos objetos, distintos métodos:** el ser humano da sentido a sus actos; exige comprensión (Dilthey, Weber).",
+        "**Doble hermenéutica** (Giddens): interpretamos un mundo ya interpretado, y nuestros conceptos lo transforman. Cuando «bullying» entró a la escuela, cambió cómo se viven ciertos conflictos.",
+        "**Rigor sin imitación:** ni la física sigue un método único; exigírselo a la pedagogía es injusto.",
+        "**Criterios propios:** credibilidad, transferibilidad, consistencia y confirmabilidad."
+      ],
+      pasoAPaso: true,
+      minutos: "26-29" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Puede la pedagogía ser ciencia? ¿Qué te diría Popper? ¿Y Kuhn? ¿Y Morin?",
+      respuesta: "**Popper:** si sus hipótesis son falsables. **Kuhn:** si una comunidad comparte un paradigma. **Morin:** solo si no fragmenta un objeto que es complejo.",
+      minutos: "29-30",
+      notas: "Pregunta abierta: es una síntesis posible, no la única." },
+
+    { tipo: "tabla",
+      titulo: "Los seis autores en una tabla",
+      columnas: ["Autor", "Cómo avanza la ciencia", "La palabra clave"],
+      filas: [
+        ["Círculo de Viena", "Verificando por inducción", "Verificación"],
+        ["Popper", "Por conjeturas y refutaciones", "Falsabilidad"],
+        ["Kuhn", "Por paradigmas que cambian con revoluciones", "Paradigma"],
+        ["Lakatos", "Por programas de investigación que progresan o degeneran", "Núcleo duro y cinturón protector"],
+        ["Feyerabend", "Sin un método fijo: «todo vale»", "Anarquismo epistemológico"],
+        ["Morin", "Tejiendo lo que la ciencia clásica separó", "Complejidad"]
+      ],
+      pasoAPaso: true,
+      minutos: "30-31",
+      notas: "Es la tabla de «Dónde nos quedamos», ya completa. Que la copien: entra al Parcial 2." },
+
+    { tipo: "plataforma",
+      etiqueta: "Tarea en la plataforma", tipoAct: "En equipo · en vivo",
+      titulo: "Mi autor en cuatro cuadros",
+      enlace: "../tareas.html#mi-autor", textoEnlace: "Tareas → Mi autor en cuatro cuadros",
+      minutos: "31-44", evaluacion: "Sumativo · cuenta como tarea del Parcial 2",
+      notas: "Antes de clase: Panel → Tareas → Tareas digitales → 👥 de «Mi autor en cuatro cuadros»: forma los equipos (o usa una formación anterior) y proyecta sus QR. A cada equipo le toca por sorteo Lakatos, Feyerabend, Morin o las ciencias sociales. Síguelos en el Monitor en vivo. Quien no escriba nada saldrá con 0 al calificar (✋ No aportó).",
+      pasos: [
+        "Escanea el **QR de tu equipo**: la plataforma les asigna su autor por sorteo.",
+        "Llenen los **cuatro cuadros** con sus palabras: su idea en una frase, un ejemplo en el aula, una crítica y qué le dice a su investigación.",
+        "**Repártanse los cuadros**: cada quien desde su celular. Ojo: quien no escriba nada no tiene calificación.",
+        "En **12 minutos** lo compartimos con el grupo."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "plataforma",
+      etiqueta: "Puesta en común", tipoAct: "Todo el grupo",
+      titulo: "Compartimos nuestros autores",
+      minutos: "44-53", evaluacion: "Formativo",
+      notas: "Panel → Monitor en vivo → «Mi autor en cuatro cuadros» → toca la tarjeta de cada equipo (⛶ Pantalla completa) y que la expliquen en un minuto. Al final, 🔑 Liberar clave: cada equipo compara en su celular con lo que dice el compendio.",
+      pasos: [
+        "Cada equipo explica sus cuatro cuadros en **un minuto**.",
+        "El grupo pregunta: ¿el ejemplo en el aula **sí** es de ese autor?",
+        "Al final se libera la **clave**: comparen en su celular con lo que dice el compendio."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tema",
+      titulo: "Hoy se recibe la Entrega 1",
+      etiqueta: "Proyecto · 15 puntos del Examen Final",
+      puntos: [
+        "Preguntas **1 a 6**, de **150 a 250 palabras** cada una.",
+        "Al menos **3 referencias en APA 7**, en orden alfabético y con sangría francesa.",
+        "En el **Taller** del Aula Virtual toca **Entregar** para que quede la fecha.",
+        "Recibes la **retroalimentación con la rúbrica**: la usarás para corregir antes de la Entrega 2 (martes 24)."
+      ],
+      minutos: "53-57",
+      evaluacion: "Entrega 1 del proyecto (cuenta en el Examen Final)",
+      notas: "La fecha se movió del martes 3 al lunes 9 porque no hubo clase. Puedes descargar el Word de todos en Panel → Taller (⬇ Todos en .zip)." },
+
+    { tipo: "cierre",
+      evidencia: "**Mi autor en cuatro cuadros** de cada equipo, compartido con el grupo, y la **Entrega 1** recibida.",
+      materiales: "Libro de texto (Tema 4), Aula Virtual y **celular con internet**.",
+      proxima: "Terminar **Mi autor en cuatro cuadros** si les faltó. Jugar **💬 ¿Quién lo dijo?** (nivel Tema 4). Leer el **Tema 5** para el **martes 10**.",
+      minutos: "57-60" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

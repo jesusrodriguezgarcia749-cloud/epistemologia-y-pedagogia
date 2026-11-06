@@ -6,8 +6,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js";
-import { docCuadro } from "./cuadro-word.js?v=2026102708";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js";
+import { docCuadro } from "./cuadro-word.js?v=2026110601";
 import { brillar, descubrir, miCielo, estadoAutor, misionPorFecha, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA, TIPOS_PARA_ENCENDER, NOMBRE_TIPO, CLAVES_AUTOR } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
@@ -109,7 +109,7 @@ async function estadoDe(a) {
 }
 function insignia(a, st) {
   if (a.tipo === 'practica') return '<span class="tq tq-practica">Práctica · sin calificación</span>';
-  if (a.tipo === 'coev') return '<span class="tq tq-practica">Participación · en vivo</span>';
+  if (a.tipo === 'coev' || a.tipo === 'vivo') return '<span class="tq tq-practica">En vivo · en clase</span>';
   if (a.tipo === 'pronto') return '<span class="tq tq-pronto">Próximamente</span>';
   if (!st) return `<span class="tq">${abierta(a.id) ? 'Tarea' : '🔒 Cerrada'}</span>`;
   if (st.cal !== null) return `<span class="tq tq-cal">Calificada: <b>${st.cal}</b></span>`;
@@ -134,7 +134,7 @@ async function portada() {
   if (sesion) $('#tq-salir').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } olvidarAlumno(); sesion = null; EQS = null; if (unsubGrupo) unsubGrupo(); portada(); });
   else $('#tq-entrar').addEventListener('click', () => formAcceso($('#cl-acceso'), portada));
   $('#cl-sesiones').innerHTML = TEMAS_TAREAS.map((t, i) => `<details class="tq-tema" data-tema="${i}" ${t === actual ? 'open' : ''}><summary><span class="tq-num">${esc(t.tema)}</span><span><b>${esc(t.titulo)}</b><small>${esc(t.fechaTexto)} · ${t.acts.filter(califica).length} tarea${t.acts.filter(califica).length === 1 ? '' : 's'}</small></span></summary>
-    <div class="cl-cards">${t.acts.map(a => `<a class="cl-card ${a.tipo === 'pronto' ? 'cl-pronto' : ''}" href="${a.tipo === 'pronto' ? '#' : '#' + a.id}" data-act="${a.id}"><span class="cl-ico">${a.icono}</span><b>${esc(a.nombre)}</b><small>${esc(a.modo)}</small><p>${esc(a.desc)}</p><span class="cl-estado" data-st="${a.id}">${insignia(a, null)}</span><p class="cl-avance" data-av="${a.id}"></p></a>`).join('')}</div></details>`).join('');
+    <div class="cl-cards">${t.acts.map(a => `<a class="cl-card ${a.tipo === 'pronto' ? 'cl-pronto' : ''}" href="${a.tipo === 'pronto' ? '#' : '#' + (a.tipo === 'vivo' ? a.vivo : a.id)}" data-act="${a.id}"><span class="cl-ico">${a.icono}</span><b>${esc(a.nombre)}</b><small>${esc(a.modo)}</small><p>${esc(a.desc)}</p><span class="cl-estado" data-st="${a.id}">${insignia(a, null)}</span><p class="cl-avance" data-av="${a.id}"></p></a>`).join('')}</div></details>`).join('');
   $$('.cl-pronto').forEach(x => x.addEventListener('click', e => e.preventDefault()));
   if (sesion) {
     escucharGrupo();
@@ -177,7 +177,7 @@ function ruta() {
     ${a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
   if (a.tipo === 'cuadro') actCuadro($('#cl-cuerpo'), a);
   else if (a.tipo === 'coev') actCoev($('#cl-cuerpo'));
-  else ({ 'que-paradigma': actQueParadigma, 'quien-lo-dijo': actQuienLoDijo })[a.id]($('#cl-cuerpo'));
+  else ({ 'que-paradigma': actQueParadigma, 'quien-lo-dijo': actQuienLoDijo, 'quien-avanza': actQuienAvanza, 'que-obstaculo': actQueObstaculo, neuromito: actNeuromito })[a.id]($('#cl-cuerpo'));
   window.scrollTo({ top: 0 });
 }
 // El QR de un equipo abre tareas.html#unir-CODIGO (vía unir.html): entra, se une y va a su tarea.
@@ -228,8 +228,9 @@ function actCuadro(cont, a) {
   const entrar = async () => {
     escucharGrupo();
     cont.innerHTML = '<p class="atlas-ayuda">Buscando a tu equipo…</p>';
-    const eq = await equipo(a.id);
+    const eq = a.individual ? null : await equipo(a.id);
     if (eq) return cuadro(cont, eq, a);
+    if (a.individual) return cuadro(cont, null, a);
     cont.innerHTML = `<div class="cl-sin-eq"><p><b>Todavía no estás en un equipo.</b> Escribe el código de 4 letras de tu equipo (o escanea el QR que proyecta tu maestro).</p>
       <form id="cl-unir" class="ma-unir"><div><input id="cl-cod" maxlength="4" autocomplete="off" placeholder="ABCD" aria-label="Código del equipo"><button class="btn-at" type="submit">Unirme</button></div></form>
       <p class="ma-msg mal" id="cl-unir-msg" hidden></p><p class="cl-o">o</p><button type="button" class="btn-ruta" id="cl-solo">Hacerla solo (se guarda en tu cuenta)</button></div>`;
@@ -244,7 +245,7 @@ function cuadro(cont, eq, a) {
   const ref = eq ? doc(db, 'grupos', sesion.grupoId, 'equipos', eq.id, 'atlas', A.id) : doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', A.ind);
   cont.innerHTML = `<div class="ma-barra"><span>${eq ? `👥 <b>${esc(eq.nombre)}</b>: ${esc((eq.nombres || []).join(', '))}` : `👤 <b>${esc(sesion.nombre)}</b> (individual)`}</span><span class="ma-estado" id="cu-estado"></span>
       <button type="button" class="btn-ruta" id="cu-word">⬇ Descargar en Word</button></div>
-    ${V ? `<div class="cu-afirma"><span>${V.ico}</span><div><small>${eq ? 'La afirmación que le tocó a su equipo por sorteo' : 'Tu afirmación'}</small><b>${esc(V.afirmacion)}</b></div></div>` : ''}
+    ${V ? `<div class="cu-afirma"><span>${V.ico}</span><div><small>${eq ? (A.sorteo || 'La afirmación que le tocó a su equipo por sorteo') : (A.sorteoInd || 'Tu afirmación')}</small><b>${esc(V.afirmacion)}</b></div></div>` : ''}
     <div data-entrega></div>
     <p class="atlas-ayuda">${A.ayuda}${eq ? ' Repártanse el trabajo en el equipo.' : ''} Se guarda solo${eq ? ' y todos ven al instante lo que escriben los demás' : ''}.</p>
     <p class="cu-progreso" id="cu-progreso"></p>
@@ -274,6 +275,7 @@ function cuadro(cont, eq, a) {
       } else {
         if (!existe) { const s0 = await getDoc(ref); if (!s0.exists()) await setDoc(ref, { celdas: {}, por: {}, ...firma(), actualizado: serverTimestamp() }); existe = true; }
         const args = []; lote.forEach(([r, v]) => args.push(new FieldPath(...r), v));
+        args.push(new FieldPath('aportes', sesion.alumnoId), sesion.nombre);   // quién aportó (para el cero automático)
         args.push('ultimoAutor', sesion.alumnoId, 'ultimoPin', sesion.pin, 'ultimoNombre', sesion.nombre, 'ultimoCambio', ultima, 'actualizado', serverTimestamp());
         await updateDoc(ref, ...args);
       }
@@ -444,6 +446,40 @@ function actQueParadigma(cont) {
       filtros: [['todos', 'Todos', () => true], ['P', 'Positivista', x => x.g === 'par' && x.c === 'P'], ['I', 'Interpretativo', x => x.g === 'par' && x.c === 'I'], ['S', 'Sociocrítico', x => x.g === 'par' && x.c === 'S'], ['L', 'Lineal', x => x.g === 'lin' && x.c === 'L'], ['Y', 'Sistémica', x => x.g === 'lin' && x.c === 'S']],
       fila: x => { const o = PARADIGMAS_OP[x.g].find(y => y[0] === x.c); return `<div class="ap-fila" style="border-left-color:${o[2]}"><span class="ap-fe">${x.e}</span><div><b>${esc(x.q)}</b> <small class="ap-tag">${esc(o[1])}</small><p class="ap-dato">${esc(x.x)}</p></div></div>`; } },
   });
+}
+
+// ======================================================= 🎮 Juegos de 5 minutos con opciones de color (desde el 9 de nov)
+function juegoOpciones(cont, { clave, intro, OP, items, niveles, estrellas, boton, introEst, uno, varios }) {
+  cargarLab();
+  const op = c => OP.find(x => x[0] === c) || ['', '', '#888'];
+  juegoPreguntas(cont, {
+    clave, seg: 15, intro, niveles, items, estrellas, tipo: () => clave.replace(/-/g, ''), nombreAutor,
+    preparar: x => ({ carta: `<span class="ap-emo">${x.e}</span><b class="jp-q">${esc(x.q)}</b>`, opciones: OP.map(([k, n, col]) => ({ v: k, t: esc(n), style: `--c:${col}` })), correctas: [x.c], clase: 'jp-infl' }),
+    mal: x => `No: es ${op(x.c)[1]}.`,
+    explicar: x => `<p class="ap-dato">${esc(x.x)}</p>`,
+    repaso: x => `${x.e} <b>${esc(x.q)}</b> → ${esc(op(x.c)[1])}. <span class="ap-dato">${esc(x.x)}</span>`,
+    estudiar: { boton, intro: introEst, uno, varios, texto: x => x.q + ' ' + op(x.c)[1],
+      filtros: [['todos', 'Todos', () => true], ...OP.map(([k, n]) => [k, n, x => x.c === k])],
+      fila: x => `<div class="ap-fila" style="border-left-color:${op(x.c)[2]}"><span class="ap-fe">${x.e}</span><div><b>${esc(x.q)}</b> <small class="ap-tag">${esc(op(x.c)[1])}</small><p class="ap-dato">${esc(x.x)}</p></div></div>` },
+  });
+}
+function actQuienAvanza(cont) {
+  juegoOpciones(cont, { clave: 'quien-avanza', OP: AUTORES_T4, items: QUIEN_AVANZA,
+    intro: 'Aparece una idea sobre cómo avanza la ciencia: ¿es del <b>Círculo de Viena</b>, de <b>Popper</b>, <b>Kuhn</b>, <b>Lakatos</b>, <b>Feyerabend</b> o <b>Morin</b>? Cinco minutos para calentar antes de leer el cierre del Tema 4.',
+    niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 10, desc: 'Las ideas centrales de cada autor.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 15, desc: 'Todo mezclado, con los principios de Morin y las heurísticas de Lakatos.', filtro: () => true }],
+    estrellas: x => [x.c], boton: 'Estudiar las ideas', introEst: 'Todas las ideas del juego con su autor (compendio, 4.1 a 4.6).', uno: 'idea', varios: 'ideas' });
+}
+function actQueObstaculo(cont) {
+  juegoOpciones(cont, { clave: 'que-obstaculo', OP: OBSTACULOS, items: QUE_OBSTACULO,
+    intro: 'Frases que se oyen en la escuela y en la vida: ¿qué <b>obstáculo epistemológico</b> de Bachelard hay detrás? Te sirve para «Mi inercia mental» y para la pregunta 7 de tu proyecto.',
+    niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 8, desc: 'Un ejemplo claro de cada obstáculo.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 14, desc: 'Todo mezclado, con casos del aula.', filtro: () => true }],
+    estrellas: () => ['bachelard'], boton: 'Estudiar los obstáculos', introEst: 'Los cinco obstáculos epistemológicos de Bachelard con sus ejemplos (compendio, 5.1).', uno: 'frase', varios: 'frases' });
+}
+function actNeuromito(cont) {
+  juegoOpciones(cont, { clave: 'neuromito', OP: NEURO_OP, items: NEUROMITOS,
+    intro: 'Lo que se dice del cerebro en las escuelas: ¿es un <b>neuromito</b> o tiene <b>evidencia</b>? Te sirve para «Analiza un producto neuro» y para el examen.',
+    niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 10, desc: 'Los neuromitos más famosos y lo que sí sabemos.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 16, desc: 'Todo mezclado: Hebb, Dunlosky, Dehaene, el estrés, el cerebro adolescente…', filtro: () => true }],
+    estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : ['dehaene']; }, boton: 'Estudiar la tabla', introEst: 'Neuromitos y hallazgos con evidencia (compendio, Tema 7).', uno: 'idea', varios: 'ideas' });
 }
 
 // ======================================================= ⚡ ARENA EN VIVO (alumno)

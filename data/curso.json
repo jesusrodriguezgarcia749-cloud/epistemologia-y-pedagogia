@@ -155,61 +155,71 @@
   },
   {
    "n": 5,
-   "horas": 2,
-   "fecha": "2026-11-03",
-   "fechaTexto": "Mar 3 de noviembre",
-   "tema": "TEMA 5 — NUEVO PARADIGMA EPISTEMOLÓGICO DE LA CIENCIA",
-   "titulo": "5.1–5.4 Inercia mental, desconstrucción del método, neurociencia y dimensión dialógica",
+   "horas": 1,
+   "fecha": "2026-11-09",
+   "fechaTexto": "Lun 9 de noviembre",
+   "tema": "TEMA 4 — CIERRE: CONCEPCIÓN CONTEMPORÁNEA DE LA CIENCIA (contenido del Parcial 2)",
+   "titulo": "4.4 Lakatos · 4.5 Feyerabend · 4.6 Morin · 4.7 La cientificidad de las ciencias sociales",
    "docente": [
-    "Exposición: obstáculos epistemológicos (Bachelard), la observación cargada de teoría (Hanson) y el método como camino (Martínez Miguélez).",
-    "El cerebro que construye lo que conoce: Maturana y Varela, Damasio.",
-    "La dimensión dialógica: Gadamer, Habermas y Freire.",
-    "Dinámica: cada alumno identifica una inercia mental propia sobre la educación."
+    "Calentamiento (5 min): juego «¿Quién avanza así la ciencia?» en el Aula Virtual.",
+    "Lectura comentada del compendio: Lakatos y los programas de investigación (4.4), Feyerabend y el anarquismo epistemológico (4.5), Morin y el pensamiento complejo (4.6), y la cientificidad de las ciencias sociales (4.7).",
+    "Actividad en equipo «Mi autor en cuatro cuadros»: a cada equipo le toca por sorteo un autor o subtema (4.4 a 4.7); escriben su idea en una frase, un ejemplo en el aula, una crítica y qué le dice a su investigación.",
+    "Puesta en común: se proyecta el trabajo de cada equipo y lo explican en un minuto; al final el docente libera la clave.",
+    "Recepción de la Entrega 1 del proyecto (preguntas 1 a 6)."
    ],
    "independiente": [
-    "Actividades de repaso del Tema 5 en el Aula Virtual.",
-    "Lectura analítica del Tema 6."
+    "Completar «Mi autor en cuatro cuadros» si no se terminó en clase.",
+    "Actividades de repaso del Tema 4 en el Aula Virtual.",
+    "Lectura analítica del Tema 5."
    ],
    "proyecto": [
-    "Recepción de la Entrega 1 (preguntas 1 a 6, con referencias APA).",
-    "Pregunta 7: ¿qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?"
+    "Recepción de la Entrega 1 (preguntas 1 a 6, con referencias APA)."
    ],
    "evaluacion": [
-    "Participación (dinámica de inercias)",
-    "Entrega 1 del proyecto (cuenta en el Examen Final)"
+    "Rúbrica de Tarea («Mi autor en cuatro cuadros»)",
+    "Entrega 1 del proyecto (cuenta en el Examen Final)",
+    "Participación"
+   ],
+   "subtemas": [
+    "4.4",
+    "4.5",
+    "4.6",
+    "4.7"
+   ]
+  },
+  {
+   "n": 6,
+   "horas": 2,
+   "fecha": "2026-11-10",
+   "fechaTexto": "Mar 10 de noviembre",
+   "tema": "TEMAS 5 Y 6 — NUEVO PARADIGMA EPISTEMOLÓGICO Y CONOCIMIENTO ORDINARIO",
+   "titulo": "5.1–5.4 Inercia mental, desconstrucción del método, neurociencia y dimensión dialógica · 6.1–6.2 Aproximaciones al conocimiento, conocimiento local y ordinario",
+   "docente": [
+    "Calentamiento (5 min): juego «¿Qué obstáculo es?» con los obstáculos epistemológicos de Bachelard.",
+    "Lectura comentada del Tema 5: obstáculos epistemológicos (Bachelard), la observación cargada de teoría (Hanson), el método como camino (Martínez Miguélez), el cerebro que construye lo que conoce (Maturana y Varela, Damasio) y la dimensión dialógica (Gadamer, Habermas y Freire).",
+    "Actividad individual «Mi inercia mental»: cada alumno identifica una creencia propia sobre la educación, qué obstáculo es y qué la puso en duda.",
+    "Lectura comentada de 6.1 y 6.2: conocimiento tácito (Polanyi), conocimiento local mexicano y ecología de saberes (Sousa Santos).",
+    "Actividad en equipo «Saberes de la vida» (cuadro comparativo del programa): a cada equipo le toca un saber local y lo comparan como conocimiento ordinario y como conocimiento científico; puesta en común y clave."
+   ],
+   "independiente": [
+    "Terminar «Saberes de la vida» si no se terminó en clase.",
+    "Actividades de repaso de los Temas 5 y 6 en el Aula Virtual.",
+    "Lectura analítica de 6.3, 6.4 y el Tema 7."
+   ],
+   "proyecto": [
+    "Pregunta 7: ¿qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?",
+    "Pregunta 8: ¿qué método usarás y por qué es el camino adecuado para tu objeto de estudio?",
+    "Pregunta 9: ¿qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?"
+   ],
+   "evaluacion": [
+    "Rúbrica de Tarea (cuadro comparativo «Saberes de la vida»)",
+    "Participación («Mi inercia mental»)"
    ],
    "subtemas": [
     "5.1",
     "5.2",
     "5.3",
-    "5.4"
-   ]
-  },
-  {
-   "n": 6,
-   "horas": 1,
-   "fecha": "2026-11-09",
-   "fechaTexto": "Lun 9 de noviembre",
-   "tema": "TEMA 6 — CONOCIMIENTO CIENTÍFICO Y CONOCIMIENTO ORDINARIO",
-   "titulo": "6.1–6.2 Aproximaciones al conocimiento, conocimiento local y ordinario",
-   "docente": [
-    "Exposición: conocimiento tácito (Polanyi), conocimiento local mexicano (milpa, nixtamalización) y ecología de saberes (Sousa Santos).",
-    "Elaboración del cuadro comparativo sobre el conocimiento científico y el ordinario (actividad con docente del programa): se inicia en clase y se termina en casa."
-   ],
-   "independiente": [
-    "Terminar el cuadro comparativo.",
-    "Entrevistar a un docente con experiencia sobre un saber de su práctica que no esté en los libros.",
-    "Lectura analítica de los subtemas 6.3 y 6.4 y del Tema 7."
-   ],
-   "proyecto": [
-    "Pregunta 8: ¿qué método usarás y por qué es el camino adecuado para tu objeto de estudio?",
-    "Pregunta 9: ¿qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?"
-   ],
-   "evaluacion": [
-    "Rúbrica de Tarea (cuadro comparativo)",
-    "Participación"
-   ],
-   "subtemas": [
+    "5.4",
     "6.1",
     "6.2"
    ]
@@ -217,27 +227,32 @@
   {
    "n": 7,
    "horas": 2,
-   "fecha": "2026-11-10",
-   "fechaTexto": "Mar 10 de noviembre",
-   "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
-   "titulo": "6.3–6.4 Ciencia y arte, nuevo paradigma para la educación · 7.1–7.4 Dinámica del cerebro, sistema cognitivo-afectivo, armonía entre las partes del cerebro y principios para aumentar el aprendizaje",
+   "fecha": "2026-11-17",
+   "fechaTexto": "Mar 17 de noviembre",
+   "tema": "TEMAS 6 Y 7 — CIENCIA Y ARTE, Y NEUROCIENCIA DEL APRENDIZAJE",
+   "titulo": "6.3–6.4 Ciencia y arte, nuevo paradigma para la educación · 7.1–7.4 Dinámica del cerebro, sistema cognitivo-afectivo, armonía entre las partes del cerebro y principios para aumentar el aprendizaje · Arena de repaso del Parcial 2",
    "docente": [
-    "Apertura: ciencia y arte en la docencia: el profesional reflexivo (Schön) y el docente investigador (Stenhouse) (6.3 y 6.4).",
-    "Exposición: plasticidad, periodos sensibles, cerebro adolescente y sueño; emoción y cognición.",
-    "Los cuatro pilares del aprendizaje (Dehaene) y las estrategias con evidencia: práctica de recuperación y práctica espaciada.",
-    "«Detector de neuromitos»: hemisferios, cerebro triuno y estilos de aprendizaje frente a la evidencia."
+    "Calentamiento (5 min): juego «¿Neuromito o evidencia?».",
+    "Lectura comentada de 6.3 y 6.4: el profesional reflexivo (Schön) y el docente investigador (Stenhouse).",
+    "Lectura comentada del Tema 7: plasticidad, periodos sensibles, cerebro adolescente y sueño; emoción y cognición; los cuatro pilares del aprendizaje (Dehaene); práctica de recuperación y práctica espaciada.",
+    "Actividad en equipo «Analiza un producto neuro»: a cada equipo le toca por sorteo un producto o una idea que se vende en las escuelas y la juzgan con la evidencia del Tema 7; puesta en común y clave.",
+    "Arena en vivo de repaso para el Examen Parcial 2 (cierre del Tema 4 y Temas 5 a 7), si da tiempo.",
+    "Asesoría grupal breve: errores frecuentes de la Entrega 1 y cómo integrar las preguntas 1 a 14 en el borrador de la Entrega 2."
    ],
    "independiente": [
-    "Analizar un curso, libro o video comercial de «neuroeducación» con los cánones de cientificidad.",
-    "Actividades de repaso de los Temas 6 y 7 en el Aula Virtual."
+    "Actividades de repaso de los Temas 4 a 7 en el Aula Virtual para el Examen Parcial 2.",
+    "Avanzar el borrador del ensayo (Entrega 2)."
    ],
    "proyecto": [
     "Pregunta 10: ¿cómo darás rigor a tu investigación? (triangulación, reflexividad, criterios de calidad)",
-    "Pregunta 11: ¿hay algún neuromito o creencia sin evidencia cerca de tu tema? ¿Cómo lo evitarías?"
+    "Pregunta 11: ¿hay algún neuromito o creencia sin evidencia cerca de tu tema? ¿Cómo lo evitarías?",
+    "Pregunta 12: ¿qué interés guía tu investigación: técnico, práctico o emancipatorio? (Habermas)",
+    "Pregunta 13: ¿qué objetaría Feyerabend o Morin a tu método? ¿Cómo responderías?",
+    "Pregunta 14: redacta tu tesis provisional: ¿tu investigación es ciencia y de qué tipo?"
    ],
    "evaluacion": [
     "Rúbrica de Tarea (análisis de un producto «neuro»)",
-    "Participación"
+    "Participación (Arena de repaso)"
    ],
    "subtemas": [
     "6.3",
@@ -251,43 +266,15 @@
   {
    "n": 8,
    "horas": 2,
-   "fecha": "2026-11-17",
-   "fechaTexto": "Mar 17 de noviembre",
-   "tema": "TEMA 7 — EL PROCESO DE ENSEÑANZA-APRENDIZAJE A LA LUZ DE LA NEUROCIENCIA",
-   "titulo": "Repaso integral del Parcial 2 (cierre del Tema 4 y Temas 5 a 7) · Asesoría del protocolo · 10.5 El ensayo final",
-   "docente": [
-    "Repaso por equipos con preguntas relámpago del cierre del Tema 4 y de los Temas 5, 6 y 7; dudas y formato del examen en línea.",
-    "Asesoría del protocolo (actividad con docente del programa): mientras el grupo practica en el Aula Virtual y trabaja su borrador, el docente revisa con cada alumno, en 3 minutos, la coherencia entre pregunta, paradigma y método. Son 16 alumnos; la retroalimentación escrita de la Entrega 1 en el Aula Virtual complementa la asesoría.",
-    "Asesoría grupal: errores frecuentes de la Entrega 1 y cómo integrar las preguntas 1 a 14 en un borrador continuo (10.5 El ensayo final)."
-   ],
-   "independiente": [
-    "Práctica en el Aula Virtual con las actividades del Tema 4 y de los Temas 5 a 7.",
-    "Avanzar el borrador del ensayo (Entrega 2) con las observaciones de la asesoría."
-   ],
-   "proyecto": [
-    "Pregunta 12: ¿qué interés guía tu investigación: técnico, práctico o emancipatorio? (Habermas)",
-    "Pregunta 13: ¿qué objetaría Feyerabend o Morin a tu método? ¿Cómo responderías?",
-    "Pregunta 14: redacta tu tesis provisional: ¿tu investigación es ciencia y de qué tipo?"
-   ],
-   "evaluacion": [
-    "Participación (repaso)",
-    "Asistencia"
-   ],
-   "subtemas": [
-    "10.5"
-   ]
-  },
-  {
-   "n": 9,
-   "horas": 2,
    "fecha": "2026-11-24",
    "fechaTexto": "Mar 24 de noviembre",
    "tema": "TEMAS 8 Y 9 — NUEVO PARADIGMA EN ORIENTACIÓN Y NUEVOS ENFOQUES PARADIGMÁTICOS",
-   "titulo": "8.1–8.3 Nuevo paradigma en orientación · 9.1–9.4 Bioética, desarrollo sustentable, economía y educación, de los programas computacionales a la inteligencia artificial · Retroalimentación del Parcial 2",
+   "titulo": "8.1–8.3 Nuevo paradigma en orientación · 9.1–9.4 Bioética, desarrollo sustentable, economía y educación, de los programas computacionales a la inteligencia artificial · Retroalimentación del Parcial 2 · 10.5 El ensayo final",
    "docente": [
     "Retroalimentación grupal del Examen Parcial 2 (10 minutos).",
     "Exposición del Tema 8: del modelo de rasgos y factores (Parsons) al proyecto de vida; modelos de intervención (Bisquerra); del modelo del déficit a las barreras para el aprendizaje y la participación (Booth y Ainscow), con el caso Andrea; la orientación y la psicopedagogía a la luz de los paradigmas (conexión con Orientación Educativa).",
-    "Exposición del Tema 9: bioética y ética de la investigación con menores (consentimiento, asentimiento, confidencialidad); desarrollo sustentable y Agenda 2030 como problema complejo; lectura epistemológica de las cuatro perspectivas de economía y educación (conexión con Economía y Educación); de los programas computacionales de los noventa a la inteligencia artificial generativa: qué es saber, cómo verificar y cómo declarar su uso en APA."
+    "Exposición del Tema 9: bioética y ética de la investigación con menores (consentimiento, asentimiento, confidencialidad); desarrollo sustentable y Agenda 2030 como problema complejo; lectura epistemológica de las cuatro perspectivas de economía y educación (conexión con Economía y Educación); de los programas computacionales de los noventa a la inteligencia artificial generativa: qué es saber, cómo verificar y cómo declarar su uso en APA.",
+    "Cómo se arma y se defiende el ensayo final (10.5): de las preguntas 1 a 18 al texto continuo y a la defensa oral de 3 minutos."
    ],
    "independiente": [
     "Analizar un caso de orientación vivido u observado desde dos paradigmas distintos.",
@@ -311,11 +298,12 @@
     "9.1",
     "9.2",
     "9.3",
-    "9.4"
+    "9.4",
+    "10.5"
    ]
   },
   {
-   "n": 10,
+   "n": 9,
    "horas": 1,
    "fecha": "2026-11-30",
    "fechaTexto": "Lun 30 de noviembre",
@@ -346,7 +334,7 @@
    ]
   },
   {
-   "n": 11,
+   "n": 10,
    "horas": 2,
    "fecha": "2026-12-01",
    "fechaTexto": "Mar 1 de diciembre",
@@ -379,11 +367,18 @@
    "fechaTexto": "Lunes 2 de noviembre"
   },
   {
-   "tipo": "entrega",
+   "tipo": "descanso",
    "fecha": "2026-11-03",
+   "titulo": "Sin clase",
+   "fechaTexto": "Martes 3 de noviembre",
+   "detalle": "Los temas de esta sesión se reacomodaron en las clases del 9, 10 y 17 de noviembre."
+  },
+  {
+   "tipo": "entrega",
+   "fecha": "2026-11-09",
    "titulo": "Entrega 1 del proyecto «Pienso, luego investigo»",
    "detalle": "Tesis y esquema del ensayo: respuestas a las preguntas 1 a 6 (Temas 1 a 4), con al menos 3 referencias en formato APA 7.",
-   "fechaTexto": "Martes 3 de noviembre"
+   "fechaTexto": "Lunes 9 de noviembre"
   },
   {
    "tipo": "descanso",

@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css?v=2026102602">
-<link rel="stylesheet" href="css/admin.css?v=2026102708">
+<link rel="stylesheet" href="css/admin.css?v=2026110601">
 <link rel="stylesheet" href="css/progreso.css?v=2026102602">
 <link rel="stylesheet" href="css/index.css?v=2026102602">
 <link rel="stylesheet" href="css/extra.css?v=2026102602">
@@ -91,9 +91,6 @@
     <button class="tab-btn" data-tab="participacion">Participación</button>
     <button class="tab-btn" data-tab="equipos">👥 Equipos</button>
     <button class="tab-btn" data-tab="monitor">🟢 Monitor en vivo</button>
-    <button class="tab-btn" data-tab="arena">⚡ Arena</button>
-    <button class="tab-btn" data-tab="tribunal">⚖️ Tribunal</button>
-    <button class="tab-btn" data-tab="coev">🗣️ Coevaluación</button>
     <button class="tab-btn" data-tab="proyecto">Ensayo final</button>
     <button class="tab-btn" data-tab="asistencia">Asistencia</button>
     <button class="tab-btn" data-tab="uniformes">Uniformes</button>
@@ -192,14 +189,6 @@
   </div>
 
   <div id="tab-monitor" class="tab-panel">
-    <p class="field-hint">Lo que los equipos y los alumnos están escribiendo en los cuadros, en vivo. Elige la actividad; ahí mismo liberas la clave cuando terminen. Toca una tarjeta para ver todo lo que escribieron y quién escribió cada celda.</p>
-    <div class="mon-chips mon-act" id="mon-act"></div>
-    <p class="mon-resumen" id="mon-resumen"></p>
-    <div class="mon-grid" id="mon-grid"></div>
-    <p class="field-hint" id="mon-sin"></p>
-  </div>
-
-  <div id="tab-arena" class="tab-panel">
     <div class="bloques-activos-card cielo-admin">
       <h3 class="section-title" style="margin-top:0">🌌 El cielo del grupo</h3>
       <p class="field-hint">Cada acierto de tus alumnos en ¿Quién lo dijo?, ¿Qué paradigma es? y la Arena enciende la estrella de ese autor en la Constelación del Laboratorio. Proyéctalo en vivo: cada estrella brilla según cuántos alumnos la encendieron, con el ranking de exploradores y las estrellas que nadie ha encendido.</p>
@@ -208,10 +197,20 @@
       <p class="field-hint" id="cielo-mision-msg" hidden></p>
       <button type="button" class="btn btn-primary" id="cielo-proyectar" style="margin-top:10px">🌌 Proyectar el cielo del grupo</button>
     </div>
+    <p class="field-hint">Lo que los equipos y los alumnos están escribiendo en los cuadros, en vivo. Elige la actividad; ahí mismo liberas la clave cuando terminen. Toca una tarjeta para ver todo lo que escribieron y quién escribió cada celda.</p>
+    <div class="mon-chips mon-act" id="mon-act"></div>
+    <p class="mon-resumen" id="mon-resumen"></p>
+    <div class="mon-grid" id="mon-grid"></div>
+    <p class="field-hint" id="mon-sin"></p>
+  </div>
+
+  <div id="tab-arena" class="tab-panel">
+    <p class="vivo-volver"><button type="button" class="btn btn-ghost-dark btn-small" data-volver-tareas>← Volver a Tareas</button> <span class="field-hint">La Arena se abre desde su actividad del día en <b>Tareas → Tareas digitales</b>.</span></p>
     <div id="ar-panel"></div>
   </div>
 
   <div id="tab-tribunal" class="tab-panel">
+    <p class="vivo-volver"><button type="button" class="btn btn-ghost-dark btn-small" data-volver-tareas>← Volver a Tareas</button> <span class="field-hint">El Tribunal se abre desde su actividad del día en <b>Tareas → Tareas digitales</b>.</span></p>
     <div id="tr-panel"></div>
   </div>
 
@@ -419,6 +418,6 @@
 </div>
 <script src="js/vendor/qrcode.js"></script>
 <script src="js/app.js"></script>
-<script type="module" src="js/admin.js?v=2026102708"></script>
+<script type="module" src="js/admin.js?v=2026110601"></script>
 </body>
 </html>

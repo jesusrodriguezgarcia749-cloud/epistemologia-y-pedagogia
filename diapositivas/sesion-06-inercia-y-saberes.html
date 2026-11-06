@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 6 · Romper la inercia y escuchar a la comunidad · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 6: Martes 10 de noviembre · 2 horas
+     Junta lo que era del martes 3 (sin clase): Tema 5 completo, y del lunes 9: 6.1 y 6.2.
+     5.1 a 5.4 Inercia mental, desconstrucción del método, neurociencia y dimensión dialógica
+     6.1 y 6.2 Aproximaciones al conocimiento, conocimiento local y ordinario
+     Juego de 5 minutos, «Mi inercia mental» (individual), «Saberes de la vida» (en equipo,
+     cuadro comparativo del programa) y puesta en común.
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulos 5 y 6
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Temas 5 y 6 · Nuevo paradigma y saberes de la vida",
+      dia: "Martes 10 de noviembre · Sesión 6 de 10",
+      titulo: "Romper la inercia y escuchar a la comunidad",
+      subtitulo: "5.1 a 5.4 Inercia mental, el método, el cerebro y el diálogo · 6.1 y 6.2 Conocimiento tácito y saberes locales",
+      duracion: "2 horas",
+      minutos: "0-1",
+      notas: "Sesión doble: junta lo que era del martes 3 (Tema 5, sin clase) y del lunes 9 (6.1 y 6.2). Ritmo ágil: la lectura del compendio con comentarios breves. Parcial 2 el lunes 23." },
+
+    { tipo: "objetivos",
+      intro: "Hoy recorremos dos temas que se dan la mano: lo que nos impide conocer y lo que la comunidad ya sabe.",
+      puntos: [
+        "Calentar con el juego **¿Qué obstáculo es?**",
+        "Reconocer la **inercia mental** y los **obstáculos epistemológicos** de Bachelard, y escribir **tu propia inercia**.",
+        "Entender por qué el método es **un camino** y que **el cerebro construye** lo que conoce.",
+        "Distinguir un **diálogo** de un simple intercambio de opiniones.",
+        "Conocer el **conocimiento tácito**, los **saberes locales** y la **ecología de saberes**.",
+        "En equipo: **Saberes de la vida**, el cuadro comparativo del programa."
+      ],
+      pasoAPaso: true,
+      minutos: "1-2" },
+
+    { tipo: "plataforma",
+      etiqueta: "Calentamiento", tipoAct: "Individual · juego de 5 minutos",
+      titulo: "¿Qué obstáculo es?",
+      enlace: "../tareas.html#que-obstaculo", textoEnlace: "Tareas → ¿Qué obstáculo es?",
+      minutos: "2-7", evaluacion: "Formativo",
+      notas: "Todos en «Básico». Es un adelanto de Bachelard: no importa que se equivoquen, al responder leen por qué. Después lo retomamos con la tabla de los obstáculos.",
+      pasos: [
+        "Escanea el QR: **Tareas → ¿Qué obstáculo es?**",
+        "Frases que se oyen en la escuela: ¿qué **obstáculo** hay detrás?",
+        "Elige **Básico**. Al responder, lee por qué."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tema",
+      titulo: "Un nuevo paradigma epistemológico",
+      etiqueta: "De dónde venimos",
+      puntos: [
+        "El Tema 4 terminó con una sospecha: **ni la física sigue un método único y fijo**.",
+        "Entonces hay que repensar **desde la raíz** cómo se produce el conocimiento.",
+        "A fines del siglo XX, varios autores hablaron de un **nuevo paradigma epistemológico**.",
+        "En América Latina, uno de sus principales difusores fue **Miguel Martínez Miguélez** (1997, 2009).",
+        "Hoy lo recorremos en cuatro pasos: **inercia, método, cerebro y diálogo**."
+      ],
+      pasoAPaso: true,
+      minutos: "7-8" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Por qué nos cuesta tanto cambiar una forma de enseñar, aunque sepamos que no funciona?",
+      respuesta: "Porque no solo pensamos con argumentos: pensamos con **hábitos**. A esa fuerza que nos mantiene pensando igual la llamaremos **inercia mental**.",
+      minutos: "8-9" },
+
+    { tipo: "tema",
+      titulo: "5.1 Inercia mental",
+      etiqueta: "El peso de las costumbres intelectuales",
+      puntos: [
+        "En física, la **inercia** mantiene a un cuerpo como está mientras ninguna fuerza lo cambie.",
+        "La **inercia mental** es seguir pensando como siempre, aunque haya razones para cambiar.",
+        "Martínez Miguélez: aprendimos a pensar de forma **lineal, fragmentada y cuantitativa**, y esa forma se volvió invisible.",
+        "**No la elegimos: la heredamos.**",
+        "También es colectiva: según Planck, las ideas nuevas triunfan cuando crece **otra generación**."
+      ],
+      pasoAPaso: true,
+      minutos: "9-11" },
+
+    { tipo: "tabla",
+      titulo: "Los obstáculos epistemológicos de Bachelard",
+      columnas: ["Obstáculo", "Qué es", "Así suena en la escuela"],
+      filas: [
+        ["Experiencia primera", "Confiar en la primera impresión, sin crítica", "«Los objetos pesados caen más rápido, se ve»"],
+        ["Generalización apresurada", "Concluir mucho a partir de pocos casos", "«En esta colonia los alumnos no leen» (por tres casos)"],
+        ["Obstáculo verbal", "Creer que nombrar algo es explicarlo", "«Reprueba porque no tiene motivación» (y ya)"],
+        ["Unitario y pragmático", "Explicarlo todo con un solo principio", "«Con tabletas en el salón se resuelve todo»"],
+        ["Sustancialista", "Atribuir cualidades ocultas a las cosas", "«Ese niño es malo por naturaleza»"]
+      ],
+      pasoAPaso: true,
+      minutos: "11-14",
+      notas: "Bachelard (1938/2000), La formación del espíritu científico. Idea central: el problema no es que los alumnos no sepan, sino que ya «saben» algo que les impide aprender. De ahí viene la investigación sobre concepciones alternativas y cambio conceptual." },
+
+    { tipo: "tema",
+      titulo: "No es que no sepan: es que ya «saben»",
+      etiqueta: "Bachelard en el salón de clases",
+      puntos: [
+        "El conocimiento científico no se construye sobre una **mente vacía**, sino **contra** conocimientos previos mal hechos.",
+        "Los alumnos llegan con ideas previas sobre el calor, la fuerza o los seres vivos, y esas ideas **resisten**.",
+        "Décadas después, esta intuición se volvió una línea de investigación: **concepciones alternativas** y **cambio conceptual**.",
+        "Para enseñar no basta con explicar bien: hay que **hacer visible la idea previa** y ponerla a prueba."
+      ],
+      pasoAPaso: true,
+      minutos: "14-15",
+      notas: "Pregunta rápida al grupo: ¿qué idea previa equivocada traían sus alumnos de prácticas? Ejemplo clásico: «en verano hace calor porque la Tierra está más cerca del Sol»." },
+
+    { tipo: "observa",
+      titulo: "«Así lo hemos hecho siempre»",
+      etiqueta: "En el aula mexicana",
+      imagen: "img/s5-junta.jpg",
+      puntos: [
+        "Una secundaria propone cambiar el examen bimestral único por **proyectos con rúbrica**.",
+        "Argumentos razonables: falta de tiempo, grupos numerosos.",
+        "Pura inercia: «así lo hemos hecho siempre», «a mí me evaluaron así y salí bien».",
+        "Reconocer la inercia **no es descalificar** a quien se resiste: todos tenemos inercias.",
+        "La pregunta del buen directivo: **¿qué evidencia tenemos de que lo actual funciona?**"
+      ],
+      minutos: "15-16" },
+
+    { tipo: "plataforma",
+      etiqueta: "Actividad en la plataforma", tipoAct: "Individual · 10 minutos",
+      titulo: "Mi inercia mental",
+      enlace: "../tareas.html#mi-inercia", textoEnlace: "Tareas → Mi inercia mental",
+      minutos: "16-26", evaluacion: "Participación (dinámica de inercias)",
+      notas: "Es la dinámica de la planeación, ahora en la plataforma (individual, sin clave). Si cuesta arrancar, da un ejemplo propio: «yo daba por hecho que un grupo callado es un grupo que aprende». Al final, tres voluntarios comparten (puedes abrir su tarjeta en Monitor en vivo → Mi inercia mental). Les sirve para la pregunta 7 del proyecto.",
+      pasos: [
+        "Escanea el QR: **Tareas → Mi inercia mental**. Es **individual**.",
+        "Escribe algo que **das por hecho** sobre la educación sin haberlo examinado nunca.",
+        "¿**De dónde viene**? ¿Qué **obstáculo** de Bachelard es? ¿Qué la **pone en duda**?",
+        "Al final, **tres voluntarios** comparten. Te sirve para la **pregunta 7**."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "pregunta",
+      pregunta: "¿Vemos el mundo tal como es, o como estamos acostumbrados a verlo?",
+      respuesta: "Lo vemos **a través de lo que ya sabemos y esperamos**. Por eso el método tradicional se equivoca cuando supone que la observación es neutral.",
+      minutos: "26-27",
+      notas: "Pregunta de arranque del libro. Sirve de puente entre la inercia (5.1) y la desconstrucción del método (5.2)." },
+
+    { tipo: "tema",
+      titulo: "5.2 Desconstruir el método tradicional",
+      etiqueta: "Desconstruir no es destruir",
+      puntos: [
+        "**Desconstruir** (Derrida): desarmar con cuidado una estructura para mostrar sus **supuestos ocultos** y lo que deja fuera.",
+        "No se trata de abandonar el rigor, sino de **entenderlo mejor**.",
+        "La pregunta: ¿qué supone el método de los manuales y qué deja fuera?"
+      ],
+      pasoAPaso: true,
+      minutos: "27-28" },
+
+    { tipo: "tabla",
+      titulo: "Cuatro supuestos del método tradicional",
+      columnas: ["El método supone que…", "Pero…"],
+      filas: [
+        ["La observación es **neutral**", "**Toda observación está cargada de teoría** (Hanson): un médico ve una fractura donde un lego ve manchas grises."],
+        ["Sujeto y objeto están **separados**", "Un maestro que investiga su propio grupo **es parte** del fenómeno."],
+        ["El método es un **algoritmo**", "No hay secuencia fija que garantice el conocimiento."],
+        ["Solo vale **lo medible**", "Hay realidades humanas que no se cuantifican y sí se pueden conocer."]
+      ],
+      pasoAPaso: true,
+      minutos: "28-30",
+      notas: "Hanson (1958/1977), Patrones de descubrimiento." },
+
+    { tipo: "tema",
+      titulo: "El método como camino",
+      etiqueta: "Del griego méthodos: «camino»",
+      puntos: [
+        "**El método se adecua al objeto:** no se usa la misma ruta para subir una montaña que para cruzar un río.",
+        "**Diseño emergente:** el plan se ajusta cuando aparecen hallazgos inesperados.",
+        "**Triangulación:** contrastar fuentes, métodos o investigadores da solidez.",
+        "**Reflexividad:** en lugar de fingir neutralidad, el investigador **declara sus supuestos**.",
+        "Hasta la física lo reconoce: **Prigogine** mostró que del desorden puede surgir un orden nuevo."
+      ],
+      pasoAPaso: true,
+      minutos: "30-32",
+      notas: "Martínez Miguélez (2004). La triangulación, el diseño emergente y la reflexividad ya los vieron como técnicas en Investigación Cualitativa: aquí son respuestas a la crítica del método." },
+
+    { tipo: "pregunta",
+      pregunta: "Revisa el método de tu protocolo: ¿lo elegiste porque se adecua a tu pregunta, o porque es «el que siempre se usa»?",
+      respuesta: "Si fue lo segundo, es **inercia metodológica**. El camino se elige **después** de entender el fenómeno, no antes. Piensa también cómo **triangularías** en tu caso.",
+      minutos: "32-33",
+      evaluacion: "Participación",
+      notas: "Para pensar del libro (5.2). Prepara la pregunta 8 del proyecto, que verán al final de hoy." },
+
+    { tipo: "dato",
+      titulo: "Esto ya lo viste",
+      cifra: "3",
+      texto: "técnicas que conociste en **Investigación Cualitativa** —**triangulación, diseño emergente y reflexividad**— son, en el fondo, respuestas a la crítica del método científico tradicional.",
+      fuente: "Libro de texto, Tema 5 (Conexión con tu carrera).",
+      minutos: "33-34" },
+
+    { tipo: "pausa",
+      titulo: "¡Pausa activa!",
+      duracion: "2 minutos",
+      texto: "De pie. Cruza los brazos como siempre lo haces. Ahora crúzalos al revés. ¿Se siente raro? Eso es la **inercia**: el cuerpo también tiene hábitos. Repite tres veces el cruce «raro» y siéntate.",
+      minutos: "34-35" },
+
+    { tipo: "imagen",
+      titulo: "5.3 ¿Cuál de las dos líneas es más larga?",
+      imagen: "img/s5-muller-lyer.svg",
+      pie: "Ilusión de Müller-Lyer (1889). Piénsalo antes de avanzar.",
+      minutos: "35-36" },
+
+    { tipo: "pregunta",
+      pregunta: "¿A o B?",
+      respuesta: "**Miden exactamente lo mismo.** Aunque ya lo sepas, las sigues viendo distintas: tu cerebro no copia la realidad, **la interpreta** con lo que espera ver.",
+      minutos: "36-37",
+      notas: "Si hay tiempo, mídelas con una regla sobre la pantalla. Conecta con Hanson: la observación está cargada de teoría… y de cerebro." },
+
+    { tipo: "tema",
+      titulo: "El cerebro no es un espejo",
+      etiqueta: "Neurociencia y epistemología",
+      puntos: [
+        "Percibir no es recibir: el cerebro **completa, interpreta y anticipa**.",
+        "Muchos investigadores lo describen como una **máquina de predicción**: lanza hipótesis sobre el mundo y las corrige con los sentidos.",
+        "¿Te suena? Se parece a las **conjeturas y refutaciones** de Popper.",
+        "En el Tema 7 veremos qué dice la neurociencia del aprendizaje en el aula; hoy, **cómo conocemos**."
+      ],
+      pasoAPaso: true,
+      minutos: "37-38" },
+
+    { tipo: "tabla",
+      titulo: "Dos ideas que cambiaron la conversación",
+      columnas: ["Autores", "Idea", "Ejemplo"],
+      filas: [
+        ["Maturana y Varela (1984), El árbol del conocimiento", "**Todo hacer es conocer y todo conocer es hacer.** Lo que un ser vivo conoce depende de su estructura.", "Un perro, un murciélago y una persona «conocen» mundos distintos en el mismo cuarto."],
+        ["Damasio (1994), El error de Descartes", "**La emoción no es enemiga de la razón: es su condición.**", "Pacientes que razonaban bien en abstracto, pero sin emociones no podían decidir en su vida."]
+      ],
+      pasoAPaso: true,
+      minutos: "38-40",
+      notas: "El «error de Descartes», según Damasio, fue separar mente y cuerpo, razón y emoción. Caso del libro: la maestra que dedica tres minutos a calmar al grupo después del recreo no pierde tiempo: crea una condición para aprender." },
+
+    { tipo: "tema",
+      titulo: "«Primero que se calmen, luego aprenden»",
+      etiqueta: "En el aula mexicana",
+      puntos: [
+        "Una maestra de primero de secundaria nota que, después del recreo, su grupo llega **alterado**.",
+        "Dedica **tres minutos** a respirar y a una pregunta abierta: ¿cómo se sienten?",
+        "Algunos colegas lo ven como **pérdida de tiempo**.",
+        "Con Damasio, la lectura cambia: está creando una **condición para aprender**.",
+        "El conocimiento no es obra de una razón pura: es de un **ser humano completo**, con cuerpo, emociones e historia."
+      ],
+      pasoAPaso: true,
+      minutos: "40-41" },
+
+    { tipo: "video",
+      titulo: "Tu cerebro alucina tu realidad",
+      youtube: "https://www.youtube.com/watch?v=lyu7v7nWzfo",
+      subtitulos: "es",
+      pie: "Anil Seth, neurocientífico · TED (en inglés con subtítulos en español). Basta con los primeros 6 minutos.",
+      minutos: "41-44",
+      notas: "La charla completa dura unos 17 minutos: detenla alrededor del minuto 6, cuando ya explicó la percepción como predicción. Si no hay tiempo, déjala para casa." },
+
+    { tipo: "pregunta",
+      pregunta: "¿Puede producirse conocimiento conversando?",
+      respuesta: "Para el nuevo paradigma, **sí**: el conocimiento confiable no nace en la mente aislada de un genio, sino en la **conversación crítica** entre personas que contrastan perspectivas.",
+      minutos: "44-45" },
+
+    { tipo: "tabla",
+      titulo: "5.4 La dimensión dialógica",
+      columnas: ["Autor", "Idea clave", "En una frase"],
+      filas: [
+        ["Gadamer", "**Fusión de horizontes**", "Comprender no es ponerse en lugar del otro: es que ambos horizontes se amplíen."],
+        ["Habermas", "**Acción comunicativa**", "En un diálogo ideal gana la fuerza del mejor argumento, no la jerarquía."],
+        ["Freire", "**Diálogo liberador**", "El educando también sabe; el diálogo exige humildad, fe en las personas y pensamiento crítico."],
+        ["Morin", "**Principio dialógico**", "Mantener juntas ideas opuestas: orden y desorden, razón y emoción."]
+      ],
+      pasoAPaso: true,
+      minutos: "45-48" },
+
+    { tipo: "tarea",
+      titulo: "¿Fue un diálogo?",
+      etiqueta: "Prueba de Habermas · 5 minutos",
+      puntos: [
+        "Piensa en cómo compartieron sus inercias hace rato.",
+        "**¿Todos pudieron hablar?**",
+        "**¿Se escucharon los argumentos**, o cada quien defendió lo suyo?",
+        "**¿Alguien impuso su posición** por quién era y no por lo que argumentaba?",
+        "¿Qué haría falta para un verdadero diálogo en el aula?"
+      ],
+      minutos: "48-50",
+      evaluacion: "Participación" },
+
+    { tipo: "tema",
+      titulo: "Diálogo de saberes",
+      etiqueta: "Puente hacia el Tema 6 y la Nueva Escuela Mexicana",
+      puntos: [
+        "Si el conocimiento se construye dialogando, los saberes de la **comunidad**, de los **pueblos originarios**, de las **familias** y de los **alumnos** pueden entrar a la conversación.",
+        "Es una de las ideas centrales de la **Nueva Escuela Mexicana**.",
+        "La pregunta del próximo lunes: ¿qué relación hay entre el saber de la ciencia y el saber de la vida?"
+      ],
+      pasoAPaso: true,
+      minutos: "50-51" },
+
+    { tipo: "tabla",
+      titulo: "Glosario del Tema 5",
+      columnas: ["Concepto", "En una línea"],
+      filas: [
+        ["Inercia mental", "Mantener las formas de pensar habituales aunque haya razones para cambiar."],
+        ["Obstáculo epistemológico", "Saber previo o hábito que impide construir un conocimiento nuevo (Bachelard)."],
+        ["Observación cargada de teoría", "Lo que observamos depende de lo que ya sabemos y esperamos (Hanson)."],
+        ["Reflexividad", "Reconocer de forma explícita la posición y los supuestos del investigador."],
+        ["Fusión de horizontes", "Comprender como ampliación mutua de perspectivas (Gadamer)."],
+        ["Acción comunicativa", "Interacción orientada al entendimiento mediante argumentos (Habermas)."]
+      ],
+      pasoAPaso: true,
+      minutos: "51-52",
+      notas: "Estos conceptos son los que más aparecen en el examen del Parcial 2. Que los copien en su cuaderno." },
+
+    { tipo: "pregunta",
+      pregunta: "¿Quién sabe más de suelos: un agrónomo con doctorado o un campesino que ha sembrado milpa durante cuarenta años?",
+      respuesta: "Depende de **qué pregunta** quieras responder. Cada uno sabe cosas que el otro no, y de **maneras distintas**. De eso trata hoy.",
+      minutos: "52-53" },
+
+    { tipo: "tabla",
+      titulo: "6.1 Cinco maneras de conocer",
+      columnas: ["Vía", "Ejemplo"],
+      filas: [
+        ["Experiencia directa", "Conozco el sabor del chile habanero porque lo he probado."],
+        ["Testimonio", "Sé que existe la Antártida porque confío en quienes han estado ahí."],
+        ["Razonamiento", "Si todos los mamíferos tienen pulmones y la ballena es mamífero, la ballena tiene pulmones."],
+        ["Investigación sistemática", "Sé que el tabaco aumenta el riesgo de cáncer porque miles de estudios lo muestran."],
+        ["Práctica e intuición", "Sé cuándo un grupo está a punto de desbordarse, aunque no sepa explicar cómo."]
+      ],
+      pasoAPaso: true,
+      minutos: "53-54",
+      notas: "Ninguna es infalible y casi todo lo que sabemos combina varias. Hasta los científicos dependen del testimonio: nadie repite todos los experimentos de su disciplina." },
+
+    { tipo: "pregunta",
+      pregunta: "¿Puedes explicar con palabras cómo andas en bicicleta?",
+      respuesta: "No del todo. **Sabemos más de lo que podemos decir** (Polanyi). A ese saber que no cabe completo en palabras se le llama **conocimiento tácito**.",
+      minutos: "54-55" },
+
+    { tipo: "tema",
+      titulo: "El conocimiento tácito",
+      etiqueta: "Michael Polanyi (1966)",
+      puntos: [
+        "Reconocemos el rostro de un amigo entre miles, pero **no sabemos explicar cómo**.",
+        "Todo conocimiento, **incluso el científico**, descansa en una base tácita: el experto «ve» en sus datos lo que el principiante no ve.",
+        "Por eso la formación no se hace solo con libros: requiere aprender **junto a un maestro**, como en los antiguos talleres.",
+        "**¿Qué saberes tácitos tiene un buen maestro?** Manejar los tiempos, detectar que un alumno tiene problemas en casa, saber cuándo insistir."
+      ],
+      pasoAPaso: true,
+      minutos: "55-57" },
+
+    { tipo: "tema",
+      titulo: "6.2 El conocimiento ordinario",
+      etiqueta: "El sentido común",
+      puntos: [
+        "**Práctico:** resuelve problemas inmediatos.",
+        "**Compartido:** se transmite en la familia y la comunidad.",
+        "**Poco sistemático y poco crítico:** casi nunca se pone a prueba a propósito.",
+        "**Contextual:** funciona bien en su contexto, pero puede fallar fuera de él.",
+        "A veces acierta y a veces se equivoca: durante siglos dijo que **el Sol gira alrededor de la Tierra**, porque así se ve."
+      ],
+      pasoAPaso: true,
+      minutos: "57-58" },
+
+    { tipo: "tabla",
+      titulo: "Cinco rasgos del sentido común",
+      columnas: ["El conocimiento ordinario es…", "Por ejemplo"],
+      filas: [
+        ["**Práctico**", "Sirve para resolver problemas inmediatos."],
+        ["**Compartido**", "Se transmite en la familia y la comunidad."],
+        ["**Poco sistemático**", "No se organiza en teorías explícitas."],
+        ["**Poco crítico**", "Rara vez se pone a prueba a propósito."],
+        ["**Contextual**", "Funciona bien en su contexto, pero puede fallar fuera de él."]
+      ],
+      pasoAPaso: true,
+      minutos: "58-60",
+      notas: "A veces acierta y a veces se equivoca: durante siglos dijo que el Sol gira alrededor de la Tierra «porque así se ve». Pero muchos descubrimientos partieron de observaciones populares." },
+
+    { tipo: "imagen",
+      titulo: "El conocimiento local: la milpa",
+      imagen: "img/s6-milpa.svg",
+      pie: "Conocimiento ecológico desarrollado en Mesoamérica hace miles de años.",
+      minutos: "60-61",
+      notas: "Otros ejemplos del libro: la nixtamalización (cocer el maíz con cal mejora su valor nutritivo; la nutrición lo explicó siglos después), la herbolaria (de ahí salieron medicamentos, aunque no todo remedio resiste la comprobación) y el saber del monte y del mar de pescadores y milperos de la península." },
+
+    { tipo: "video",
+      titulo: "Agrobiodiversidad: la milpa",
+      mp4: "https://nemdigitalstorage.blob.core.windows.net/nem-main/archivos/2022/11/03/HD_BACH_VS_SEM16_MILPA.mp4",
+      pie: "Nueva Escuela Mexicana Digital (SEP), con investigadoras del Instituto de Biología de la UNAM y de la CONABIO.",
+      minutos: "61-65",
+      notas: "Video oficial de la plataforma NEM Digital de la SEP. Proyecta un fragmento de 5 o 6 minutos." },
+
+    { tipo: "tema",
+      titulo: "Más saberes locales de México",
+      etiqueta: "Antes de que la ciencia los explicara",
+      puntos: [
+        "**Nixtamalización:** cocer el maíz con cal mejora su valor nutritivo; la nutrición lo explicó siglos después.",
+        "**Herbolaria:** de ahí salieron medicamentos modernos, aunque **no todo remedio** resiste la comprobación.",
+        "**El monte y el mar:** pescadores del Golfo y milperos de la península leen lluvias, animales y señales del entorno con gran precisión.",
+        "¿Qué saber local conoces de tu familia o tu comunidad?"
+      ],
+      pasoAPaso: true,
+      minutos: "65-67" },
+
+    { tipo: "dato",
+      titulo: "Epistemicidio",
+      cifra: "Epistemicidio",
+      texto: "Así llamó **Boaventura de Sousa Santos** a la destrucción de los saberes de los pueblos colonizados. Su respuesta: las **epistemologías del Sur** y una **ecología de saberes**.",
+      fuente: "Sousa Santos (2009). La NEM retoma la idea al pedir diálogo entre saberes comunitarios y conocimiento científico (SEP, 2022).",
+      minutos: "67-68" },
+
+    { tipo: "tema",
+      titulo: "Ecología de saberes",
+      etiqueta: "Boaventura de Sousa Santos (2009)",
+      puntos: [
+        "**Epistemologías del Sur:** los saberes de los pueblos que fueron colonizados.",
+        "**Epistemicidio:** la destrucción o el desprecio de esos saberes.",
+        "**Ecología de saberes:** la ciencia es muy valiosa, pero **no es el único** saber; distintos saberes pueden dialogar según el problema.",
+        "Para llegar a la Luna se necesita la ciencia moderna; para cuidar la biodiversidad de un territorio, quizá también **el saber de quienes lo habitan** desde hace siglos.",
+        "La NEM lo retoma como **saberes comunitarios** (SEP, 2022)."
+      ],
+      pasoAPaso: true,
+      minutos: "68-69" },
+
+    { tipo: "tabla",
+      titulo: "Dos errores que hay que evitar",
+      columnas: ["", "Cientificismo", "Relativismo ingenuo"],
+      filas: [
+        ["Cree que…", "Solo la ciencia produce conocimiento válido", "Todos los saberes valen lo mismo para todo"],
+        ["Consecuencia", "Empobrece la escuela y la desconecta de la vida de los alumnos", "Da igual un antibiótico que un remedio sin eficacia comprobada"],
+        ["La salida", "Diálogo de saberes: cada saber se valora por su capacidad de responder **ciertas preguntas en ciertos contextos**", "Las diferencias se discuten con **respeto y con argumentos**"]
+      ],
+      pasoAPaso: true,
+      minutos: "69-71" },
+
+    { tipo: "observa",
+      titulo: "La milpa en el salón",
+      etiqueta: "En el aula mexicana",
+      imagen: "img/s6-abuelos.jpg",
+      puntos: [
+        "Telesecundaria de una comunidad maya de Campeche. Proyecto de Ciencias: **ciclos de nutrientes**.",
+        "El maestro invita a **dos abuelos** a explicar cómo preparan la milpa.",
+        "Los alumnos registran, preguntan y luego investigan **qué pasa con el nitrógeno**.",
+        "Al final: un **cartel bilingüe en maya y español** que integra ambos saberes.",
+        "Los abuelos también aprenden. **Nadie sale con menos de lo que trajo.**"
+      ],
+      minutos: "71-72" },
+
+    { tipo: "plataforma",
+      etiqueta: "Actividad con docente del programa", tipoAct: "En equipo · en vivo",
+      titulo: "Saberes de la vida",
+      enlace: "../tareas.html#saberes", textoEnlace: "Tareas → Saberes de la vida",
+      minutos: "72-90", evaluacion: "Sumativo · Rúbrica de Tarea (cuadro comparativo)",
+      notas: "Es el cuadro comparativo del programa (6.2), con seis criterios en lugar de diez para que quepa en clase. Antes: Panel → Tareas → Tareas digitales → 👥 de «Saberes de la vida» y proyecta los QR. A cada equipo le toca un saber por sorteo: la milpa, la nixtamalización, la herbolaria, la pesca del Golfo, las parteras o el saber tácito del maestro. Error típico: «científico = bueno, ordinario = malo»: pide fortalezas y limitaciones de los dos. Quien no escriba nada saldrá con 0 (✋ No aportó).",
+      pasos: [
+        "Escanea el **QR de tu equipo**: la plataforma les asigna un **saber** por sorteo.",
+        "Compárenlo **como saber de la comunidad** y **como conocimiento científico**: origen, transmisión, validación, alcance, fortalezas y limitaciones.",
+        "🔎 **Investiguen** qué dice la ciencia de su saber, con su fuente.",
+        "Repártanse las filas: cada quien desde su celular. Luego lo **compartimos**."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "plataforma",
+      etiqueta: "Puesta en común", tipoAct: "Todo el grupo",
+      titulo: "Compartimos nuestros saberes",
+      minutos: "90-100", evaluacion: "Formativo",
+      notas: "Panel → Monitor en vivo → «Saberes de la vida» → toca la tarjeta de cada equipo (⛶ Pantalla completa). Pregunta clave: ¿dónde se encuentran los dos saberes? Al final, 🔑 Liberar clave.",
+      pasos: [
+        "Cada equipo presenta su saber en **un minuto**: ¿en qué es fuerte como saber de la comunidad y en qué como ciencia?",
+        "¿Dónde **se encuentran** los dos saberes? ¿Dónde **chocan**?",
+        "¿Cómo evitar el **cientificismo** y el **relativismo ingenuo**?",
+        "Al final se libera la **clave**: comparen en su celular."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "ejemplo",
+      numero: 8,
+      pregunta: "¿Qué método usarás y por qué es el camino adecuado para tu objeto de estudio?",
+      respuesta: "Usaré un diseño **cuasiexperimental** con dos grupos y prueba antes y después, complementado con **entrevistas semiestructuradas**. Siguiendo a Martínez Miguélez (2004), el método es el camino que se adecua al objeto: la comprensión lectora puede **medirse** con una prueba, pero la experiencia de los alumnos con la lectura en voz alta solo se alcanza **escuchándolos**. No es un experimento puro porque los grupos ya existen en la escuela y no puedo formarlos al azar; lo reconoceré como **limitación**.",
+      fuente: "Caso ficticio. Observa: nombra el diseño, lo justifica con un autor del curso y reconoce su límite.",
+      minutos: "100-102" },
+
+    { tipo: "ejemplo",
+      numero: 9,
+      pregunta: "¿Qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?",
+      respuesta: "Mi tema toca el **saber práctico de los docentes** que leen en voz alta desde hace años, un saber en buena parte tácito (Polanyi, 1966), y las **prácticas de lectura de las familias**, como contar historias en casa. Dialogaré con ellos entrevistando a dos docentes con experiencia **antes** de diseñar la intervención y preguntando a los alumnos qué se lee en sus casas. No los trataré como creencias que hay que corregir, sino como saberes que pueden **enriquecer la interpretación** de mis resultados (Sousa Santos, 2009).",
+      fuente: "Caso ficticio. Fíjate en el «cómo»: acciones concretas de diálogo, no solo buenas intenciones.",
+      minutos: "102-104" },
+
+    { tipo: "tabla",
+      titulo: "Glosario de hoy",
+      columnas: ["Concepto", "En una línea"],
+      filas: [
+        ["Conocimiento tácito", "Saber que no puede expresarse del todo con palabras (Polanyi)."],
+        ["Conocimiento ordinario", "Sentido común que compartimos para la vida diaria."],
+        ["Conocimiento local", "Saber que una comunidad desarrolla por generaciones en su territorio."],
+        ["Ecología de saberes", "Diálogo y complementariedad entre distintos tipos de conocimiento."],
+        ["Cientificismo", "Creer que solo la ciencia produce conocimiento válido."]
+      ],
+      pasoAPaso: true,
+      minutos: "104-105" },
+
+    { tipo: "tema",
+      titulo: "Taller APA: paráfrasis o cita textual",
+      etiqueta: "Para la Entrega 2",
+      puntos: [
+        "**Paráfrasis:** la idea del autor con tus palabras, más (Autor, año). Es la forma más usada.",
+        "**Cita textual corta** (menos de 40 palabras): entre comillas y **siempre con página**: (Bachelard, 1938/2000, p. 15).",
+        "**Cita textual larga** (40 palabras o más): en bloque aparte, con sangría y sin comillas.",
+        "**Regla de oro:** cita textual solo cuando las palabras exactas importan. Una tesis llena de citas textuales muestra que el autor no digirió sus lecturas."
+      ],
+      pasoAPaso: true,
+      minutos: "105-106",
+      notas: "El número de página del ejemplo es ilustrativo." },
+
+    { tipo: "ejemplo",
+      numero: 7,
+      pregunta: "¿Qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?",
+      respuesta: "Mi principal riesgo es la **experiencia primera**: por mis prácticas ya «sé» que los alumnos no entienden lo que leen, y podría ver solo lo que confirma esa idea (Bachelard, 1938/2000). Además, me gusta leer en voz alta, así que tengo una **inercia a favor** de mi propia propuesta. Para controlarlo, otra persona calificará las pruebas sin saber de qué grupo es cada una, **triangularé** los resultados con entrevistas y llevaré un diario donde escribiré mis supuestos (**reflexividad**).",
+      fuente: "Caso ficticio. Observa: nombra el obstáculo con el concepto del curso y propone **cómo controlarlo**.",
+      minutos: "106-108" },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 7, texto: "¿Qué obstáculos epistemológicos o inercias podrían sesgar tu investigación?" },
+        { numero: 8, texto: "¿Qué método usarás y por qué es el camino adecuado para tu objeto de estudio?" },
+        { numero: 9, texto: "¿Qué saberes no científicos —comunitarios o de la práctica docente— toca tu tema y cómo dialogarías con ellos?" }
+      ],
+      minutos: "108-112",
+      notas: "Entrega 2: martes 24 de noviembre, preguntas 1 a 14 en texto continuo, 150 a 250 palabras por pregunta, mínimo 6 referencias APA. Las seis primeras se corrigen con la retroalimentación de la Entrega 1." },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "¿Cómo llamó Bachelard a los hábitos de pensamiento que impiden aprender algo nuevo?", respuesta: "**Obstáculos epistemológicos.**" },
+        { pregunta: "¿Qué quiere decir que la observación está cargada de teoría?", respuesta: "**Lo que vemos depende de lo que ya sabemos** (Hanson)." },
+        { pregunta: "Para Damasio, ¿qué relación hay entre emoción y razón?", respuesta: "**La emoción es condición de la razón**, no su enemiga." },
+        { pregunta: "En un diálogo ideal, según Habermas, ¿qué debe imponerse?", respuesta: "**La fuerza del mejor argumento.**" }
+      ],
+      minutos: "112-117",
+      notas: "Si sobra tiempo, que avancen la pregunta 7 en clase y resuelvan dudas de la Entrega 2." },
+
+    { tipo: "cierre",
+      evidencia: "**Mi inercia mental** de cada alumno y **Saberes de la vida** de cada equipo, compartidos con el grupo.",
+      materiales: "Libro de texto (Temas 5 y 6), Aula Virtual y **celular con internet**.",
+      proxima: "Terminar **Saberes de la vida** si les faltó. Actividades de repaso de los **Temas 5 y 6** en el Aula Virtual. Leer **6.3, 6.4 y el Tema 7** (neurociencia y aprendizaje) para el **martes 17**. Avanzar las preguntas 7, 8 y 9.",
+      minutos: "117-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

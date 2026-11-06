@@ -9,7 +9,7 @@ export async function docCuadro({ A, V = null, R = null, S, eq = null, nombre = 
   const D = new DocITES(); await D.cargarLogo();
   const celdas = (S && S.celdas) || {}, por = (S && S.por) || {};
   D.portada({ kicker: A.kicker, titulo: A.titulo, subtitulo: V ? 'Análisis de una afirmación con los autores del Tema 4' : 'Cuadro comparativo', etiqueta: eq ? `Equipo «${eq.nombre}»` : 'Alumno', personas: eq ? eq.nombres || [] : [nombre] });
-  if (V) D.h1('La afirmación analizada', V.afirmacion);
+  if (V) D.h1(A.nombreVariante || 'La afirmación analizada', V.afirmacion);
   D.h1(V ? 'Nuestro análisis' : 'Cuadro comparativo');
   const celda = k => { const t = (celdas[k] || '').trim(), au = eq && por[k]; return { runs: [[t || '(sin escribir)', t ? {} : { i: true, color: '9A9389' }], ...(au ? [[`\n✍ ${au}`, { color: '3F7A4F', tam: 8 }]] : [])] }; };
   const cab = (f, t, inv) => { const fu = (celdas[`${f}_fuente`] || '').trim(); return inv ? { runs: [[t, { b: true }], [`\n🔎 Investigación${fu ? ' · Fuente: ' + fu : ' · sin fuente'}`, { color: '6B6358', tam: 8, i: !fu }]], fondo: 'F4EFE4' } : { t, b: true, fondo: 'F4EFE4' }; };
