@@ -17,6 +17,7 @@ import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS
 import { zipDocx } from "./docx-ites.js?v=2026102708";
 import { wordTaller, numsDe, estadoEntrega, slugArchivo } from "./taller-word.js?v=2026102708";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
+import { RUTAS, sugerirRuta, MIN_SALIDA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026110901";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -1934,7 +1935,71 @@ function aporteDe(d, al) {
   andar(d);
   return { si: n > 0 || !!(d.aportes && d.aportes[al.id]) || d.ultimoAutor === al.id, n };
 }
+// ---- Clase autoguiada: avance por estaciones, boleto de salida y bitácora de la conferencia (participación)
+async function calificarRuta(a, enCatalogo) {
+  const wrap = document.getElementById('td-calificar'); wrap.hidden = false;
+  wrap.innerHTML = '<p class="empty-inline">Reuniendo el avance de cada alumno…</p>';
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const g = grupoActivo, R = RUTAS[a.id], P = R.participacion, sal = R.estaciones.find(e => e.tipo === 'salida');
+  const filas = await Promise.all(alumnosCache.map(async al => {
+    let S = null, cal = '', exento = false, part = false;
+    try { const c = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'tareas', catalogoId(a.id))); if (c.exists()) { cal = c.data().calificacion ?? ''; exento = !!c.data().exento; } } catch { /* */ }
+    try { const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'atlas', R.ind)); S = s.exists() ? s.data() : null; } catch { /* */ }
+    try { const p = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'participaciones', P.id)); part = p.exists(); } catch { /* */ }
+    const sug = S ? sugerirRuta(R, S) : { nota: 0, detalle: 'No ha empezado' };
+    return { al, S, sug, cal, exento, part, bit: S ? bitacoraCompleta(R, S) : false, bitN: S ? bitacoraAvance(R, S) : 0 };
+  }));
+  const f = t => typeof t === 'number' ? new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+  const pasos = S => R.estaciones.map(e => (S && S.hechas && S.hechas[e.id]) ? `<span title="${escaparHTML(e.titulo)}">✅</span>` : (S && S.saltadas && S.saltadas[e.id]) ? `<span title="${escaparHTML(e.titulo)}: la saltó">⏭️</span>` : `<span title="${escaparHTML(e.titulo)}">⬜</span>`).join('');
+  const respuestas = S => `${sal.preguntas.map(([k, q], i) => `<p><b>${i + 1}. ${escaparHTML(q)}</b><br>${escaparHTML((S.salida || {})[k] || '—')}</p>`).join('')}`;
+  const bitacora = S => R.bitacora.campos.map(([k, t]) => `<p><b>${escaparHTML(t)}:</b> ${escaparHTML((S.bitacora || {})[k] || '—')}</p>`).join('');
+  const nBit = filas.filter(x => x.bit).length;
+  wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
+    ${enCatalogo ? '' : '<p class="aviso-td">⚠️ Esta tarea todavía no está en el catálogo: las calificaciones se guardan, pero no cuentan en el promedio hasta que la agregues.</p>'}
+    <p class="field-hint">Sugerida sobre 10: <b>6</b> por las ${R.estaciones.length} estaciones terminadas, <b>1</b> por las tarjetas acertadas al primer intento y <b>3</b> por el boleto de salida (una por respuesta de ${MIN_SALIDA} palabras o más). «Mi inercia mental» y «Saberes de la vida» se califican además como sus propias tareas.</p>
+    <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button><button type="button" class="btn btn-small btn-primary" id="rt-part">🎤 Dar participación a quienes completaron la bitácora (${nBit})</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button></div>
+    <p class="save-msg" id="rt-part-msg" hidden></p>
+    <div class="taller-tabla-wrap"><table class="taller-tabla td-tabla"><thead><tr><th>Alumno</th><th>Estaciones</th><th>Salida</th><th>Bitácora</th><th>Sugerida</th><th>Calificación</th><th title="Falta justificada: la tarea no le cuenta en el promedio">Exento</th></tr></thead><tbody>
+    ${filas.map(x => `<tr data-id="${x.al.id}"><td><b>${escaparHTML(x.al.nombre)}</b>${x.S && x.S.entregado ? `<br><small class="td-ok">✓ Entregó ${escaparHTML(f(x.S.entregado.t))}</small>` : x.S ? '<br><small class="td-no">Sin entregar</small>' : ''}</td>
+      <td><span class="rt-adm-pasos">${pasos(x.S)}</span><br><small>${escaparHTML(x.sug.detalle)}</small></td>
+      <td>${x.S ? `<details><summary>${x.sug.resp}/${x.sug.preguntas}</summary><div class="rt-adm-resp">${respuestas(x.S)}</div></details>` : '—'}</td>
+      <td>${x.S && x.bitN ? `<details><summary>${x.bit ? '✅ Completa' : `${x.bitN}/${R.bitacora.campos.length}`}${x.part ? ' · 🎤' : ''}</summary><div class="rt-adm-resp">${bitacora(x.S)}</div></details>` : x.part ? '🎤' : '—'}</td>
+      <td><b class="td-sug">${x.sug.nota}</b></td>
+      <td><input type="number" min="0" max="10" step="0.1" class="calif-input td-in" value="${x.cal}" placeholder="0-10" data-sug="${x.sug.nota}" ${x.exento ? 'disabled' : ''}></td>
+      <td><input type="checkbox" class="td-ex" ${x.exento ? 'checked' : ''} aria-label="Exento"></td></tr>`).join('')}</tbody></table></div>
+    <button type="button" class="btn btn-primary btn-block" id="td-guardar">Guardar calificaciones</button><p class="save-msg" id="td-msg" hidden></p>`;
+  document.getElementById('td-cerrar').addEventListener('click', () => { wrap.hidden = true; });
+  document.getElementById('td-usar').addEventListener('click', () => wrap.querySelectorAll('.td-in:not(:disabled)').forEach(i => { if (i.value === '') i.value = i.dataset.sug; }));
+  wrap.querySelectorAll('.td-ex').forEach(c => c.addEventListener('change', () => { const i = c.closest('tr').querySelector('.td-in'); i.disabled = c.checked; if (c.checked) i.value = ''; }));
+  document.getElementById('rt-part').addEventListener('click', async e => {
+    const b = e.currentTarget, msg = document.getElementById('rt-part-msg'), quienes = filas.filter(x => x.bit && !x.part);
+    if (!nBit) { msg.textContent = 'Todavía nadie completa la bitácora.'; msg.hidden = false; return; }
+    if (!quienes.length) { msg.textContent = '✓ Todos los que completaron la bitácora ya tienen su participación.'; msg.hidden = false; return; }
+    if (!confirm(`Se registrará la participación «${P.nombre}» (Parcial 2) a ${quienes.length} alumno${quienes.length === 1 ? '' : 's'}:\n\n${quienes.map(x => '· ' + x.al.nombre).join('\n')}\n\nLa puedes revisar o quitar después en la pestaña Participación.`)) return;
+    b.disabled = true;
+    try {
+      await setDoc(doc(db, 'grupos', g, 'participaciones_catalogo', P.id), { nombre: P.nombre, fecha: P.fecha, parcial: 'p2', digital: a.id, creado: serverTimestamp() }, { merge: true });
+      await Promise.all(quienes.map(x => setDoc(doc(db, 'grupos', g, 'alumnos', x.al.id, 'participaciones', P.id), { parcial: 'p2', nombre: P.nombre, fecha: P.fecha, calificacion: 10, actualizado: serverTimestamp() })));
+      quienes.forEach(x => { x.part = true; });
+      msg.textContent = `✓ Participación registrada a ${quienes.length} alumno${quienes.length === 1 ? '' : 's'}.`; msg.hidden = false;
+    } catch (er) { msg.textContent = 'No se pudo registrar: ' + (er.message || er); msg.hidden = false; }
+    finally { b.disabled = false; }
+  });
+  document.getElementById('td-guardar').addEventListener('click', async () => {
+    const msg = document.getElementById('td-msg'), escr = [];
+    wrap.querySelectorAll('tr[data-id]').forEach(tr => {
+      const i = tr.querySelector('.td-in'), ex = tr.querySelector('.td-ex'), ref = doc(db, 'grupos', g, 'alumnos', tr.dataset.id, 'tareas', catalogoId(a.id));
+      if (ex.checked) escr.push(setDoc(ref, { parcial: 'p2', nombre: nombreCatalogo(a), fecha: a.fecha, exento: true, actualizado: serverTimestamp() }));
+      else if (i.value === '') escr.push(deleteDoc(ref).catch(() => {}));
+      else escr.push(setDoc(ref, { parcial: 'p2', nombre: nombreCatalogo(a), fecha: a.fecha, calificacion: Math.max(0, Math.min(10, parseFloat(i.value))), actualizado: serverTimestamp() }));
+    });
+    try { await Promise.all(escr); msg.textContent = '✓ Calificaciones guardadas. Ya se ven en Mi progreso.'; msg.hidden = false; refrescarMarcas(); }
+    catch (e) { msg.textContent = 'No se pudo guardar: ' + (e.message || e); msg.hidden = false; }
+  });
+}
+
 async function calificarTareaDig(a, enCatalogo) {
+  if (a.tipo === 'ruta') return calificarRuta(a, enCatalogo);
   const wrap = document.getElementById('td-calificar'); wrap.hidden = false;
   wrap.innerHTML = '<p class="empty-inline">Reuniendo el trabajo de cada alumno…</p>';
   wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });

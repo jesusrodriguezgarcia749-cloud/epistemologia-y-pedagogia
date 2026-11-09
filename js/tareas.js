@@ -8,6 +8,7 @@ import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, co
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
+import { RUTAS, sugerirRuta, MIN_SALIDA, MIN_BITACORA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026110901";
 import { brillar, descubrir, miCielo, estadoAutor, misionPorFecha, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA, TIPOS_PARA_ENCENDER, NOMBRE_TIPO, CLAVES_AUTOR } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
@@ -107,6 +108,10 @@ async function estadoDe(a) {
   const out = { avance: '', entregado: null, cal: null };
   try { const c = await getDoc(doc(db, 'grupos', g, 'alumnos', al, 'tareas', catalogoId(a.id))); if (c.exists() && c.data().calificacion !== undefined && c.data().calificacion !== null) out.cal = c.data().calificacion; } catch { /* */ }
   try {
+    if (a.tipo === 'ruta') {
+      const R = RUTAS[a.id], s = await getDoc(doc(db, 'grupos', g, 'alumnos', al, 'atlas', R.ind));
+      if (s.exists()) { const sg = sugerirRuta(R, s.data()); out.avance = `${sg.hechas} de ${sg.total} estaciones${bitacoraCompleta(R, s.data()) ? ' · 🎤 bitácora lista' : ''}`; out.entregado = s.data().entregado || null; }
+    }
     if (a.tipo === 'cuadro') {
       const A = CUADROS[a.id], s = await getDoc(eq ? doc(db, 'grupos', g, 'equipos', eq.id, 'atlas', A.id) : doc(db, 'grupos', g, 'alumnos', al, 'atlas', A.ind));
       if (s.exists()) { out.avance = sugerirCuadro(A, s.data().celdas).detalle; out.entregado = s.data().entregado || null; }
@@ -177,12 +182,16 @@ function ruta() {
   if (id === 'tribunal') { $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true; $('#cl-actividad').innerHTML = '<a class="cl-volver" href="#">← Todas las tareas</a><h2 class="cl-h2">⚖️ Tribunal de la ciencia</h2><div id="cl-cuerpo"></div>'; actTribunal($('#cl-cuerpo')); window.scrollTo({ top: 0 }); return; }
   if (id === 'arena') { $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true; $('#cl-actividad').innerHTML = '<a class="cl-volver" href="#">← Todas las tareas</a><h2 class="cl-h2">⚡ Arena en vivo</h2><div id="cl-cuerpo"></div>'; actArena($('#cl-cuerpo')); window.scrollTo({ top: 0 }); return; }
   const a = TAREAS_DIG[id];
-  if (!a || a.tipo === 'pronto') { $('#cl-sesiones').hidden = false; $('#cl-acceso').hidden = false; $('#cl-actividad').innerHTML = ''; portada(); return; }
+  if (!a || a.tipo === 'pronto') { try { sessionStorage.removeItem('ruta_origen'); } catch { /* */ } $('#cl-sesiones').hidden = false; $('#cl-acceso').hidden = false; $('#cl-actividad').innerHTML = ''; portada(); return; }
   $('#cl-sesiones').hidden = true; $('#cl-acceso').hidden = true;
   const c = $('#cl-actividad');
-  c.innerHTML = `<a class="cl-volver" href="#">← Todas las tareas</a><p class="cl-fecha">Tema ${esc(a.tema)} · ${esc(a.titulo)} · ${esc(a.fechaTexto)}</p><h2 class="cl-h2">${a.icono} ${esc(a.nombre)}</h2>
-    ${a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
+  let origen = null; try { origen = sessionStorage.getItem('ruta_origen'); } catch { /* */ }
+  const volver = origen && TAREAS_DIG[origen] && origen !== a.id ? `<a class="cl-volver rt-volver" href="#${origen}">← Volver a la ${esc(TAREAS_DIG[origen].nombre.split(':')[0].toLowerCase())}</a>` : '<a class="cl-volver" href="#">← Todas las tareas</a>';
+  if (a.tipo === 'ruta') { try { sessionStorage.setItem('ruta_origen', a.id); } catch { /* */ } }
+  c.innerHTML = `${volver}<p class="cl-fecha">Tema ${esc(a.tema)} · ${esc(a.titulo)} · ${esc(a.fechaTexto)}</p><h2 class="cl-h2">${a.icono} ${esc(a.nombre)}</h2>
+    ${a.tipo === 'ruta' ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2 · 🎤 la bitácora de la conferencia cuenta como participación.</p>' : a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
   if (a.tipo === 'cuadro') actCuadro($('#cl-cuerpo'), a);
+  else if (a.tipo === 'ruta') actRuta($('#cl-cuerpo'), a);
   else if (a.tipo === 'coev') actCoev($('#cl-cuerpo'));
   else ({ 'que-paradigma': actQueParadigma, 'quien-lo-dijo': actQuienLoDijo, 'quien-avanza': actQuienAvanza, 'que-obstaculo': actQueObstaculo, neuromito: actNeuromito })[a.id]($('#cl-cuerpo'));
   window.scrollTo({ top: 0 });
@@ -394,6 +403,7 @@ function juegoPreguntas(cont, C) {
   };
   const fin = async () => {
     parar();
+    if (C.alTerminar) { try { C.alTerminar(bien, Math.min(i, items.length)); } catch { /* */ } }
     if (C.escenaFinal) { const e = C.escenaFinal(bien, malos); if (e) { cont.innerHTML = ''; await e; } }
     const marca = reto ? pts : bien, clave = `clase_${C.clave}_mejor_${N.id}`, previa = Number((lsGet(clave) || '0').split(/[ /]/)[0]) || 0, record = marca > previa;
     if (record) lsSet(clave, reto ? `${pts} pts` : `${bien}/${Math.min(i, items.length)}`);
@@ -456,11 +466,11 @@ function actQueParadigma(cont) {
 }
 
 // ======================================================= 🎮 Juegos de 5 minutos con opciones de color (desde el 9 de nov)
-function juegoOpciones(cont, { clave, intro, OP, items, niveles, estrellas, boton, introEst, uno, varios }) {
+function juegoOpciones(cont, { clave, intro, OP, items, niveles, estrellas, boton, introEst, uno, varios, alTerminar }) {
   cargarLab();
   const op = c => OP.find(x => x[0] === c) || ['', '', '#888'];
   juegoPreguntas(cont, {
-    clave, seg: 15, intro, niveles, items, estrellas, tipo: () => clave.replace(/-/g, ''), nombreAutor,
+    clave, seg: 15, intro, niveles, items, estrellas, tipo: () => clave.replace(/-/g, ''), nombreAutor, alTerminar,
     preparar: x => ({ carta: `<span class="ap-emo">${x.e}</span><b class="jp-q">${esc(x.q)}</b>`, opciones: OP.map(([k, n, col]) => ({ v: k, t: esc(n), style: `--c:${col}` })), correctas: [x.c], clase: 'jp-infl' }),
     mal: x => `No: es ${op(x.c)[1]}.`,
     explicar: x => `<p class="ap-dato">${esc(x.x)}</p>`,
@@ -476,8 +486,8 @@ function actQuienAvanza(cont) {
     niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 10, desc: 'Las ideas centrales de cada autor.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 15, desc: 'Todo mezclado, con los principios de Morin y las heurísticas de Lakatos.', filtro: () => true }],
     estrellas: x => [x.c], boton: 'Estudiar las ideas', introEst: 'Todas las ideas del juego con su autor (compendio, 4.1 a 4.6).', uno: 'idea', varios: 'ideas' });
 }
-function actQueObstaculo(cont) {
-  juegoOpciones(cont, { clave: 'que-obstaculo', OP: OBSTACULOS, items: QUE_OBSTACULO,
+function actQueObstaculo(cont, extra = {}) {
+  juegoOpciones(cont, { ...extra, clave: 'que-obstaculo', OP: OBSTACULOS, items: QUE_OBSTACULO,
     intro: 'Frases que se oyen en la escuela y en la vida: ¿qué <b>obstáculo epistemológico</b> de Bachelard hay detrás? Te sirve para «Mi inercia mental» y para la pregunta 7 de tu proyecto.',
     niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 8, desc: 'Un ejemplo claro de cada obstáculo.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 14, desc: 'Todo mezclado, con casos del aula.', filtro: () => true }],
     estrellas: () => ['bachelard'], boton: 'Estudiar los obstáculos', introEst: 'Los cinco obstáculos epistemológicos de Bachelard con sus ejemplos (compendio, 5.1).', uno: 'frase', varios: 'frases' });
@@ -487,6 +497,172 @@ function actNeuromito(cont) {
     intro: 'Lo que se dice del cerebro en las escuelas: ¿es un <b>neuromito</b> o tiene <b>evidencia</b>? Te sirve para «Analiza un producto neuro» y para el examen.',
     niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 10, desc: 'Los neuromitos más famosos y lo que sí sabemos.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 16, desc: 'Todo mezclado: Hebb, Dunlosky, Dehaene, el estrés, el cerebro adolescente…', filtro: () => true }],
     estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : ['dehaene']; }, boton: 'Estudiar la tabla', introEst: 'Neuromitos y hallazgos con evidencia (compendio, Tema 7).', uno: 'idea', varios: 'ideas' });
+}
+
+// ======================================================= 🧭 CLASE AUTOGUIADA (ruta de estaciones)
+// Cada estación se desbloquea al terminar la anterior; la bitácora de la conferencia va aparte y está siempre abierta.
+const mdRuta = t => mdTxt(t).replace(/\n/g, '<br>');
+function actRuta(cont, a) {
+  const entrar = () => { escucharGrupo(); rutaVista(cont, a, RUTAS[a.id]); };
+  if (sesion) entrar(); else formAcceso(cont, entrar, 'Entra con tu nombre y PIN para empezar tu clase');
+}
+async function rutaVista(cont, a, R) {
+  const E = R.estaciones, ref = doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', R.ind);
+  let S = { hechas: {}, saltadas: {}, checks: {}, salida: {}, bitacora: {} }, actual = null, tGuardar = null, pendiente = {};
+  cont.innerHTML = '<p class="atlas-ayuda">Cargando tu clase…</p>';
+  try { const s = await getDoc(ref); if (s.exists()) S = { ...S, ...s.data() }; } catch { /* sin conexión: empieza en blanco */ }
+  ['hechas', 'saltadas', 'checks', 'salida', 'bitacora'].forEach(k => { S[k] = S[k] || {}; });
+  const avisar = (txt, mal) => { const m = $('#rt-guardado', cont); if (m) { m.textContent = txt; m.className = 'rt-guardado' + (mal ? ' mal' : ''); } };
+  const guardar = async parcial => {
+    if (!abierta(a.id)) { avisar('🔒 La clase está cerrada: ya no se guardan cambios.', true); return false; }
+    try { await setDoc(ref, { ...parcial, nombre: sesion.nombre, actualizado: serverTimestamp() }, { merge: true }); avisar('✓ Guardado'); return true; }
+    catch (e) { avisar('⚠️ No se pudo guardar. Revisa tu internet; lo que escribiste sigue aquí.', true); return false; }
+  };
+  // Textos: se juntan y se guardan cada segundo
+  const guardarTexto = (grupo, k, v) => {
+    S[grupo][k] = v; pendiente[grupo] = { ...(pendiente[grupo] || {}), [k]: v }; avisar('Guardando…');
+    clearTimeout(tGuardar); tGuardar = setTimeout(() => { const p = pendiente; pendiente = {}; guardar(p); }, 900);
+  };
+  const desbloqueada = i => i === 0 || !!S.hechas[E[i - 1].id] || !!S.saltadas[E[i - 1].id];
+  const marcar = async (id, extra = {}) => { if (!S.hechas[id]) { S.hechas[id] = Date.now(); Object.assign(S, extra); await guardar({ hechas: { [id]: S.hechas[id] }, ...extra }); } pintarMapa(); };
+  const siguienteDe = id => { const i = E.findIndex(e => e.id === id); return E[i + 1] || null; };
+  const botonSiguiente = id => { const n = siguienteDe(id); return n ? `<button type="button" class="btn-at rt-sig" data-ir="${n.id}">Siguiente estación: ${n.ico} ${esc(n.titulo)} →</button>` : ''; };
+  const enlazarIr = r => $$('[data-ir]', r).forEach(b => b.addEventListener('click', () => abrir(b.dataset.ir)));
+
+  cont.innerHTML = `<div class="rt-cab"><p>${R.intro}</p>
+      <div class="rt-barra" aria-hidden="true"><i id="rt-barra"></i></div><p class="rt-cuenta"><span id="rt-cuenta"></span> <span class="rt-guardado" id="rt-guardado"></span></p>
+      <p class="rt-cierre" id="rt-cierre"></p></div>
+    <ol class="rt-mapa" id="rt-mapa"></ol>
+    <button type="button" class="rt-bit-tarjeta" id="rt-bit-ir"><span>${R.bitacora.ico}</span><div><b>${esc(R.bitacora.titulo)}</b><small id="rt-bit-est"></small></div><em>Abrir →</em></button>
+    <section class="rt-estacion" id="rt-est" aria-live="polite"></section>`;
+  $('#rt-bit-ir', cont).addEventListener('click', () => abrir('conferencia'));
+  function pintarMapa() {
+    const n = E.filter(e => S.hechas[e.id]).length;
+    $('#rt-barra', cont).style.width = (100 * n / E.length) + '%';
+    $('#rt-cuenta', cont).innerHTML = S.entregado ? `✅ <b>Clase entregada.</b> ${n} de ${E.length} estaciones.` : `<b>${n} de ${E.length}</b> estaciones terminadas.`;
+    $('#rt-cierre', cont).innerHTML = !abierta(a.id) ? `🔒 ${vencida(a.id) ? `Esta clase cerró el ${esc(cierreTxt(a.id))}` : 'Tu maestro cerró esta clase'}: puedes repasarla, pero ya no se guardan cambios.` : cierreTxt(a.id) ? `⏰ Tienes hasta el <b>${esc(cierreTxt(a.id))}</b>.` : '';
+    $('#rt-mapa', cont).innerHTML = E.map((e, i) => { const h = !!S.hechas[e.id], ab = desbloqueada(i), sal = !h && S.saltadas[e.id];
+      return `<li><button type="button" class="rt-paso ${h ? 'hecha' : ab ? 'abierta' : 'bloq'} ${actual === e.id ? 'actual' : ''}" data-est="${e.id}" ${ab ? '' : 'disabled'}>
+        <span class="rt-num">${h ? '✓' : i + 1}</span><span class="rt-ico">${e.ico}</span><span class="rt-tx"><b>${esc(e.titulo)}</b><small>${h ? 'Terminada' : sal ? 'Pendiente: la saltaste' : ab ? `≈ ${e.min} min` : '🔒 Termina la anterior'}</small></span></button></li>`; }).join('');
+    $$('[data-est]', cont).forEach(b => b.addEventListener('click', () => abrir(b.dataset.est)));
+    const bn = bitacoraAvance(R, S);
+    $('#rt-bit-est', cont).textContent = bitacoraCompleta(R, S) ? '✓ Completa · cuenta como participación' : `${bn} de ${R.bitacora.campos.length} respuestas · ${R.bitacora.extra ? 'siempre abierta' : ''}`;
+  }
+  function abrir(id, quieto) {
+    if (detener) { detener(); detener = null; }
+    actual = id; pintarMapa();
+    const zona = $('#rt-est', cont);
+    if (id === 'conferencia') bitacora(zona);
+    else { const e = E.find(x => x.id === id); zona.innerHTML = `<p class="rt-kicker">Estación ${E.indexOf(e) + 1} de ${E.length} · ≈ ${e.min} min</p><h3 class="rt-h3">${e.ico} ${esc(e.titulo)}</h3><p class="atlas-ayuda">${e.desc}</p><div class="rt-cuerpo"></div>`;
+      const c = $('.rt-cuerpo', zona);
+      ({ juego: juego, leccion: leccion, cuadro: estCuadro, salida: salida })[e.tipo](c, e); }
+    if (!quieto) zona.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // ---- estación de juego
+  function juego(c, e) {
+    c.innerHTML = `<div class="rt-listo" id="rt-listo" ${S.hechas[e.id] ? '' : 'hidden'}>✅ <b>¡Estación completada!</b> ${botonSiguiente(e.id)}</div><div id="rt-juego"></div>`;
+    enlazarIr(c);
+    actQueObstaculo($('#rt-juego', c), { alTerminar: async (bien, total) => { await marcar(e.id, { juego: { bien, total } }); const l = $('#rt-listo', c); if (l) { l.hidden = false; } } });
+  }
+  // ---- mini-lección: tarjetas con pregunta de comprobación
+  function leccion(c, e) {
+    const key = i => `${e.id}_${i}`, ok = i => !!(S.checks[key(i)] && S.checks[key(i)].ok);
+    let i = e.tarjetas.findIndex((_, k) => !ok(k)); if (i < 0) i = 0;
+    const pintar = () => {
+      const T = e.tarjetas[i], hecha = ok(i), ops = barajar(T.ops.map((t, k) => [t, k]));
+      c.innerHTML = `<div class="rt-puntos">${e.tarjetas.map((_, k) => `<button type="button" class="rt-punto ${ok(k) ? 'ok' : ''} ${k === i ? 'act' : ''}" data-k="${k}" ${k <= i || ok(k) || (k > 0 && ok(k - 1)) ? '' : 'disabled'} aria-label="Tarjeta ${k + 1}">${k + 1}</button>`).join('')}</div>
+        <article class="rt-tarjeta"><p class="rt-tk">${esc(T.k)}</p><h4>${esc(T.t)}</h4>${T.texto.map(p => `<p>${mdRuta(p)}</p>`).join('')}
+          ${T.ej ? `<div class="rt-ej"><b>Ejemplo</b> ${mdRuta(T.ej)}</div>` : ''}
+          ${T.video ? `<details class="rt-video"><summary>Ver video (opcional)</summary><div class="rt-marco" data-v="${esc(T.video.id)}" data-cc="${T.video.cc ? 1 : ''}"></div><small>${esc(T.video.pie)} Si no carga, <a href="https://www.youtube.com/watch?v=${esc(T.video.id)}" target="_blank" rel="noopener">ábrelo en YouTube</a> o sigue sin él.</small></details>` : ''}</article>
+        <div class="rt-check"><p class="rt-q">🤔 ${esc(T.q)}</p><div class="rt-ops">${ops.map(([t, k]) => `<button type="button" class="rt-op ${hecha && k === T.c ? 'ok' : ''}" data-op="${k}" ${hecha ? 'disabled' : ''}>${esc(t)}</button>`).join('')}</div><div id="rt-fb">${hecha ? `<div class="aviso ok"><strong>¡Correcto!</strong> ${mdRuta(T.x)}</div>` : ''}</div>
+          <div class="rt-nav">${i > 0 ? '<button type="button" class="btn-ruta" id="rt-ant">← Anterior</button>' : ''}<span id="rt-adelante">${hecha ? avanzar() : ''}</span></div></div>`;
+      $$('.rt-punto', c).forEach(b => b.addEventListener('click', () => { i = +b.dataset.k; pintar(); }));
+      const an = $('#rt-ant', c); if (an) an.addEventListener('click', () => { i--; pintar(); });
+      const v = $('.rt-video', c); if (v) v.addEventListener('toggle', () => { const m = $('.rt-marco', v); if (v.open && !m.firstChild) m.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${m.dataset.v}?rel=0${m.dataset.cc ? '&cc_load_policy=1&cc_lang_pref=es&hl=es' : ''}" title="Video" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`; });
+      enlazar();
+      $$('.rt-op', c).forEach(b => b.addEventListener('click', async () => {
+        const k = +b.dataset.op, prev = S.checks[key(i)] || { intentos: 0 }, n = (prev.intentos || 0) + 1;
+        if (k === T.c) {
+          S.checks[key(i)] = { ok: true, intentos: n };
+          $$('.rt-op', c).forEach(x => { x.disabled = true; }); b.classList.add('ok');
+          $('#rt-fb', c).innerHTML = `<div class="aviso ok"><strong>${n === 1 ? '¡Correcto a la primera!' : '¡Correcto!'}</strong> ${mdRuta(T.x)}</div>`;
+          const todas = e.tarjetas.every((_, q) => ok(q));
+          await guardar({ checks: { [key(i)]: S.checks[key(i)] } });
+          if (todas) await marcar(e.id);
+          $('#rt-adelante', c).innerHTML = avanzar(); enlazar(); pintarPuntos();
+        } else {
+          S.checks[key(i)] = { ok: false, intentos: n }; b.classList.add('mal'); b.disabled = true;
+          $('#rt-fb', c).innerHTML = `<div class="aviso mal"><strong>Todavía no.</strong> Vuelve a leer la tarjeta y prueba otra opción.</div>`;
+          guardar({ checks: { [key(i)]: S.checks[key(i)] } });
+        }
+      }));
+    };
+    const avanzar = () => i < e.tarjetas.length - 1 ? '<button type="button" class="btn-at" id="rt-sigt">Siguiente tarjeta →</button>' : (e.tarjetas.every((_, q) => ok(q)) ? `<span class="rt-fin">✅ ¡Mini-lección terminada!</span> ${botonSiguiente(e.id)}` : '<span class="rt-fin">Te falta contestar alguna tarjeta: búscala en los números de arriba.</span>');
+    const enlazar = () => { const b = $('#rt-sigt', c); if (b) b.onclick = () => { i++; pintar(); window.scrollTo({ top: $('#rt-est', cont).offsetTop - 20, behavior: 'smooth' }); }; enlazarIr(c); };
+    const pintarPuntos = () => $$('.rt-punto', c).forEach(b => { const k = +b.dataset.k; b.classList.toggle('ok', ok(k)); b.disabled = !(k <= i || ok(k) || (k > 0 && ok(k - 1))); });
+    pintar();
+  }
+  // ---- estación que manda a una actividad de la plataforma y revisa si ya la hizo
+  async function detectar(e) {
+    const g = sesion.grupoId, al = sesion.alumnoId, A = CUADROS[e.act], escribio = d => !!d && Object.values(d.celdas || {}).some(v => String(v || '').trim());
+    try {
+      if (TAREAS_DIG[e.act].individual) { const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al, 'atlas', A.ind)); return s.exists() && escribio(s.data()); }
+      const eq = await equipo(e.act);
+      if (eq) { const s = await getDoc(doc(db, 'grupos', g, 'equipos', eq.id, 'atlas', A.id)); if (!s.exists()) return false; const d = s.data(); return !!((d.aportes || {})[al]) || d.ultimoAutor === al || Object.values(d.por || {}).includes(sesion.nombre); }
+      const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al, 'atlas', A.ind)); return s.exists() && escribio(s.data());
+    } catch { return false; }
+  }
+  async function estCuadro(c, e) {
+    const act = TAREAS_DIG[e.act];
+    const pintar = (estado) => {
+      const h = !!S.hechas[e.id];
+      c.innerHTML = `<div class="rt-act"><span class="rt-act-ico">${act.icono}</span><div><b>${esc(act.nombre)}</b><small>${esc(act.modo)} · cuenta también como su propia tarea</small></div>
+          <a class="btn-at" href="#${act.id}">Abrir la actividad →</a></div>
+        <p class="rt-estado">${h ? '✅ <b>Listo:</b> ya escribiste en esta actividad.' : estado === 'buscando' ? 'Revisando si ya escribiste…' : estado === 'no' ? '⏳ Todavía no encuentro nada escrito tuyo. Ábrela, escribe y vuelve aquí.' : ''}</p>
+        <div class="rt-nav">${h ? botonSiguiente(e.id) : `<button type="button" class="btn-ruta" id="rt-rev">🔄 Ya la hice: revisar</button>${S.saltadas[e.id] ? '' : '<button type="button" class="ma-link" id="rt-saltar">Seguir sin terminarla (tu maestro verá que falta)</button>'}`}</div>`;
+      enlazarIr(c);
+      const r = $('#rt-rev', c); if (r) r.addEventListener('click', revisar);
+      const sl = $('#rt-saltar', c); if (sl) sl.addEventListener('click', async () => { if (!confirm('¿Seguir sin terminarla? Puedes regresar después; mientras, tu maestro la verá como pendiente.')) return; S.saltadas[e.id] = Date.now(); await guardar({ saltadas: { [e.id]: S.saltadas[e.id] } }); pintarMapa(); const n = siguienteDe(e.id); if (n) abrir(n.id); });
+    };
+    const revisar = async () => { pintar('buscando'); if (await detectar(e)) { await marcar(e.id); pintar(); } else pintar('no'); };
+    if (S.hechas[e.id]) pintar(); else revisar();
+  }
+  // ---- boleto de salida y entrega
+  function salida(c, e) {
+    const listo = () => e.preguntas.every(([k]) => palabras(S.salida[k]) >= MIN_SALIDA);
+    c.innerHTML = e.preguntas.map(([k, q], n) => `<label class="rt-campo"><span><b>${n + 1}.</b> ${esc(q)}</span><textarea rows="4" data-s="${k}">${esc(S.salida[k] || '')}</textarea><small class="rt-pal" data-p="${k}"></small></label>`).join('')
+      + `<div class="rt-entrega" id="rt-entrega"></div>`;
+    const cuentas = () => { e.preguntas.forEach(([k]) => { const n = palabras(S.salida[k]), el = $(`[data-p="${k}"]`, c); el.textContent = `${n} palabra${n === 1 ? '' : 's'}${n < MIN_SALIDA ? ` · mínimo ${MIN_SALIDA}` : ' ✓'}`; el.classList.toggle('ok', n >= MIN_SALIDA); }); entrega(); };
+    const entrega = () => {
+      const z = $('#rt-entrega', c), faltan = E.filter(x => x.id !== e.id && !S.hechas[x.id]);
+      z.innerHTML = S.entregado ? `<div class="cl-entregada">✅ Entregaste tu clase el ${esc(punto(fechaHora(S.entregado.t)))} Puedes seguir mejorando tus respuestas mientras esté abierta.</div>`
+        : `<button type="button" class="btn-at" id="rt-entregar" ${listo() && abierta(a.id) ? '' : 'disabled'}>📤 Entregar mi clase</button><small>${!listo() ? `Contesta las tres preguntas (mínimo ${MIN_SALIDA} palabras cada una) para poder entregar.` : faltan.length ? `Ojo: te falta: ${faltan.map(x => x.titulo).join(' · ')}.` : '¡Todo listo!'}</small>`;
+      const b = $('#rt-entregar', c); if (b) b.addEventListener('click', async () => {
+        if (faltan.length && !confirm(`Te falta: ${faltan.map(x => x.titulo).join(', ')}.\n\n¿Entregar así? Puedes volver a completarlo mientras la clase siga abierta.`)) return;
+        b.disabled = true; clearTimeout(tGuardar); const p = pendiente; pendiente = {};
+        S.entregado = { t: Date.now() };
+        if (await guardar({ ...p, entregado: S.entregado })) await marcar(e.id); else S.entregado = null;
+        entrega();
+      });
+    };
+    $$('[data-s]', c).forEach(t => { t.readOnly = !abierta(a.id); t.addEventListener('input', () => { guardarTexto('salida', t.dataset.s, t.value); cuentas(); }); });
+    cuentas();
+  }
+  // ---- bitácora de la conferencia (participación)
+  function bitacora(zona) {
+    const B = R.bitacora;
+    zona.innerHTML = `<p class="rt-kicker">Estación extra · cuenta como participación</p><h3 class="rt-h3">${B.ico} ${esc(B.titulo)}</h3><p class="atlas-ayuda">${B.desc}</p>
+      ${B.campos.map(([k, t, ay]) => `<label class="rt-campo"><span><b>${esc(t)}</b><small>${esc(ay)}</small></span><textarea rows="${k === 'tema' ? 1 : 3}" data-b="${k}">${esc(S.bitacora[k] || '')}</textarea><small class="rt-pal" data-p="${k}"></small></label>`).join('')}
+      <p class="rt-estado" id="rt-bit-ok"></p>`;
+    const cuentas = () => { B.campos.forEach(([k]) => { const n = palabras(S.bitacora[k]), min = k === 'tema' ? 2 : MIN_BITACORA, el = $(`[data-p="${k}"]`, zona); el.textContent = `${n} palabra${n === 1 ? '' : 's'}${n < min ? ` · mínimo ${min}` : ' ✓'}`; el.classList.toggle('ok', n >= min); });
+      $('#rt-bit-ok', zona).innerHTML = bitacoraCompleta(R, S) ? '✅ <b>Bitácora completa.</b> Tu maestro la registrará como participación.' : ''; pintarMapa(); };
+    $$('[data-b]', zona).forEach(t => { t.readOnly = !abierta(a.id); t.addEventListener('input', () => { guardarTexto('bitacora', t.dataset.b, t.value); cuentas(); }); });
+    cuentas();
+  }
+  window.addEventListener('estado-tareas', () => { if ($('#rt-mapa', cont)) pintarMapa(); });
+  pintarMapa();
+  const primera = E.find((e, i) => desbloqueada(i) && !S.hechas[e.id]);
+  abrir(primera ? primera.id : E[E.length - 1].id, true);
 }
 
 // ======================================================= ⚡ ARENA EN VIVO (alumno)

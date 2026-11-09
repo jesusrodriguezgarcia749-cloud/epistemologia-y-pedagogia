@@ -798,3 +798,6 @@ body.mon-completo .mon-grid { grid-template-columns: repeat(auto-fill, minmax(21
 .btn.cal-hecha, .asis-estado-label.cal-hecha { background: #2e7d3c !important; border-color: #2e7d3c !important; color: #fff !important; }
 .btn.cal-medio, .asis-estado-label.cal-medio { background: #c98a2c !important; border-color: #c98a2c !important; color: #fff !important; }
 .asis-estado-label.cal-hecha, .asis-estado-label.cal-medio { padding: 3px 10px; border-radius: 999px; }
+.rt-adm-pasos { letter-spacing: 1px; white-space: nowrap; }
+.rt-adm-resp { max-width: 380px; font-size: .85rem; padding: 6px 0; }
+.rt-adm-resp p { margin: 0 0 6px; }
