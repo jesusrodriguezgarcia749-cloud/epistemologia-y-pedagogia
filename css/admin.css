@@ -778,3 +778,23 @@ body.mon-completo .mon-grid { grid-template-columns: repeat(auto-fill, minmax(21
 .td-siap { color: #3f7a4f; }
 .vivo-volver { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 0 0 12px; }
 .td-vivo .td-nom small { color: #8a8072; font-weight: 400; }
+
+/* ---- Traído de Origen: exento, fecha límite, marcas de calificada, Word por fila, repasos en participación */
+/* Vista rápida de participación: columnas de solo lectura de las actividades de repaso */
+.mz-col-extra { background: color-mix(in srgb, #3F7A4F 12%, transparent); }
+.mz-extra { text-align: center; }
+.mz-act-si { display: inline-grid; place-items: center; width: 2.1rem; height: 2.1rem; border-radius: 8px; background: #3F7A4F; color: #fff; font-weight: 800; }
+.mz-act-no { display: inline-grid; place-items: center; width: 2.1rem; height: 2.1rem; border-radius: 8px; border: 1.5px dashed var(--line); color: var(--ink-soft); }
+/* Exento por falta justificada */
+.ex-check { display: inline-flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 600; white-space: nowrap; cursor: pointer; }
+.ex-check input, .td-ex { width: 20px; height: 20px; }
+.mz-exento { display: inline-grid; place-items: center; width: 54px; padding: 8px 0; border-radius: 8px; background: color-mix(in srgb, #2E6FA8 14%, transparent); color: #2E6FA8; font: 800 .8rem var(--font-body); }
+.td-cierre { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600; }
+.td-cierre input { font: inherit; font-weight: 400; padding: 5px 8px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--cream); color: var(--ink); }
+.cal-marca { display: inline-block; font-size: .78rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; margin: 0 8px; white-space: nowrap; }
+.cal-marca.si { background: #e3f1e6; color: #2e6b3a; }
+.cal-marca.medio { background: #fff3d6; color: #8a5a00; }
+.cal-marca.no { background: #f6e3df; color: #a3341f; }
+.btn.cal-hecha, .asis-estado-label.cal-hecha { background: #2e7d3c !important; border-color: #2e7d3c !important; color: #fff !important; }
+.btn.cal-medio, .asis-estado-label.cal-medio { background: #c98a2c !important; border-color: #c98a2c !important; color: #fff !important; }
+.asis-estado-label.cal-hecha, .asis-estado-label.cal-medio { padding: 3px 10px; border-radius: 999px; }

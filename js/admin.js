@@ -26,6 +26,9 @@ const db = getFirestore(app);
 // PARCIALES: usado únicamente para todo lo que depende de calculo.js
 // (Historial, exportar CSV, resumen del alumno) — el Diagnóstico NO
 // participa en ningún cálculo de calificación, así que NO va aquí.
+// Las listas de parcial (Tareas, Participación, Asistencia, Uniformes, Examen) abren solas en el parcial en curso.
+const parcialDeHoy = (hoy = new Date()) => { const d = hoy.toISOString().slice(0, 10); return d <= '2026-10-15' ? 'p1' : d <= '2026-11-27' ? 'p2' : 'final'; };
+document.querySelectorAll('select').forEach(sel => { if ([...sel.options].some(o => o.value === 'p1')) { const p = parcialDeHoy(); if ([...sel.options].some(o => o.value === p)) sel.value = p; } });
 const PARCIALES = ['p1', 'p2', 'final'];
 
 // PARCIALES_EXAMEN: usado solo en la sección "Examen en línea" del panel,
@@ -470,6 +473,25 @@ async function agregarItemCatalogo(tipo) {
   cargarCatalogo(tipo);
 }
 
+// ¿Cuántos alumnos ya tienen calificación (o están exentos) en cada tarea del catálogo? Para marcar en la lista
+// cuáles ya se calificaron y cuáles faltan. Se lee una vez por alumno.
+async function conteoCalificadas() {
+  const cuenta = {};
+  await Promise.all(alumnosCache.map(async a => {
+    try { (await getDocs(collection(db, 'grupos', grupoActivo, 'alumnos', a.id, 'tareas'))).forEach(d => { const x = d.data(); if (x.exento || (x.calificacion !== undefined && x.calificacion !== null && x.calificacion !== '')) cuenta[d.id] = (cuenta[d.id] || 0) + 1; }); } catch { /* */ }
+  }));
+  return cuenta;
+}
+// Después de guardar calificaciones, se actualizan las marcas de las dos listas sin cerrar lo que está abierto.
+async function refrescarMarcas() {
+  const cuenta = await conteoCalificadas(), tot = alumnosCache.length;
+  document.querySelectorAll('[data-marca]').forEach(el => { el.innerHTML = marcaCalificada(cuenta[el.dataset.marca] || 0, tot); });
+  document.querySelectorAll('[data-btncal]').forEach(el => { const n = cuenta[el.dataset.btncal] || 0; el.textContent = textoBotonCal(n, tot, el.dataset.flecha || ''); el.classList.remove('cal-hecha', 'cal-medio'); const c = claseBotonCal(n, tot); if (c) el.classList.add(c); });
+}
+// El botón de calificar dice en qué va: «✅ Calificada», «Calificar · 12 de 21» o «Calificar».
+const textoBotonCal = (n, total, flecha = '') => !total || !n ? 'Calificar' + flecha : n >= total ? '✅ Calificada' + flecha : `Calificar · ${n} de ${total}` + flecha;
+const claseBotonCal = (n, total) => !total || !n ? '' : n >= total ? 'cal-hecha' : 'cal-medio';
+const marcaCalificada = (n, total) => !total ? '' : n >= total ? '<span class="cal-marca si">✅ Calificada</span>' : n > 0 ? `<span class="cal-marca medio">🟡 ${n} de ${total} calificados</span>` : '<span class="cal-marca no">⏳ Sin calificar</span>';
 async function cargarCatalogo(tipo) {
   const cfg = CONFIG_TIPO[tipo];
   const cont = document.getElementById(cfg.listaCatalogo);
@@ -504,10 +526,11 @@ async function cargarCatalogo(tipo) {
     nota.textContent = `Hay ${items.length} tarea(s) en este parcial. El promedio se saca sobre ese total: lo no entregado cuenta como cero.`;
     cont.appendChild(nota);
   }
+  const cuenta = tipo === 'tareas' ? await conteoCalificadas() : null;
   items.forEach(item => {
     const row = document.createElement('button');
     row.type = 'button'; row.className = 'asis-row';
-    row.innerHTML = `<span class="student-name">${escaparHTML(item.nombre)}${item.fecha ? ` <small class="res-extra">(${escaparHTML(item.fecha)})</small>` : ''}</span><span class="asis-estado-label">Calificar →</span>`;
+    row.innerHTML = `<span class="student-name">${escaparHTML(item.nombre)}${item.fecha ? ` <small class="res-extra">(${escaparHTML(item.fecha)})</small>` : ''}</span>${cuenta ? `<span data-marca="${escaparHTML(item.id)}">${marcaCalificada(cuenta[item.id] || 0, alumnosCache.length)}</span>` : ''}<span class="asis-estado-label ${cuenta ? claseBotonCal(cuenta[item.id] || 0, alumnosCache.length) : ''}" ${cuenta ? `data-btncal="${escaparHTML(item.id)}" data-flecha=" →"` : ''}>${cuenta ? textoBotonCal(cuenta[item.id] || 0, alumnosCache.length, ' →') : 'Calificar →'}</span>`;
     row.addEventListener('click', () => calificarItem(tipo, item));
     cont.appendChild(row);
   });
@@ -520,9 +543,9 @@ async function calificarItem(tipo, item) {
   document.getElementById(cfg.calificarTitulo).textContent = `Calificar: ${item.nombre}`;
   const cont = document.getElementById(cfg.calificarLista);
   cont.innerHTML = '<p class="empty-inline">Cargando…</p>';
-  const valores = {}, comentarios = {};
+  const valores = {}, comentarios = {}, exentos = {};
   await Promise.all(alumnosCache.map(async (a) => {
-    try { const snap = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, cfg.sub, item.id)); valores[a.id] = snap.exists() ? snap.data().calificacion : ''; comentarios[a.id] = snap.exists() ? (snap.data().comentario || '') : ''; }
+    try { const snap = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', a.id, cfg.sub, item.id)); valores[a.id] = snap.exists() ? snap.data().calificacion ?? '' : ''; exentos[a.id] = snap.exists() && !!snap.data().exento; comentarios[a.id] = snap.exists() ? (snap.data().comentario || '') : ''; }
     catch { valores[a.id] = ''; comentarios[a.id] = ''; }
   }));
 
@@ -542,13 +565,14 @@ async function calificarItem(tipo, item) {
       const marcado = valores[a.id] !== '' && valores[a.id] !== undefined && valores[a.id] !== null;
       row.innerHTML = `<label class="part-check" style="display:flex; align-items:center; gap:10px; width:100%; cursor:pointer;"><input type="checkbox" class="part-input" ${marcado ? 'checked' : ''} style="width:22px; height:22px; flex:none;"><span class="student-name">${escaparHTML(a.nombre)}</span></label>`;
     } else {
-      row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10"><textarea class="proy-comentario" rows="2" placeholder="Comentarios para el alumno: qué salió bien y qué debe corregir (lo verá en Mi progreso)">${escaparHTML(comentarios[a.id] || '')}</textarea>`;
+      row.innerHTML = `<span class="student-name">${escaparHTML(a.nombre)}</span><input type="number" min="0" max="10" step="0.1" class="calif-input" value="${valores[a.id] ?? ''}" placeholder="0-10" ${exentos[a.id] ? 'disabled' : ''}><label class="ex-check" title="Falta justificada: esta tarea no le cuenta en el promedio"><input type="checkbox" class="ex-input" ${exentos[a.id] ? 'checked' : ''}> Exento</label><textarea class="proy-comentario" rows="2" placeholder="Comentarios para el alumno: qué salió bien y qué debe corregir (lo verá en Mi progreso)">${escaparHTML(comentarios[a.id] || '')}</textarea>`;
     }
     filasCont.appendChild(row);
+    const ex = row.querySelector('.ex-input'); if (ex) ex.addEventListener('change', () => { const i = row.querySelector('.calif-input'); i.disabled = ex.checked; if (ex.checked) i.value = ''; });
   });
   cont.querySelector('[data-accion="marcar-diez"]').addEventListener('click', () => {
     if (esParticipacion) filasCont.querySelectorAll('.part-input').forEach(inp => { inp.checked = true; });
-    else filasCont.querySelectorAll('.calif-input').forEach(inp => { inp.value = '10'; });
+    else filasCont.querySelectorAll('.calif-input:not(:disabled)').forEach(inp => { inp.value = '10'; });
   });
   cont.querySelector('[data-accion="limpiar-todos"]').addEventListener('click', () => {
     if (!confirm('¿Vaciar la captura de todos los alumnos para esta actividad?')) return;
@@ -581,8 +605,9 @@ async function guardarCalificaciones(tipo) {
       }
       return;
     }
-    const input = row.querySelector('.calif-input'), comentario = (row.querySelector('.proy-comentario')?.value || '').trim();
-    if (input.value === '' && !comentario) { escrituras.push(deleteDoc(ref).catch(() => {})); }
+    const input = row.querySelector('.calif-input'), ex = row.querySelector('.ex-input'), comentario = (row.querySelector('.proy-comentario')?.value || '').trim();
+    if (ex && ex.checked) { escrituras.push(setDoc(ref, { parcial: item.parcial, nombre: item.nombre, fecha: item.fecha, exento: true, ...(comentario ? { comentario } : {}), actualizado: serverTimestamp() })); }
+    else if (input.value === '' && !comentario) { escrituras.push(deleteDoc(ref).catch(() => {})); }
     else {
       const calificacion = input.value === '' ? null : parseFloat(input.value);
       escrituras.push(setDoc(ref, { parcial: item.parcial, nombre: item.nombre, fecha: item.fecha, calificacion, comentario, actualizado: serverTimestamp() }));
@@ -590,6 +615,7 @@ async function guardarCalificaciones(tipo) {
   });
   try { await Promise.all(escrituras); } catch (err) { marcarResultado(cfg.btnGuardarCalif, cfg.msgCalif, false, '', 'No se pudo guardar: ' + (err.message || err)); return; }
   marcarResultado(cfg.btnGuardarCalif, cfg.msgCalif, true, '✓ Calificaciones guardadas.', '');
+  if (tipo === 'tareas') refrescarMarcas();
 }
 
 // ---------- ASISTENCIA ----------
@@ -1858,14 +1884,16 @@ async function cargarTareasDig() {
   let est = {}, enCat = new Set();
   try { const g = await getDoc(doc(db, 'grupos', grupoActivo)); est = (g.exists() && g.data().tareasDig) || {}; } catch { /* */ }
   try { const sn = await getDocs(collection(db, 'grupos', grupoActivo, 'tareas_catalogo')); sn.forEach(d => { if (d.id.startsWith('dig-')) enCat.add(d.id); }); } catch { /* */ }
+  const cuenta = await conteoCalificadas();
   cont.innerHTML = TEMAS_TAREAS.map(t => `<div class="td-tema"><p class="td-tit"><b>${escaparHTML(t.tema)} · ${escaparHTML(t.titulo)}</b> <small>${escaparHTML(t.fechaTexto)}</small></p>${t.acts.filter(a => califica(a) || a.tipo === 'vivo').map(a => {
     if (a.tipo === 'vivo') return `<div class="td-fila td-vivo"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)} <small>· en vivo, no se califica</small></span><button type="button" class="btn btn-small btn-primary" data-vivo="${a.id}">▶ Conducir en clase</button></div>`;
-    const cat = enCat.has(catalogoId(a.id)), ab = !(est[a.id] && est[a.id].abierta === false);
-    return `<div class="td-fila"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)}</span>
+    const cat = enCat.has(catalogoId(a.id)), cierre = (est[a.id] && est[a.id].cierre) || '', vencida = !!cierre && Date.now() > Date.parse(cierre), ab = !(est[a.id] && est[a.id].abierta === false) && !vencida;
+    return `<div class="td-fila"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)}${cat ? ` <span data-marca="${catalogoId(a.id)}">${marcaCalificada(cuenta[catalogoId(a.id)] || 0, alumnosCache.length)}</span>` : ''}</span>
+      <label class="td-cierre" title="Fecha y hora límite: la tarea se cierra sola. Déjala vacía para cerrarla tú."><span>⏰ Cierra</span><input type="datetime-local" data-cierre="${a.id}" value="${escaparHTML(cierre)}"></label>
       <button type="button" class="btn btn-small td-cat ${cat ? 'si' : ''}" data-cat="${a.id}" ${cat ? 'disabled' : ''}>${cat ? '✓ En el catálogo' : '+ Agregar al catálogo'}</button>
-      <button type="button" class="btn btn-small td-ab ${ab ? 'si' : 'no'}" data-ab="${a.id}">${ab ? '🔓 Abierta' : '🔒 Cerrada'}</button>
+      <button type="button" class="btn btn-small td-ab ${ab ? 'si' : 'no'}" data-ab="${a.id}">${ab ? '🔓 Abierta' : vencida ? '🔒 Cerrada (venció)' : '🔒 Cerrada'}</button>
       ${enEquipo(a) ? `<button type="button" class="btn btn-small td-eq" data-eqt="${a.id}" aria-expanded="false">👥 Equipos</button>` : ''}
-      <button type="button" class="btn btn-small btn-primary" data-cal="${a.id}">Calificar</button></div>`;
+      <button type="button" class="btn btn-small btn-primary ${cat ? claseBotonCal(cuenta[catalogoId(a.id)] || 0, alumnosCache.length) : ''}" data-cal="${a.id}" ${cat ? `data-btncal="${catalogoId(a.id)}"` : ''}>${cat ? textoBotonCal(cuenta[catalogoId(a.id)] || 0, alumnosCache.length) : 'Calificar'}</button></div>`;
   }).join('')}</div>`).join('');
   cont.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', async () => {
     const a = TAREAS_DIG[b.dataset.cat];
@@ -1874,9 +1902,14 @@ async function cargarTareasDig() {
     cargarTareasDig(); cargarCatalogo('tareas');
   }));
   cont.querySelectorAll('[data-ab]').forEach(b => b.addEventListener('click', async () => {
-    const id = b.dataset.ab, ab = !(est[id] && est[id].abierta === false);
+    const id = b.dataset.ab, c = (est[id] && est[id].cierre) || '', venc = !!c && Date.now() > Date.parse(c), ab = !(est[id] && est[id].abierta === false) && !venc;
     if (ab && !confirm('¿Cerrar la tarea? Los alumnos ya no podrán hacer cambios (lo que llevan se conserva).')) return;
-    await setDoc(doc(db, 'grupos', grupoActivo), { tareasDig: { [id]: { abierta: !ab } } }, { merge: true });
+    if (!ab && venc && !confirm('Esta tarea se cerró porque pasó su fecha límite. ¿Abrirla otra vez? Se quitará la fecha límite.')) return;
+    await setDoc(doc(db, 'grupos', grupoActivo), { tareasDig: { [id]: { abierta: !ab, ...(venc ? { cierre: '' } : {}) } } }, { merge: true });
+    cargarTareasDig();
+  }));
+  cont.querySelectorAll('[data-cierre]').forEach(i => i.addEventListener('change', async () => {
+    await setDoc(doc(db, 'grupos', grupoActivo), { tareasDig: { [i.dataset.cierre]: { cierre: i.value || '', ...(i.value && Date.parse(i.value) > Date.now() ? { abierta: true } : {}) } } }, { merge: true });
     cargarTareasDig();
   }));
   escucharEquiposAdmin(); pintarTdEquipos();
@@ -1912,41 +1945,59 @@ async function calificarTareaDig(a, enCatalogo) {
   const docEquipo = async eq => { if (!(eq.id in cacheEq)) { try { const s = await getDoc(doc(db, 'grupos', g, 'equipos', eq.id, 'atlas', A.id)); cacheEq[eq.id] = s.exists() ? s.data() : null; } catch { cacheEq[eq.id] = null; } } return cacheEq[eq.id]; };
   const filas = await Promise.all(alumnosCache.map(async al => {
     const eq = equipos.find(e => (e.integrantes || []).includes(al.id)) || null;
-    let sug = { nota: 0, detalle: 'Sin trabajo' }, entregado = null, resumen = '', cal = '';
-    try { const c = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'tareas', catalogoId(a.id))); if (c.exists()) cal = c.data().calificacion ?? ''; } catch { /* */ }
+    let sug = { nota: 0, detalle: 'Sin trabajo' }, entregado = null, resumen = '', cal = '', exento = false, word = null;
+    try { const c = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'tareas', catalogoId(a.id))); if (c.exists()) { cal = c.data().calificacion ?? ''; exento = !!c.data().exento; } } catch { /* */ }
     try {
       let datos = eq ? await docEquipo(eq) : null;
       if (!datos) { const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'atlas', A.ind)); datos = s.exists() ? s.data() : null; }
-      if (datos) { sug = sugerirCuadro(A, datos.celdas); entregado = datos.entregado || null; resumen = A.filas.map(([f, t]) => `${t}: ${A.columnas.map(([c]) => ((datos.celdas || {})[`${f}_${c}`] || '').trim().split(/\s+/).filter(Boolean).length >= MIN_PALABRAS_CELDA ? '●' : '○').join('')}`).join(' · '); }
+      if (datos) { word = datos; sug = sugerirCuadro(A, datos.celdas); entregado = datos.entregado || null; resumen = A.filas.map(([f, t]) => `${t}: ${A.columnas.map(([c]) => ((datos.celdas || {})[`${f}_${c}`] || '').trim().split(/\s+/).filter(Boolean).length >= MIN_PALABRAS_CELDA ? '●' : '○').join('')}`).join(' · '); }
     } catch { /* */ }
     // Cero automático: en equipo, quien no escribió nada lleva 0; los que aportaron, la sugerencia del equipo.
     let ap = null;
     if (eq) { const d = await docEquipo(eq); if (d) { ap = aporteDe(d, al); if (!ap.si) sug = { nota: 0, detalle: '✋ No aportó: no escribió nada en el trabajo del equipo · ' + sug.detalle }; } }
-    return { al, eq, sug, entregado, resumen, cal, ap };
+    return { al, eq, sug, entregado, resumen, cal, ap, exento, word };
   }));
   const f = t => t && t.toDate ? t.toDate().toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : typeof t === 'number' ? new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
   const inv = A.filas.filter(x => x[3]).length;
   wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
     ${enCatalogo ? '' : '<p class="aviso-td">⚠️ Esta tarea todavía no está en el catálogo: las calificaciones se guardan, pero no cuentan en el promedio hasta que la agregues.</p>'}
     <p class="field-hint">La calificación sugerida sale de qué tan completo está el cuadro: ${inv ? `8 puntos por las ${A.filas.length * A.columnas.length} celdas llenas (cuenta la que tiene ${MIN_PALABRAS_CELDA} palabras o más) y 2 por ${inv === 1 ? 'la fuente de la fila' : 'las fuentes de las filas'} de investigación` : 'celdas llenas'}. En equipo, quien <b>no escribió nada</b> sale con sugerida <b>0</b> (✋ No aportó); los que sí aportaron llevan la del equipo. Puedes corregirla a mano si alguien trabajó desde el celular de un compañero.</p>
-    <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button></div>
-    <div class="taller-tabla-wrap"><table class="taller-tabla td-tabla"><thead><tr><th>Alumno</th><th>Trabajo</th><th>Entrega</th><th>Sugerida</th><th>Calificación</th></tr></thead><tbody>
+    <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-zip">⬇ Word de todos (.zip)</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button><span class="field-hint" id="td-zip-msg"></span></div>
+    <div class="taller-tabla-wrap"><table class="taller-tabla td-tabla"><thead><tr><th>Alumno</th><th>Trabajo</th><th>Entrega</th><th>Sugerida</th><th>Calificación</th><th title="Falta justificada: la tarea no le cuenta en el promedio">Exento</th><th>Word</th></tr></thead><tbody>
     ${filas.map(x => `<tr data-id="${x.al.id}"><td><b>${escaparHTML(x.al.nombre)}</b>${x.eq ? `<br><small>👥 ${escaparHTML(x.eq.nombre)}</small>` : ''}</td>
       <td><small>${escaparHTML(x.sug.detalle)}</small>${x.resumen ? `<details><summary>Ver</summary><small>${escaparHTML(x.resumen)}</small></details>` : ''}</td>
       <td>${x.entregado ? `<span class="td-ok">✓ ${escaparHTML(f(x.entregado.t))}</span>` : '<span class="td-no">No entregada</span>'}</td>
       <td><b class="td-sug">${x.sug.nota}</b>${x.ap && !x.ap.si ? `<br><small class="td-noap" title="No escribió nada en el trabajo del equipo">✋ No aportó${x.cal !== '' && Number(x.cal) > 0 ? ' · ⚠️ revisa: ya tiene calificación' : ''}</small>` : x.ap && x.ap.n ? `<br><small class="td-siap">✍️ ${x.ap.n} celda${x.ap.n === 1 ? '' : 's'}</small>` : ''}</td>
-      <td><input type="number" min="0" max="10" step="0.1" class="calif-input td-in" value="${x.cal}" placeholder="0-10" data-sug="${x.sug.nota}"></td></tr>`).join('')}</tbody></table></div>
+      <td><input type="number" min="0" max="10" step="0.1" class="calif-input td-in" value="${x.cal}" placeholder="0-10" data-sug="${x.sug.nota}" ${x.exento ? 'disabled' : ''}></td>
+      <td><input type="checkbox" class="td-ex" ${x.exento ? 'checked' : ''} aria-label="Exento"></td>
+      <td>${x.word ? `<button type="button" class="btn btn-small td-word" data-w="${x.al.id}" title="Descargar su trabajo en Word">⬇</button>` : '<small>—</small>'}</td></tr>`).join('')}</tbody></table></div>
     <button type="button" class="btn btn-primary btn-block" id="td-guardar">Guardar calificaciones</button><p class="save-msg" id="td-msg" hidden></p>`;
   document.getElementById('td-cerrar').addEventListener('click', () => { wrap.hidden = true; });
-  document.getElementById('td-usar').addEventListener('click', () => wrap.querySelectorAll('.td-in').forEach(i => { if (i.value === '') i.value = i.dataset.sug; }));
+  // Word de cada alumno o equipo (el mismo que descarga el alumno) y todos en .zip (uno por equipo)
+  const wordDe = async x => { const V = varianteDe(A, x.eq, x.eq ? undefined : x.al.id), R = respuestasDe(A, V); const { D, archivo } = await docCuadro({ A, V, R, S: x.word, eq: x.eq, nombre: x.al.nombre, conClave: false }); return { blob: D.blob(), archivo: archivo + '.docx' }; };
+  wrap.querySelectorAll('.td-word').forEach(b => b.addEventListener('click', async () => {
+    const x = filas.find(y => y.al.id === b.dataset.w); b.disabled = true;
+    try { const r = await wordDe(x); bajar(r.blob, r.archivo); } catch (e) { alert('No se pudo generar el Word: ' + (e.message || e)); } finally { b.disabled = false; }
+  }));
+  document.getElementById('td-zip').addEventListener('click', async e => {
+    const b = e.currentTarget, msg = document.getElementById('td-zip-msg'), vistos = new Set();
+    const con = filas.filter(x => x.word && !(x.eq && vistos.has(x.eq.id)) && (x.eq ? vistos.add(x.eq.id) : true));
+    if (!con.length) { msg.textContent = 'Todavía nadie tiene trabajo en esta tarea.'; return; }
+    b.disabled = true; msg.textContent = `Armando ${con.length} documentos…`;
+    try { const docs = []; for (const x of con) docs.push(await wordDe(x)); await bajarZip(docs, `${slugArchivo(nombreCatalogo(a))}_${slugArchivo(grupoActivo)}.zip`); msg.textContent = `✓ ${docs.length} documentos en el .zip`; }
+    catch (er) { msg.textContent = 'No se pudo armar el .zip: ' + (er.message || er); } finally { b.disabled = false; }
+  });
+  document.getElementById('td-usar').addEventListener('click', () => wrap.querySelectorAll('.td-in:not(:disabled)').forEach(i => { if (i.value === '') i.value = i.dataset.sug; }));
+  wrap.querySelectorAll('.td-ex').forEach(c => c.addEventListener('change', () => { const i = c.closest('tr').querySelector('.td-in'); i.disabled = c.checked; if (c.checked) i.value = ''; }));
   document.getElementById('td-guardar').addEventListener('click', async () => {
     const msg = document.getElementById('td-msg'), escr = [];
     wrap.querySelectorAll('tr[data-id]').forEach(tr => {
-      const i = tr.querySelector('.td-in'), ref = doc(db, 'grupos', g, 'alumnos', tr.dataset.id, 'tareas', catalogoId(a.id));
-      if (i.value === '') escr.push(deleteDoc(ref).catch(() => {}));
+      const i = tr.querySelector('.td-in'), ex = tr.querySelector('.td-ex'), ref = doc(db, 'grupos', g, 'alumnos', tr.dataset.id, 'tareas', catalogoId(a.id));
+      if (ex.checked) escr.push(setDoc(ref, { parcial: 'p2', nombre: nombreCatalogo(a), fecha: a.fecha, exento: true, actualizado: serverTimestamp() }));
+      else if (i.value === '') escr.push(deleteDoc(ref).catch(() => {}));
       else escr.push(setDoc(ref, { parcial: 'p2', nombre: nombreCatalogo(a), fecha: a.fecha, calificacion: Math.max(0, Math.min(10, parseFloat(i.value))), actualizado: serverTimestamp() }));
     });
-    try { await Promise.all(escr); msg.textContent = '✓ Calificaciones guardadas. Ya se ven en Mi progreso.'; msg.hidden = false; }
+    try { await Promise.all(escr); msg.textContent = '✓ Calificaciones guardadas. Ya se ven en Mi progreso.'; msg.hidden = false; refrescarMarcas(); }
     catch (e) { msg.textContent = 'No se pudo guardar: ' + (e.message || e); msg.hidden = false; }
   });
 }
