@@ -83,25 +83,37 @@ const PRESENTACION = {
       pasoAPaso: true,
       minutos: "8-10" },
 
-    { tipo: "imagen",
+    { tipo: "diagramaPasos",
       titulo: "Lo esencial: un programa de investigación",
-      imagen: "img/s4-lakatos.svg",
-      pie: "El núcleo duro no se toca (heurística negativa); el cinturón protector se ajusta cuando llegan los golpes de la experiencia (heurística positiva: qué investigar).",
-      minutos: "10-11" },
-
-    { tipo: "tabla",
-      titulo: "¿Progresivo o degenerativo?",
-      columnas: ["Programa", "Qué hace", "Qué le pasa"],
-      filas: [
-        ["**Progresivo**", "Sus ajustes permiten **predecir hechos nuevos** que luego se confirman", "Sigue creciendo"],
-        ["**Degenerativo**", "Solo hace ajustes para **explicar después** lo que ya sabía", "Se abandona cuando aparece uno progresivo"]
+      minutos: "10-14",
+      intro: "Así se ve una teoría según **Lakatos**: como una fortaleza con murallas. Avanza (→) y la vamos armando parte por parte.",
+      svg: `<svg viewBox="0 0 640 520" role="img" aria-label="Un programa de investigación de Lakatos: núcleo duro, cinturón protector, golpes de la experiencia, programa progresivo y degenerativo"><defs><marker id="flR" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="22" refX="16" refY="11" orient="auto"><path d="M0,0 L20,11 L0,22 z" fill="#A83232"/></marker><marker id="flV" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="22" refX="16" refY="11" orient="auto"><path d="M0,0 L20,11 L0,22 z" fill="#3F7A4F"/></marker><marker id="flG" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="22" refX="16" refY="11" orient="auto"><path d="M0,0 L20,11 L0,22 z" fill="#8A8A8A"/></marker></defs><g data-paso="1" data-anim="resaltar"><circle cx="250" cy="285" r="205" fill="#DCE4EE" stroke="#2E5E8C" stroke-width="5" stroke-dasharray="16 11"/><text x="250" y="122" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="25" fill="#16213A">Cinturón protector</text><text x="250" y="150" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="18" fill="#4F5868">hipótesis auxiliares que se ajustan</text></g><g data-paso="0" data-anim="resaltar"><circle cx="250" cy="300" r="92" fill="#16213A"/><text x="250" y="298" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="30" fill="#fff">Núcleo duro</text><text x="250" y="330" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="19" fill="#E9C46A">no se toca</text></g><g data-paso="5" data-anim="fade"><rect x="155" y="400" width="190" height="34" rx="17" fill="#fff" stroke="#16213A" stroke-width="2"/><text x="250" y="423" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="16" font-weight="700" fill="#16213A">🚫 heurística negativa</text><rect x="20" y="470" width="230" height="34" rx="17" fill="#fff" stroke="#2E5E8C" stroke-width="2"/><text x="135" y="493" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="16" font-weight="700" fill="#2E5E8C">🧭 heurística positiva</text></g><text x="630" y="22" text-anchor="end" font-family="Public Sans,sans-serif" font-weight="700" font-size="21" fill="#A83232" data-paso="2" data-anim="resaltar">⚡ Golpes de la experiencia</text><line x1="560" y1="40" x2="415" y2="135" stroke="#A83232" stroke-width="5" marker-end="url(#flR)" data-paso="2" data-anim="caer" class="golpe"/><line x1="610" y1="80" x2="445" y2="175" stroke="#A83232" stroke-width="5" marker-end="url(#flR)" data-paso="2" data-anim="caer" class="golpe"/><line x1="625" y1="135" x2="460" y2="225" stroke="#A83232" stroke-width="5" marker-end="url(#flR)" data-paso="2" data-anim="caer" class="golpe"/><g data-paso="3" data-anim="resaltar"><line x1="458" y1="285" x2="548" y2="285" stroke="#3F7A4F" stroke-width="5" marker-end="url(#flV)"/><text x="503" y="262" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="21" fill="#3F7A4F">Progresivo</text></g><g data-paso="3" data-anim="zoom"><circle cx="590" cy="285" r="26" fill="#2E6FA8"/><ellipse cx="590" cy="285" rx="40" ry="8" fill="none" stroke="#9CC3E6" stroke-width="3"/><text x="590" y="336" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="16" font-weight="700" fill="#2E6FA8">Neptuno, 1846</text></g><g data-paso="4" data-anim="resaltar"><line x1="430" y1="390" x2="525" y2="440" stroke="#8A8A8A" stroke-width="5" stroke-dasharray="10 7" marker-end="url(#flG)"/><text x="500" y="395" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="21" fill="#A83232">Degenerativo</text></g><g data-paso="4" data-anim="zoom"><circle cx="565" cy="462" r="26" fill="none" stroke="#8A8A8A" stroke-width="3" stroke-dasharray="6 5"/><text x="565" y="471" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="26" font-weight="700" fill="#8A8A8A">?</text><text x="565" y="510" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="16" font-weight="700" fill="#8A8A8A">«Vulcano» nunca apareció</text></g></svg>`,
+      pasos: [
+        { num: "1 · Lo de adentro", titulo: "El núcleo duro", color: "#16213A",
+          texto: ["Las **ideas fundamentales** de la teoría: lo que la hace ser lo que es. Quienes trabajan en ese programa **deciden no cuestionarlas**.", "Si se abandona el núcleo, ya es **otro** programa. A esta regla Lakatos la llama **heurística negativa**: lo que **no** se debe hacer."],
+          ejemplo: "**Newton:** sus tres leyes y la gravitación. **Constructivismo:** «el conocimiento se construye activamente»." },
+        { num: "2 · La muralla", titulo: "El cinturón protector", color: "#2E5E8C",
+          texto: ["Las **hipótesis auxiliares**: supuestos y condiciones de cómo se aplica la teoría. Por eso la línea es **punteada**: se puede mover y reconstruir.", "Su trabajo es **proteger el núcleo**: cuando algo falla, se cambia el cinturón, no el núcleo."],
+          ejemplo: "**Constructivismo:** conocimientos previos, andamiaje, zona de desarrollo próximo, trabajo entre pares." },
+        { num: "3 · Lo que llega de afuera", titulo: "Los golpes de la experiencia", color: "#A83232",
+          texto: ["Datos que **contradicen** la teoría: una predicción que falla, una clase en la que no aprendieron.", "**Popper:** un solo dato contrario basta para refutarla. **Lakatos:** en la historia real no pasa así; el golpe **lo recibe el cinturón**, no el núcleo."],
+          ejemplo: "**1821:** la órbita de **Urano** no coincidía con Newton. Nadie tiró las leyes de Newton: se propuso que **otro planeta** lo jalaba." },
+        { num: "4 · El ajuste que acierta", titulo: "Programa progresivo", color: "#3F7A4F",
+          texto: ["Sus ajustes **predicen hechos nuevos** que luego **se confirman**. Ese programa está vivo: conviene seguirlo."],
+          ejemplo: "**1846:** Le Verrier calculó dónde debía estar ese planeta… y **ahí estaba: Neptuno**. El ajuste no solo salvó a Newton: anticipó algo que nadie había visto." },
+        { num: "5 · El ajuste que solo excusa", titulo: "Programa degenerativo", color: "#A83232",
+          texto: ["Sus ajustes solo **justifican después** lo que ya pasó; nunca anticipan nada. Son **parches**.", "No se abandona de golpe: se deja cuando aparece **otro programa progresivo** que lo reemplaza."],
+          ejemplo: "**Mercurio** tampoco cuadraba. Propusieron otro planeta, «**Vulcano**»… y **nunca apareció**. Lo explicó otro programa: la **relatividad de Einstein (1915)**." },
+        { num: "6 · ¿Y en el aula?", titulo: "Un puente entre Popper y Kuhn", color: "#C98A2C",
+          texto: ["**Con Kuhn:** los científicos no abandonan su teoría a la primera. **Con Popper:** elegir entre teorías **sí es racional**: ¿predice cosas nuevas o solo se justifica?"],
+          ejemplo: "Una estrategia constructivista falla y decimos «**faltó andamiaje**». ¿Ese ajuste nos ayuda a **lograr nuevos aprendizajes**, o solo **excusa el fracaso**?" }
       ],
-      minutos: "11-12" },
+      notas: "Al entrar se ve toda la figura tenue: avanza paso a paso. 1) núcleo duro (heurística negativa), 2) cinturón protector (hipótesis auxiliares, heurística positiva), 3) caen los golpes: Popper contra Lakatos y el caso de Urano, 4) progresivo: Neptuno (1846, Le Verrier y Galle), 5) degenerativo: «Vulcano» y Mercurio, que explicó Einstein (1915), 6) el puente entre Popper y Kuhn y la pregunta del aula, que sigue en la próxima diapositiva. Al final se encienden las etiquetas de las dos heurísticas." },
 
     { tipo: "pregunta",
       pregunta: "Una estrategia constructivista falla en el aula y el docente dice «faltó andamiaje». ¿Es un programa progresivo o degenerativo?",
       respuesta: "Depende: si ese ajuste **permite predecir y lograr nuevos aprendizajes**, es progresivo; si solo sirve para **justificar el fracaso**, es degenerativo.",
-      minutos: "12-13",
+      minutos: "14-15",
       notas: "Es el ejemplo del compendio: el núcleo del constructivismo es «el conocimiento se construye activamente»; el cinturón, el conflicto cognitivo, el aprendizaje entre pares, la zona de desarrollo próximo." },
 
     { tipo: "tema",
@@ -115,14 +127,14 @@ const PRESENTACION = {
         "**Proliferación de teorías** y la ciencia como **una tradición más** en una sociedad libre."
       ],
       pasoAPaso: true,
-      minutos: "13-15",
+      minutos: "15-16",
       notas: "A esta postura la llamó anarquismo epistemológico (Feyerabend, 1975/1986)." },
 
     { tipo: "video",
       titulo: "Feyerabend: el anarquismo metodológico",
       youtube: "https://www.youtube.com/watch?v=-lBcHCawLcU",
       pie: "Nico Balero Reche · en español. Proyecta solo los primeros minutos.",
-      minutos: "15-17",
+      minutos: "16-17",
       notas: "Solo un fragmento, para que escuchen el «todo vale» explicado por otra voz. Si no carga o el tiempo aprieta, sáltalo: la lectura del compendio basta." },
 
     { tipo: "tema",
@@ -156,9 +168,9 @@ const PRESENTACION = {
       notas: "Sociólogo y filósofo francés (1921-2026); murió el 29 de mayo de 2026, a los 104 años." },
 
     { tipo: "video",
-      titulo: "Morin: introducción al pensamiento complejo",
-      youtube: "https://www.youtube.com/watch?v=BM8nfUUVOhg",
-      pie: "Resúmenes Entelekia · en español. Proyecta solo los primeros minutos.",
+      titulo: "Morin en persona: la complejidad hoy",
+      youtube: "https://www.youtube.com/watch?v=fSDi8YFX3Cw",
+      pie: "Edgar Morin en persona: «La complejidad hoy» · CEIICH, UNAM. Proyecta un fragmento de 2 minutos.",
       minutos: "22-24",
       notas: "Detenlo cuando ya presentó la idea de simplificación frente a complejidad. Si el tiempo aprieta, sáltalo." },
 

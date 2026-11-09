@@ -137,6 +137,34 @@
   .d-plataforma .qr-dia span{display:block;font:600 .36em "Public Sans",sans-serif;color:var(--marino);margin-top:.3em;line-height:1.3}
   .d-plataforma .tipo-act{display:inline-block;font:600 .5em "Public Sans",sans-serif;color:var(--marino);border:2px solid var(--marino);padding:.2em .7em;margin:0 0 .6em .4em}
   @media (max-width:700px){.d-plataforma .plat{grid-template-columns:1fr}.d-plataforma .qr-dia{width:6em}}
+  /* Diagrama que se arma paso a paso: a la izquierda la figura, a la derecha una tarjeta por paso */
+  .d-diagramaPasos h2{margin-bottom:.35em}
+  .dp{display:grid;grid-template-columns:1.05fr 1fr;gap:.9em;align-items:center}
+  .dp-fig svg{display:block;width:100%;height:auto;max-height:560px;overflow:visible}
+  .reveal .slides section .dp-fig svg .fragment{transform-box:fill-box;transform-origin:center;transition:opacity .45s ease,transform .6s cubic-bezier(.3,1.35,.55,1),visibility .45s}
+  .reveal .slides section .dp-fig svg .dpa-zoom{transform:scale(.2)}
+  .reveal .slides section .dp-fig svg .dpa-expandir{transform:scale(1.45)}
+  .reveal .slides section .dp-fig svg .dpa-caer{transform:translate(-60px,-170px)}
+  .reveal .slides section .dp-fig svg .dpa-derecha{transform:translateX(-90px)}
+  /* «resaltar»: la parte ya se ve tenue desde el inicio y se enciende en su paso */
+  .reveal .slides section .dp-fig svg .fragment.dpa-resaltar{opacity:.2;visibility:inherit}
+  .reveal .slides section .dp-fig svg .fragment.visible{opacity:1;transform:none}
+  .reveal .slides section .dp-fig svg .golpe:nth-of-type(2){transition-delay:.15s}
+  .reveal .slides section .dp-fig svg .golpe:nth-of-type(3){transition-delay:.3s}
+  .reveal .slides section .dp-fig svg .current-fragment.dpa-resaltar{animation:dpLatido 1.4s ease-in-out .3s 2}
+  @keyframes dpLatido{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .dp-cards{display:grid}
+  .dp-card{grid-area:1/1;background:#fff;border:2px solid var(--arena);border-top:10px solid var(--c,var(--marino));padding:.65em .8em;box-shadow:0 10px 24px rgba(22,33,58,.12)}
+  .reveal .slides section .dp-card.fragment{transform:translateY(-36px);transition:opacity .4s,transform .55s cubic-bezier(.3,1.35,.55,1),visibility .4s}
+  .reveal .slides section .dp-card.fragment.visible{transform:none}
+  .reveal .slides section .dp-card.fragment.visible.fade-in-then-out:not(.current-fragment){opacity:0;visibility:hidden}
+  .dp-card .num{font:700 .44em "Public Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--c,var(--marino))}
+  .dp-card h3{font:700 .78em "Fraunces",serif;color:var(--marino);margin:.1em 0 .3em}
+  .dp-card p{font-size:.55em;line-height:1.4;margin:.25em 0}
+  .dp-card .ej{background:var(--beige);border-left:5px solid var(--c,var(--marino));padding:.35em .55em;margin-top:.45em;font-size:.5em;line-height:1.38}
+  .dp-card.intro{border-top-color:var(--arena);text-align:center}
+  .dp-card.intro p{font-size:.6em}
+  @media (prefers-reduced-motion:reduce){.dp-fig svg .fragment,.dp-card.fragment{transition:opacity .2s!important;transform:none!important}}
   @media (prefers-reduced-motion:reduce){.reveal .slides section{transition:none!important}}`;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
@@ -209,6 +237,19 @@
       <h2>${esc(d.titulo || "¡Pausa activa!")}</h2>
       ${d.duracion ? `<div class="dur">${esc(d.duracion)}</div>` : ""}
       <div class="caja">${txt(d.texto)}</div>`,
+
+    // Diagrama que se arma paso a paso. En el SVG, cada elemento con data-paso="n" aparece en el paso n
+    // (data-anim: zoom, expandir, caer, derecha o fade); a la derecha va una tarjeta por paso.
+    diagramaPasos: d => {
+      const svg = String(d.svg || "").replace(/data-paso="(\d+)"(?:\s+data-anim="(\w+)")?(?:\s+class="([^"]*)")?/g,
+        (m, n, an, cl) => `class="fragment dpa-${an || "fade"}${cl ? " " + cl : ""}" data-fragment-index="${n}"`);
+      const L = d.pasos || [];
+      const cards = L.map((p, i) => `<div class="dp-card fragment${i < L.length - 1 ? " fade-in-then-out" : ""}" data-fragment-index="${i}" style="--c:${esc(p.color || "#16213A")}">
+          <div class="num">${esc(p.num || `Paso ${i + 1}`)}</div><h3>${esc(p.titulo)}</h3>${(Array.isArray(p.texto) ? p.texto : [p.texto]).filter(Boolean).map(t => `<p>${txt(t)}</p>`).join("")}${p.ejemplo ? `<div class="ej">${txt(p.ejemplo)}</div>` : ""}</div>`).join("");
+      return `<h2>${esc(d.titulo)}</h2>
+      <div class="dp"><div class="dp-fig">${svg}</div>
+        <div class="dp-cards">${d.intro ? `<div class="dp-card intro fragment fade-out" data-fragment-index="0"><p>${txt(d.intro)}</p></div>` : ""}${cards}</div></div>`;
+    },
 
     imagen: d => `
       <h2>${esc(d.titulo)}</h2>
