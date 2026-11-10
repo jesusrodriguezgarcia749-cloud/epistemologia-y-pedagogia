@@ -131,22 +131,24 @@ function insignia(a, st) {
 }
 function tarjetaCielo() {
   const n = encendidas(cieloLocal()), R = rango(n);
-  return `<a class="ar-tarjeta cielo-tarjeta" href="laboratorio.html#constelacion"><span>🌌</span><div><b>Mi cielo · ${n} de ${TOTAL_ESTRELLAS} estrellas</b><small>${R.ico} ${esc(R.nombre)}. Cada acierto en los juegos y en la Arena enciende la estrella de ese autor en la Constelación del Laboratorio.</small></div><em>Ver mi cielo →</em></a>`;
+  return `<a class="tq-cielo" href="laboratorio.html#constelacion">🌌 <b>Mi cielo:</b> ${n} de ${TOTAL_ESTRELLAS} estrellas · ${R.ico} ${esc(R.nombre)} <em>Ver →</em></a>`;
 }
 async function portada() {
   const d0 = new Date(), hoy = `${d0.getFullYear()}-${String(d0.getMonth() + 1).padStart(2, '0')}-${String(d0.getDate()).padStart(2, '0')}`;
   const actual = [...TEMAS_TAREAS].reverse().find(t => t.fecha <= hoy) || TEMAS_TAREAS[0];
+  const deHoy = TEMAS_TAREAS.find(t => t.fecha === hoy), proxima = deHoy ? null : TEMAS_TAREAS.find(t => t.fecha > hoy);
+  const marcaHoy = t => t === deHoy ? '<span class="tq-hoy">★ Hoy</span>' : t === proxima ? '<span class="tq-hoy prox">Próxima clase</span>' : '';
   $('#cl-acceso').innerHTML = (sesion ? `<div class="tq-quien">👤 <b>${esc(sesion.nombre)}</b> · aquí ves tu avance y tus calificaciones <button type="button" class="ma-link" id="tq-salir">Salir</button></div>`
     : `<div class="tq-quien">Entra con tu nombre y PIN para ver tu avance, entregar y conocer tus calificaciones. <button type="button" class="btn-at" id="tq-entrar">Entrar</button></div>`)
-    + `<a class="ar-tarjeta mi-tarjeta" href="#mision"><span>🔭</span><div><b>Misión de la semana</b><small id="mi-tarjeta-txt">Descubre a los autores del tema con su gancho para recordarlos y enciende sus estrellas.</small></div><em>Empezar →</em></a>`
-    + `<a class="ar-tarjeta" href="#arena"><span>⚡</span><div><b>Arena en vivo</b><small>Cuando tu maestro abra la Arena, entra aquí: preguntas en vivo contra el reloj, con podio.</small></div><em>Entrar →</em></a>`
-    + `<a class="ar-tarjeta tr-tarjeta" href="#tribunal"><span>⚖️</span><div><b>Tribunal de la ciencia</b><small>En vivo: te ponen la toga de un autor (Popper, Kuhn, Lakatos…) y dictas si un caso es ciencia o no, con tu argumento.</small></div><em>Entrar →</em></a>`
     + tarjetaCielo();
-  textoMision();
   if (sesion) $('#tq-salir').addEventListener('click', () => { try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } olvidarAlumno(); sesion = null; EQS = null; if (unsubGrupo) unsubGrupo(); portada(); });
   else $('#tq-entrar').addEventListener('click', () => formAcceso($('#cl-acceso'), portada));
-  $('#cl-sesiones').innerHTML = TEMAS_TAREAS.map((t, i) => `<details class="tq-tema" data-tema="${i}" ${t === actual ? 'open' : ''}><summary><span class="tq-num">${esc(t.tema)}</span><span><b>${esc(t.titulo)}</b><small>${esc(t.fechaTexto)} · ${t.acts.filter(califica).length} tarea${t.acts.filter(califica).length === 1 ? '' : 's'}</small></span></summary>
+  $('#cl-sesiones').innerHTML = TEMAS_TAREAS.map((t, i) => `<details class="tq-tema${t === deHoy || t === proxima ? ' tq-destacada' : ''}" data-tema="${i}" ${t === actual || t === proxima ? 'open' : ''}><summary><span class="tq-num">${esc(t.tema)}</span><span>${marcaHoy(t)}<b>${esc(t.titulo)}</b><small>${esc(t.fechaTexto)} · ${t.acts.filter(califica).length} tarea${t.acts.filter(califica).length === 1 ? '' : 's'}</small></span></summary>
     <div class="cl-cards">${t.acts.map(a => `<a class="cl-card ${a.tipo === 'pronto' ? 'cl-pronto' : ''}" href="${a.tipo === 'pronto' ? '#' : '#' + (a.tipo === 'vivo' ? a.vivo : a.id)}" data-act="${a.id}"><span class="cl-ico">${a.icono}</span><b>${esc(a.nombre)}</b><small>${esc(a.modo)}</small><p>${esc(a.desc)}</p><span class="cl-estado" data-st="${a.id}">${insignia(a, null)}</span><p class="cl-avance" data-av="${a.id}"></p></a>`).join('')}</div></details>`).join('');
+  // La misión de la semana vive dentro de la clase actual (o la próxima)
+  const iM = TEMAS_TAREAS.indexOf(deHoy || actual), cajaM = $(`.tq-tema[data-tema="${iM}"] .cl-cards`);
+  if (cajaM) cajaM.insertAdjacentHTML('afterbegin', `<a class="cl-card cl-mision" href="#mision"><span class="cl-ico">🔭</span><b>Misión de la semana</b><small>Práctica · enciende estrellas</small><p id="mi-tarjeta-txt">Descubre a los autores del tema con su gancho para recordarlos y enciende sus estrellas.</p><span class="cl-estado"><span class="tq tq-practica">Práctica · sin calificación</span></span></a>`);
+  textoMision();
   $$('.cl-pronto').forEach(x => x.addEventListener('click', e => e.preventDefault()));
   if (sesion) {
     escucharGrupo();

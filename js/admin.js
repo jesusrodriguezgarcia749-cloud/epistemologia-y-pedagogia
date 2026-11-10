@@ -1886,7 +1886,10 @@ async function cargarTareasDig() {
   try { const g = await getDoc(doc(db, 'grupos', grupoActivo)); est = (g.exists() && g.data().tareasDig) || {}; } catch { /* */ }
   try { const sn = await getDocs(collection(db, 'grupos', grupoActivo, 'tareas_catalogo')); sn.forEach(d => { if (d.id.startsWith('dig-')) enCat.add(d.id); }); } catch { /* */ }
   const cuenta = await conteoCalificadas();
-  cont.innerHTML = TEMAS_TAREAS.map(t => `<div class="td-tema"><p class="td-tit"><b>${escaparHTML(t.tema)} · ${escaparHTML(t.titulo)}</b> <small>${escaparHTML(t.fechaTexto)}</small></p>${t.acts.filter(a => califica(a) || a.tipo === 'vivo').map(a => {
+  // La clase de hoy (o la próxima) resalta, con un botón para ir directo a ella
+  const d0 = new Date(), HOY = `${d0.getFullYear()}-${String(d0.getMonth() + 1).padStart(2, '0')}-${String(d0.getDate()).padStart(2, '0')}`;
+  const deHoy = TEMAS_TAREAS.find(t => t.fecha === HOY), prox = deHoy ? null : TEMAS_TAREAS.find(t => t.fecha > HOY), dest = deHoy || prox;
+  cont.innerHTML = (dest ? `<button type="button" class="btn btn-small td-ir-hoy" id="td-ir-hoy">${deHoy ? '★ Ir a la clase de hoy' : '→ Ir a la próxima clase'} · ${escaparHTML(dest.fechaTexto)}</button>` : '') + TEMAS_TAREAS.map(t => `<div class="td-tema${t === dest ? ' td-destacada' : ''}"${t === dest ? ' id="td-hoy"' : ''}><p class="td-tit">${t === dest ? `<span class="td-marca-hoy">${deHoy ? '★ Hoy' : 'Próxima clase'}</span> ` : ''}<b>${escaparHTML(t.tema)} · ${escaparHTML(t.titulo)}</b> <small>${escaparHTML(t.fechaTexto)}</small></p>${t.acts.filter(a => califica(a) || a.tipo === 'vivo').map(a => {
     if (a.tipo === 'vivo') return `<div class="td-fila td-vivo"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)} <small>· en vivo, no se califica</small></span><button type="button" class="btn btn-small btn-primary" data-vivo="${a.id}">▶ Conducir en clase</button></div>`;
     const cat = enCat.has(catalogoId(a.id)), cierre = (est[a.id] && est[a.id].cierre) || '', vencida = !!cierre && Date.now() > Date.parse(cierre), ab = !(est[a.id] && est[a.id].abierta === false) && !vencida;
     return `<div class="td-fila"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)}${cat ? ` <span data-marca="${catalogoId(a.id)}">${marcaCalificada(cuenta[catalogoId(a.id)] || 0, alumnosCache.length)}</span>` : ''}</span>
@@ -1896,6 +1899,7 @@ async function cargarTareasDig() {
       ${enEquipo(a) ? `<button type="button" class="btn btn-small td-eq" data-eqt="${a.id}" aria-expanded="false">👥 Equipos</button>` : ''}
       <button type="button" class="btn btn-small btn-primary ${cat ? claseBotonCal(cuenta[catalogoId(a.id)] || 0, alumnosCache.length) : ''}" data-cal="${a.id}" ${cat ? `data-btncal="${catalogoId(a.id)}"` : ''}>${cat ? textoBotonCal(cuenta[catalogoId(a.id)] || 0, alumnosCache.length) : 'Calificar'}</button></div>`;
   }).join('')}</div>`).join('');
+  const irHoy = document.getElementById('td-ir-hoy'); if (irHoy) irHoy.addEventListener('click', () => document.getElementById('td-hoy').scrollIntoView({ behavior: 'smooth', block: 'start' }));
   cont.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', async () => {
     const a = TAREAS_DIG[b.dataset.cat];
     if (!confirm(`¿Agregar «${nombreCatalogo(a)}» a las tareas del Parcial 2?\n\nDesde este momento cuenta para la calificación: a quien no la entregue le contará como cero en el promedio de tareas.`)) return;
