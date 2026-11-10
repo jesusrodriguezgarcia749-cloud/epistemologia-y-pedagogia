@@ -88,20 +88,20 @@ const PRESENTACION = {
       pasoAPaso: true,
       minutos: "9-11" },
 
-    { tipo: "tabla",
+    { tipo: "diagramaPasos",
       titulo: "Los obstáculos epistemológicos de Bachelard",
-      columnas: ["Obstáculo", "Qué es", "Así suena en la escuela"],
-      filas: [
-        ["Experiencia primera", "Confiar en la primera impresión, sin crítica", "«Los objetos pesados caen más rápido, se ve»"],
-        ["Generalización apresurada", "Concluir mucho a partir de pocos casos", "«En esta colonia los alumnos no leen» (por tres casos)"],
-        ["Obstáculo verbal", "Creer que nombrar algo es explicarlo", "«Reprueba porque no tiene motivación» (y ya)"],
-        ["Unitario y pragmático", "Explicarlo todo con un solo principio", "«Con tabletas en el salón se resuelve todo»"],
-        ["Sustancialista", "Atribuir cualidades ocultas a las cosas", "«Ese niño es malo por naturaleza»"]
-      ],
-      pasoAPaso: true,
       minutos: "11-14",
-      notas: "Bachelard (1938/2000), La formación del espíritu científico. Idea central: el problema no es que los alumnos no sepan, sino que ya «saben» algo que les impide aprender. De ahí viene la investigación sobre concepciones alternativas y cambio conceptual." },
-
+      intro: "Para llegar a un conocimiento nuevo hay que cruzar **muros** que pone lo que ya «sabemos». Avanza (→) y los vamos encontrando.",
+      notas: "Bachelard (1938/2000), La formación del espíritu científico. Antes de cada clic lee la frase del ejemplo y pregunta: ¿alguna vez lo han oído? Al final se dibuja el camino: el cambio conceptual. Idea central: el problema no es que los alumnos no sepan, sino que ya «saben» algo que les impide aprender.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="El camino de lo que ya sé al conocimiento nuevo, con cinco obstáculos epistemológicos"><path d="M120,372 C230,360 190,282 290,280 S420,250 390,190 S470,110 520,92" fill="none" stroke="#C9CED6" stroke-width="14" stroke-linecap="round" stroke-dasharray="2 20"/><path data-paso="5" data-anim="trazo" pathLength="1" d="M120,372 C230,360 190,282 290,280 S420,250 390,190 S470,110 520,92" fill="none" stroke="#3F7A4F" stroke-width="10" stroke-linecap="round"/><g><circle cx="70" cy="378" r="56" fill="#16213A"/><text x="70" y="372" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#fff">Lo que</text><text x="70" y="394" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#E9C46A">ya «sé»</text></g><g data-paso="5" data-anim="zoom"><circle cx="565" cy="70" r="58" fill="#CFE6D4"/></g><circle cx="565" cy="70" r="58" fill="none" stroke="#3F7A4F" stroke-width="4" stroke-dasharray="6 6"/><text x="565" y="64" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#16213A">Conocimiento</text><text x="565" y="86" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#16213A">nuevo</text><g font-family="Public Sans,sans-serif" font-weight="700" font-size="15"><g data-paso="0" data-anim="resaltar"><rect x="168" y="330" width="58" height="44" fill="#A83232" rx="4"/><path d="M168,345 H226 M168,360 H226 M197,330 V345 M183,345 V360 M211,345 V360 M197,360 V374" stroke="#F4D6D6" stroke-width="2"/><text x="197" y="404" text-anchor="middle" fill="#A83232">1 · Experiencia primera</text></g><g data-paso="1" data-anim="resaltar"><rect x="238" y="262" width="58" height="44" fill="#A83232" rx="4"/><path d="M238,277 H296 M238,292 H296 M267,262 V277 M253,277 V292 M281,277 V292 M267,292 V306" stroke="#F4D6D6" stroke-width="2"/><text x="267" y="252" text-anchor="middle" fill="#A83232">2 · Generalización apresurada</text></g><g data-paso="2" data-anim="resaltar"><rect x="368" y="242" width="58" height="44" fill="#A83232" rx="4"/><path d="M368,257 H426 M368,272 H426 M397,242 V257 M383,257 V272 M411,257 V272 M397,272 V286" stroke="#F4D6D6" stroke-width="2"/><text x="440" y="300" text-anchor="start" fill="#A83232">3 · Obstáculo verbal</text></g><g data-paso="3" data-anim="resaltar"><rect x="370" y="168" width="58" height="44" fill="#A83232" rx="4"/><path d="M370,183 H428 M370,198 H428 M399,168 V183 M385,183 V198 M413,183 V198 M399,198 V212" stroke="#F4D6D6" stroke-width="2"/><text x="356" y="196" text-anchor="end" fill="#A83232">4 · Unitario y pragmático</text></g><g data-paso="4" data-anim="resaltar"><rect x="452" y="96" width="58" height="44" fill="#A83232" rx="4"/><path d="M452,111 H510 M452,126 H510 M481,96 V111 M467,111 V126 M495,111 V126 M481,126 V140" stroke="#F4D6D6" stroke-width="2"/><text x="440" y="122" text-anchor="end" fill="#A83232">5 · Sustancialista</text></g></g><g data-paso="5" data-anim="zoom"><rect x="40" y="70" width="190" height="40" rx="20" fill="#fff" stroke="#3F7A4F" stroke-width="3"/><text x="135" y="96" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#3F7A4F">✓ cambio conceptual</text></g></svg>`,
+      pasos: [
+        { num: "Muro 1", titulo: "Experiencia primera", color: "#A83232", texto: "Confiar en la **primera impresión**, sin crítica: si así se ve, así es.", ejemplo: "«Los objetos pesados caen más rápido, se ve.»" },
+        { num: "Muro 2", titulo: "Generalización apresurada", color: "#A83232", texto: "Concluir **mucho a partir de pocos casos**.", ejemplo: "«En esta colonia los alumnos no leen.» (Lo dice por tres casos.)" },
+        { num: "Muro 3", titulo: "Obstáculo verbal", color: "#A83232", texto: "Creer que **nombrar algo es explicarlo**: la etiqueta toma el lugar de la explicación.", ejemplo: "«Reprueba porque no tiene motivación.» (Y ya.)" },
+        { num: "Muro 4", titulo: "Unitario y pragmático", color: "#A83232", texto: "Explicarlo **todo con un solo principio**, o por lo útil que parece.", ejemplo: "«Con tabletas en el salón se resuelve todo.»" },
+        { num: "Muro 5", titulo: "Sustancialista", color: "#A83232", texto: "Atribuir a las cosas **cualidades ocultas**, «por naturaleza».", ejemplo: "«Ese niño es malo por naturaleza.»" },
+        { num: "La salida", titulo: "Cambio conceptual", color: "#3F7A4F", texto: ["No es que los alumnos no sepan: es que **ya «saben»** algo que les impide aprender.", "Por eso, enseñar no es llenar un vaso vacío: es ayudar a **cruzar esos muros** con evidencia y mejores explicaciones."] }
+      ] },
     { tipo: "tema",
       titulo: "No es que no sepan: es que ya «saben»",
       etiqueta: "Bachelard en el salón de clases",
@@ -159,7 +159,7 @@ const PRESENTACION = {
       pasoAPaso: true,
       minutos: "27-28" },
 
-    { tipo: "tabla",
+    { tipo: "tablaPasos",
       titulo: "Cuatro supuestos del método tradicional",
       columnas: ["El método supone que…", "Pero…"],
       filas: [
@@ -168,10 +168,9 @@ const PRESENTACION = {
         ["El método es un **algoritmo**", "No hay secuencia fija que garantice el conocimiento."],
         ["Solo vale **lo medible**", "Hay realidades humanas que no se cuantifican y sí se pueden conocer."]
       ],
-      pasoAPaso: true,
+      pie: "Antes de cada clic: **¿qué tiene de falso este supuesto?**",
       minutos: "28-30",
-      notas: "Hanson (1958/1977), Patrones de descubrimiento." },
-
+      notas: "Hanson (1958/1977), Patrones de descubrimiento. Lee el supuesto y deja que el grupo lo critique antes de destapar la respuesta." },
     { tipo: "tema",
       titulo: "El método como camino",
       etiqueta: "Del griego méthodos: «camino»",
@@ -267,18 +266,22 @@ const PRESENTACION = {
       respuesta: "Para el nuevo paradigma, **sí**: el conocimiento confiable no nace en la mente aislada de un genio, sino en la **conversación crítica** entre personas que contrastan perspectivas.",
       minutos: "44-45" },
 
-    { tipo: "tabla",
+    { tipo: "diagramaPasos",
       titulo: "5.4 La dimensión dialógica",
-      columnas: ["Autor", "Idea clave", "En una frase"],
-      filas: [
-        ["Gadamer", "**Fusión de horizontes**", "Comprender no es ponerse en lugar del otro: es que ambos horizontes se amplíen."],
-        ["Habermas", "**Acción comunicativa**", "En un diálogo ideal gana la fuerza del mejor argumento, no la jerarquía."],
-        ["Freire", "**Diálogo liberador**", "El educando también sabe; el diálogo exige humildad, fe en las personas y pensamiento crítico."],
-        ["Morin", "**Principio dialógico**", "Mantener juntas ideas opuestas: orden y desorden, razón y emoción."]
-      ],
-      pasoAPaso: true,
-      minutos: "45-48" },
-
+      minutos: "45-48",
+      intro: "Si nadie observa con la mente en blanco, ¿cómo llegamos a un conocimiento confiable? **Conversando.** Avanza (→).",
+      notas: "Arma la figura: primero un horizonte, luego el otro, y al juntarlos aparece la fusión (Gadamer). En Habermas, haz la pregunta y deja que respondan antes de revelar.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Dos horizontes que se fusionan en el diálogo"><g data-paso="0" data-anim="resaltar"><circle cx="235" cy="200" r="135" fill="#2E5E8C" fill-opacity=".18" stroke="#2E5E8C" stroke-width="4"/><text x="170" y="150" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="24" fill="#2E5E8C">Mi</text><text x="170" y="178" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="24" fill="#2E5E8C">horizonte</text></g><g data-paso="1" data-anim="resaltar"><circle cx="405" cy="200" r="135" fill="#A83232" fill-opacity=".14" stroke="#A83232" stroke-width="4"/><text x="470" y="150" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="24" fill="#A83232">Tu</text><text x="470" y="178" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="24" fill="#A83232">horizonte</text></g><g data-paso="2" data-anim="zoom"><path d="M320,95.4 A135,135 0 0,1 320,304.6 A135,135 0 0,1 320,95.4 Z" fill="#E9C46A" stroke="#C98A2C" stroke-width="3"/><text x="320" y="196" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#16213A">fusión de</text><text x="320" y="216" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#16213A">horizontes</text></g><g font-family="Public Sans,sans-serif" font-weight="700" font-size="17" text-anchor="middle"><g data-paso="3" data-anim="subir"><rect x="40" y="356" width="170" height="64" rx="12" fill="#fff" stroke="#16213A" stroke-width="3"/><text x="125" y="384" fill="#16213A">⚖️ Habermas</text><text x="125" y="406" font-size="14" font-weight="600" fill="#4F5868">el mejor argumento</text></g><g data-paso="4" data-anim="subir"><rect x="235" y="356" width="170" height="64" rx="12" fill="#fff" stroke="#3F7A4F" stroke-width="3"/><text x="320" y="384" fill="#3F7A4F">⇄ Freire</text><text x="320" y="406" font-size="14" font-weight="600" fill="#4F5868">el educando también sabe</text></g><g data-paso="5" data-anim="subir"><rect x="430" y="356" width="170" height="64" rx="12" fill="#fff" stroke="#C98A2C" stroke-width="3"/><text x="515" y="384" fill="#C98A2C">☯ Morin</text><text x="515" y="406" font-size="14" font-weight="600" fill="#4F5868">opuestos que se necesitan</text></g></g></svg>`,
+      pasos: [
+        { num: "Gadamer · 1", titulo: "Mi horizonte", color: "#2E5E8C", texto: "Cada quien mira desde su **horizonte**: lo que ve y entiende depende de su historia, su cultura y lo que ya sabe." },
+        { num: "Gadamer · 2", titulo: "Tu horizonte", color: "#A83232", texto: "La otra persona también tiene su horizonte. Ninguno de los dos lo ve **todo**." },
+        { num: "Gadamer · 3", titulo: "Fusión de horizontes", color: "#C98A2C", texto: "Comprender **no es ponerse en lugar del otro**: es que, al dialogar, **los dos horizontes se amplían**." },
+        { num: "Habermas", titulo: "Acción comunicativa", color: "#16213A",
+          pregunta: "En una junta se aprueba la propuesta del director **porque es el director**, sin dar razones. ¿Hubo diálogo?",
+          respuesta: "**No.** Para Habermas, en un diálogo ideal se impone **la fuerza del mejor argumento**, no la jerarquía." },
+        { num: "Freire", titulo: "Diálogo liberador", color: "#3F7A4F", texto: "**El educando también sabe.** El diálogo exige humildad, fe en las personas y pensamiento crítico: lo contrario de la educación bancaria." },
+        { num: "Morin", titulo: "Principio dialógico", color: "#C98A2C", texto: "Mantener **juntas ideas opuestas** que se necesitan: orden y desorden, razón y emoción.", ejemplo: "Si el conocimiento se construye dialogando, los saberes de la comunidad pueden **conversar con la ciencia**: es el diálogo de saberes de la NEM." }
+      ] },
     { tipo: "tarea",
       titulo: "¿Fue un diálogo?",
       etiqueta: "Prueba de Habermas · 5 minutos",
@@ -303,27 +306,19 @@ const PRESENTACION = {
       pasoAPaso: true,
       minutos: "50-51" },
 
-    { tipo: "tabla",
+    { tipo: "palabrasHoy",
       titulo: "Glosario del Tema 5",
-      columnas: ["Concepto", "En una línea"],
-      filas: [
-        ["Inercia mental", "Mantener las formas de pensar habituales aunque haya razones para cambiar."],
-        ["Obstáculo epistemológico", "Saber previo o hábito que impide construir un conocimiento nuevo (Bachelard)."],
-        ["Observación cargada de teoría", "Lo que observamos depende de lo que ya sabemos y esperamos (Hanson)."],
-        ["Reflexividad", "Reconocer de forma explícita la posición y los supuestos del investigador."],
-        ["Fusión de horizontes", "Comprender como ampliación mutua de perspectivas (Gadamer)."],
-        ["Acción comunicativa", "Interacción orientada al entendimiento mediante argumentos (Habermas)."]
-      ],
-      pasoAPaso: true,
+      etiqueta: "Para el examen",
+      pasoAPaso: false,
       minutos: "51-52",
-      notas: "Estos conceptos son los que más aparecen en el examen del Parcial 2. Que los copien en su cuaderno." },
-
+      notas: "Estos conceptos son los que más aparecen en el examen del Parcial 2. Que los copien en su cuaderno; también están en el Glosario del Aula Virtual.",
+      terminos: ["Inercia mental", "Obstáculo epistemológico", "Observación cargada de teoría", "Triangulación", "Reflexividad", "Fusión de horizontes", "Acción comunicativa", "Diálogo de saberes", "Desconstrucción"] },
     { tipo: "pregunta",
       pregunta: "¿Quién sabe más de suelos: un agrónomo con doctorado o un campesino que ha sembrado milpa durante cuarenta años?",
       respuesta: "Depende de **qué pregunta** quieras responder. Cada uno sabe cosas que el otro no, y de **maneras distintas**. De eso trata hoy.",
       minutos: "52-53" },
 
-    { tipo: "tabla",
+    { tipo: "tablaPasos",
       titulo: "6.1 Cinco maneras de conocer",
       columnas: ["Vía", "Ejemplo"],
       filas: [
@@ -333,10 +328,9 @@ const PRESENTACION = {
         ["Investigación sistemática", "Sé que el tabaco aumenta el riesgo de cáncer porque miles de estudios lo muestran."],
         ["Práctica e intuición", "Sé cuándo un grupo está a punto de desbordarse, aunque no sepa explicar cómo."]
       ],
-      pasoAPaso: true,
+      pie: "Antes de cada clic: **¿qué sabes tú por esta vía?**",
       minutos: "53-54",
-      notas: "Ninguna es infalible y casi todo lo que sabemos combina varias. Hasta los científicos dependen del testimonio: nadie repite todos los experimentos de su disciplina." },
-
+      notas: "Pide un ejemplo propio para cada vía antes de destapar el del libro. Ninguna es infalible y casi todo lo que sabemos combina varias. Hasta los científicos dependen del testimonio: nadie repite todos los experimentos de su disciplina." },
     { tipo: "pregunta",
       pregunta: "¿Puedes explicar con palabras cómo andas en bicicleta?",
       respuesta: "No del todo. **Sabemos más de lo que podemos decir** (Polanyi). A ese saber que no cabe completo en palabras se le llama **conocimiento tácito**.",
@@ -367,7 +361,7 @@ const PRESENTACION = {
       pasoAPaso: true,
       minutos: "57-58" },
 
-    { tipo: "tabla",
+    { tipo: "tablaPasos",
       titulo: "Cinco rasgos del sentido común",
       columnas: ["El conocimiento ordinario es…", "Por ejemplo"],
       filas: [
@@ -377,17 +371,25 @@ const PRESENTACION = {
         ["**Poco crítico**", "Rara vez se pone a prueba a propósito."],
         ["**Contextual**", "Funciona bien en su contexto, pero puede fallar fuera de él."]
       ],
-      pasoAPaso: true,
+      pie: "Antes de cada clic: **¿qué quiere decir este rasgo?**",
       minutos: "58-60",
       notas: "A veces acierta y a veces se equivoca: durante siglos dijo que el Sol gira alrededor de la Tierra «porque así se ve». Pero muchos descubrimientos partieron de observaciones populares." },
-
-    { tipo: "imagen",
+    { tipo: "diagramaPasos",
       titulo: "El conocimiento local: la milpa",
-      imagen: "img/s6-milpa.svg",
-      pie: "Conocimiento ecológico desarrollado en Mesoamérica hace miles de años.",
-      minutos: "60-61",
-      notas: "Otros ejemplos del libro: la nixtamalización (cocer el maíz con cal mejora su valor nutritivo; la nutrición lo explicó siglos después), la herbolaria (de ahí salieron medicamentos, aunque no todo remedio resiste la comprobación) y el saber del monte y del mar de pescadores y milperos de la península." },
-
+      minutos: "60-62",
+      intro: "Tres plantas que se ayudan entre sí: un sistema ecológico que Mesoamérica dominaba hace miles de años. Avanza (→).",
+      notas: "Arma la milpa planta por planta. En el último paso pregunta quién lo sabía primero antes de mostrar la respuesta. Otros ejemplos del libro: la nixtamalización (la nutrición la explicó siglos después), la herbolaria (de ahí salieron medicamentos, aunque no todo remedio resiste la comprobación) y el saber del monte y del mar de pescadores y milperos de la península.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="La milpa: maíz, frijol y calabaza que se ayudan"><rect x="0" y="0" width="640" height="330" fill="#EAF3F8"/><circle cx="560" cy="70" r="36" fill="#F2C14E"/><rect x="0" y="330" width="640" height="110" fill="#8A6A45"/><path d="M0,330 H640" stroke="#5B8C3A" stroke-width="6"/><g data-paso="0" data-anim="resaltar"><path d="M300,330 C302,260 296,190 300,90" stroke="#5F8F3A" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M300,250 C260,230 230,236 205,250 C235,232 270,226 300,238 Z M300,200 C340,178 372,184 398,196 C366,182 334,186 300,190 Z M300,150 C266,130 240,134 222,144 C246,128 274,128 300,140 Z M300,110 C326,92 350,94 366,102 C344,90 320,92 300,102 Z" fill="#6FA34A" stroke="#4A7A2E" stroke-width="2"/><ellipse cx="318" cy="168" rx="11" ry="30" fill="#F2C14E" stroke="#C98A2C" stroke-width="2" transform="rotate(14 318 168)"/><text x="345" y="96" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#16213A">🌽 Maíz</text></g><g data-paso="1" data-anim="resaltar"><path d="M306,320 C330,300 286,280 310,260 C334,240 288,222 312,202 C336,182 290,164 312,144 C330,128 300,116 310,104" stroke="#2F6B3A" stroke-width="4" fill="none"/><g fill="#3E8E4E"><ellipse cx="330" cy="292" rx="12" ry="7"/><ellipse cx="288" cy="258" rx="12" ry="7"/><ellipse cx="334" cy="222" rx="12" ry="7"/><ellipse cx="290" cy="178" rx="12" ry="7"/></g><path d="M326,236 q14,6 10,22" stroke="#6B3E75" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M286,196 q-14,6 -10,22" stroke="#6B3E75" stroke-width="5" fill="none" stroke-linecap="round"/><text x="350" y="250" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#16213A">🫘 Frijol</text></g><g data-paso="2" data-anim="resaltar"><path d="M330,328 C380,320 430,326 480,318 C520,312 560,322 600,316" stroke="#4A7A2E" stroke-width="5" fill="none"/><g fill="#5C9A3C" stroke="#3E6E26" stroke-width="2"><path d="M360,330 c-30,-40 30,-50 34,-6 c4,-44 64,-34 30,6 z"/><path d="M450,330 c-30,-40 30,-50 34,-6 c4,-44 64,-34 30,6 z"/><path d="M540,330 c-30,-40 30,-50 34,-6 c4,-44 64,-34 30,6 z"/></g><ellipse cx="505" cy="320" rx="30" ry="18" fill="#E8913A" stroke="#B5651D" stroke-width="2"/><text x="440" y="270" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#16213A">🎃 Calabaza</text></g><g data-paso="3" data-anim="resaltar"><path d="M300,330 v40 M300,350 l-26,26 M300,350 l26,28 M300,365 l-14,30 M310,372 l18,22" stroke="#E9DCC4" stroke-width="4" fill="none" stroke-linecap="round"/><g fill="#F4E9D8"><circle cx="276" cy="378" r="5"/><circle cx="324" cy="380" r="5"/><circle cx="288" cy="396" r="5"/></g><g font-family="Public Sans,sans-serif" font-weight="700" font-size="18" fill="#F4E9D8"><text x="120" y="378">N</text><text x="170" y="410">N</text><text x="410" y="390">N</text><text x="470" y="420">N</text></g><text x="40" y="430" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#F4E9D8">Las raíces del frijol fijan nitrógeno (N) en el suelo</text></g><g data-paso="4" data-anim="zoom"><rect x="22" y="22" width="220" height="70" rx="12" fill="#16213A"/><text x="132" y="52" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="20" fill="#E9C46A">Los milperos lo sabían</text><text x="132" y="76" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" font-weight="600" fill="#fff">siglos antes que la química</text></g></svg>`,
+      pasos: [
+        { num: "Planta 1", titulo: "El maíz", color: "#C98A2C", texto: "Crece alto y derecho: es el **soporte** de la milpa." },
+        { num: "Planta 2", titulo: "El frijol", color: "#2F6B3A", texto: "**Trepa por el maíz** para alcanzar la luz, sin necesidad de varas." },
+        { num: "Planta 3", titulo: "La calabaza", color: "#B5651D", texto: "Sus hojas grandes **cubren el suelo**: guardan la humedad y frenan la maleza." },
+        { num: "Bajo tierra", titulo: "El nitrógeno", color: "#5E4429", texto: "Las raíces del frijol **fijan nitrógeno** en el suelo: abonan al maíz y a la calabaza. Por eso la milpa no agota la tierra tan rápido." },
+        { num: "La pregunta", titulo: "¿Quién lo sabía primero?", color: "#16213A",
+          pregunta: "¿Quién descubrió que el frijol «alimenta» la tierra: la química moderna o los milperos?",
+          respuesta: "**Los milperos**, siglos antes: la química explicó el ciclo del nitrógeno hasta el siglo XIX. Eso es **conocimiento local**: sistemático a su manera y probado por generaciones.",
+          encenderAlResponder: true }
+      ] },
     { tipo: "video",
       titulo: "Agrobiodiversidad: la milpa",
       mp4: "https://nemdigitalstorage.blob.core.windows.net/nem-main/archivos/2022/11/03/HD_BACH_VS_SEM16_MILPA.mp4",
@@ -427,17 +429,20 @@ const PRESENTACION = {
       pasoAPaso: true,
       minutos: "68-69" },
 
-    { tipo: "tabla",
+    { tipo: "diagramaPasos",
       titulo: "Dos errores que hay que evitar",
-      columnas: ["", "Cientificismo", "Relativismo ingenuo"],
-      filas: [
-        ["Cree que…", "Solo la ciencia produce conocimiento válido", "Todos los saberes valen lo mismo para todo"],
-        ["Consecuencia", "Empobrece la escuela y la desconecta de la vida de los alumnos", "Da igual un antibiótico que un remedio sin eficacia comprobada"],
-        ["La salida", "Diálogo de saberes: cada saber se valora por su capacidad de responder **ciertas preguntas en ciertos contextos**", "Las diferencias se discuten con **respeto y con argumentos**"]
-      ],
-      pasoAPaso: true,
-      minutos: "69-71" },
-
+      minutos: "69-71",
+      intro: "Al reconocer los saberes de la comunidad hay dos trampas, una en cada extremo. Avanza (→).",
+      notas: "Primero un extremo, luego el otro, y al final la pregunta del punto sano. Pide un ejemplo escolar de cada error.",
+      svg: `<svg viewBox="0 0 640 320" role="img" aria-label="Del cientificismo al relativismo ingenuo, con la ecología de saberes en medio"><defs><linearGradient id="dosG" x1="0" x2="1"><stop offset="0" stop-color="#A83232"/><stop offset=".5" stop-color="#3F7A4F"/><stop offset="1" stop-color="#C98A2C"/></linearGradient></defs><rect x="40" y="150" width="560" height="16" rx="8" fill="url(#dosG)" opacity=".35"/><g data-paso="0" data-anim="resaltar"><circle cx="70" cy="158" r="34" fill="#A83232"/><text x="70" y="165" text-anchor="middle" font-size="26" fill="#fff">🔬</text><text x="70" y="226" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="19" fill="#A83232">Cientificismo</text><text x="70" y="250" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">«solo vale</text><text x="70" y="270" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">la ciencia»</text></g><g data-paso="1" data-anim="resaltar"><circle cx="570" cy="158" r="34" fill="#C98A2C"/><text x="570" y="165" text-anchor="middle" font-size="26" fill="#fff">🤷</text><text x="570" y="226" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="19" fill="#C98A2C">Relativismo</text><text x="570" y="248" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="19" fill="#C98A2C">ingenuo</text><text x="570" y="272" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">«todo vale igual»</text></g><g data-paso="2" data-anim="zoom"><circle cx="320" cy="158" r="48" fill="#3F7A4F"/><text x="320" y="167" text-anchor="middle" font-size="32" fill="#fff">🤝</text><text x="320" y="240" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#3F7A4F">Ecología de saberes</text><text x="320" y="264" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">cada saber, para lo que responde bien</text></g><g data-paso="2" data-anim="fade"><path d="M110,120 Q215,70 270,128" stroke="#3F7A4F" stroke-width="3" fill="none" stroke-dasharray="6 5"/><path d="M530,120 Q425,70 370,128" stroke="#3F7A4F" stroke-width="3" fill="none" stroke-dasharray="6 5"/></g></svg>`,
+      pasos: [
+        { num: "Error 1", titulo: "Cientificismo", color: "#A83232", texto: "Cree que **solo la ciencia** produce conocimiento válido.", ejemplo: "**Consecuencia:** empobrece la escuela y la desconecta de la vida de los alumnos." },
+        { num: "Error 2", titulo: "Relativismo ingenuo", color: "#C98A2C", texto: "Cree que **todos los saberes valen lo mismo para todo**.", ejemplo: "**Consecuencia:** da igual un antibiótico que un remedio sin eficacia comprobada." },
+        { num: "La salida", titulo: "Ecología de saberes", color: "#3F7A4F",
+          pregunta: "Entonces, ¿dónde está el punto sano?",
+          respuesta: "En el **diálogo de saberes**: cada saber se valora por su capacidad de responder **ciertas preguntas en ciertos contextos**, y las diferencias se discuten **con respeto y con argumentos**.",
+          encenderAlResponder: true }
+      ] },
     { tipo: "observa",
       titulo: "La milpa en el salón",
       etiqueta: "En el aula mexicana",
@@ -492,19 +497,11 @@ const PRESENTACION = {
       fuente: "Caso ficticio. Fíjate en el «cómo»: acciones concretas de diálogo, no solo buenas intenciones.",
       minutos: "102-104" },
 
-    { tipo: "tabla",
-      titulo: "Glosario de hoy",
-      columnas: ["Concepto", "En una línea"],
-      filas: [
-        ["Conocimiento tácito", "Saber que no puede expresarse del todo con palabras (Polanyi)."],
-        ["Conocimiento ordinario", "Sentido común que compartimos para la vida diaria."],
-        ["Conocimiento local", "Saber que una comunidad desarrolla por generaciones en su territorio."],
-        ["Ecología de saberes", "Diálogo y complementariedad entre distintos tipos de conocimiento."],
-        ["Cientificismo", "Creer que solo la ciencia produce conocimiento válido."]
-      ],
-      pasoAPaso: true,
-      minutos: "104-105" },
-
+    { tipo: "palabrasHoy",
+      titulo: "Palabras de hoy",
+      pasoAPaso: false,
+      minutos: "104-105",
+      terminos: ["Conocimiento tácito", "Conocimiento ordinario", "Conocimiento local o tradicional", "Epistemologías del Sur", "Ecología de saberes", "Cientificismo"] },
     { tipo: "tema",
       titulo: "Taller APA: paráfrasis o cita textual",
       etiqueta: "Para la Entrega 2",
