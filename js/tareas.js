@@ -264,10 +264,12 @@ function cuadro(cont, eq, a) {
     ${V ? `<div class="cu-afirma"><span>${V.ico}</span><div><small>${eq ? (A.sorteo || 'La afirmación que le tocó a su equipo por sorteo') : (A.sorteoInd || 'Tu afirmación')}</small><b>${esc(V.afirmacion)}</b></div></div>` : ''}
     <div data-entrega></div>
     <p class="atlas-ayuda">${A.ayuda}${eq ? ' Repártanse el trabajo en el equipo.' : ''} Se guarda solo${eq ? ' y todos ven al instante lo que escriben los demás' : ''}.</p>
+    ${A.ejemplo ? `<div class="cu-ej-aviso"><b>💡 Debajo de cada espacio hay un ejemplo</b> resuelto con otro caso: <i>${esc(A.ejemplo.caso)}</i>. ${eq ? 'Úsenlo para ver qué se pide y cuánto escribir, pero <b>no lo copien</b>: contesten con ' + (V ? 'lo que les tocó' : 'sus propias ideas') : 'Úsalo para ver qué se pide y cuánto escribir, pero <b>no lo copies</b>: contesta con ' + (V ? 'lo que te tocó' : 'tus propias ideas')}.</div>` : ''}
     <p class="cu-progreso" id="cu-progreso"></p>
     <div class="cu-clave" id="cu-clave" hidden><b>🔑 Su maestro liberó la clave.</b> <button type="button" class="btn-at" id="cu-ver-clave" aria-pressed="false">Comparar con la clave</button></div>
     <div class="cu-tabla ${A.columnas.length === 1 ? 'cu-1col' : ''}">${A.filas.map(([f, t, ayuda, inv]) => `<section class="cu-fila ${inv ? 'cu-inv' : ''}"><h3>${inv ? '<span class="cu-tag">🔎 Investiga</span>' : ''}${esc(t)}<small>${esc(ayuda)}</small></h3>
       <div class="cu-celdas">${A.columnas.map(([c, nc], ci) => `<label class="cu-celda cu-${c}"><span>${esc(nc)} <small class="ma-autor" data-autor="${f}_${c}"></small></span><textarea data-k="${f}_${c}" rows="3"></textarea>
+        ${A.ejemplo && A.ejemplo.celdas[`${f}_${c}`] ? `<p class="cu-ej"><b>💡 Ejemplo</b> ${esc(A.ejemplo.celdas[`${f}_${c}`])}</p>` : ''}
         ${A.sinClave ? '' : `<p class="cu-resp" data-resp="${f}_${c}" hidden><b>${inv || V ? 'Respuesta posible' : 'Según el compendio'}:</b> ${esc(R[f][ci])}</p>`}</label>`).join('')}</div>
       ${inv ? `<label class="cu-fuente"><span>📚 Fuente: ¿de dónde lo sacaron? <small class="ma-autor" data-autor="${f}_fuente"></small></span><input data-k="${f}_fuente" type="text" placeholder="Autor o sitio, título y enlace (URL)"></label>` : ''}</section>`).join('')}</div>`;
   const estado = (t, c = '') => { const e = $('#cu-estado'); if (e) { e.textContent = t; e.className = 'ma-estado ' + c; } };

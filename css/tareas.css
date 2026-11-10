@@ -435,3 +435,8 @@ html[data-theme="dark"] .cu-positivista > span { color: #8DB6E0; } html[data-the
 .rt-entrega small { color: var(--ink-soft); }
 html[data-theme="dark"] .rt-op.ok, html[data-theme="dark"] .rt-fin, html[data-theme="dark"] .rt-pal.ok { color: #9BD3A8; }
 @media (max-width: 560px) { .rt-estacion { padding: 14px; } .rt-tarjeta { padding: 14px; } .rt-sig { margin-left: 0; } }
+/* Ejemplos guía bajo cada celda */
+.cu-ej { margin: 6px 0 0; font-weight: 400; font-size: .84rem; line-height: 1.45; color: var(--ink-soft); background: rgba(201,160,74,.10); border-left: 3px solid var(--saffron); border-radius: 6px; padding: 6px 9px; }
+.cu-ej b { color: var(--saffron-dark); font-size: .76rem; text-transform: uppercase; letter-spacing: .05em; margin-right: 4px; }
+.cu-ej-aviso { background: rgba(201,160,74,.14); border: 1px dashed var(--saffron); border-radius: 12px; padding: 10px 14px; font-size: .92rem; margin: 0 0 12px; }
+html[data-theme="dark"] .cu-ej b { color: #E9C46A; }

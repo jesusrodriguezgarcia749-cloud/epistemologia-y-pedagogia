@@ -392,6 +392,13 @@ CUADROS['mi-inercia'] = {
   titulo: 'Mi inercia mental', kicker: 'Tema 5.1 · Inercia mental y obstáculos epistemológicos', archivo: 'Mi_inercia',
   ayuda: 'Piensa en algo que das por hecho sobre la educación sin haberlo examinado nunca (por ejemplo, sobre los exámenes, las tareas, la disciplina o «los alumnos de hoy»). Escríbelo con honestidad: no hay respuestas malas.',
   columnas: [['yo', 'Lo que escribo', '#8E5BA8']],
+  ejemplo: { caso: 'Una creencia de ejemplo (la tuya debe ser otra)', celdas: {
+    creencia_yo: 'Creo que los alumnos que se sientan hasta atrás son los que no quieren estudiar.',
+    origen_yo: 'Lo escuché de varios maestros en la secundaria y en la prepa, y lo veía en compañeros de atrás que platicaban mucho.',
+    obstaculo_yo: 'Generalización apresurada: saqué una regla para todos los de atrás a partir de unos cuantos compañeros que conocí.',
+    duda_yo: 'Hay alumnos que se sientan atrás por timidez, porque llegaron tarde o porque ven bien de lejos. Y con Hanson: quizá solo veo lo que ya espero ver.',
+    cambio_yo: 'Me haría cambiar comparar las calificaciones por lugar en el salón. En mi investigación podría sesgarme a observar solo a los de atrás.',
+  } },
   filas: [
     ['creencia', 'Mi creencia', '¿Qué doy por hecho sobre la educación?'],
     ['origen', '¿De dónde viene?', '¿La aprendí en mi casa, en mi escuela, de un maestro, de las redes?'],
@@ -409,6 +416,23 @@ CUADROS.saberes = {
   sorteo: 'El saber que le tocó a su equipo por sorteo', sorteoInd: 'Tu saber', nombreVariante: 'El saber',
   ayuda: 'Comparen su saber visto como <b>conocimiento ordinario o local</b> (como lo sabe la comunidad) y como <b>conocimiento científico</b> (como lo estudia la ciencia). Usen ejemplos de su comunidad o de la escuela. La fila <b>🔎 Investiga</b> pide una fuente de lo que dice la ciencia sobre su saber.',
   columnas: [['ordinario', 'Como saber de la comunidad', '#C98A2C'], ['cientifico', 'Como conocimiento científico', '#2E6FA8']],
+  // Ejemplo resuelto con OTRO saber (que no le toca a ningún equipo), para que vean cómo se contesta sin copiarlo.
+  ejemplo: { caso: '🐝 La miel de la abeja melipona (xunán kab) en la península', celdas: {
+    origen_ordinario: 'Los mayas la cultivan desde hace siglos en jobones (troncos huecos). Lo produjeron generaciones de familias que observaron a las abejas en el monte.',
+    origen_cientifico: 'Lo producen biólogos y químicos de universidades y centros de investigación que estudian a las abejas sin aguijón y analizan su miel en el laboratorio.',
+    transmision_ordinario: 'En la familia: el abuelo le enseña al nieto a abrir el jobón sin dañar la cría y cuándo cosechar. Casi todo es oral y se aprende haciendo.',
+    transmision_cientifico: 'Por escrito: artículos, tesis, congresos y cursos para productores. Cualquiera puede leerlo y revisarlo.',
+    validacion_ordinario: 'Se cree porque «siempre ha funcionado»: las abuelas han visto por generaciones que la miel ayuda con los ojos y las heridas.',
+    validacion_cientifico: 'Se pone a prueba: se analizan muestras en laboratorio para ver si de verdad combaten bacterias, y otros investigadores pueden repetirlo.',
+    alcance_ordinario: 'Funciona en la península, con estas abejas, estas flores y este clima; en otra región quizá no aplica igual.',
+    alcance_cientifico: 'Busca explicar por qué funciona en cualquier lugar (qué sustancias de la miel actúan), aunque sus resultados son provisionales.',
+    fortalezas_ordinario: 'Cuida a la abeja y al monte, se basa en siglos de observación y es parte de la identidad de la comunidad.',
+    fortalezas_cientifico: 'Puede comprobar qué usos sí funcionan, explicar por qué y ayudar a proteger a una abeja que está en peligro.',
+    limites_ordinario: 'Algunas creencias no se han comprobado (por ejemplo, que cura cualquier enfermedad) y el saber se pierde si los jóvenes ya no lo aprenden.',
+    limites_cientifico: 'Puede despreciar el saber de los meliponicultores o quedarse en artículos que la comunidad nunca lee.',
+    dicen_ordinario: 'La comunidad la usa para los ojos y las heridas. La ciencia le dio la razón en parte: el saber local había notado algo real mucho antes.',
+    dicen_cientifico: 'Hay estudios de laboratorio que encontraron que esta miel frena el crecimiento de algunas bacterias; no hay pruebas de que cure «de todo». (Abajo, en Fuente: autor, título, año y enlace).',
+  } },
   filas: [
     ['origen', 'Origen', '¿De dónde sale? ¿Quién lo produce?'],
     ['transmision', 'Cómo se transmite', '¿En la familia y la comunidad, o en la escuela, las revistas y los congresos?'],
@@ -444,6 +468,14 @@ CUADROS['producto-neuro'] = {
   sorteo: 'El producto que le tocó a su equipo por sorteo', sorteoInd: 'Tu producto', nombreVariante: 'El producto',
   ayuda: 'Imaginen que se lo quieren vender a su escuela. Júzguenlo con lo que dice el Tema 7 y con los cánones de cientificidad del Tema 2. La fila <b>🔎 Investiga</b> pide buscar en el celular un estudio o una revisión real, con su fuente.',
   columnas: [['equipo', 'Lo que escribe el equipo', '#3E5BA8']],
+  ejemplo: { caso: '🍬 Un producto inventado: gomitas «NeuroMax», «30 % más memoria en una semana»', celdas: {
+    promete_equipo: 'Que comer dos gomitas al día aumenta 30 % la memoria y mejora las calificaciones en una semana.',
+    mito_equipo: 'Que el cerebro se «potencia» con una sustancia mágica, sin estudiar ni practicar (una solución rápida para algo complejo).',
+    evidencia_equipo: 'Buscamos en Google Académico y no hay ningún estudio publicado sobre el producto; su página solo tiene testimonios. (Abajo, en Fuente: lo que consultaron, con enlace).',
+    canones_equipo: 'No es verificable: no dice quién midió el 30 % ni cómo. Promete demasiado y vende algo.',
+    mejor_equipo: 'Práctica de recuperación y práctica espaciada, y dormir bien: sí tienen evidencia y son gratis.',
+    veredicto_equipo: 'No lo compraríamos: es publicidad con palabras científicas, no ciencia.',
+  } },
   filas: [
     ['promete', 'Qué promete', '¿Qué dice que logra en los alumnos?'],
     ['mito', 'La idea que hay detrás', '¿Qué neuromito o qué idea sobre el cerebro lo sostiene?'],
