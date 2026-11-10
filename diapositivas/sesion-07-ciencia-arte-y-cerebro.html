@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 7 · Ciencia, arte y cerebro · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 7: Martes 17 de noviembre · 2 horas
+     6.3 y 6.4 Ciencia y arte; nuevo paradigma para la educación
+     7.1 a 7.4 Neurociencia del aprendizaje y neuromitos
+     Juego de 5 minutos «¿Neuromito o evidencia?», «Analiza un producto neuro» (en equipo,
+     Rúbrica de Tarea), Arena de repaso del Parcial 2 y asesoría de la Entrega 2.
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulos 6 y 7
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Temas 6 y 7 · Ciencia y arte, y neurociencia del aprendizaje",
+      dia: "Martes 17 de noviembre · Sesión 7 de 10",
+      titulo: "Ciencia, arte y cerebro",
+      subtitulo: "6.3 y 6.4 El profesional reflexivo y el docente investigador · 7.1 a 7.4 Qué dice la neurociencia del aprendizaje (y qué no)",
+      duracion: "2 horas",
+      minutos: "0-1",
+      notas: "Última clase antes del Parcial 2 (lunes 23). Ritmo ágil en 6.3 y 6.4; el peso está en el Tema 7 y en el producto «neuro». La Arena sirve de repaso del examen. Entrega 2: martes 24." },
+
+    { tipo: "objetivos",
+      intro: "Hoy unimos dos preguntas: ¿cómo piensa un buen maestro mientras enseña? y ¿qué sabemos de verdad sobre cómo aprende el cerebro?",
+      puntos: [
+        "Calentar con el juego **¿Neuromito o evidencia?**",
+        "Entender la relación entre **ciencia y arte** y el **profesional reflexivo** de Schön.",
+        "Reconocer al **docente investigador** (Stenhouse) y los **cuatro pilares** de Delors.",
+        "Conocer lo que la neurociencia sabe con solidez: **plasticidad, emoción, redes y los pilares de Dehaene**.",
+        "Distinguir un hallazgo de un **neuromito**. En equipo: **Analiza un producto «neuro»**.",
+        "Repasar para el **Parcial 2** en la Arena y avanzar la **Entrega 2**."
+      ],
+      pasoAPaso: true,
+      minutos: "1-2" },
+
+    { tipo: "plataforma",
+      etiqueta: "Calentamiento", tipoAct: "Individual · juego de 5 minutos",
+      titulo: "¿Neuromito o evidencia?",
+      enlace: "../tareas.html#neuromito", textoEnlace: "Tareas → ¿Neuromito o evidencia?",
+      minutos: "2-7", evaluacion: "Formativo",
+      notas: "Que jueguen sin haber leído: es mejor que se equivoquen ahora y lo vean en la tabla de neuromitos más tarde. Pregunta al final: ¿cuántos creían que solo usamos el 10 % del cerebro? ¿Y en los estilos de aprendizaje?",
+      pasos: [
+        "Escanea el QR: **Tareas → ¿Neuromito o evidencia?**",
+        "Frases que se oyen en las escuelas sobre el cerebro: ¿**neuromito** o tiene **evidencia**?",
+        "Elige **Básico**. Al responder, lee por qué."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tema",
+      titulo: "6.3 Ciencia y arte en el conocimiento",
+      etiqueta: "Una separación que no siempre existió",
+      puntos: [
+        "Hoy separamos: la ciencia sería **objetiva y rigurosa**; el arte, **subjetivo y libre**.",
+        "Pero **Leonardo da Vinci** era pintor, ingeniero y anatomista, y no veía contradicción.",
+        "En la ciencia también hay **intuición, imaginación y belleza**: los físicos prefieren a veces una ecuación por su «elegancia».",
+        "Muchas ideas clave llegaron **de pronto, en un descanso**… después de mucho trabajo."
+      ],
+      pasoAPaso: true,
+      minutos: "7-9" },
+
+    { tipo: "diagramaPasos",
+      titulo: "¿Dónde cabe la creatividad?",
+      minutos: "9-12",
+      intro: "Popper distinguía dos momentos en el trabajo científico. Avanza (→) y los separamos.",
+      notas: "Popper: contexto de descubrimiento y de justificación (la distinción viene de Reichenbach, pero el libro la presenta con Popper). Poincaré cuenta en Ciencia y método que la idea le llegó al poner el pie en el autobús y que, ya de regreso en Caen, la verificó con calma. Antes de revelar la respuesta, deja que el grupo opine.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Contexto de descubrimiento y contexto de justificación, unidos por la creatividad"><defs><marker id="fdj" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16213A"/></marker></defs><g data-paso="0" data-anim="resaltar"><rect x="20" y="40" width="270" height="250" rx="18" fill="#FFF4D6" stroke="#C98A2C" stroke-width="4"/><circle cx="155" cy="112" r="40" fill="#F2C14E" stroke="#C98A2C" stroke-width="3"/><rect x="138" y="150" width="34" height="22" rx="4" fill="#8A6A45"/><path d="M155,58 V40 M105,80 L92,70 M205,80 L218,70 M98,118 H82 M212,118 H228" stroke="#C98A2C" stroke-width="4" stroke-linecap="round"/><text x="155" y="208" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#16213A">Contexto de</text><text x="155" y="232" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#C98A2C">descubrimiento</text><text x="155" y="266" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">¿cómo se me ocurrió?</text></g><g data-paso="1" data-anim="resaltar"><rect x="350" y="40" width="270" height="250" rx="18" fill="#E3EEF7" stroke="#2E5E8C" stroke-width="4"/><circle cx="472" cy="108" r="36" fill="#fff" stroke="#2E5E8C" stroke-width="8"/><path d="M498,134 L532,168" stroke="#2E5E8C" stroke-width="12" stroke-linecap="round"/><path d="M456,108 l12,12 l22,-24" fill="none" stroke="#3F7A4F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text x="485" y="208" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#16213A">Contexto de</text><text x="485" y="232" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="20" fill="#2E5E8C">justificación</text><text x="485" y="266" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">¿cómo lo pruebo?</text></g><g data-paso="1" data-anim="fade"><path d="M296,165 H340" stroke="#16213A" stroke-width="5" marker-end="url(#fdj)"/></g><path data-paso="2" data-anim="trazo" pathLength="1" d="M155,296 C170,380 470,380 485,296" fill="none" stroke="#3F7A4F" stroke-width="8" stroke-linecap="round"/><g data-paso="2" data-anim="zoom"><rect x="150" y="372" width="340" height="56" rx="14" fill="#3F7A4F"/><text x="320" y="396" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#fff">el rigor no está reñido con la</text><text x="320" y="418" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#fff">creatividad: la necesita</text></g></svg>`,
+      pasos: [
+        { num: "Popper · 1", titulo: "Contexto de descubrimiento", color: "#C98A2C", texto: "**Cómo se le ocurre** a alguien una idea. Aquí cabe lo creativo, lo intuitivo, hasta lo irracional.", ejemplo: "Poincaré llevaba semanas con un problema matemático: la solución le llegó **al subir a un autobús**." },
+        { num: "Popper · 2", titulo: "Contexto de justificación", color: "#2E5E8C", texto: "**Cómo se pone a prueba** la idea. Aquí sí se exige rigor: datos, contrastación y crítica.", ejemplo: "De regreso a casa, Poincaré **comprobó** la idea con calma antes de darla por buena." },
+        { num: "Martínez Miguélez", titulo: "¿Y el arte?", color: "#3F7A4F",
+          pregunta: "Para Popper, la creatividad cabe en el descubrimiento. ¿Cabe también en la investigación misma?",
+          respuesta: "Para Martínez Miguélez (2004), **sí**: interpretar, categorizar y teorizar exigen creatividad, sensibilidad e intuición. **El rigor no está reñido con la creatividad: la necesita.**",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "pregunta",
+      pregunta: "Recuerda una clase en la que un maestro improvisó algo que salió muy bien. ¿Fue pura intuición?",
+      respuesta: "Casi nunca. Detrás hay un **saber que el maestro no puede explicar del todo**: el conocimiento tácito de Polanyi. Schön le puso nombre a lo que pasa en ese momento.",
+      minutos: "12-13",
+      notas: "Para pensar del libro (6.3). Que respondan dos o tres en voz alta antes de revelar." },
+
+    { tipo: "diagramaPasos",
+      titulo: "El profesional reflexivo",
+      minutos: "13-16",
+      intro: "Donald Schön (1983/1998) estudió cómo trabajan médicos, arquitectos y maestros. Avanza (→).",
+      notas: "Schön (1983/1998), El profesional reflexivo. Primero la crítica (racionalidad técnica) y luego los tres momentos a lo largo de una clase. La última pregunta conecta con su Taller de Formación y Práctica Docente: el diario de prácticas es reflexión sobre la acción.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="De la racionalidad técnica a la reflexión en y sobre la acción"><defs><marker id="fsc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4F5868"/></marker></defs><g data-paso="0" data-anim="resaltar"><rect x="30" y="34" width="190" height="64" rx="10" fill="#fff" stroke="#16213A" stroke-width="3"/><text x="125" y="62" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">Teoría</text><text x="125" y="84" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">científica</text><rect x="420" y="34" width="190" height="64" rx="10" fill="#fff" stroke="#16213A" stroke-width="3"/><text x="515" y="72" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">Práctica</text><path d="M226,66 H410" stroke="#4F5868" stroke-width="4" marker-end="url(#fsc)"/><text x="318" y="56" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="15" font-style="italic" fill="#4F5868">solo aplicar</text></g><g data-paso="0" data-anim="zoom"><circle cx="318" cy="84" r="18" fill="#A83232"/><path d="M309,75 l18,18 M327,75 l-18,18" stroke="#fff" stroke-width="4" stroke-linecap="round"/></g><text x="40" y="168" font-family="Public Sans,sans-serif" font-weight="700" font-size="14" fill="#4F5868" letter-spacing="1.5">UNA CLASE</text><text x="600" y="168" text-anchor="end" font-family="Public Sans,sans-serif" font-weight="700" font-size="14" fill="#4F5868" letter-spacing="1.5">DESPUÉS</text><path d="M40,240 H440" stroke="#D3D9E3" stroke-width="10" stroke-linecap="round"/><path d="M470,240 H600" stroke="#D3D9E3" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 14"/><path data-paso="1" data-anim="trazo" pathLength="1" d="M40,240 H260" stroke="#3F7A4F" stroke-width="10" stroke-linecap="round" fill="none"/><g data-paso="1" data-anim="zoom"><circle cx="130" cy="240" r="30" fill="#3F7A4F"/><path d="M118,252 v-20 a4,4 0 0 1 8,0 v-6 a4,4 0 0 1 8,0 v6 a4,4 0 0 1 8,0 v14 c0,8 -6,12 -12,12 h-4 c-4,0 -8,-3 -8,-6z" fill="#fff"/></g><g data-paso="1" data-anim="fade"><text x="130" y="306" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#3F7A4F">Conocimiento</text><text x="130" y="326" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#3F7A4F">en la acción</text><text x="130" y="350" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" fill="#4F5868">lo hago con destreza</text></g><path data-paso="2" data-anim="trazo" pathLength="1" d="M260,240 C290,240 300,200 330,200 C360,200 360,240 440,240" stroke="#C98A2C" stroke-width="10" stroke-linecap="round" fill="none"/><g data-paso="2" data-anim="zoom"><circle cx="330" cy="200" r="30" fill="#C98A2C"/><text x="330" y="212" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="800" font-size="30" fill="#fff">?!</text></g><g data-paso="2" data-anim="fade"><text x="330" y="306" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#C98A2C">Reflexión</text><text x="330" y="326" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#C98A2C">en la acción</text><text x="330" y="350" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" fill="#4F5868">ajusto sobre la marcha</text></g><g data-paso="3" data-anim="zoom"><rect x="500" y="204" width="64" height="76" rx="6" fill="#fff" stroke="#2E5E8C" stroke-width="4"/><path d="M512,224 H552 M512,238 H552 M512,252 H540" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M500,214 h-8 M500,234 h-8 M500,254 h-8" stroke="#2E5E8C" stroke-width="3"/></g><g data-paso="3" data-anim="fade"><text x="532" y="306" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#2E5E8C">Reflexión</text><text x="532" y="326" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#2E5E8C">sobre la acción</text><text x="532" y="350" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" fill="#4F5868">reviso lo que pasó</text></g><g data-paso="3" data-anim="subir"><rect x="120" y="384" width="400" height="44" rx="22" fill="#16213A"/><text x="320" y="412" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#E9C46A">el profesional reflexivo (Schön, 1983)</text></g></svg>`,
+      pasos: [
+        { num: "La crítica", titulo: "Racionalidad técnica", color: "#A83232", texto: "La idea de que el profesional **solo aplica** la teoría científica a la práctica.", ejemplo: "No explica qué hace un buen maestro ante una situación **única, incierta o conflictiva** que ningún manual previó." },
+        { num: "Schön · 1", titulo: "Conocimiento en la acción", color: "#3F7A4F", texto: "El saber **tácito** que se nota en lo que hacemos con destreza.", ejemplo: "Leer el ambiente de un grupo al entrar y saber cuándo callar." },
+        { num: "Schön · 2", titulo: "Reflexión en la acción", color: "#C98A2C", texto: "Pensar **mientras actuamos**: algo nos sorprende y ajustamos sobre la marcha.", ejemplo: "A los diez minutos la actividad no funciona: el maestro cambia la consigna y forma parejas." },
+        { num: "Schön · 3", titulo: "Reflexión sobre la acción", color: "#2E5E8C",
+          pregunta: "Si llevaste un **diario de prácticas**, ¿qué tipo de reflexión hacías al escribirlo?",
+          respuesta: "**Reflexión sobre la acción:** la que se hace **después**, al revisar lo ocurrido. Por ejemplo, preguntarte por qué una actividad funcionó en un grupo y no en otro.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tablaPasos",
+      titulo: "6.4 ¿Qué cambia en la escuela?",
+      columnas: ["De…", "A…"],
+      filas: [
+        ["Conocimiento **fragmentado**", "Conocimiento **relacionado**: proyectos y problemas que integran disciplinas."],
+        ["**Transmisión**", "**Construcción dialógica**: un maestro que crea situaciones para pensar juntos."],
+        ["Contenidos **abstractos**", "Aprendizajes **contextualizados**: parten de la realidad de los alumnos y su comunidad."],
+        ["La **certeza**", "La **incertidumbre**: preparar para un mundo cambiante (Morin, 1999)."],
+        ["Docente **técnico**", "Docente **investigador**: un profesional que investiga y transforma su práctica."]
+      ],
+      densa: true,
+      pie: "Antes de cada clic: **¿hacia dónde crees que cambia?**",
+      minutos: "16-18",
+      notas: "Es la síntesis de los Temas 4 a 6: método, complejidad, conocimiento tácito, diálogo de saberes y ciencia y arte. Pregunta rápida: ¿cuál de estos cambios ya ven en la NEM?" },
+
+    { tipo: "diagramaPasos",
+      titulo: "Los cuatro pilares de la educación",
+      minutos: "18-20",
+      intro: "Informe de la UNESCO coordinado por **Jacques Delors** (1996), *La educación encierra un tesoro*. Avanza (→).",
+      notas: "Junto con los siete saberes de Morin, inspiró muchas reformas en América Latina, incluidas varias en México. Pregunta al final: ¿cuál de los cuatro pilares descuida más la escuela que ustedes vivieron?",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Los cuatro pilares de la educación de Delors"><path d="M50,118 L320,28 L590,118 Z" fill="#16213A"/><text x="320" y="88" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="20" fill="#E9C46A">La educación</text><text x="320" y="110" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="14" fill="#fff">del siglo XXI (UNESCO, 1996)</text><rect x="66" y="118" width="508" height="16" fill="#4F5868"/><g data-paso="0" data-anim="resaltar"><rect x="96" y="144" width="68" height="184" fill="#2E5E8C"/><path d="M108,150 V322 M130,150 V322 M152,150 V322" stroke="#fff" stroke-opacity=".25" stroke-width="3"/><rect x="88" y="136" width="84" height="12" fill="#2E5E8C"/><circle cx="130" cy="236" r="26" fill="#fff"/><text x="130" y="246" text-anchor="middle" font-size="26">📚</text><text x="130" y="384" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#2E5E8C">Aprender</text><text x="130" y="406" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#2E5E8C">a conocer</text></g><g data-paso="1" data-anim="resaltar"><rect x="219" y="144" width="68" height="184" fill="#C98A2C"/><path d="M231,150 V322 M253,150 V322 M275,150 V322" stroke="#fff" stroke-opacity=".25" stroke-width="3"/><rect x="211" y="136" width="84" height="12" fill="#C98A2C"/><circle cx="253" cy="236" r="26" fill="#fff"/><text x="253" y="246" text-anchor="middle" font-size="26">🛠️</text><text x="253" y="384" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#C98A2C">Aprender</text><text x="253" y="406" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#C98A2C">a hacer</text></g><g data-paso="2" data-anim="resaltar"><rect x="353" y="144" width="68" height="184" fill="#3F7A4F"/><path d="M365,150 V322 M387,150 V322 M409,150 V322" stroke="#fff" stroke-opacity=".25" stroke-width="3"/><rect x="345" y="136" width="84" height="12" fill="#3F7A4F"/><circle cx="387" cy="236" r="26" fill="#fff"/><text x="387" y="246" text-anchor="middle" font-size="26">🤝</text><text x="387" y="384" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#3F7A4F">Aprender a</text><text x="387" y="406" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#3F7A4F">vivir juntos</text></g><g data-paso="3" data-anim="resaltar"><rect x="476" y="144" width="68" height="184" fill="#A83232"/><path d="M488,150 V322 M510,150 V322 M532,150 V322" stroke="#fff" stroke-opacity=".25" stroke-width="3"/><rect x="468" y="136" width="84" height="12" fill="#A83232"/><circle cx="510" cy="236" r="26" fill="#fff"/><text x="510" y="246" text-anchor="middle" font-size="26">🌱</text><text x="510" y="384" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#A83232">Aprender</text><text x="510" y="406" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#A83232">a ser</text></g><rect x="56" y="328" width="528" height="16" fill="#4F5868"/><rect x="40" y="344" width="560" height="12" fill="#16213A"/></svg>`,
+      pasos: [
+        { num: "Pilar 1", titulo: "Aprender a conocer", color: "#2E5E8C", texto: "Comprender el mundo y **aprender a aprender**, más que acumular datos.", ejemplo: "Enseñar a buscar, evaluar y relacionar información." },
+        { num: "Pilar 2", titulo: "Aprender a hacer", color: "#C98A2C", texto: "Poner en práctica lo aprendido y **enfrentar situaciones nuevas**.", ejemplo: "Un proyecto que resuelve un problema real de la comunidad." },
+        { num: "Pilar 3", titulo: "Aprender a vivir juntos", color: "#3F7A4F", texto: "Comprender al otro, trabajar en proyectos comunes y **resolver los conflictos dialogando**.", ejemplo: "El diálogo de saberes de los Temas 5 y 6." },
+        { num: "Pilar 4", titulo: "Aprender a ser", color: "#A83232", texto: "El **desarrollo integral** de la persona: cuerpo, mente, sensibilidad y responsabilidad.", ejemplo: "Recuerda a Damasio: quien aprende es un **ser humano completo**." }
+      ] },
+
+    { tipo: "diagramaPasos",
+      titulo: "El docente como investigador",
+      minutos: "20-23",
+      intro: "Lawrence **Stenhouse** (1975/1984): «no hay desarrollo del currículo sin desarrollo del profesor». Avanza (→).",
+      notas: "Caso del libro (En el aula mexicana): un equipo de una secundaria técnica implementa una estrategia de comprensión lectora durante un ciclo y la registra sistemáticamente. Conecta con la pregunta de la clase pasada: la investigación-acción de Elliott (1990) y la ciencia crítica de Carr y Kemmis (1986/1988) colocan al docente en el centro de la producción de conocimiento pedagógico.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="El ciclo del docente investigador"><defs><marker id="fst" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4F5868"/></marker></defs><circle cx="320" cy="220" r="150" fill="none" stroke="#E3E6EC" stroke-width="5" stroke-dasharray="4 10"/><g data-paso="1" data-anim="fade"><path d="M376,81 A150,150 0 0,1 459,164" fill="none" stroke="#4F5868" stroke-width="5" marker-end="url(#fst)"/></g><g data-paso="2" data-anim="fade"><path d="M459,276 A150,150 0 0,1 376,359" fill="none" stroke="#4F5868" stroke-width="5" marker-end="url(#fst)"/></g><g data-paso="3" data-anim="fade"><path d="M264,359 A150,150 0 0,1 181,276" fill="none" stroke="#4F5868" stroke-width="5" marker-end="url(#fst)"/></g><g data-paso="3" data-anim="fade"><path d="M181,164 A150,150 0 0,1 264,81" fill="none" stroke="#4F5868" stroke-width="5" marker-end="url(#fst)"/></g><g data-paso="0" data-anim="zoom"><circle cx="320" cy="70" r="56" fill="#2E5E8C"/><text x="320" y="66" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">Currículo</text><text x="320" y="86" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">= hipótesis</text></g><g data-paso="1" data-anim="zoom"><circle cx="470" cy="220" r="56" fill="#C98A2C"/><text x="470" y="216" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">Probar en</text><text x="470" y="236" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">el salón</text></g><g data-paso="2" data-anim="zoom"><circle cx="320" cy="370" r="56" fill="#3F7A4F"/><text x="320" y="366" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">Registrar</text><text x="320" y="386" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">evidencias</text></g><g data-paso="3" data-anim="zoom"><circle cx="170" cy="220" r="56" fill="#A83232"/><text x="170" y="216" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">Analizar</text><text x="170" y="236" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#fff">y escribir</text></g><g data-paso="4" data-anim="zoom"><circle cx="320" cy="220" r="62" fill="#E9C46A" stroke="#C98A2C" stroke-width="4"/><text x="320" y="210" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#16213A">conocimiento</text><text x="320" y="230" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#16213A">pedagógico</text><text x="320" y="250" text-anchor="middle" font-size="18">📄</text></g></svg>`,
+      pasos: [
+        { num: "Paso 1", titulo: "El currículo es una hipótesis", color: "#2E5E8C", texto: "Lo que dice el programa **no es una receta**: es una propuesta que el maestro pone a prueba.", ejemplo: "Una secundaria técnica decide probar una estrategia para mejorar la **comprensión lectora**." },
+        { num: "Paso 2", titulo: "Probar en el salón", color: "#C98A2C", texto: "La estrategia se aplica **durante un ciclo escolar**, con grupos reales.", ejemplo: "No se trata de «aplicarla y ya», sino de **observar qué pasa**." },
+        { num: "Paso 3", titulo: "Registrar evidencias", color: "#3F7A4F", texto: "Se registra **sistemáticamente** lo que ocurre.", ejemplo: "Diarios de clase, evidencias de los alumnos, evaluaciones con rúbrica y reuniones de análisis." },
+        { num: "Paso 4", titulo: "Analizar y escribir", color: "#A83232", texto: "Al final escriben **qué funcionó, qué no y por qué**… y el ciclo empieza otra vez con una hipótesis mejor." },
+        { num: "La pregunta", titulo: "¿Es conocimiento?", color: "#C98A2C",
+          pregunta: "Ese documento que escribió el equipo docente, ¿es conocimiento pedagógico?",
+          respuesta: "**Sí:** es sistemático, se apoya en evidencias y otras escuelas pueden **leerlo, criticarlo y aprovecharlo**. La pedagogía no se hace solo en las universidades: también en las aulas.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "palabrasHoy",
+      titulo: "Glosario de 6.3 y 6.4",
+      etiqueta: "Para el examen",
+      pasoAPaso: false,
+      minutos: "23-24",
+      notas: "Que los copien en su cuaderno; también están en el Glosario del Aula Virtual.",
+      terminos: ["Contexto de descubrimiento", "Contexto de justificación", "Racionalidad técnica", "Conocimiento en la acción", "Reflexión en la acción", "Reflexión sobre la acción", "Cuatro pilares de la educación", "Docente investigador"] },
+
+    { tipo: "pregunta",
+      pregunta: "¿Es cierto que solo usamos el 10 % del cerebro?",
+      respuesta: "**No.** Usamos prácticamente todo el cerebro; distintas zonas se activan según la tarea. Es uno de los **neuromitos** más difundidos.",
+      minutos: "24-25",
+      notas: "Pregunta de arranque del libro. Si alguien lo creía en el juego, no lo exhibas: el estudio de Dekker que veremos muestra que muchos docentes también lo creen." },
+
+    { tipo: "tema",
+      titulo: "Tema 7 · Neurociencia y aprendizaje",
+      etiqueta: "Un doble propósito",
+      puntos: [
+        "En el Tema 5 vimos que **el cerebro construye** lo que conoce. Ahora bajamos **al aula**.",
+        "Primero: lo que la investigación sabe **con razonable solidez** sobre cómo aprende el cerebro.",
+        "Segundo: distinguirlo de los **neuromitos**, creencias que circulan como científicas y que la investigación no respalda.",
+        "Es **epistemología aplicada**: usar los cánones de cientificidad del Tema 2 en un campo de moda."
+      ],
+      pasoAPaso: true,
+      minutos: "25-26" },
+
+    { tipo: "diagramaPasos",
+      titulo: "7.1 El cerebro que cambia",
+      minutos: "26-29",
+      intro: "De una neurona a una red que aprende. Avanza (→).",
+      notas: "La información no se guarda en un solo lugar, como en un archivero: está distribuida en redes. Hebb (1949) suele resumirse como «las neuronas que se activan juntas se conectan». La última pregunta tiene una consecuencia ética: ningún alumno es incapaz de aprender por naturaleza.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Neuronas, sinapsis, redes y plasticidad"><path d="M110,270 L250,170" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M110,270 L280,350" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M250,170 L420,250" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M280,350 L420,250" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M420,250 L560,170" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M420,250 L560,350" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M250,170 L280,350" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M560,170 L560,350" stroke="#D3D9E3" stroke-width="3" stroke-dasharray="5 6"/><path d="M110,270 L138,260" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L107,234" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L82,260" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L81,291" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L120,298" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><circle cx="110" cy="270" r="20" fill="#C9CED6"/><path d="M250,170 L278,160" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L247,134" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L222,160" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L221,191" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L260,198" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><circle cx="250" cy="170" r="20" fill="#C9CED6"/><path d="M280,350 L308,340" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L277,314" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L252,340" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L251,371" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L290,378" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><circle cx="280" cy="350" r="20" fill="#C9CED6"/><path d="M420,250 L448,240" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L417,214" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L392,240" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L391,271" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L430,278" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><circle cx="420" cy="250" r="20" fill="#C9CED6"/><path d="M560,170 L588,160" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L557,134" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L532,160" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L531,191" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L570,198" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><circle cx="560" cy="170" r="20" fill="#C9CED6"/><path d="M560,350 L588,340" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L557,314" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L532,340" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L531,371" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L570,378" stroke="#C9CED6" stroke-width="3" stroke-linecap="round"/><circle cx="560" cy="350" r="20" fill="#C9CED6"/><g data-paso="1" data-anim="fade"><path d="M110,270 L250,170" stroke="#2E5E8C" stroke-width="4"/><path d="M250,170 L278,160" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L247,134" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L222,160" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L221,191" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M250,170 L260,198" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><circle cx="250" cy="170" r="20" fill="#2E5E8C"/></g><g data-paso="1" data-anim="zoom"><circle cx="180.0" cy="220.0" r="15" fill="#E9C46A" stroke="#C98A2C" stroke-width="3"/><text x="158.0" y="206.0" text-anchor="end" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#C98A2C">sinapsis</text></g><g data-paso="2" data-anim="fade"><path d="M110,270 L250,170" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M110,270 L280,350" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M250,170 L420,250" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M280,350 L420,250" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M420,250 L560,170" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M420,250 L560,350" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M250,170 L280,350" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M560,170 L560,350" stroke="#2E5E8C" stroke-width="3" stroke-opacity=".55"/><path d="M280,350 L308,340" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L277,314" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L252,340" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L251,371" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M280,350 L290,378" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><circle cx="280" cy="350" r="20" fill="#2E5E8C"/><path d="M420,250 L448,240" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L417,214" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L392,240" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L391,271" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M420,250 L430,278" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><circle cx="420" cy="250" r="20" fill="#2E5E8C"/><path d="M560,170 L588,160" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L557,134" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L532,160" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L531,191" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,170 L570,198" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><circle cx="560" cy="170" r="20" fill="#2E5E8C"/><path d="M560,350 L588,340" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L557,314" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L532,340" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L531,371" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M560,350 L570,378" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><circle cx="560" cy="350" r="20" fill="#2E5E8C"/><text x="612" y="422" text-anchor="end" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#2E5E8C">una red</text></g><g data-paso="0" data-anim="zoom"><path d="M110,270 L138,260" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L107,234" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L82,260" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L81,291" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><path d="M110,270 L120,298" stroke="#2E5E8C" stroke-width="3" stroke-linecap="round"/><circle cx="110" cy="270" r="20" fill="#2E5E8C"/><text x="110" y="322" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#2E5E8C">una neurona</text></g><g data-paso="0" data-anim="fade"><text x="30" y="48" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="24" fill="#16213A">86 000 millones</text><text x="30" y="72" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">de neuronas en un cerebro humano</text></g><path data-paso="3" data-anim="trazo" pathLength="1" d="M110,270 L250,170 L420,250 L560,170" fill="none" stroke="#C98A2C" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><g data-paso="3" data-anim="fade"><text x="420" y="104" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#C98A2C">Hebb (1949): se activan juntas,</text><text x="420" y="126" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#C98A2C">se conectan más</text></g><g data-paso="4" data-anim="zoom"><rect x="40" y="394" width="460" height="42" rx="21" fill="#3F7A4F"/><text x="270" y="421" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="18" fill="#fff">✓ Nadie está condenado por su cerebro</text></g></svg>`,
+      pasos: [
+        { num: "Paso 1", titulo: "Neuronas", color: "#2E5E8C", texto: "El cerebro humano tiene alrededor de **86 000 millones** de neuronas." },
+        { num: "Paso 2", titulo: "Sinapsis", color: "#C98A2C", texto: "Se comunican en puntos llamados **sinapsis**: cada neurona puede comunicarse con miles de otras." },
+        { num: "Paso 3", titulo: "Redes", color: "#2E5E8C", texto: "La información no está guardada en un cajón, como en un archivero: está **distribuida en redes** que se activan juntas." },
+        { num: "Paso 4", titulo: "Plasticidad", color: "#C98A2C", texto: "Al aprender, unas conexiones **se fortalecen** y otras se debilitan. Por eso la práctica consolida y lo que no se usa se debilita.", ejemplo: "La plasticidad **dura toda la vida**, aunque es mayor en la infancia." },
+        { num: "La pregunta", titulo: "¿Condenado por su cerebro?", color: "#3F7A4F",
+          pregunta: "Un maestro dice de un alumno: «es que no le da la cabeza para las matemáticas». ¿Qué responde la plasticidad?",
+          respuesta: "**Nadie está condenado por su cerebro.** Las capacidades se desarrollan con la experiencia y con la enseñanza adecuada.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tablaPasos",
+      titulo: "Tres hallazgos para el aula",
+      columnas: ["Hallazgo", "Lo que dice la investigación", "Y en la escuela…"],
+      filas: [
+        ["**Periodos sensibles**", "Hay etapas en que ciertos aprendizajes son más fáciles, como distinguir los sonidos de una lengua.", "Pero **no son ventanas que se cierran**: leer, escribir o resolver problemas se aprenden a cualquier edad."],
+        ["**Cerebro adolescente**", "La **corteza prefrontal** (planear, controlar impulsos) madura hasta pasados los veinte años; la recompensa y lo social están muy activos.", "No es «falta de voluntad»: hay que acompañar con **estructura, sentido y participación**."],
+        ["**Sueño**", "Durante el sueño el cerebro **reactiva y reorganiza** lo aprendido: consolida la memoria.", "Dormir poco perjudica el aprendizaje: ¿horarios, tareas nocturnas, pantallas antes de dormir?"]
+      ],
+      revelar: "fila",
+      pie: "Antes de cada clic: **¿qué consecuencia tendrá en el salón?**",
+      minutos: "29-32",
+      notas: "Para quienes irán a secundaria o bachillerato, el cerebro adolescente es lo más útil: explica la sensibilidad a la opinión de los pares y la búsqueda de emociones intensas." },
+
+    { tipo: "pausa",
+      titulo: "¡Pausa activa!",
+      duracion: "2 minutos",
+      texto: "De pie. Sin ver tus notas, dile a quien tienes al lado **tres cosas** que aprendiste hoy. Luego cambien. Acabas de hacer **práctica de recuperación**: en un rato verás por qué funciona.",
+      minutos: "32-34" },
+
+    { tipo: "pregunta",
+      pregunta: "Un maestro de Historia de Campeche empieza la clase así: «¿Por qué creen que Campeche tenía murallas y baluartes? ¿De quién se defendía?». ¿Por qué no empezó con fechas?",
+      respuesta: "Porque **la curiosidad prepara al cerebro para aprender**: los alumnos lanzaron hipótesis (piratas, guerras) y la clase fue respondiendo **su propia** pregunta. Al final recordaban mucho más.",
+      minutos: "34-35",
+      notas: "Caso del libro (7.2, En el aula mexicana). La pregunta inicial no fue un truco motivacional: fue una manera de preparar el aprendizaje." },
+
+    { tipo: "tema",
+      titulo: "7.2 Pensar y sentir no se separan",
+      etiqueta: "El sistema cognitivo-afectivo",
+      puntos: [
+        "**Immordino-Yang y Damasio** (2007): las emociones **forman parte** del aprendizaje, no son un añadido.",
+        "**Estrés:** un poco moviliza la atención; el **intenso y prolongado** daña la memoria. Violencia, hambre o conflicto en casa no son «mala actitud».",
+        "**Curiosidad:** Mora (2013) lo resume así: «solo se puede aprender aquello que se ama».",
+        "**Lo social:** aprendemos observando, imitando y conversando, como decía **Vygotsky**."
+      ],
+      pasoAPaso: true,
+      minutos: "35-37",
+      notas: "Para pensar del libro: ¿qué emociones predominan en un examen? ¿Qué cambiaría en la evaluación si tomáramos en serio la relación entre emoción y cognición? Esta evidencia respalda un clima escolar seguro y vínculos de confianza." },
+
+    { tipo: "diagramaPasos",
+      titulo: "7.3 ¿Hemisferio izquierdo o derecho?",
+      minutos: "37-40",
+      intro: "Uno de los neuromitos más difundidos, y de dónde salió. Avanza (→).",
+      notas: "Sperry, premio Nobel en 1981, estudió pacientes a quienes se les había cortado el cuerpo calloso para tratar epilepsias graves. Hay especializaciones reales (en la mayoría, ciertas funciones del lenguaje dependen más del hemisferio izquierdo), pero no hay personas «de un hemisferio». La última pregunta es el cerebro triuno de MacLean, muy citado en cursos para docentes.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Los dos hemisferios, el cuerpo calloso y las redes cerebrales"><ellipse cx="215" cy="225" rx="105" ry="145" fill="#E3E6EC" stroke="#9AA3B2" stroke-width="3"/><ellipse cx="425" cy="225" rx="105" ry="145" fill="#E3E6EC" stroke="#9AA3B2" stroke-width="3"/><path d="M150,140 q20,-20 40,0 t40,0 M140,200 q25,-18 50,0 t50,0 M150,270 q20,18 40,0 t40,0 M170,330 q20,-14 40,0 M410,140 q20,-20 40,0 t40,0 M400,200 q25,-18 50,0 t50,0 M410,270 q20,18 40,0 t40,0 M420,330 q20,-14 40,0" fill="none" stroke="#C9CED6" stroke-width="3"/><rect x="296" y="180" width="48" height="90" rx="14" fill="#C9CED6"/><g data-paso="0" data-anim="resaltar"><ellipse cx="215" cy="225" rx="105" ry="145" fill="#2E5E8C" fill-opacity=".85"/><ellipse cx="425" cy="225" rx="105" ry="145" fill="#C98A2C" fill-opacity=".85"/><g font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#fff" text-anchor="middle"><text x="205" y="190">«lógico»</text><text x="205" y="222">«verbal»</text><text x="205" y="254">«analítico»</text><text x="435" y="190">«creativo»</text><text x="435" y="222">«intuitivo»</text><text x="435" y="254">«artístico»</text></g></g><g data-paso="1" data-anim="zoom"><path d="M320,160 V292" stroke="#A83232" stroke-width="5" stroke-dasharray="9 7"/><circle cx="320" cy="150" r="17" fill="#A83232"/><text x="320" y="157" text-anchor="middle" font-size="18" fill="#fff">✂</text></g><g data-paso="1" data-anim="fade"><text x="320" y="402" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#A83232">Sperry: pacientes con el cuerpo calloso cortado (casos excepcionales)</text></g><g data-paso="2" data-anim="fade"><ellipse cx="215" cy="225" rx="105" ry="145" fill="#CFE6D4" stroke="#3F7A4F" stroke-width="3"/><ellipse cx="425" cy="225" rx="105" ry="145" fill="#CFE6D4" stroke="#3F7A4F" stroke-width="3"/></g><g data-paso="2" data-anim="zoom"><rect x="294" y="158" width="52" height="136" rx="16" fill="#3F7A4F"/><circle cx="320" cy="150" r="19" fill="#3F7A4F"/><path d="M311,150 l6,6 l12,-13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M304,212 h32 M304,238 h32" stroke="#fff" stroke-width="4"/><path d="M330,204 l8,8 l-8,8 M310,230 l-8,8 l8,8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g><g data-paso="2" data-anim="zoom"><rect x="140" y="14" width="360" height="44" rx="22" fill="#fff" stroke="#3F7A4F" stroke-width="3"/><text x="320" y="43" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#3F7A4F">✓ en un cerebro sano, trabajan juntos</text></g><path data-paso="3" data-anim="trazo" pathLength="1" d="M170,130 L250,175 L320,225 L400,160 L470,120 M250,175 L200,300 L320,225 L440,300 L400,160 M200,300 L300,345 L440,300" fill="none" stroke="#E9C46A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><g data-paso="3" data-anim="fade" fill="#E9C46A" stroke="#16213A" stroke-width="2"><circle cx="170" cy="130" r="8"/><circle cx="250" cy="175" r="8"/><circle cx="320" cy="225" r="8"/><circle cx="400" cy="160" r="8"/><circle cx="470" cy="120" r="8"/><circle cx="200" cy="300" r="8"/><circle cx="440" cy="300" r="8"/><circle cx="300" cy="345" r="8"/></g><g data-paso="3" data-anim="fade"><text x="320" y="428" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#16213A">Redes integradas: atención, memoria, lenguaje, emoción…</text></g></svg>`,
+      pasos: [
+        { num: "El mito", titulo: "Personas «de un hemisferio»", color: "#2E5E8C", texto: "Unos serían de **hemisferio izquierdo** (lógicos, verbales) y otros de **hemisferio derecho** (creativos, intuitivos), y habría que enseñar distinto a cada uno." },
+        { num: "De dónde salió", titulo: "Los pacientes de Sperry", color: "#A83232", texto: "Roger **Sperry** (Nobel 1981) estudió pacientes con el **cuerpo calloso cortado**: en esas condiciones excepcionales, cada hemisferio procesaba la información distinto.", ejemplo: "Una investigación real, **mal interpretada** fuera del laboratorio." },
+        { num: "Lo que sabemos", titulo: "Trabajan juntos", color: "#3F7A4F", texto: "En un cerebro sano los dos hemisferios **trabajan juntos constantemente**, comunicados por el cuerpo calloso." },
+        { num: "Lo que sabemos", titulo: "Redes integradas", color: "#C98A2C", texto: "Leer, resolver un problema o pintar activan **redes** que cruzan ambos hemisferios: atención, memoria, lenguaje, emoción.", ejemplo: "La «armonía» del cerebro no es equilibrar dos mitades: es **integrar muchas redes**." },
+        { num: "Otro mito", titulo: "El cerebro triuno", color: "#A83232",
+          pregunta: "¿Tenemos un cerebro «reptiliano», uno «emocional» y uno «racional», apilados como capas?",
+          respuesta: "**No.** Es una metáfora atractiva de MacLean, pero la neurociencia actual la considera superada: la evolución **no apiló cerebros**, y razón y emoción son **redes que se entrelazan**." }
+      ] },
+
+    { tipo: "diagramaPasos",
+      titulo: "7.4 Los cuatro pilares del aprendizaje",
+      minutos: "40-43",
+      intro: "Stanislas **Dehaene** (2018/2019), *¿Cómo aprendemos?*: lo que la ciencia cognitiva sabe con más solidez. Avanza (→).",
+      notas: "Antes de la última respuesta, deja que voten: ¿qué pilar falla? La retroalimentación sirve si es rápida, precisa y sin castigo. Conecta la consolidación con el sueño (7.1) y con la práctica espaciada (siguiente diapositiva).",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Los cuatro pilares del aprendizaje de Dehaene"><g data-paso="0" data-anim="fade"><path d="M280,145 L250,120" stroke="#2E5E8C" stroke-width="4"/></g><g data-paso="1" data-anim="fade"><path d="M360,145 L390,120" stroke="#C98A2C" stroke-width="4"/></g><g data-paso="2" data-anim="fade"><path d="M360,295 L390,320" stroke="#A83232" stroke-width="4"/></g><g data-paso="3" data-anim="fade"><path d="M280,295 L250,320" stroke="#3F7A4F" stroke-width="4"/></g><circle cx="320" cy="220" r="72" fill="#16213A"/><text x="320" y="214" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="22" fill="#E9C46A">Aprender</text><text x="320" y="240" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" fill="#fff">Dehaene (2019)</text><g data-paso="0" data-anim="subir"><rect x="20" y="20" width="250" height="104" rx="14" fill="#fff" stroke="#2E5E8C" stroke-width="4"/><rect x="20" y="20" width="12" height="104" rx="6" fill="#2E5E8C"/><text x="50" y="62" font-size="26">👁️</text><text x="84" y="62" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#2E5E8C">Atención</text><text x="50" y="98" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">sin atención, no se aprende</text></g><g data-paso="1" data-anim="subir"><rect x="370" y="20" width="250" height="104" rx="14" fill="#fff" stroke="#C98A2C" stroke-width="4"/><rect x="370" y="20" width="12" height="104" rx="6" fill="#C98A2C"/><text x="400" y="62" font-size="26">✋</text><text x="434" y="62" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#C98A2C">Compromiso activo</text><text x="400" y="98" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">predecir, intentar, responder</text></g><g data-paso="2" data-anim="subir"><rect x="370" y="316" width="250" height="104" rx="14" fill="#fff" stroke="#A83232" stroke-width="4"/><rect x="370" y="316" width="12" height="104" rx="6" fill="#A83232"/><text x="400" y="358" font-size="26">🔁</text><text x="434" y="358" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#A83232">Retroalimentación</text><text x="400" y="394" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">el error es información</text></g><g data-paso="3" data-anim="subir"><rect x="20" y="316" width="250" height="104" rx="14" fill="#fff" stroke="#3F7A4F" stroke-width="4"/><rect x="20" y="316" width="12" height="104" rx="6" fill="#3F7A4F"/><text x="50" y="358" font-size="26">💤</text><text x="84" y="358" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#3F7A4F">Consolidación</text><text x="50" y="394" font-family="Public Sans,sans-serif" font-size="15" fill="#4F5868">práctica, espaciado y sueño</text></g><g data-paso="4" data-anim="zoom"><rect x="358" y="304" width="274" height="128" rx="20" fill="none" stroke="#A83232" stroke-width="5" stroke-dasharray="10 7"/></g></svg>`,
+      pasos: [
+        { num: "Pilar 1", titulo: "Atención", color: "#2E5E8C", texto: "El cerebro **selecciona** la información: lo que no recibe atención difícilmente se aprende.", ejemplo: "Una clase con demasiados estímulos a la vez, o con distracciones constantes, dificulta aprender." },
+        { num: "Pilar 2", titulo: "Compromiso activo", color: "#C98A2C", texto: "Un organismo pasivo aprende poco: el alumno debe **generar hipótesis, intentar, responder, predecir**.", ejemplo: "No es que se mueva todo el tiempo: es que **su mente esté activa**." },
+        { num: "Pilar 3", titulo: "Retroalimentación del error", color: "#A83232", texto: "El cerebro aprende cuando nota la diferencia entre **lo que esperaba y lo que ocurrió**. El error es información, no fracaso." },
+        { num: "Pilar 4", titulo: "Consolidación", color: "#3F7A4F", texto: "Lo aprendido debe **volverse automático** para liberar la mente.", ejemplo: "Requiere práctica, **repetición espaciada y sueño**." },
+        { num: "La pregunta", titulo: "¿Qué pilar falla?", color: "#A83232",
+          pregunta: "Un examen se devuelve **tres semanas después**, solo con la calificación y sin comentarios. ¿Qué pilar se descuida?",
+          respuesta: "La **retroalimentación del error**: para aprender del error hace falta saber **cuál fue**, y pronto. Una retroalimentación rápida y precisa, sin castigo, es de las herramientas más poderosas.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tablaPasos",
+      titulo: "¿Cómo estudias tú?",
+      columnas: ["Técnica", "Utilidad", "En qué consiste"],
+      filas: [
+        ["**Releer**", "**Baja**", "Leer otra vez el mismo texto. Se siente cómodo, pero rinde poco."],
+        ["**Subrayar**", "**Baja**", "Marcar el texto. Muy usado, de poca utilidad."],
+        ["**Práctica de recuperación**", "**Alta**", "**Intentar recordar**: preguntas, tarjetas, cuestionarios sin calificación."],
+        ["**Práctica espaciada**", "**Alta**", "Estudiar en **varias sesiones**, no todo la noche antes del examen."],
+        ["**Práctica intercalada**", "Moderada", "Alternar tipos de problemas para aprender **cuándo usar cada estrategia**."],
+        ["**Elaboración**", "Moderada", "Explicar con tus palabras y **preguntarte por qué**; relacionarlo con lo que ya sabes."]
+      ],
+      revelar: "fila", densa: true,
+      pie: "Antes de cada clic, **vota con la mano**: ¿utilidad alta, moderada o baja? (Dunlosky et al., 2013)",
+      minutos: "43-46",
+      notas: "Dunlosky y colegas (2013) compararon diez técnicas de estudio: solo dos obtuvieron utilidad alta (recuperación y espaciada); releer y subrayar, que son las más usadas, salieron bajas; la intercalada y la elaboración, moderadas. Roediger y Karpicke (2006) lo mostraron experimentalmente: quienes practicaban recordando retenían más a largo plazo que quienes solo releían. Mensaje: enseñar a estudiar es una tarea pedagógica fundamentada. Para el Parcial 2 del lunes: que no relean, que se pregunten (como en la pausa activa)." },
+
+    { tipo: "tablaPasos",
+      titulo: "Neuromitos frecuentes en la escuela (1)",
+      columnas: ["Se dice…", "Lo que dice la evidencia"],
+      filas: [
+        ["Solo usamos el **10 %** del cerebro.", "Usamos prácticamente todo; distintas zonas se activan según la tarea."],
+        ["Hay personas de **hemisferio izquierdo** y de **hemisferio derecho**.", "Los hemisferios trabajan juntos; no hay un hemisferio dominante como rasgo de aprendizaje."],
+        ["Se aprende mejor según el **estilo** visual, auditivo o kinestésico.", "No hay evidencia de que adaptar la enseñanza al estilo preferido mejore el aprendizaje (Pashler et al., 2008). Sí ayuda presentar el contenido en **varios formatos a todos**."],
+        ["La **gimnasia cerebral** conecta los hemisferios.", "No hay evidencia de esos efectos; la actividad física en general sí favorece la salud y el bienestar."]
+      ],
+      densa: true,
+      pie: "Antes de cada clic: **¿qué crees que dice la evidencia?**",
+      minutos: "46-48",
+      notas: "Tabla del libro (7.4). Si en el juego del inicio falló mucho alguna, detente ahí. Los productos del trabajo en equipo salen de esta tabla: gimnasia cerebral, apps, test VAK, hemisferio derecho, Mozart y «tres años»." },
+
+    { tipo: "tablaPasos",
+      titulo: "Neuromitos frecuentes en la escuela (2)",
+      columnas: ["Se dice…", "Lo que dice la evidencia"],
+      filas: [
+        ["Escuchar a **Mozart** hace más inteligentes a los niños.", "Fue un efecto pequeño y pasajero que no se ha confirmado de manera consistente."],
+        ["Todo se juega antes de los **tres años**.", "Hay periodos sensibles, pero la plasticidad dura toda la vida."],
+        ["El **azúcar** provoca hiperactividad.", "Los estudios controlados no han encontrado ese efecto en la conducta de los niños."]
+      ],
+      pie: "Antes de cada clic: **¿qué crees que dice la evidencia?**",
+      minutos: "48-49",
+      notas: "Pregunta antes de revelar el azúcar: ¿cuántos lo han oído en una fiesta infantil? La evidencia no respalda el efecto en la conducta." },
+
+    { tipo: "dato",
+      titulo: "Hasta los maestros caen",
+      cifra: "½",
+      texto: "En promedio, docentes del Reino Unido y los Países Bajos aceptaron **cerca de la mitad** de los neuromitos que se les presentaron. Y los más interesados en la neurociencia **no estaban protegidos**: a veces aceptaban más, quizá por estar expuestos a materiales comerciales de baja calidad.",
+      fuente: "Dekker et al. (2012). Howard-Jones (2014) documentó cómo estos mitos se difunden en todo el mundo.",
+      minutos: "49-50" },
+
+    { tipo: "tema",
+      titulo: "El test de estilos de aprendizaje",
+      etiqueta: "En el aula mexicana",
+      puntos: [
+        "En muchas escuelas se aplica al inicio del ciclo un test para clasificar a los alumnos en **visuales, auditivos o kinestésicos**.",
+        "Tres preguntas epistemológicas: **¿qué evidencia la respalda? ¿quién la promueve? ¿qué pasaría si fuera falsa?**",
+        "Las preferencias existen, pero **eso no significa que aprendan mejor así** (Pashler et al., 2008).",
+        "**Cautela:** entre un hallazgo de laboratorio y una receta para el salón hay **una gran distancia**. Ante cualquier propuesta «neuro»: ¿dónde está la evidencia?, ¿quién la produjo?, ¿se ha replicado?"
+      ],
+      pasoAPaso: true,
+      minutos: "50-51",
+      notas: "Taller APA del libro: dos autores siempre ambos (Immordino-Yang y Damasio, 2007); tres o más, «et al.» desde la primera cita (Pashler et al., 2008); en la lista de referencias, todos los autores hasta 20." },
+
+    { tipo: "plataforma",
+      etiqueta: "Actividad en equipo", tipoAct: "En equipo · en vivo",
+      titulo: "Analiza un producto «neuro»",
+      enlace: "../tareas.html#producto-neuro", textoEnlace: "Tareas → Analiza un producto «neuro»",
+      minutos: "51-71", evaluacion: "Sumativo · Rúbrica de Tarea",
+      notas: "Antes: Panel → Tareas → Tareas digitales → 👥 de «Analiza un producto neuro» y proyecta los QR. A cada equipo le toca por sorteo: gimnasia cerebral, app de entrenamiento cerebral, test VAK, curso del hemisferio derecho, Mozart para bebés o estimulación temprana «todo antes de los tres años». Abajo de cada campo verán un ejemplo guía con un producto inventado (gomitas NeuroMax): que no lo copien. La fila 🔎 pide un estudio o revisión real con su fuente. Quien no escriba nada saldrá con 0 (✋ No aportó).",
+      pasos: [
+        "Escanea el **QR de tu equipo**: la plataforma les asigna un **producto** por sorteo.",
+        "Imaginen que se lo quieren **vender a su escuela**: ¿qué promete y qué idea del cerebro hay detrás?",
+        "🔎 **Investiguen** qué dice la evidencia, con su fuente, y apliquen los **cánones de cientificidad**.",
+        "¿Qué usarían **en su lugar**? Su **veredicto**: ¿lo comprarían?"
+      ],
+      pasoAPaso: true },
+
+    { tipo: "plataforma",
+      etiqueta: "Puesta en común", tipoAct: "Todo el grupo",
+      titulo: "¿Lo compramos o no?",
+      minutos: "71-79", evaluacion: "Formativo",
+      notas: "Panel → Monitor en vivo → «Analiza un producto neuro» → toca la tarjeta de cada equipo (⛶ Pantalla completa). Pregunta clave: ¿qué tienen en común todos los productos? (Prometen mucho, citan poco, venden algo.) Al final, 🔑 Liberar clave.",
+      pasos: [
+        "Cada equipo presenta su producto en **un minuto**: qué promete y su **veredicto**.",
+        "¿Qué tienen **en común** todos los productos?",
+        "¿Qué **principio con evidencia** usarían en su lugar?",
+        "Al final se libera la **clave**: comparen en su celular."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "plataforma",
+      etiqueta: "Arena en vivo", tipoAct: "Todo el grupo · desde el celular",
+      titulo: "Arena de repaso del Parcial 2",
+      enlace: "../tareas.html#arena", textoEnlace: "Tareas → ⚡ Arena en vivo",
+      minutos: "79-94", evaluacion: "Participación (Arena de repaso)",
+      notas: "Panel docente → ⚡ Arena → «Repaso del Parcial 2 · cierre del Tema 4 y Temas 5 a 7», 20 segundos → Abrir la sala y proyectar. Cuando estén todos, ▶ Empezar. En cada respuesta, detente unos segundos a explicar con la frase que aparece abajo. Si sobra tiempo, puedes abrir el ⚖️ Tribunal de la ciencia (opcional).",
+      pasos: [
+        "Escanea el QR o entra a **Aula Virtual → Tareas → ⚡ Arena en vivo** con tu nombre y PIN.",
+        "Preguntas contra el reloj del **cierre del Tema 4 y los Temas 5 a 7**.",
+        "Cuenta la **rapidez**, pero sobre todo **acertar**. Al final, el podio.",
+        "Es **práctica de recuperación**: justo lo que recomienda Dunlosky para estudiar."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "palabrasHoy",
+      titulo: "Glosario del Tema 7",
+      etiqueta: "Para el examen",
+      pasoAPaso: false,
+      minutos: "94-95",
+      terminos: ["Sinapsis", "Plasticidad cerebral", "Periodo sensible", "Corteza prefrontal", "Consolidación", "Neuromito", "Práctica de recuperación", "Práctica espaciada", "Retroalimentación"] },
+
+    { tipo: "tema",
+      titulo: "Asesoría: hacia la Entrega 2",
+      etiqueta: "Martes 24 de noviembre",
+      puntos: [
+        "Son las **preguntas 1 a 14** en texto continuo, de **150 a 250 palabras** cada una, con **mínimo 6 referencias** APA.",
+        "Las preguntas 1 a 6 se **corrigen** con la retroalimentación de la Entrega 1.",
+        "Revisa tu borrador: ¿cada respuesta habla de **tu pregunta de investigación**, o podría ser de cualquiera?",
+        "¿Cada respuesta **nombra un concepto del curso** y lo apoya en un **autor citado**?",
+        "Lista de **Referencias** (no «Bibliografía»): solo lo que citaste, en orden alfabético y con **sangría francesa**."
+      ],
+      pasoAPaso: true,
+      minutos: "95-98",
+      notas: "Aquí comenta los errores frecuentes que viste al calificar la Entrega 1. Taller APA de 6.4: «Referencias» incluye solo las obras citadas, y todas; orden alfabético por el primer autor; sangría francesa; varias obras del mismo autor, de la más antigua a la más reciente." },
+
+    { tipo: "ejemplo",
+      numero: 10,
+      pregunta: "¿Cómo darás rigor a tu investigación?",
+      respuesta: "Daré rigor de tres maneras. Primero, **triangularé** los resultados de la prueba de comprensión con las entrevistas a los alumnos y con mi diario de clase, para que ninguna fuente sola sostenga mis conclusiones (Martínez Miguélez, 2004). Segundo, practicaré la **reflexividad**: en el diario anotaré lo que espero encontrar, porque sé que estoy a favor de la lectura en voz alta. Tercero, otra persona calificará las pruebas **sin saber de qué grupo** es cada una. Como dice Stenhouse (1975/1984), mi investigación en el aula vale si otros pueden revisar cómo la hice.",
+      fuente: "Caso ficticio. Observa: tres acciones concretas, cada una con su porqué, y no solo «seré objetivo».",
+      minutos: "98-100" },
+
+    { tipo: "ejemplo",
+      numero: 11,
+      pregunta: "¿Hay algún neuromito o creencia sin evidencia cerca de tu tema? ¿Cómo lo evitarías?",
+      respuesta: "Sí. Cerca de mi tema circula la idea de que la lectura en voz alta solo ayuda a los alumnos **«auditivos»**. Es el neuromito de los **estilos de aprendizaje**: no hay evidencia de que adaptar la enseñanza al estilo preferido mejore el aprendizaje (Pashler et al., 2008). Para evitarlo, no clasificaré a los alumnos por estilos ni interpretaré mis resultados con esa idea; en cambio, me apoyaré en principios con evidencia, como el **compromiso activo** y la **retroalimentación del error** (Dehaene, 2018/2019), y haré preguntas durante la lectura para que los alumnos predigan y recuerden.",
+      fuente: "Caso ficticio. Fíjate: nombra el mito, cita la evidencia que lo desmiente y dice qué hará en su lugar.",
+      minutos: "100-102" },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 10, texto: "¿Cómo darás rigor a tu investigación? (triangulación, reflexividad, criterios de calidad)" },
+        { numero: 11, texto: "¿Hay algún neuromito o creencia sin evidencia cerca de tu tema? ¿Cómo lo evitarías?" },
+        { numero: 12, texto: "¿Qué interés guía tu investigación: técnico, práctico o emancipatorio? (Habermas)" },
+        { numero: 13, texto: "¿Qué objetaría Feyerabend o Morin a tu método? ¿Cómo responderías?" },
+        { numero: 14, texto: "Redacta tu tesis provisional: ¿tu investigación es ciencia y de qué tipo?" }
+      ],
+      minutos: "102-107",
+      notas: "Con estas cinco se completan las 14 preguntas de la Entrega 2 (martes 24). Si hay tiempo, que empiecen la 11 en clase: es la que se conecta con lo de hoy." },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "Según Schön, ¿cómo se llama pensar y ajustar mientras actuamos?", respuesta: "**Reflexión en la acción.**" },
+        { pregunta: "Para Stenhouse, ¿qué es el currículo?", respuesta: "**Una hipótesis** que el maestro pone a prueba en su salón." },
+        { pregunta: "¿Qué es la plasticidad cerebral?", respuesta: "La capacidad del cerebro de **modificar sus conexiones** con la experiencia, **toda la vida**." },
+        { pregunta: "Nombra los cuatro pilares del aprendizaje de Dehaene.", respuesta: "**Atención, compromiso activo, retroalimentación del error y consolidación.**" },
+        { pregunta: "¿Qué dos técnicas de estudio tienen utilidad alta según Dunlosky?", respuesta: "**Práctica de recuperación y práctica espaciada.**" }
+      ],
+      minutos: "107-115",
+      notas: "Es práctica de recuperación: que respondan sin ver sus notas." },
+
+    { tipo: "cierre",
+      evidencia: "**Analiza un producto «neuro»** de cada equipo y puntaje de la **Arena de repaso**.",
+      materiales: "Libro de texto (Temas 6 y 7), Aula Virtual y **celular con internet**.",
+      proxima: "**Lunes 23: Examen Parcial 2** (cierre del Tema 4 y Temas 5 a 7). Estudia con las actividades de repaso del Aula Virtual: **recuperación y espaciada**, no releer. **Martes 24: Entrega 2** (preguntas 1 a 14). Leer **8.1 a 8.3 y el Tema 9** para el martes 24.",
+      minutos: "115-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>
