@@ -4,6 +4,7 @@
    ===================================================================== */
 (function () {
   const REVEAL = "https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/";
+  const AQUI = (document.currentScript && document.currentScript.src) || location.href;   // para cargar pasos.js junto a este archivo
 
   /* ---------- 1. Estilos ---------- */
   function link(href) {
@@ -240,17 +241,6 @@
 
     // Diagrama que se arma paso a paso. En el SVG, cada elemento con data-paso="n" aparece en el paso n
     // (data-anim: zoom, expandir, caer, derecha o fade); a la derecha va una tarjeta por paso.
-    diagramaPasos: d => {
-      const svg = String(d.svg || "").replace(/data-paso="(\d+)"(?:\s+data-anim="(\w+)")?(?:\s+class="([^"]*)")?/g,
-        (m, n, an, cl) => `class="fragment dpa-${an || "fade"}${cl ? " " + cl : ""}" data-fragment-index="${n}"`);
-      const L = d.pasos || [];
-      const cards = L.map((p, i) => `<div class="dp-card fragment${i < L.length - 1 ? " fade-in-then-out" : ""}" data-fragment-index="${i}" style="--c:${esc(p.color || "#16213A")}">
-          <div class="num">${esc(p.num || `Paso ${i + 1}`)}</div><h3>${esc(p.titulo)}</h3>${(Array.isArray(p.texto) ? p.texto : [p.texto]).filter(Boolean).map(t => `<p>${txt(t)}</p>`).join("")}${p.ejemplo ? `<div class="ej">${txt(p.ejemplo)}</div>` : ""}</div>`).join("");
-      return `<h2>${esc(d.titulo)}</h2>
-      <div class="dp"><div class="dp-fig">${svg}</div>
-        <div class="dp-cards">${d.intro ? `<div class="dp-card intro fragment fade-out" data-fragment-index="0"><p>${txt(d.intro)}</p></div>` : ""}${cards}</div></div>`;
-    },
-
     imagen: d => `
       <h2>${esc(d.titulo)}</h2>
       <figure>${img(d.imagen, d.pie || d.titulo)}${d.pie ? `<figcaption>${esc(d.pie)}</figcaption>` : ""}</figure>`,
@@ -320,7 +310,7 @@
 
   function crear(d) {
     const sec = document.createElement("section");
-    const fn = plantillas[d.tipo];
+    const fn = plantillas[d.tipo] || (window.PASOS && window.PASOS.plantillas[d.tipo]);
     sec.className = "d-" + (fn ? d.tipo : "tema");
     sec.innerHTML = fn ? fn(d) : `<div class="vacio">Tipo de diapositiva desconocido: “${esc(d.tipo)}”.</div>`;
     if (COLOR[d.tipo]) sec.setAttribute("data-background-color", COLOR[d.tipo]);
@@ -439,8 +429,8 @@
   }
 
   function iniciar() {
-    construir();
-    script(REVEAL + "dist/reveal.js")
+    script(new URL("pasos.js?v=2026111001", AQUI).href).catch(() => console.warn("No se pudo cargar pasos.js"))
+      .then(() => { construir(); return script(REVEAL + "dist/reveal.js"); })
       .then(() => script(REVEAL + "plugin/notes/notes.js").catch(() => {}))
       .then(() => {
         Reveal.initialize({
@@ -448,6 +438,7 @@
           width: 1280, height: 720, margin: 0.04, preloadIframes: false,
           plugins: window.RevealNotes ? [RevealNotes] : []
         });
+        if (window.PASOS) window.PASOS.activar(Reveal);
         if (DOCENTE) modoDocente();
       })
       .catch(() => {
