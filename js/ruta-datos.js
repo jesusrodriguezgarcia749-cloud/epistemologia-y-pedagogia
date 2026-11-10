@@ -2,7 +2,7 @@
 // Se guarda en grupos/{g}/alumnos/{a}/atlas/{RUTA.ind}:
 //   hechas.{estación} = ms · checks.{tarjeta} = { ok, intentos } · juego = { bien, total }
 //   salida.{p1,p2,p3} · bitacora.{campo} · entregado = { t }
-// Cuenta como tarea del Parcial 2 (dig-clase-autoguiada). La bitácora de la conferencia, como participación.
+// Cuenta como tarea del Parcial 2 (dig-clase-autoguiada). (La bitácora de la conferencia se quitó: R.bitacora es opcional.)
 
 const palabras = t => (String(t || '').trim().match(/\S+/g) || []).length;
 const r1 = n => Math.round(n * 10) / 10;
@@ -15,7 +15,6 @@ export const RUTAS = {
     id: 'clase-autoguiada', ind: 'tarea-clase-autoguiada',
     titulo: 'Clase autoguiada · Temas 5 y 6',
     intro: 'Hoy no hay clase en el salón, así que la clase viene a ti. Recorre las estaciones en orden: cada una se desbloquea al terminar la anterior. Calcula unos <b>90 minutos</b>; puedes hacerla en partes, todo se guarda solo.',
-    participacion: { id: 'dig-bitacora-conferencia', nombre: 'Bitácora de la conferencia', fecha: '2026-11-10' },
     estaciones: [
       { id: 'calienta', tipo: 'juego', ico: '🎮', titulo: 'Calentamiento: ¿Qué obstáculo es?', min: 5,
         desc: 'Juega una ronda (la que quieras). No importa cuántas aciertes: te prepara para la mini-lección. Al terminar la ronda se desbloquea la siguiente estación.' },
@@ -135,15 +134,6 @@ export const RUTAS = {
           ['p3', 'Propón un ejemplo de diálogo de saberes para un aula de Campeche y explica cómo evitarías caer en el cientificismo o en el relativismo ingenuo.'],
         ] },
     ],
-    bitacora: { id: 'conferencia', ico: '🎤', titulo: 'Bitácora de la conferencia', extra: true,
-      desc: 'Hazla el mismo día de la conferencia, mientras la tienes fresca. Cuenta como <b>participación</b>. Se abre desde ahora, no necesitas terminar las otras estaciones.',
-      campos: [
-        ['tema', 'Título o tema de la conferencia y quién la dio', 'Ej.: «La inclusión en el aula», Mtra. …'],
-        ['idea', 'Una idea que te llevaste, con tus palabras', '¿Qué dijo que te pareció importante o te hizo pensar?'],
-        ['autor', 'Relaciónala con un autor o concepto del curso', 'Ej.: Bachelard (obstáculos), Kuhn (paradigma), Freire (diálogo), Polanyi (saber tácito)… ¿Por qué se relacionan?'],
-        ['tipo', '¿Desde qué tipo de conocimiento habló?', '¿Científico (estudios, datos), ordinario o local (experiencia, comunidad), tácito (su práctica)? Justifica.'],
-        ['pregunta', 'Una pregunta que le harías al ponente', 'Una pregunta de verdad, que te interese.'],
-      ] },
   },
 };
 
@@ -159,5 +149,5 @@ export function sugerirRuta(R, S) {
   return { nota: r1(nota), hechas, total: est.length, primera, tarjetas: tarjetas.length, resp, preguntas: sal ? sal.preguntas.length : 0,
     detalle: `${hechas}/${est.length} estaciones · ${primera}/${tarjetas.length} tarjetas al primer intento · salida ${resp}/${sal ? sal.preguntas.length : 0}` };
 }
-export const bitacoraCompleta = (R, S) => { const B = (S && S.bitacora) || {}; return R.bitacora.campos.every(([k]) => palabras(B[k]) >= (k === 'tema' ? 2 : MIN_BITACORA)); };
-export const bitacoraAvance = (R, S) => { const B = (S && S.bitacora) || {}; return R.bitacora.campos.filter(([k]) => palabras(B[k]) >= (k === 'tema' ? 2 : MIN_BITACORA)).length; };
+export const bitacoraCompleta = (R, S) => { if (!R.bitacora) return false; const B = (S && S.bitacora) || {}; return R.bitacora.campos.every(([k]) => palabras(B[k]) >= (k === 'tema' ? 2 : MIN_BITACORA)); };
+export const bitacoraAvance = (R, S) => { if (!R.bitacora) return 0; const B = (S && S.bitacora) || {}; return R.bitacora.campos.filter(([k]) => palabras(B[k]) >= (k === 'tema' ? 2 : MIN_BITACORA)).length; };

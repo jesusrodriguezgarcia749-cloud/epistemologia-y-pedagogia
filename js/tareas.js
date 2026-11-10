@@ -8,7 +8,7 @@ import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, co
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js?v=2026111001";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
-import { RUTAS, sugerirRuta, MIN_SALIDA, MIN_BITACORA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026110901";
+import { RUTAS, sugerirRuta, MIN_SALIDA, MIN_BITACORA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026111002";
 import { brillar, descubrir, miCielo, estadoAutor, misionPorFecha, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA, TIPOS_PARA_ENCENDER, NOMBRE_TIPO, CLAVES_AUTOR } from "./cielo.js";
 import { formacionDe, formaciones, formacionDeTarea, abiertas as inscAbiertas, equipoDe, tareasDeFormacion, enEquipo } from "./equipos.js";
 
@@ -191,7 +191,7 @@ function ruta() {
   const volver = origen && TAREAS_DIG[origen] && origen !== a.id ? `<a class="cl-volver rt-volver" href="#${origen}">← Volver a la ${esc(TAREAS_DIG[origen].nombre.split(':')[0].toLowerCase())}</a>` : '<a class="cl-volver" href="#">← Todas las tareas</a>';
   if (a.tipo === 'ruta') { try { sessionStorage.setItem('ruta_origen', a.id); } catch { /* */ } }
   c.innerHTML = `${volver}<p class="cl-fecha">Tema ${esc(a.tema)} · ${esc(a.titulo)} · ${esc(a.fechaTexto)}</p><h2 class="cl-h2">${a.icono} ${esc(a.nombre)}</h2>
-    ${a.tipo === 'ruta' ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2 · 🎤 la bitácora de la conferencia cuenta como participación.</p>' : a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
+    ${a.tipo === 'ruta' ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
   if (a.tipo === 'cuadro') actCuadro($('#cl-cuerpo'), a);
   else if (a.tipo === 'ruta') actRuta($('#cl-cuerpo'), a);
   else if (a.tipo === 'coev') actCoev($('#cl-cuerpo'));
@@ -537,9 +537,9 @@ async function rutaVista(cont, a, R) {
       <div class="rt-barra" aria-hidden="true"><i id="rt-barra"></i></div><p class="rt-cuenta"><span id="rt-cuenta"></span> <span class="rt-guardado" id="rt-guardado"></span></p>
       <p class="rt-cierre" id="rt-cierre"></p></div>
     <ol class="rt-mapa" id="rt-mapa"></ol>
-    <button type="button" class="rt-bit-tarjeta" id="rt-bit-ir"><span>${R.bitacora.ico}</span><div><b>${esc(R.bitacora.titulo)}</b><small id="rt-bit-est"></small></div><em>Abrir →</em></button>
+    ${R.bitacora ? `<button type="button" class="rt-bit-tarjeta" id="rt-bit-ir"><span>${R.bitacora.ico}</span><div><b>${esc(R.bitacora.titulo)}</b><small id="rt-bit-est"></small></div><em>Abrir →</em></button>` : ''}
     <section class="rt-estacion" id="rt-est" aria-live="polite"></section>`;
-  $('#rt-bit-ir', cont).addEventListener('click', () => abrir('conferencia'));
+  if (R.bitacora) $('#rt-bit-ir', cont).addEventListener('click', () => abrir('conferencia'));
   function pintarMapa() {
     const n = E.filter(e => S.hechas[e.id]).length;
     $('#rt-barra', cont).style.width = (100 * n / E.length) + '%';
@@ -549,6 +549,7 @@ async function rutaVista(cont, a, R) {
       return `<li><button type="button" class="rt-paso ${h ? 'hecha' : ab ? 'abierta' : 'bloq'} ${actual === e.id ? 'actual' : ''}" data-est="${e.id}" ${ab ? '' : 'disabled'}>
         <span class="rt-num">${h ? '✓' : i + 1}</span><span class="rt-ico">${e.ico}</span><span class="rt-tx"><b>${esc(e.titulo)}</b><small>${h ? 'Terminada' : sal ? 'Pendiente: la saltaste' : ab ? `≈ ${e.min} min` : '🔒 Termina la anterior'}</small></span></button></li>`; }).join('');
     $$('[data-est]', cont).forEach(b => b.addEventListener('click', () => abrir(b.dataset.est)));
+    if (!R.bitacora) return;
     const bn = bitacoraAvance(R, S);
     $('#rt-bit-est', cont).textContent = bitacoraCompleta(R, S) ? '✓ Completa · cuenta como participación' : `${bn} de ${R.bitacora.campos.length} respuestas · ${R.bitacora.extra ? 'siempre abierta' : ''}`;
   }
@@ -556,7 +557,7 @@ async function rutaVista(cont, a, R) {
     if (detener) { detener(); detener = null; }
     actual = id; pintarMapa();
     const zona = $('#rt-est', cont);
-    if (id === 'conferencia') bitacora(zona);
+    if (id === 'conferencia' && R.bitacora) bitacora(zona);
     else { const e = E.find(x => x.id === id); zona.innerHTML = `<p class="rt-kicker">Estación ${E.indexOf(e) + 1} de ${E.length} · ≈ ${e.min} min</p><h3 class="rt-h3">${e.ico} ${esc(e.titulo)}</h3><p class="atlas-ayuda">${e.desc}</p><div class="rt-cuerpo"></div>`;
       const c = $('.rt-cuerpo', zona);
       ({ juego: juego, leccion: leccion, cuadro: estCuadro, salida: salida })[e.tipo](c, e); }

@@ -17,7 +17,7 @@ import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS
 import { zipDocx } from "./docx-ites.js?v=2026102708";
 import { wordTaller, numsDe, estadoEntrega, slugArchivo } from "./taller-word.js?v=2026102708";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
-import { RUTAS, sugerirRuta, MIN_SALIDA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026110901";
+import { RUTAS, sugerirRuta, MIN_SALIDA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026111002";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
 
 const app = initializeApp(firebaseConfig);
@@ -1949,25 +1949,25 @@ async function calificarRuta(a, enCatalogo) {
     let S = null, cal = '', exento = false, part = false;
     try { const c = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'tareas', catalogoId(a.id))); if (c.exists()) { cal = c.data().calificacion ?? ''; exento = !!c.data().exento; } } catch { /* */ }
     try { const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'atlas', R.ind)); S = s.exists() ? s.data() : null; } catch { /* */ }
-    try { const p = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'participaciones', P.id)); part = p.exists(); } catch { /* */ }
+    if (P) try { const p = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'participaciones', P.id)); part = p.exists(); } catch { /* */ }
     const sug = S ? sugerirRuta(R, S) : { nota: 0, detalle: 'No ha empezado' };
     return { al, S, sug, cal, exento, part, bit: S ? bitacoraCompleta(R, S) : false, bitN: S ? bitacoraAvance(R, S) : 0 };
   }));
   const f = t => typeof t === 'number' ? new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
   const pasos = S => R.estaciones.map(e => (S && S.hechas && S.hechas[e.id]) ? `<span title="${escaparHTML(e.titulo)}">✅</span>` : (S && S.saltadas && S.saltadas[e.id]) ? `<span title="${escaparHTML(e.titulo)}: la saltó">⏭️</span>` : `<span title="${escaparHTML(e.titulo)}">⬜</span>`).join('');
   const respuestas = S => `${sal.preguntas.map(([k, q], i) => `<p><b>${i + 1}. ${escaparHTML(q)}</b><br>${escaparHTML((S.salida || {})[k] || '—')}</p>`).join('')}`;
-  const bitacora = S => R.bitacora.campos.map(([k, t]) => `<p><b>${escaparHTML(t)}:</b> ${escaparHTML((S.bitacora || {})[k] || '—')}</p>`).join('');
+  const bitacora = S => (R.bitacora ? R.bitacora.campos : []).map(([k, t]) => `<p><b>${escaparHTML(t)}:</b> ${escaparHTML((S.bitacora || {})[k] || '—')}</p>`).join('');
   const nBit = filas.filter(x => x.bit).length;
   wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
     ${enCatalogo ? '' : '<p class="aviso-td">⚠️ Esta tarea todavía no está en el catálogo: las calificaciones se guardan, pero no cuentan en el promedio hasta que la agregues.</p>'}
     <p class="field-hint">Sugerida sobre 10: <b>6</b> por las ${R.estaciones.length} estaciones terminadas, <b>1</b> por las tarjetas acertadas al primer intento y <b>3</b> por el boleto de salida (una por respuesta de ${MIN_SALIDA} palabras o más). «Mi inercia mental» y «Saberes de la vida» se califican además como sus propias tareas.</p>
-    <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button><button type="button" class="btn btn-small btn-primary" id="rt-part">🎤 Dar participación a quienes completaron la bitácora (${nBit})</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button></div>
+    <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button>${R.bitacora ? `<button type="button" class="btn btn-small btn-primary" id="rt-part">🎤 Dar participación a quienes completaron la bitácora (${nBit})</button>` : ''}<button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button></div>
     <p class="save-msg" id="rt-part-msg" hidden></p>
-    <div class="taller-tabla-wrap"><table class="taller-tabla td-tabla"><thead><tr><th>Alumno</th><th>Estaciones</th><th>Salida</th><th>Bitácora</th><th>Sugerida</th><th>Calificación</th><th title="Falta justificada: la tarea no le cuenta en el promedio">Exento</th></tr></thead><tbody>
+    <div class="taller-tabla-wrap"><table class="taller-tabla td-tabla"><thead><tr><th>Alumno</th><th>Estaciones</th><th>Salida</th>${R.bitacora ? '<th>Bitácora</th>' : ''}<th>Sugerida</th><th>Calificación</th><th title="Falta justificada: la tarea no le cuenta en el promedio">Exento</th></tr></thead><tbody>
     ${filas.map(x => `<tr data-id="${x.al.id}"><td><b>${escaparHTML(x.al.nombre)}</b>${x.S && x.S.entregado ? `<br><small class="td-ok">✓ Entregó ${escaparHTML(f(x.S.entregado.t))}</small>` : x.S ? '<br><small class="td-no">Sin entregar</small>' : ''}</td>
       <td><span class="rt-adm-pasos">${pasos(x.S)}</span><br><small>${escaparHTML(x.sug.detalle)}</small></td>
       <td>${x.S ? `<details><summary>${x.sug.resp}/${x.sug.preguntas}</summary><div class="rt-adm-resp">${respuestas(x.S)}</div></details>` : '—'}</td>
-      <td>${x.S && x.bitN ? `<details><summary>${x.bit ? '✅ Completa' : `${x.bitN}/${R.bitacora.campos.length}`}${x.part ? ' · 🎤' : ''}</summary><div class="rt-adm-resp">${bitacora(x.S)}</div></details>` : x.part ? '🎤' : '—'}</td>
+      ${!R.bitacora ? '' : `<td>${x.S && x.bitN ? `<details><summary>${x.bit ? '✅ Completa' : `${x.bitN}/${R.bitacora.campos.length}`}${x.part ? ' · 🎤' : ''}</summary><div class="rt-adm-resp">${bitacora(x.S)}</div></details>` : x.part ? '🎤' : '—'}</td>`}
       <td><b class="td-sug">${x.sug.nota}</b></td>
       <td><input type="number" min="0" max="10" step="0.1" class="calif-input td-in" value="${x.cal}" placeholder="0-10" data-sug="${x.sug.nota}" ${x.exento ? 'disabled' : ''}></td>
       <td><input type="checkbox" class="td-ex" ${x.exento ? 'checked' : ''} aria-label="Exento"></td></tr>`).join('')}</tbody></table></div>
@@ -1975,7 +1975,7 @@ async function calificarRuta(a, enCatalogo) {
   document.getElementById('td-cerrar').addEventListener('click', () => { wrap.hidden = true; });
   document.getElementById('td-usar').addEventListener('click', () => wrap.querySelectorAll('.td-in:not(:disabled)').forEach(i => { if (i.value === '') i.value = i.dataset.sug; }));
   wrap.querySelectorAll('.td-ex').forEach(c => c.addEventListener('change', () => { const i = c.closest('tr').querySelector('.td-in'); i.disabled = c.checked; if (c.checked) i.value = ''; }));
-  document.getElementById('rt-part').addEventListener('click', async e => {
+  if (R.bitacora) document.getElementById('rt-part').addEventListener('click', async e => {
     const b = e.currentTarget, msg = document.getElementById('rt-part-msg'), quienes = filas.filter(x => x.bit && !x.part);
     if (!nBit) { msg.textContent = 'Todavía nadie completa la bitácora.'; msg.hidden = false; return; }
     if (!quienes.length) { msg.textContent = '✓ Todos los que completaron la bitácora ya tienen su participación.'; msg.hidden = false; return; }

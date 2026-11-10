@@ -201,8 +201,7 @@
     "Estación 3 · Actividad individual «Mi inercia mental».",
     "Estación 4 · Mini-lección de 6.1 y 6.2 en cinco tarjetas: maneras de conocer, conocimiento tácito (Polanyi), conocimiento ordinario y local, ecología de saberes (Sousa Santos) y los dos riesgos.",
     "Estación 5 · Actividad en equipo «Saberes de la vida», en vivo desde casa.",
-    "Estación 6 · Boleto de salida (tres preguntas abiertas) y entrega.",
-    "Estación extra · Bitácora de la conferencia: cuenta como participación."
+    "Estación 6 · Boleto de salida (tres preguntas abiertas) y entrega."
    ],
    "independiente": [
     "Todo se hace en casa: la clase autoguiada completa, con sus actividades.",
@@ -216,8 +215,7 @@
    "evaluacion": [
     "Tarea: «Clase autoguiada: Temas 5 y 6» (estaciones, tarjetas y boleto de salida)",
     "Rúbrica de Tarea (cuadro comparativo «Saberes de la vida»)",
-    "Tarea: «Mi inercia mental»",
-    "Participación: bitácora de la conferencia"
+    "Tarea: «Mi inercia mental»"
    ],
    "subtemas": [
     "5.1",
@@ -389,7 +387,7 @@
    "fecha": "2026-11-10",
    "titulo": "Conferencia · clase autoguiada",
    "fechaTexto": "Martes 10 de noviembre",
-   "detalle": "El grupo asiste a una conferencia. La clase de los Temas 5 y 6 se hace en Tareas, a tu ritmo: «Clase autoguiada». No olvides llenar la bitácora de la conferencia: cuenta como participación."
+   "detalle": "El grupo asiste a una conferencia. La clase de los Temas 5 y 6 se hace en Tareas, a tu ritmo: «Clase autoguiada»."
   },
   {
    "tipo": "descanso",
