@@ -1,0 +1,1163 @@
+{
+ "publicado": true,
+ "categorias": {
+  "concepto": "💡 Concepto",
+  "corriente": "🧭 Corriente o postura",
+  "metodo": "🔬 Método",
+  "cerebro": "🧠 Cerebro y aprendizaje",
+  "educacion": "🏫 Educación y orientación",
+  "apa": "📝 Escritura y APA"
+ },
+ "temas": {
+  "1": "Tema 1 · Introducción a la epistemología",
+  "2": "Tema 2 · Naturaleza del conocimiento",
+  "3": "Tema 3 · La racionalidad científica clásica",
+  "4": "Tema 4 · Concepción contemporánea de la ciencia",
+  "5": "Tema 5 · Nuevo paradigma epistemológico de la ciencia",
+  "6": "Tema 6 · Conocimiento científico y conocimiento ordinario",
+  "7": "Tema 7 · El proceso de enseñanza-aprendizaje a la luz de la neurociencia",
+  "8": "Tema 8 · Nuevo paradigma en orientación",
+  "9": "Tema 9 · Nuevos enfoques paradigmáticos",
+  "10": "Tema 10 · Integración: la pedagogía como ciencia en la Nueva Escuela Mexicana"
+ },
+ "terminos": [
+  {
+   "id": "accion-comunicativa",
+   "t": "Acción comunicativa",
+   "c": "concepto",
+   "tema": "5.4",
+   "d": "Según Habermas, interacción orientada al entendimiento mediante argumentos."
+  },
+  {
+   "id": "agenda-2030",
+   "t": "Agenda 2030",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Plan de la ONU con diecisiete Objetivos de Desarrollo Sostenible."
+  },
+  {
+   "id": "anarquismo-epistemologico",
+   "t": "Anarquismo epistemológico",
+   "c": "corriente",
+   "tema": "4.7",
+   "d": "Postura de Feyerabend según la cual ninguna regla metodológica fija garantiza el progreso de la ciencia."
+  },
+  {
+   "id": "anomalia",
+   "t": "Anomalía",
+   "c": "concepto",
+   "tema": "4.3",
+   "d": "Para Kuhn, un hecho que el paradigma no puede explicar; cuando se acumulan, llega la crisis.",
+   "v": [
+    "anomalías"
+   ]
+  },
+  {
+   "id": "asentimiento",
+   "t": "Asentimiento",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Acuerdo del menor de edad para participar en una investigación, además de la autorización de sus tutores."
+  },
+  {
+   "id": "autonomia-profesional-docente",
+   "t": "Autonomía profesional docente",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Reconocimiento de la capacidad del magisterio para tomar decisiones curriculares y didácticas."
+  },
+  {
+   "id": "barreras-para-el-aprendizaje-y-la-participacion",
+   "t": "Barreras para el aprendizaje y la participación",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Obstáculos del contexto escolar que impiden aprender y participar."
+  },
+  {
+   "id": "bioetica",
+   "t": "Bioética",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Reflexión ética sobre las ciencias de la vida y sus aplicaciones, concebida por Potter como puente entre la ciencia y los valores."
+  },
+  {
+   "id": "buen-vivir",
+   "t": "Buen vivir",
+   "c": "educacion",
+   "tema": "9.2",
+   "d": "Concepto de los pueblos andinos (sumak kawsay) que entiende el bienestar en armonía con la comunidad y la naturaleza."
+  },
+  {
+   "id": "cambio-conceptual",
+   "t": "Cambio conceptual",
+   "c": "concepto",
+   "tema": "5.1",
+   "d": "Proceso por el que una persona transforma sus ideas previas al enfrentarlas con evidencia y mejores explicaciones."
+  },
+  {
+   "id": "campos-formativos",
+   "t": "Campos formativos",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Organización del currículo de la NEM en cuatro grandes áreas: Lenguajes; Saberes y pensamiento científico; Ética, naturaleza y sociedades; y De lo humano y lo comunitario.",
+   "v": [
+    "campo formativo"
+   ]
+  },
+  {
+   "id": "canones-de-cientificidad",
+   "t": "Cánones de cientificidad",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Criterios que debe cumplir un conocimiento para ser considerado científico."
+  },
+  {
+   "id": "capital-cultural",
+   "t": "Capital cultural",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Según Bourdieu, conjunto de saberes, gustos y formas de expresión que se heredan y que la escuela premia."
+  },
+  {
+   "id": "capital-humano",
+   "t": "Capital humano",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Conocimientos y habilidades considerados como inversión que aumenta la productividad."
+  },
+  {
+   "id": "cerebro-triuno",
+   "t": "Cerebro triuno",
+   "c": "cerebro",
+   "tema": "7.3",
+   "d": "Modelo de los años sesenta que dividía el cerebro en tres «cerebros» (reptil, emocional y racional). La neurociencia actual lo considera superado."
+  },
+  {
+   "id": "ciencia",
+   "t": "Ciencia",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Conocimiento sistemático y fundamentado que somete sus afirmaciones a prueba y a crítica pública.",
+   "noMarcar": true
+  },
+  {
+   "id": "ciencia-normal",
+   "t": "Ciencia normal",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Periodo en que la comunidad trabaja dentro de un paradigma aceptado."
+  },
+  {
+   "id": "ciencias-del-espiritu",
+   "t": "Ciencias del espíritu",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Nombre que dio Dilthey a las ciencias humanas: buscan comprender el sentido de la acción humana, no solo explicarla."
+  },
+  {
+   "id": "ciencias-facticas",
+   "t": "Ciencias fácticas",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Estudian hechos del mundo y se validan por la experiencia."
+  },
+  {
+   "id": "ciencias-formales",
+   "t": "Ciencias formales",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Lógica y matemáticas; se validan por demostración."
+  },
+  {
+   "id": "cientificismo",
+   "t": "Cientificismo",
+   "c": "corriente",
+   "tema": "6.4",
+   "d": "Creencia de que solo la ciencia produce conocimiento válido."
+  },
+  {
+   "id": "cinturon-protector",
+   "t": "Cinturón protector",
+   "c": "concepto",
+   "tema": "4.4",
+   "d": "Para Lakatos, las hipótesis auxiliares que rodean al núcleo duro y se ajustan para protegerlo de los datos contrarios.",
+   "v": [
+    "hipótesis auxiliares"
+   ]
+  },
+  {
+   "id": "circulo-de-viena",
+   "t": "Círculo de Viena",
+   "c": "concepto",
+   "tema": "4.1",
+   "d": "Grupo de filósofos y científicos de los años veinte y treinta que fundó el positivismo lógico."
+  },
+  {
+   "id": "cita-textual",
+   "t": "Cita textual",
+   "c": "apa",
+   "tema": "5.4",
+   "d": "Copiar literalmente las palabras de un autor, entre comillas y con la página."
+  },
+  {
+   "id": "codiseno",
+   "t": "Codiseño",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Proceso mediante el cual los docentes participan en el diseño curricular a partir de su contexto."
+  },
+  {
+   "id": "comprender",
+   "t": "Comprender",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Captar el sentido o significado de una acción humana desde dentro; método de las ciencias del espíritu según Dilthey.",
+   "noMarcar": true
+  },
+  {
+   "id": "concepciones-alternativas",
+   "t": "Concepciones alternativas",
+   "c": "concepto",
+   "tema": "5.1",
+   "d": "Ideas previas de los alumnos, distintas de las científicas, que influyen en lo que aprenden.",
+   "v": [
+    "ideas previas"
+   ]
+  },
+  {
+   "id": "conjeturas-y-refutaciones",
+   "t": "Conjeturas y refutaciones",
+   "c": "concepto",
+   "tema": "4.2",
+   "d": "Para Popper, la ciencia avanza proponiendo hipótesis audaces e intentando refutarlas, no acumulando confirmaciones."
+  },
+  {
+   "id": "conocimiento-empirico",
+   "t": "Conocimiento empírico",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Saber práctico adquirido por experiencia directa, imitación o tradición."
+  },
+  {
+   "id": "conocimiento-en-la-accion",
+   "t": "Conocimiento en la acción",
+   "c": "concepto",
+   "tema": "6.3",
+   "d": "Para Schön, el saber que el profesional muestra al actuar, aunque no siempre pueda explicarlo."
+  },
+  {
+   "id": "conocimiento-local-o-tradicional",
+   "t": "Conocimiento local o tradicional",
+   "c": "concepto",
+   "tema": "6.4",
+   "d": "Saber desarrollado por una comunidad durante generaciones en relación con su territorio."
+  },
+  {
+   "id": "conocimiento-ordinario",
+   "t": "Conocimiento ordinario",
+   "c": "concepto",
+   "tema": "6.4",
+   "d": "Saber de sentido común compartido por una sociedad para la vida diaria."
+  },
+  {
+   "id": "conocimiento-tacito",
+   "t": "Conocimiento tácito",
+   "c": "concepto",
+   "tema": "6.4",
+   "d": "Según Polanyi, saber que no puede expresarse completamente con palabras."
+  },
+  {
+   "id": "consentimiento-informado",
+   "t": "Consentimiento informado",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Aceptación libre de participar en una investigación tras recibir información suficiente."
+  },
+  {
+   "id": "consolidacion",
+   "t": "Consolidación",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Proceso por el cual un aprendizaje se estabiliza en la memoria, en buena parte durante el sueño.",
+   "marcar": [
+    "consolidación de la memoria"
+   ]
+  },
+  {
+   "id": "constructivismo",
+   "t": "Constructivismo",
+   "c": "corriente",
+   "tema": "1.3",
+   "d": "Postura según la cual el conocimiento se construye en la interacción del sujeto con su entorno."
+  },
+  {
+   "id": "contexto-de-descubrimiento",
+   "t": "Contexto de descubrimiento",
+   "c": "concepto",
+   "tema": "6.3",
+   "d": "Cómo se le ocurre a alguien una idea científica (intuición, casualidad, sueños). Se distingue del contexto de justificación."
+  },
+  {
+   "id": "contexto-de-justificacion",
+   "t": "Contexto de justificación",
+   "c": "concepto",
+   "tema": "6.3",
+   "d": "Cómo se pone a prueba y se defiende una idea científica ante los demás."
+  },
+  {
+   "id": "corroboracion",
+   "t": "Corroboración",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Estado provisional de una teoría que ha resistido intentos serios de refutación.",
+   "v": [
+    "corroborada",
+    "corroboradas"
+   ]
+  },
+  {
+   "id": "corteza-prefrontal",
+   "t": "Corteza prefrontal",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Región cerebral relacionada con la planeación y el control de impulsos, que madura hasta la adultez temprana."
+  },
+  {
+   "id": "creencia-verdadera-justificada",
+   "t": "Creencia verdadera justificada",
+   "c": "concepto",
+   "tema": "1.3",
+   "d": "Definición clásica de conocimiento, propuesta desde el Teeteto de Platón."
+  },
+  {
+   "id": "criterio-de-demarcacion",
+   "t": "Criterio de demarcación",
+   "c": "concepto",
+   "tema": "4.2",
+   "d": "Lo que permite distinguir la ciencia de lo que no lo es. Para Popper, que una teoría sea falsable."
+  },
+  {
+   "id": "criticismo",
+   "t": "Criticismo",
+   "c": "corriente",
+   "tema": "1.1",
+   "d": "Postura de Kant: el conocimiento nace de la experiencia, pero la razón le da forma con sus propias estructuras. Une racionalismo y empirismo."
+  },
+  {
+   "id": "cuatro-pilares-de-la-educacion",
+   "t": "Cuatro pilares de la educación",
+   "c": "concepto",
+   "tema": "6.4",
+   "d": "Informe Delors (UNESCO, 1996): aprender a conocer, aprender a hacer, aprender a vivir juntos y aprender a ser.",
+   "v": [
+    "aprender a conocer",
+    "aprender a hacer",
+    "aprender a vivir juntos",
+    "aprender a ser"
+   ]
+  },
+  {
+   "id": "desarrollo-sustentable",
+   "t": "Desarrollo sustentable",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Desarrollo que satisface las necesidades del presente sin comprometer las de las generaciones futuras."
+  },
+  {
+   "id": "desconstruccion",
+   "t": "Desconstrucción",
+   "c": "metodo",
+   "tema": "5.4",
+   "d": "Análisis que desarma una estructura de pensamiento para mostrar sus supuestos y exclusiones."
+  },
+  {
+   "id": "dialectica",
+   "t": "Dialéctica",
+   "c": "corriente",
+   "tema": "3.4",
+   "d": "Forma de pensamiento que comprende la realidad como proceso de cambio impulsado por contradicciones."
+  },
+  {
+   "id": "dialogo-de-saberes",
+   "t": "Diálogo de saberes",
+   "c": "concepto",
+   "tema": "5.4",
+   "d": "Encuentro respetuoso entre el conocimiento científico y otros saberes, como los comunitarios."
+  },
+  {
+   "id": "diseno-emergente",
+   "t": "Diseño emergente",
+   "c": "metodo",
+   "tema": "5.4",
+   "d": "Plan de investigación que se ajusta conforme avanzan los hallazgos."
+  },
+  {
+   "id": "doble-hermeneutica",
+   "t": "Doble hermenéutica",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Según Giddens, el hecho de que las ciencias sociales interpretan un mundo ya interpretado por los actores."
+  },
+  {
+   "id": "docente-investigador",
+   "t": "Docente investigador",
+   "c": "concepto",
+   "tema": "6.4",
+   "d": "Maestro que investiga su propia práctica para comprenderla y mejorarla."
+  },
+  {
+   "id": "ecologia-de-saberes",
+   "t": "Ecología de saberes",
+   "c": "corriente",
+   "tema": "6.4",
+   "d": "Propuesta de diálogo y complementariedad entre distintos tipos de conocimiento."
+  },
+  {
+   "id": "educacion-bancaria",
+   "t": "Educación bancaria",
+   "c": "concepto",
+   "tema": "3.4",
+   "d": "Crítica de Paulo Freire a la enseñanza que «deposita» conocimientos en alumnos pasivos, como en una cuenta de banco."
+  },
+  {
+   "id": "educacion-emocional",
+   "t": "Educación emocional",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Proceso educativo para desarrollar competencias emocionales."
+  },
+  {
+   "id": "educacion-inclusiva",
+   "t": "Educación inclusiva",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Principio que busca que todos los alumnos aprendan y participen en la escuela regular, con los ajustes necesarios."
+  },
+  {
+   "id": "ejes-articuladores",
+   "t": "Ejes articuladores",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Siete temas transversales que atraviesan todos los campos formativos de la NEM.",
+   "v": [
+    "eje articulador"
+   ]
+  },
+  {
+   "id": "empirismo",
+   "t": "Empirismo",
+   "c": "corriente",
+   "tema": "1.3",
+   "d": "Postura según la cual todo conocimiento procede de la experiencia sensible."
+  },
+  {
+   "id": "enfoque-de-capacidades",
+   "t": "Enfoque de capacidades",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Según Sen, visión del desarrollo como ampliación de las libertades reales de las personas."
+  },
+  {
+   "id": "ensenanza-asistida-por-computadora",
+   "t": "Enseñanza asistida por computadora",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Uso de programas que presentan contenidos y retroalimentan las respuestas del alumno."
+  },
+  {
+   "id": "epistemologia",
+   "t": "Epistemología",
+   "c": "concepto",
+   "tema": "1.3",
+   "d": "Rama de la filosofía que estudia el conocimiento científico: sus fundamentos, métodos, validez y límites."
+  },
+  {
+   "id": "epistemologias-del-sur",
+   "t": "Epistemologías del Sur",
+   "c": "corriente",
+   "tema": "6.4",
+   "d": "Según Sousa Santos, formas de conocimiento de los pueblos que fueron colonizados.",
+   "v": [
+    "epistemología del Sur"
+   ]
+  },
+  {
+   "id": "equifinalidad",
+   "t": "Equifinalidad",
+   "c": "concepto",
+   "tema": "3.2",
+   "d": "Propiedad de los sistemas abiertos: se puede llegar a un mismo resultado por caminos distintos."
+  },
+  {
+   "id": "estadio-positivo",
+   "t": "Estadio positivo",
+   "c": "concepto",
+   "tema": "3.1",
+   "d": "Para Comte, la última etapa del pensamiento humano (después de la teológica y la metafísica), en la que se explican los hechos por leyes observables.",
+   "v": []
+  },
+  {
+   "id": "estilos-de-aprendizaje",
+   "t": "Estilos de aprendizaje",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Idea de que cada persona aprende mejor si se le enseña en su estilo (visual, auditivo, kinestésico). No tiene evidencia: es un neuromito.",
+   "v": [
+    "VAK"
+   ]
+  },
+  {
+   "id": "experiencia-primera",
+   "t": "Experiencia primera",
+   "c": "concepto",
+   "tema": "5.1",
+   "d": "Obstáculo de Bachelard: confiar en la primera impresión, sin crítica."
+  },
+  {
+   "id": "explicar",
+   "t": "Explicar",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Dar cuenta de un fenómeno por sus causas o leyes generales; método de las ciencias naturales según Dilthey.",
+   "noMarcar": true
+  },
+  {
+   "id": "falsabilidad",
+   "t": "Falsabilidad",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Según Popper, posibilidad de que una teoría sea refutada por la experiencia; criterio de demarcación de la ciencia.",
+   "v": [
+    "falsable",
+    "falsables"
+   ]
+  },
+  {
+   "id": "filosofia-de-la-ciencia",
+   "t": "Filosofía de la ciencia",
+   "c": "concepto",
+   "tema": "1.3",
+   "d": "Campo que estudia la ciencia como actividad humana completa: su conocimiento, sus supuestos, su historia y su relación con la sociedad."
+  },
+  {
+   "id": "fusion-de-horizontes",
+   "t": "Fusión de horizontes",
+   "c": "concepto",
+   "tema": "5.4",
+   "d": "Según Gadamer, la comprensión como ampliación mutua de perspectivas."
+  },
+  {
+   "id": "generalizacion-apresurada",
+   "t": "Generalización apresurada",
+   "c": "concepto",
+   "tema": "5.1",
+   "d": "Obstáculo de Bachelard: concluir algo general a partir de muy pocos casos."
+  },
+  {
+   "id": "gnoseologia",
+   "t": "Gnoseología",
+   "c": "concepto",
+   "tema": "1.3",
+   "d": "Teoría del conocimiento en general; estudia la posibilidad, el origen y la esencia de todo conocimiento humano."
+  },
+  {
+   "id": "hechos-sociales",
+   "t": "Hechos sociales",
+   "c": "concepto",
+   "tema": "3.4",
+   "d": "Según Durkheim, maneras de actuar, pensar y sentir exteriores al individuo que se imponen sobre él.",
+   "v": [
+    "hecho social"
+   ]
+  },
+  {
+   "id": "hermeneutica",
+   "t": "Hermenéutica",
+   "c": "corriente",
+   "tema": "3.4",
+   "d": "Teoría y arte de la interpretación de textos, acciones y significados."
+  },
+  {
+   "id": "heuristica-negativa",
+   "t": "Heurística negativa",
+   "c": "concepto",
+   "tema": "4.4",
+   "d": "Regla de un programa de investigación: no tocar el núcleo duro."
+  },
+  {
+   "id": "heuristica-positiva",
+   "t": "Heurística positiva",
+   "c": "concepto",
+   "tema": "4.4",
+   "d": "Indicaciones de un programa de investigación sobre cómo desarrollar y modificar el cinturón protector."
+  },
+  {
+   "id": "horizonte",
+   "t": "Horizonte",
+   "c": "concepto",
+   "tema": "5.4",
+   "d": "Para Gadamer, el punto de vista desde el que cada quien comprende, formado por su historia y su cultura.",
+   "marcar": [
+    "fusión de horizontes"
+   ]
+  },
+  {
+   "id": "inconmensurabilidad",
+   "t": "Inconmensurabilidad",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Imposibilidad de comparar dos paradigmas con una medida común.",
+   "v": [
+    "inconmensurables"
+   ]
+  },
+  {
+   "id": "induccion",
+   "t": "Inducción",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Razonamiento que va de casos particulares a generalizaciones.",
+   "marcar": [
+    "inducción"
+   ]
+  },
+  {
+   "id": "inercia-mental",
+   "t": "Inercia mental",
+   "c": "concepto",
+   "tema": "5.4",
+   "d": "Tendencia a mantener las formas de pensar habituales aunque existan razones para cambiarlas."
+  },
+  {
+   "id": "informe-brundtland",
+   "t": "Informe Brundtland",
+   "c": "educacion",
+   "tema": "9.2",
+   "d": "Informe de la ONU (1987) que definió el desarrollo sostenible: atender las necesidades de hoy sin comprometer las de las generaciones futuras."
+  },
+  {
+   "id": "inteligencia-artificial-generativa",
+   "t": "Inteligencia artificial generativa",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Sistemas capaces de producir textos, imágenes y otros contenidos a partir de patrones aprendidos de grandes cantidades de datos."
+  },
+  {
+   "id": "interculturalidad-critica",
+   "t": "Interculturalidad crítica",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Enfoque que promueve el diálogo entre culturas reconociendo las desigualdades de poder entre ellas."
+  },
+  {
+   "id": "intereses-del-conocimiento",
+   "t": "Intereses del conocimiento",
+   "c": "concepto",
+   "tema": "3.1",
+   "d": "Para Habermas, todo conocimiento responde a un interés: técnico (controlar), práctico (comprender) o emancipatorio (liberar).",
+   "v": [
+    "interés técnico",
+    "interés práctico",
+    "interés emancipatorio"
+   ]
+  },
+  {
+   "id": "intersubjetividad",
+   "t": "Intersubjetividad",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Acuerdo razonado entre varios sujetos sobre un conocimiento; versión de la objetividad propia de las ciencias sociales."
+  },
+  {
+   "id": "investigacion-cualitativa",
+   "t": "Investigación cualitativa",
+   "c": "metodo",
+   "tema": "1.3",
+   "d": "Investigación que busca comprender significados y experiencias, con entrevistas, observación y análisis de textos.",
+   "v": []
+  },
+  {
+   "id": "investigacion-cuantitativa",
+   "t": "Investigación cuantitativa",
+   "c": "metodo",
+   "tema": "1.3",
+   "d": "Investigación que mide y cuenta: usa números, estadística e instrumentos estandarizados para explicar o comparar.",
+   "v": []
+  },
+  {
+   "id": "investigacion-accion",
+   "t": "Investigación-acción",
+   "c": "metodo",
+   "tema": "1.3",
+   "d": "Enfoque en el que el docente investiga su propia práctica para mejorarla: planea, actúa, observa y reflexiona en ciclos.",
+   "v": [
+    "investigación acción"
+   ]
+  },
+  {
+   "id": "logica-lineal",
+   "t": "Lógica lineal",
+   "c": "concepto",
+   "tema": "3.3",
+   "d": "Forma de razonar basada en los principios de identidad, no contradicción y tercero excluido: algo es o no es.",
+   "v": [
+    "principio de identidad",
+    "principio de no contradicción",
+    "principio del tercero excluido"
+   ]
+  },
+  {
+   "id": "maquinas-de-ensenar",
+   "t": "Máquinas de enseñar",
+   "c": "educacion",
+   "tema": "9.4",
+   "d": "Aparatos de Skinner (años cincuenta) que presentaban preguntas paso a paso y reforzaban cada respuesta correcta."
+  },
+  {
+   "id": "mecanicismo",
+   "t": "Mecanicismo",
+   "c": "corriente",
+   "tema": "3.4",
+   "d": "Visión del mundo como una máquina regida por leyes fijas, propia de la ciencia clásica."
+  },
+  {
+   "id": "metodo-mixto",
+   "t": "Método mixto",
+   "c": "metodo",
+   "tema": "1.3",
+   "d": "Diseño que combina lo cuantitativo y lo cualitativo en una misma investigación.",
+   "v": []
+  },
+  {
+   "id": "modelo-clinico",
+   "t": "Modelo clínico",
+   "c": "educacion",
+   "tema": "8.2",
+   "d": "Modelo de orientación centrado en la atención individual de un especialista a un alumno (counseling).",
+   "v": []
+  },
+  {
+   "id": "modelo-de-consulta",
+   "t": "Modelo de consulta",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Forma de orientación en la que el orientador asesora a docentes y familias para que intervengan."
+  },
+  {
+   "id": "modelo-de-programas",
+   "t": "Modelo de programas",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Forma de orientación planificada, preventiva y dirigida a grupos."
+  },
+  {
+   "id": "modelo-de-rasgos-y-factores",
+   "t": "Modelo de rasgos y factores",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Enfoque clásico de orientación que busca la correspondencia entre las características medibles de la persona y los requisitos de una ocupación."
+  },
+  {
+   "id": "modelo-del-deficit",
+   "t": "Modelo del déficit",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Enfoque que ubica las dificultades de aprendizaje en carencias del alumno."
+  },
+  {
+   "id": "neuromito",
+   "t": "Neuromito",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Creencia falsa o exagerada sobre el cerebro que se difunde como si fuera científica.",
+   "v": [
+    "neuromitos"
+   ]
+  },
+  {
+   "id": "nucleo-duro",
+   "t": "Núcleo duro",
+   "c": "concepto",
+   "tema": "4.4",
+   "d": "Para Lakatos, las ideas centrales de un programa de investigación que sus defensores deciden no cuestionar."
+  },
+  {
+   "id": "nueva-escuela-mexicana",
+   "t": "Nueva Escuela Mexicana",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Proyecto educativo establecido a partir de la reforma constitucional de 2019 y el Plan de Estudio 2022."
+  },
+  {
+   "id": "observacion-cargada-de-teoria",
+   "t": "Observación cargada de teoría",
+   "c": "concepto",
+   "tema": "5.4",
+   "d": "Idea de que lo que observamos depende de los conocimientos y expectativas que ya tenemos."
+  },
+  {
+   "id": "obstaculo-epistemologico",
+   "t": "Obstáculo epistemológico",
+   "c": "concepto",
+   "tema": "5.4",
+   "d": "Según Bachelard, conocimiento previo o hábito de pensamiento que impide construir un conocimiento científico nuevo.",
+   "v": [
+    "obstáculos epistemológicos"
+   ]
+  },
+  {
+   "id": "obstaculo-sustancialista",
+   "t": "Obstáculo sustancialista",
+   "c": "concepto",
+   "tema": "5.1",
+   "d": "Obstáculo de Bachelard: atribuir cualidades ocultas a las cosas para explicarlas.",
+   "v": [
+    "sustancialista"
+   ]
+  },
+  {
+   "id": "obstaculo-verbal",
+   "t": "Obstáculo verbal",
+   "c": "concepto",
+   "tema": "5.1",
+   "d": "Obstáculo de Bachelard: creer que algo ya está explicado porque tiene nombre."
+  },
+  {
+   "id": "ontologia",
+   "t": "Ontología",
+   "c": "concepto",
+   "tema": "3.4",
+   "d": "Rama de la filosofía que estudia qué es la realidad y cómo está constituida."
+  },
+  {
+   "id": "paradigma",
+   "t": "Paradigma",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Según Kuhn, conjunto de teorías, métodos, problemas y valores compartidos por una comunidad científica.",
+   "marcar": [
+    "paradigma",
+    "paradigmas"
+   ]
+  },
+  {
+   "id": "paradigma-de-simplificacion",
+   "t": "Paradigma de simplificación",
+   "c": "concepto",
+   "tema": "4.6",
+   "d": "Para Morin, la forma de pensar que separa, reduce y aísla, y por eso no ve la complejidad."
+  },
+  {
+   "id": "paradigma-sociocritico",
+   "t": "Paradigma sociocrítico",
+   "c": "corriente",
+   "tema": "3.4",
+   "d": "Enfoque de investigación que busca transformar la realidad y emancipar a las personas."
+  },
+  {
+   "id": "parafrasis",
+   "t": "Paráfrasis",
+   "c": "apa",
+   "tema": "5.4",
+   "d": "Decir con tus propias palabras la idea de un autor, citando de dónde la tomaste."
+  },
+  {
+   "id": "pensamiento-complejo",
+   "t": "Pensamiento complejo",
+   "c": "corriente",
+   "tema": "4.7",
+   "d": "Propuesta de Morin para comprender la realidad en sus múltiples dimensiones entrelazadas."
+  },
+  {
+   "id": "periodo-sensible",
+   "t": "Periodo sensible",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Etapa en que ciertos aprendizajes se adquieren con mayor facilidad.",
+   "v": [
+    "periodos sensibles"
+   ]
+  },
+  {
+   "id": "plasticidad-cerebral",
+   "t": "Plasticidad cerebral",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Capacidad del cerebro de modificar sus conexiones a partir de la experiencia, presente durante toda la vida."
+  },
+  {
+   "id": "positivismo",
+   "t": "Positivismo",
+   "c": "corriente",
+   "tema": "3.4",
+   "d": "Corriente que sostiene que solo es válido el conocimiento basado en la observación de hechos y sus leyes."
+  },
+  {
+   "id": "positivismo-logico",
+   "t": "Positivismo lógico",
+   "c": "corriente",
+   "tema": "4.7",
+   "d": "Corriente del Círculo de Viena que solo acepta como significativas las afirmaciones verificables empíricamente o lógicamente."
+  },
+  {
+   "id": "practica-de-recuperacion",
+   "t": "Práctica de recuperación",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Estrategia de estudio que consiste en intentar recordar lo aprendido."
+  },
+  {
+   "id": "practica-espaciada",
+   "t": "Práctica espaciada",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Distribución del estudio en varias sesiones a lo largo del tiempo."
+  },
+  {
+   "id": "practica-intercalada",
+   "t": "Práctica intercalada",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Estudiar mezclando temas o tipos de problemas en vez de practicar uno solo a la vez."
+  },
+  {
+   "id": "praxis",
+   "t": "Praxis",
+   "c": "concepto",
+   "tema": "3.4",
+   "d": "En Freire, unión de reflexión y acción para transformar el mundo."
+  },
+  {
+   "id": "prevencion",
+   "t": "Prevención",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Principio de anticiparse a los problemas antes de que aparezcan.",
+   "noMarcar": true
+  },
+  {
+   "id": "principio-de-recursividad",
+   "t": "Principio de recursividad",
+   "c": "concepto",
+   "tema": "4.6",
+   "d": "Para Morin, los productos son a la vez productores de lo que los produce, como la sociedad y los individuos.",
+   "v": [
+    "recursividad organizacional"
+   ]
+  },
+  {
+   "id": "principio-de-verificacion",
+   "t": "Principio de verificación",
+   "c": "concepto",
+   "tema": "4.1",
+   "d": "Idea del positivismo lógico: una afirmación tiene sentido solo si se puede comprobar con la experiencia."
+  },
+  {
+   "id": "principio-dialogico",
+   "t": "Principio dialógico",
+   "c": "concepto",
+   "tema": "4.6",
+   "d": "Para Morin, mantener unidas ideas opuestas que se necesitan, como orden y desorden."
+  },
+  {
+   "id": "principio-hologramatico",
+   "t": "Principio hologramático",
+   "c": "concepto",
+   "tema": "4.6",
+   "d": "Para Morin, la parte está en el todo y el todo está en la parte, como cada célula contiene el código genético."
+  },
+  {
+   "id": "programa-analitico",
+   "t": "Programa analítico",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Programa elaborado por el colectivo docente que contextualiza los contenidos del programa sintético."
+  },
+  {
+   "id": "programa-de-investigacion",
+   "t": "Programa de investigación",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Según Lakatos, conjunto formado por un núcleo duro y un cinturón protector de hipótesis."
+  },
+  {
+   "id": "programa-degenerativo",
+   "t": "Programa degenerativo",
+   "c": "concepto",
+   "tema": "4.4",
+   "d": "Para Lakatos, el que solo hace ajustes después de los hechos para salvarse, sin predecir nada nuevo.",
+   "v": []
+  },
+  {
+   "id": "programa-progresivo",
+   "t": "Programa progresivo",
+   "c": "concepto",
+   "tema": "4.4",
+   "d": "Para Lakatos, el que con sus ajustes predice hechos nuevos que luego se confirman.",
+   "v": []
+  },
+  {
+   "id": "programa-sintetico",
+   "t": "Programa sintético",
+   "c": "educacion",
+   "tema": "10.5",
+   "d": "Programa nacional que establece los contenidos básicos."
+  },
+  {
+   "id": "propiedad-emergente",
+   "t": "Propiedad emergente",
+   "c": "concepto",
+   "tema": "3.4",
+   "d": "Característica que aparece en un sistema y no existe en sus partes por separado."
+  },
+  {
+   "id": "provisionalidad",
+   "t": "Provisionalidad",
+   "c": "concepto",
+   "tema": "2.4",
+   "d": "Rasgo de la ciencia según el cual ningún conocimiento es definitivo y todo puede revisarse."
+  },
+  {
+   "id": "proyecto-de-vida",
+   "t": "Proyecto de vida",
+   "c": "educacion",
+   "tema": "8.3",
+   "d": "Construcción personal y continua de metas, valores y trayectorias, acompañada por la orientación."
+  },
+  {
+   "id": "racionalidad-tecnica",
+   "t": "Racionalidad técnica",
+   "c": "concepto",
+   "tema": "6.4",
+   "d": "Según Schön, idea de que la práctica profesional es solo la aplicación de teoría científica."
+  },
+  {
+   "id": "racionalismo",
+   "t": "Racionalismo",
+   "c": "corriente",
+   "tema": "1.3",
+   "d": "Postura según la cual la razón es la fuente principal del conocimiento."
+  },
+  {
+   "id": "reflexion-en-la-accion",
+   "t": "Reflexión en la acción",
+   "c": "concepto",
+   "tema": "6.4",
+   "d": "Según Schön, capacidad de pensar y ajustar la intervención mientras se actúa."
+  },
+  {
+   "id": "reflexion-sobre-la-accion",
+   "t": "Reflexión sobre la acción",
+   "c": "concepto",
+   "tema": "6.3",
+   "d": "Para Schön, pensar después de actuar para aprender de lo que pasó."
+  },
+  {
+   "id": "reflexividad",
+   "t": "Reflexividad",
+   "c": "metodo",
+   "tema": "5.4",
+   "d": "Reconocimiento explícito de la posición y los supuestos del investigador."
+  },
+  {
+   "id": "retroalimentacion",
+   "t": "Retroalimentación",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Información sobre el resultado de una acción que permite corregir el error.",
+   "noMarcar": true
+  },
+  {
+   "id": "revolucion-cientifica",
+   "t": "Revolución científica",
+   "c": "concepto",
+   "tema": "4.7",
+   "d": "Sustitución de un paradigma por otro.",
+   "v": [
+    "revoluciones científicas"
+   ]
+  },
+  {
+   "id": "sangria-francesa",
+   "t": "Sangría francesa",
+   "c": "apa",
+   "tema": "6.4",
+   "d": "Formato de las referencias APA: la primera línea pegada al margen y las siguientes metidas."
+  },
+  {
+   "id": "sinapsis",
+   "t": "Sinapsis",
+   "c": "cerebro",
+   "tema": "7.4",
+   "d": "Punto de comunicación entre dos neuronas."
+  },
+  {
+   "id": "sistema",
+   "t": "Sistema",
+   "c": "concepto",
+   "tema": "3.4",
+   "d": "Conjunto de partes interrelacionadas que forman un todo con propiedades propias.",
+   "noMarcar": true
+  },
+  {
+   "id": "sociologia-comprensiva",
+   "t": "Sociología comprensiva",
+   "c": "corriente",
+   "tema": "3.1",
+   "d": "Propuesta de Max Weber: entender la acción social desde el sentido que le dan quienes actúan."
+  },
+  {
+   "id": "supuesto-epistemologico",
+   "t": "Supuesto epistemológico",
+   "c": "concepto",
+   "tema": "1.3",
+   "d": "Idea implícita sobre qué es conocer que sostiene una práctica, como la evaluación o la enseñanza."
+  },
+  {
+   "id": "teoria-del-conocimiento",
+   "t": "Teoría del conocimiento",
+   "c": "concepto",
+   "tema": "1.2",
+   "d": "Otro nombre de la gnoseología: estudia el conocimiento humano en general, no solo el científico."
+  },
+  {
+   "id": "teoria-general-de-los-sistemas",
+   "t": "Teoría General de los Sistemas",
+   "c": "concepto",
+   "tema": "3.2",
+   "d": "Propuesta de Ludwig von Bertalanffy: estudiar los fenómenos como sistemas de partes relacionadas, donde el todo es más que la suma de las partes."
+  },
+  {
+   "id": "tipos-ideales",
+   "t": "Tipos ideales",
+   "c": "metodo",
+   "tema": "3.1",
+   "d": "Herramienta de Max Weber: modelos «puros» que exageran rasgos de un fenómeno para poder compararlo con la realidad."
+  },
+  {
+   "id": "todo-vale",
+   "t": "Todo vale",
+   "c": "concepto",
+   "tema": "4.5",
+   "d": "Frase de Feyerabend: no hay un método único que garantice el avance de la ciencia.",
+   "marcar": [
+    "todo vale"
+   ]
+  },
+  {
+   "id": "triangulacion",
+   "t": "Triangulación",
+   "c": "metodo",
+   "tema": "5.4",
+   "d": "Contraste de diversas fuentes, métodos o investigadores sobre un mismo fenómeno."
+  },
+  {
+   "id": "tutoria",
+   "t": "Tutoría",
+   "c": "educacion",
+   "tema": "8.2",
+   "d": "Acompañamiento académico y personal de los alumnos a lo largo de su formación.",
+   "noMarcar": true
+  }
+ ]
+}
