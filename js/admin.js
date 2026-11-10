@@ -130,6 +130,7 @@ function cargarTabActiva() {
   // Tabla de alumnos contra actividades, arriba de la captura de siempre.
   vistaRapida(tab, { db, grupoActivo, alumnos: alumnosCache, datosDeAlumno });
   if (tab === 'tareas') { cargarCatalogo('tareas'); cargarTareasDig(); }
+  if (tab === 'concentrado') cargarConcentrado();
   if (tab === 'equipos') cargarEquiposTab();
   if (tab === 'monitor') iniciarMonitor(); else detenerMonitor();
   if (tab === 'arena') iniciarArena(); else detenerArena();
@@ -762,6 +763,185 @@ async function guardarPractico() {
 // ---------- PROYECTO: MI PLATO, MI HISTORIA ----------
 const ENTREGAS_PROYECTO = ['entrega1', 'entrega2', 'entregaFinal'];
 ENTREGAS_PROYECTO.forEach(entrega => { on(`btn-guardar-${entrega}`, 'click', () => guardarEntregaProyecto(entrega)); });
+
+// ---------- CONCENTRADO DE TRABAJOS ----------
+// Alumnos (filas) contra trabajos con Word (columnas). Al inicio, resaltado, el proyecto «Pienso, luego investigo»
+// por entrega. Cada celda abre una ventana para ver, calificar y pasar al siguiente alumno sin salir de la tabla.
+const TIPOS_WORD = ['cuadro'];
+const CT = { cols: [], datos: {}, enCat: new Set(), grupo: null, dlg: null };
+const ctFecha = t => { const d = t && t.toDate ? t.toDate() : typeof t === 'number' ? new Date(t) : t ? new Date(t) : null; return d && !isNaN(d) ? d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' }) : ''; };
+const ctNorm = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+on('ct-busca', 'input', () => ctFiltrar());
+on('ct-recientes', 'change', () => { if (CT.grupo) ctPintarTabla(); });
+
+function ctColumnas() {
+  const tareas = TEMAS_TAREAS.flatMap(t => t.acts.filter(a => califica(a) && TIPOS_WORD.includes(a.tipo))
+    .map(a => ({ id: a.id, tipo: 'tarea', a, nombre: a.nombre, icono: a.icono, fecha: t.fechaTexto, orden: t.fecha || '' })));
+  const rec = document.getElementById('ct-recientes'); if (!rec || rec.checked) tareas.reverse();
+  const D = TALLER_DATA;
+  const proy = ENTREGAS_PROYECTO.map(k => ({ id: 'mp-' + k, tipo: 'proyecto', ent: k, icono: '📘', nombre: (D && D.entregas[k] && D.entregas[k].nombre) || k, fecha: ((D && D.entregas[k] && D.entregas[k].fecha) || '') }));
+  return [...proy, ...tareas];
+}
+
+async function cargarConcentrado() {
+  const cont = document.getElementById('ct-tabla'); if (!cont) return;
+  if (!grupoActivo) { cont.innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  if (!alumnosCache.length) { cont.innerHTML = '<p class="empty-inline">Este grupo aún no tiene alumnos.</p>'; return; }
+  try { TALLER_DATA = TALLER_DATA || await fetch('data/taller.json').then(r => r.json()); LAB_DATA = LAB_DATA || await fetch('data/laboratorio.json').then(r => r.json()); } catch { /* sin taller */ }
+  // Siempre fresco: las calificaciones pudieron cambiar en otras pestañas.
+  CT.datos = {}; CT.grupo = grupoActivo; CT_MP = null;
+  CT.enCat = new Set();
+  try { const sn = await getDocs(collection(db, 'grupos', grupoActivo, 'tareas_catalogo')); sn.forEach(d => CT.enCat.add(d.id)); } catch { /* */ }
+  ctPintarTabla();
+  const g = grupoActivo, pend = CT.cols.filter(c => !CT.datos[c.id]);
+  const est = document.getElementById('ct-estado');
+  let hechas = 0; est.textContent = pend.length ? `Cargando ${pend.length} trabajos…` : '';
+  const una = async c => { try { CT.datos[c.id] = c.tipo === 'proyecto' ? await ctReunirProyecto(c) : await reunirTareaDig(c.a); } catch (e) { CT.datos[c.id] = { error: true, filas: [] }; } if (g !== grupoActivo) return; hechas++; est.textContent = hechas < pend.length ? `Cargando… ${hechas} de ${pend.length}` : ''; ctPintarColumna(c); };
+  // de cuatro en cuatro, para no saturar
+  const cola = [...pend]; await Promise.all([0, 1, 2, 3].map(async () => { while (cola.length) await una(cola.shift()); }));
+}
+
+// Proyecto: una sola lectura del taller sirve para las tres entregas.
+let CT_MP = null;
+async function ctReunirProyecto(c) {
+  if (!CT_MP || CT_MP.g !== grupoActivo) {
+    const filas = await Promise.all(alumnosCache.map(async al => {
+      let d = null; try { const s = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', al.id, 'investigacion', 'taller')); d = s.exists() ? s.data() : null; } catch { /* */ }
+      const cal = {}; await Promise.all(ENTREGAS_PROYECTO.map(async k => { try { const s = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', al.id, 'proyecto', k)); cal[k] = s.exists() ? s.data() : {}; } catch { cal[k] = {}; } }));
+      return { al, d, cal };
+    }));
+    CT_MP = { g: grupoActivo, filas };
+  }
+  const D = TALLER_DATA, k = c.ent, tot = D ? D.preguntas.filter(p => p.entrega === k).length : 0;
+  return { filas: CT_MP.filas.map(({ al, d, cal }) => {
+    const T = (d && d.datos) || {}, es = d && D ? estadoEntrega(T, D, k) : { entregada: false }, av = (((d && d.avance) || {}).respuestas || {})[k] || 0;
+    const ca = cal[k] || {};
+    return { al, d, T, es, av, tot, importado: null, cal: ca.calificacion ?? '', comentario: ca.comentario || '', word: d && d.datos ? T : null };
+  }) };
+}
+
+function ctPintarTabla() {
+  CT.cols = ctColumnas();
+  const cont = document.getElementById('ct-tabla');
+  cont.innerHTML = `<table class="ct-tabla"><thead><tr><th class="ct-al">Alumno</th>${CT.cols.map(c => `<th class="${c.tipo === 'proyecto' ? 'ct-proy' : ''}" data-col="${c.id}"><span class="ct-ico">${c.icono}</span><b>${escaparHTML(c.nombre)}</b><small>${escaparHTML(c.fecha)}</small></th>`).join('')}</tr></thead>
+    <tbody>${alumnosCache.map(al => `<tr data-al="${al.id}" data-n="${escaparHTML(ctNorm(al.nombre))}"><th class="ct-al" scope="row">${escaparHTML(al.nombre)}</th>${CT.cols.map(c => `<td class="${c.tipo === 'proyecto' ? 'ct-proy' : ''}" data-c="${c.id}"><span class="ct-carga">…</span></td>`).join('')}</tr>`).join('')}</tbody>
+    <tfoot><tr><th class="ct-al">Todos</th>${CT.cols.map(c => `<td class="${c.tipo === 'proyecto' ? 'ct-proy' : ''}"><button type="button" class="btn btn-small ct-zip" data-zip="${c.id}" title="Descargar el Word de todos en un .zip">⬇ .zip</button></td>`).join('')}</tr></tfoot></table>`;
+  cont.querySelectorAll('[data-zip]').forEach(b => b.addEventListener('click', () => ctZip(CT.cols.find(c => c.id === b.dataset.zip), b)));
+  CT.cols.forEach(c => { if (CT.datos[c.id]) ctPintarColumna(c); });
+  ctFiltrar();
+}
+
+const ctFila = (c, alId) => ((CT.datos[c.id] || {}).filas || []).find(x => x.al.id === alId);
+function ctCelda(c, x) {
+  if (!x) return '<span class="ct-nada">—</span>';
+  const nota = x.exento ? '<span class="ct-cal ex">Exento</span>' : x.cal !== '' && x.cal != null ? `<span class="ct-cal">${escaparHTML(String(x.cal))}</span>` : '';
+  let est = '';
+  if (c.tipo === 'proyecto') {
+    est = x.es.entregada ? `<span class="ct-ok" title="${x.es.modificada ? 'Lo cambió después de entregarlo' : 'Entregado'}">${x.es.modificada ? '✏️' : '✓'} ${ctFecha(x.es.t)}</span>` : x.importado ? `<span class="ct-ok" title="Subió su Word">📥 ${ctFecha(x.importado.t)}</span>` : x.av ? `<span class="ct-proc">✎ ${x.av}/${x.tot}</span>` : '<span class="ct-nada">—</span>';
+  } else {
+    est = x.entregado ? `<span class="ct-ok">✓ ${ctFecha(x.entregado.t)}</span>` : x.word ? '<span class="ct-proc">✎ sin entregar</span>' : '<span class="ct-nada">—</span>';
+    if (x.eq) est += ' <span title="Equipo: ' + escaparHTML(x.eq.nombre) + '">👥</span>';
+    if (x.ap && !x.ap.si) est += ' <span title="No escribió nada en el trabajo del equipo">✋</span>';
+  }
+  return `<button type="button" class="ct-abrir" data-abrir="${c.id}|${x.al.id}" title="Ver y calificar">${est}${nota}</button>${x.word ? `<button type="button" class="ct-bajar" data-bajar="${c.id}|${x.al.id}" title="Descargar su Word">⬇</button>` : ''}`;
+}
+function ctPintarColumna(c) {
+  document.querySelectorAll(`#ct-tabla td[data-c="${c.id}"]`).forEach(td => {
+    const alId = td.closest('tr').dataset.al;
+    td.innerHTML = CT.datos[c.id].error ? '<span class="ct-nada" title="No se pudo cargar">⚠️</span>' : ctCelda(c, ctFila(c, alId));
+    td.querySelectorAll('[data-abrir]').forEach(b => b.addEventListener('click', () => ctAbrir(c, alId)));
+    td.querySelectorAll('[data-bajar]').forEach(b => b.addEventListener('click', () => ctBajar(c, ctFila(c, alId), b)));
+  });
+}
+function ctFiltrar() {
+  const q = ctNorm((document.getElementById('ct-busca') || {}).value || '').trim();
+  document.querySelectorAll('#ct-tabla tbody tr').forEach(tr => { tr.hidden = !!q && !tr.dataset.n.includes(q); });
+}
+
+async function ctWord(c, x) {
+  if (c.tipo === 'proyecto') return wordTaller(x.T, TALLER_DATA, LAB_DATA, c.ent, x.al.nombre, { soloBlob: true });
+  return CT.datos[c.id].wordDe(x);
+}
+async function ctBajar(c, x, b) {
+  if (!x || !x.word) return; b.disabled = true;
+  try { const r = await ctWord(c, x); bajar(r.blob, r.archivo); } catch (e) { alert('No se pudo generar el Word: ' + (e.message || e)); } finally { b.disabled = false; }
+}
+async function ctZip(c, b) {
+  const msg = document.getElementById('ct-zip-msg'), D = CT.datos[c.id];
+  if (!D) { msg.textContent = 'Espera a que termine de cargar ese trabajo.'; return; }
+  const vistos = new Set(), con = D.filas.filter(x => x.word && !(x.eq && vistos.has(x.eq.id)) && (x.eq ? vistos.add(x.eq.id) : true));
+  if (!con.length) { msg.textContent = `«${c.nombre}»: todavía nadie tiene trabajo.`; return; }
+  b.disabled = true; msg.textContent = `Armando ${con.length} documentos de «${c.nombre}»…`;
+  try { const docs = []; for (const x of con) docs.push(await ctWord(c, x)); await bajarZip(docs, `${slugArchivo(c.nombre)}_${slugArchivo(grupoActivo)}.zip`); msg.textContent = `✓ ${docs.length} documentos de «${c.nombre}» en el .zip`; }
+  catch (e) { msg.textContent = 'No se pudo armar el .zip: ' + (e.message || e); } finally { b.disabled = false; }
+}
+
+// ---- Ventana de calificar: ver, calificar, «Guardar y siguiente»
+function ctVisibles() { return [...document.querySelectorAll('#ct-tabla tbody tr')].filter(tr => !tr.hidden).map(tr => tr.dataset.al); }
+function ctAbrir(c, alId) {
+  const dlg = document.getElementById('ct-dlg'), cu = document.getElementById('ct-dlg-cuerpo'), x = ctFila(c, alId);
+  if (!x) return;
+  const orden = ctVisibles(), i = orden.indexOf(alId), sig = orden[i + 1], ant = orden[i - 1];
+  const e = escaparHTML;
+  let info = '';
+  if (c.tipo === 'proyecto') {
+    const pl = x.T.plat || {}, cp = Object.entries(pl).filter(([n, v]) => v > 50 && numsDe(TALLER_DATA, c.ent).includes(Number(n))).map(([n]) => n);
+    info = `<p><b>Pregunta de investigación:</b> ${e((x.d && x.d.pregunta) || '—')}</p>
+      <p><b>Avance:</b> ${x.av} de ${x.tot} preguntas${x.es.entregada ? ` · ${x.es.modificada ? '✏️ la cambió después de entregarla' : '✓ entregada'} el ${e(ctFecha(x.es.t))}` : x.importado ? ` · 📥 subió su Word el ${e(ctFecha(x.importado.t))}` : ' · sin entregar'}</p>
+      ${cp.length ? `<p class="ct-alerta">⚠️ Preguntas con menos de 50 % de texto propio (casi todo es la respuesta base): ${e(cp.join(', '))}</p>` : ''}
+      ${x.d ? `<details><summary>Leer sus respuestas</summary>${(TALLER_DATA ? TALLER_DATA.preguntas.filter(p => numsDe(TALLER_DATA, c.ent).includes(p.n)) : []).map(p => `<p class="ct-resp"><b>${p.n}. ${e(p.texto)}</b><br>${e(((x.T.respuestas || {})[p.n]) || '—')}</p>`).join('')}</details>` : '<p><i>Aún no entra al taller.</i></p>'}`;
+  } else {
+    info = `<p><b>Entrega:</b> ${x.entregado ? `✓ ${e(ctFecha(x.entregado.t))}` : x.word ? '✎ lo empezó, sin entregar' : 'sin trabajo'}${x.eq ? ` · 👥 ${e(x.eq.nombre)}` : ''}</p>
+      <p><b>Sugerida: ${e(String(x.sug.nota))}</b> <small>· ${e(x.sug.detalle)}</small></p>
+      ${x.ap && !x.ap.si ? '<p class="ct-alerta">✋ No escribió nada en el trabajo del equipo.</p>' : ''}
+      ${x.resumen ? `<details><summary>Ver el resumen del trabajo</summary><p class="ct-resp">${e(x.resumen)}</p></details>` : ''}
+      ${CT.enCat.has(catalogoId(c.a.id)) ? '' : '<p class="ct-alerta">⚠️ Esta tarea todavía no está en el catálogo: la calificación se guarda, pero no cuenta en el promedio hasta que la agregues (Tareas → Tareas digitales).</p>'}`;
+  }
+  cu.innerHTML = `<div class="ct-dlg-cab"><div><small>${e(c.icono)} ${e(c.nombre)}</small><h3 id="ct-dlg-tit">${e(x.al.nombre)}</h3></div><button type="button" class="ct-x" id="ct-cerrar" aria-label="Cerrar">✕</button></div>
+    <div class="ct-dlg-info">${info}</div>
+    <div class="ct-dlg-cal">
+      <label><span>Calificación</span><input type="number" min="0" max="10" step="0.1" class="calif-input" id="ct-cal" value="${e(String(x.cal ?? ''))}" placeholder="0-10" ${x.exento ? 'disabled' : ''}></label>
+      ${c.tipo === 'tarea' ? `<button type="button" class="btn btn-small btn-ghost-dark" id="ct-usar">Usar sugerida (${e(String(x.sug.nota))})</button><label class="ct-ex"><input type="checkbox" id="ct-ex" ${x.exento ? 'checked' : ''}> Exento (falta justificada)</label>` : ''}
+      ${c.tipo === 'proyecto' ? `<textarea id="ct-com" rows="3" placeholder="Comentarios para el alumno: qué salió bien y qué debe corregir (lo verá en Mi progreso)">${e(x.comentario || '')}</textarea>` : ''}
+    </div>
+    <p class="save-msg" id="ct-msg" hidden></p>
+    <div class="ct-dlg-acc">
+      <button type="button" class="btn btn-small btn-ghost-dark" id="ct-ant" ${ant ? '' : 'disabled'}>← Anterior</button>
+      ${x.word ? '<button type="button" class="btn btn-small" id="ct-word">⬇ Word</button>' : ''}
+      <button type="button" class="btn btn-small btn-ghost-dark" id="ct-guardar">Guardar</button>
+      <button type="button" class="btn btn-small btn-primary" id="ct-sig">${sig ? 'Guardar y siguiente →' : 'Guardar y cerrar'}</button>
+    </div>`;
+  const $d = id => document.getElementById(id);
+  $d('ct-cerrar').addEventListener('click', () => dlg.close());
+  if ($d('ct-usar')) $d('ct-usar').addEventListener('click', () => { if (!$d('ct-ex').checked) $d('ct-cal').value = x.sug.nota; });
+  if ($d('ct-ex')) $d('ct-ex').addEventListener('change', ev => { $d('ct-cal').disabled = ev.target.checked; if (ev.target.checked) $d('ct-cal').value = ''; });
+  if ($d('ct-word')) $d('ct-word').addEventListener('click', ev => ctBajar(c, x, ev.currentTarget));
+  const guardar = async () => {
+    const msg = $d('ct-msg'), v = $d('ct-cal').value, ex = $d('ct-ex') ? $d('ct-ex').checked : false;
+    if (v !== '' && (isNaN(parseFloat(v)) || parseFloat(v) < 0 || parseFloat(v) > 10)) { msg.textContent = 'La calificación va de 0 a 10.'; msg.hidden = false; return false; }
+    try {
+      if (c.tipo === 'proyecto') {
+        const comentario = ($d('ct-com').value || '').trim(), calificacion = v === '' ? null : parseFloat(v);
+        await setDoc(doc(db, 'grupos', grupoActivo, 'alumnos', x.al.id, 'proyecto', c.ent), { calificacion, comentario, actualizado: serverTimestamp() });
+        x.cal = calificacion ?? ''; x.comentario = comentario;
+        const m = CT_MP && CT_MP.filas.find(y => y.al.id === x.al.id); if (m) m.cal[c.ent] = { calificacion, comentario };
+      } else {
+        const a = c.a, ref = doc(db, 'grupos', grupoActivo, 'alumnos', x.al.id, 'tareas', catalogoId(a.id));
+        if (ex) await setDoc(ref, { parcial: 'p2', nombre: nombreCatalogo(a), fecha: a.fecha, exento: true, actualizado: serverTimestamp() });
+        else if (v === '') await deleteDoc(ref).catch(() => {});
+        else await setDoc(ref, { parcial: 'p2', nombre: nombreCatalogo(a), fecha: a.fecha, calificacion: Math.max(0, Math.min(10, parseFloat(v))), actualizado: serverTimestamp() });
+        x.exento = ex; x.cal = ex || v === '' ? '' : Math.max(0, Math.min(10, parseFloat(v)));
+        refrescarMarcas();
+      }
+      ctPintarColumna(c); msg.textContent = '✓ Guardado.'; msg.hidden = false; return true;
+    } catch (er) { msg.textContent = 'No se pudo guardar: ' + (er.message || er); msg.hidden = false; return false; }
+  };
+  $d('ct-guardar').addEventListener('click', guardar);
+  $d('ct-sig').addEventListener('click', async () => { if (!(await guardar())) return; if (sig) ctAbrir(c, sig); else dlg.close(); });
+  $d('ct-ant').addEventListener('click', () => { if (ant) ctAbrir(c, ant); });
+  if (!dlg.open) dlg.showModal();
+  setTimeout(() => { const i = $d('ct-cal'); if (i && !i.disabled) i.focus(); }, 30);
+}
 
 async function cargarProyecto() {
   const empty = document.getElementById('proyecto-empty');
@@ -2002,11 +2182,9 @@ async function calificarRuta(a, enCatalogo) {
   });
 }
 
-async function calificarTareaDig(a, enCatalogo) {
-  if (a.tipo === 'ruta') return calificarRuta(a, enCatalogo);
-  const wrap = document.getElementById('td-calificar'); wrap.hidden = false;
-  wrap.innerHTML = '<p class="empty-inline">Reuniendo el trabajo de cada alumno…</p>';
-  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// Reúne el trabajo de cada alumno (o de su equipo) en un cuadro: sugerida, entrega, resumen, calificación
+// y el Word. Lo usan «Calificar» y el «Concentrado de trabajos».
+async function reunirTareaDig(a) {
   const g = grupoActivo, A = CUADROS[a.id];
   let equipos = [];
   try { const [gs, sn] = await Promise.all([getDoc(doc(db, 'grupos', g)), getDocs(collection(db, 'grupos', g, 'equipos'))]); equipos = equiposDe(sn.docs.map(d => ({ id: d.id, ...d.data() })), formacionDeTarea(gs.exists() ? gs.data() : {}, a.id)); } catch { /* */ }
@@ -2026,6 +2204,17 @@ async function calificarTareaDig(a, enCatalogo) {
     if (eq) { const d = await docEquipo(eq); if (d) { ap = aporteDe(d, al); if (!ap.si) sug = { nota: 0, detalle: '✋ No aportó: no escribió nada en el trabajo del equipo · ' + sug.detalle }; } }
     return { al, eq, sug, entregado, resumen, cal, ap, exento, word };
   }));
+  const wordDe = async x => { const V = varianteDe(A, x.eq, x.eq ? undefined : x.al.id), R = respuestasDe(A, V); const { D, archivo } = await docCuadro({ A, V, R, S: x.word, eq: x.eq, nombre: x.al.nombre, conClave: false }); return { blob: D.blob(), archivo: archivo + '.docx' }; };
+  return { filas, wordDe };
+}
+
+async function calificarTareaDig(a, enCatalogo) {
+  if (a.tipo === 'ruta') return calificarRuta(a, enCatalogo);
+  const wrap = document.getElementById('td-calificar'); wrap.hidden = false;
+  wrap.innerHTML = '<p class="empty-inline">Reuniendo el trabajo de cada alumno…</p>';
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const g = grupoActivo, A = CUADROS[a.id];
+  const { filas, wordDe } = await reunirTareaDig(a);
   const f = t => t && t.toDate ? t.toDate().toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : typeof t === 'number' ? new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
   const inv = A.filas.filter(x => x[3]).length;
   wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
@@ -2043,7 +2232,6 @@ async function calificarTareaDig(a, enCatalogo) {
     <button type="button" class="btn btn-primary btn-block" id="td-guardar">Guardar calificaciones</button><p class="save-msg" id="td-msg" hidden></p>`;
   document.getElementById('td-cerrar').addEventListener('click', () => { wrap.hidden = true; });
   // Word de cada alumno o equipo (el mismo que descarga el alumno) y todos en .zip (uno por equipo)
-  const wordDe = async x => { const V = varianteDe(A, x.eq, x.eq ? undefined : x.al.id), R = respuestasDe(A, V); const { D, archivo } = await docCuadro({ A, V, R, S: x.word, eq: x.eq, nombre: x.al.nombre, conClave: false }); return { blob: D.blob(), archivo: archivo + '.docx' }; };
   wrap.querySelectorAll('.td-word').forEach(b => b.addEventListener('click', async () => {
     const x = filas.find(y => y.al.id === b.dataset.w); b.disabled = true;
     try { const r = await wordDe(x); bajar(r.blob, r.archivo); } catch (e) { alert('No se pudo generar el Word: ' + (e.message || e)); } finally { b.disabled = false; }
