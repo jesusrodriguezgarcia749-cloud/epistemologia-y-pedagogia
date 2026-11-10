@@ -21,8 +21,8 @@
    ],
    "proyecto": [
     "Presentar el proyecto Pienso, luego investigo, sus tres entregas y su peso en el Examen Final.",
-    "Sondeo del grupo: quién tiene protocolo del Taller de Investigación y en qué etapa; quien no lo tenga define un tema de tesis tentativo.",
-    "Pregunta 1: ¿cuál es el tema y la pregunta de investigación de tu protocolo (o del que te gustaría hacer) y por qué te interesa?"
+    "Sondeo del grupo: qué le gustaría investigar a cada quien; quien no tenga tema define uno tentativo.",
+    "Pregunta 1: ¿qué tema te gustaría investigar, cuál sería tu pregunta de investigación y por qué te interesa?"
    ],
    "evaluacion": [
     "Examen Diagnóstico (sin valor oficial)",
@@ -94,7 +94,7 @@
     "Mapa conceptual de teoría del conocimiento, epistemología y filosofía de la ciencia (1.2), si quedó pendiente."
    ],
    "proyecto": [
-    "Pregunta 4: ¿desde qué paradigma —positivista, interpretativo o sociocrítico— está planteada tu investigación? Justifícalo con dos rasgos de tu protocolo."
+    "Pregunta 4: ¿desde qué paradigma —positivista, interpretativo o sociocrítico— está planteada tu investigación? Justifícalo con dos rasgos de tu pregunta y del método que usarías."
    ],
    "evaluacion": [
     "Rúbrica de Tarea (cuadro de paradigmas en la plataforma)",
@@ -324,7 +324,7 @@
    ],
    "proyecto": [
     "Pregunta 17: ¿cómo se relaciona tu investigación con la Nueva Escuela Mexicana?",
-    "Pregunta 18 (reflexión final): después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu protocolo?"
+    "Pregunta 18 (reflexión final): después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu pregunta o de tu forma de investigarla?"
    ],
    "evaluacion": [
     "Participación (debate)",
@@ -436,7 +436,7 @@
  "proyecto": {
   "nombre": "Pienso, luego investigo",
   "lema": "Cogito ergo sum: el lema de nuestro escudo, convertido en método.",
-  "descripcion": "Es el ensayo final del curso sobre el quehacer científico de la pedagogía. Cada alumno analiza con lentes epistemológicos su propio protocolo de investigación; si todavía no lo tienes, trabajas sobre el tema de tesis que te gustaría investigar. Respondes 18 preguntas guía en tres entregas y, al final, las integras en un ensayo continuo que defiendes oralmente.",
+  "descripcion": "Es el ensayo final del curso sobre el quehacer científico de la pedagogía. Cada alumno elige un tema que le gustaría investigar, lo convierte en una pregunta de investigación y la analiza con lentes epistemológicos; no hace falta tener un protocolo. Respondes 18 preguntas guía en tres entregas y, al final, las integras en un ensayo continuo que defiendes oralmente.",
   "peso": "El proyecto vale 40 de los 100 puntos del Examen Final. No se suma al Parcial 2: vive completo en el Final.",
   "entregas": [
    {
@@ -448,7 +448,7 @@
     "temas": "Temas 1 a 4",
     "requisito": "Respuestas a las preguntas 1 a 6, de 150 a 250 palabras cada una (900 a 1,500 en total), con al menos 3 referencias en APA 7.",
     "preguntas": [
-     "¿Cuál es el tema y la pregunta de investigación de tu protocolo (o del que te gustaría hacer) y por qué te interesa?",
+     "¿Qué tema te gustaría investigar, cuál sería tu pregunta de investigación y por qué te interesa?",
      "¿Qué tipo de conocimiento quieres producir con tu investigación: explicar, comprender o transformar?",
      "¿Dónde se ubica tu tema en la clasificación de las ciencias y por qué?",
      "¿Desde qué paradigma —positivista, interpretativo o sociocrítico— está planteada tu investigación?",
@@ -487,7 +487,7 @@
      "¿Qué barreras o desigualdades podría revelar —o reproducir— tu investigación?",
      "¿Qué dilemas éticos tiene tu investigación y cómo los resolverás?",
      "¿Cómo se relaciona tu investigación con la Nueva Escuela Mexicana?",
-     "Después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu protocolo?"
+     "Después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu pregunta o de tu forma de investigarla?"
     ]
    }
   ],
@@ -512,11 +512,11 @@
   ],
   "ejemplo": {
    "titulo": "Ejemplo resuelto (preguntas 1, 2 y 4)",
-   "nota": "Caso ficticio, solo para mostrar el nivel esperado. No lo copies: tu respuesta debe hablar de tu propio protocolo.",
+   "nota": "Caso ficticio, solo para mostrar el nivel esperado. No lo copies: tu respuesta debe hablar de tu propio tema.",
    "respuestas": [
     {
      "n": 1,
-     "texto": "Mi protocolo se titula «La lectura en voz alta y la comprensión lectora en primer grado de secundaria». Mi pregunta es: ¿de qué manera la lectura en voz alta diaria del docente influye en la comprensión lectora de alumnos de primer grado de una secundaria pública de Campeche? Me interesa porque en mis prácticas vi que muchos alumnos leen las palabras, pero no entienden lo que leen."
+     "texto": "Me gustaría investigar «La lectura en voz alta y la comprensión lectora en primer grado de secundaria». Mi pregunta es: ¿de qué manera la lectura en voz alta diaria del docente influye en la comprensión lectora de alumnos de primer grado de una secundaria pública de Campeche? Me interesa porque en mis prácticas vi que muchos alumnos leen las palabras, pero no entienden lo que leen."
     },
     {
      "n": 2,
@@ -553,9 +553,9 @@
      "No considera posturas contrarias."
     ],
     [
-     "Aplicación a su protocolo",
-     "Analiza su propio protocolo con los conceptos del curso.",
-     "La relación con su protocolo es superficial.",
+     "Aplicación a su tema y pregunta de investigación",
+     "Analiza su propio tema y su pregunta con los conceptos del curso.",
+     "La relación con su tema es superficial.",
      "No hay relación con su investigación."
     ],
     [
@@ -595,7 +595,7 @@
      "No cumple el mínimo de referencias."
     ],
     [
-     "Vínculo con su protocolo",
+     "Vínculo con su tema y pregunta",
      "Cada respuesta habla de su investigación concreta.",
      "Algunas respuestas son genéricas.",
      "Las respuestas no se relacionan con su investigación."

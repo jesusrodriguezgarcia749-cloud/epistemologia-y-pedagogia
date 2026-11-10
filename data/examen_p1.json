@@ -26,13 +26,13 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Por qué el curso se ubica en séptimo cuatrimestre, según la introducción del compendio?",
    "opciones": [
-    "Porque los alumnos ya tienen formación teórica y están construyendo su protocolo de investigación",
+    "Porque los alumnos ya tienen formación teórica y metodológica para pensar su propia investigación",
     "Porque es una materia de repaso de los cuatrimestres anteriores",
     "Porque no requiere ningún conocimiento previo",
     "Porque sustituye al taller de investigación"
    ],
    "correcta": 0,
-   "explicacion": "Un protocolo sin reflexión epistemológica es como una casa sin cimientos."
+   "explicacion": "Una investigación sin reflexión epistemológica es como una casa sin cimientos."
   },
   {
    "id": "p1-003",

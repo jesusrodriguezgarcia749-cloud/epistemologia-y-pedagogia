@@ -360,7 +360,7 @@ CUADROS['mi-autor'] = {
     ['idea', 'Su idea en una frase', '¿Qué propone? Díganlo como se lo dirían a un compañero.'],
     ['aula', 'Un ejemplo en el aula', 'Una situación de una escuela que se explica con esta idea.'],
     ['critica', 'Una crítica o un riesgo', '¿Dónde se queda corto o qué peligro tiene si se lee mal?'],
-    ['investigo', 'Qué le dice a mi investigación', '¿Qué cambiaría en un protocolo (el suyo o uno de pedagogía) si se toma en serio esta idea?'],
+    ['investigo', 'Qué le dice a mi investigación', '¿Qué cambiaría en una investigación (la suya o una de pedagogía) si se toma en serio esta idea?'],
   ],
   variantes: [
     { id: 'lakatos', ico: '🧱', afirmacion: '4.4 · Imre Lakatos: los programas de investigación', respuestas: {
