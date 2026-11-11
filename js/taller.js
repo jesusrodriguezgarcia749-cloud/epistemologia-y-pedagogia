@@ -5,7 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { wordTaller, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026102708";
+import { wordTaller, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, revisarCitas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026111101";
 
 const db = getFirestore(initializeApp(firebaseConfig));
 const SESSION_KEY = 'ep_sesion_alumno';
@@ -983,7 +983,7 @@ function pintarGuiada(ent) {
 }
 function pintarFinal(ent, cuerpo, ir) {
   const E = ENTREGAS[ent], hasta = hastaDe(D, ent), NS = NUMS(ent), todas = D.preguntas.filter(p => p.n <= hasta).map(p => p.n);
-  const sug = refsSugeridas(D, LAB, hasta), S = new Set(T.refs.sel);
+  const sug = refsSugeridas(D, LAB, hasta, T), S = new Set(T.refs.sel);
   const md2 = t => esc(t).replace(/\*([^*]+)\*/g, '<i>$1</i>');
   T.introPasos = T.introPasos || INTRO.map(() => '');
   cuerpo.innerHTML = `<article class="t-preg e1">
@@ -1013,6 +1013,9 @@ function pintarFinal(ent, cuerpo, ir) {
       [!muchaPlat.length, muchaPlat.length ? `Preguntas donde más de la mitad es la respuesta base de la plataforma: ${muchaPlat.join(', ')}. Escríbelas más con tus palabras.` : 'En todas las respuestas, al menos la mitad del texto es tuyo ✓'],
       [nr >= E.minRefs, `${nr} referencia${nr === 1 ? '' : 's'} ${nr >= E.minRefs ? '✓' : `· te faltan ${E.minRefs - nr} para el mínimo de ${E.minRefs}`}`],
     ];
+    const rc = revisarCitas(textosDe(T, D, ent).map(([, t]) => t), refs);
+    L.push([!rc.sinRef.length, rc.sinRef.length ? `Citas sin su referencia en la lista: ${rc.sinRef.join(', ')}. Agrega la obra a tus referencias o, si no la leíste, quita la cita.` : 'Cada autor que citas está en tus referencias ✓']);
+    L.push([!rc.sinCitar.length, rc.sinCitar.length ? `Referencias que no citas en tu texto: ${rc.sinCitar.join('; ')}. Cítalas o desmárcalas: en APA solo va lo que citaste.` : 'Todas tus referencias están citadas en el texto ✓']);
     if (E.minArticulos) L.push([na >= E.minArticulos, `${na} artículo${na === 1 ? '' : 's'} académico${na === 1 ? '' : 's'} ${na >= E.minArticulos ? '✓' : `· te faltan ${E.minArticulos - na} (de revista, con volumen y número o DOI)`}`]);
     if (E.intro) L.push([palabras(T.intro) >= 100, palabras(T.intro) >= 100 ? 'Tiene introducción ✓' : 'Falta la introducción (al menos 100 palabras)']);
     if (E.minPal) L.push([total >= E.minPal && total <= E.maxPal, `${total.toLocaleString('es-MX')} palabras en total ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500` : total > E.maxPal ? '· pasaste el máximo de 3,500' : '✓ dentro del rango (2,500 a 3,500)'}`]);

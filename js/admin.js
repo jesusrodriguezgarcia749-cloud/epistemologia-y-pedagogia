@@ -15,7 +15,7 @@ import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } 
 import { vistaRapida } from "./matriz.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js?v=2026111001";
 import { zipDocx } from "./docx-ites.js?v=2026102708";
-import { wordTaller, numsDe, estadoEntrega, slugArchivo } from "./taller-word.js?v=2026102708";
+import { wordTaller, numsDe, estadoEntrega, slugArchivo, revisarCitas, textosDe, refsElegidas, hastaDe } from "./taller-word.js?v=2026111101";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
 import { RUTAS, sugerirRuta, MIN_SALIDA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026111002";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";
@@ -816,7 +816,8 @@ async function ctReunirProyecto(c) {
   return { filas: CT_MP.filas.map(({ al, d, cal }) => {
     const T = (d && d.datos) || {}, es = d && D ? estadoEntrega(T, D, k) : { entregada: false }, av = (((d && d.avance) || {}).respuestas || {})[k] || 0;
     const ca = cal[k] || {};
-    return { al, d, T, es, av, tot, importado: null, cal: ca.calificacion ?? '', comentario: ca.comentario || '', word: d && d.datos ? T : null };
+    const rc = d && d.datos && D && LAB_DATA ? revisarCitas(textosDe(T, D, k).map(([, t]) => t), refsElegidas(T, D, LAB_DATA, hastaDe(D, k))) : null;
+    return { al, d, T, es, av, tot, rc, importado: null, cal: ca.calificacion ?? '', comentario: ca.comentario || '', word: d && d.datos ? T : null };
   }) };
 }
 
@@ -837,7 +838,9 @@ function ctCelda(c, x) {
   const nota = x.exento ? '<span class="ct-cal ex">Exento</span>' : x.cal !== '' && x.cal != null ? `<span class="ct-cal">${escaparHTML(String(x.cal))}</span>` : '';
   let est = '';
   if (c.tipo === 'proyecto') {
+    const nCit = x.rc ? x.rc.sinRef.length + x.rc.sinCitar.length : 0;
     est = x.es.entregada ? `<span class="ct-ok" title="${x.es.modificada ? 'Lo cambió después de entregarlo' : 'Entregado'}">${x.es.modificada ? '✏️' : '✓'} ${ctFecha(x.es.t)}</span>` : x.importado ? `<span class="ct-ok" title="Subió su Word">📥 ${ctFecha(x.importado.t)}</span>` : x.av ? `<span class="ct-proc">✎ ${x.av}/${x.tot}</span>` : '<span class="ct-nada">—</span>';
+    if (nCit) est += ` <span title="${nCit} cita${nCit === 1 ? '' : 's'} o referencia${nCit === 1 ? '' : 's'} que no coinciden: toca para ver">📎</span>`;
   } else {
     est = x.entregado ? `<span class="ct-ok">✓ ${ctFecha(x.entregado.t)}</span>` : x.word ? '<span class="ct-proc">✎ sin entregar</span>' : '<span class="ct-nada">—</span>';
     if (x.eq) est += ' <span title="Equipo: ' + escaparHTML(x.eq.nombre) + '">👥</span>';
@@ -888,6 +891,8 @@ function ctAbrir(c, alId) {
     const pl = x.T.plat || {}, cp = Object.entries(pl).filter(([n, v]) => v > 50 && numsDe(TALLER_DATA, c.ent).includes(Number(n))).map(([n]) => n);
     info = `<p><b>Pregunta de investigación:</b> ${e((x.d && x.d.pregunta) || '—')}</p>
       <p><b>Avance:</b> ${x.av} de ${x.tot} preguntas${x.es.entregada ? ` · ${x.es.modificada ? '✏️ la cambió después de entregarla' : '✓ entregada'} el ${e(ctFecha(x.es.t))}` : x.importado ? ` · 📥 subió su Word el ${e(ctFecha(x.importado.t))}` : ' · sin entregar'}</p>
+      ${x.rc && x.rc.sinRef.length ? `<p class="ct-alerta">📎 Cita a autores que no están en sus referencias: ${e(x.rc.sinRef.join(', '))}</p>` : ''}
+      ${x.rc && x.rc.sinCitar.length ? `<p class="ct-alerta">📎 Referencias que no cita en el texto: ${e(x.rc.sinCitar.join('; '))}</p>` : ''}
       ${cp.length ? `<p class="ct-alerta">⚠️ Preguntas con menos de 50 % de texto propio (casi todo es la respuesta base): ${e(cp.join(', '))}</p>` : ''}
       ${x.d ? `<details><summary>Leer sus respuestas</summary>${(TALLER_DATA ? TALLER_DATA.preguntas.filter(p => numsDe(TALLER_DATA, c.ent).includes(p.n)) : []).map(p => `<p class="ct-resp"><b>${p.n}. ${e(p.texto)}</b><br>${e(((x.T.respuestas || {})[p.n]) || '—')}</p>`).join('')}</details>` : '<p><i>Aún no entra al taller.</i></p>'}`;
   } else {

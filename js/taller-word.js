@@ -24,13 +24,21 @@ export const tieneCita = t => /\([^()]*\d{4}[^()]*\)/.test(t || '');
 export const esArticulo = r => /doi\.org|doi:|\b\d+\s*\(\d+\)\s*,\s*\d+|\be\d{4,}\b/i.test(String(r || '').replace(/\*/g, ''));
 export const slugArchivo = n => String(n || '').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
 
-export function refsSugeridas(D, LAB, hasta) {
-  const ids = [...new Set(D.preguntas.filter(p => p.n <= hasta).flatMap(p => p.autores))];
+// Normaliza para comparar apellidos sin acentos ni mayúsculas.
+const sinAcento = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+// Autores que cita el borrador de la brújula (pregunta 4): también deben aparecer como referencias sugeridas.
+function idsBrujula(LAB, T) {
+  const pf = T && T.brujula && T.brujula.clave && LAB.brujula ? LAB.brujula.perfiles[T.brujula.clave] : null; if (!pf) return [];
+  return pf.autores.flatMap(txt => { const ap = sinAcento(txt.replace(/\(.*$/, '')).split(/\s+y\s+/).map(x => x.trim().split(/\s+/)[0]);
+    const a = LAB.autores.find(x => ap.includes(sinAcento(x.nombre).split(/\s+/).slice(-1)[0]) || ap.some(w => sinAcento(x.nombre).split(/\s+/).includes(w)) || ap.includes(x.id)); return a ? [a.id] : []; });
+}
+export function refsSugeridas(D, LAB, hasta, T) {
+  const ids = [...new Set([...D.preguntas.filter(p => p.n <= hasta).flatMap(p => p.autores), ...(hasta >= 4 ? idsBrujula(LAB, T) : [])])];
   return ids.flatMap(id => ((LAB.autores.find(a => a.id === id) || {}).refs || []).map((r, i) => ({ id: `${id}-${i}`, apa: r.apa })));
 }
 export function refsElegidas(T, D, LAB, hasta) {
   const refs = T.refs || {}, S = new Set(refs.sel || []);
-  return [...refsSugeridas(D, LAB, hasta).filter(r => S.has(r.id)).map(r => r.apa), ...String(refs.otras || '').split('\n').map(x => x.trim()).filter(Boolean)];
+  return [...refsSugeridas(D, LAB, hasta, T).filter(r => S.has(r.id)).map(r => r.apa), ...String(refs.otras || '').split('\n').map(x => x.trim()).filter(Boolean)];
 }
 // Lo que entra al Word de cada entrega.
 export function textosDe(T, D, ent) {
@@ -68,4 +76,31 @@ export async function wordTaller(T, D, LAB, ent, nombre, { soloBlob = false } = 
     archivo: `Pienso_luego_investigo_${E.archivo}_${slugArchivo(nombre || 'borrador')}`,
     soloBlob,
   });
+}
+
+// ---- Revisión de citas: autores citados en el texto que no están en Referencias, y referencias que no se citan.
+const NO_AUTOR = new Set(['esta', 'este', 'esto', 'estos', 'estas', 'segun', 'como', 'para', 'desde', 'aunque', 'pregunta', 'tema', 'obra', 'original', 'mi', 'la', 'el', 'los', 'las', 'en', 'con', 'que', 'trad', 'ed']);
+const palabrasAutor = t => sinAcento(t).replace(/et al\.?/g, ' ').split(/[^a-zñü'-]+/).filter(w => w.length >= 3 && !NO_AUTOR.has(w) && w !== 'y');
+export function citasDe(texto) {
+  const t = String(texto || ''), out = [], ANIO = '(\\d{4}(?:\\/\\d{4})?|s\\.\\s?f\\.)';
+  // Narrativa: Apellido (2004) · Apellido y Apellido (1987) · Apellido et al. (2014)
+  const N = new RegExp(`((?:[A-ZÁÉÍÓÚÑ][\\wáéíóúñü'-]+)(?:\\s+(?:[A-ZÁÉÍÓÚÑ][\\wáéíóúñü'-]+|y|de|del|van|von|et al\\.))*)\\s*\\(${ANIO}`, 'g');
+  let m; while ((m = N.exec(t))) out.push({ quien: m[1].trim(), anio: m[2] });
+  // Parentética: (Apellido, 2004) · (A, 2000; B y C, 2001)
+  const P = /\(([^()]*\d{4}[^()]*)\)/g;
+  while ((m = P.exec(t))) m[1].split(';').forEach(seg => { const k = seg.match(new RegExp(`^\\s*([^,]+?),\\s*${ANIO}`)); if (k) out.push({ quien: k[1].trim(), anio: k[2] }); });
+  return out.filter(c => palabrasAutor(c.quien).length);
+}
+export function revisarCitas(textos, refs) {
+  const autoresRef = refs.map(r => { const t = String(r).replace(/\*/g, ''); return { r, ap: palabrasAutor(t.split('(')[0]), anios: t.match(/\b(1[5-9]|20)\d{2}\b/g) || [] }; });
+  const citas = citasDe(textos.join('\n')), vistos = new Set(), sinRef = [];
+  citas.forEach(c => {
+    const w = palabrasAutor(c.quien), an = (c.anio.match(/\d{4}/g) || []), mismos = autoresRef.filter(a => w.some(x => a.ap.includes(x)));
+    // Si no hay año (s. f.) basta el apellido; si hay año, debe coincidir con el de alguna de sus referencias.
+    const ok = mismos.some(a => !an.length || an.some(y => a.anios.includes(y)));
+    if (!ok) { const k = c.quien + ' (' + c.anio + ')' + (mismos.length ? ' —el año no coincide con tu referencia—' : ''); if (!vistos.has(k)) { vistos.add(k); sinRef.push(k); } }
+  });
+  const todo = sinAcento(textos.join(' '));
+  const sinCitar = autoresRef.filter(a => { const pri = a.ap[0]; return pri && !citas.some(c => palabrasAutor(c.quien).includes(pri)) && !new RegExp(`\\b${pri}\\b`).test(todo); }).map(a => String(a.r).replace(/\*/g, '').split('(')[0].trim().replace(/,$/, ''));
+  return { sinRef, sinCitar };
 }
