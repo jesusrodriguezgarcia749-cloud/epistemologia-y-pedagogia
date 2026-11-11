@@ -805,10 +805,10 @@ let entregaSel = 'entrega1';
 function apoyo(p) {
   const o = T.objetivos, pf = perfil();
   switch (p.usa) {
-    case 'pregunta': return T.pregunta ? `Mi tema es ${T.tema || '…'}. ${T.problema ? T.problema.trim() + ' ' : ''}Por eso, mi pregunta de investigación es: ${T.pregunta.trim()}` : '';
+    case 'pregunta': return T.pregunta ? `${T.tema && T.tema.trim() ? `Mi tema es ${T.tema.trim().replace(/[.\s]+$/, '')}. ` : ''}${T.problema ? T.problema.trim() + ' ' : ''}${T.tema && T.tema.trim() ? 'Por eso, mi' : 'Mi'} pregunta de investigación es: ${T.pregunta.trim()}` : '';
     case 'tipo': { const t = T.tipoManual || tipoDe(T.pregunta); return t ? `Mi pregunta es de tipo ${D.tipos[t].nombre.toLowerCase()}: ${D.tipos[t].txt}` : ''; }
     case 'brujula': return parrafoBrujula();
-    case 'hipotesis': return o.hipotesis ? `Mi ${T.brujula.clave === 'I' ? 'supuesto inicial' : 'hipótesis'} es: ${o.hipotesis.trim()} Me desmentiría que ${o.refutaria.trim().replace(/^…/, '')}` : '';
+    case 'hipotesis': return o.hipotesis ? `Mi ${T.brujula.clave === 'I' ? 'supuesto inicial' : 'hipótesis'} es: ${o.hipotesis.trim()} Me desmentiría que ${minPrimera(o.refutaria.trim().replace(/^…/, '').replace(/^me desmentir[ií]a que[\s…:]*/i, '').trim())}` : '';
     case 'matriz': return T.matriz.filter(f => f.tecnica).length ? `Para responder a mi pregunta usaré ${T.matriz.filter(f => f.tecnica).map(f => `${f.tecnica.toLowerCase()} (${f.instrumento || 'instrumento por definir'}) con ${f.participantes || 'participantes por definir'}`).join('; ')}.` : '';
     case 'rigor': return pf ? `Como mi enfoque es ${pf.enfoque.toLowerCase()}, cuidaré criterios de ${pf.rigor.join(', ').toLowerCase()}.` : '';
     case 'etica': { const si = D.etica.filter((_, i) => T.etica[i]); return si.length ? 'Para atender la ética de mi investigación: ' + si.map(x => x.charAt(0).toLowerCase() + x.slice(1).replace(/\.$/, '')).join('; ') + '.' : ''; }
@@ -924,6 +924,8 @@ const fijarPaso = (ent, v) => { if (ent === 'entrega1') T.e1paso = v; else { T.p
 // Qué tanto de la respuesta es texto de la plataforma (la respuesta base), para que el alumno escriba lo suyo.
 const MAX_PLAT = 50;
 const platDe = n => porcentajePlataforma(T.respuestas[n], (GUIA[n] && GUIA[n].base()) || '');
+// Primera letra en minúscula (para continuar una oración), salvo siglas o nombres propios evidentes (USAER, María).
+const minPrimera = t => /^[A-ZÁÉÍÓÚÑ][a-záéíóúñü]/.test(t) && !/^(El|La|Los|Las)\s+[A-ZÁÉÍÓÚÑ]/.test(t) && !/^[A-ZÁÉÍÓÚÑ][a-záéíóúñü]+\s+[A-ZÁÉÍÓÚÑ]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t;
 function guardarPlat(n) { T.plat = T.plat || {}; T.plat[n] = platDe(n); }
 
 function pintarGuiada(ent) {
@@ -1014,6 +1016,11 @@ function pintarFinal(ent, cuerpo, ir) {
       [nr >= E.minRefs, `${nr} referencia${nr === 1 ? '' : 's'} ${nr >= E.minRefs ? '✓' : `· te faltan ${E.minRefs - nr} para el mínimo de ${E.minRefs}`}`],
     ];
     const rc = revisarCitas(textosDe(T, D, ent).map(([, t]) => t), refs);
+    // Oraciones repetidas (8 palabras o más) y huecos «…» que quedaron sin llenar.
+    const visto = new Map(), rep = new Set(), huecos = [];
+    textosDe(T, D, ent).forEach(([n, t]) => { if (/(^|\s)…(\s|\.|$)/.test(t || '')) huecos.push(n === 'intro' ? 'introducción' : n); String(t || '').split(/(?<=[.!?])\s+/).forEach(o => { const k = o.toLowerCase().replace(/[^a-záéíóúñü0-9 ]/g, '').replace(/\s+/g, ' ').trim(); if (k.split(' ').length < 8) return; if (visto.has(k)) rep.add(n === 'intro' ? 'introducción' : n).add(visto.get(k)); else visto.set(k, n === 'intro' ? 'introducción' : n); }); });
+    L.push([!rep.size, rep.size ? `Hay oraciones repetidas en: ${[...rep].join(', ')}. Deja cada idea una sola vez.` : 'Sin oraciones repetidas ✓']);
+    if (huecos.length) L.push([false, `Quedaron puntos suspensivos «…» sin llenar en: ${huecos.join(', ')} (¿te faltó escribir tu tema en la Etapa 1?).`]);
     L.push([!rc.sinRef.length, rc.sinRef.length ? `Citas sin su referencia en la lista: ${rc.sinRef.join(', ')}. Agrega la obra a tus referencias o, si no la leíste, quita la cita.` : 'Cada autor que citas está en tus referencias ✓']);
     L.push([!rc.sinCitar.length, rc.sinCitar.length ? `Referencias que no citas en tu texto: ${rc.sinCitar.join('; ')}. Cítalas o desmárcalas: en APA solo va lo que citaste.` : 'Todas tus referencias están citadas en el texto ✓']);
     if (E.minArticulos) L.push([na >= E.minArticulos, `${na} artículo${na === 1 ? '' : 's'} académico${na === 1 ? '' : 's'} ${na >= E.minArticulos ? '✓' : `· te faltan ${E.minArticulos - na} (de revista, con volumen y número o DOI)`}`]);
