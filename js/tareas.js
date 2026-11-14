@@ -514,12 +514,23 @@ async function rutaVista(cont, a, R) {
   const E = R.estaciones, ref = doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', R.ind);
   let S = { hechas: {}, saltadas: {}, checks: {}, salida: {}, bitacora: {} }, actual = null, tGuardar = null, pendiente = {};
   cont.innerHTML = '<p class="atlas-ayuda">Cargando tu clase…</p>';
-  try { const s = await getDoc(ref); if (s.exists()) S = { ...S, ...s.data() }; } catch { /* sin conexión: empieza en blanco */ }
+  // Copia de respaldo en el teléfono: si algo no alcanzó a guardarse en la nube, no se pierde al recargar.
+  const LKEY = `ep_ruta_${sesion.grupoId}_${sesion.alumnoId}_${R.ind}`;
+  const leerLocal = () => { try { return JSON.parse(localStorage.getItem(LKEY) || 'null'); } catch { return null; } };
+  const respaldar = () => { try { localStorage.setItem(LKEY, JSON.stringify({ hechas: S.hechas, saltadas: S.saltadas, checks: S.checks, salida: S.salida, bitacora: S.bitacora, entregado: S.entregado || null })); } catch { /* sin espacio */ } };
+  let nube = null;
+  try { const s = await getDoc(ref); if (s.exists()) { nube = s.data(); S = { ...S, ...nube }; } } catch { /* sin conexión: empieza con lo del teléfono */ }
   ['hechas', 'saltadas', 'checks', 'salida', 'bitacora'].forEach(k => { S[k] = S[k] || {}; });
+  const L = leerLocal(), falta = {};
+  if (L) ['hechas', 'saltadas', 'checks', 'salida', 'bitacora'].forEach(k => Object.entries(L[k] || {}).forEach(([c, v]) => {
+    const ya = S[k][c]; if (v && (ya === undefined || ya === null || ya === '' || (typeof v === 'string' && typeof ya === 'string' && v.length > ya.length))) { S[k][c] = v; (falta[k] = falta[k] || {})[c] = v; }
+  }));
+  if (L && L.entregado && !S.entregado) { S.entregado = L.entregado; falta.entregado = L.entregado; }
   const avisar = (txt, mal) => { const m = $('#rt-guardado', cont); if (m) { m.textContent = txt; m.className = 'rt-guardado' + (mal ? ' mal' : ''); } };
   const guardar = async parcial => {
     if (!abierta(a.id)) { avisar('🔒 La clase está cerrada: ya no se guardan cambios.', true); return false; }
-    try { await setDoc(ref, { ...parcial, nombre: sesion.nombre, actualizado: serverTimestamp() }, { merge: true }); avisar('✓ Guardado'); return true; }
+    respaldar();
+    try { await setDoc(ref, { ...parcial, nombre: sesion.nombre, pinVerificado: sesion.pin, actualizado: serverTimestamp() }, { merge: true }); avisar('✓ Guardado'); return true; }
     catch (e) { avisar('⚠️ No se pudo guardar. Revisa tu internet; lo que escribiste sigue aquí.', true); return false; }
   };
   // Textos: se juntan y se guardan cada segundo
@@ -540,6 +551,7 @@ async function rutaVista(cont, a, R) {
     ${R.bitacora ? `<button type="button" class="rt-bit-tarjeta" id="rt-bit-ir"><span>${R.bitacora.ico}</span><div><b>${esc(R.bitacora.titulo)}</b><small id="rt-bit-est"></small></div><em>Abrir →</em></button>` : ''}
     <section class="rt-estacion" id="rt-est" aria-live="polite"></section>`;
   if (R.bitacora) $('#rt-bit-ir', cont).addEventListener('click', () => abrir('conferencia'));
+  if (Object.keys(falta).length) guardar(falta); else if (!L) respaldar();
   function pintarMapa() {
     const n = E.filter(e => S.hechas[e.id]).length;
     $('#rt-barra', cont).style.width = (100 * n / E.length) + '%';
