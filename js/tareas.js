@@ -207,6 +207,11 @@ function ruta() {
   if (a.tipo === 'ruta') { try { sessionStorage.setItem('ruta_origen', a.id); } catch { /* */ } }
   c.innerHTML = `${volver}<p class="cl-fecha">Tema ${esc(a.tema)} · ${esc(a.titulo)} · ${esc(a.fechaTexto)}</p><h2 class="cl-h2">${a.icono} ${esc(a.nombre)}</h2>
     ${a.tipo === 'ruta' ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
+  if (a.tipo === 'practica' && !sesion) {   // para que el maestro lo vea en el Monitor y salga en el ranking
+    JUEGO = null; $('#cl-acceso').innerHTML = '';
+    formAcceso($('#cl-cuerpo'), () => ruta(), '🎮 Entra con tu nombre y PIN para jugar: así tu maestro ve tu avance y sales en el ranking');
+    window.scrollTo({ top: 0 }); return;
+  }
   JUEGO = a.tipo === 'practica' ? a.id : null; if (JUEGO) reportarJuego({ estado: 'menu', entroMs: Date.now() });
   if (a.tipo === 'cuadro') actCuadro($('#cl-cuerpo'), a);
   else if (a.tipo === 'ruta') actRuta($('#cl-cuerpo'), a);
