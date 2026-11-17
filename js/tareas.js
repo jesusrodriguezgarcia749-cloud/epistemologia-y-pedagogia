@@ -4,7 +4,7 @@
 // · Arena en vivo: grupos/{g}/arena/sala (la controla el docente) y .../sala/jugadores/{alumno}.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js?v=2026111001";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
@@ -25,6 +25,21 @@ const barajar = a => { const c = [...a]; for (let i = c.length - 1; i > 0; i--) 
 const punto = t => /\.$/.test(t) ? t : t + '.';
 const fechaHora = ts => { const d = ts && ts.toDate ? ts.toDate() : typeof ts === 'number' ? new Date(ts) : null; return d ? d.toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''; };
 let sesion = null; try { sesion = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); } catch { sesion = null; }
+// Juegos de práctica en vivo: el maestro ve en su Monitor quién entró, en qué pregunta va y el ranking del día.
+// No cuenta para calificación. Se guarda en grupos/{g}/alumnos/{a}/atlas/tarea-juego-{id}.
+let JUEGO = null;
+function reportarJuego(d) {
+  if (!sesion || !JUEGO) return;
+  setDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', 'tarea-juego-' + JUEGO),
+    { ...d, juego: JUEGO, nombre: sesion.nombre, pinVerificado: sesion.pin, ultimoMs: Date.now(), ultimo: serverTimestamp() }, { merge: true }).catch(() => {});
+}
+// La mejor ronda del día (para el ranking en vivo): 100 puntos por acierto, o los puntos del modo reto.
+function hoyDe(marca, info) {
+  const f = new Date().toLocaleDateString('en-CA'), k = `jv_hoy_${JUEGO}_${f}`; let prev = -1;
+  try { prev = Number(localStorage.getItem(k) || -1); } catch { /* */ }
+  if (marca > prev) { try { localStorage.setItem(k, String(marca)); } catch { /* */ } return { hoy: { fecha: f, marca, ...info } }; }
+  return {};
+}
 recordarAlumno(sesion);
 let EQS = null, GDATA = {}, ESTADO = {}, unsubGrupo = null, detener = null;
 // Una tarea está cerrada si el docente la cerró o si ya pasó su fecha límite (grupos/{g}.tareasDig.{id}.cierre).
@@ -192,6 +207,7 @@ function ruta() {
   if (a.tipo === 'ruta') { try { sessionStorage.setItem('ruta_origen', a.id); } catch { /* */ } }
   c.innerHTML = `${volver}<p class="cl-fecha">Tema ${esc(a.tema)} · ${esc(a.titulo)} · ${esc(a.fechaTexto)}</p><h2 class="cl-h2">${a.icono} ${esc(a.nombre)}</h2>
     ${a.tipo === 'ruta' ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : a.tipo === 'coev' ? '<p class="cl-vale">🗣️ Cuenta en tu participación.</p>' : califica(a) ? '<p class="cl-vale">📌 Cuenta como una tarea del Parcial 2.</p>' : '<p class="cl-vale cl-vale-p">🎯 Práctica para repasar: no lleva calificación.</p>'}<div id="cl-cuerpo"></div>`;
+  JUEGO = a.tipo === 'practica' ? a.id : null; if (JUEGO) reportarJuego({ estado: 'menu', entroMs: Date.now() });
   if (a.tipo === 'cuadro') actCuadro($('#cl-cuerpo'), a);
   else if (a.tipo === 'ruta') actRuta($('#cl-cuerpo'), a);
   else if (a.tipo === 'coev') actCoev($('#cl-cuerpo'));
@@ -373,8 +389,10 @@ function juegoPreguntas(cont, C) {
     $('#ap-reto').addEventListener('change', e => { reto = e.target.checked; lsSet('clase_' + C.clave + '_reto', reto ? '1' : '0'); });
     $$('.ap-nivel', cont).forEach(b => b.addEventListener('click', () => { N = C.niveles.find(x => x.id === b.dataset.n); nueva(); }));
     $('#ap-estudiar').addEventListener('click', estudiar);
+    reportarJuego({ estado: 'menu' });
   };
-  const nueva = () => { items = barajar(C.items.filter(N.filtro)).slice(0, N.preg); nuevasRonda = new Set(); i = 0; bien = 0; pts = 0; racha = 0; mejorRacha = 0; fallos = []; malos = 0; pregunta(); };
+  const nueva = () => { items = barajar(C.items.filter(N.filtro)).slice(0, N.preg); nuevasRonda = new Set(); i = 0; bien = 0; pts = 0; racha = 0; mejorRacha = 0; fallos = []; malos = 0;
+    reportarJuego({ estado: 'jugando', nivel: N.n, nivelId: N.id, i: 0, n: C.termina ? 0 : items.length, bien: 0, malos: 0, pts: 0, reto }); pregunta(); };
   const marcador = () => `${C.cabecera ? C.cabecera(bien, malos) : ''}<div class="ap-marcador"><span>${N.ico} ${N.n} · ${C.termina ? `pregunta ${i + 1}` : `${Math.min(i + 1, items.length)} de ${items.length}`}</span><span>✅ ${bien}</span>${reto ? `<span>⭐ ${pts} pts · 🔥 racha ${racha}</span>` : ''}</div>`;
   const terminado = () => i >= items.length || (C.termina && C.termina(bien, malos));
   const pregunta = () => {
@@ -395,6 +413,7 @@ function juegoPreguntas(cont, C) {
     const x = items[i], ok = v !== null && P.correctas.includes(v);
     $$('.jp-op', cont).forEach(b => { b.disabled = true; if (P.correctas.includes(b.dataset.v)) b.classList.add('ok'); else if (b.dataset.v === v) b.classList.add('mal'); });
     if (ok) { bien++; racha++; mejorRacha = Math.max(mejorRacha, racha); if (reto) pts += 100 + Math.round(10 * q); } else { malos++; racha = 0; fallos.push(x); }
+    reportarJuego({ estado: 'jugando', i: i + 1, bien, malos, pts });
     const tit = v === null ? '⏱ Se acabó el tiempo.' : ok ? (C.bien ? C.bien(x, bien) : '¡Correcto!') : (C.mal ? C.mal(x, malos) : 'No es esa.');
     $('#ap-fb').innerHTML = `<div class="aviso ${ok ? 'ok' : 'mal'}"><strong>${tit}</strong>${C.explicar(x, ok)}</div><div id="jp-extra"></div><button class="btn-at" id="ap-sig" type="button">${terminado() || i + 1 >= items.length ? 'Ver resultado' : 'Siguiente →'}</button>`;
     if (C.despues) C.despues(x, v, $('#jp-extra'));
@@ -411,6 +430,7 @@ function juegoPreguntas(cont, C) {
     if (C.escenaFinal) { const e = C.escenaFinal(bien, malos); if (e) { cont.innerHTML = ''; await e; } }
     const marca = reto ? pts : bien, clave = `clase_${C.clave}_mejor_${N.id}`, previa = Number((lsGet(clave) || '0').split(/[ /]/)[0]) || 0, record = marca > previa;
     if (record) lsSet(clave, reto ? `${pts} pts` : `${bien}/${Math.min(i, items.length)}`);
+    reportarJuego({ estado: 'termino', i: Math.min(i, items.length), n: Math.min(i, items.length), bien, malos, pts, reto, nivel: N.n, nivelId: N.id, rondas: increment(1), [`mejor_${N.id}`]: lsGet(clave) || '', ...hoyDe(reto ? pts : bien * 100, { bien, n: Math.min(i, items.length), nivel: N.n, reto }) });
     const tot = encendidas(cieloLocal()), Rg = rango(tot);
     const cielo = C.estrellas ? `<a class="ci-fin" href="laboratorio.html#constelacion"><span>🌌</span><div><b>${nuevasRonda.size ? `¡${nuevasRonda.size} estrella${nuevasRonda.size === 1 ? '' : 's'} nueva${nuevasRonda.size === 1 ? '' : 's'} en esta ronda!` : 'Tu cielo'}</b><small>${tot} de ${TOTAL_ESTRELLAS} encendidas · ${Rg.ico} ${esc(Rg.nombre)}${Rg.sig ? ` · te faltan ${Rg.sig.faltan} para ${Rg.sig.ico} ${esc(Rg.sig.nombre)}` : ''}</small></div><em>Ver mi cielo →</em></a>` : '';
     cont.innerHTML = `<div class="resumen">${C.final ? C.final(bien, malos) : ''}${cielo}<h3>${N.ico} ${N.n}: ${bien} acierto${bien === 1 ? '' : 's'} de ${Math.min(i, items.length)}</h3>
@@ -421,7 +441,7 @@ function juegoPreguntas(cont, C) {
     $('#ap-otra').addEventListener('click', nueva); const bn = $('#ap-niv'); if (bn) bn.addEventListener('click', inicio); $('#ap-est').addEventListener('click', estudiar);
   };
   const estudiar = () => {
-    parar();
+    parar(); reportarJuego({ estado: 'estudiando' });
     const E = C.estudiar; let f = E.filtros[0][0], qq = '';
     cont.innerHTML = `<button type="button" class="ma-link" id="ap-volver">← Volver al juego</button>
       <p class="atlas-ayuda">${E.intro}</p>

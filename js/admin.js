@@ -2348,6 +2348,8 @@ function iniciarMonitor() {
   MON.subs.push(onSnapshot(collection(db, 'grupos', grupoActivo, 'equipos'), sn => { MON.todos = sn.docs.map(d => ({ id: d.id, ...d.data() })); suscribirMon(); pintarMonitor(); }, () => {}));
   MON.reloj = setInterval(() => document.querySelectorAll('.mon-card').forEach(c => pintarTiempoMon(c, (MON.datos[c.dataset.clave] || {}).actualizado)), 10000);
   pintarMonitor();
+  const bj = document.getElementById('mon-juegos'); if (bj && !bj.dataset.ok) { bj.dataset.ok = '1'; bj.addEventListener('click', jvEntrar); }
+  if (JV.on) jvSuscribir();
 }
 function pintarClaveMon() { const b = document.getElementById('mon-clave'); if (!b || !MON.act) return; b.hidden = !!CUADROS[MON.act].sinClave; MON.clave = !!((MON.g.claves || {})[CUADROS[MON.act].clave]); b.setAttribute('aria-pressed', String(MON.clave)); b.textContent = MON.clave ? '🔒 Ocultar clave a los alumnos' : '🔑 Liberar clave'; }
 function filtrarMon() { MON.equipos = TAREAS_DIG[MON.act] && TAREAS_DIG[MON.act].individual ? [] : equiposDe(MON.todos, formacionDeTarea(MON.g, MON.act)).sort(ordenEqMon); }
@@ -2358,6 +2360,7 @@ function suscribirMon() {
   alumnosCache.forEach(al => MON.eqSubs.push(onSnapshot(doc(db, 'grupos', MON.grupo, 'alumnos', al.id, 'atlas', A.ind), sn => { MON.datos['i:' + al.id] = sn.exists() ? { ...sn.data(), ultimoNombre: sn.data().ultimoNombre || al.nombre } : null; actualizarMon('i:' + al.id); }, () => {})));
 }
 function detenerMonitor() {
+  jvDetener();
   document.body.classList.remove('mon-completo');
   MON.subs.forEach(u => u()); MON.subs = []; MON.eqSubs.forEach(u => u()); MON.eqSubs = [];
   clearInterval(MON.reloj); MON.reloj = null;
@@ -2685,3 +2688,99 @@ function pintarProyCoev() {
     <h3>Preguntas del grupo</h3><ol class="cop-preg">${r.preguntas.map(q => `<li>${escaparHTML(q)}</li>`).join('') || '<li><i>Todavía no hay preguntas.</i></li>'}</ol></div>`;
 }
 on('co-proy-cerrar', 'click', () => { document.getElementById('co-proy').hidden = true; document.body.classList.remove('con-qr'); CO.proy = null; });
+
+// ---- Juegos de práctica en vivo: quién entró, en qué pregunta va y cómo terminó (no califica)
+// Cada alumno escribe grupos/{g}/alumnos/{a}/atlas/tarea-juego-{id} al entrar, al responder y al terminar.
+const JV = { on: false, modo: 'juegos', juego: null, proy: false, datos: {}, subs: [], reloj: null, t: null };
+const jvJuegos = () => TEMAS_TAREAS.flatMap(t => t.acts.filter(a => a.tipo === 'practica').map(a => ({ ...a, tema: t.tema, fecha: t.fecha })));
+function jvDeHoy() { const L = jvJuegos(), hoy = new Date().toLocaleDateString('en-CA'); return ([...L].reverse().find(a => a.fecha && a.fecha <= hoy) || L[0]).id; }
+const jvEsHoy = ms => ms && new Date(ms).toDateString() === new Date().toDateString();
+const jvHace = ms => { const s = Math.max(0, Math.round((Date.now() - ms) / 1000)); return s < 60 ? `hace ${s} s` : s < 3600 ? `hace ${Math.round(s / 60)} min` : new Date(ms).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }); };
+function jvEstado(d) {
+  if (!d || !jvEsHoy(d.ultimoMs)) return 'sin';
+  if (d.estado === 'jugando' && Date.now() - d.ultimoMs > 180000) return 'quieto';
+  return { jugando: 'jugando', termino: 'termino', estudiando: 'estudiando' }[d.estado] || 'menu';
+}
+const JV_EST = { jugando: ['🟢', 'Jugando'], termino: ['✅', 'Terminó'], estudiando: ['📚', 'Estudiando'], menu: ['🕹️', 'Entró, eligiendo nivel'], quieto: ['⏸️', 'Sin actividad'], sin: ['⚪', 'No ha entrado hoy'] };
+const JV_ORDEN = ['jugando', 'termino', 'estudiando', 'menu', 'quieto', 'sin'];
+function jvEntrar() {
+  if (JV.on) { jvSalir(); return; }
+  JV.on = true; JV.modo = 'juegos'; if (!JV.juego) JV.juego = jvDeHoy();
+  document.getElementById('jv').hidden = false;
+  document.getElementById('mon-juegos').textContent = '✕ Ocultar los juegos en vivo';
+  jvSuscribir();
+}
+function jvSalir() {
+  if (!JV.on) return; JV.on = false; jvDetener();
+  document.getElementById('jv').hidden = true;
+  document.getElementById('mon-juegos').textContent = '🎮 Ver los juegos en vivo';
+}
+function jvDetener() { JV.proy = false; const ov = document.getElementById('jv-proy'); if (ov && !ov.classList.contains('jv-leer')) ov.hidden = true; JV.subs.forEach(u => u()); JV.subs = []; clearInterval(JV.reloj); JV.reloj = null; }
+function jvSuscribir() {
+  jvDetener(); JV.datos = {};
+  if (!grupoActivo) { document.getElementById('jv').innerHTML = '<p class="empty-inline">Elige un grupo primero.</p>'; return; }
+  const g = grupoActivo, docId = 'tarea-juego-' + JV.juego, pintar = jvPintar;
+  document.getElementById('jv').innerHTML = '';
+  alumnosCache.forEach(a => JV.subs.push(onSnapshot(doc(db, 'grupos', g, 'alumnos', a.id, 'atlas', docId), sn => {
+    JV.datos[a.id] = sn.exists() ? sn.data() : null; clearTimeout(JV.t); JV.t = setTimeout(pintar, 150);
+  }, () => {})));
+  JV.reloj = setInterval(pintar, 15000);
+  pintar();
+}
+function jvFilas() {
+  return alumnosCache.map(a => { const d = JV.datos[a.id]; return { a, d, e: jvEstado(d) }; })
+    .sort((x, y) => JV_ORDEN.indexOf(x.e) - JV_ORDEN.indexOf(y.e) || ((y.d && y.e !== 'sin' ? (y.d.bien || 0) : 0) - (x.d && x.e !== 'sin' ? (x.d.bien || 0) : 0)) || (x.a.nombre || '').localeCompare(y.a.nombre || '', 'es'));
+}
+function jvPintar() {
+  if (!JV.on || JV.modo !== 'juegos') return;
+  const caja = document.getElementById('jv'), J = jvJuegos(), act = J.find(x => x.id === JV.juego) || J[0];
+  const filas = jvFilas(), cuenta = k => filas.filter(f => f.e === k).length;
+  const sel = document.activeElement && document.activeElement.id === 'jv-sel';
+  if (!caja.querySelector('#jv-grid') || !sel) caja.innerHTML = `
+    <div class="jv-cab"><label class="field-label" for="jv-sel">Juego</label>
+      <select id="jv-sel" class="jv-sel">${J.map(a => `<option value="${a.id}" ${a.id === JV.juego ? 'selected' : ''}>${escaparHTML(a.tema)} · ${a.icono} ${escaparHTML(a.nombre)}</option>`).join('')}</select>
+      <button type="button" class="chip-mon" id="jv-podio">🏆 Proyectar ranking en vivo</button></div>
+    <p class="mon-resumen" id="jv-res"></p><div class="jv-grid" id="jv-grid"></div>
+    <p class="field-hint">Se actualiza solo. No cuenta para calificación: sirve para ver quién está participando. «Sin actividad» = lleva más de 3 minutos sin responder. Solo cuenta lo de hoy.</p>`;
+  document.getElementById('jv-res').innerHTML = `<b>${escaparHTML(act.nombre)}</b> · ${JV_ORDEN.filter(k => cuenta(k)).map(k => `${JV_EST[k][0]} ${cuenta(k)} ${JV_EST[k][1].toLowerCase()}`).join(' · ')}`;
+  document.getElementById('jv-grid').innerHTML = filas.map(({ a, d, e }) => {
+    const n = d && d.n, i = d ? d.i || 0 : 0, pct = n ? Math.round(100 * Math.min(i, n) / n) : 0;
+    let det = '';
+    if (e === 'jugando' || e === 'quieto') det = `${escaparHTML(d.nivel || '')} · pregunta ${Math.min(i + 1, n || i + 1)}${n ? ` de ${n}` : ''}<div class="jv-barra"><i style="width:${pct}%"></i></div>✅ ${d.bien || 0} · ❌ ${d.malos || 0}${d.reto ? ` · ⭐ ${d.pts || 0} pts` : ''}`;
+    else if (e === 'termino') det = `${escaparHTML(d.nivel || '')}: <b>${d.bien || 0} de ${d.n || 0}</b>${d.reto ? ` · ⭐ ${d.pts || 0} pts` : ''}<br><small>${typeof d.rondas === 'number' ? d.rondas : 1} ronda${(typeof d.rondas === 'number' ? d.rondas : 1) === 1 ? '' : 's'}${d['mejor_' + d.nivelId] ? ` · su mejor: ${escaparHTML(d['mejor_' + d.nivelId])}` : ''}</small>`;
+    else if (e === 'sin' && d && d.ultimoMs) det = `<small>Última vez: ${new Date(d.ultimoMs).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}</small>`;
+    return `<div class="jv-card jv-${e}"><div class="jv-nom">${escaparHTML(a.nombre)}</div><div class="jv-est">${JV_EST[e][0]} ${JV_EST[e][1]}${e !== 'sin' && d ? ` <small>· ${jvHace(d.ultimoMs)}</small>` : ''}</div>${det ? `<div class="jv-det">${det}</div>` : ''}</div>`;
+  }).join('') || '<p class="empty-inline">Este grupo no tiene alumnos.</p>';
+  const s = document.getElementById('jv-sel'); if (!s.dataset.ok) { s.dataset.ok = '1'; s.addEventListener('change', () => { JV.juego = s.value; jvSuscribir(); }); }
+  const p = document.getElementById('jv-podio'); if (!p.dataset.ok) { p.dataset.ok = '1'; p.addEventListener('click', jvPodio); }
+  if (JV.proy) jvPintarProy();
+}
+// Ranking en vivo para proyectar: la mejor ronda de hoy de cada alumno, o la ronda que juega ahora si va mejor.
+// 100 puntos por acierto (en modo reto, más los segundos que le sobraron). Solo se muestran los 10 primeros.
+function jvMarca(d) {
+  if (!d || !jvEsHoy(d.ultimoMs)) return null;
+  const hoy = new Date().toLocaleDateString('en-CA'), h = d.hoy && d.hoy.fecha === hoy ? d.hoy : null;
+  const vivo = d.estado === 'jugando' ? (d.reto ? d.pts || 0 : (d.bien || 0) * 100) : null;
+  if (vivo != null && (!h || vivo > h.marca)) return { marca: vivo, bien: d.bien || 0, n: d.n || 0, nivel: d.nivel || '', jugando: true };
+  if (h) return { ...h, jugando: d.estado === 'jugando' };
+  if (d.estado === 'termino' && d.n) return { marca: d.reto ? d.pts || 0 : (d.bien || 0) * 100, bien: d.bien || 0, n: d.n, nivel: d.nivel || '', jugando: false };
+  return null;
+}
+function jvPodio() { JV.proy = true; jvPintarProy(); }
+function jvPintarProy() {
+  const ov = document.getElementById('jv-proy'); if (!JV.proy || !ov) return;
+  const J = jvJuegos(), act = J.find(x => x.id === JV.juego) || J[0];
+  const filas = jvFilas(), con = filas.map(f => ({ ...f, m: jvMarca(f.d) })).filter(f => f.m && f.m.marca > 0)
+    .sort((x, y) => y.m.marca - x.m.marca || (x.a.nombre || '').localeCompare(y.a.nombre || '', 'es'));
+  const top = con.slice(0, 10), jugando = filas.filter(f => f.e === 'jugando').length, entraron = filas.filter(f => f.e !== 'sin').length;
+  ov.classList.remove('jv-leer');
+  ov.innerHTML = `<button type="button" class="btn" id="jv-cerrar" style="position:absolute;top:18px;right:18px">Cerrar ✕</button>
+    <p class="jv-p-kicker">${escaparHTML(act.tema)} · Ranking en vivo</p><h2 class="jv-p-tit">${act.icono} ${escaparHTML(act.nombre)}</h2>
+    ${top.length ? `<ol class="jv-podio">${top.map((f, k) => `<li class="${f.m.jugando ? 'jv-vivo' : ''}"><span class="jv-med">${['🥇', '🥈', '🥉'][k] || (k + 1) + '.º'}</span><b>${escaparHTML(f.a.nombre)}${f.m.jugando ? ' <small>🟢 jugando</small>' : ''}</b><em>${f.m.marca} pts<small>${escaparHTML(f.m.nivel || '')} · ${f.m.bien} de ${f.m.n}</small></em></li>`).join('')}</ol>`
+      : '<p class="jv-p-vacio">Todavía nadie tiene aciertos. ¡A jugar!</p>'}
+    <p class="jv-p-pie">🎮 ${entraron} ${entraron === 1 ? 'alumno ha entrado' : 'alumnos han entrado'} hoy · 🟢 ${jugando} jugando ahora · 100 puntos por acierto, más el bono de rapidez en modo reto ⏱</p>`;
+  ov.hidden = false;
+  document.getElementById('jv-cerrar').addEventListener('click', () => { JV.proy = false; ov.hidden = true; });
+}
+document.addEventListener('keydown', e => { const ov = document.getElementById('jv-proy'); if (e.key === 'Escape' && ov && !ov.hidden) { ov.hidden = true; JV.proy = false; } });
+
