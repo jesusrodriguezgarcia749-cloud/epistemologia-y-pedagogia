@@ -10,6 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebase-config.js";
+import { elegirConCuotas, rndConSemilla } from "./seleccion-examen.js?v=2026111801";
 import { TOPES } from "./calculo.js";
 
 const app = initializeApp(firebaseConfig);
@@ -71,6 +72,7 @@ function barajarConSemilla(arr, semilla) {
 // en el banco (reparto por mayores residuos). Así cada alumno recibe un
 // examen distinto, pero todos con el mismo peso de cada subtema.
 function elegirReactivos(banco, n, semilla) {
+  if (banco.config?.cuotas) return elegirConCuotas(banco.reactivos, n, rndConSemilla(semilla), banco.config).map(r => r.id);
   const todos = banco.reactivos.map(r => r.id);
   if (banco.config?.seleccion !== 'por_subtema' || n >= todos.length) return barajarConSemilla(todos, semilla).slice(0, n);
   const grupos = new Map();

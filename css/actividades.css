@@ -226,3 +226,46 @@ html[data-theme="dark"] .act-tema-card.act-terminado .act-tema-num{color:#9FD8B7
 .act-celebra{animation:act-pop .5s ease;}
 @keyframes act-pop{0%{transform:scale(.96);opacity:.4}100%{transform:none;opacity:1}}
 #btn-act-siguiente:disabled{opacity:.45; cursor:not-allowed;}
+
+/* ---- Prepárate para tu examen, temas resaltados y simulacro */
+.act-prep{margin:0 0 22px; padding:18px 20px; border-radius:18px; background:linear-gradient(135deg,#FFF6DD,#FFFBF0); border:2px solid #E2B84A; box-shadow:0 8px 22px rgba(160,120,30,.12);}
+html[data-theme="dark"] .act-prep{background:linear-gradient(135deg,#3A311A,#2B2615); border-color:#C9A04A;}
+.act-prep-cab{display:flex; gap:16px; justify-content:space-between; align-items:flex-start;}
+.act-prep-cab h2{margin:.1rem 0 .4rem; font-size:1.35rem;}
+.act-prep-cab p{margin:0;}
+.act-prep-kicker{font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#8A6A1E;}
+html[data-theme="dark"] .act-prep-kicker{color:#E8C66E;}
+.act-prep-cuenta{flex:none; text-align:center; background:#fff; border:1px solid #E2CF9A; border-radius:14px; padding:8px 14px; min-width:92px;}
+html[data-theme="dark"] .act-prep-cuenta{background:#1E1B12;}
+.act-prep-cuenta b{display:block; font-family:Fraunces,Georgia,serif; font-size:2rem; line-height:1;}
+.act-prep-cuenta small{display:block; font-size:.75rem; opacity:.8;}
+.act-prep-pasos{list-style:none; padding:0; margin:14px 0 0; display:grid; gap:10px;}
+.act-prep-pasos li{background:rgba(255,255,255,.7); border-radius:12px; padding:10px 12px; line-height:1.45;}
+html[data-theme="dark"] .act-prep-pasos li{background:rgba(0,0,0,.2);}
+.act-prep-botones{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:8px;}
+.act-prep-mejor{font-size:.9rem;}
+.act-tema-wrap{display:flex; flex-direction:column; gap:6px;}
+.act-tema-wrap .act-tema-card{flex:1;}
+.act-tema-card.act-examen{border:2px solid #D4A72C !important; background:#FFF8E3; box-shadow:0 0 0 4px rgba(212,167,44,.15);}
+html[data-theme="dark"] .act-tema-card.act-examen{background:#33290F;}
+.act-badge-examen{background:#C9A04A; color:#1b1b1b; border-color:transparent;}
+.act-badge-gris{opacity:.8;}
+.act-solo-examen{align-self:stretch; border:1.5px dashed #C9A04A; background:transparent; border-radius:12px; padding:8px 10px; font-weight:600; cursor:pointer; color:inherit;}
+.sim-reloj{font-weight:700; font-variant-numeric:tabular-nums;}
+.sim-reloj.sim-poco{color:#B0322A;}
+.sim-sub{font-size:.75rem; opacity:.7; margin-left:auto;}
+.reactivo-head{display:flex; align-items:center; gap:8px;}
+.quiz-option.sim-elegida{outline:2px solid #2C5DA8; background:rgba(44,93,168,.08);}
+.sim-nav{display:flex; justify-content:space-between; gap:10px;}
+.sim-mapa{display:flex; flex-wrap:wrap; gap:6px; margin:16px 0 6px; justify-content:center;}
+.sim-mapa button{width:34px; height:34px; border-radius:8px; border:1px solid var(--line); background:var(--parchment,#F4EFE4); font-weight:600; cursor:pointer; color:inherit;}
+.sim-mapa button.sim-ok{background:#DCEBF9; border-color:#7FA6D6;}
+.sim-mapa button.sim-aqui{outline:2px solid #2C5DA8;}
+.sim-subtemas{margin:16px 0; padding:14px 16px; border-radius:14px; background:var(--parchment,#F4EFE4);}
+.sim-subtemas h3{margin-top:0;}
+.sim-rev-tit{margin-top:26px;}
+.sim-rev{border-left:5px solid #CFC6B4; background:var(--parchment,#F4EFE4); border-radius:10px; padding:10px 14px; margin:10px 0;}
+.sim-rev-ok{border-left-color:#4E9A70;} .sim-rev-mal{border-left-color:#B0322A;}
+.sim-rev p{margin:.3rem 0;} .sim-rev-n{font-weight:700;} .sim-rev-q{font-weight:600;}
+.sim-rev-exp{font-size:.9rem; opacity:.85;}
+@media (max-width:560px){ .act-prep-cab{flex-direction:column-reverse;} .act-prep-cuenta{align-self:flex-start;} }

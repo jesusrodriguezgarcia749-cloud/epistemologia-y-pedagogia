@@ -2692,7 +2692,11 @@ on('co-proy-cerrar', 'click', () => { document.getElementById('co-proy').hidden 
 // ---- Juegos de práctica en vivo: quién entró, en qué pregunta va y cómo terminó (no califica)
 // Cada alumno escribe grupos/{g}/alumnos/{a}/atlas/tarea-juego-{id} al entrar, al responder y al terminar.
 const JV = { on: false, modo: 'juegos', juego: null, proy: false, datos: {}, subs: [], reloj: null, t: null };
-const jvJuegos = () => TEMAS_TAREAS.flatMap(t => t.acts.filter(a => a.tipo === 'practica').map(a => ({ ...a, tema: t.tema, fecha: t.fecha })));
+const jvJuegos = () => [...TEMAS_TAREAS.flatMap(t => t.acts.filter(a => a.tipo === 'practica').map(a => ({ ...a, tema: t.tema, fecha: t.fecha }))),
+  // Simulacros de Actividades (se ven igual que un juego: avance, resultado y ranking).
+  { id: 'simulacro-p2', tema: '4 a 7', icono: '🎯', nombre: 'Simulacro del Parcial 2', fecha: '2026-11-18' },
+  { id: 'simulacro-final', tema: '1 a 10', icono: '🎯', nombre: 'Simulacro del Examen Final', fecha: '2026-11-24' }]
+  .sort((x, y) => (x.fecha || '').localeCompare(y.fecha || ''));
 function jvDeHoy() { const L = jvJuegos(), hoy = new Date().toLocaleDateString('en-CA'); return ([...L].reverse().find(a => a.fecha && a.fecha <= hoy) || L[0]).id; }
 const jvEsHoy = ms => ms && new Date(ms).toDateString() === new Date().toDateString();
 const jvHace = ms => { const s = Math.max(0, Math.round((Date.now() - ms) / 1000)); return s < 60 ? `hace ${s} s` : s < 3600 ? `hace ${Math.round(s / 60)} min` : new Date(ms).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }); };
@@ -2746,7 +2750,8 @@ function jvPintar() {
   document.getElementById('jv-grid').innerHTML = filas.map(({ a, d, e }) => {
     const n = d && d.n, i = d ? d.i || 0 : 0, pct = n ? Math.round(100 * Math.min(i, n) / n) : 0;
     let det = '';
-    if (e === 'jugando' || e === 'quieto') det = `${escaparHTML(d.nivel || '')} · pregunta ${Math.min(i + 1, n || i + 1)}${n ? ` de ${n}` : ''}<div class="jv-barra"><i style="width:${pct}%"></i></div>✅ ${d.bien || 0} · ❌ ${d.malos || 0}${d.reto ? ` · ⭐ ${d.pts || 0} pts` : ''}`;
+    if ((e === 'jugando' || e === 'quieto') && d.nivelId === 'sim') det = `Simulacro · contestadas <b>${i} de ${n || '?'}</b><div class="jv-barra"><i style="width:${pct}%"></i></div><small>La calificación sale al entregar</small>`;
+    else if (e === 'jugando' || e === 'quieto') det = `${escaparHTML(d.nivel || '')} · pregunta ${Math.min(i + 1, n || i + 1)}${n ? ` de ${n}` : ''}<div class="jv-barra"><i style="width:${pct}%"></i></div>✅ ${d.bien || 0} · ❌ ${d.malos || 0}${d.reto ? ` · ⭐ ${d.pts || 0} pts` : ''}`;
     else if (e === 'termino') det = `${escaparHTML(d.nivel || '')}: <b>${d.bien || 0} de ${d.n || 0}</b>${d.reto ? ` · ⭐ ${d.pts || 0} pts` : ''}<br><small>${typeof d.rondas === 'number' ? d.rondas : 1} ronda${(typeof d.rondas === 'number' ? d.rondas : 1) === 1 ? '' : 's'}${d['mejor_' + d.nivelId] ? ` · su mejor: ${escaparHTML(d['mejor_' + d.nivelId])}` : ''}</small>`;
     else if (e === 'sin' && d && d.ultimoMs) det = `<small>Última vez: ${new Date(d.ultimoMs).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}</small>`;
     return `<div class="jv-card jv-${e}"><div class="jv-nom">${escaparHTML(a.nombre)}</div><div class="jv-est">${JV_EST[e][0]} ${JV_EST[e][1]}${e !== 'sin' && d ? ` <small>· ${jvHace(d.ultimoMs)}</small>` : ''}</div>${det ? `<div class="jv-det">${det}</div>` : ''}</div>`;

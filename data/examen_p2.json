@@ -2,9 +2,19 @@
  "parcial": "p2",
  "titulo": "Examen Parcial 2 — Cierre del Tema 4 (Feyerabend, Morin y la cientificidad de las ciencias sociales) y Temas 5 a 7",
  "config": {
-  "preguntasPorExamen": 40,
+  "preguntasPorExamen": 30,
   "minutos": 60,
-  "seleccion": "por_subtema"
+  "seleccion": "por_subtema",
+  "cuotas": {
+   "4": 6,
+   "5": 8,
+   "6": 8,
+   "7": 8
+  },
+  "maxPorTipo": {
+   "caso": 6
+  },
+  "guia": "guia-parcial-2.html"
  },
  "reactivos": [
   {
