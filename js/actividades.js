@@ -422,7 +422,7 @@ function pintarPrep() {
   const n = EXAMEN.config.preguntasPorExamen, min = EXAMEN.config.minutos;
   const mejor = (() => { try { return JSON.parse(localStorage.getItem(claveSim()) || 'null'); } catch { return null; } })();
   box.innerHTML = `
-    <div class="act-prep-cab"><div><p class="act-prep-kicker">Prepárate para tu examen</p><h2>${esc(EXAMEN.titulo)} · ${esc(fechaCorta(EXAMEN.fecha))}</h2>
+    <div class="act-prep-cab"><div><p class="act-prep-kicker">Prepárate para tu examen</p><h2>${esc(EXAMEN.titulo)} · ${esc(fechaCorta(EXAMEN.fecha))}${(EXAMEN.fechaTexto.match(/de \d{1,2}:\d{2} a \d{1,2}:\d{2}/) || [''])[0] ? ', ' + esc((EXAMEN.fechaTexto.match(/de \d{1,2}:\d{2} a \d{1,2}:\d{2}/))[0]) : ''}</h2>
       <p>Entran: <b>${esc(temasTxt)}</b>.${n ? ` ${n} preguntas en ${min} minutos.` : ''} Las preguntas del examen se parecen a las de estas Actividades.</p></div>
       <div class="act-prep-cuenta"><b>${dias > 1 ? dias : dias === 1 ? '1' : '¡Hoy!'}</b>${dias > 1 ? 'días' : dias === 1 ? 'día' : ''}<small>${cuando}</small></div></div>
     <ol class="act-prep-pasos">
