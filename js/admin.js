@@ -12,6 +12,7 @@ import {
 import { firebaseConfig } from "./firebase-config.js";
 import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
+import { resumenGeneral } from "./resumen-tareas.js?v=2026111801";
 import { vistaRapida } from "./matriz.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js?v=2026111001";
 import { zipDocx } from "./docx-ites.js?v=2026102708";
@@ -1736,6 +1737,7 @@ function cargarHistorial() {
   const resumen = document.getElementById('hist-resumen');
   if (!cont) return;
   cont.innerHTML = ''; resumen.hidden = true;
+  { const rc = document.getElementById('rs-cont'); if (rc && rc.dataset.g !== String(grupoActivo)) { rc.innerHTML = ''; rc.dataset.g = String(grupoActivo); } }
   renderParcialesReporte(); renderSelectHistAlumno(); cargarRedondeos();
   if (!grupoActivo) { empty.hidden = false; empty.textContent = 'Elige un grupo primero.'; return; }
   if (alumnosCache.length === 0) { empty.hidden = false; empty.textContent = 'Este grupo aún no tiene alumnos.'; return; }
@@ -2789,3 +2791,28 @@ function jvPintarProy() {
 }
 document.addEventListener('keydown', e => { const ov = document.getElementById('jv-proy'); if (e.key === 'Escape' && ov && !ov.hidden) { ov.hidden = true; JV.proy = false; } });
 
+// ---------- RESUMEN GENERAL (Historial) ----------
+on('btn-resumen-general', 'click', () => resumenGeneral(document.getElementById('rs-cont'), {
+  db, fs: { collection, getDocs }, grupo: grupoActivo, clase: 'Epistemología y Pedagogía', alumnos: alumnosCache,
+  temas: TEMAS_TAREAS, califica, catalogoId, escaparHTML,
+  entregasDig: async a => {
+    if (a.tipo === 'ruta') {
+      const R = RUTAS[a.id];
+      return Promise.all(alumnosCache.map(async al => { let S = null; try { const s = await getDoc(doc(db, 'grupos', grupoActivo, 'alumnos', al.id, 'atlas', R.ind)); S = s.exists() ? s.data() : null; } catch { /* */ } return { alId: al.id, ent: !!(S && S.entregado), emp: !!S }; }));
+    }
+    const { filas } = await reunirTareaDig(a);
+    return filas.map(x => ({ alId: x.al.id, ent: !!x.entregado, emp: !!x.word }));
+  },
+  proyecto: async () => {
+    try { TALLER_DATA = TALLER_DATA || await fetch('data/taller.json').then(r => r.json()); LAB_DATA = LAB_DATA || await fetch('data/laboratorio.json').then(r => r.json()); } catch { /* */ }
+    CT_MP = null;
+    const out = [];
+    for (const k of ENTREGAS_PROYECTO) {
+      const { filas } = await ctReunirProyecto({ ent: k });
+      const E = (TALLER_DATA && TALLER_DATA.entregas[k]) || {};
+      out.push({ id: 'mp-' + k, nombre: 'Proyecto · ' + (E.nombre || k), fecha: '9999', filas: filas.map(x => ({ alId: x.al.id, ent: !!(x.es && x.es.entregada) || !!x.importado, emp: !!x.av, cal: x.cal === '' || x.cal == null ? null : Number(x.cal) })) });
+    }
+    return out;
+  },
+  irCalificar: a => { switchTab('tareas'); calificarTareaDig(TAREAS_DIG[a.id] || a, true); }
+}));
