@@ -995,6 +995,7 @@ function pintarFinal(ent, cuerpo, ir) {
       <button type="button" class="btn-lab-l" id="in-armar">🧩 Armar mi introducción</button>
       <textarea class="t-resp" id="in-final" rows="7" placeholder="Aquí queda tu introducción (de 150 a 250 palabras).">${esc(T.intro || '')}</textarea><p class="t-cuenta" id="in-cnt"></p>` : ''}
     <h4 class="e1-h">📚 Referencias</h4>
+    <p class="lab-ayuda">¿Dudas con el formato? <a href="curso-apa.html" target="_blank" rel="noopener">Curso de APA 7 y generador de referencias</a>.</p>
     <p class="lab-ayuda">${esc(D.entregas[ent].nombre)} pide <b>al menos ${E.minRefs} referencias en APA 7</b>${E.minArticulos ? `, de ellas <b>al menos ${E.minArticulos} artículos académicos</b> (de revista, con volumen y número o DOI)` : ''}. Marca las obras de los autores que citaste (vienen del compendio, ya en formato APA) y agrega las que tú encontraste, una por renglón.</p>
     <div class="e1-refs">${sug.map(r => `<label><input type="checkbox" data-r="${r.id}" ${S.has(r.id) ? 'checked' : ''}> <span>${md2(r.apa)}</span></label>`).join('')}</div>
     <label class="e1-sub"><span><b>Otras referencias</b><small>Una por renglón, en APA 7. Para poner un título en cursivas, enciérralo entre asteriscos: *Título del libro*. Un artículo: Apellido, N. (año). Título del artículo. *Nombre de la revista*, *volumen*(número), páginas. https://doi.org/…</small></span><textarea id="e1-otras" rows="4">${esc(T.refs.otras || '')}</textarea></label>
