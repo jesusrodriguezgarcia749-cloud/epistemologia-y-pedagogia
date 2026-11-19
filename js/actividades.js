@@ -13,7 +13,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { elegirConCuotas } from "./seleccion-examen.js?v=2026111801";
-import { ACTIVIDADES_PARCIAL, NOMBRES_PARCIAL, PARTICIPACION_MIXTA } from "./calculo.js";
+import { ACTIVIDADES_PARCIAL, NOMBRES_PARCIAL, PARTICIPACION_MIXTA, actividadesAbiertas, textoCierre } from "./calculo.js";
 
 // ------------------------------------------------------------ configuración
 const SESSION_KEY = 'ep_sesion_alumno';
@@ -56,7 +56,7 @@ function barajar(arr) {
   return c;
 }
 function bloqueDeTema(n) {
-  for (const [p, temas] of Object.entries(ACTIVIDADES_PARCIAL)) if (temas.includes(n)) return p;
+  for (const [p, temas] of Object.entries(ACTIVIDADES_PARCIAL)) if (temas.includes(n) && actividadesAbiertas(p)) return p;
   return null;
 }
 const ptsPorTema = (p) => PARTICIPACION_MIXTA.actividades / ACTIVIDADES_PARCIAL[p].length;
@@ -113,6 +113,7 @@ async function entrar() {
     const snap = await getDocs(collection(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'actividades'));
     terminados = new Set(snap.docs.map(d => d.data()).filter(a => a.completado).map(a => Number(a.tema)));
   } catch { terminados = new Set(); }
+  pintarPrep();
   renderSelectorTemas();
 }
 
@@ -130,7 +131,7 @@ function renderSelectorTemas() {
     const hechos = temas.filter(n => terminados.has(n)).length;
     const valor = p === 'final'
       ? 'cuentan dentro de «Tareas y participación»'
-      : `<strong>${(hechos * ptsPorTema(p)).toFixed(1)} de ${PARTICIPACION_MIXTA.actividades} pts</strong>`;
+      : `<strong>${(hechos * ptsPorTema(p)).toFixed(2)} de ${PARTICIPACION_MIXTA.actividades} pts</strong>${actividadesAbiertas(p) ? (textoCierre(p) ? ` · se cierra el ${textoCierre(p)}` : '') : ' · ya cerrado'}`;
     return `<div class="act-resumen-bloque"><b>${NOMBRES_PARCIAL[p]}</b> · ${hechos} de ${temas.length} temas terminados · ${valor}</div>`;
   }).join('');
   $('act-resumen-puntos').innerHTML = resumen;
@@ -139,7 +140,7 @@ function renderSelectorTemas() {
     const bloque = bloqueDeTema(t.n);
     const hecho = terminados.has(t.n);
     const etiqueta = bloque
-      ? `<span class="act-badge act-badge-valor">Cuenta para el ${NOMBRES_PARCIAL[bloque]}${bloque === 'final' ? '' : ` · ${ptsPorTema(bloque).toFixed(1)} pts`}</span>`
+      ? `<span class="act-badge act-badge-valor">Cuenta para el ${NOMBRES_PARCIAL[bloque]}${bloque === 'final' ? '' : ` · ${ptsPorTema(bloque).toFixed(2)} pts`}</span>`
       : '<span class="act-badge">Repaso libre</span>';
     const ex = estadoExamenTema(t.n);
     return `
@@ -296,7 +297,7 @@ function volverASelector() {
   $('act-curso').hidden = true;
   $('act-resumen').hidden = true;
   $('act-selector').hidden = false;
-  if (EXAMEN) $('act-prep').hidden = false;
+  if (EXAMEN) { pintarPrep(); $('act-prep').hidden = false; }
   renderSelectorTemas();
 }
 
@@ -332,7 +333,7 @@ async function finDeRonda() {
       <div class="resultado-hero res-ok act-celebra">
         <p class="res-etq">Tema ${temaActivo} · ✔ Terminado</p>
         <p class="res-calif">${total} / ${total}</p>
-        <p class="res-sub">${bloque === 'final' ? '¡Listo! Este tema ya cuenta en tu participación del Examen Final. Ya aparece en Mi progreso.' : bloque ? `¡Listo! Sumaste <strong>${ptsPorTema(bloque).toFixed(1)} puntos</strong> de participación del ${NOMBRES_PARCIAL[bloque]}. Ya aparece en Mi progreso.` : '¡Dominaste este tema! (Repaso libre: no suma puntos).'}</p>
+        <p class="res-sub">${bloque === 'final' ? '¡Listo! Este tema ya cuenta en tu participación del Examen Final. Ya aparece en Mi progreso.' : bloque ? `¡Listo! Sumaste <strong>${ptsPorTema(bloque).toFixed(2)} puntos</strong> de participación del ${NOMBRES_PARCIAL[bloque]}. Ya aparece en Mi progreso.` : '¡Dominaste este tema! (Repaso libre: no suma puntos).'}</p>
       </div>
       <button class="btn btn-primary btn-block" id="btn-otro-tema">Elegir otro tema</button>`;
   } else if (yaEstaba) {
@@ -429,12 +430,23 @@ function pintarPrep() {
   const temasTxt = [...EXAMEN.temas.entries()].map(([t, l]) => (SUBTEMAS_TEMA[t] || []).some(st => !EXAMEN.subtemas.has(st)) ? `Tema ${t} (solo ${l[0]} a ${l[l.length - 1]})` : `Tema ${t}`).join(', ').replace(/, ([^,]*)$/, ' y $1');
   const n = EXAMEN.config.preguntasPorExamen, min = EXAMEN.config.minutos;
   const mejor = (() => { try { return JSON.parse(localStorage.getItem(claveSim()) || 'null'); } catch { return null; } })();
+  // Participación con valor ligada a este examen (Parcial 2): se muestra mientras esté abierta.
+  const partP = EXAMEN.clave in ACTIVIDADES_PARCIAL && EXAMEN.clave !== 'final' && actividadesAbiertas(EXAMEN.clave) ? EXAMEN.clave : null;
+  let partTxt = '';
+  if (partP) {
+    const temasP = ACTIVIDADES_PARCIAL[partP];
+    const lista = temasP.join(', ').replace(/, (\d+)$/, ' y $1');
+    const parteT = temasP.find(t => (SUBTEMAS_TEMA[t] || []).some(st => !EXAMEN.subtemas.has(st)));
+    const hechos = sesion ? temasP.filter(t => terminados.has(t)).length : null;
+    partTxt = `<div class="act-prep-part"><p><b>⭐ Estos mismos temas son tu participación.</b> Los ${PARTICIPACION_MIXTA.actividades} puntos de actividades del ${esc(NOMBRES_PARCIAL[partP])} salen de los Temas ${lista}: cada tema que termines sin errores vale ${ptsPorTema(partP).toFixed(2)} puntos.${parteT ? ` Del Tema ${parteT} basta la parte que entra al examen.` : ''} Tienes hasta el <b>${esc(textoCierre(partP))}</b>.</p>${hechos !== null ? `<p class="act-prep-part-avance">Llevas <b>${hechos} de ${temasP.length} temas</b> · ${(hechos * ptsPorTema(partP)).toFixed(2)} de ${PARTICIPACION_MIXTA.actividades} puntos.</p>` : ''}</div>`;
+  }
   box.innerHTML = `
     <div class="act-prep-cab"><div><p class="act-prep-kicker">Prepárate para tu examen</p><h2>${esc(EXAMEN.titulo)} · ${esc(fechaCorta(EXAMEN.fecha))}</h2>
       <p>Entran: <b>${esc(temasTxt)}</b>.${n ? ` ${n} preguntas en ${min} minutos.` : ''} Las preguntas del examen se parecen a las de estas Actividades.</p></div>
       <div class="act-prep-cuenta"><b>${dias > 1 ? dias : dias === 1 ? '1' : '¡Hoy!'}</b>${dias > 1 ? 'días' : dias === 1 ? 'día' : ''}<small>${cuando}</small></div></div>
+    ${partTxt}
     <ol class="act-prep-pasos">
-      <li><b>① Estudia los temas resaltados</b> en dorado aquí abajo, hasta que todas sus preguntas te salgan bien.${[...EXAMEN.temas.keys()].some(t => (SUBTEMAS_TEMA[t] || []).some(st => !EXAMEN.subtemas.has(st))) ? ' Donde solo entra una parte, usa el botón «Estudiar solo lo que entra».' : ''}</li>
+      <li><b>① Estudia los temas resaltados</b> en dorado aquí abajo, hasta que todas sus preguntas te salgan bien${partP ? ': <b>así estudias para el examen y sumas tu participación al mismo tiempo</b>' : ''}.${[...EXAMEN.temas.keys()].some(t => (SUBTEMAS_TEMA[t] || []).some(st => !EXAMEN.subtemas.has(st))) ? ' Donde solo entra una parte, usa el botón «Estudiar solo lo que entra».' : ''}</li>
       <li><b>② Haz el simulacro</b>: ${n || 30} preguntas parecidas a las del examen, con reloj de ${min || 60} minutos. No vale calificación y lo puedes repetir las veces que quieras; al final te dice qué subtemas repasar.
         <div class="act-prep-botones"><button type="button" class="btn btn-primary" id="act-sim-ir">🎯 Hacer el simulacro</button>${mejor ? `<span class="act-prep-mejor">Tu mejor simulacro: <b>${mejor.cal}</b> (${mejor.bien} de ${mejor.n})</span>` : ''}</div></li>
       ${EXAMEN.config.guia ? `<li><b>③ Descarga la guía de estudio</b>: una página por tema con las ideas clave, los autores y lo que más se confunde.<div class="act-prep-botones"><a class="btn btn-ghost-dark" href="${esc(EXAMEN.config.guia)}" target="_blank" rel="noopener">📄 Abrir la guía de estudio</a></div></li>` : ''}

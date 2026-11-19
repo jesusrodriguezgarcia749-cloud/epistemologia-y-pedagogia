@@ -67,6 +67,21 @@ export const META_PARTICIPACION = { p1: 6, p2: 4 };
 export const ACTIVIDADES_PARCIAL = { p2: [4, 5, 6, 7], final: [8, 9, 10] };
 export const PARTICIPACION_MIXTA = { clase: 10, actividades: 15 };
 
+// Cierre de las actividades con valor de cada parcial (hora de Campeche).
+// Un tema terminado después de esta hora ya no suma a ese parcial.
+// Parcial 2: lunes 23 de noviembre de 2026, 11:59 p. m. (decisión del docente).
+export const CIERRE_ACTIVIDADES = { p2: '2026-11-23T23:59:59-06:00' };
+export const textoCierre = (p) => CIERRE_ACTIVIDADES[p] ? 'lunes 23 de noviembre a las 11:59 p. m.' : '';
+export function actividadesAbiertas(p, ahora = Date.now()) {
+  return !CIERRE_ACTIVIDADES[p] || ahora <= Date.parse(CIERRE_ACTIVIDADES[p]);
+}
+function msDeFecha(f) {
+  if (!f) return null;
+  if (typeof f.toMillis === 'function') return f.toMillis();
+  if (typeof f.seconds === 'number') return f.seconds * 1000;
+  const n = Date.parse(f); return Number.isNaN(n) ? null : n;
+}
+
 export const PESO_CUATRIMESTRE = { p1: 0.25, p2: 0.25, final: 0.50 };
 
 export const NOMBRES_PARCIAL = { p1: 'Parcial 1', p2: 'Parcial 2', final: 'Examen Final' };
@@ -152,17 +167,19 @@ function calcularParticipacionConteo(lista, meta, tope) {
 }
 
 // Actividades de repaso: proporción de temas terminados sin errores.
-export function calcularActividades(actividades, temas, tope) {
-  const completados = (temas || []).filter(n => (actividades || []).some(a => Number(a.tema) === n && a.completado));
+export function calcularActividades(actividades, temas, tope, cierre) {
+  const limite = cierre ? Date.parse(cierre) : null;
+  const aTiempo = a => { if (!limite) return true; const ms = msDeFecha(a.fecha); return ms === null || ms <= limite; };
+  const completados = (temas || []).filter(n => (actividades || []).some(a => Number(a.tema) === n && a.completado && aTiempo(a)));
   const pts = temas && temas.length ? (completados.length / temas.length) * tope : 0;
   return { pts, tope, completados, temas: temas || [] };
 }
 
 // Participación mixta (desde el Parcial 2): 10 pts en clase + 15 pts de
 // actividades de repaso.
-function calcularParticipacionMixta(lista, meta, actividades, temas) {
+function calcularParticipacionMixta(lista, meta, actividades, temas, cierre) {
   const clase = calcularParticipacionConteo(lista, meta, PARTICIPACION_MIXTA.clase);
-  const act = calcularActividades(actividades, temas, PARTICIPACION_MIXTA.actividades);
+  const act = calcularActividades(actividades, temas, PARTICIPACION_MIXTA.actividades, cierre);
   return {
     pts: clase.pts + act.pts,
     tope: PARTICIPACION_MIXTA.clase + PARTICIPACION_MIXTA.actividades,
@@ -297,7 +314,7 @@ function calcularParcialBase(parcial, datos) {
   const tareas = calcularTareasSobreCatalogo(tareasDelParcial, catalogoDelParcial, tope.tareas);
   const temasAct = ACTIVIDADES_PARCIAL[parcial];
   const participacion = temasAct
-    ? calcularParticipacionMixta(participacionDelParcial, META_PARTICIPACION[parcial], datos.actividades, temasAct)
+    ? calcularParticipacionMixta(participacionDelParcial, META_PARTICIPACION[parcial], datos.actividades, temasAct, CIERRE_ACTIVIDADES[parcial])
     : { ...calcularParticipacionConteo(participacionDelParcial, META_PARTICIPACION[parcial], tope.participacion) };
   if (!participacion.texto) participacion.texto = `${participacion.cantidad} de ${participacion.meta} participaciones`;
   const asistencia = calcularAsistencia(asistenciaDelParcial, tope.asistencia);

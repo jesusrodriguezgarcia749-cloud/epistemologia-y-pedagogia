@@ -269,3 +269,10 @@ html[data-theme="dark"] .act-tema-card.act-examen{background:#33290F;}
 .sim-rev p{margin:.3rem 0;} .sim-rev-n{font-weight:700;} .sim-rev-q{font-weight:600;}
 .sim-rev-exp{font-size:.9rem; opacity:.85;}
 @media (max-width:560px){ .act-prep-cab{flex-direction:column-reverse;} .act-prep-cuenta{align-self:flex-start;} }
+
+/* Participación ligada al examen (dentro del recuadro dorado) */
+.act-prep-part{margin:12px 0 0; padding:10px 12px; border-radius:12px; background:#FFF; border:1.5px dashed #C9A04A; line-height:1.45;}
+.act-prep-part p{margin:0;}
+.act-prep-part .act-prep-part-avance{margin-top:6px; font-size:.95rem; color:#6B5317;}
+html[data-theme="dark"] .act-prep-part{background:rgba(0,0,0,.25);}
+html[data-theme="dark"] .act-prep-part .act-prep-part-avance{color:#E8C66E;}
