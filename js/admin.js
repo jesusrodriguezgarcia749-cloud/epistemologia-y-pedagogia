@@ -518,7 +518,7 @@ async function cargarCatalogo(tipo) {
     const nota = document.createElement('p');
     nota.className = 'field-hint';
     nota.style.margin = '0 0 10px';
-    nota.textContent = 'La participación se marca con palomita: cuenta cuántas veces participó cada alumno, no con qué calificación. Desde el Parcial 2, 4 participaciones en clase dan 10 puntos; los otros 15 los dan las actividades de repaso que el alumno termina sin errores en el Aula Virtual.';
+    nota.textContent = 'La participación se marca con palomita: cuenta cuántas veces participó cada alumno, no con qué calificación. Desde el Parcial 2, 4 participaciones en clase dan 10 puntos; los otros 15 los dan las actividades de repaso que el alumno termina sin errores en el Aula Virtual (en el Parcial 2, solo los Temas 4 a 7; del Tema 4 basta la parte que entra al examen).';
     cont.appendChild(nota);
   }
   // Para tareas, se recuerda cuántas hay: es el denominador del promedio.

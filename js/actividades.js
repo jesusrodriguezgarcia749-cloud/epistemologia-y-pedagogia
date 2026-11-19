@@ -151,7 +151,7 @@ function renderSelectorTemas() {
       ${etiqueta}
       <span class="act-tema-avance" data-avance="${t.n}"></span>
     </button>
-    ${ex.parcial ? `<button type="button" class="btn btn-small act-solo-examen" data-solo="${t.n}">📝 Estudiar solo lo que entra (${esc(ex.rango)})</button>` : ''}
+    ${ex.parcial ? `<button type="button" class="btn btn-small act-solo-examen" data-solo="${t.n}">📝 Estudiar solo lo que entra (${esc(ex.rango)})${bloque && !hecho ? ' · también cuenta para tu participación' : ''}</button>` : ''}
     </div>`;
   }).join('');
   cont.querySelectorAll('.act-tema-card').forEach(btn => btn.addEventListener('click', () => iniciarTema(Number(btn.dataset.tema))));
@@ -185,9 +185,12 @@ async function iniciarTema(n, soloExamen = false) {
   temaActivo = n;
   totalesCache[n] = todos.length;
   aciertos = terminados.has(n) ? new Set() : leerAvance(n);
-  const base = soloExamen && EXAMEN ? todos.filter(r => EXAMEN.subtemas.has(r.subtema)) : todos;
-  const pendientes = base.filter(r => !aciertos.has(r.id));
-  iniciarRonda(pendientes.length ? pendientes : base);
+  // En «Estudiar solo lo que entra», el tema se da por terminado cuando salen
+  // bien todas las preguntas de esa parte (así cuenta para la participación).
+  modoExamen = !!(soloExamen && EXAMEN);
+  baseTema = modoExamen ? todos.filter(r => EXAMEN.subtemas.has(r.subtema)) : todos;
+  const pendientes = baseTema.filter(r => !aciertos.has(r.id));
+  iniciarRonda(pendientes.length ? pendientes : baseTema);
 }
 
 function iniciarRonda(lista) {
@@ -297,12 +300,16 @@ function volverASelector() {
   renderSelectorTemas();
 }
 
+let modoExamen = false;
+let baseTema = [];
+
 async function finDeRonda() {
   $('act-curso').hidden = true;
   const res = $('act-resumen');
   res.hidden = false;
-  const total = todos.length;
-  const pendientes = todos.filter(r => !aciertos.has(r.id));
+  const objetivo = baseTema.length ? baseTema : todos;
+  const total = objetivo.length;
+  const pendientes = objetivo.filter(r => !aciertos.has(r.id));
   const yaEstaba = terminados.has(temaActivo);
   const bloque = bloqueDeTema(temaActivo);
 
@@ -311,6 +318,7 @@ async function finDeRonda() {
     try {
       await setDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'actividades', `tema-${temaActivo}`), {
         tema: temaActivo, completado: true, correcto: true, pinVerificado: sesion.pin, total, nombre: sesion.nombre, fecha: serverTimestamp(),
+        modo: modoExamen ? 'examen' : 'completo',
       });
       terminados.add(temaActivo);
       try { localStorage.removeItem(claveAvance(temaActivo)); } catch { /* nada */ }
@@ -346,7 +354,7 @@ async function finDeRonda() {
     $('btn-pendientes').addEventListener('click', () => { res.hidden = true; $('act-curso').hidden = false; iniciarRonda(pendientes); });
   }
   const rep = $('btn-repetir');
-  if (rep) rep.addEventListener('click', () => { res.hidden = true; $('act-curso').hidden = false; iniciarRonda(todos); });
+  if (rep) rep.addEventListener('click', () => { res.hidden = true; $('act-curso').hidden = false; iniciarRonda(objetivo); });
   $('btn-otro-tema').addEventListener('click', volverASelector);
 }
 
