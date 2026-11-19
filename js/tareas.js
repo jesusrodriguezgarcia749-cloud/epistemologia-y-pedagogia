@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js?v=2026111001";
+import { cierreDe, prorrogaDe, estaAbierta } from "./cierre-tareas.js?v=2026111901";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
 import { RUTAS, sugerirRuta, MIN_SALIDA, MIN_BITACORA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026111002";
 import { brillar, descubrir, miCielo, estadoAutor, misionPorFecha, autoresEn, recordarAlumno, olvidarAlumno, cieloLocal, encendidas, rango, TOTAL_ESTRELLAS, BRILLA, NOVA, TIPOS_PARA_ENCENDER, NOMBRE_TIPO, CLAVES_AUTOR } from "./cielo.js";
@@ -33,6 +34,16 @@ function reportarJuego(d) {
   setDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'atlas', 'tarea-juego-' + JUEGO),
     { ...d, juego: JUEGO, nombre: sesion.nombre, pinVerificado: sesion.pin, ultimoMs: Date.now(), ultimo: serverTimestamp() }, { merge: true }).catch(() => {});
 }
+// Preguntas que el alumno falló hoy en el juego (para «Las más falladas» del Monitor). La lista se reemplaza completa.
+const textoItem = (x, html) => String(html || (x && (x.q || x.n || x.t || x.p || x.pregunta || x.nombre)) || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 180);
+function registrarFallo(x, html) {
+  if (!sesion || !JUEGO) return;
+  const t = textoItem(x, html); if (!t) return;
+  const f = new Date().toLocaleDateString('en-CA'), k = `jv_fallos_${sesion.alumnoId}_${JUEGO}_${f}`;
+  let m = {}; try { m = JSON.parse(lsGet(k) || '{}'); } catch { /* */ }
+  m[t] = (m[t] || 0) + 1; lsSet(k, JSON.stringify(m));
+  reportarJuego({ fallosHoy: { fecha: f, l: Object.entries(m).map(([tt, n]) => ({ t: tt, n })) } });
+}
 // La mejor ronda del día (para el ranking en vivo): 100 puntos por acierto, o los puntos del modo reto.
 function hoyDe(marca, info) {
   const f = new Date().toLocaleDateString('en-CA'), k = `jv_hoy_${JUEGO}_${f}`; let prev = -1;
@@ -43,9 +54,12 @@ function hoyDe(marca, info) {
 recordarAlumno(sesion);
 let EQS = null, GDATA = {}, ESTADO = {}, unsubGrupo = null, detener = null;
 // Una tarea está cerrada si el docente la cerró o si ya pasó su fecha límite (grupos/{g}.tareasDig.{id}.cierre).
-const vencida = id => { const c = ESTADO[id] && ESTADO[id].cierre; return !!c && Date.now() > Date.parse(c); };
-const abierta = id => !(ESTADO[id] && ESTADO[id].abierta === false) && !vencida(id);
-const cierreTxt = id => { const c = ESTADO[id] && ESTADO[id].cierre; return c ? new Date(c).toLocaleString('es-MX', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) : ''; };
+// Desde el 19 de noviembre, cada tarea cierra sola a las 23:59 del día de su clase (ver cierre-tareas.js); el docente
+// puede cambiar la fecha o darle prórroga a un alumno.
+const cierreEf = id => prorrogaDe(ESTADO[id], sesion && sesion.alumnoId) || cierreDe(ESTADO[id], TAREAS_DIG[id]);
+const vencida = id => { const c = cierreEf(id); return !!c && Date.now() > Date.parse(c); };
+const abierta = id => estaAbierta(ESTADO[id], TAREAS_DIG[id], sesion && sesion.alumnoId);
+const cierreTxt = id => { const c = cierreEf(id); return c ? new Date(c).toLocaleString('es-MX', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }) : ''; };
 
 // ======================================================= acceso y equipo
 async function cargarGruposEn(sel) {
@@ -114,7 +128,7 @@ function escucharGrupo() {
 }
 // Cada 30 s se revisa si alguna tarea llegó a su hora de cierre (sin esperar cambios en Firestore).
 let ULT_GRUPO = {};
-setInterval(() => { if (Object.values(ESTADO).some(e => e && e.cierre)) window.dispatchEvent(new CustomEvent('estado-tareas', { detail: ULT_GRUPO })); }, 30000);
+setInterval(() => { if (Object.keys(TAREAS_DIG).some(id => cierreEf(id))) window.dispatchEvent(new CustomEvent('estado-tareas', { detail: ULT_GRUPO })); }, 30000);
 
 // ======================================================= portada: temas que se despliegan
 async function estadoDe(a) {
@@ -417,7 +431,7 @@ function juegoPreguntas(cont, C) {
     const q = reto ? Math.max(0, SEG - (Date.now() - t0) / 1000) : 0; parar();
     const x = items[i], ok = v !== null && P.correctas.includes(v);
     $$('.jp-op', cont).forEach(b => { b.disabled = true; if (P.correctas.includes(b.dataset.v)) b.classList.add('ok'); else if (b.dataset.v === v) b.classList.add('mal'); });
-    if (ok) { bien++; racha++; mejorRacha = Math.max(mejorRacha, racha); if (reto) pts += 100 + Math.round(10 * q); } else { malos++; racha = 0; fallos.push(x); }
+    if (ok) { bien++; racha++; mejorRacha = Math.max(mejorRacha, racha); if (reto) pts += 100 + Math.round(10 * q); } else { malos++; racha = 0; fallos.push(x); registrarFallo(x, P && P.carta); }
     reportarJuego({ estado: 'jugando', i: i + 1, bien, malos, pts });
     const tit = v === null ? '⏱ Se acabó el tiempo.' : ok ? (C.bien ? C.bien(x, bien) : '¡Correcto!') : (C.mal ? C.mal(x, malos) : 'No es esa.');
     $('#ap-fb').innerHTML = `<div class="aviso ${ok ? 'ok' : 'mal'}"><strong>${tit}</strong>${C.explicar(x, ok)}</div><div id="jp-extra"></div><button class="btn-at" id="ap-sig" type="button">${terminado() || i + 1 >= items.length ? 'Ver resultado' : 'Siguiente →'}</button>`;
