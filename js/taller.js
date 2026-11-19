@@ -5,7 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { wordTaller, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, revisarCitas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026111101";
+import { wordTaller, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, revisarCitas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026111904";
 
 const db = getFirestore(initializeApp(firebaseConfig));
 const SESSION_KEY = 'ep_sesion_alumno';
@@ -1023,6 +1023,8 @@ function pintarFinal(ent, cuerpo, ir) {
     if (huecos.length) L.push([false, `Quedaron puntos suspensivos «…» sin llenar en: ${huecos.join(', ')} (¿te faltó escribir tu tema en la Etapa 1?).`]);
     L.push([!rc.sinRef.length, rc.sinRef.length ? `Citas sin su referencia en la lista: ${rc.sinRef.join(', ')}. Agrega la obra a tus referencias o, si no la leíste, quita la cita.` : 'Cada autor que citas está en tus referencias ✓']);
     L.push([!rc.sinCitar.length, rc.sinCitar.length ? `Referencias que no citas en tu texto: ${rc.sinCitar.join('; ')}. Cítalas o desmárcalas: en APA solo va lo que citaste.` : 'Todas tus referencias están citadas en el texto ✓']);
+    if (rc.dobleAnio && rc.dobleAnio.length) L.push([false, `En la lista de referencias va un solo año, el de la edición que leíste, y al final «(Obra original publicada en…)». Corrige: ${rc.dobleAnio.join('; ')}. Los dos años juntos (1934/2008) solo van en la cita dentro del texto.`]);
+    if (rc.repetidas && rc.repetidas.length) L.push([false, `Esta obra está dos veces en tu lista: ${rc.repetidas.join('; ')}. Deja solo una.`]);
     if (E.minArticulos) L.push([na >= E.minArticulos, `${na} artículo${na === 1 ? '' : 's'} académico${na === 1 ? '' : 's'} ${na >= E.minArticulos ? '✓' : `· te faltan ${E.minArticulos - na} (de revista, con volumen y número o DOI)`}`]);
     if (E.intro) L.push([palabras(T.intro) >= 100, palabras(T.intro) >= 100 ? 'Tiene introducción ✓' : 'Falta la introducción (al menos 100 palabras)']);
     if (E.minPal) L.push([total >= E.minPal && total <= E.maxPal, `${total.toLocaleString('es-MX')} palabras en total ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500` : total > E.maxPal ? '· pasaste el máximo de 3,500' : '✓ dentro del rango (2,500 a 3,500)'}`]);

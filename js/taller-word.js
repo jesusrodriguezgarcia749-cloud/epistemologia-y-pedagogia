@@ -101,6 +101,17 @@ export function revisarCitas(textos, refs) {
     if (!ok) { const k = c.quien + ' (' + c.anio + ')' + (mismos.length ? ' —el año no coincide con tu referencia—' : ''); if (!vistos.has(k)) { vistos.add(k); sinRef.push(k); } }
   });
   const todo = sinAcento(textos.join(' '));
-  const sinCitar = autoresRef.filter(a => { const pri = a.ap[0]; return pri && !citas.some(c => palabrasAutor(c.quien).includes(pri)) && !new RegExp(`\\b${pri}\\b`).test(todo); }).map(a => String(a.r).replace(/\*/g, '').split('(')[0].trim().replace(/,$/, ''));
-  return { sinRef, sinCitar };
+  // Una referencia está citada si su autor aparece citado con alguno de sus años (o, si no tiene año, si se menciona el apellido).
+  const sinCitar = autoresRef.filter(a => { const pri = a.ap[0]; if (!pri) return false;
+    const deEl = citas.filter(c => palabrasAutor(c.quien).includes(pri));
+    if (deEl.length) return !deEl.some(c => { const an = c.anio.match(/\d{4}/g) || []; return !an.length || !a.anios.length || an.some(y => a.anios.includes(y)); });
+    return !new RegExp(`\\b${pri}\\b`).test(todo); })
+    .map(a => { const t = String(a.r).replace(/\*/g, ''); return t.split('(')[0].trim().replace(/,$/, '') + (t.match(/\((\d{4})/) ? ` (${t.match(/\((\d{4})/)[1]})` : ''); });
+  // En la lista de referencias va un solo año (el de la edición que se leyó) y al final «(Obra original publicada en…)».
+  const dobleAnio = refs.filter(r => /\(\s*\d{4}\s*\/\s*\d{4}\s*\)/.test(String(r))).map(r => String(r).replace(/\*/g, '').split(')')[0] + ')');
+  // La misma obra dos veces (mismo apellido y mismo título).
+  const clave = r => sinAcento(String(r).replace(/\*/g, '')).replace(/\(.*?\)/g, ' ').replace(/[^a-zñ ]/g, ' ').split(/\s+/).filter(w => w.length > 3).slice(0, 3).join(' ');
+  const vistas = new Map(), repetidas = [];
+  refs.forEach(r => { const k = clave(r); if (!k) return; if (vistas.has(k)) repetidas.push(String(r).replace(/\*/g, '').split('(')[0].trim().replace(/,$/, '')); else vistas.set(k, r); });
+  return { sinRef, sinCitar, dobleAnio, repetidas };
 }
