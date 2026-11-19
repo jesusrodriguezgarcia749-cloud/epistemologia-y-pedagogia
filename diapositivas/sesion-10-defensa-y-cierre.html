@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 10 · Defensa oral y cierre · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 10: Martes 1 de diciembre · 2 horas
+     Defensa oral del ensayo (3 minutos y una pregunta) · Repaso integral para el Examen Final
+     (Temas 1 a 10) · Cierre del curso
+     Juego de 5 minutos «¿Quién lo dijo?», Arena de repaso del Examen Final y retroalimentación
+     del alumno hacia el curso. La versión final escrita del ensayo se entrega el viernes 4.
+     Fuente: libro de texto Epistemología y Pedagogía, 10.4, 10.5 y Epílogo
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Cierre del curso · Temas 1 a 10",
+      dia: "Martes 1 de diciembre · Sesión 10 de 10",
+      titulo: "Pienso, luego defiendo",
+      subtitulo: "Defensa oral del ensayo · Repaso integral para el Examen Final · Cierre del curso",
+      duracion: "2 horas",
+      minutos: "0-1",
+      notas: "Hoy no hay tarea en la plataforma: la evaluación es la defensa oral (rúbrica del ensayo, criterio «Defensa oral»). La versión final escrita del ensayo se entrega el viernes 4 a las 23:59. Ten a la mano la lista del grupo para el orden de las defensas y un cronómetro (el del Taller del investigador sirve)." },
+
+    { tipo: "objetivos",
+      intro: "Hoy cada quien defiende su respuesta a la pregunta que nos acompañó todo el curso: ¿puede la pedagogía ser ciencia, y qué tipo de ciencia?",
+      puntos: [
+        "Calentar con **¿Quién lo dijo?**: los autores que vas a citar.",
+        "**Defender tu ensayo** en 3 minutos y responder una pregunta.",
+        "Repasar los **Temas 1 a 10** en la **Arena** para el Examen Final.",
+        "Cerrar el curso: **qué nos llevamos** y tu voz sobre la materia."
+      ],
+      pasoAPaso: true,
+      minutos: "1-2" },
+
+    { tipo: "plataforma",
+      etiqueta: "Calentamiento", tipoAct: "Individual · juego de 5 minutos",
+      titulo: "¿Quién lo dijo?",
+      enlace: "../tareas.html#quien-lo-dijo", textoEnlace: "Tareas → ¿Quién lo dijo?",
+      minutos: "2-7", evaluacion: "Formativo",
+      notas: "Es el juego de los 55 pensadores de la Constelación. Sirve para que tengan frescos los autores que van a citar en la defensa. Elige el monitor de juegos en «¿Quién lo dijo?» para ver las más falladas.",
+      pasos: [
+        "Escanea el QR: **Tareas → ¿Quién lo dijo?**",
+        "Frases y obras contra su autor: **de Platón a Morin**.",
+        "Elige **Experto** si ya te sientes listo."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tablaPasos",
+      titulo: "Así es la defensa oral",
+      columnas: ["Momento", "Qué dices"],
+      filas: [
+        ["**0:00** · El problema", "Tu tema y **tu pregunta de investigación**, en una frase."],
+        ["**0:30** · Tu tesis", "Tu respuesta: ¿tu investigación es ciencia? **¿De qué tipo?**"],
+        ["**1:10** · Tus argumentos", "Dos ideas con **sus autores**: (Apellido, año)."],
+        ["**2:00** · Un contraargumento", "Lo que te diría alguien que piensa distinto, **y tu respuesta**."],
+        ["**2:40** · Cierre", "Qué cambiarías de tu investigación después de este curso."],
+        ["**3:00** · Una pregunta", "Del maestro o del grupo: respóndela **con argumentos**."]
+      ],
+      densa: true,
+      pie: "Se evalúa con el criterio **Defensa oral** de la rúbrica: **explicar con seguridad y responder con argumentos**, no leer.",
+      minutos: "7-10",
+      notas: "Criterio de la rúbrica del ensayo: «Explica su postura con seguridad y responde preguntas con argumentos» (logrado); «Explica, pero le cuesta responder preguntas»; «Lee sin comprender o no puede responder». Se permite una tarjeta con palabras clave, no leer el texto. El Taller del investigador tiene un armador de guion y un cronómetro de 3 minutos." },
+
+    { tipo: "tema",
+      titulo: "Defensas",
+      etiqueta: "3 minutos y una pregunta por persona",
+      puntos: [
+        "Pasa al frente quien diga el maestro; **el siguiente se prepara**.",
+        "Mientras escuchas, anota **una pregunta** para alguien: la mejor pregunta también cuenta como participación.",
+        "Preguntas que ayudan: **¿qué autor te contradice?**, **¿qué evidencia tienes?**, **¿qué paradigma es tu investigación?**",
+        "Aplaudimos **al final de cada defensa**."
+      ],
+      pasoAPaso: true,
+      minutos: "10-70",
+      notas: "Unos 16 alumnos × 3 a 4 minutos ≈ 60 minutos. Usa el cronómetro y avisa a los 2:30. Preguntas sugeridas según el caso: ¿qué objetaría Popper (o Feyerabend) a tu método?; ¿qué barreras podría reproducir tu investigación?; ¿cómo vas a cuidar la ética con menores?; ¿cómo se relaciona con la NEM? Califica en Panel → Proyecto → Entrega final (criterio Defensa oral)." },
+
+    { tipo: "pausa", minutos: "70-73" },
+
+    { tipo: "tema",
+      titulo: "El Examen Final",
+      etiqueta: "Lunes 7 de diciembre · en línea",
+      puntos: [
+        "**40 reactivos en 60 minutos**, en el Aula Virtual, de **todos los temas (1 a 10)**.",
+        "Pesan más los temas nuevos: **8, 9 y 10** (orientación, bioética, sustentabilidad, economía, IA y NEM).",
+        "Casos de aplicación, opción múltiple, relación de columnas, completar y verdadero o falso.",
+        "Prepárate en **Actividades**: temas resaltados, **simulacro** y repaso. **Recuperación y espaciada**, no releer."
+      ],
+      pasoAPaso: true,
+      minutos: "73-76",
+      notas: "El banco del Examen Final tiene 104 reactivos; los Temas 8, 9 y 10 aportan más de la mitad. El recuadro «Prepárate» de Actividades muestra la cuenta regresiva y el simulacro del próximo examen." },
+
+    { tipo: "plataforma",
+      etiqueta: "Arena en vivo", tipoAct: "Todo el grupo · desde el celular",
+      titulo: "Arena de repaso del Examen Final",
+      enlace: "../tareas.html#arena", textoEnlace: "Tareas → ⚡ Arena en vivo",
+      minutos: "76-96", evaluacion: "Participación",
+      notas: "Panel docente → ⚡ Arena → «Repaso del Examen Final · Temas 1 a 10», 20 segundos → Abrir la sala y proyectar. Son 23 preguntas del banco del Final (2 por cada tema del 1 al 7 y 3 de los Temas 8, 9 y 10). En cada respuesta, detente unos segundos con la explicación de abajo.",
+      pasos: [
+        "Escanea el QR o entra a **Aula Virtual → Tareas → ⚡ Arena en vivo** con tu nombre y PIN.",
+        "Preguntas contra el reloj de los **Temas 1 a 10**.",
+        "Cuenta la **rapidez**, pero sobre todo **acertar**. Al final, el podio.",
+        "Es **práctica de recuperación**: la mejor manera de estudiar."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "cita",
+      texto: "La epistemología no le ofrece al pedagogo un conjunto de respuestas, sino una manera de hacer preguntas: pensar lo que hacemos mientras lo hacemos, como pedía Schön; dialogar con quien piensa distinto, como pedía Freire; exponer nuestras ideas a la crítica, como pedía Popper; mirar el todo sin perder las partes, como pedía Morin.",
+      autor: "Epílogo del libro de texto, «Pensar lo que hacemos»",
+      minutos: "96-100",
+      notas: "Recuerda la escena del inicio del libro: la junta de Consejo Técnico donde todos hablaban con seguridad (los alumnos son visuales, nadie lee en casa, la música clásica mejora la concentración). Pregunta: ¿qué le preguntarían hoy a cada una de esas afirmaciones? Cierre del libro: la educación es demasiado importante para dejarla en manos de la costumbre, de la moda o de la ocurrencia." },
+
+    { tipo: "tema",
+      titulo: "Tu voz sobre el curso",
+      etiqueta: "Retroalimentación",
+      puntos: [
+        "¿Qué **tema o autor** te cambió la manera de ver la educación?",
+        "¿Qué **actividad** te ayudó más a aprender? ¿Cuál no?",
+        "¿Qué **cambiarías** del curso para el próximo grupo?",
+        "Una frase: **¿puede la pedagogía ser ciencia?**"
+      ],
+      pasoAPaso: true,
+      minutos: "100-112",
+      notas: "Espacio para la retroalimentación del alumno hacia el curso (programa). Puede ser en voz alta o por escrito en una hoja sin nombre. Toma nota de lo que se repita: sirve para el próximo cuatrimestre." },
+
+    { tipo: "cierre",
+      evidencia: "**Defensa oral** de cada alumno (rúbrica del ensayo) y participación en la **Arena**.",
+      materiales: "Ensayo o tarjeta con palabras clave, Aula Virtual y **celular con internet**.",
+      proxima: "**Viernes 4, 23:59: versión final del ensayo** en la plataforma (2,500 a 3,500 palabras, APA 7, mínimo 8 referencias). **Lunes 7: Examen Final** en línea, Temas 1 a 10. **Viernes 11:** calificaciones del curso.",
+      minutos: "112-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

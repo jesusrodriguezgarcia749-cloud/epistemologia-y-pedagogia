@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 8 · Orientación y nuevos enfoques · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 8: Martes 24 de noviembre · 2 horas
+     Retroalimentación del Parcial 2
+     8.1 a 8.3 Nuevo paradigma en orientación y psicopedagogía
+     9.1 a 9.4 Bioética, desarrollo sustentable, economía y educación, de los programas
+     computacionales a la inteligencia artificial · 10.5 El ensayo final
+     Juego de 5 minutos «¿Desde qué paradigma se orienta?», «Un caso, tres miradas» (en equipo,
+     Rúbrica de Tarea) y «Ficha APA: economía y educación» (individual, Rúbrica de Tarea).
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulos 8, 9 y 10.5
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Temas 8 y 9 · Nuevo paradigma en orientación y nuevos enfoques paradigmáticos",
+      dia: "Martes 24 de noviembre · Sesión 8 de 10",
+      titulo: "Orientar, cuidar, decidir",
+      subtitulo: "8.1 a 8.3 De diagnosticar a acompañar · 9.1 a 9.4 Bioética, sustentabilidad, economía e inteligencia artificial",
+      duracion: "2 horas",
+      minutos: "0-1",
+      notas: "Primera clase después del Parcial 2. Abre con los resultados (10 minutos) y entra al Tema 8 con el juego. El Tema 9 es amplio: no se trata de agotarlo, sino de leerlo con lentes epistemológicos. La Entrega 2 ya no es hoy: se recorrió al lunes 30 de noviembre, hasta las 23:59." },
+
+    { tipo: "objetivos",
+      intro: "Hoy vemos cómo los cambios de paradigma transforman una práctica concreta, la orientación, y cómo la epistemología ayuda a pensar cuatro problemas de nuestro tiempo.",
+      puntos: [
+        "Revisar juntos los resultados del **Parcial 2**.",
+        "Calentar con el juego **¿Desde qué paradigma se orienta?**",
+        "Pasar del **diagnóstico** al **acompañamiento** y del **déficit** a las **barreras** (Tema 8).",
+        "Leer con lentes epistemológicos la **bioética**, la **sustentabilidad**, la **economía de la educación** y la **inteligencia artificial** (Tema 9).",
+        "En equipo: **Un caso, tres miradas**. Individual: **Ficha APA** de economía y educación.",
+        "Saber cómo se arma y se **defiende el ensayo final**."
+      ],
+      pasoAPaso: true,
+      minutos: "1-2" },
+
+    { tipo: "tema",
+      titulo: "Retroalimentación del Parcial 2",
+      etiqueta: "Lo que nos dijo el examen",
+      puntos: [
+        "Primero lo que salió **bien** como grupo.",
+        "Las **tres preguntas más falladas**: ¿qué confundimos y por qué?",
+        "Un error que vale la pena: confundir **Lakatos** (programas progresivos o degenerativos) con **Kuhn** (paradigmas y revoluciones).",
+        "Para el **Examen Final** (lunes 7 de diciembre) entran **todos los temas**: el Simulacro y la guía estarán en Actividades."
+      ],
+      pasoAPaso: true,
+      minutos: "2-12",
+      notas: "Panel docente → Exámenes → resultados del Parcial 2. Busca las preguntas que más fallaron y coméntalas sin decir nombres. Termina con algo positivo: la recuperación espaciada funciona, y el Final se prepara igual. Si el examen se aplicó en otro grupo después, no muestres las preguntas textuales." },
+
+    { tipo: "plataforma",
+      etiqueta: "Calentamiento", tipoAct: "Individual · juego de 5 minutos",
+      titulo: "¿Desde qué paradigma se orienta?",
+      enlace: "../tareas.html#que-orienta", textoEnlace: "Tareas → ¿Desde qué paradigma se orienta?",
+      minutos: "12-17", evaluacion: "Formativo",
+      notas: "Que jueguen sin haber leído el Tema 8: los tres paradigmas ya los conocen del Tema 3. En el Monitor en vivo verás «Las más falladas hoy»: detente en esas al explicar la tabla de 8.3. Pregunta al final: ¿a quién le aplicaron un test vocacional? ¿Les sirvió?",
+      pasos: [
+        "Escanea el QR: **Tareas → ¿Desde qué paradigma se orienta?**",
+        "Un test vocacional, una entrevista, una barrera en la escuela: ¿**positivista**, **interpretativo** o **sociocrítico**?",
+        "Elige **Básico**. Al responder, lee por qué."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "pregunta",
+      pregunta: "¿Una prueba vocacional puede decirte para qué naciste?",
+      respuesta: "Puede darte **datos útiles de un momento**, pero no un destino. Detrás de cada forma de orientar hay una **idea de qué es conocer a una persona**: esa es la pregunta epistemológica del Tema 8.",
+      minutos: "17-18",
+      notas: "Pregunta de arranque del libro (8.1). Recuerda que en paralelo cursan Orientación Educativa y el próximo cuatrimestre el Taller de Psicopedagogía: aquí no repetimos técnicas, preguntamos qué conocimiento hay detrás." },
+
+    { tipo: "diagramaPasos",
+      titulo: "8.1 Del diagnóstico a la construcción",
+      minutos: "18-22",
+      intro: "Cómo cambió la idea de «conocer» a quien se orienta. Avanza (→).",
+      notas: "Parsons (1909), Choosing a Vocation: conocer a la persona, conocer las ocupaciones y razonar la correspondencia. Las cuatro críticas salen del libro: plasticidad (Tema 7) y dialéctica (Tema 3); contexto sistémico; mundo del trabajo inestable; el significado. Super (mediados del siglo XX): el desarrollo vocacional dura toda la vida. Pregunta del libro: ¿te aplicaron una prueba vocacional? ¿Influyó en que estudiaran Pedagogía?",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Del modelo de rasgos y factores a la construcción del proyecto de vida"><defs><marker id="f81" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4F5868"/></marker></defs><g data-paso="0" data-anim="resaltar"><rect x="16" y="40" width="186" height="300" rx="16" fill="#E3EEF7" stroke="#2E6FA8" stroke-width="4"/><circle cx="109" cy="104" r="28" fill="#2E6FA8"/><rect x="81" y="136" width="56" height="56" rx="10" fill="#2E6FA8"/><path d="M60,214 h98 M60,232 h98 M60,250 h70" stroke="#2E6FA8" stroke-width="6" stroke-linecap="round"/><text x="109" y="290" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">Rasgos y factores</text><text x="109" y="314" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" fill="#4F5868">Parsons, 1909</text></g><g data-paso="1" data-anim="fade"><path d="M206,190 H232" stroke="#4F5868" stroke-width="4" marker-end="url(#f81)"/></g><g data-paso="1" data-anim="resaltar"><rect x="238" y="40" width="166" height="300" rx="16" fill="#FBEAE6" stroke="#A83232" stroke-width="4"/><text x="321" y="78" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#A83232">Cuatro críticas</text><g font-family="Public Sans,sans-serif" font-size="14" fill="#16213A"><text x="256" y="120">✗ No son rasgos fijos</text><text x="256" y="168">✗ El contexto importa</text><text x="256" y="216">✗ El trabajo cambia</text><text x="256" y="264">✗ El significado</text><text x="276" y="282">cuenta</text></g></g><g data-paso="2" data-anim="fade"><path d="M408,190 H432" stroke="#4F5868" stroke-width="4" marker-end="url(#f81)"/></g><g data-paso="2" data-anim="resaltar"><rect x="438" y="40" width="186" height="300" rx="16" fill="#E6F2E8" stroke="#3F7A4F" stroke-width="4"/><path d="M466,250 C500,250 486,180 530,180 C570,180 556,110 596,110" fill="none" stroke="#3F7A4F" stroke-width="7" stroke-linecap="round"/><path d="M530,180 C556,186 570,222 600,226" fill="none" stroke="#3F7A4F" stroke-width="5" stroke-dasharray="3 9" stroke-linecap="round"/><circle cx="466" cy="250" r="9" fill="#3F7A4F"/><circle cx="596" cy="110" r="9" fill="#3F7A4F"/><text x="531" y="290" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">Proyecto de vida</text><text x="531" y="314" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" fill="#4F5868">Super; constructivismo</text></g><g data-paso="2" data-anim="subir"><rect x="96" y="372" width="448" height="48" rx="24" fill="#16213A"/><text x="320" y="402" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#E9C46A">de diagnosticar y predecir a acompañar y construir</text></g></svg>`,
+      pasos: [
+        { num: "El origen · 1909", titulo: "El modelo de rasgos y factores", color: "#2E6FA8", texto: "Conocer los **rasgos** de la persona con **tests**, conocer las ocupaciones y encontrar **la respuesta correcta**. Un **experto** que diagnostica. Base **positivista**.", ejemplo: "Frank **Parsons** abrió en Boston una oficina de orientación vocacional y publicó *Choosing a Vocation*." },
+        { num: "Desde el nuevo paradigma", titulo: "Cuatro críticas", color: "#A83232", texto: "Las personas **cambian** (plasticidad, Tema 7); deciden en un **contexto** (familia, economía, género); el **trabajo ya no es estable**; y lo que importa también es lo que la carrera **significa** para la persona.", ejemplo: "Un test a los catorce años **captura un momento, no un destino**." },
+        { num: "Hoy", titulo: "Acompañar la construcción", color: "#3F7A4F",
+          pregunta: "Si no se trata de encontrar «la» profesión correcta, ¿qué hace el orientador?",
+          respuesta: "**Acompaña la construcción de un proyecto de vida**: ayuda a dar sentido a la propia historia y a imaginar posibilidades. Donald **Super**: el desarrollo vocacional dura **toda la vida**.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tablaPasos",
+      titulo: "8.2 Los modelos de intervención de Bisquerra",
+      columnas: ["Modelo", "Cómo trabaja", "Su límite o su fuerza"],
+      filas: [
+        ["**Clínico** o de counseling", "Atención **individual**, en entrevista, para un problema específico.", "Llega a pocos y **cuando el problema ya existe**."],
+        ["De **servicios**", "Un departamento atiende **las demandas que le llegan**.", "Es **reactivo**: espera a que lleguen."],
+        ["De **programas**", "Programas **planificados** para grupos, con objetivos y evaluación.", "Es **preventivo** y **llega a todos**."],
+        ["De **consulta**", "El orientador **asesora** a docentes, directivos y familias para que ellos intervengan.", "**Multiplica** su alcance."]
+      ],
+      densa: true,
+      pie: "Principios de hoy: **prevención, desarrollo, intervención social e integración curricular**.",
+      minutos: "22-25",
+      notas: "Bisquerra (1998). Caso del libro (8.2): en una secundaria técnica la tutoría de tercero solo revisaba calificaciones y reportes; un tutor la organizó como programa (conocimiento de sí, oferta de bachillerato con exalumnos, toma de decisiones, proyecto de vida) e invitó a las familias. El grupo dejó de ver la tutoría como un tribunal. Educación emocional (Bisquerra, 2000), con mirada crítica: no debe servir para pedir a los alumnos que se adapten a situaciones injustas." },
+
+    { tipo: "diagramaPasos",
+      titulo: "8.3 Del déficit a las barreras",
+      minutos: "25-29",
+      intro: "Cuando un alumno no aprende, ¿dónde buscamos el problema? Avanza (→).",
+      notas: "Booth y Ainscow (2000), Índice de inclusión. La Ley General de Educación (2019) estableció la educación inclusiva y retomó el concepto de barreras. Caso Andrea del libro: baja visión; en la escuela anterior le daban tareas más fáciles; en la nueva, la maestra de apoyo revisó con los docentes las barreras. Antes de revelar el último paso, deja que el grupo proponga ajustes.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Del modelo del déficit a las barreras para el aprendizaje y la participación"><g data-paso="0" data-anim="resaltar"><rect x="20" y="30" width="280" height="290" rx="16" fill="#FBEAE6" stroke="#A83232" stroke-width="4"/><circle cx="160" cy="118" r="34" fill="#A83232"/><rect x="126" y="158" width="68" height="78" rx="14" fill="#A83232"/><circle cx="214" cy="104" r="30" fill="#fff" stroke="#16213A" stroke-width="6"/><path d="M236,126 L262,152" stroke="#16213A" stroke-width="10" stroke-linecap="round"/><text x="160" y="276" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="18" fill="#16213A">¿Qué le pasa</text><text x="160" y="298" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="18" fill="#16213A">a este alumno?</text></g><g data-paso="1" data-anim="resaltar"><rect x="340" y="30" width="280" height="290" rx="16" fill="#E6F2E8" stroke="#3F7A4F" stroke-width="4"/><path d="M380,130 L480,70 L580,130 Z" fill="#3F7A4F"/><rect x="392" y="130" width="176" height="104" fill="#fff" stroke="#3F7A4F" stroke-width="4"/><rect x="404" y="146" width="70" height="40" fill="#D3D9E3"/><text x="439" y="172" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="11" fill="#4F5868">texto chico</text><rect x="486" y="146" width="70" height="40" fill="#5C6B5E"/><text x="521" y="172" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="11" fill="#9AA49B">pizarrón</text><circle cx="540" cy="214" r="9" fill="#C98A2C"/><text x="460" y="220" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="11" fill="#4F5868">lugar lejano</text><text x="480" y="276" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="18" fill="#16213A">¿Qué barreras</text><text x="480" y="298" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="18" fill="#16213A">encuentra aquí?</text></g><g data-paso="2" data-anim="subir"><rect x="60" y="346" width="520" height="70" rx="16" fill="#16213A"/><text x="320" y="376" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#E9C46A">el problema deja de estar solo en el individuo:</text><text x="320" y="400" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#fff">es relacional y sistémico</text></g></svg>`,
+      pasos: [
+        { num: "Antes", titulo: "El modelo del déficit", color: "#A83232", texto: "Se busca **qué le falta** al alumno, se le **clasifica** y se le da un tratamiento, a menudo **fuera del aula**.", ejemplo: "En su escuela anterior, a Andrea (baja visión) la llamaban «una alumna con problemas» y le daban **tareas más fáciles**." },
+        { num: "Booth y Ainscow · 2000", titulo: "Barreras para el aprendizaje y la participación", color: "#3F7A4F", texto: "Ahora la pregunta es **qué hay en la escuela** —currículo, materiales, espacios, evaluación, prejuicios— que le impide aprender y participar.", ejemplo: "Fotocopias con letra pequeña, pizarrón con poco contraste, un lugar alejado." },
+        { num: "El caso Andrea", titulo: "¿Qué cambió?", color: "#16213A",
+          pregunta: "Con ajustes sencillos, Andrea trabajó al nivel de sus compañeros. ¿Qué ajustes harías tú?",
+          respuesta: "**Materiales ampliados, un lugar al frente y la tableta con zoom.** El cambio no estuvo en Andrea, sino en **la mirada de la escuela**. El psicopedagogo pasa de **etiquetar** a **identificar barreras y diseñar ajustes**, dentro del aula.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tablaPasos",
+      titulo: "La orientación a la luz de los paradigmas",
+      columnas: ["Paradigma", "Cómo «conoce» a la persona", "Práctica típica", "Riesgo"],
+      filas: [
+        ["**Positivista**", "Midiendo **rasgos estables** con instrumentos estandarizados.", "Test vocacional y recomendación del experto.", "Confundir **un momento con un destino**."],
+        ["**Interpretativo**", "Comprendiendo los **significados** que la persona da a su historia.", "Entrevista, relato de vida, proyecto de vida.", "Perder de vista **el contexto**."],
+        ["**Sociocrítico**", "Analizando las **barreras y desigualdades** del entorno.", "Intervención social y eliminación de barreras.", "Descuidar la **experiencia singular** de cada alumno."]
+      ],
+      densa: true,
+      pie: "**Ningún paradigma basta por sí solo**: un buen orientador sabe qué le da cada herramienta y qué le esconde.",
+      minutos: "29-32",
+      notas: "Es la tabla de cierre de 8.3 y la base de la actividad en equipo. Si en el Monitor salieron preguntas muy falladas del juego, este es el momento de comentarlas." },
+
+    { tipo: "pausa", minutos: "32-35" },
+
+    { tipo: "pregunta",
+      pregunta: "¿Hasta dónde es ético investigar con niños y adolescentes?",
+      respuesta: "Hasta donde se respeten **su autonomía, su intimidad y su bienestar**. Para eso existe la **bioética**: un puente entre lo que la ciencia **puede** hacer y lo que **debe** hacer.",
+      minutos: "35-36",
+      notas: "Pregunta de arranque del Tema 9. El Tema 9 pone a trabajar la manera de pensar del curso frente a cuatro problemas de nuestro tiempo: no se agotan, se leen con lentes epistemológicos." },
+
+    { tipo: "diagramaPasos",
+      titulo: "9.1 La bioética: un puente",
+      minutos: "36-40",
+      intro: "Van Rensselaer **Potter** (1971) difundió la palabra. Beauchamp y Childress (1979) le dieron cuatro principios. Avanza (→).",
+      notas: "Potter, Bioethics: Bridge to the Future (1971): el conocimiento científico creció tan rápido que la reflexión sobre su uso se quedó atrás (preocupación epistemológica). Beauchamp y Childress (1979), Principles of Biomedical Ethics. Jonas (1979/1995), El principio de responsabilidad: actuar de modo que las consecuencias sean compatibles con la permanencia de una vida humana auténtica. Problemas actuales del libro: edición genética, final de la vida, datos personales, IA en decisiones médicas, vacunas en la pandemia.",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="La bioética como puente entre las ciencias de la vida y la ética, sostenido por cuatro principios"><g data-paso="0" data-anim="resaltar"><rect x="14" y="70" width="140" height="120" rx="14" fill="#E3EEF7" stroke="#2E5E8C" stroke-width="4"/><text x="84" y="118" text-anchor="middle" font-size="34">🧬</text><text x="84" y="152" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#2E5E8C">Ciencias</text><text x="84" y="172" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#2E5E8C">de la vida</text><rect x="486" y="70" width="140" height="120" rx="14" fill="#F7EEDB" stroke="#C98A2C" stroke-width="4"/><text x="556" y="118" text-anchor="middle" font-size="34">⚖️</text><text x="556" y="152" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#C98A2C">Humanidades</text><text x="556" y="172" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#C98A2C">y ética</text><path d="M154,150 Q320,40 486,150" fill="none" stroke="#16213A" stroke-width="10"/><rect x="154" y="150" width="332" height="18" fill="#16213A"/><text x="320" y="140" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="22" fill="#16213A">Bioética</text></g><g data-paso="1" data-anim="resaltar"><rect x="176" y="168" width="54" height="150" fill="#2E5E8C"/><text x="203" y="248" transform="rotate(-90 203 243)" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#fff">Autonomía</text></g><g data-paso="2" data-anim="resaltar"><rect x="252" y="168" width="54" height="150" fill="#3F7A4F"/><text x="279" y="248" transform="rotate(-90 279 243)" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#fff">Beneficencia</text></g><g data-paso="3" data-anim="resaltar"><rect x="334" y="168" width="54" height="150" fill="#A83232"/><text x="361" y="248" transform="rotate(-90 361 243)" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#fff">No maleficencia</text></g><g data-paso="4" data-anim="resaltar"><rect x="410" y="168" width="54" height="150" fill="#C98A2C"/><text x="437" y="248" transform="rotate(-90 437 243)" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#fff">Justicia</text></g><rect x="150" y="318" width="340" height="12" fill="#4F5868"/><g data-paso="5" data-anim="subir"><rect x="90" y="388" width="460" height="44" rx="22" fill="#16213A"/><text x="320" y="416" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#E9C46A">Jonas: pensar también en las generaciones futuras</text></g></svg>`,
+      pasos: [
+        { num: "Potter · 1971", titulo: "Un puente entre ciencia y valores", color: "#16213A", texto: "La ciencia creció **tan rápido** que la reflexión sobre su uso **se quedó atrás**. La bioética une las ciencias de la vida con la ética.", ejemplo: "Hoy: la **edición genética**, los **datos de salud**, la IA en decisiones médicas, las **vacunas** repartidas de forma desigual en la pandemia." },
+        { num: "Principio 1", titulo: "Autonomía", color: "#2E5E8C", texto: "Respetar la capacidad de las personas para **decidir sobre sí mismas**: exige **información y consentimiento**.", ejemplo: "Nadie entra a tu investigación sin saber de qué se trata y aceptar libremente." },
+        { num: "Principio 2", titulo: "Beneficencia", color: "#3F7A4F", texto: "Actuar **en favor del bien** de las personas.", ejemplo: "Que la investigación **devuelva** algo a la comunidad que participó." },
+        { num: "Principio 3", titulo: "No maleficencia", color: "#A83232", texto: "**No causar daño.**", ejemplo: "Ninguna pregunta ni actividad que **exponga o humille** a un alumno." },
+        { num: "Principio 4", titulo: "Justicia", color: "#C98A2C", texto: "Distribuir de manera **equitativa** los beneficios y las cargas.", ejemplo: "Que siempre participen **los mismos** y nunca reciban nada a cambio no es justo." },
+        { num: "Jonas · 1979", titulo: "El principio de responsabilidad", color: "#16213A",
+          pregunta: "¿Por qué la tecnología moderna exige, según Jonas, una ética nueva?",
+          respuesta: "Porque su poder es enorme: ya no basta pensar en las consecuencias **inmediatas**; hay que actuar de modo que sean compatibles con **la vida de las generaciones futuras**.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tema",
+      titulo: "La ética de tu propia investigación",
+      etiqueta: "Si tu tesis toca a personas, sobre todo a menores",
+      puntos: [
+        "**Consentimiento informado**: los participantes —y, si son menores, sus padres o tutores— saben de qué se trata y aceptan libremente.",
+        "**Asentimiento**: aunque los padres autoricen, **el menor también** debe estar de acuerdo, en palabras de su edad.",
+        "**Confidencialidad y anonimato**: usa **seudónimos**; nadie debe poder reconocer a quien participó.",
+        "**No daño** y **devolución**: nada que exponga o humille, y comparte los resultados con la comunidad."
+      ],
+      pasoAPaso: true,
+      minutos: "40-42",
+      notas: "Caso del libro, «La foto del grupo»: una practicante publica en redes fotos de niños con el nombre de la escuela; la maestra le pide retirarlas. Nadie había pedido permiso y algunos niños pueden estar en riesgo si se hace pública su ubicación. Esto conecta con la pregunta 16 del proyecto. Lo retomarán en Ética Profesional." },
+
+    { tipo: "diagramaPasos",
+      titulo: "9.2 El desarrollo sustentable",
+      minutos: "42-45",
+      intro: "Informe **Brundtland** (1987): satisfacer las necesidades del presente **sin comprometer** las de las generaciones futuras. Avanza (→).",
+      notas: "Comisión Mundial sobre el Medio Ambiente y el Desarrollo (1987/1988), Nuestro futuro común. Agenda 2030 (ONU, 2015): 17 ODS; el Objetivo 4 es educación inclusiva, equitativa y de calidad. Críticas: mantiene la idea de crecimiento ilimitado; desde América Latina, el buen vivir. Pregunta del libro: identifica un problema ambiental de tu municipio (en la península: el agua de los cenotes, la deforestación, los incendios, la erosión de las costas). ¿Qué disciplinas y qué saberes de la comunidad harían falta?",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="Tres dimensiones entrelazadas del desarrollo sustentable"><g data-paso="0" data-anim="resaltar"><circle cx="320" cy="140" r="110" fill="#3F7A4F" fill-opacity=".55" stroke="#3F7A4F" stroke-width="4"/><text x="320" y="96" text-anchor="middle" font-size="30">🌳</text><text x="320" y="124" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">Ambiental</text></g><g data-paso="1" data-anim="resaltar"><circle cx="248" cy="262" r="110" fill="#2E5E8C" fill-opacity=".55" stroke="#2E5E8C" stroke-width="4"/><text x="200" y="300" text-anchor="middle" font-size="30">🤝</text><text x="200" y="330" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">Social</text></g><g data-paso="2" data-anim="resaltar"><circle cx="392" cy="262" r="110" fill="#C98A2C" fill-opacity=".55" stroke="#C98A2C" stroke-width="4"/><text x="440" y="300" text-anchor="middle" font-size="30">💰</text><text x="440" y="330" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="17" fill="#16213A">Económica</text></g><g data-paso="3" data-anim="zoom"><circle cx="320" cy="222" r="30" fill="#16213A"/><text x="320" y="230" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="20" fill="#E9C46A">∞</text></g><g data-paso="3" data-anim="subir"><rect x="150" y="392" width="340" height="40" rx="20" fill="#16213A"/><text x="320" y="418" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#E9C46A">un problema complejo (Morin)</text></g></svg>`,
+      pasos: [
+        { num: "Dimensión 1", titulo: "Ambiental", color: "#3F7A4F", texto: "Conservar los **ecosistemas**, la **biodiversidad** y los recursos naturales.", ejemplo: "El agua de los **cenotes** de la península." },
+        { num: "Dimensión 2", titulo: "Social", color: "#2E5E8C", texto: "Garantizar la **equidad**, la **inclusión** y el bienestar de las personas.", ejemplo: "La **Agenda 2030** (ONU, 2015): el **Objetivo 4** pide una educación inclusiva, equitativa y de calidad." },
+        { num: "Dimensión 3", titulo: "Económica", color: "#C98A2C", texto: "Generar **prosperidad sin destruir** sus propias bases.", ejemplo: "La crítica: ¿se puede crecer sin límite en un planeta finito? Desde América Latina, el **buen vivir**." },
+        { num: "Lectura epistemológica", titulo: "¿Por qué es complejo?", color: "#16213A",
+          pregunta: "¿Se puede resolver la dimensión ambiental por separado?",
+          respuesta: "No: las tres están **entrelazadas**. Una solución puramente técnica a un problema ambiental puede crear problemas sociales, y al revés. Es un problema **complejo** en el sentido de **Morin**.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tablaPasos",
+      titulo: "9.3 Economía y educación: cuatro lentes",
+      columnas: ["Perspectiva", "¿Qué es la educación?", "¿Qué cuenta como evidencia?", "Paradigma cercano"],
+      filas: [
+        ["**Capital humano** · Schultz (1961); Becker (1964)", "Una **inversión** que aumenta la productividad.", "Ingresos, productividad, crecimiento.", "Positivista"],
+        ["**Reproducción** · Bowles y Gintis (1976); Bourdieu y Passeron (1970)", "Un mecanismo que **reproduce desigualdades**.", "Trayectorias desiguales según el origen social.", "Sociocrítico"],
+        ["**Capacidades** · Sen (1999)", "Una **ampliación de libertades** reales.", "Libertades para vivir la vida que se valora.", "Interpretativo y crítico"],
+        ["**Derecho humano** · Delors (1996); LGE (2019)", "Un **derecho** que el Estado debe garantizar.", "Acceso, permanencia y aprendizaje para todos.", "Normativo y crítico"]
+      ],
+      densa: true,
+      pie: "Si una investigación solo mide salarios, encontrará solo lo que el capital humano sabe ver: **elegir qué medir ya es tomar postura**.",
+      minutos: "45-49",
+      notas: "Une las dos tablas del libro (9.3). Bourdieu: el capital cultural (formas de hablar, gustos, saberes) que la escuela premia como si fuera mérito. Sen: inspiró el Índice de Desarrollo Humano. En paralelo cursan Economía y Educación: aquí las leemos con lentes epistemológicos. Esta tabla es la base de la Ficha APA individual." },
+
+    { tipo: "lineaTiempo",
+      titulo: "9.4 De los programas computacionales a la IA",
+      intro: "El programa se escribió en los noventa. Avanza (→) y mira cómo cambió la pregunta.",
+      notas: "Skinner (1958), máquinas de enseñar: pasos pequeños, respuesta activa, refuerzo inmediato. Papert (1980), Mindstorms y Logo: que el niño programe a la computadora (constructivismo, heredero de Piaget). Red Escolar (1997, ILCE). Los programas de análisis cualitativo y la discusión de Martínez Miguélez. Pandemia 2020: educación a pantallas, televisión y radio, con resultados desiguales. IA generativa desde 2022.",
+      eventos: [
+        { fecha: "1958", ico: "📟", color: "#4F5868", titulo: "Las máquinas de enseñar", texto: "**Skinner**: pasos pequeños, respuesta activa y **refuerzo inmediato**. La raíz de la enseñanza asistida por computadora." },
+        { fecha: "1980", ico: "🐢", color: "#3F7A4F", titulo: "Papert y Logo", texto: "No «programar al niño»: que **el niño programe a la computadora** enseñándole a una tortuga a dibujar. Una propuesta **constructivista**." },
+        { fecha: "1997", ico: "💽", color: "#2E5E8C", titulo: "Red Escolar en México", texto: "Computadoras e internet para escuelas públicas; enciclopedias en **CD-ROM**; los primeros programas para **analizar entrevistas**." },
+        { fecha: "2020", ico: "📺", color: "#C98A2C", titulo: "La pandemia", texto: "La escuela pasa de un día para otro a **pantallas, televisión y radio**, con resultados **muy desiguales**." },
+        { fecha: "Desde 2022", ico: "🤖", color: "#A83232", titulo: "La inteligencia artificial generativa", texto: "Sistemas que producen textos, imágenes y código que **parecen escritos por personas**.",
+          pregunta: "Si una IA responde bien un examen, ¿sabe?",
+          respuesta: "Recuerda el Tema 1: saber es **creencia verdadera justificada**. Un modelo de lenguaje genera textos **probables** a partir de patrones; no tiene creencias ni justifica como una persona. ¿Y el alumno que copia su respuesta, **sabe**?" }
+      ],
+      minutos: "49-52" },
+
+    { tipo: "tablaPasos",
+      titulo: "Las preguntas epistemológicas de la IA",
+      columnas: ["Pregunta", "Lo que nos toca hacer"],
+      filas: [
+        ["¿Qué es **saber**?", "Si no puedes **explicarlo ni justificarlo**, no lo sabes, aunque el texto esté bien."],
+        ["¿Cómo se **verifica**?", "La IA afirma cosas falsas con seguridad e **inventa referencias**: rastrea, contrasta, verifica."],
+        ["¿Quién es el **autor**?", "**Declara** cómo la usaste y para qué (APA). Las ideas deben ser tuyas."],
+        ["¿Qué **aprendizajes** cambian?", "Pensamiento crítico, buenas preguntas, juicio sobre la información y diálogo."]
+      ],
+      pie: "**Nunca cites una fuente que te sugirió una IA sin haberla localizado y leído tú.**",
+      minutos: "52-55",
+      notas: "Caso del libro, «El ensayo perfecto»: el maestro no acusa; pide explicación oral y dos fuentes; una no existe. Rediseña: entregas por etapas, bitácora y defensa oral, y enseña a usar la IA para generar preguntas y contraargumentos. Es justo lo que hacemos con el ensayo final y su defensa. UNESCO (2023) y Selwyn (2019): la pregunta no es si la tecnología reemplazará a los maestros, sino qué educación queremos. Formato APA de la herramienta: Desarrollador. (Año). Nombre (versión) [Modelo de lenguaje extenso]. URL." },
+
+    { tipo: "plataforma",
+      etiqueta: "Actividad en equipo", tipoAct: "En equipo · en vivo",
+      titulo: "Un caso, tres miradas",
+      enlace: "../tareas.html#tres-miradas", textoEnlace: "Tareas → Un caso, tres miradas",
+      minutos: "55-80", evaluacion: "Sumativo · Rúbrica de Tarea",
+      notas: "Antes: Panel → Tareas → Tareas digitales → 👥 de «Un caso, tres miradas» y proyecta los QR. A cada equipo le toca por sorteo: Mateo y el test vocacional, Diego «el flojo», Itzel que habla maya en casa, la foto en redes de la practicante, el ensayo hecho con IA o las alumnas que dejan la secundaria. Abajo de cada fila hay un ejemplo guía con el caso de Andrea (8.3): que no lo copien. La fila 🔎 pide una ley, un documento o un estudio real con su fuente. Cierra hoy a las 23:59; si alguien faltó con justificante, dale prórroga desde la misma fila. Quien no escriba nada saldrá con 0 (✋ No aportó).",
+      pasos: [
+        "Escanea el **QR de tu equipo**: la plataforma les asigna un **caso** por sorteo.",
+        "Mírenlo con los **tres paradigmas**: ¿qué se mediría, qué habría que comprender, qué barreras hay?",
+        "Encuentren el **dilema ético** y decidan **qué harían** como orientadores.",
+        "🔎 Una **ley, documento o estudio** real que los respalde. Su **veredicto**: ¿con qué mirada empiezan?"
+      ],
+      pasoAPaso: true },
+
+    { tipo: "plataforma",
+      etiqueta: "Puesta en común", tipoAct: "Todo el grupo",
+      titulo: "¿Qué se le escapa a cada mirada?",
+      minutos: "80-87", evaluacion: "Formativo",
+      notas: "Panel → Monitor en vivo → «Un caso, tres miradas» → toca la tarjeta de cada equipo (⛶ Pantalla completa). Pregunta clave para cerrar: ¿en qué caso la mirada positivista sí ayuda? (Por ejemplo, los datos de asistencia en el abandono escolar.) Al final, 🔑 Liberar clave.",
+      pasos: [
+        "Cada equipo presenta su caso en **un minuto**: su **dilema ético** y **qué harían**.",
+        "¿En qué caso la mirada **positivista sí ayuda**?",
+        "¿Qué caso necesitó **las tres miradas**?",
+        "Al final se libera la **clave**: comparen en su celular."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "plataforma",
+      etiqueta: "Tarea individual", tipoAct: "Individual · cierra hoy a las 23:59",
+      titulo: "Ficha APA: economía y educación",
+      enlace: "../tareas.html#ficha-economia", textoEnlace: "Tareas → Ficha APA: economía y educación",
+      minutos: "87-97", evaluacion: "Sumativo · Rúbrica de Tarea",
+      notas: "Es la actividad independiente del libro (9.3). Dales 10 minutos en clase para elegir perspectiva y encontrar su artículo con el celular (Redalyc, SciELO, Dialnet, Google Académico). El ejemplo guía usa el artículo clásico de Schultz (1961): el suyo debe ser de 2016 en adelante y de México o América Latina. Insiste: que lean el artículo; nada de citar lo que no abrieron. Le sirve para el estado del arte del protocolo.",
+      pasos: [
+        "Elige una perspectiva: **capital humano, reproducción, capacidades o derecho humano**.",
+        "Busca un **artículo académico de 2016 en adelante** sobre **México o América Latina**.",
+        "Referencia **APA 7**, pregunta, método, hallazgos con tus palabras y **una cita con página**.",
+        "Cierra con la **lectura epistemológica**: ¿qué cuenta como evidencia y qué deja fuera?"
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tema",
+      titulo: "10.5 Cómo se arma el ensayo final",
+      etiqueta: "Versión final: viernes 4 de diciembre · Defensa: martes 1",
+      puntos: [
+        "**Introducción**: el problema, por qué importa y **tu tesis**.",
+        "**Desarrollo**: tu tesis con **al menos cinco autores** del curso, y **un contraargumento** respondido.",
+        "**Aplicación**: tu postura en la práctica real, en la **NEM** o en **tu propia investigación**.",
+        "**Conclusión** con las preguntas que quedan abiertas, y **Referencias** APA 7: **mínimo 8**, al menos **2 artículos**.",
+        "**Defensa oral de 3 minutos** el martes 1: arma tu guion en el **Taller del investigador**."
+      ],
+      pasoAPaso: true,
+      minutos: "97-101",
+      notas: "De 2,500 a 3,500 palabras. Criterios del libro: claridad de la tesis, solidez de los argumentos, uso pertinente de los autores, posturas contrarias, vinculación con la práctica, formato APA, redacción y ortografía. Si usan IA, la declaran y verifican cada fuente. En el Taller del investigador está el armador de guion con cronómetro de 3 minutos. Recuérdales: la Entrega 2 (preguntas 1 a 14) es el lunes 30 a las 23:59." },
+
+    { tipo: "ejemplo",
+      numero: 16,
+      pregunta: "¿Qué dilemas éticos tiene tu investigación y cómo los resolverás? Si usaste inteligencia artificial, ¿cómo lo declaras?",
+      respuesta: "Mi investigación incluye **entrevistas a alumnos de 12 años**, así que pediré el **consentimiento informado** de sus padres y el **asentimiento** de cada alumno, con un formato en palabras sencillas. Usaré **seudónimos** y no mencionaré el nombre de la escuela, para proteger su **confidencialidad**. Si un alumno no quiere participar, su calificación no cambiará: eso evita el daño y respeta su **autonomía** (Beauchamp y Childress, 1979). Usé una herramienta de inteligencia artificial solo para generar preguntas de práctica de la entrevista; lo declaro en la metodología y **verifiqué cada fuente** que cito.",
+      fuente: "Caso ficticio. Observa: nombra los principios, dice qué hará en concreto y declara el uso de IA.",
+      minutos: "101-104" },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 15, texto: "¿Qué barreras o desigualdades podría revelar —o reproducir— tu investigación?" },
+        { numero: 16, texto: "¿Qué dilemas éticos tiene tu investigación y cómo los resolverás? Si usaste inteligencia artificial, ¿cómo lo declaras?" }
+      ],
+      minutos: "104-108",
+      notas: "Las preguntas 15 y 16 ya son para el ensayo final. La 15 conecta con Booth y Ainscow y con Bourdieu: ¿tu investigación podría dejar fuera a alguien o reforzar una etiqueta?" },
+
+    { tipo: "palabrasHoy",
+      titulo: "Glosario de los Temas 8 y 9",
+      etiqueta: "Para el examen",
+      pasoAPaso: false,
+      minutos: "108-109",
+      terminos: ["Modelo de rasgos y factores", "Proyecto de vida", "Modelo de programas", "Modelo del déficit", "Barreras para el aprendizaje y la participación", "Bioética", "Asentimiento", "Desarrollo sustentable", "Capital humano", "Capital cultural", "Enfoque de capacidades", "Inteligencia artificial generativa"] },
+
+    { tipo: "repaso",
+      preguntas: [
+        { pregunta: "¿Qué base epistemológica tenía el modelo de rasgos y factores de Parsons?", respuesta: "**Positivista**: rasgos medibles, tests estandarizados, un experto y una respuesta correcta." },
+        { pregunta: "¿Qué propusieron Booth y Ainscow en lugar del déficit?", respuesta: "Hablar de **barreras para el aprendizaje y la participación**." },
+        { pregunta: "Nombra los cuatro principios de la bioética.", respuesta: "**Autonomía, beneficencia, no maleficencia y justicia.**" },
+        { pregunta: "¿Qué es el asentimiento?", respuesta: "El **acuerdo del menor** para participar, además de la autorización de sus tutores." },
+        { pregunta: "Para Sen, ¿cómo debe medirse el desarrollo?", respuesta: "Por la **expansión de las capacidades**: las libertades reales para vivir la vida que se valora." }
+      ],
+      minutos: "109-116",
+      notas: "Práctica de recuperación: que respondan sin ver sus notas." },
+
+    { tipo: "cierre",
+      evidencia: "**Un caso, tres miradas** de cada equipo y la **Ficha APA** de cada alumno (las dos cierran hoy a las 23:59).",
+      materiales: "Libro de texto (Temas 8, 9 y 10.5), Aula Virtual y **celular con internet**.",
+      proxima: "**Lunes 30: Entrega 2** (preguntas 1 a 14) hasta las 23:59. Leer el **Tema 10 (10.1 a 10.4)**: la Nueva Escuela Mexicana. **Martes 1: defensa oral** del ensayo. **Viernes 4: versión final** del ensayo.",
+      minutos: "116-120" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>

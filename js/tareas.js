@@ -6,7 +6,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js?v=2026111001";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, QUE_ORIENTA, FUENTES_NEM, DE_DONDE_NEM, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js?v=2026111903";
 import { cierreDe, prorrogaDe, estaAbierta } from "./cierre-tareas.js?v=2026111901";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
 import { RUTAS, sugerirRuta, MIN_SALIDA, MIN_BITACORA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026111002";
@@ -230,7 +230,7 @@ function ruta() {
   if (a.tipo === 'cuadro') actCuadro($('#cl-cuerpo'), a);
   else if (a.tipo === 'ruta') actRuta($('#cl-cuerpo'), a);
   else if (a.tipo === 'coev') actCoev($('#cl-cuerpo'));
-  else ({ 'que-paradigma': actQueParadigma, 'quien-lo-dijo': actQuienLoDijo, 'quien-avanza': actQuienAvanza, 'que-obstaculo': actQueObstaculo, neuromito: actNeuromito })[a.id]($('#cl-cuerpo'));
+  else ({ 'que-paradigma': actQueParadigma, 'quien-lo-dijo': actQuienLoDijo, 'quien-avanza': actQuienAvanza, 'que-obstaculo': actQueObstaculo, neuromito: actNeuromito, 'que-orienta': actQueOrienta, 'de-donde-nem': actDeDondeNem })[a.id]($('#cl-cuerpo'));
   window.scrollTo({ top: 0 });
 }
 // El QR de un equipo abre tareas.html#unir-CODIGO (vía unir.html): entra, se une y va a su tarea.
@@ -540,6 +540,19 @@ function actNeuromito(cont) {
     intro: 'Lo que se dice del cerebro en las escuelas: ¿es un <b>neuromito</b> o tiene <b>evidencia</b>? Te sirve para «Analiza un producto neuro» y para el examen.',
     niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 10, desc: 'Los neuromitos más famosos y lo que sí sabemos.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 16, desc: 'Todo mezclado: Hebb, Dunlosky, Dehaene, el estrés, el cerebro adolescente…', filtro: () => true }],
     estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : ['dehaene']; }, boton: 'Estudiar la tabla', introEst: 'Neuromitos y hallazgos con evidencia (compendio, Tema 7).', uno: 'idea', varios: 'ideas' });
+}
+
+function actQueOrienta(cont) {
+  juegoOpciones(cont, { clave: 'que-orienta', OP: PARADIGMAS_OP.par, items: QUE_ORIENTA,
+    intro: 'Un test vocacional, un relato de vida, una barrera en la escuela, el salario por año de estudio: ¿desde qué <b>paradigma</b> se mira a la persona? Es la tabla de 8.3 y la lectura de 9.3. Cinco minutos antes de leer los Temas 8 y 9.',
+    niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 8, desc: 'Un caso claro de cada paradigma.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 14, desc: 'Todo mezclado: el modelo del déficit, Super, la reproducción…', filtro: () => true }],
+    estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : [REPRESENTA.par[x.c]]; }, boton: 'Estudiar los casos', introEst: 'Las formas de orientar y de pensar la economía de la educación, con su paradigma (compendio, 8.1 a 8.3 y 9.3).', uno: 'caso', varios: 'casos' });
+}
+function actDeDondeNem(cont) {
+  juegoOpciones(cont, { clave: 'de-donde-nem', OP: FUENTES_NEM, items: DE_DONDE_NEM,
+    intro: 'Aparece un elemento de la <b>Nueva Escuela Mexicana</b>: ¿de qué idea del curso viene? Es la tabla de conexiones de 10.2. Cinco minutos para calentar.',
+    niveles: [{ id: 'basico', n: 'Básico', ico: '🎮', preg: 8, desc: 'Los elementos centrales del plan.', filtro: x => x.niv === 1 }, { id: 'experto', n: 'Experto', ico: '🏆', preg: 14, desc: 'Todo mezclado, con casos del aula.', filtro: () => true }],
+    estrellas: x => { const a = autoresEn(x.q, x.x); return a.length ? a : [{ complejo: 'morin', saberes: 'sousa', critico: 'freire', investigador: 'stenhouse', inclusion: 'booth' }[x.c]]; }, boton: 'Estudiar las conexiones', introEst: 'Cada elemento de la NEM con su fundamento (compendio, 10.2).', uno: 'elemento', varios: 'elementos' });
 }
 
 // ======================================================= 🧭 CLASE AUTOGUIADA (ruta de estaciones)

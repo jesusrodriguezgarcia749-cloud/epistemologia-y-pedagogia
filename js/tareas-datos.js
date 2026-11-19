@@ -27,6 +27,18 @@ export const TEMAS_TAREAS = [
     { id: 'producto-neuro', tipo: 'cuadro', icono: '🧠', nombre: 'Analiza un producto «neuro»', modo: 'En equipo · en vivo', desc: 'A su equipo le toca un producto que se vende a las escuelas (gimnasia cerebral, apps, tests de estilos…): júzguenlo con la evidencia del Tema 7.' },
     { id: 'arena-repaso', tipo: 'vivo', vivo: 'arena', set: 'repasoP2', icono: '⚡', nombre: 'Arena de repaso del Parcial 2', modo: 'En vivo · en clase', desc: 'Preguntas contra el reloj del cierre del Tema 4 y los Temas 5 a 7, con podio. Entra cuando tu maestro abra la Arena.' },
     { id: 'tribunal-17', tipo: 'vivo', vivo: 'tribunal', icono: '⚖️', nombre: 'Tribunal de la ciencia', modo: 'En vivo · en clase', desc: 'Te ponen la toga de un autor y dictas si un caso es ciencia. Entra cuando tu maestro abra el Tribunal.' },
+  ] },  { tema: '8 y 9', titulo: 'Nuevo paradigma en orientación y nuevos enfoques paradigmáticos', fecha: '2026-11-24', fechaTexto: 'Mar 24 de noviembre', acts: [
+    { id: 'que-orienta', tipo: 'practica', icono: '🎮', nombre: '¿Desde qué paradigma se orienta?', modo: 'Juego de 5 minutos', desc: 'Un test vocacional, un relato de vida, una barrera en la escuela, el salario por año de estudio: ¿positivista, interpretativo o sociocrítico?' },
+    { id: 'tres-miradas', tipo: 'cuadro', icono: '🔭', nombre: 'Un caso, tres miradas', modo: 'En equipo · en vivo', desc: 'A su equipo le toca un caso de la escuela (un test vocacional, un alumno etiquetado, una foto en redes, un ensayo hecho con IA…): mírenlo con los tres paradigmas, encuentren el dilema ético y decidan qué harían.' },
+    { id: 'ficha-economia', tipo: 'cuadro', individual: true, icono: '📑', nombre: 'Ficha APA: economía y educación', modo: 'Individual', desc: 'Un artículo académico reciente sobre México o América Latina desde una de las cuatro perspectivas: referencia APA 7, pregunta, método, hallazgos, cita y lectura epistemológica.' },
+  ] },
+  { tema: '10', titulo: 'La pedagogía como ciencia en la Nueva Escuela Mexicana', fecha: '2026-11-30', fechaTexto: 'Lun 30 de noviembre', acts: [
+    { id: 'de-donde-nem', tipo: 'practica', icono: '🎮', nombre: '¿De dónde viene esta idea de la NEM?', modo: 'Juego de 5 minutos', desc: 'Campos formativos, saberes comunitarios, programa analítico, inclusión: ¿Morin, el diálogo de saberes, el paradigma sociocrítico, el docente investigador o Booth y Ainscow?' },
+    { id: 'nem-evidencia', tipo: 'cuadro', icono: '🏫', nombre: 'La NEM con evidencia', modo: 'En equipo · en vivo', desc: 'A su equipo le toca un elemento de la NEM: qué dice el plan, su fundamento, un argumento a favor, uno crítico, la evidencia y su veredicto.' },
+    { id: 'pregunta-guia', tipo: 'cuadro', individual: true, icono: '🧭', nombre: 'Mi respuesta a la pregunta guía', modo: 'Individual', desc: '¿Puede la pedagogía ser ciencia? Tu postura de la primera clase contra la de hoy, con argumentos y un contraargumento: el esqueleto de tu ensayo.' },
+  ] },
+  { tema: '1 a 10', titulo: 'Defensa oral y repaso del Examen Final', fecha: '2026-12-01', fechaTexto: 'Mar 1 de diciembre', acts: [
+    { id: 'arena-final', tipo: 'vivo', vivo: 'arena', set: 'repasoFinal', icono: '⚡', nombre: 'Arena de repaso del Examen Final', modo: 'En vivo · en clase', desc: 'Preguntas contra el reloj de los Temas 1 a 10, con podio. Entra cuando tu maestro abra la Arena.' },
   ] },
 ];
 export const TAREAS_DIG = Object.fromEntries(TEMAS_TAREAS.flatMap(t => t.acts.map(a => [a.id, { ...a, tema: t.tema, titulo: t.titulo, fecha: t.fecha, fechaTexto: t.fechaTexto }])));
@@ -606,3 +618,269 @@ export const NEUROMITOS = [
   { e: '❌', q: 'El error es información: el cerebro aprende de la diferencia entre lo que esperaba y lo que pasó.', c: 'E', niv: 2, x: 'Es la retroalimentación del error, uno de los cuatro pilares de Dehaene.' },
   { e: '🔀', q: 'Alternar tipos de problemas ayuda a distinguir cuándo usar cada estrategia.', c: 'E', niv: 2, x: 'Es la práctica intercalada.' },
 ];
+
+// =====================================================================================
+// SESIONES 8 Y 9 · Temas 8, 9 y 10 (para el Examen Final)
+// =====================================================================================
+
+// ---------- 🔭 Un caso, tres miradas (Mar 24 nov · Temas 8 y 9). En equipo, con sorteo de caso.
+CUADROS['tres-miradas'] = {
+  id: 'act-tres-miradas', ind: 'tarea-tres-miradas', clave: 'tresMiradas',
+  titulo: 'Un caso, tres miradas', kicker: 'Temas 8 y 9 · Orientación, psicopedagogía y bioética', archivo: 'Un_caso_tres_miradas',
+  sorteo: 'El caso que le tocó a su equipo por sorteo', sorteoInd: 'Tu caso', nombreVariante: 'El caso',
+  ayuda: 'Imaginen que son el equipo de orientación de la escuela. Miren el caso con los <b>tres paradigmas</b> (tabla de 8.3), detecten el <b>dilema ético</b> (9.1) y decidan qué harían. La fila <b>🔎 Investiga</b> pide una ley, un documento oficial o un estudio real sobre el tema del caso, con su fuente.',
+  columnas: [['equipo', 'Lo que escribe el equipo', '#2E5E8C']],
+  ejemplo: { caso: '👓 El caso de Andrea (8.3): alumna de segundo con baja visión a la que su escuela anterior consideraba «una alumna con problemas»', celdas: {
+    positivista_equipo: 'Se mediría su agudeza visual y su rendimiento con pruebas, y se le clasificaría: el problema estaría en Andrea («le falta vista, hay que darle tareas más fáciles»).',
+    interpretativa_equipo: 'Habría que escucharla: cómo vive que la traten como «problema», qué le gusta, qué quiere lograr en la escuela y qué siente al no poder leer el pizarrón.',
+    sociocritica_equipo: 'Barreras de la escuela: fotocopias con letra pequeña, pizarrón con poco contraste y un lugar alejado. Hay que cambiar eso, no a Andrea (Booth y Ainscow, 2000).',
+    etica_equipo: 'Justicia y no maleficencia: darle tareas más fáciles la dañaba y le quitaba oportunidades. También confidencialidad: su condición no tiene por qué comentarse frente al grupo.',
+    modelo_equipo: 'Modelo de consulta: la maestra de apoyo asesora a los docentes para ajustar materiales, sentarla al frente y usar la tableta con zoom. Es preventivo y dentro del aula.',
+    evidencia_equipo: 'La Ley General de Educación (2019) establece la educación inclusiva y habla de barreras para el aprendizaje y la participación. (Abajo, en Fuente: el artículo y la liga del DOF).',
+    veredicto_equipo: 'Empezaríamos por la sociocrítica (barreras), sin dejar de escucharla a ella. Lo que se le escapa: sin datos de su avance no sabríamos si los ajustes funcionan.',
+  } },
+  filas: [
+    ['positivista', 'Mirada positivista', '¿Qué se mediría o diagnosticaría? ¿Dónde se ubica el problema?'],
+    ['interpretativa', 'Mirada interpretativa', '¿Qué habría que comprender de la historia y de lo que significa la situación para la persona?'],
+    ['sociocritica', 'Mirada sociocrítica', '¿Qué barreras o desigualdades del entorno hay? ¿Qué habría que transformar?'],
+    ['etica', 'El dilema ético', '¿Qué principio está en juego: autonomía, beneficencia, no maleficencia, justicia, consentimiento, confidencialidad?'],
+    ['modelo', '¿Qué harían como orientadores?', 'Una acción concreta. ¿Modelo clínico, de servicios, de programas o de consulta (Bisquerra)? ¿Es preventiva?'],
+    ['evidencia', 'Una ley, un documento o un estudio', 'Algo real que respalde su propuesta: qué dice, quién lo publicó y cuándo.', true],
+    ['veredicto', '¿Con qué mirada empezarían y qué se le escapa?', 'Ningún paradigma basta solo (8.3): ¿cuál eligen y qué les esconde?'],
+  ],
+  variantes: [
+    { id: 'vocacional', ico: '🧪', afirmacion: 'Mateo, de tercero, hizo un test vocacional que dice que «no tiene aptitudes para la universidad». Su papá ya decidió que entre a un bachillerato técnico.', respuestas: {
+      positivista: ['El test mide rasgos (aptitudes, intereses) y recomienda la opción que mejor se ajusta: modelo de rasgos y factores (Parsons, 1909). El problema estaría en las aptitudes de Mateo.'],
+      interpretativa: ['Escuchar a Mateo: qué quiere él, qué le gusta, qué historia quiere construir con su vida (Super; enfoques constructivistas).'],
+      sociocritica: ['El peso de la economía familiar y de las oportunidades de la región: ¿hay bachilleratos cerca?, ¿la familia puede sostener estudios largos?'],
+      etica: ['Autonomía: la decisión debe ser de Mateo, informado; el test captura un momento, no un destino.'],
+      modelo: ['Modelo de programas: una unidad de tutoría sobre la oferta de bachillerato y el proyecto de vida, y una sesión con las familias para acompañar sin imponer.'],
+      evidencia: ['Respuesta abierta: por ejemplo, la oferta oficial de bachilleratos del estado o un estudio sobre elección vocacional en jóvenes mexicanos.'],
+      veredicto: ['Empezar por la interpretativa (su proyecto de vida) sin ignorar el contexto económico; el test puede ser un dato más, no la última palabra.'] } },
+    { id: 'flojo', ico: '🧮', afirmacion: 'Diego, de segundo, reprueba matemáticas. En la sala de maestros dicen que «es flojo» y que «seguro tiene déficit de atención», aunque nadie lo ha evaluado.', respuestas: {
+      positivista: ['Se aplicarían pruebas para diagnosticar qué le falta: modelo del déficit. El problema se ubica en Diego.'],
+      interpretativa: ['Entrevistarlo: cómo vive las matemáticas, desde cuándo se le dificultan, qué pasa en su casa y en clase.'],
+      sociocritica: ['Barreras: la forma de enseñar y evaluar, el ritmo, la etiqueta de «flojo» que ya le pusieron (Booth y Ainscow, 2000).'],
+      etica: ['No maleficencia y confidencialidad: etiquetar a un alumno sin evaluación lo daña, y hablar de él en la sala de maestros expone su intimidad.'],
+      modelo: ['Modelo de consulta: el orientador asesora al maestro de matemáticas para ajustar la enseñanza y dar retroalimentación del error (Dehaene).'],
+      evidencia: ['Respuesta abierta: por ejemplo, la Ley General de Educación (2019) sobre educación inclusiva, o un estudio sobre el efecto de las etiquetas en el rendimiento.'],
+      veredicto: ['Empezar por las barreras y por escucharlo; si persiste, pedir una evaluación profesional, no un diagnóstico de pasillo.'] } },
+    { id: 'silenciosa', ico: '🤫', afirmacion: 'Itzel, de primero, habla maya en casa y casi no participa en clase. Algunos maestros dicen que «no entiende» y proponen que repita el grado.', respuestas: {
+      positivista: ['Medir su comprensión con pruebas estandarizadas en español y compararla con la norma; el problema estaría en Itzel.'],
+      interpretativa: ['Comprender cómo vive la escuela en una lengua que no es la de su casa, qué entiende y qué le da pena decir.'],
+      sociocritica: ['Barrera lingüística y cultural: la escuela solo reconoce el español. Interculturalidad crítica y diálogo de saberes (Sousa Santos; NEM).'],
+      etica: ['Justicia: que repita por una barrera de la escuela sería injusto; autonomía y respeto a su identidad.'],
+      modelo: ['Modelo de consulta y de programas: asesorar a los docentes para valorar su lengua, dar apoyos y evaluar lo que sabe, no solo cómo lo dice en español.'],
+      evidencia: ['Respuesta abierta: por ejemplo, la Ley General de Derechos Lingüísticos de los Pueblos Indígenas (2003) o el Plan de Estudio 2022 (interculturalidad crítica).'],
+      veredicto: ['Empezar por la sociocrítica y la interpretativa: la lengua de Itzel es un saber, no un déficit.'] } },
+    { id: 'foto', ico: '📸', afirmacion: 'Una practicante de Pedagogía publica en sus redes fotos de los niños trabajando, con el nombre de la escuela, para presumir su proyecto.', respuestas: {
+      positivista: ['Desde la medición casi no se ve el problema: las fotos serían «evidencias» del proyecto. Ahí está su límite.'],
+      interpretativa: ['Comprender qué quería la practicante (mostrar su trabajo) y qué sienten las familias al ver a sus hijos expuestos.'],
+      sociocritica: ['Algunos niños pueden estar en situaciones de riesgo en las que su ubicación no debe hacerse pública; la exposición recae en los más vulnerables.'],
+      etica: ['Consentimiento informado de las familias, asentimiento de los niños, confidencialidad y no daño (9.1). Nadie pidió permiso.'],
+      modelo: ['Retirar las fotos de inmediato y hacer un programa breve para practicantes sobre ética de la investigación: formatos de consentimiento y uso de seudónimos.'],
+      evidencia: ['Respuesta abierta: por ejemplo, la Ley General de los Derechos de Niñas, Niños y Adolescentes (2014) sobre su intimidad, o un código de ética de investigación.'],
+      veredicto: ['La mirada ética manda aquí; la bioética no es un tema lejano de laboratorios: empieza en lo cotidiano.'] } },
+    { id: 'ia', ico: '🤖', afirmacion: 'Un alumno de bachillerato que suele escribir con muchos errores entrega un ensayo impecable. No puede explicarlo y una de sus fuentes no existe.', respuestas: {
+      positivista: ['Se mediría con un detector de texto generado por IA o con la calificación del ensayo: se ve el producto, no el proceso.'],
+      interpretativa: ['Preguntarle cómo lo hizo, por qué recurrió a la IA y qué entiende del tema: qué significa para él la tarea.'],
+      sociocritica: ['Desigualdades: quién tiene acceso a estas herramientas y quién sabe usarlas; tareas que premian el producto y no el pensamiento.'],
+      etica: ['Honestidad académica y autoría: ¿de quién son las ideas? Hay que declarar el uso de IA y verificar cada fuente (APA; UNESCO, 2023).'],
+      modelo: ['Como el maestro del libro: pedirle que explique oralmente, rediseñar las tareas por etapas con bitácora y defensa oral, y enseñar a usar la IA para generar preguntas, no para sustituir el pensamiento.'],
+      evidencia: ['Respuesta abierta: por ejemplo, la guía de la UNESCO (2023) sobre IA generativa en la educación y la investigación.'],
+      veredicto: ['Empezar por la interpretativa (que lo explique) sin acusar; la pregunta de fondo es qué es saber: si no puede explicarlo, no lo sabe.'] } },
+    { id: 'abandono', ico: '🎒', afirmacion: 'Tres alumnas de tercero dejaron de venir: dos trabajan en un negocio familiar y una cuida a sus hermanos menores.', respuestas: {
+      positivista: ['Se medirían faltas, calificaciones y factores de riesgo para predecir quién abandona.'],
+      interpretativa: ['Visitarlas y escucharlas: qué significa la escuela para ellas y para sus familias, qué las haría volver.'],
+      sociocritica: ['Desigualdad económica y de género: se espera que las chicas cuiden o trabajen. Intervención social sobre el contexto, no solo sobre ellas.'],
+      etica: ['Justicia: el derecho a la educación (artículo 3.º) está en juego; beneficencia al buscar que regresen sin culparlas.'],
+      modelo: ['Modelo de programas y de consulta: trabajo con familias y la comunidad, horarios flexibles o becas; prevenir con seguimiento de asistencia.'],
+      evidencia: ['Respuesta abierta: por ejemplo, datos de abandono escolar en secundaria de la SEP o del INEGI, o un estudio sobre abandono escolar y género en México.'],
+      veredicto: ['Empezar por la sociocrítica (las condiciones que las sacan de la escuela) y escuchar su historia; la estadística sola no las regresa.'] } },
+  ],
+};
+
+// ---------- 📑 Ficha APA: economía y educación (Mar 24 nov · 9.3). Individual. Es la tarea del programa.
+CUADROS['ficha-economia'] = {
+  id: 'act-ficha-economia', ind: 'tarea-ficha-economia', clave: 'fichaEconomia', sinClave: true,
+  titulo: 'Ficha APA: economía y educación', kicker: 'Tema 9.3 · Economía y educación', archivo: 'Ficha_economia_educacion',
+  ayuda: 'Elige una de las cuatro perspectivas (capital humano, reproducción, capacidades o derecho humano) y busca en <b>Redalyc, SciELO, Dialnet o Google Académico</b> un artículo académico <b>de 2016 o más reciente</b> que la aplique a <b>México o América Latina</b>. Léelo tú: nunca cites un artículo que no hayas abierto. Esta ficha es el modelo para el estado del arte de tu protocolo.',
+  columnas: [['yo', 'Lo que escribo', '#3F7A4F']],
+  ejemplo: { caso: '📜 Un artículo clásico de ejemplo (el tuyo debe ser de 2016 en adelante y de México o América Latina)', celdas: {
+    perspectiva_yo: 'Capital humano: me interesa porque es la idea que más se repite en las políticas educativas y en PISA.',
+    referencia_yo: 'Schultz, T. W. (1961). Investment in human capital. The American Economic Review, 51(1), 1-17. (Abajo, en Fuente: dónde lo encontré, por ejemplo JSTOR).',
+    pregunta_yo: '¿Por qué crece la economía de los países más de lo que explican la tierra, el trabajo y el capital físico? ¿Qué papel juega lo que las personas aprenden?',
+    metodo_yo: 'Cuantitativo: compara estimaciones económicas del crecimiento y del gasto en educación, salud y capacitación de Estados Unidos.',
+    hallazgos_yo: 'Schultz (1961) sostiene que los conocimientos y habilidades de las personas son una forma de capital que se produce invirtiendo, y que esa inversión explica buena parte del crecimiento económico.',
+    cita_yo: '«Although it is obvious that people acquire useful skills and knowledge, it is not obvious that these skills and knowledge are a form of capital» (Schultz, 1961, p. 1).',
+    lectura_yo: 'Cuenta como evidencia el ingreso y la productividad; usa estadística; mira desde el paradigma positivista. Deja fuera la libertad, la desigualdad de origen y lo que la educación significa para las personas.',
+  } },
+  filas: [
+    ['perspectiva', 'La perspectiva que elegí', 'Capital humano, reproducción, capacidades o derecho humano. ¿Por qué esa?'],
+    ['referencia', 'Referencia en APA 7', 'Artículo de 2016 o más reciente, sobre México o América Latina, con su DOI o enlace.', true],
+    ['pregunta', 'Pregunta de investigación del artículo', '¿Qué quisieron averiguar los autores? Con tus palabras.'],
+    ['metodo', 'Enfoque metodológico', '¿Cuantitativo, cualitativo o mixto? ¿Qué hicieron: encuestas, entrevistas, estadística, análisis de documentos?'],
+    ['hallazgos', 'Hallazgos principales', 'Parafraseados con tus palabras, con (Apellido, año).'],
+    ['cita', 'Una cita textual breve', 'Entre comillas y con número de página: (Apellido, año, p. 12).'],
+    ['lectura', 'Lectura epistemológica', '¿Qué cuenta como evidencia en el artículo? ¿Qué mide y qué deja fuera? ¿Desde qué paradigma mira? (tabla de 9.3)'],
+  ],
+};
+
+// ---------- 🏫 La NEM con evidencia (Lun 30 nov · 10.1 a 10.3). En equipo, con sorteo de elemento.
+CUADROS['nem-evidencia'] = {
+  id: 'act-nem-evidencia', ind: 'tarea-nem-evidencia', clave: 'nemEvidencia',
+  titulo: 'La NEM con evidencia', kicker: 'Tema 10 · La pedagogía como ciencia en la Nueva Escuela Mexicana', archivo: 'NEM_con_evidencia',
+  sorteo: 'El elemento de la NEM que le tocó a su equipo por sorteo', sorteoInd: 'Tu elemento', nombreVariante: 'El elemento',
+  ayuda: 'No se trata de defender ni de atacar la NEM, sino de <b>entenderla</b> (10.1). Distingan el <b>fundamento</b> de la <b>implementación</b> y pidan <b>evidencia</b> (10.3). La fila <b>🔎 Investiga</b> pide un dato, un documento o un estudio real, con su fuente.',
+  columnas: [['equipo', 'Lo que escribe el equipo', '#A63D2F']],
+  ejemplo: { caso: '♿ Un elemento de ejemplo (no está en el sorteo): el eje articulador «Inclusión»', celdas: {
+    dice_equipo: 'Que todos los alumnos aprendan y participen en la escuela regular, con los ajustes necesarios, en todos los campos formativos.',
+    fundamento_equipo: 'Las barreras para el aprendizaje y la participación de Booth y Ainscow (Tema 8): el problema no está solo en el alumno sino en la escuela.',
+    favor_equipo: 'Corrige una larga historia de mandar a otros espacios a los que «no encajan» y obliga a revisar materiales, espacios y formas de evaluar.',
+    contra_equipo: 'Sin maestros de apoyo, materiales y formación, la inclusión puede quedarse en el discurso y recaer solo en el docente de grupo.',
+    evidencia_equipo: 'La Ley General de Educación (2019) la establece como principio. Faltaría un estudio sobre cuántas escuelas tienen apoyo real. (Abajo, en Fuente: la liga).',
+    veredicto_equipo: 'Fundamento sólido; la duda está en la implementación. Necesitaríamos datos de las escuelas para juzgarla.',
+  } },
+  filas: [
+    ['dice', 'Qué dice el plan', '¿En qué consiste este elemento según el Plan de Estudio 2022? Con sus palabras.'],
+    ['fundamento', 'Su fundamento epistemológico', '¿Qué idea del curso hay detrás? Morin, Freire, Sousa Santos, Stenhouse, Booth y Ainscow… (tabla de 10.2)'],
+    ['favor', 'Un argumento a favor', 'Pertinencia, reconocimiento, integración, profesionalización… (10.3)'],
+    ['contra', 'Un argumento crítico', 'Relativismo, ambigüedad, carga docente, brechas de implementación, evaluación… (10.3)'],
+    ['evidencia', 'Qué evidencia hay', 'Un dato, un documento oficial o un estudio real, con su fuente. Si no hay, digan qué evidencia haría falta.', true],
+    ['veredicto', 'Veredicto del equipo', '¿El problema está en el fundamento, en la implementación o en ninguno? ¿Qué los haría cambiar de opinión?'],
+  ],
+  variantes: [
+    { id: 'campos', ico: '🧩', afirmacion: 'Los cuatro campos formativos y los siete ejes articuladores en lugar de asignaturas aisladas', respuestas: {
+      dice: ['El currículo se organiza en Lenguajes; Saberes y pensamiento científico; Ética, naturaleza y sociedades; y De lo humano y lo comunitario, atravesados por siete ejes.'],
+      fundamento: ['El pensamiento complejo de Morin y su crítica a la fragmentación: un problema real no llega dividido en materias.'],
+      favor: ['Integración: organizar el aprendizaje en torno a problemas reales favorece la comprensión y el pensamiento complejo.'],
+      contra: ['Ambigüedad: no siempre queda claro cómo traducir los campos al aula, y se puede perder profundidad disciplinar.'],
+      evidencia: ['Respuesta abierta: el Plan de Estudio 2022 (SEP) como fuente del fundamento; para los efectos haría falta un estudio sobre aprendizajes.'],
+      veredicto: ['Fundamento sólido (Morin); la duda está en la implementación y en cómo se evalúa.'] } },
+    { id: 'saberes', ico: '🌽', afirmacion: 'Los saberes comunitarios y la interculturalidad crítica dentro de la escuela', respuestas: {
+      dice: ['La escuela reconoce los saberes de la comunidad, de los pueblos originarios y afromexicanos, y promueve el diálogo entre culturas reconociendo desigualdades de poder.'],
+      fundamento: ['Dimensión dialógica (Tema 5), Freire y la ecología de saberes de Boaventura de Sousa Santos (Tema 6).'],
+      favor: ['Reconocimiento: corrige una larga historia de desprecio hacia los pueblos originarios y sus conocimientos; pertinencia en contextos rurales e indígenas.'],
+      contra: ['Riesgo de relativismo: poner en el mismo plano saberes con distinto respaldo, por ejemplo en temas de salud (ecología de saberes no es relativismo ingenuo).'],
+      evidencia: ['Respuesta abierta: por ejemplo, los «fondos de conocimiento» (Moll et al., 1992) o estudios de escuelas interculturales en México.'],
+      veredicto: ['Fundamento valioso si se maneja con rigor: diálogo, no sustitución de la ciencia.'] } },
+    { id: 'analitico', ico: '📝', afirmacion: 'El programa analítico y el codiseño hechos por el colectivo docente', respuestas: {
+      dice: ['A partir del programa sintético nacional, cada colectivo elabora un programa analítico que contextualiza los contenidos según su escuela y su comunidad.'],
+      fundamento: ['El docente investigador (Stenhouse), la investigación-acción (Elliott; Carr y Kemmis) y el profesional reflexivo (Schön): el programa analítico es un acto epistemológico.'],
+      favor: ['Profesionalización: trata al magisterio como profesional que decide, no como técnico que ejecuta instrucciones.'],
+      contra: ['Carga y condiciones: el codiseño exige tiempo, formación y trabajo colegiado; sin eso se vuelve trámite.'],
+      evidencia: ['Respuesta abierta: por ejemplo, un estudio sobre cómo los colectivos elaboraron su programa analítico, o la experiencia de su propia escuela documentada.'],
+      veredicto: ['Fundamento sólido; depende de que haya tiempo y formación para hacerlo como investigación y no como formato.'] } },
+    { id: 'libros', ico: '📚', afirmacion: 'Los libros de texto gratuitos distribuidos a partir de 2023', respuestas: {
+      dice: ['Materiales nacionales alineados con los campos formativos y con proyectos comunitarios, de aula y escolares.'],
+      fundamento: ['Aprendizaje basado en proyectos y en problemas de la comunidad; pensamiento complejo.'],
+      favor: ['Llevan el enfoque de proyectos y la comunidad a todas las aulas del país.'],
+      contra: ['Brechas de implementación: se discutió públicamente la calidad de algunos materiales, con críticas por errores y por su enfoque.'],
+      evidencia: ['Respuesta abierta: revisiones publicadas de los libros o notas de fuentes confiables; distingan opinión de análisis con datos.'],
+      veredicto: ['Una idea puede ser valiosa y estar mal implementada: aquí el debate es sobre todo de implementación.'] } },
+    { id: 'autonomia', ico: '🧑‍🏫', afirmacion: 'La autonomía profesional del magisterio', respuestas: {
+      dice: ['El plan reconoce a los docentes como profesionales capaces de tomar decisiones curriculares y didácticas.'],
+      fundamento: ['Stenhouse («no hay desarrollo del currículo sin desarrollo del profesor») y Schön (el profesional reflexivo).'],
+      favor: ['Profesionalización docente y pertinencia: quien conoce el contexto decide.'],
+      contra: ['Sin condiciones, la autonomía puede convertirse en una carga adicional o en simple trámite.'],
+      evidencia: ['Respuesta abierta: por ejemplo, estudios sobre formación continua docente en México o encuestas a maestros sobre la reforma.'],
+      veredicto: ['Fundamento sólido; la pregunta es si hay tiempo, formación y acompañamiento.'] } },
+    { id: 'evaluacion', ico: '📊', afirmacion: 'Cómo saber si la NEM mejora los aprendizajes', respuestas: {
+      dice: ['El plan pone el acento en la evaluación formativa, ligada al proceso y a la comunidad.'],
+      fundamento: ['Pedir evidencia y someter las afirmaciones a crítica: Popper, Bunge y los cánones de cientificidad (Temas 2 y 4).'],
+      favor: ['La evaluación formativa acompaña el aprendizaje y no solo lo mide al final.'],
+      contra: ['Evaluación de resultados: es difícil saber si la reforma mejora los aprendizajes si se reducen o cambian los instrumentos de medición.'],
+      evidencia: ['Respuesta abierta: resultados de evaluaciones nacionales o internacionales recientes, distinguiendo qué miden y qué no.'],
+      veredicto: ['Sin evidencia sistemática no se puede afirmar ni negar que funcione: hay que pedir datos, no solo opiniones.'] } },
+  ],
+};
+
+// ---------- 🧭 Mi respuesta a la pregunta guía (Lun 30 nov · 10.4). Individual. Alimenta la pregunta 18 y el ensayo.
+CUADROS['pregunta-guia'] = {
+  id: 'act-pregunta-guia', ind: 'tarea-pregunta-guia', clave: 'preguntaGuia', sinClave: true,
+  titulo: 'Mi respuesta a la pregunta guía', kicker: 'Tema 10.4 · Regreso a la pregunta guía', archivo: 'Mi_respuesta_pregunta_guia',
+  ayuda: '¿Puede la pedagogía ser ciencia, y qué tipo de ciencia? Recupera la postura que elegiste en la primera clase (arte, ciencia aplicada, ciencia propia o ciencia crítica) y compárala con lo que piensas hoy. Es el esqueleto de tu ensayo final y de tu defensa oral.',
+  columnas: [['yo', 'Lo que escribo', '#16213A']],
+  ejemplo: { caso: '🧑‍🎓 Una alumna de ejemplo (tu respuesta debe ser tuya)', celdas: {
+    antes_yo: 'En la primera clase elegí «la pedagogía como arte»: pensaba que enseñar bien depende del talento y la vocación, no de la ciencia.',
+    ahora_yo: 'Hoy pienso que es una ciencia social y práctica, con métodos plurales, que también reconoce el saber de la práctica docente.',
+    influyo_yo: 'Schön y Stenhouse: me hicieron ver que lo que yo llamaba «arte» es un saber que se puede investigar y sistematizar.',
+    argumento_yo: 'La pedagogía estudia el hecho educativo con rigor aunque no siga un método único: Feyerabend (1975) mostró que ni la física lo sigue, y Martínez Miguélez (2004) defiende un rigor propio para lo cualitativo.',
+    contra_yo: 'Alguien diría que si no predice como la física no es ciencia. Respondo con Bunge: la cientificidad está en ser sistemática, contrastable y abierta a la crítica, no en imitar a la física.',
+    aplicacion_yo: 'En mi investigación sobre lectura en voz alta combino una prueba de comprensión con entrevistas: explico y comprendo a la vez.',
+  } },
+  filas: [
+    ['antes', 'Mi postura en la primera clase', '¿Arte, ciencia aplicada, ciencia propia o ciencia crítica? ¿Por qué la elegiste entonces?'],
+    ['ahora', 'Mi postura hoy', '¿Sigues pensando lo mismo, la matizas o la cambiaste?'],
+    ['influyo', 'Qué tema o autor influyó más', 'Nombra al autor o el tema y di qué te hizo ver.'],
+    ['argumento', 'Mi mejor argumento', 'Tu tesis apoyada en al menos dos autores del curso, con (Apellido, año).'],
+    ['contra', 'Un contraargumento y mi respuesta', '¿Qué te diría alguien que piensa distinto? ¿Qué le respondes?'],
+    ['aplicacion', 'Cómo se ve en mi investigación', '¿Qué tipo de ciencia es tu propia investigación? (pregunta 18 del proyecto)'],
+  ],
+};
+
+// ---------- 🎮 ¿Desde qué paradigma se orienta? (Mar 24 nov · Tema 8 y 9.3). Usa PARADIGMAS_OP.par.
+export const QUE_ORIENTA = [
+  { e: '🧪', q: 'Un test vocacional mide tus aptitudes e intereses y te recomienda la carrera que «mejor se ajusta» a tus rasgos.', c: 'P', niv: 1, x: 'Es el modelo de rasgos y factores de Parsons (1909): rasgos medibles, instrumentos estandarizados y una respuesta correcta.' },
+  { e: '📖', q: 'La orientadora le pide al alumno que cuente su historia y qué quiere construir con su vida.', c: 'I', niv: 1, x: 'Comprender los significados que la persona da a su historia: relato de vida y acompañamiento del proyecto de vida.' },
+  { e: '🚧', q: 'La maestra de apoyo revisa qué hay en la escuela que impide aprender a una alumna con baja visión.', c: 'S', niv: 1, x: 'Barreras para el aprendizaje y la participación (Booth y Ainscow, 2000): el problema deja de ubicarse solo en la alumna.' },
+  { e: '📊', q: 'Se ordena a los alumnos por su puntaje en una prueba para decidir quién «sirve» para el bachillerato general.', c: 'P', niv: 1, x: 'Medir rasgos estables para predecir. El riesgo de esta mirada: confundir un momento con un destino.' },
+  { e: '🏘️', q: 'El departamento de orientación trabaja con la comunidad para que las chicas de la colonia no dejen la secundaria por cuidar a sus hermanos.', c: 'S', niv: 1, x: 'Intervención social: analizar las desigualdades del entorno (aquí, de género) y transformarlas.' },
+  { e: '🎙️', q: 'Entrevistas a profundidad para entender por qué un alumno dice que «la escuela no es para él».', c: 'I', niv: 1, x: 'Busca el sentido que el alumno da a su experiencia: tradición comprensiva.' },
+  { e: '💰', q: 'Calcular cuánto aumenta el salario por cada año más de escolaridad.', c: 'P', niv: 1, x: 'Capital humano (Schultz, 1961; Becker, 1964): la evidencia son los ingresos y el método, la estadística. Paradigma positivista (9.3).' },
+  { e: '🎓', q: 'Mostrar que la escuela premia el capital cultural de las clases privilegiadas y lo hace pasar por mérito personal.', c: 'S', niv: 1, x: 'Teoría de la reproducción de Bourdieu y Passeron (1970): mirada sociocrítica (9.3).' },
+  { e: '🩺', q: 'Cuando un alumno no aprende, se busca qué le falta, se le clasifica y se le atiende fuera del aula regular.', c: 'P', niv: 2, x: 'Es el modelo del déficit: diagnosticar y clasificar ubica el problema solo en el individuo.' },
+  { e: '🧭', q: 'Acompañar a una alumna a imaginar varias trayectorias posibles y a darles sentido como una historia que ella va escribiendo.', c: 'I', niv: 2, x: 'Super y los enfoques constructivistas: la carrera como una historia que la persona escribe e interpreta.' },
+  { e: '📋', q: 'El orientador aplica una batería de cuestionarios estandarizados de personalidad e intereses y entrega un reporte con su recomendación.', c: 'P', niv: 2, x: 'El orientador como experto que diagnostica y recomienda: base positivista.' },
+  { e: '✊', q: 'Un taller de tutoría ayuda al grupo a reconocer y cuestionar los estereotipos de género al elegir carrera.', c: 'S', niv: 2, x: 'Conocer para transformar una desigualdad: tradición sociocrítica.' },
+  { e: '🪞', q: 'Un alumno escribe su autobiografía escolar y el tutor la comenta con él para comprender su trayectoria.', c: 'I', niv: 2, x: 'Relato de vida: comprensión de significados.' },
+  { e: '♿', q: 'Ajustar los materiales, el pizarrón y el lugar en el salón en vez de etiquetar al alumno.', c: 'S', niv: 2, x: 'Identificar barreras y diseñar ajustes: base de la educación inclusiva (Ley General de Educación, 2019).' },
+  { e: '📈', q: 'Predecir quién terminará la universidad a partir del puntaje del examen de admisión.', c: 'P', niv: 2, x: 'Explicar y predecir con variables medibles: tradición positivista.' },
+  { e: '🔍', q: 'Estudiar cómo influyen la familia, la economía y el género en las decisiones de jóvenes rurales, para proponer cambios en las políticas.', c: 'S', niv: 2, x: 'Las decisiones vocacionales como fenómeno sistémico y desigual, con intención de transformar.' },
+];
+
+// ---------- 🎮 ¿De dónde viene esta idea de la NEM? (Lun 30 nov · 10.2)
+export const FUENTES_NEM = [['complejo', 'Pensamiento complejo (Morin)', '#8E5BA8'], ['saberes', 'Diálogo de saberes (Freire, Sousa Santos)', '#3F7A4F'], ['critico', 'Paradigma sociocrítico (Freire, Habermas)', '#A63D2F'], ['investigador', 'Docente investigador (Stenhouse, Schön)', '#2E5E8C'], ['inclusion', 'Barreras e inclusión (Booth y Ainscow)', '#C98A2C']];
+export const DE_DONDE_NEM = [
+  { e: '🧩', q: 'Organizar el currículo en cuatro campos formativos en lugar de asignaturas aisladas.', c: 'complejo', niv: 1, x: 'Responde a la crítica de Morin a la fragmentación del conocimiento (tabla de 10.2).' },
+  { e: '🌐', q: 'Siete ejes articuladores que atraviesan todos los campos.', c: 'complejo', niv: 1, x: 'Unir lo que estaba separado: «tejer junto» (complexus).' },
+  { e: '💧', q: 'Estudiar la contaminación del agua de la colonia con lenguaje, ciencia, ética, historia y acción comunitaria a la vez.', c: 'complejo', niv: 2, x: 'Un problema real no se presenta dividido en materias: es el ejemplo del compendio (10.2).' },
+  { e: '🌽', q: 'Reconocer en la escuela los saberes de los pueblos originarios y afromexicanos.', c: 'saberes', niv: 1, x: 'Ecología de saberes de Boaventura de Sousa Santos (Tema 6).' },
+  { e: '🗣️', q: 'La interculturalidad crítica: diálogo entre culturas que reconoce las desigualdades de poder entre ellas.', c: 'saberes', niv: 1, x: 'Dimensión dialógica (Tema 5) y epistemologías del Sur.' },
+  { e: '👵', q: 'Invitar a una partera de la comunidad a dialogar con el grupo junto con lo que dice la ciencia sobre el embarazo.', c: 'saberes', niv: 2, x: 'Diálogo de saberes con rigor: ni desprecio ni relativismo ingenuo (Tema 6).' },
+  { e: '🏘️', q: 'La comunidad como núcleo integrador de la escuela.', c: 'critico', niv: 1, x: 'Paradigma sociocrítico y pensamiento sistémico: Habermas y Bertalanffy (tabla de 10.2).' },
+  { e: '✊', q: 'La idea de que la educación debe transformar la realidad y no solo adaptarse a ella.', c: 'critico', niv: 1, x: 'Tradición sociocrítica y pedagogía de Paulo Freire.' },
+  { e: '🏦', q: 'La educación no como depósito de contenidos, sino como proceso dialógico ligado a la vida de la comunidad.', c: 'critico', niv: 2, x: 'Es la crítica de Freire a la educación bancaria.' },
+  { e: '📝', q: 'El colectivo docente elabora su programa analítico a partir de un diagnóstico de su escuela.', c: 'investigador', niv: 1, x: 'Codiseño: el programa analítico es un acto epistemológico (Stenhouse, Elliott, Carr y Kemmis).' },
+  { e: '🧑‍🏫', q: 'Reconocer al magisterio como profesional que toma decisiones, no como técnico que aplica programas.', c: 'investigador', niv: 1, x: 'Autonomía profesional: Stenhouse y Schön (Tema 6).' },
+  { e: '🔄', q: 'Diagnosticar, planificar, actuar, observar y reflexionar durante el ciclo escolar para ajustar los proyectos.', c: 'investigador', niv: 2, x: 'Es un ciclo de investigación-acción, como en el caso de la secundaria técnica del compendio (10.2).' },
+  { e: '♿', q: 'El eje articulador «Inclusión».', c: 'inclusion', niv: 1, x: 'Barreras para el aprendizaje y la participación (Booth y Ainscow, Tema 8).' },
+  { e: '🚪', q: 'Que la escuela regular haga ajustes para que todos aprendan, en vez de enviar a otros espacios a los que no encajan.', c: 'inclusion', niv: 2, x: 'Educación inclusiva de la Ley General de Educación (2019).' },
+];
+
+// ---------- ⚡ Arena de repaso del Examen Final (Mar 1 dic): sale del banco del Examen Final (la primera opción es la correcta).
+ARENA.repasoFinal = { titulo: 'Repaso del Examen Final · Temas 1 a 10', preguntas: [
+    {"q": "Una tesista pregunta: «¿Qué hace que mi estudio de caso sea científico y no una simple opinión?». ¿A qué campo pertenece su pregunta?", "o": ["A la epistemología, que estudia el conocimiento científico", "A la teoría del conocimiento, que estudia todo conocimiento humano en general", "A la filosofía de la ciencia entendida solo como historia de los inventos", "A ninguno: es una pregunta técnica de metodología"], "x": "La epistemología se pregunta qué hace científico a un conocimiento."},
+    {"q": "Un alumno responde bien todas las preguntas de un examen, pero en la revisión oral no puede explicar ninguna respuesta. Usando la definición clásica de conocimiento, ¿qué conclusión es más defendible?", "o": ["Tenía creencias verdaderas, pero sin justificación; acertar no basta para afirmar que sabe", "Sabe perfectamente, porque sus respuestas fueron verdaderas", "No tiene creencias, porque no las explica", "Sus respuestas eran falsas aunque fueran correctas"], "x": "Creencia, verdad y justificación son las tres condiciones de la definición clásica."},
+    {"q": "Según la definición de trabajo del curso, ¿qué permite que la historia sea ciencia aunque no pueda repetir sus hechos en un laboratorio?", "o": ["Que somete sus afirmaciones a prueba con métodos adecuados a su objeto y a la crítica pública", "Que sus conclusiones son verdades eternas", "Que sigue los mismos cinco pasos que la física", "Que la practican personas con doctorado"], "x": "No existe un método único."},
+    {"q": "Una abuela de Hecelchakán sabe, por la forma de las nubes, cuándo va a llover, y casi siempre acierta. Un alumno dice que eso «ya es ciencia, porque predice». ¿Qué responderías?", "o": ["Es conocimiento empírico: práctico y preciso, pero no sistematizado ni sometido a crítica pública", "Es ciencia, porque toda predicción correcta es científica", "Es conocimiento religioso, porque se transmite por tradición", "Es conocimiento filosófico, porque reflexiona sobre la naturaleza"], "x": "Acertar no basta: la ciencia se valida por comprobación y crítica de la comunidad."},
+    {"q": "¿Qué aporta la mirada sistémica al análisis de un problema de conducta en un grupo?", "o": ["Buscar su origen en las relaciones entre escuela, familia, comunidad y organización, no solo en el alumno", "Encontrar una sola causa en el alumno y sancionarla", "Ignorar el contexto para ser objetivo", "Medir la conducta con una escala numérica"], "x": "Una escuela es un sistema con clima, normas no escritas e historia."},
+    {"q": "Un maestro dicta los contenidos, los alumnos copian y en el examen repiten lo dictado. Freire lo llamaría educación bancaria. ¿Qué propondría en su lugar?", "o": ["Una educación problematizadora y dialógica, que una reflexión y acción (praxis)", "Más exámenes, para asegurar que repitan bien", "Que el alumno estudie solo, sin maestro", "Una educación técnica centrada en la productividad"], "x": "Freire (1970/2005)."},
+    {"q": "La NEM se presenta como un \"cambio de paradigma\". ¿Qué tendría que mostrarse para hablar de revolución en el sentido técnico de Kuhn?", "o": ["Que el modelo anterior acumuló anomalías, entró en crisis y fue sustituido por una nueva forma de ver los problemas y los conceptos", "Que cambió el nombre de las asignaturas", "Que se publicaron libros de texto nuevos", "Que una autoridad lo declaró así"], "x": "En Kuhn, paradigma tiene un sentido técnico ligado a las comunidades."},
+    {"q": "Un programa se declara «científicamente probado» porque funcionó en 30 escuelas. Desde el problema de la inducción, ¿qué se puede afirmar?", "o": ["Que ningún número de casos garantiza que funcionará en la siguiente escuela", "Que con 30 casos queda verificado para siempre", "Que con 100 escuelas ya habría certeza absoluta", "Que la inducción no tiene ningún valor en la investigación"], "x": "Los cisnes blancos no garantizan que no exista uno negro."},
+    {"q": "Dos testigos de un mismo accidente describen cosas distintas, y ambos están seguros de lo que vieron. ¿Qué idea del Tema 5 lo explica mejor?", "o": ["El cerebro no es un espejo: completa, interpreta y anticipa lo que percibe", "Uno de los dos necesariamente miente", "La observación es neutral si se pone atención", "La memoria guarda copias exactas de lo que vemos"], "x": "Percibir no es recibir pasivamente."},
+    {"q": "Un investigador cualitativo explica en su tesis su relación con la escuela que estudia, sus supuestos y cómo pudieron influir en su interpretación. ¿Qué práctica aplica?", "o": ["Reflexividad", "Neutralidad absoluta", "Verificacionismo", "Generalización apresurada"], "x": "En lugar de fingir neutralidad, explicita su posición."},
+    {"q": "Un colectivo sistematiza durante un ciclo su estrategia de comprensión lectora y comparte lo que aprendió. ¿Qué respuesta a la pregunta guía respalda?", "o": ["Que la pedagogía también es ciencia por lo que los maestros investigan y sistematizan en sus aulas", "Que solo las universidades producen conocimiento pedagógico", "Que la pedagogía es solo un arte", "Que la experiencia docente no es conocimiento"], "x": "Stenhouse y el docente investigador."},
+    {"q": "En un proyecto sobre plantas medicinales, unos alumnos proponen \"comprobar\" un remedio tradicional para la diabetes de un familiar dejando su tratamiento médico. ¿Qué respuesta es coherente con la ecología de saberes y con la bioética?", "o": ["Valorar el saber tradicional como objeto de estudio, sin sustituir un tratamiento médico y cuidando no causar daño", "Apoyar la propuesta porque todos los saberes valen lo mismo", "Prohibir cualquier mención a los saberes tradicionales", "Dejar la decisión a los alumnos sin intervenir"], "x": "Se evitan a la vez el relativismo ingenuo y el cientificismo, y se respeta el principio de no maleficencia."},
+    {"q": "Un alumno que vive violencia en casa no logra concentrarse y lo reportan por «mala actitud». ¿Qué conclusión integra mejor los Temas 7 y 8?", "o": ["El estrés intenso afecta el aprendizaje; conviene un clima seguro e identificar barreras del contexto, no solo sancionar", "Es falta de voluntad que se corrige con más reportes", "Debe ir a una escuela especial", "La emoción no influye en la atención"], "x": "Emoción y cognición no se separan; el problema no está solo en el alumno."},
+    {"q": "Un taller promete «activar el cerebro derecho» para que los alumnos sean más creativos. Con los cánones de cientificidad, ¿qué preguntarías primero?", "o": ["¿Dónde está la evidencia y se ha replicado?, sabiendo que en un cerebro sano los hemisferios trabajan juntos", "¿Cuántos ejercicios incluye el taller?", "¿Lo recomienda algún personaje famoso?", "¿Usa imágenes del cerebro en sus materiales?"], "x": "Ante cualquier propuesta «neuro», preguntar por la evidencia."},
+    {"q": "Un alumno pregunta: «¿Para qué hago un proyecto de vida, si el test ya me dijo qué estudiar?». Con la crítica del nuevo paradigma, ¿qué argumento es más sólido?", "o": ["El test capta un momento, el contexto también decide y el mundo del trabajo cambia: conviene aprender a construir una trayectoria", "El test siempre se equivoca y no debe tomarse en cuenta", "El proyecto de vida sustituye por completo a cualquier instrumento de evaluación", "El test solo es válido si lo interpreta un psicólogo"], "x": "Las personas cambian, el contexto importa y el mundo del trabajo ya no es estable."},
+    {"q": "Un orientador aplica a un grupo un test de intereses y entrega a cada alumno \"la carrera para la que nació\", sin entrevistas ni contexto. Con lo visto en todo el curso, ¿cuál es la crítica más completa?", "o": ["Trabaja desde un supuesto positivista que confunde un momento con un destino; ignora el contexto sistémico y la construcción del proyecto de vida", "Ninguna: los tests estandarizados son el único conocimiento válido sobre una persona", "Su único error es no usar inteligencia artificial para interpretar el test", "Que el test es falsable y por eso no es científico"], "x": "Une el modelo de rasgos y factores (Tema 8) con los paradigmas (Tema 3) y la plasticidad y el cambio (Temas 3 y 7)."},
+    {"q": "¿Qué condiciones del facilitador propuso Carl Rogers para el aprendizaje significativo?", "o": ["Autenticidad, aceptación y comprensión empática", "Disciplina, control y evaluación constante", "Diagnóstico, tratamiento y seguimiento", "Prevención, desarrollo e intervención social"], "x": "Rogers (1969/1975), educación centrada en la persona."},
+    {"q": "Una maestra califica mejor a los alumnos que «hablan bien» y conocen museos, y lo atribuye a su talento. Según Bourdieu y Passeron, ¿qué ocurre?", "o": ["La escuela premia el capital cultural heredado y lo presenta como mérito personal", "Es una aplicación del enfoque de capacidades de Sen", "Es un ejemplo de capital humano que aumenta la productividad", "Es la correspondencia entre escuela y trabajo de Bowles y Gintis"], "x": "Así la escuela legitima las desigualdades."},
+    {"q": "Para tu tesis vas a entrevistar a alumnos de secundaria. ¿Qué conjunto de medidas éticas corresponde?", "o": ["Consentimiento de los tutores, asentimiento de los menores, confidencialidad con seudónimos, no daño y devolución de resultados", "Solo pedir permiso al director", "Publicar los nombres reales para dar credibilidad", "Grabar sin avisar para no influir en las respuestas"], "x": "La ética de la investigación con menores es una aplicación concreta de la bioética."},
+    {"q": "En la Nueva Escuela Mexicana, ¿dónde aparece la relación con la naturaleza, según el compendio?", "o": ["En el campo «Ética, naturaleza y sociedades» y en ejes como vida saludable", "Solo en el campo «Saberes y pensamiento científico»", "En el campo «Lenguajes» y en el eje de lectura y escritura", "Solo en la asignatura de Geografía"], "x": "SEP (2022)."},
+    {"q": "¿Por qué algunos críticos señalan que es difícil saber si la NEM mejora los aprendizajes?", "o": ["Porque se necesita evidencia sistemática y se han reducido o cambiado los instrumentos de medición", "Porque la NEM prohíbe evaluar", "Porque los aprendizajes no pueden estudiarse científicamente", "Porque la reforma todavía no se aplica en ninguna escuela"], "x": "Evaluar una reforma exige evidencia sistemática."},
+    {"q": "¿Cuál de los siguientes NO es un campo formativo de la NEM?", "o": ["Matemáticas y tecnología", "Lenguajes", "Ética, naturaleza y sociedades", "De lo humano y lo comunitario"], "x": "Los cuatro campos son Lenguajes; Saberes y pensamiento científico; Ética, naturaleza y sociedades; y De lo humano y lo comunitario."},
+    {"q": "Un maestro dice: «La idea de partir de la comunidad es buena, pero en mi escuela no hubo formación ni tiempo para el codiseño». Con los criterios del Tema 10, ¿qué está haciendo?", "o": ["Distinguir los fundamentos de la implementación", "Caer en el relativismo ingenuo", "Rechazar la reforma por razones políticas", "Confundir la NEM con el programa sintético"], "x": "Una idea puede ser valiosa y estar mal implementada."}
+] };

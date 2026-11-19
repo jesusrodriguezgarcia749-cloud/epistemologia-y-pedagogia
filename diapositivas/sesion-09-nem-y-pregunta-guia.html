@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 9 · La NEM y la pregunta guía · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     SESIÓN 9: Lunes 30 de noviembre · 1 hora
+     10.1 a 10.4 La Nueva Escuela Mexicana: lectura epistemológica, argumentos a favor y en
+     contra, y regreso a la pregunta guía
+     Juego de 5 minutos «¿De dónde viene esta idea de la NEM?», «La NEM con evidencia» (en
+     equipo, Rúbrica de Tarea) y «Mi respuesta a la pregunta guía» (individual, Rúbrica de Tarea).
+     Fuente: libro de texto Epistemología y Pedagogía, Capítulo 10
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Tema 10 · Integración: la pedagogía como ciencia en la Nueva Escuela Mexicana",
+      dia: "Lunes 30 de noviembre · Sesión 9 de 10",
+      titulo: "La NEM con lentes de epistemología",
+      subtitulo: "10.1 a 10.4 Qué es, de dónde vienen sus ideas, qué dicen sus defensores y sus críticos, y de regreso a la pregunta guía",
+      duracion: "1 hora",
+      minutos: "0-1",
+      notas: "Sesión de una hora: ritmo ágil. Hoy a las 23:59 vence la Entrega 2 (preguntas 1 a 14). Mañana es la defensa oral: recuérdales el guion del Taller del investigador. Aclaración de método del libro: no analizamos la NEM para defenderla ni para atacarla, sino para entenderla." },
+
+    { tipo: "objetivos",
+      intro: "Llegamos al final del recorrido: ponemos todas las herramientas del curso a trabajar sobre la reforma que viven hoy las escuelas mexicanas.",
+      puntos: [
+        "Calentar con el juego **¿De dónde viene esta idea de la NEM?**",
+        "Reconocer los **fundamentos epistemológicos** de la NEM.",
+        "Evaluar los **argumentos a favor y críticos** con evidencia.",
+        "En equipo: **La NEM con evidencia**.",
+        "Volver a la **pregunta guía**: ¿puede la pedagogía ser ciencia?"
+      ],
+      pasoAPaso: true,
+      minutos: "1-2" },
+
+    { tipo: "plataforma",
+      etiqueta: "Calentamiento", tipoAct: "Individual · juego de 5 minutos",
+      titulo: "¿De dónde viene esta idea de la NEM?",
+      enlace: "../tareas.html#de-donde-nem", textoEnlace: "Tareas → ¿De dónde viene esta idea de la NEM?",
+      minutos: "2-7", evaluacion: "Formativo",
+      notas: "Muchos ya conocen la NEM por sus prácticas: el juego les muestra que detrás de cada elemento hay un autor del curso. Revisa en el Monitor «Las más falladas hoy» y retómalas en el diagrama siguiente.",
+      pasos: [
+        "Escanea el QR: **Tareas → ¿De dónde viene esta idea de la NEM?**",
+        "Aparece un elemento de la NEM: ¿viene de **Morin**, del **diálogo de saberes**, del **paradigma sociocrítico**, del **docente investigador** o de **Booth y Ainscow**?",
+        "Elige **Básico**. Al responder, lee por qué."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tema",
+      titulo: "10.1 ¿Qué es la Nueva Escuela Mexicana?",
+      etiqueta: "Reforma de 2019 · Plan de Estudio 2022",
+      puntos: [
+        "Nace de la reforma al **artículo 3.º** y de la **Ley General de Educación** de 2019; se aplica desde el ciclo **2023-2024**.",
+        "La **comunidad** como núcleo integrador de la escuela.",
+        "**Cuatro campos formativos** y **siete ejes articuladores** en lugar de asignaturas aisladas.",
+        "Un **programa sintético** nacional y un **programa analítico** que hace cada colectivo docente (**codiseño**).",
+        "**Autonomía profesional** del magisterio y metodologías como los **proyectos comunitarios**."
+      ],
+      pasoAPaso: true,
+      minutos: "7-10",
+      notas: "Campos: Lenguajes; Saberes y pensamiento científico; Ética, naturaleza y sociedades; De lo humano y lo comunitario. Ejes: inclusión, pensamiento crítico, interculturalidad crítica, igualdad de género, vida saludable, apropiación de las culturas por la lectura y la escritura, artes y experiencias estéticas. Esto ya lo vieron en Sistema Educativo Nacional, Legislación y Diseño Curricular: aquí lo miramos desde la pregunta por el conocimiento." },
+
+    { tipo: "diagramaPasos",
+      titulo: "10.2 Lectura epistemológica de la NEM",
+      minutos: "10-15",
+      intro: "Cada elemento del plan tiene detrás una idea que ya estudiamos. Avanza (→).",
+      notas: "Es el cuadro de conexiones del libro (10.2). Caso del libro: en una secundaria técnica el colectivo diagnostica (resultados, encuesta a familias, recorrido por la colonia), detecta comprensión lectora y manejo de basura, articula proyectos y ajusta durante el ciclo: sin llamarlo así, hicieron investigación-acción. Pregunta de arranque: ¿un maestro que diseña su programa analítico está haciendo ciencia?",
+      svg: `<svg viewBox="0 0 640 440" role="img" aria-label="La NEM en el centro, conectada con cinco ideas del curso"><circle cx="320" cy="220" r="62" fill="#16213A"/><text x="320" y="214" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="700" font-size="26" fill="#E9C46A">NEM</text><text x="320" y="240" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#fff">Plan 2022</text><g data-paso="0" data-anim="resaltar"><path d="M320,158 V98" stroke="#8E5BA8" stroke-width="5"/><rect x="200" y="22" width="240" height="76" rx="14" fill="#F1E8F6" stroke="#8E5BA8" stroke-width="4"/><text x="320" y="54" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#8E5BA8">Pensamiento complejo</text><text x="320" y="78" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="14" fill="#16213A">campos formativos · Morin</text></g><g data-paso="1" data-anim="resaltar"><path d="M378,196 L440,160" stroke="#3F7A4F" stroke-width="5"/><rect x="430" y="110" width="200" height="86" rx="14" fill="#E6F2E8" stroke="#3F7A4F" stroke-width="4"/><text x="530" y="142" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#3F7A4F">Diálogo de saberes</text><text x="530" y="164" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">interculturalidad crítica</text><text x="530" y="184" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">Freire · Sousa Santos</text></g><g data-paso="2" data-anim="resaltar"><path d="M370,258 L432,300" stroke="#A63D2F" stroke-width="5"/><rect x="420" y="290" width="210" height="86" rx="14" fill="#FBEAE6" stroke="#A63D2F" stroke-width="4"/><text x="525" y="322" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#A63D2F">Paradigma sociocrítico</text><text x="525" y="344" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">la comunidad · transformar</text><text x="525" y="364" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">Freire · Habermas</text></g><g data-paso="3" data-anim="resaltar"><path d="M270,258 L208,300" stroke="#2E5E8C" stroke-width="5"/><rect x="10" y="290" width="210" height="86" rx="14" fill="#E3EEF7" stroke="#2E5E8C" stroke-width="4"/><text x="115" y="322" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#2E5E8C">Docente investigador</text><text x="115" y="344" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">programa analítico · codiseño</text><text x="115" y="364" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">Stenhouse · Schön</text></g><g data-paso="4" data-anim="resaltar"><path d="M262,196 L200,160" stroke="#C98A2C" stroke-width="5"/><rect x="10" y="110" width="200" height="86" rx="14" fill="#F7EEDB" stroke="#C98A2C" stroke-width="4"/><text x="110" y="142" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="16" fill="#C98A2C">Inclusión</text><text x="110" y="164" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">barreras, no déficit</text><text x="110" y="184" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="13" fill="#16213A">Booth y Ainscow</text></g><g data-paso="5" data-anim="subir"><rect x="150" y="394" width="340" height="40" rx="20" fill="#16213A"/><text x="320" y="420" text-anchor="middle" font-family="Public Sans,sans-serif" font-weight="700" font-size="15" fill="#E9C46A">¿cambio de paradigma, en el sentido de Kuhn?</text></g></svg>`,
+      pasos: [
+        { num: "Tema 4", titulo: "Pensamiento complejo", color: "#8E5BA8", texto: "Los **campos formativos** y los **ejes articuladores** responden a la crítica de **Morin** a la fragmentación.", ejemplo: "La contaminación del agua de una colonia **no llega dividida en materias**: exige lenguaje, ciencia, ética, historia y acción." },
+        { num: "Temas 5 y 6", titulo: "Diálogo de saberes", color: "#3F7A4F", texto: "Los **saberes comunitarios** y la **interculturalidad crítica**: la escuela no impone un único tipo de conocimiento.", ejemplo: "La **ecología de saberes** de Sousa Santos; los saberes de los pueblos originarios y afromexicanos." },
+        { num: "Tema 3", titulo: "Paradigma sociocrítico", color: "#A63D2F", texto: "La **comunidad** como núcleo y una educación que **transforma** la realidad, no solo se adapta.", ejemplo: "La crítica de **Freire** a la educación como depósito de contenidos." },
+        { num: "Tema 6", titulo: "Docente investigador", color: "#2E5E8C", texto: "El **programa analítico** es un **acto epistemológico**: el colectivo decide qué conocimientos entran, en qué orden y con qué sentido.", ejemplo: "Diagnosticar, planificar, actuar, observar y reflexionar: un ciclo de **investigación-acción**." },
+        { num: "Tema 8", titulo: "Inclusión", color: "#C98A2C", texto: "El eje de **inclusión** retoma las **barreras para el aprendizaje y la participación**.", ejemplo: "La escuela regular hace los ajustes; no envía a otro lado a quien no encaja." },
+        { num: "Tema 4 · Kuhn", titulo: "¿Un cambio de paradigma?", color: "#16213A",
+          pregunta: "La NEM se presenta como «cambio de paradigma». ¿Lo es, en el sentido de Kuhn?",
+          respuesta: "Kuhn hablaba de **comunidades científicas**. La pregunta kuhniana sería: ¿hay **nuevos problemas, conceptos y formas de ver la escuela** (revolución), o es un **ajuste dentro del mismo paradigma escolar**? **La respuesta no es obvia**: hay que argumentarla.",
+          encenderAlResponder: true }
+      ] },
+
+    { tipo: "tablaPasos",
+      titulo: "10.3 Argumentos a favor y críticos",
+      columnas: ["A favor", "Críticos"],
+      filas: [
+        ["**Pertinencia**: partir de la comunidad da sentido, sobre todo en contextos rurales e indígenas.", "**Riesgo de relativismo**: poner en el mismo plano saberes con distinto respaldo, por ejemplo en salud."],
+        ["**Reconocimiento**: corrige una larga historia de desprecio hacia los pueblos originarios.", "**Ambigüedad**: no siempre queda claro cómo llevar los conceptos al aula."],
+        ["**Integración**: aprender en torno a problemas reales favorece el pensamiento complejo.", "**Carga y condiciones**: el codiseño exige tiempo, formación y trabajo colegiado."],
+        ["**Profesionalización**: trata al magisterio como profesional, no como técnico.", "**Brechas de implementación** y **evaluación**: ¿cómo saber si mejora los aprendizajes?"]
+      ],
+      densa: true,
+      pie: "Para evaluar el debate: **distinguir fundamento de implementación, pedir evidencia, reconocer los supuestos y mantener el diálogo**.",
+      minutos: "15-18",
+      notas: "Los libros de texto de 2023 recibieron críticas públicas por errores y por su enfoque: es un ejemplo de brecha de implementación. Pregunta del libro: si vas a ser docente en escuela pública, la NEM será tu marco de trabajo; ¿qué evidencia necesitarías para cambiar de opinión sobre alguno de sus elementos?" },
+
+    { tipo: "plataforma",
+      etiqueta: "Actividad en equipo", tipoAct: "En equipo · en vivo",
+      titulo: "La NEM con evidencia",
+      enlace: "../tareas.html#nem-evidencia", textoEnlace: "Tareas → La NEM con evidencia",
+      minutos: "18-38", evaluacion: "Sumativo · Rúbrica de Tarea",
+      notas: "Antes: Panel → Tareas → Tareas digitales → 👥 de «La NEM con evidencia» y proyecta los QR. A cada equipo le toca por sorteo: campos formativos, saberes comunitarios, programa analítico, libros de texto de 2023, autonomía docente o cómo evaluar si la NEM funciona. El ejemplo guía es el eje de Inclusión: que no lo copien. La fila 🔎 pide un dato, documento o estudio real; si no hay, que digan qué evidencia haría falta. Cierra hoy a las 23:59.",
+      pasos: [
+        "Escanea el **QR de tu equipo**: les toca un **elemento de la NEM** por sorteo.",
+        "¿Qué **dice el plan** y qué **idea del curso** hay detrás?",
+        "Un argumento **a favor** y uno **crítico**.",
+        "🔎 ¿Qué **evidencia** hay? Su **veredicto**: ¿el problema está en el fundamento o en la implementación?"
+      ],
+      pasoAPaso: true },
+
+    { tipo: "plataforma",
+      etiqueta: "Puesta en común", tipoAct: "Todo el grupo",
+      titulo: "¿Fundamento o implementación?",
+      minutos: "38-45", evaluacion: "Formativo",
+      notas: "Panel → Monitor en vivo → «La NEM con evidencia». Cada equipo da su veredicto en 40 segundos. Pregunta de cierre: ¿en cuántos elementos el problema estaba más en la implementación que en el fundamento? Al final, 🔑 Liberar clave.",
+      pasos: [
+        "Cada equipo da su **veredicto** en 40 segundos.",
+        "¿Dónde está el problema: en el **fundamento** o en la **implementación**?",
+        "¿Qué **evidencia** nos falta para saber si la NEM funciona?"
+      ],
+      pasoAPaso: true },
+
+    { tipo: "cita",
+      texto: "La pedagogía puede ser una ciencia, siempre que no se mida con la vara de las ciencias naturales: una ciencia social y humana, de carácter práctico, con métodos plurales, que combina la explicación con la comprensión, reconoce el saber de la práctica docente, dialoga con otros saberes y tiene una dimensión ética inevitable.",
+      autor: "Una respuesta posible a la pregunta guía (compendio, 10.4)",
+      minutos: "45-47",
+      notas: "Es una respuesta posible, no la única. Repasa en voz alta qué aportó cada tema (lista de 10.4): del Tema 1 (creencia verdadera justificada y las cuatro posturas) al Tema 10." },
+
+    { tipo: "plataforma",
+      etiqueta: "Regreso a la pregunta guía", tipoAct: "Individual · cierra hoy a las 23:59",
+      titulo: "Mi respuesta a la pregunta guía",
+      enlace: "../tareas.html#pregunta-guia", textoEnlace: "Tareas → Mi respuesta a la pregunta guía",
+      minutos: "47-57", evaluacion: "Sumativo · Rúbrica de Tarea",
+      notas: "Es el esqueleto de su ensayo y de la defensa de mañana. Que empiecen en clase recordando su postura de la sesión 1 (arte, ciencia aplicada, ciencia propia o ciencia crítica). La última fila es la pregunta 18 del proyecto.",
+      pasos: [
+        "¿Qué postura elegiste en la **primera clase**? ¿Y **hoy**?",
+        "¿Qué **tema o autor** te hizo cambiar (o te confirmó)?",
+        "Tu **mejor argumento** con dos autores y **un contraargumento** respondido.",
+        "¿Qué tipo de ciencia es **tu propia investigación**? (pregunta 18)"
+      ],
+      pasoAPaso: true },
+
+    { tipo: "proyecto",
+      titulo: "Pienso, luego investigo · hoy",
+      preguntas: [
+        { numero: 17, texto: "¿Cómo se relaciona tu investigación con la Nueva Escuela Mexicana?" },
+        { numero: 18, texto: "Reflexión final: después de este curso, ¿tu investigación es ciencia? ¿De qué tipo? ¿Qué cambiarías de tu pregunta o de tu forma de investigarla?" }
+      ],
+      minutos: "57-59",
+      notas: "Con estas se completan las 18 preguntas del ensayo final (versión final: viernes 4 de diciembre a las 23:59)." },
+
+    { tipo: "cierre",
+      evidencia: "**La NEM con evidencia** de cada equipo y **Mi respuesta a la pregunta guía** de cada alumno (cierran hoy a las 23:59).",
+      materiales: "Libro de texto (Tema 10), Aula Virtual y **celular con internet**.",
+      proxima: "**Hoy a las 23:59: Entrega 2** (preguntas 1 a 14). **Mañana, martes 1: defensa oral** de 3 minutos: arma tu guion en el **Taller del investigador**. **Viernes 4: versión final** del ensayo. **Lunes 7: Examen Final**.",
+      minutos: "59-60" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>
