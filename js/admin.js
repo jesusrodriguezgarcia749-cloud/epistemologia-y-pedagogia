@@ -10,9 +10,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
+import { ACTIVIDADES_PARCIAL, calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { resumenGeneral } from "./resumen-tareas.js?v=2026111801";
+import { resumenSemana } from "./resumen-semana.js?v=2026112001";
 import { vistaRapida } from "./matriz.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js?v=2026111904";
 import { cierreDe, parcialDe, esAuto } from "./cierre-tareas.js?v=2026111901";
@@ -2843,6 +2844,11 @@ function jvPintarProy() {
   document.getElementById('jv-cerrar').addEventListener('click', () => { JV.proy = false; ov.hidden = true; });
 }
 document.addEventListener('keydown', e => { const ov = document.getElementById('jv-proy'); if (e.key === 'Escape' && ov && !ov.hidden) { ov.hidden = true; JV.proy = false; } });
+
+// ---------- RESUMEN DE LA SEMANA (Historial) ----------
+on('btn-resumen-semana', 'click', () => { const p = parcialDeHoy(); resumenSemana(document.getElementById('rsem-cont'), {
+  clase: 'Epistemología y Pedagogía', grupo: grupoActivo, alumnos: alumnosCache, parcial: p, nombresParcial: NOMBRES_PARCIAL,
+  datosDeAlumno, calcularParcial, temasRepaso: ACTIVIDADES_PARCIAL[p] || [] }); });
 
 // ---------- RESUMEN GENERAL (Historial) ----------
 on('btn-resumen-general', 'click', () => resumenGeneral(document.getElementById('rs-cont'), {
