@@ -2391,6 +2391,15 @@ async function reunirTareaDig(a) {
     // Cero automático: en equipo, quien no escribió nada lleva 0; los que aportaron, la sugerencia del equipo.
     let ap = null;
     if (eq) { const d = await docEquipo(eq); if (d) { ap = aporteDe(d, al); if (!ap.si) sug = { nota: 0, detalle: '✋ No aportó: no escribió nada en el trabajo del equipo · ' + sug.detalle }; } }
+    // Faltó a la clase en equipo y la hizo individual (con prórroga): cuenta su trabajo individual.
+    if (eq && ap && !ap.si) {
+      try { const s = await getDoc(doc(db, 'grupos', g, 'alumnos', al.id, 'atlas', A.ind)); const d = s.exists() ? s.data() : null;
+        if (d && Object.values(d.celdas || {}).some(v => String(v || '').trim())) {
+          word = d; entregado = d.entregado || null; const sg = sugerirCuadro(A, d.celdas); sug = { ...sg, detalle: '👤 La hizo individual (no estuvo en el trabajo del equipo) · ' + sg.detalle };
+          resumen = A.filas.map(([f, t]) => `${t}: ${A.columnas.map(([c]) => ((d.celdas || {})[`${f}_${c}`] || '').trim().split(/\s+/).filter(Boolean).length >= MIN_PALABRAS_CELDA ? '●' : '○').join('')}`).join(' · ');
+          return { al, eq: null, sug, entregado, resumen, cal, ap: null, exento, word, indiv: true };
+        } } catch { /* */ }
+    }
     return { al, eq, sug, entregado, resumen, cal, ap, exento, word };
   }));
   const wordDe = async x => { const V = varianteDe(A, x.eq, x.eq ? undefined : x.al.id), R = respuestasDe(A, V); const { D, archivo } = await docCuadro({ A, V, R, S: x.word, eq: x.eq, nombre: x.al.nombre, conClave: false }); return { blob: D.blob(), archivo: archivo + '.docx' }; };

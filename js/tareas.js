@@ -144,6 +144,8 @@ async function estadoDe(a) {
     if (a.tipo === 'cuadro') {
       const A = CUADROS[a.id], s = await getDoc(eq ? doc(db, 'grupos', g, 'equipos', eq.id, 'atlas', A.id) : doc(db, 'grupos', g, 'alumnos', al, 'atlas', A.ind));
       if (s.exists()) { out.avance = sugerirCuadro(A, s.data().celdas).detalle; out.entregado = s.data().entregado || null; }
+      if (eq) { const si = await getDoc(doc(db, 'grupos', g, 'alumnos', al, 'atlas', A.ind)); // la hizo individual con prórroga
+        if (si.exists() && Object.values(si.data().celdas || {}).some(v => String(v || '').trim())) { out.avance = '👤 Individual · ' + sugerirCuadro(A, si.data().celdas).detalle; out.entregado = si.data().entregado || out.entregado; } }
     }
   } catch { /* */ }
   return out;
@@ -282,6 +284,14 @@ function actCuadro(cont, a) {
     escucharGrupo();
     cont.innerHTML = '<p class="atlas-ayuda">Buscando a tu equipo…</p>';
     const eq = a.individual ? null : await equipo(a.id);
+    // Con prórroga (por ejemplo, faltó el día del trabajo en equipo) puede hacerla individual.
+    if (eq && prorrogaDe(ESTADO[a.id], sesion.alumnoId)) {
+      cont.innerHTML = `<div class="cl-sin-eq"><p><b>Tu maestro te abrió esta tarea.</b> Si no estuviste cuando tu equipo la hizo, hazla <b>individual</b>: se guarda en tu cuenta y cuenta para tu calificación.</p>
+        <button type="button" class="btn-at" id="cl-ind">Hacerla individual</button><p class="cl-o">o</p><button type="button" class="btn-ruta" id="cl-eq">Ver la de mi equipo (${esc(eq.nombre)})</button></div>`;
+      $('#cl-ind').addEventListener('click', () => cuadro(cont, null, a));
+      $('#cl-eq').addEventListener('click', () => cuadro(cont, eq, a));
+      return;
+    }
     if (eq) return cuadro(cont, eq, a);
     if (a.individual) return cuadro(cont, null, a);
     cont.innerHTML = `<div class="cl-sin-eq"><p><b>Todavía no estás en un equipo.</b> Escribe el código de 4 letras de tu equipo (o escanea el QR que proyecta tu maestro).</p>
