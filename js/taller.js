@@ -757,7 +757,7 @@ function etapaMatriz(c) {
     return (rec.length ? `<optgroup label="✓ Recomendadas para este objetivo">${rec.map(op).join('')}</optgroup>` : '')
       + Object.entries({ cuanti: 'Cuantitativas', cuali: 'Cualitativas', part: 'Participativas' }).map(([gr, n]) => `<optgroup label="${n}">${D.tecnicas[gr].filter(t => !rec.includes(t)).map(op).join('')}</optgroup>`).join('');
   };
-  c.insertAdjacentHTML('beforeend', `<p class="t-recuerda"><b>📌 Esta etapa es para la Entrega 2</b> (preguntas 8 y 10). Si todavía estás en la Entrega 1, regresa a la etapa anterior y descarga tu Word.</p>
+  c.insertAdjacentHTML('beforeend', `<p class="t-recuerda"><b>📌 Esta etapa es para la Entrega 2</b> (preguntas 8 y 10). Llénala y después escribe las preguntas 7 a 14 en la etapa «Las 18 preguntas». <button type="button" class="btn-lab-l" data-ir-e2>Ir a las preguntas 7 a 14 →</button></p>
     <p class="lab-ayuda">La matriz de congruencia muestra que todo cuadra: cada objetivo específico tiene una pregunta, una técnica, un instrumento y unos participantes. Es lo que un sínodo revisa primero. Te sirve para las preguntas 8 y 10.</p>
     ${guiaMatriz(k)}
     ${esp.length ? '' : '<p class="aviso-lab">Primero escribe tus objetivos específicos en la Etapa 3 (Objetivos e hipótesis): aquí aparecerá una fila por cada uno.</p>'}
@@ -798,10 +798,15 @@ function etapaMatriz(c) {
   $$('#mz input, #mz select, #mz textarea').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { T.matriz[+el.dataset.i][el.dataset.c] = el.value; cambio(); revisarMz(); }));
   $$('#mz .t-sug').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const el = $(`#mz [data-i="${b.dataset.i}"][data-c="${b.dataset.c}"]:not(button)`); el.value = b.dataset.v; el.dispatchEvent(new Event('input')); el.focus(); }));
   revisarMz();
+  $$('[data-ir-e2]', c).forEach(b => b.addEventListener('click', () => { entregaSel = 'entrega2'; irA(D.etapas.findIndex(x => x.id === 'cuaderno')); }));
 }
 
 // ------------------------------------------------ Etapa 4: las 18 preguntas
-let entregaSel = 'entrega1';
+// Se abre en la entrega que toca según la fecha (antes siempre abría la Entrega 1 y las preguntas 7 a 14 quedaban escondidas).
+const hoyISO = () => new Date().toLocaleDateString('en-CA');
+const entregaActual = () => hoyISO() <= '2026-11-09' ? 'entrega1' : hoyISO() <= '2026-11-30' ? 'entrega2' : 'entregaFinal';
+let entregaSel = entregaActual();
+const rangoEnt = ent => { const ns = numsDe(D, ent); return `preguntas ${ns[0]} a ${ns[ns.length - 1]}`; };
 function apoyo(p) {
   const o = T.objetivos, pf = perfil();
   switch (p.usa) {
@@ -816,8 +821,10 @@ function apoyo(p) {
   }
 }
 function etapaCuaderno(c) {
+  const ea = entregaActual(), faltan1 = ea !== 'entrega1' && numsDe(D, 'entrega1').filter(n => palabras(T.respuestas[n]) < 150);
   c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">Aquí escribes tu proyecto. Cada pregunta te dice qué te piden, te da pistas y te sugiere autores. Lo que hiciste en las etapas anteriores aparece como punto de partida. Busca de 150 a 250 palabras por respuesta.</p>
-    <div class="lab-chips" id="c-ent">${Object.entries(D.entregas).map(([k, e]) => `<button type="button" class="chip-lab" aria-pressed="${k === entregaSel}" data-e="${k}">${esc(e.nombre)}</button>`).join('')}</div>
+    <p class="t-recuerda"><b>📌 Ahora toca la ${esc(D.entregas[ea].nombre)}: ${rangoEnt(ea)}.</b> Elige la entrega en estos botones; cada una tiene sus preguntas con el mismo sistema que ya conoces.${faltan1 && faltan1.length ? ` Ojo: en la Entrega 1 te falta completar la${faltan1.length === 1 ? ' pregunta' : 's preguntas'} ${faltan1.join(', ')}.` : ''}</p>
+    <div class="lab-chips t-chips-ent" id="c-ent">${Object.entries(D.entregas).map(([k, e]) => `<button type="button" class="chip-lab" aria-pressed="${k === entregaSel}" data-e="${k}">${esc(e.nombre)}<small> · ${rangoEnt(k)}</small></button>`).join('')}</div>
     <div id="c-lista"></div>`);
   $$('#c-ent .chip-lab').forEach(b => b.addEventListener('click', () => { entregaSel = b.dataset.e; $$('#c-ent .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x === b))); pintarCuaderno(); }));
   pintarCuaderno();
@@ -1001,6 +1008,7 @@ function pintarFinal(ent, cuerpo, ir) {
     <label class="e1-sub"><span><b>Otras referencias</b><small>Una por renglón, en APA 7. Para poner un título en cursivas, enciérralo entre asteriscos: *Título del libro*. Un artículo: Apellido, N. (año). Título del artículo. *Nombre de la revista*, *volumen*(número), páginas. https://doi.org/…</small></span><textarea id="e1-otras" rows="4">${esc(T.refs.otras || '')}</textarea></label>
     <h4 class="e1-h">Antes de entregar</h4><ul class="e1-checks" id="e1-rev"></ul>
     <button type="button" class="btn-lab e1-word" id="e1-word">⬇ Descargar ${esc(E.boton)} en Word</button>
+    ${ent !== 'entregaFinal' ? `<p class="t-recuerda">➡️ Al terminar esta entrega, sigue con la ${esc(D.entregas[ent === 'entrega1' ? 'entrega2' : 'entregaFinal'].nombre)}: ${rangoEnt(ent === 'entrega1' ? 'entrega2' : 'entregaFinal')}. <button type="button" class="btn-lab-l" id="e1-sig-ent">Ir a la siguiente entrega →</button></p>` : ''}
     <p class="t-nota">Sale con la portada oficial del ITES y en formato APA 7: Times New Roman 12, doble espacio, sangría, número de página y referencias con sangría francesa. Puedes descargarlo las veces que quieras.</p>
     <div class="t-entregar" id="t-entregar"></div>
     ${ent === 'entregaFinal' ? '<p class="t-recuerda">🎤 La entrega final incluye una defensa oral de 3 minutos: arma y ensaya tu guion en la Etapa 6.</p>' : ''}
@@ -1058,6 +1066,7 @@ function pintarFinal(ent, cuerpo, ir) {
   $('#e1-otras').addEventListener('input', ev => { T.refs.otras = ev.target.value; cambio(); rev(); });
   $('#e1-ant').addEventListener('click', () => ir(NS.length - 1));
   $('#e1-word').addEventListener('click', () => descargarWord(ent));
+  const se = $('#e1-sig-ent'); if (se) se.addEventListener('click', () => { entregaSel = ent === 'entrega1' ? 'entrega2' : 'entregaFinal'; $$('#c-ent .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.e === entregaSel))); pintarCuaderno(); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   rev();
 }
 function pintarCuaderno() { pintarGuiada(entregaSel); }

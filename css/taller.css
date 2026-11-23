@@ -274,3 +274,4 @@ html[data-theme="dark"] .t-paso-n { color: #8fb8e0; }
 .e1-guia2 { margin: .6rem 0 0 !important; font-size: .9rem !important; color: var(--ink-soft); }
 .t-entregar { margin: 1rem 0 .4rem; padding: .8rem .9rem; border-radius: 10px; border: 1.5px dashed var(--line); background: var(--cream); }
 .t-entregar p { margin: 0 0 .5rem; }
+.t-chips-ent .chip-lab small { font-weight: 400; opacity: .8; }
