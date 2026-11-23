@@ -4,7 +4,7 @@
 // · Arena en vivo: grupos/{g}/arena/sala (la controla el docente) y .../sala/jugadores/{alumno}.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, getDocFromServer, setDoc, updateDoc, onSnapshot, FieldPath, collection, getDocs, query, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, QUE_PARADIGMA, PARADIGMAS_OP, QUE_ORIENTA, FUENTES_NEM, DE_DONDE_NEM, ARENA, COEV, COEV_NIV, TR_VER, TR_MIN_ARG, trLente, trPuntos, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe, AUTORES_T4, QUIEN_AVANZA, OBSTACULOS, QUE_OBSTACULO, NEURO_OP, NEUROMITOS } from "./tareas-datos.js?v=2026112301";
 import { cierreDe, prorrogaDe, estaAbierta } from "./cierre-tareas.js?v=2026111901";
@@ -52,6 +52,28 @@ function hoyDe(marca, info) {
   return {};
 }
 recordarAlumno(sesion);
+// ---- Por qué no se pudo guardar: distingue «sin internet» de «tu sesión ya no es válida»
+// (por ejemplo, si el maestro corrigió el nombre del alumno, su registro cambió y la sesión vieja ya no sirve).
+async function diagnosticar(e) {
+  const code = (e && e.code) || '';
+  if (!navigator.onLine || code === 'unavailable' || code === 'deadline-exceeded') return { tipo: 'red', txt: 'Sin conexión a internet. Lo que escribiste sigue en tu teléfono; se enviará cuando regrese la señal.' };
+  if (code === 'permission-denied' && sesion) {
+    try {
+      const s = await getDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId));
+      if (!s.exists()) return { tipo: 'sesion', txt: 'Tu maestro corrigió tu nombre en la lista y tu sesión quedó vieja. Toca «Salir y volver a entrar» y entra con tu nombre como aparece ahora y tu mismo PIN. No pierdes nada: lo que escribiste está guardado en tu teléfono.' };
+      const pin = s.data().pin;
+      if (String(pin) === String(sesion.pin) && pin !== sesion.pin) { sesion.pin = pin; try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(sesion)); } catch { /* */ } return { tipo: 'reintentar', txt: 'Reintentando…' }; }
+      if (String(pin) !== String(sesion.pin)) return { tipo: 'sesion', txt: 'Tu PIN cambió. Toca «Salir y volver a entrar» y entra con el PIN nuevo que te dé tu maestro. Lo que escribiste está guardado en tu teléfono.' };
+    } catch { return { tipo: 'red', txt: 'No hay conexión con el servidor. Revisa tu internet; lo que escribiste sigue aquí.' }; }
+    return { tipo: 'otro', txt: 'El servidor rechazó el guardado. Avísale a tu maestro y toma captura de esta pantalla.' };
+  }
+  return { tipo: 'otro', txt: `No se pudo guardar (${code || (e && e.message) || 'error'}). Revisa tu internet e inténtalo de nuevo.` };
+}
+const BTN_REENTRAR = '<button type="button" class="btn-at" data-reentrar>Salir y volver a entrar</button>';
+document.addEventListener('click', ev => {
+  if (!ev.target.closest('[data-reentrar]')) return;
+  try { sessionStorage.removeItem(SESSION_KEY); } catch { /* */ } olvidarAlumno(); sesion = null; location.reload();
+});
 let EQS = null, GDATA = {}, ESTADO = {}, unsubGrupo = null, detener = null;
 // Una tarea está cerrada si el docente la cerró o si ya pasó su fecha límite (grupos/{g}.tareasDig.{id}.cierre).
 // Desde el 19 de noviembre, cada tarea cierra sola a las 23:59 del día de su clase (ver cierre-tareas.js); el docente
@@ -80,7 +102,7 @@ function formAcceso(cont, alEntrar, titulo = 'Entra con tu nombre y PIN') {
     try {
       const id = slug(n), s = await getDoc(doc(db, 'grupos', g, 'alumnos', id));
       if (!s.exists() || String(s.data().pin) !== pin) { err.textContent = 'No encontramos ese nombre y PIN en el grupo elegido. Verifica con tu docente.'; err.hidden = false; return; }
-      sesion = { grupoId: g, alumnoId: id, nombre: s.data().nombre, pin }; recordarAlumno(sesion);
+      sesion = { grupoId: g, alumnoId: id, nombre: s.data().nombre, pin: s.data().pin }; recordarAlumno(sesion);
       try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(sesion)); } catch { /* */ }
       EQS = null; escucharGrupo(); alEntrar();
     } catch (e2) { err.textContent = 'No se pudo entrar: ' + (e2.message || e2); err.hidden = false; }
@@ -263,14 +285,28 @@ function unirPorQR(codigo) {
 }
 
 // ---- barra común: entregar tarea y aviso de tarea cerrada
-function barraEntrega(cont, a, { entregado, alEntregar }) {
+function barraEntrega(cont, a, { entregado, alEntregar, faltan = () => [], comprobar = null }) {
   const zona = $('[data-entrega]', cont);
+  let verif = '';
+  const verificar = async () => {
+    if (!comprobar) return;
+    verif = '<p class="rt-estado">Comprobando con el servidor…</p>'; pintar();
+    try { verif = await comprobar(); } catch (e) { const d = await diagnosticar(e); verif = `<div class="aviso mal">${esc(d.txt)} ${d.tipo === 'sesion' ? BTN_REENTRAR : ''}</div>`; }
+    pintar();
+  };
   const pintar = () => {
-    const ab = abierta(a.id);
+    const ab = abierta(a.id), fl = faltan();
     zona.innerHTML = !ab ? `<div class="cl-cerrada">🔒 ${vencida(a.id) ? `Esta tarea cerró el ${esc(cierreTxt(a.id))}` : 'Tu maestro cerró esta tarea'}: ya no se guardan cambios.${entregado() ? ` Entregada el ${esc(punto(fechaHora(entregado().t)))}` : ''}</div>`
-      : entregado() ? `<div class="cl-entregada">✅ Entregada el ${esc(entregado().por ? fechaHora(entregado().t) + ' por ' + entregado().por + '.' : punto(fechaHora(entregado().t)))} Aún puedes corregir mientras la tarea siga abierta.</div>`
-      : `<div class="cl-entregar"><span>¿Ya terminaron? Entreguen la tarea para que su maestro la califique.${cierreTxt(a.id) ? ` <b>Cierra: ${esc(cierreTxt(a.id))}.</b>` : ''}</span><button type="button" class="btn-at" data-entregar>📤 Entregar tarea</button></div>`;
-    const b = $('[data-entregar]', zona); if (b) b.addEventListener('click', async () => { if (!confirm('¿Entregar la tarea? Podrás seguir corrigiendo mientras tu maestro no la cierre.')) return; b.disabled = true; try { await alEntregar(); } catch (e) { alert('No se pudo entregar: ' + (e.message || e)); b.disabled = false; } pintar(); });
+      : entregado() ? `<div class="cl-entregada">✅ Entregada el ${esc(entregado().por ? fechaHora(entregado().t) + ' por ' + entregado().por + '.' : punto(fechaHora(entregado().t)))} Aún puedes corregir mientras la tarea siga abierta.${comprobar ? ' <button type="button" class="btn-ruta" data-verif>🔎 Comprobar que le llegó a mi maestro</button>' : ''}</div>`
+      : `<div class="cl-entregar"><span>¿Ya terminaron? Envíen la tarea para que su maestro la califique.${cierreTxt(a.id) ? ` <b>Cierra: ${esc(cierreTxt(a.id))}.</b>` : ''}${fl.length ? `<br><small>Todavía falta: ${esc(fl.slice(0, 6).join(' · '))}${fl.length > 6 ? ` y ${fl.length - 6} más` : ''}.</small>` : '<br><small>✓ Todo lleno.</small>'}</span><button type="button" class="btn-at" data-entregar>📤 Enviar tarea al maestro</button></div>`;
+    if (entregado() && verif) zona.insertAdjacentHTML('beforeend', `<div class="cl-verif">${verif}</div>`);
+    const v = $('[data-verif]', zona); if (v) v.addEventListener('click', verificar);
+    const b = $('[data-entregar]', zona); if (b) b.addEventListener('click', async () => {
+      if (!confirm(fl.length ? `Todavía falta: ${fl.join(', ')}.\n\n¿Enviar así? Podrás seguir corrigiendo mientras la tarea siga abierta.` : '¿Enviar la tarea? Podrás seguir corrigiendo mientras tu maestro no la cierre.')) return;
+      b.disabled = true; b.textContent = 'Enviando…';
+      try { await alEntregar(); pintar(); verificar(); return; }
+      catch (e) { const d = await diagnosticar(e); if (d.tipo === 'reintentar') { try { await alEntregar(); pintar(); verificar(); return; } catch { /* */ } } alert('No se pudo enviar. ' + d.txt); if (d.tipo === 'sesion') zona.insertAdjacentHTML('beforeend', BTN_REENTRAR); b.disabled = false; b.textContent = '📤 Enviar tarea al maestro'; return; }
+    });
     $$('textarea, input:not([type=hidden])', cont).forEach(t => { if (!t.closest('[data-entrega]')) t.readOnly = !ab; });
   };
   window.addEventListener('estado-tareas', pintar);
@@ -345,10 +381,12 @@ function cuadro(cont, eq, a) {
         await updateDoc(ref, ...args);
       }
       lote.forEach(([r]) => vuelo.delete(r.join('|')));
-      if (!pend.size) estado(eq ? 'Guardado y compartido con tu equipo ✓' : 'Guardado en tu cuenta ✓', 'ok');
-    } catch {
+      if (!pend.size) estado(eq ? 'Guardado y compartido con tu equipo ✓' : 'Guardado en tu cuenta ✓', 'ok'); repEntrega();
+    } catch (er) {
       lote.forEach(([r, v]) => { const k = r.join('|'); vuelo.delete(k); if (!pend.has(k)) pend.set(k, [r, v]); });
-      estado('No se pudo guardar. Reintentando…', 'mal'); pendT = setTimeout(flush, 4000);
+      const d = await diagnosticar(er);
+      if (d.tipo === 'sesion') { estado('⚠️ ' + d.txt, 'mal'); const e = $('#cu-estado'); if (e && !$('[data-reentrar]', e.parentNode)) e.insertAdjacentHTML('afterend', BTN_REENTRAR); return; }
+      estado(d.tipo === 'reintentar' ? 'Reintentando…' : '⚠️ ' + d.txt + ' Reintentando…', 'mal'); pendT = setTimeout(flush, d.tipo === 'reintentar' ? 300 : 4000);
     }
   };
   $$('[data-k]', cont).forEach(t => t.addEventListener('input', () => {
@@ -366,7 +404,19 @@ function cuadro(cont, eq, a) {
   window.addEventListener('estado-tareas', onEstado);
   getDoc(doc(db, 'grupos', sesion.grupoId)).then(s => verClave(s.exists() ? s.data() : {})).catch(() => {});
   $('#cu-ver-clave').addEventListener('click', e => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', String(on)); e.currentTarget.textContent = on ? 'Ocultar la clave' : 'Comparar con la clave'; $$('.cu-resp', cont).forEach(p => { p.hidden = !on; }); });
+  const palK = (c, k) => ((c[k] || '').trim().match(/\S+/g) || []).length;
+  const nombreK = k => { const [f, c] = k.split('_'); const fi = A.filas.find(x => x[0] === f); const co = A.columnas.find(x => x[0] === c); return `${fi ? fi[1] : f}${A.columnas.length > 1 && co ? ` (${co[1]})` : ''}`; };
+  const faltanDe = c => [...claves.filter(k => palK(c, k) < MIN_PALABRAS_CELDA).map(nombreK), ...A.filas.filter(x => x[3] && !(c[`${x[0]}_fuente`] || '').trim()).map(x => `fuente de ${x[1]}`)];
   repEntrega = barraEntrega(cont, a, {
+    faltan: () => faltanDe(S.celdas),
+    comprobar: async () => {
+      await flush();
+      const sn = await getDocFromServer(ref), d = sn.exists() ? sn.data() : {};
+      if (!d.entregado) return '<div class="aviso mal"><strong>Tu maestro todavía NO la tiene como entregada.</strong> Vuelve a tocar «Enviar».</div>';
+      const fl = faltanDe(d.celdas || {}), n = claves.length - claves.filter(k => palK(d.celdas || {}, k) < MIN_PALABRAS_CELDA).length;
+      return `<div class="aviso ${fl.length ? 'mal' : 'ok'}"><strong>${fl.length ? '✓ Tu maestro ya tiene la tarea, pero falta:' : '✓ Confirmado: tu maestro ya tiene la tarea completa.'}</strong> ${n} de ${claves.length} celdas llenas en el servidor.
+        ${fl.length ? `<ul class="rt-verif">${fl.map(t => `<li class="mal">❌ ${esc(t)}</li>`).join('')}</ul>` : ''}<small>Comprobado ${esc(punto(fechaHora(Date.now())))}</small></div>`;
+    },
     entregado: () => S.entregado,
     alEntregar: async () => {
       await flush();
@@ -579,21 +629,37 @@ async function rutaVista(cont, a, R) {
   // Copia de respaldo en el teléfono: si algo no alcanzó a guardarse en la nube, no se pierde al recargar.
   const LKEY = `ep_ruta_${sesion.grupoId}_${sesion.alumnoId}_${R.ind}`;
   const leerLocal = () => { try { return JSON.parse(localStorage.getItem(LKEY) || 'null'); } catch { return null; } };
-  const respaldar = () => { try { localStorage.setItem(LKEY, JSON.stringify({ hechas: S.hechas, saltadas: S.saltadas, checks: S.checks, salida: S.salida, bitacora: S.bitacora, entregado: S.entregado || null })); } catch { /* sin espacio */ } };
+  const respaldar = () => { try { localStorage.setItem(LKEY, JSON.stringify({ hechas: S.hechas, saltadas: S.saltadas, checks: S.checks, salida: S.salida, bitacora: S.bitacora })); } catch { /* sin espacio */ } };
+  // Ojo: «entregado» NO se respalda en el teléfono; solo cuenta si quedó en la nube (antes, una entrega fallida aparecía como hecha).
   let nube = null;
   try { const s = await getDoc(ref); if (s.exists()) { nube = s.data(); S = { ...S, ...nube }; } } catch { /* sin conexión: empieza con lo del teléfono */ }
   ['hechas', 'saltadas', 'checks', 'salida', 'bitacora'].forEach(k => { S[k] = S[k] || {}; });
+  // Si el maestro le corrigió el nombre, el respaldo del teléfono quedó con el registro viejo: se adopta.
+  if (!leerLocal()) { try { const pre = `ep_ruta_${sesion.grupoId}_`, suf = `_${R.ind}`;
+    for (const k of Object.keys(localStorage).filter(k => k.startsWith(pre) && k.endsWith(suf) && k !== LKEY)) {
+      const viejo = k.slice(pre.length, -suf.length); const sv = await getDoc(doc(db, 'grupos', sesion.grupoId, 'alumnos', viejo));
+      if (!sv.exists()) { localStorage.setItem(LKEY, localStorage.getItem(k)); localStorage.removeItem(k); break; } } } catch { /* sin conexión */ } }
   const L = leerLocal(), falta = {};
   if (L) ['hechas', 'saltadas', 'checks', 'salida', 'bitacora'].forEach(k => Object.entries(L[k] || {}).forEach(([c, v]) => {
     const ya = S[k][c]; if (v && (ya === undefined || ya === null || ya === '' || (typeof v === 'string' && typeof ya === 'string' && v.length > ya.length))) { S[k][c] = v; (falta[k] = falta[k] || {})[c] = v; }
   }));
-  if (L && L.entregado && !S.entregado) { S.entregado = L.entregado; falta.entregado = L.entregado; }
-  const avisar = (txt, mal) => { const m = $('#rt-guardado', cont); if (m) { m.textContent = txt; m.className = 'rt-guardado' + (mal ? ' mal' : ''); } };
-  const guardar = async parcial => {
+  // Reparación: si la entrega quedó en la nube pero no la marca del boleto, se completa sola.
+  const EST_SAL = E.find(x => x.tipo === 'salida');
+  if (S.entregado && EST_SAL && !S.hechas[EST_SAL.id]) { S.hechas[EST_SAL.id] = (S.entregado.t && S.entregado.t.toMillis ? S.entregado.t.toMillis() : S.entregado.t) || Date.now(); (falta.hechas = falta.hechas || {})[EST_SAL.id] = S.hechas[EST_SAL.id]; }
+  const avisar = (txt, mal, html) => { const m = $('#rt-guardado', cont); if (m) { if (html) m.innerHTML = html; else m.textContent = txt; m.className = 'rt-guardado' + (mal ? ' mal' : ''); } };
+  let reintentoT = null;
+  const guardar = async (parcial, otra) => {
     if (!abierta(a.id)) { avisar('🔒 La clase está cerrada: ya no se guardan cambios.', true); return false; }
     respaldar();
-    try { await setDoc(ref, { ...parcial, nombre: sesion.nombre, pinVerificado: sesion.pin, actualizado: serverTimestamp() }, { merge: true }); avisar('✓ Guardado'); return true; }
-    catch (e) { avisar('⚠️ No se pudo guardar. Revisa tu internet; lo que escribiste sigue aquí.', true); return false; }
+    try { await setDoc(ref, { ...parcial, nombre: sesion.nombre, pinVerificado: sesion.pin, actualizado: serverTimestamp() }, { merge: true }); avisar('✓ Guardado en la nube'); return true; }
+    catch (e) {
+      const d = await diagnosticar(e);
+      if (d.tipo === 'reintentar' && !otra) return guardar(parcial, true);
+      avisar('', true, `⚠️ ${esc(d.txt)} ${d.tipo === 'sesion' ? BTN_REENTRAR : '<button type="button" class="ma-link" data-reint>Reintentar</button>'}`);
+      const r = $('[data-reint]', cont); if (r) r.onclick = () => guardar(parcial);
+      if (d.tipo === 'red') { clearTimeout(reintentoT); reintentoT = setTimeout(() => guardar(parcial), 8000); }
+      return false;
+    }
   };
   // Textos: se juntan y se guardan cada segundo
   const guardarTexto = (grupo, k, v) => {
@@ -711,18 +777,36 @@ async function rutaVista(cont, a, R) {
     const listo = () => e.preguntas.every(([k]) => palabras(S.salida[k]) >= MIN_SALIDA);
     c.innerHTML = e.preguntas.map(([k, q], n) => `<label class="rt-campo"><span><b>${n + 1}.</b> ${esc(q)}</span><textarea rows="4" data-s="${k}">${esc(S.salida[k] || '')}</textarea><small class="rt-pal" data-p="${k}"></small></label>`).join('')
       + `<div class="rt-entrega" id="rt-entrega"></div>`;
-    const cuentas = () => { e.preguntas.forEach(([k]) => { const n = palabras(S.salida[k]), el = $(`[data-p="${k}"]`, c); el.textContent = `${n} palabra${n === 1 ? '' : 's'}${n < MIN_SALIDA ? ` · mínimo ${MIN_SALIDA}` : ' ✓'}`; el.classList.toggle('ok', n >= MIN_SALIDA); }); entrega(); };
-    const entrega = () => {
+    const cuentas = () => { e.preguntas.forEach(([k]) => { const n = palabras(S.salida[k]), el = $(`[data-p="${k}"]`, c); el.textContent = `${n} palabra${n === 1 ? '' : 's'}${n < MIN_SALIDA ? ` · mínimo ${MIN_SALIDA}` : ' ✓'}`; el.classList.toggle('ok', n >= MIN_SALIDA); }); if (!S.entregado || !$('#rt-verif', c)) entrega(); };
+    const entrega = (verif) => {
       const z = $('#rt-entrega', c), faltan = E.filter(x => x.id !== e.id && !S.hechas[x.id]);
-      z.innerHTML = S.entregado ? `<div class="cl-entregada">✅ Entregaste tu clase el ${esc(punto(fechaHora(S.entregado.t)))} Puedes seguir mejorando tus respuestas mientras esté abierta.</div>`
-        : `<button type="button" class="btn-at" id="rt-entregar" ${listo() && abierta(a.id) ? '' : 'disabled'}>📤 Entregar mi clase</button><small>${!listo() ? `Contesta las tres preguntas (mínimo ${MIN_SALIDA} palabras cada una) para poder entregar.` : faltan.length ? `Ojo: te falta: ${faltan.map(x => x.titulo).join(' · ')}.` : '¡Todo listo!'}</small>`;
+      z.innerHTML = S.entregado ? `<div class="cl-entregada">✅ Entregaste tu clase el ${esc(punto(fechaHora(S.entregado.t)))} Puedes seguir mejorando tus respuestas mientras esté abierta.</div>
+          <button type="button" class="btn-ruta" id="rt-verif">🔎 Comprobar que le llegó a mi maestro</button><div id="rt-verif-res">${verif || ''}</div>`
+        : `<button type="button" class="btn-at" id="rt-entregar" ${listo() && abierta(a.id) ? '' : 'disabled'}>📤 Enviar mi clase al maestro</button><small>${!listo() ? `Contesta las tres preguntas (mínimo ${MIN_SALIDA} palabras cada una) para poder enviar.` : faltan.length ? `Ojo: te falta: ${faltan.map(x => x.titulo).join(' · ')}.` : '¡Todo listo! Toca el botón para enviarla.'}</small>`;
+      const v = $('#rt-verif', c); if (v) v.addEventListener('click', comprobar);
       const b = $('#rt-entregar', c); if (b) b.addEventListener('click', async () => {
-        if (faltan.length && !confirm(`Te falta: ${faltan.map(x => x.titulo).join(', ')}.\n\n¿Entregar así? Puedes volver a completarlo mientras la clase siga abierta.`)) return;
-        b.disabled = true; clearTimeout(tGuardar); const p = pendiente; pendiente = {};
-        S.entregado = { t: Date.now() };
-        if (await guardar({ ...p, entregado: S.entregado })) await marcar(e.id); else S.entregado = null;
-        entrega();
+        if (faltan.length && !confirm(`Te falta: ${faltan.map(x => x.titulo).join(', ')}.\n\n¿Enviar así? Puedes volver a completarlo mientras la clase siga abierta.`)) return;
+        b.disabled = true; b.textContent = 'Enviando…'; clearTimeout(tGuardar); const p = pendiente; pendiente = {};
+        const t = Date.now(), salida0 = { ...S.salida };
+        // Todo en una sola escritura: respuestas del boleto + estación terminada + entrega.
+        if (await guardar({ ...p, salida: salida0, hechas: { [e.id]: t }, entregado: { t } })) { S.entregado = { t }; S.hechas[e.id] = t; pintarMapa(); entrega(); comprobar(); }
+        else { Object.assign(pendiente, p); entrega(); }
       });
+    };
+    // Lee la entrega DIRECTO del servidor (no de la memoria del teléfono) y dice qué recibió el maestro y qué falta.
+    const comprobar = async () => {
+      const r = $('#rt-verif-res', c); if (!r) return; r.innerHTML = '<p class="rt-estado">Comprobando con el servidor…</p>';
+      try {
+        const sn = await getDocFromServer(ref), d = sn.exists() ? sn.data() : {}, h = d.hechas || {}, sal = d.salida || {};
+        if (!d.entregado) { r.innerHTML = '<div class="aviso mal"><strong>Tu maestro todavía NO la tiene.</strong> Vuelve a tocar «Enviar».</div>'; S.entregado = null; entrega(); return; }
+        const li = [...E.map(x => [!!h[x.id], `${x.ico} ${x.titulo}`]),
+          ...e.preguntas.map(([k], n) => [palabras(sal[k]) >= MIN_SALIDA, `Boleto, pregunta ${n + 1}: ${palabras(sal[k])} palabras`]),
+          ...(R.bitacora ? [[bitacoraCompleta(R, d), `${R.bitacora.ico} ${R.bitacora.titulo} (participación)`]] : [])];
+        const mal = li.filter(([ok]) => !ok);
+        r.innerHTML = `<div class="aviso ${mal.length ? 'mal' : 'ok'}"><strong>${mal.length ? `✓ Tu maestro ya tiene tu clase, pero le falta${mal.length === 1 ? '' : 'n'} ${mal.length}:` : '✓ Confirmado: tu maestro ya tiene tu clase completa.'}</strong>
+          <ul class="rt-verif">${li.map(([ok, t]) => `<li class="${ok ? 'ok' : 'mal'}">${ok ? '✅' : '❌'} ${esc(t)}</li>`).join('')}</ul>
+          <small>Comprobado ${esc(punto(fechaHora(Date.now())))}</small></div>`;
+      } catch (er) { const d = await diagnosticar(er); r.innerHTML = `<div class="aviso mal">${esc(d.txt)} ${d.tipo === 'sesion' ? BTN_REENTRAR : ''}</div>`; }
     };
     $$('[data-s]', c).forEach(t => { t.readOnly = !abierta(a.id); t.addEventListener('input', () => { guardarTexto('salida', t.dataset.s, t.value); cuentas(); }); });
     cuentas();
@@ -824,7 +908,7 @@ function actTribunal(cont) {
     const m = $('#tr-msg');
     if (!borrador.v) { m.textContent = 'Elige tu veredicto.'; m.className = 'ma-msg mal'; return; }
     try { await updateDoc(yoRef, new FieldPath('v', caso.id), { l, v: borrador.v, arg: borrador.arg.trim() }, 'pinVerificado', sesion.pin); m.textContent = `✓ Voto registrado${palabras(borrador.arg) >= TR_MIN_ARG ? ' con argumento' : ''}. Puedes corregirlo mientras el Tribunal delibera.`; m.className = 'ma-msg ok'; }
-    catch (e) { m.textContent = 'No se pudo enviar: ' + (e.message || e); m.className = 'ma-msg mal'; }
+    catch (e) { const d = await diagnosticar(e); m.innerHTML = '⚠️ No se pudo enviar. ' + esc(d.txt) + (d.tipo === 'sesion' ? ' ' + BTN_REENTRAR : ''); m.className = 'ma-msg mal'; }
   };
   const pintar = () => {
     if (!LAB) return;
@@ -1015,7 +1099,7 @@ function actCoev(cont) {
       if (faltan.length) { m.textContent = `Te falta calificar: ${faltan.map(x => x[1].toLowerCase()).join(', ')}.`; m.className = 'ma-msg mal'; m.hidden = false; return; }
       mia.pregunta = $('#co-preg').value.trim();
       try { await setDoc(ref, { pinVerificado: sesion.pin, nombre: sesion.nombre, equipo: id, cal, pregunta: mia.pregunta, t: serverTimestamp() }); mia.t = Date.now(); m.textContent = '✓ Evaluación enviada. Puedes corregirla mientras siga abierta.'; m.className = 'ma-msg ok'; m.hidden = false; }
-      catch (e) { m.textContent = 'No se pudo enviar: ' + (e.message || e); m.className = 'ma-msg mal'; m.hidden = false; }
+      catch (e) { const d = await diagnosticar(e); m.innerHTML = '⚠️ No se pudo enviar. ' + esc(d.txt) + (d.tipo === 'sesion' ? ' ' + BTN_REENTRAR : ''); m.className = 'ma-msg mal'; m.hidden = false; }
     });
   };
   subs.push(onSnapshot(doc(db, 'grupos', g), sn => { const n = (sn.exists() && sn.data().coev) || {}; const cambio = n.equipo !== C.equipo || n.abierta !== C.abierta; C = n; GDATA = sn.exists() ? sn.data() : {}; if (cambio) pintar(); }, () => {}));

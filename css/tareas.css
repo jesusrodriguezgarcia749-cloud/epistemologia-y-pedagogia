@@ -449,3 +449,9 @@ html[data-theme="dark"] .cu-ej b { color: #E9C46A; }
 .tq-cielo em { margin-left: auto; font-style: normal; font-weight: 700; color: #F3C969; }
 .cl-mision { border-color: #2E6F7A; }
 .cl-mision p b { font-size: inherit; display: inline; margin: 0; color: var(--ink); }
+/* Comprobación de entrega (lee del servidor) */
+.rt-verif, .aviso ul.rt-verif { list-style: none !important; margin: 8px 0 4px; padding: 0 !important; display: grid; gap: 3px; font-weight: 500; }
+.rt-verif li.mal { color: #A63D2F; } html[data-theme="dark"] .rt-verif li.mal { color: #F0A597; }
+.cl-verif { margin-top: 8px; } .cl-entregada .btn-ruta { margin-top: 4px; }
+.rt-guardado [data-reentrar], .ma-msg [data-reentrar], .ma-barra [data-reentrar] { margin: 6px 0 0; display: inline-block; }
+#rt-entrega #rt-verif { margin-top: 8px; }
