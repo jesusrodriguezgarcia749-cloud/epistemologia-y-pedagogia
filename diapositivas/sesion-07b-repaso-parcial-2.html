@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Repaso del Parcial 2 · Epistemología y Pedagogía</title>
+</head>
+<body>
+<!-- =====================================================================
+     REPASO DEL PARCIAL 2: Lunes 23 de noviembre · 1 hora
+     El examen se recorrió al martes 24. Hoy: revisar que nadie deba tareas,
+     repaso rápido de preguntas y respuestas (4.5 a 7.4) y Arena de repaso final.
+     Fuente: libro de texto Epistemología y Pedagogía, Temas 4 (cierre) a 7
+     Lo que va en "minutos", "evaluacion" y "notas" solo lo ve el docente
+     (tecla S, o abre la página con ?docente al final de la dirección).
+     ===================================================================== -->
+<script>
+const PRESENTACION = {
+  materia: "Epistemología y Pedagogía",
+
+  diapositivas: [
+    { tipo: "portadaDia",
+      tema: "Repaso · Cierre del Tema 4 y Temas 5 a 7",
+      dia: "Lunes 23 de noviembre · Repaso del Parcial 2",
+      titulo: "Repaso relámpago",
+      subtitulo: "Feyerabend, Morin y las ciencias sociales · Romper la inercia · Saberes de la vida · Cerebro y aprendizaje",
+      duracion: "1 hora",
+      minutos: "0-1",
+      notas: "El examen se recorrió al martes 24. Hoy: revisión de pendientes al inicio, repaso rápido con preguntas (que respondan antes del clic) y la Arena de repaso final con preguntas nuevas. Las actividades de repaso del Parcial 2 se cierran hoy a las 11:59 p. m." },
+
+    { tipo: "objetivos",
+      intro: "Mañana es el examen. Hoy no hay tema nuevo: **recordar**, que es la forma de estudiar que más funciona (7.4).",
+      puntos: [
+        "Revisar que **nadie deba tareas** del Parcial 2.",
+        "Repasar con **preguntas y respuestas** los cuatro bloques del examen.",
+        "Jugar la **Arena de repaso final**, con preguntas nuevas.",
+        "Saber **cómo será el examen** de mañana."
+      ],
+      pasoAPaso: true,
+      minutos: "1-2" },
+
+    { tipo: "plataforma",
+      etiqueta: "Revisión de pendientes", tipoAct: "Individual · desde el celular",
+      titulo: "¿Debes algo?",
+      enlace: "../mi-progreso.html", textoEnlace: "Aula Virtual → Mi progreso",
+      minutos: "2-9", evaluacion: "Revisión de tareas",
+      notas: "Mientras revisan, pasa por los lugares o usa el Concentrado del panel docente. Recuérdales: las actividades de repaso del Parcial 2 (Temas 4 a 7, sin errores) se cierran HOY a las 11:59 p. m. Quien deba algo, que lo anote ahora.",
+      pasos: [
+        "Entra a **Mi progreso**: revisa tus **tareas** del Parcial 2.",
+        "Revisa en **Actividades** que los **Temas 4, 5, 6 y 7** estén **terminados sin errores**.",
+        "Lo que falte, se cierra **hoy a las 11:59 p. m.**"
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tabla",
+      titulo: "Lo que entra mañana",
+      columnas: ["Bloque", "Subtemas", "Reactivos"],
+      filas: [
+        ["Cierre del Tema 4", "4.5 Feyerabend · 4.6 Morin · 4.7 Las ciencias sociales", "6"],
+        ["Tema 5", "Inercia mental, desconstrucción del método, neurociencia y diálogo", "8"],
+        ["Tema 6", "Conocimiento tácito, saberes locales, ciencia y arte, nuevo paradigma", "8"],
+        ["Tema 7", "Cerebro, emoción, neuromitos y cómo aprender mejor", "8"]
+      ],
+      pasoAPaso: true,
+      minutos: "9-10",
+      notas: "Treinta reactivos en sesenta minutos. Lo de 4.1 a 4.4 ya se evaluó en el Parcial 1." },
+
+    { tipo: "repaso",
+      titulo: "Tema 4 · Feyerabend",
+      preguntas: [
+        { pregunta: "¿Qué quiere decir «todo vale»?", respuesta: "Que **ninguna regla fija** garantiza el progreso. **No** que cualquier opinión valga lo mismo." },
+        { pregunta: "¿Cómo llamó Feyerabend a su postura?", respuesta: "**Anarquismo epistemológico**." },
+        { pregunta: "¿Qué ejemplo usa de alguien que rompió «el método» con éxito?", respuesta: "**Galileo**, que defendió a Copérnico con retórica y argumentos cuando la evidencia no lo favorecía." },
+        { pregunta: "¿Cuál es el riesgo de leerlo mal?", respuesta: "El **relativismo extremo**: creer que da igual la vacuna que el remedio milagroso." }
+      ],
+      minutos: "10-12",
+      notas: "Que respondan a coro o con la mano antes de cada clic." },
+
+    { tipo: "tablaPasos",
+      titulo: "Tema 4 · Morin en un minuto",
+      columnas: ["Idea", "Qué significa", "Ejemplo"],
+      filas: [
+        ["**Complexus**", "Lo que está **tejido junto**.", "Un alumno es biológico, psicológico, social y cultural a la vez."],
+        ["**Simplificación**", "Disyunción, reducción y abstracción.", "Separar materias que en la vida van juntas."],
+        ["**Principio dialógico**", "Opuestos que se complementan.", "Orden y desorden en el salón."],
+        ["**Recursividad**", "Lo producido produce a quien lo produjo.", "La sociedad hace al individuo y el individuo a la sociedad."],
+        ["**Hologramático**", "El todo está en la parte.", "Cada alumno lleva la cultura de su comunidad."]
+      ],
+      revelar: "fila",
+      pie: "Antes de cada clic: **¿qué significa?**",
+      minutos: "12-14",
+      notas: "Los tres principios son pregunta segura de examen: dialógico, recursividad organizacional y hologramático. Recuerda también los siete saberes (UNESCO, 1999) y su huella en los campos formativos de la NEM." },
+
+    { tipo: "repaso",
+      titulo: "4.7 · ¿Son ciencia las ciencias sociales?",
+      preguntas: [
+        { pregunta: "¿Qué es la **doble hermenéutica** de Giddens?", respuesta: "Interpretan un mundo **ya interpretado** por sus actores, y sus conceptos **regresan** y lo transforman (el «bullying»)." },
+        { pregunta: "¿Por qué exigirle a la pedagogía que imite a la física es injusto?", respuesta: "Porque Kuhn, Lakatos y Feyerabend mostraron que **ni la física** sigue un método único." },
+        { pregunta: "¿Qué criterios de rigor tiene la investigación cualitativa?", respuesta: "**Credibilidad, transferibilidad, consistencia y confirmabilidad.**" }
+      ],
+      minutos: "14-16" },
+
+    { tipo: "tablaPasos",
+      titulo: "Tema 5 · ¿Qué obstáculo de Bachelard es?",
+      columnas: ["Frase de la sala de maestros", "Obstáculo"],
+      filas: [
+        ["«Se ve a simple vista que ese niño es flojo.»", "**Experiencia primera**: confiar en la primera impresión, sin crítica."],
+        ["«Dos alumnos de esa colonia reprobaron: todos los de ahí son así.»", "**Generalización apresurada**: concluir mucho de pocos casos."],
+        ["«Ese grupo no avanza porque es **de bajo nivel**.»", "**Obstáculo verbal**: creer que ponerle nombre ya lo explica."]
+      ],
+      revelar: "fila",
+      pie: "Antes de cada clic: **¿qué obstáculo hay detrás?**",
+      minutos: "16-18",
+      notas: "Bachelard: el conocimiento científico se construye CONTRA conocimientos previos mal hechos. La inercia mental (Martínez Miguélez) es seguir pensando como siempre aunque haya razones para cambiar; Planck: las verdades nuevas triunfan cuando crece una generación que las conoce." },
+
+    { tipo: "repaso",
+      titulo: "Tema 5 · El método y el cerebro",
+      preguntas: [
+        { pregunta: "¿Qué mostró Hanson con la radiografía?", respuesta: "Que **toda observación está cargada de teoría**: el médico y el lego miran lo mismo, pero no ven lo mismo." },
+        { pregunta: "Desconstruir el método, ¿es destruirlo?", respuesta: "No: es **desarmarlo con cuidado** para ver sus supuestos ocultos (Derrida)." },
+        { pregunta: "¿Qué significa *méthodos*?", respuesta: "**Camino**: el método se adecua al objeto, y el diseño puede ser **emergente**." },
+        { pregunta: "¿Cuál es el aporte de la neurociencia a la epistemología?", respuesta: "El cerebro **no es un espejo**: es un **constructor activo** que predice y corrige." }
+      ],
+      minutos: "18-20" },
+
+    { tipo: "tablaPasos",
+      titulo: "Tema 5 · ¿Quién lo dijo?",
+      columnas: ["Autor", "Su idea"],
+      filas: [
+        ["**Maturana y Varela**", "Todo hacer es conocer y todo conocer es hacer."],
+        ["**Damasio**", "La emoción no es enemiga de la razón: es su condición. El «error de Descartes»."],
+        ["**Gadamer**", "Comprender es una **fusión de horizontes**."],
+        ["**Habermas**", "Que gane **el mejor argumento**, no la fuerza ni la jerarquía."],
+        ["**Freire**", "El diálogo es una **postura epistemológica**: el educando también sabe."]
+      ],
+      revelar: "fila",
+      pie: "Antes de cada clic: **¿qué dijo?**",
+      minutos: "20-22",
+      notas: "La dimensión dialógica (5.4): el conocimiento se produce en la conversación crítica, no en la mente aislada de un genio." },
+
+    { tipo: "pregunta",
+      pregunta: "En un debate de clase ganó quien habló más fuerte, y nadie escuchó a los demás. Según Habermas, ¿qué faltó?",
+      respuesta: "Una situación en la que **todos puedan hablar** y se imponga **la fuerza del mejor argumento**, no la autoridad, la jerarquía ni el volumen.",
+      minutos: "22-23",
+      notas: "Es un tipo de pregunta de caso que puede aparecer mañana." },
+
+    { tipo: "pausa",
+      titulo: "¡Pausa activa!",
+      duracion: "2 minutos",
+      texto: "De pie, estírate. Sin ver tus notas, dile a quien tienes al lado **los tres principios de Morin** y **un obstáculo de Bachelard**. Luego cambien. Esto es **práctica de recuperación**: lo que más funciona para el examen.",
+      minutos: "23-25" },
+
+    { tipo: "repaso",
+      titulo: "Tema 6 · Saberes",
+      preguntas: [
+        { pregunta: "¿Qué dijo Polanyi?", respuesta: "**Sabemos más de lo que podemos decir**: el conocimiento **tácito** (andar en bicicleta, reconocer un rostro)." },
+        { pregunta: "Dos rasgos del conocimiento ordinario o de sentido común.", respuesta: "Es **práctico, compartido, poco sistemático, poco crítico y contextual**." },
+        { pregunta: "¿Por qué la milpa es conocimiento local?", respuesta: "El **frijol** aporta nitrógeno, el **maíz** lo sostiene y la **calabaza** guarda la humedad: lo sabían sin química." },
+        { pregunta: "¿Qué propone la **ecología de saberes** de Boaventura de Sousa Santos?", respuesta: "Que la ciencia **dialogue** con otros saberes, reconociendo los límites de cada uno." }
+      ],
+      minutos: "25-28" },
+
+    { tipo: "tablaPasos",
+      titulo: "Tema 6 · Ciencia, arte y escuela",
+      columnas: ["Autor o idea", "Lo que hay que recordar"],
+      filas: [
+        ["**Popper**", "Contexto de **descubrimiento** (creativo) y de **justificación** (riguroso)."],
+        ["**Schön**", "Crítica a la **racionalidad técnica**: el buen profesional reflexiona **en** la acción."],
+        ["**Stenhouse**", "El currículo es una **hipótesis** que el maestro pone a prueba: el **docente investigador**."],
+        ["**Delors (UNESCO, 1996)**", "Aprender a **conocer**, a **hacer**, a **vivir juntos** y a **ser**."]
+      ],
+      revelar: "fila",
+      pie: "Antes de cada clic: **¿qué propuso?**",
+      minutos: "28-30",
+      notas: "6.4: del conocimiento fragmentado al relacionado, de la transmisión a la construcción dialógica, de lo abstracto a lo contextualizado, de la certeza a la incertidumbre, del docente técnico al investigador." },
+
+    { tipo: "repaso",
+      titulo: "Tema 7 · ¿Neuromito o evidencia?",
+      preguntas: [
+        { pregunta: "«Solo usamos el 10 % del cerebro.»", respuesta: "**Neuromito.** Usamos todo el cerebro, en redes." },
+        { pregunta: "«Hay personas de hemisferio derecho y de hemisferio izquierdo.»", respuesta: "**Neuromito.** Sperry estudió pacientes con el cuerpo calloso **cortado**; en un cerebro sano trabajan juntos." },
+        { pregunta: "«El cerebro cambia sus conexiones con la experiencia toda la vida.»", respuesta: "**Evidencia**: la **plasticidad**. Nadie está condenado por su cerebro." },
+        { pregunta: "«Dormir consolida lo aprendido.»", respuesta: "**Evidencia**: en el sueño el cerebro reactiva y reorganiza lo aprendido. ¡Duerman hoy!" },
+        { pregunta: "«El cerebro tiene tres capas: reptiliano, límbico y neocorteza.»", respuesta: "**Metáfora superada** (MacLean): emoción y razón son redes entrelazadas." }
+      ],
+      minutos: "30-33" },
+
+    { tipo: "tablaPasos",
+      titulo: "Tema 7 · Los cuatro pilares de Dehaene",
+      columnas: ["Pilar", "Qué significa", "En el salón"],
+      filas: [
+        ["**Atención**", "El cerebro selecciona: lo que no se atiende no se aprende.", "Menos estímulos a la vez."],
+        ["**Compromiso activo**", "Una mente pasiva aprende poco.", "Predecir, responder, intentar."],
+        ["**Retroalimentación del error**", "El error es **información**, no fracaso.", "Corregir rápido y sin castigo."],
+        ["**Consolidación**", "Lo aprendido se vuelve automático.", "Práctica espaciada y sueño."]
+      ],
+      revelar: "fila",
+      pie: "Antes de cada clic: **¿cuál sigue?**",
+      minutos: "33-35",
+      notas: "Hebb (1949): las neuronas que se activan juntas se conectan. Emoción (Immordino-Yang y Damasio, 2007) y curiosidad (Mora: solo se aprende lo que se ama). El estrés intenso y prolongado daña la memoria." },
+
+    { tipo: "pregunta",
+      pregunta: "Según Dunlosky y colaboradores (2013), ¿qué técnicas de estudio tienen utilidad alta? ¿Y cuáles, de las más usadas, funcionan poco?",
+      respuesta: "Alta: la **práctica de recuperación** y la **práctica espaciada**. Baja: **releer y subrayar**. Por eso hoy hacemos preguntas y no lectura.",
+      minutos: "35-36",
+      notas: "Conecta con Roediger y Karpicke (2006): quien practica recordando retiene más que quien relee." },
+
+    { tipo: "plataforma",
+      etiqueta: "Arena en vivo", tipoAct: "Todo el grupo · desde el celular",
+      titulo: "Arena: repaso final del Parcial 2",
+      enlace: "../tareas.html#arena", textoEnlace: "Tareas → ⚡ Arena en vivo",
+      minutos: "36-50", evaluacion: "Participación (Arena de repaso)",
+      notas: "Panel docente → Tareas → Tareas digitales → Lun 23 → «Arena: repaso final del Parcial 2» (28 preguntas nuevas, distintas a las del día 17). 20 segundos por pregunta → Abrir la sala y proyectar. En cada respuesta detente unos segundos con la explicación. Si sobra tiempo, abre el ⚖️ Tribunal de la ciencia (revancha).",
+      pasos: [
+        "Entra a **Tareas → ⚡ Arena: repaso final del Parcial 2**.",
+        "Preguntas **nuevas** de los cuatro bloques, contra el reloj.",
+        "Al final, **podio**. Si fallas una, lee por qué: es tu repaso para mañana."
+      ],
+      pasoAPaso: true },
+
+    { tipo: "tema",
+      titulo: "Mañana: el examen",
+      etiqueta: "Martes 24 de noviembre · en el Aula Virtual",
+      puntos: [
+        "**30 reactivos en 60 minutos**: 6 del cierre del Tema 4 y 8 de cada uno de los Temas 5, 6 y 7.",
+        "Opción múltiple, **casos**, relación de columnas, completar y verdadero o falso.",
+        "Vale el **40 %** del Parcial 2.",
+        "Trae el **celular cargado** y datos, o usa la computadora.",
+        "Hoy en casa: la **guía de estudio** y el **simulacro** de Actividades. **Duerme bien.**"
+      ],
+      pasoAPaso: true,
+      minutos: "50-54",
+      notas: "Aclara a qué hora empieza el examen mañana y qué pasa después en la clase." },
+
+    { tipo: "repaso",
+      titulo: "Último relámpago",
+      preguntas: [
+        { pregunta: "*Complexus* significa…", respuesta: "**Lo que está tejido junto.**" },
+        { pregunta: "La inercia mental es…", respuesta: "Seguir pensando **como siempre**, aunque haya razones para cambiar." },
+        { pregunta: "El conocimiento tácito es…", respuesta: "Lo que **sabemos pero no podemos decir** (Polanyi)." },
+        { pregunta: "La mejor forma de estudiar esta noche es…", respuesta: "**Recordar** con preguntas (el simulacro), **no releer**, y **dormir**." }
+      ],
+      minutos: "54-57" },
+
+    { tipo: "cierre",
+      evidencia: "Pendientes revisados, repaso de los cuatro bloques y **Arena de repaso final**.",
+      materiales: "Aula Virtual y **celular con internet**.",
+      proxima: "**Hoy antes de las 11:59 p. m.:** terminar las actividades de repaso de los Temas 4 a 7 sin errores. **Martes 24: Examen Parcial 2** en el Aula Virtual. Estudia con la guía y el simulacro, y duerme bien.",
+      minutos: "57-60" }
+  ]
+};
+</script>
+<script src="motor.js"></script>
+</body>
+</html>
