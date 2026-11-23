@@ -937,3 +937,9 @@ html[data-theme="dark"] .ct-cat-si { color:#8FD19E; } html[data-theme="dark"] .c
 .ct-al-zip { margin-top:3px; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--ink-soft); font:inherit; font-size:.68rem; font-weight:600; padding:1px 8px; cursor:pointer; }
 .ct-al-zip:hover { background:var(--saffron, #C98A2C); color:#16130E; border-color:transparent; }
 .ct-zip-grupo { display:block; margin-top:6px; white-space:nowrap; }
+
+/* Modalidad de la tarea: en equipo o individual */
+.td-modo{display:inline-block;margin:2px 0 2px 4px;padding:1px 8px;border-radius:999px;font-size:.72rem;font-weight:700;white-space:nowrap;vertical-align:middle}
+.td-modo-eq{background:#E3ECF8;color:#1F3E6E}
+.td-modo-ind{background:#EAF4E4;color:#2F5A1E}
+.ct-tabla th .td-modo{display:block;width:max-content;margin:4px auto 0}

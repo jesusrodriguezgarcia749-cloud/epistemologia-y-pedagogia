@@ -827,6 +827,8 @@ async function ctReunirProyecto(c) {
 }
 
 // Marca en el encabezado si la tarea está en el catálogo (cuenta para la calificación) o no, con botón para agregarla.
+// Etiqueta de modalidad: en equipo o individual.
+const marcaModo = a => !a ? '' : enEquipo(a) ? '<span class="td-modo td-modo-eq" title="Tarea en equipo">👥 En equipo</span>' : '<span class="td-modo td-modo-ind" title="Tarea individual">👤 Individual</span>';
 function ctMarcaCat(c) {
   if (!c || c.tipo !== 'tarea') return '';
   return CT.enCat.has(catalogoId(c.a.id))
@@ -836,7 +838,7 @@ function ctMarcaCat(c) {
 function ctPintarTabla() {
   CT.cols = ctColumnas();
   const cont = document.getElementById('ct-tabla');
-  cont.innerHTML = `<table class="ct-tabla"><thead><tr><th class="ct-al">Alumno</th>${CT.cols.map(c => `<th class="${c.tipo === 'proyecto' ? 'ct-proy' : ''}" data-col="${c.id}"><span class="ct-ico">${c.icono}</span><b>${escaparHTML(c.nombre)}</b><small>${escaparHTML(c.fecha)}</small>${ctMarcaCat(c)}</th>`).join('')}</tr></thead>
+  cont.innerHTML = `<table class="ct-tabla"><thead><tr><th class="ct-al">Alumno</th>${CT.cols.map(c => `<th class="${c.tipo === 'proyecto' ? 'ct-proy' : ''}" data-col="${c.id}"><span class="ct-ico">${c.icono}</span><b>${escaparHTML(c.nombre)}</b><small>${escaparHTML(c.fecha)}</small>${c.tipo === 'tarea' ? marcaModo(c.a) : ''}${ctMarcaCat(c)}</th>`).join('')}</tr></thead>
     <tbody>${alumnosCache.map(al => `<tr data-al="${al.id}" data-n="${escaparHTML(ctNorm(al.nombre))}"><th class="ct-al" scope="row"><span class="ct-al-n">${escaparHTML(al.nombre)}</span><button type="button" class="ct-al-zip" data-zipal="${al.id}" title="Descargar todo el trabajo de este alumno en un .zip">⬇ .zip</button></th>${CT.cols.map(c => `<td class="${c.tipo === 'proyecto' ? 'ct-proy' : ''}" data-c="${c.id}"><span class="ct-carga">…</span></td>`).join('')}</tr>`).join('')}</tbody>
     <tfoot><tr><th class="ct-al">Todos<button type="button" class="btn btn-small ct-zip ct-zip-grupo" id="ct-zip-grupo" title="Un .zip con una carpeta (.zip) por alumno">⬇ Grupo completo</button></th>${CT.cols.map(c => `<td class="${c.tipo === 'proyecto' ? 'ct-proy' : ''}"><button type="button" class="btn btn-small ct-zip" data-zip="${c.id}" title="Descargar el Word de todos en un .zip">⬇ .zip</button></td>`).join('')}</tr></tfoot></table>`;
   cont.querySelectorAll('[data-zip]').forEach(b => b.addEventListener('click', () => ctZip(CT.cols.find(c => c.id === b.dataset.zip), b)));
@@ -2253,7 +2255,7 @@ async function cargarTareasDig() {
   cont.innerHTML = (dest ? `<button type="button" class="btn btn-small td-ir-hoy" id="td-ir-hoy">${deHoy ? '★ Ir a la clase de hoy' : '→ Ir a la próxima clase'} · ${escaparHTML(dest.fechaTexto)}</button>` : '') + TEMAS_TAREAS.map(t => `<div class="td-tema${t === dest ? ' td-destacada' : ''}"${t === dest ? ' id="td-hoy"' : ''}><p class="td-tit">${t === dest ? `<span class="td-marca-hoy">${deHoy ? '★ Hoy' : 'Próxima clase'}</span> ` : ''}<b>${escaparHTML(t.tema)} · ${escaparHTML(t.titulo)}</b> <small>${escaparHTML(t.fechaTexto)}</small></p>${t.acts.filter(a => califica(a) || a.tipo === 'vivo').map(a => {
     if (a.tipo === 'vivo') return `<div class="td-fila td-vivo"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)} <small>· en vivo, no se califica</small></span><button type="button" class="btn btn-small btn-primary" data-vivo="${a.id}">▶ Conducir en clase</button></div>`;
     const cat = enCat.has(catalogoId(a.id)), auto = esAuto(TAREAS_DIG[a.id]) && !(est[a.id] && 'cierre' in est[a.id]), cierre = cierreDe(est[a.id], TAREAS_DIG[a.id]), pro = Object.entries((est[a.id] && est[a.id].extra) || {}).filter(([, v]) => v && Date.parse(v) > Date.now()).length, vencida = !!cierre && Date.now() > Date.parse(cierre), ab = !(est[a.id] && est[a.id].abierta === false) && !vencida;
-    return `<div class="td-fila"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)}${cat ? ` <span data-marca="${catalogoId(a.id)}">${marcaCalificada(cuenta[catalogoId(a.id)] || 0, alumnosCache.length)}</span>` : ''}</span>
+    return `<div class="td-fila"><span class="td-nom">${a.icono} ${escaparHTML(a.nombre)} ${marcaModo(a)}${cat ? ` <span data-marca="${catalogoId(a.id)}">${marcaCalificada(cuenta[catalogoId(a.id)] || 0, alumnosCache.length)}</span>` : ''}</span>
       <label class="td-cierre" title="${auto ? 'Automático: cierra a las 23:59 del día de la clase. Cámbiala si quieres otra fecha; vacía, la cierras tú.' : 'Fecha y hora límite: la tarea se cierra sola. Déjala vacía para cerrarla tú.'}"><span>⏰ Cierra${auto ? ' <small class="td-auto">auto</small>' : ''}</span><input type="datetime-local" data-cierre="${a.id}" value="${escaparHTML(cierre)}"></label>
       <button type="button" class="btn btn-small td-cat ${cat ? 'si' : ''}" data-cat="${a.id}" ${cat ? 'disabled' : ''}>${cat ? '✓ En el catálogo' : '+ Agregar al catálogo'}</button>
       <button type="button" class="btn btn-small td-ab ${ab ? 'si' : 'no'}" data-ab="${a.id}">${ab ? '🔓 Abierta' : vencida ? '🔒 Cerrada (venció)' : '🔒 Cerrada'}</button>
@@ -2327,7 +2329,7 @@ async function calificarRuta(a, enCatalogo) {
   const respuestas = S => `${sal.preguntas.map(([k, q], i) => `<p><b>${i + 1}. ${escaparHTML(q)}</b><br>${escaparHTML((S.salida || {})[k] || '—')}</p>`).join('')}`;
   const bitacora = S => (R.bitacora ? R.bitacora.campos : []).map(([k, t]) => `<p><b>${escaparHTML(t)}:</b> ${escaparHTML((S.bitacora || {})[k] || '—')}</p>`).join('');
   const nBit = filas.filter(x => x.bit).length;
-  wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
+  wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))} ${marcaModo(a)}</h4>
     ${enCatalogo ? '' : '<p class="aviso-td">⚠️ Esta tarea todavía no está en el catálogo: las calificaciones se guardan, pero no cuentan en el promedio hasta que la agregues.</p>'}
     <p class="field-hint">Sugerida sobre 10: <b>6</b> por las ${R.estaciones.length} estaciones terminadas, <b>1</b> por las tarjetas acertadas al primer intento y <b>3</b> por el boleto de salida (una por respuesta de ${MIN_SALIDA} palabras o más). «Mi inercia mental» y «Saberes de la vida» se califican además como sus propias tareas.</p>
     <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button>${R.bitacora ? `<button type="button" class="btn btn-small btn-primary" id="rt-part">🎤 Dar participación a quienes completaron la bitácora (${nBit})</button>` : ''}<button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button></div>
@@ -2415,7 +2417,7 @@ async function calificarTareaDig(a, enCatalogo) {
   const { filas, wordDe } = await reunirTareaDig(a);
   const f = t => t && t.toDate ? t.toDate().toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : typeof t === 'number' ? new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
   const inv = A.filas.filter(x => x[3]).length;
-  wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))}</h4>
+  wrap.innerHTML = `<h4 class="td-h4">Calificar: ${escaparHTML(nombreCatalogo(a))} ${marcaModo(a)}</h4>
     ${enCatalogo ? '' : '<p class="aviso-td">⚠️ Esta tarea todavía no está en el catálogo: las calificaciones se guardan, pero no cuentan en el promedio hasta que la agregues.</p>'}
     <p class="field-hint">La calificación sugerida sale de qué tan completo está el cuadro: ${inv ? `8 puntos por las ${A.filas.length * A.columnas.length} celdas llenas (cuenta la que tiene ${MIN_PALABRAS_CELDA} palabras o más) y 2 por ${inv === 1 ? 'la fuente de la fila' : 'las fuentes de las filas'} de investigación` : 'celdas llenas'}. En equipo, quien <b>no escribió nada</b> sale con sugerida <b>0</b> (✋ No aportó); los que sí aportaron llevan la del equipo. Puedes corregirla a mano si alguien trabajó desde el celular de un compañero.</p>
     <div class="quiz-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;"><button type="button" class="btn btn-ghost-dark btn-small" id="td-usar">Usar sugeridas en las vacías</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-zip">⬇ Word de todos (.zip)</button><button type="button" class="btn btn-ghost-dark btn-small" id="td-cerrar">Cerrar</button><span class="field-hint" id="td-zip-msg"></span></div>
