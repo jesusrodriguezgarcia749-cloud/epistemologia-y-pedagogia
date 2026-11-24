@@ -10,7 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { ACTIVIDADES_PARCIAL, calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
+import { parcialAsistencia, ACTIVIDADES_PARCIAL, calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { resumenGeneral } from "./resumen-tareas.js?v=2026111801";
 import { resumenSemana } from "./resumen-semana.js?v=2026112001";
@@ -627,6 +627,7 @@ async function guardarCalificaciones(tipo) {
 // ---------- ASISTENCIA ----------
 let asistenciaEstados = {};
 on('asis-fecha', 'change', cargarAsistencia);
+on('asis-parcial', 'change', cargarListasAsistencia);
 on('asis-parcial', 'change', () => { cargarAsistencia(); vistaRapida('asistencia', { db, grupoActivo, alumnos: alumnosCache, datosDeAlumno }); });
 on('btn-guardar-asistencia', 'click', guardarAsistencia);
 const _hoy = new Date();
@@ -647,6 +648,7 @@ async function cargarAsistencia() {
     catch { asistenciaEstados[a.id] = 'presente'; }
   }));
   renderAsistenciaLista();
+  { const c = document.getElementById('asis-listas'); if (c && c.dataset.g !== grupoActivo) { c.dataset.g = grupoActivo; cargarListasAsistencia(); } }
 }
 
 function renderAsistenciaLista() {
@@ -670,10 +672,58 @@ async function guardarAsistencia() {
   try {
     await Promise.all(alumnosCache.map(a => {
       const ref = doc(db, 'grupos', grupoActivo, 'alumnos', a.id, 'asistencias', fecha);
-      return setDoc(ref, { estado: asistenciaEstados[a.id] || 'presente', fecha, parcial, actualizado: serverTimestamp() });
+      return setDoc(ref, { estado: asistenciaEstados[a.id] || 'presente', fecha, parcial: parcialAsistencia({ fecha }) || parcial, actualizado: serverTimestamp() });
     }));
   } catch (err) { marcarResultado('btn-guardar-asistencia', 'asis-msg', false, '', 'No se pudo guardar: ' + (err.message || err)); return; }
   marcarResultado('btn-guardar-asistencia', 'asis-msg', true, '✓ Asistencia guardada.', '');
+  cargarListasAsistencia();
+}
+
+// ---------- LISTAS DE ASISTENCIA GUARDADAS: cambiar de fecha o eliminar ----------
+const MESES_AS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const DIAS_AS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+const fechaAs = f => { const [y, m, d] = f.split('-').map(Number); return `${DIAS_AS[new Date(y, m - 1, d).getDay()]} ${d} de ${MESES_AS[m - 1]} de ${y}`; };
+let listasAs = {};
+async function cargarListasAsistencia() {
+  const cont = document.getElementById('asis-listas');
+  if (!cont) return;
+  if (!grupoActivo || !alumnosCache.length) { cont.innerHTML = ''; return; }
+  cont.innerHTML = '<p class="empty-inline">Buscando listas guardadas…</p>';
+  listasAs = {};
+  await Promise.all(alumnosCache.map(async a => {
+    try { const sn = await getDocs(collection(db, 'grupos', grupoActivo, 'alumnos', a.id, 'asistencias'));
+      sn.forEach(d => { const x = d.data(), f = x.fecha || d.id; (listasAs[f] ||= []).push({ al: a.id, id: d.id, x }); }); } catch { /* */ }
+  }));
+  const F = Object.keys(listasAs).sort().reverse();
+  cont.innerHTML = F.length ? F.map(f => { const L = listasAs[f], fal = L.filter(r => r.x.estado === 'falta').length, ret = L.filter(r => r.x.estado === 'retardo').length;
+    return `<div class="asis-guardada"><span><b>${escaparHTML(fechaAs(f))}</b><br><small>${L.length} alumnos · ${fal} falta${fal === 1 ? '' : 's'} · ${ret} retardo${ret === 1 ? '' : 's'} · cuenta para ${parcialAsistencia({ fecha: f }) === 'final' ? 'el Examen Final' : 'el Parcial 2'}</small></span>
+      <span class="asis-g-btns"><button type="button" class="mz-btn" data-as-ver="${f}">Ver</button><button type="button" class="mz-btn" data-as-mover="${f}">Cambiar fecha</button><button type="button" class="mz-btn btn-danger-lite" data-as-borrar="${f}">Eliminar</button></span></div>`; }).join('')
+    : '<p class="empty-inline">Todavía no hay listas guardadas en este grupo.</p>';
+  cont.querySelectorAll('[data-as-ver]').forEach(b => b.addEventListener('click', () => { document.getElementById('asis-fecha').value = b.dataset.asVer; cargarAsistencia(); document.getElementById('asis-fecha').scrollIntoView({ behavior: 'smooth', block: 'center' }); }));
+  cont.querySelectorAll('[data-as-borrar]').forEach(b => b.addEventListener('click', async () => {
+    const f = b.dataset.asBorrar, L = listasAs[f];
+    if (!confirm(`¿Eliminar la lista del ${fechaAs(f)}? Se borra la asistencia de ${L.length} alumnos de ese día y no se puede deshacer.`)) return;
+    b.disabled = true;
+    try { await Promise.all(L.map(r => deleteDoc(doc(db, 'grupos', grupoActivo, 'alumnos', r.al, 'asistencias', r.id)))); }
+    catch (e) { alert('No se pudo eliminar: ' + (e.message || e)); }
+    cargarListasAsistencia(); cargarAsistencia();
+  }));
+  cont.querySelectorAll('[data-as-mover]').forEach(b => b.addEventListener('click', async () => {
+    const f = b.dataset.asMover, L = listasAs[f];
+    const nueva = prompt(`Nueva fecha para la lista del ${fechaAs(f)}.\nEscríbela así: año-mes-día, por ejemplo 2026-11-17`, f);
+    if (nueva === null) return;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(nueva) || isNaN(Date.parse(nueva))) { alert('Escribe la fecha como año-mes-día, por ejemplo 2026-11-17.'); return; }
+    if (nueva === f) return;
+    if (listasAs[nueva] && !confirm(`Ya hay una lista el ${fechaAs(nueva)}. ¿Reemplazarla con esta?`)) return;
+    b.disabled = true;
+    try {
+      await Promise.all(L.map(async r => {
+        await setDoc(doc(db, 'grupos', grupoActivo, 'alumnos', r.al, 'asistencias', nueva), { ...r.x, fecha: nueva, parcial: parcialAsistencia({ fecha: nueva }), actualizado: serverTimestamp() });
+        if (r.id !== nueva) await deleteDoc(doc(db, 'grupos', grupoActivo, 'alumnos', r.al, 'asistencias', r.id));
+      }));
+    } catch (e) { alert('No se pudo cambiar la fecha: ' + (e.message || e)); }
+    cargarListasAsistencia(); cargarAsistencia();
+  }));
 }
 
 // ---------- UNIFORMES ----------

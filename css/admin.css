@@ -943,3 +943,9 @@ html[data-theme="dark"] .ct-cat-si { color:#8FD19E; } html[data-theme="dark"] .c
 .td-modo-eq{background:#E3ECF8;color:#1F3E6E}
 .td-modo-ind{background:#EAF4E4;color:#2F5A1E}
 .ct-tabla th .td-modo{display:block;width:max-content;margin:4px auto 0}
+/* Listas de asistencia guardadas */
+#asis-listas { display: grid; gap: 8px; margin-bottom: 18px; }
+.asis-guardada { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 12px; border: 1px solid var(--borde, #d9d2c3); border-radius: 12px; background: var(--card, #fff); }
+.asis-guardada small { opacity: .8; }
+.asis-g-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn-danger-lite { color: #A63D2F; border-color: #E3B4AC; }
