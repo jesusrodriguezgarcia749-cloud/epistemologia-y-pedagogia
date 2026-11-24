@@ -15,7 +15,7 @@ import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } 
 import { resumenGeneral } from "./resumen-tareas.js?v=2026111801";
 import { resumenSemana } from "./resumen-semana.js?v=2026112001";
 import { vistaRapida } from "./matriz.js";
-import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js?v=2026112301";
+import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js?v=2026112401";
 import { cierreDe, parcialDe, esAuto } from "./cierre-tareas.js?v=2026111901";
 import { zipDocx, DocITES } from "./docx-ites.js?v=2026102708";
 import { wordTaller, numsDe, estadoEntrega, slugArchivo, revisarCitas, textosDe, refsElegidas, hastaDe } from "./taller-word.js?v=2026111904";
@@ -2240,8 +2240,11 @@ async function autoCatalogo() {
     const sn = await getDocs(collection(db, 'grupos', g, 'tareas_catalogo')), ya = new Set(sn.docs.map(d => d.id));
     const nuevas = Object.values(TAREAS_DIG).filter(a => califica(a) && esAuto(a) && a.fecha <= hoy && !ya.has(catalogoId(a.id)));
     await Promise.all(nuevas.map(a => setDoc(doc(db, 'grupos', g, 'tareas_catalogo', catalogoId(a.id)), { nombre: nombreCatalogo(a), fecha: a.fecha, parcial: parcialDe(a.fecha), digital: a.id, auto: true, creado: serverTimestamp() })));
+    // Si una clase se movió a otra fecha (p. ej. por examen), su tarea automática sale del catálogo y vuelve a entrar el día nuevo.
+    const movidas = sn.docs.filter(d => d.data().auto && TAREAS_DIG[d.data().digital] && TAREAS_DIG[d.data().digital].fecha > hoy);
+    await Promise.all(movidas.map(d => deleteDoc(d.ref)));
     AUTO_CAT = g + hoy;
-    if (nuevas.length && g === grupoActivo) { try { cargarCatalogo('tareas'); } catch { /* */ } }
+    if ((nuevas.length || movidas.length) && g === grupoActivo) { try { cargarCatalogo('tareas'); } catch { /* */ } }
   } catch (e) { console.warn('No se pudo agregar al catálogo:', e); }
 }
 // ---- Tareas digitales: catálogo, abrir/cerrar y calificar con sugerencia
