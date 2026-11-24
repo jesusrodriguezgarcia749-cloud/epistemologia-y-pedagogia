@@ -103,10 +103,11 @@ function promedioCalificaciones(lista) {
 
 function calcularAsistencia(registros, tope) {
   // Sin listas tomadas no hay faltas que descontar (igual que en uniformes).
-  if (!registros || registros.length === 0) return { pts: tope, tope, presentes: 0, total: 0 };
+  if (!registros || registros.length === 0) return { pts: tope, tope, presentes: 0, total: 0, lista: [] };
   const total = registros.length;
   const suma = registros.reduce((s, r) => s + (PESO_ASISTENCIA[r.estado] ?? 0), 0);
-  return { pts: (suma / total) * tope, tope, presentes: suma, total };
+  const lista = [...registros].sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''));
+  return { pts: (suma / total) * tope, tope, presentes: suma, total, lista };
 }
 
 function calcularUniformes(datoUniforme, tope) {
@@ -377,4 +378,22 @@ export function zonaDeDecision(resultadosPorParcial, redondeos) {
     items.push({ clave: 'cuatrimestre', calif: cuatri.calif });
   }
   return items;
+}
+
+// Desglose de asistencia por fecha (para el historial del alumno y el panel).
+const MES_AS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const DIA_AS = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
+const fAs = f => { if (!f) return '—'; const [y, m, d] = f.split('-').map(Number); return `${DIA_AS[new Date(y, m - 1, d).getDay()]} ${d} ${MES_AS[m - 1]}`; };
+export const ETQ_ASIS = { presente: 'Asistió', retardo: 'Retardo', justificado: 'Falta justificada', falta: 'Falta' };
+export function textoAsistencia(a) {
+  const n = Math.round((a.presentes || 0) * 100) / 100;
+  const fal = (a.lista || []).filter(r => r.estado === 'falta').length, ret = (a.lista || []).filter(r => r.estado === 'retardo').length;
+  return a.total ? `${(a.lista || []).length - fal} de ${a.total} clases${fal ? ` · ${fal} falta${fal === 1 ? '' : 's'}` : ''}${ret ? ` · ${ret} retardo${ret === 1 ? '' : 's'}` : ''}` : 'sin listas tomadas';
+}
+export function asistenciaHTML(a) {
+  const L = a.lista || [];
+  if (!L.length) return '<p class="empty-inline">Sin listas de asistencia tomadas en este bloque.</p>';
+  const col = { presente: '#2E7D4F', retardo: '#B7791F', justificado: '#2F6FD1', falta: '#C0392B' };
+  return `<ul class="lista-asis" style="list-style:none;padding:0;margin:4px 0;display:grid;gap:2px">${L.map(r => `<li style="display:flex;justify-content:space-between;gap:8px"><span>${fAs(r.fecha)}</span><b style="color:${col[r.estado] || 'inherit'}">${ETQ_ASIS[r.estado] || r.estado}</b></li>`).join('')}</ul>
+    <p class="field-hint" style="margin:4px 0 0">Tres retardos equivalen a una falta. La falta justificada no descuenta.</p>`;
 }

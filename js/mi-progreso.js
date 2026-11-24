@@ -6,7 +6,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { calcularParcial, calcularCuatrimestreRedondeado, NOMBRES_PARCIAL, NOMBRES_ENTREGA_PROYECTO } from "./calculo.js";
+import { calcularParcial, calcularCuatrimestreRedondeado, NOMBRES_PARCIAL, NOMBRES_ENTREGA_PROYECTO, textoAsistencia, asistenciaHTML } from "./calculo.js";
 
 const app = initializeApp(firebaseConfig);
 const auth_db = getFirestore(app);
@@ -196,7 +196,7 @@ function renderParciales() {
         filaRubro(NOMBRES_ENTREGA_PROYECTO.entrega2, r.proyecto.detalle.entrega2.pts, r.proyecto.detalle.entrega2.tope, r.proyecto.detalle.entrega2.calificacion !== null ? `${r.proyecto.detalle.entrega2.calificacion}/10` : 'sin capturar') +
         filaRubro(NOMBRES_ENTREGA_PROYECTO.entregaFinal, r.proyecto.detalle.entregaFinal.pts, r.proyecto.detalle.entregaFinal.tope, r.proyecto.detalle.entregaFinal.calificacion !== null ? `${r.proyecto.detalle.entregaFinal.calificacion}/10` : 'sin capturar') +
         filaRubro('Tareas y Participación', r.tareasParticipacion.pts, r.tareasParticipacion.tope) +
-        filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope, `${r.asistencia.presentes}/${r.asistencia.total} clases`);
+        filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope, textoAsistencia(r.asistencia));
     } else if (r.externa) {
       filasDetalle =
         filaRubro('Calificación del Parcial 1 (docente del primer bloque)', r.total, 100, `${r.externa.calificacion}/10`);
@@ -205,7 +205,7 @@ function renderParciales() {
         filaRubro('Examen', r.examen.pts, r.examen.tope, r.examen.calificacion !== null ? `${r.examen.calificacion}/10` : 'sin capturar') +
         filaRubro('Tareas', r.tareas.pts, r.tareas.tope, textoTareas(r.tareas)) +
         filaRubro('Participación', r.participacion.pts, r.participacion.tope, r.participacion.texto) +
-        filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope, `${r.asistencia.presentes}/${r.asistencia.total} clases`) +
+        filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope, textoAsistencia(r.asistencia)) +
         filaRubro('Uniformes', r.uniformes.pts, r.uniformes.tope, `${r.uniformes.faltas} falta(s)`);
     }
 
@@ -218,10 +218,11 @@ function renderParciales() {
         <h4>${NOMBRES_PARCIAL[p]}</h4>
         ${filasDetalle}
         <details class="prog-detalle-bloque" style="margin-top:8px;">
-          <summary>Ver fechas — Tareas${listaPart ? ' y Participación' : ''}</summary>
+          <summary>Ver fechas — Tareas${listaPart ? ', Participación' : ''} y Asistencia</summary>
           <p class="field-hint" style="margin:8px 0 2px;">Tareas:</p>
           ${esFinal ? renderListaActividades(listaTareas, 'Sin tareas capturadas.') : renderListaTareas(listaTareas, faltantesTareas)}
           ${listaPart ? `<p class="field-hint" style="margin:10px 0 2px;">Participación:</p>${renderListaActividades(listaPart, 'Sin participación capturada.', false)}` : ''}
+          <p class="field-hint" style="margin:10px 0 2px;">Asistencia (${textoAsistencia(r.asistencia)}):</p>${asistenciaHTML(r.asistencia)}
         </details>
         <div class="res-row res-total"><span>Total</span><strong>${r.total.toFixed(1)} / 100 pts</strong></div>
         ${r.total > 0 ? `<div class="res-row res-total"><span>Calificación del bloque</span><strong>${r.calif.pendiente ? `${r.calif.cruda.toFixed(2)} <small class="res-extra">— tu docente está revisando el redondeo</small>` : `${r.calif.oficial} / 10`}</strong></div>` : ''}

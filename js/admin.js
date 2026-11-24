@@ -10,7 +10,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { parcialAsistencia, ACTIVIDADES_PARCIAL, calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
+import { parcialAsistencia, textoAsistencia, asistenciaHTML, ACTIVIDADES_PARCIAL, calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
 import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js";
 import { resumenGeneral } from "./resumen-tareas.js?v=2026111801";
 import { resumenSemana } from "./resumen-semana.js?v=2026112001";
@@ -1945,17 +1945,17 @@ async function mostrarResumenAlumno(alumno) {
           filaRubro('Ensayo — Entrega 2', r.proyecto.detalle.entrega2.pts, r.proyecto.detalle.entrega2.tope) +
           filaRubro('Ensayo — Entrega final', r.proyecto.detalle.entregaFinal.pts, r.proyecto.detalle.entregaFinal.tope) +
           filaRubro('Tareas y Participación', r.tareasParticipacion.pts, r.tareasParticipacion.tope) +
-          filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope) +
-          `<details class="prog-detalle-bloque" style="margin-top:8px;"><summary>Ver fechas — Tareas y Participación</summary>${listaDetalleHTML([...r.tareasParticipacion.lista], 'Sin capturas.', true)}</details>`;
+          filaRubro(`Asistencia (${textoAsistencia(r.asistencia)})`, r.asistencia.pts, r.asistencia.tope) +
+          `<details class="prog-detalle-bloque" style="margin-top:8px;"><summary>Ver fechas — Tareas, Participación y Asistencia</summary>${listaDetalleHTML([...r.tareasParticipacion.lista], 'Sin capturas.', true)}<p class="field-hint" style="margin:10px 0 2px;">Asistencia:</p>${asistenciaHTML(r.asistencia)}</details>`;
       } else if (r.externa) {
         cuerpo = filaRubro('Calificación capturada del docente del primer bloque', r.total, 100);
       } else {
         cuerpo = filaRubro('Examen', r.examen.pts, r.examen.tope) +
           filaRubro(etiquetaTareas(r.tareas), r.tareas.pts, r.tareas.tope) +
           filaRubro(`Participación (${r.participacion.texto})`, r.participacion.pts, r.participacion.tope) +
-          filaRubro('Asistencia', r.asistencia.pts, r.asistencia.tope) +
+          filaRubro(`Asistencia (${textoAsistencia(r.asistencia)})`, r.asistencia.pts, r.asistencia.tope) +
           filaRubro('Uniformes', r.uniformes.pts, r.uniformes.tope) +
-          `<details class="prog-detalle-bloque" style="margin-top:8px;"><summary>Ver fechas — Tareas y Participación</summary><p class="field-hint" style="margin:8px 0 2px;">Tareas:</p>${listaTareasHTML(r.tareas.lista, r.tareas.faltantes)}<p class="field-hint" style="margin:10px 0 2px;">Participación:</p>${listaDetalleHTML(r.participacion.lista, 'Sin participación capturada.', false)}</details>`;
+          `<details class="prog-detalle-bloque" style="margin-top:8px;"><summary>Ver fechas — Tareas, Participación y Asistencia</summary><p class="field-hint" style="margin:8px 0 2px;">Tareas:</p>${listaTareasHTML(r.tareas.lista, r.tareas.faltantes)}<p class="field-hint" style="margin:10px 0 2px;">Participación:</p>${listaDetalleHTML(r.participacion.lista, 'Sin participación capturada.', false)}<p class="field-hint" style="margin:10px 0 2px;">Asistencia:</p>${asistenciaHTML(r.asistencia)}</details>`;
       }
       return `<div class="res-card"><h4>${NOMBRES_PARCIAL[p]}</h4>${cuerpo}<div class="res-row res-total"><span>Total</span><strong>${r.total.toFixed(1)} / 100 pts</strong></div><div class="res-row res-total"><span>Calificación (redondeada)</span><strong>${textoCalificacion(r.calif)}</strong></div></div>`;
     }).join('')}
