@@ -177,7 +177,7 @@ function etapaPregunta(c) {
     <p class="t-formula-res"><b>Resultado:</b> <i>${esc(D.guia.formula.resultado)}</i></p>
     <h3 class="t-h3">Antes de elegir: cuatro advertencias</h3>
     <div class="t-advert">${D.guia.advertencias.map(([t, x], i) => `<div><span class="t-paso">${i + 1}</span><b>${esc(t)}</b><p>${esc(x)}</p></div>`).join('')}</div>
-    <details class="t-banco" id="banco"><summary><b>¿No sabes por dónde empezar?</b> Explora 160 preguntas de ejemplo</summary>
+    <details class="t-banco" id="banco"><summary><b>¿No sabes por dónde empezar?</b> Explora ${D.banco.preguntas.length} preguntas de ejemplo</summary>
       <p class="lab-ayuda">Son puntos de partida, no preguntas terminadas. Elige una que te interese y que puedas investigar en un lugar al que tengas acceso; luego <b>cámbiale el lugar, los sujetos y el tiempo por los tuyos</b> y deja que el revisor te ayude a afinarla. Si te interesa el tema pero no el enfoque, cambia la entrada: «¿Qué relación existe…?» mide, «¿Cómo viven…?» comprende y «¿Cómo puede… junto con…?» transforma.</p>
       <div class="t-banco-filtros">
         <label>Lugar o problema<select id="bk-amb"><option value="">Todos</option><optgroup label="Por lugar de trabajo">${D.banco.ambitos.filter(a => a.grupo === 'lugar').map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}</optgroup><optgroup label="Por tipo de problema">${D.banco.ambitos.filter(a => a.grupo === 'problema').map(a => `<option value="${a.id}">${esc(a.nombre)}</option>`).join('')}</optgroup></select></label>
