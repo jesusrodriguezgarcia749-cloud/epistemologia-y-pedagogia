@@ -1202,7 +1202,11 @@ async function cargarExamenesAbiertos() {
   try { const snap = await getDoc(doc(db, 'grupos', grupoActivo, 'config', 'examenes')); examenesAbiertos = snap.exists() && Array.isArray(snap.data().abiertos) ? snap.data().abiertos : []; }
   catch { examenesAbiertos = []; }
   renderExamenesAbiertos();
+  // Muestra de entrada los intentos del examen que está abierto (antes siempre abría el Diagnóstico).
+  const sel = document.getElementById('enlinea-parcial'), ab = ['final', 'p2', 'p1', 'diag'].find(x => examenesAbiertos.includes(x));
+  if (sel && ab && sel.value !== ab && !sel.dataset.tocado) { sel.value = ab; cargarIntentos(); }
 }
+on('enlinea-parcial', 'change', e => { e.target.dataset.tocado = '1'; });
 
 function renderExamenesAbiertos() {
   const cont = document.getElementById('examenes-abiertos-lista');
