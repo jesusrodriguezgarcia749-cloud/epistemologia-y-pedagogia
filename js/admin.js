@@ -2241,7 +2241,7 @@ async function autoCatalogo() {
     const nuevas = Object.values(TAREAS_DIG).filter(a => califica(a) && esAuto(a) && a.fecha <= hoy && !ya.has(catalogoId(a.id)));
     await Promise.all(nuevas.map(a => setDoc(doc(db, 'grupos', g, 'tareas_catalogo', catalogoId(a.id)), { nombre: nombreCatalogo(a), fecha: a.fecha, parcial: parcialDe(a.fecha), digital: a.id, auto: true, creado: serverTimestamp() })));
     // Si una clase se movió a otra fecha (p. ej. por examen), su tarea automática sale del catálogo y vuelve a entrar el día nuevo.
-    const movidas = sn.docs.filter(d => d.data().auto && TAREAS_DIG[d.data().digital] && TAREAS_DIG[d.data().digital].fecha > hoy);
+    const movidas = sn.docs.filter(d => d.data().auto && !d.data().noCat && TAREAS_DIG[d.data().digital] && TAREAS_DIG[d.data().digital].fecha > hoy);
     await Promise.all(movidas.map(d => deleteDoc(d.ref)));
     AUTO_CAT = g + hoy;
     if ((nuevas.length || movidas.length) && g === grupoActivo) { try { cargarCatalogo('tareas'); } catch { /* */ } }
@@ -3017,3 +3017,13 @@ on('btn-apa-cat', 'click', async () => {
     msg.textContent = `✓ Listo: ${con.length} calificación(es) registradas en el catálogo.`;
   } catch (e) { msg.textContent = 'No se pudo registrar: ' + (e.message || e); }
 });
+
+// Los selectores de parcial arrancan en el parcial que está corriendo (antes arrancaban en «Parcial 1»).
+(() => {
+  const hoy = new Date().toLocaleDateString('en-CA'), act = hoy > '2026-11-24' ? 'final' : 'p2';
+  ['asis-parcial', 'unif-parcial', 'part-parcial', 'tareas-parcial'].forEach(id => {
+    const s = document.getElementById(id); if (!s) return;
+    const v = [...s.options].some(o => o.value === act) ? act : 'p2';
+    if (s.value !== v) { s.value = v; s.dispatchEvent(new Event('change')); }
+  });
+})();

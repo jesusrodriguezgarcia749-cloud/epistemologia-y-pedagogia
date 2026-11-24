@@ -1,7 +1,7 @@
 // reporte.js — reporte de calificaciones en PDF (grupo o por alumno) y examen
 // resuelto, para Epistemología y Pedagogía.
 
-import { calcularParcial, calcularCuatrimestreRedondeado, NOMBRES_PARCIAL, NOMBRES_ENTREGA_PROYECTO } from "./calculo.js";
+import { calcularParcial, calcularCuatrimestreRedondeado, NOMBRES_PARCIAL, NOMBRES_ENTREGA_PROYECTO, parcialAsistencia } from "./calculo.js";
 
 export const ESCUELA = {
   nombre: 'Instituto Tecnológico y de Estudios Superiores René Descartes',
@@ -252,7 +252,7 @@ export async function reporteAlumno({ nombreGrupo, alumno, datos }) {
   const ETIQ = { presente: 'Presente', justificado: 'Justificado', retardo: 'Retardo', falta: 'Falta' };
   let asistenciaHTML = '';
   PARCIALES.forEach(p => {
-    const dias = (datos.asistencias || []).filter(a => a.parcial === p).sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''));
+    const dias = (datos.asistencias || []).filter(a => parcialAsistencia(a) === p).sort((a, b) => (a.fecha || '').localeCompare(b.fecha || ''));
     if (dias.length === 0) return;
     const r = resultados[p];
     asistenciaHTML += `<p style="font-size:.74rem; margin:14px 0 2px;"><strong>${esc(NOMBRES_PARCIAL[p])}: ${dias.length} clases registradas</strong> — ${r.asistencia.pts.toFixed(2)} / ${r.asistencia.tope} pts</p>

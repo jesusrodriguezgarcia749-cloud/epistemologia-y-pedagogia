@@ -82,6 +82,9 @@ function msDeFecha(f) {
   const n = Date.parse(f); return Number.isNaN(n) ? null : n;
 }
 
+// Hasta el examen del Parcial 2 (martes 24 de noviembre de 2026) todo cuenta para el Parcial 2; después, para el Final.
+export const FIN_P2_ASIS = '2026-11-24';
+export const parcialAsistencia = a => a && a.fecha ? (a.fecha > FIN_P2_ASIS ? 'final' : 'p2') : (a && a.parcial);
 export const PESO_CUATRIMESTRE = { p1: 0.25, p2: 0.25, final: 0.50 };
 
 export const NOMBRES_PARCIAL = { p1: 'Parcial 1', p2: 'Parcial 2', final: 'Examen Final' };
@@ -99,7 +102,8 @@ function promedioCalificaciones(lista) {
 }
 
 function calcularAsistencia(registros, tope) {
-  if (!registros || registros.length === 0) return { pts: 0, tope, presentes: 0, total: 0 };
+  // Sin listas tomadas no hay faltas que descontar (igual que en uniformes).
+  if (!registros || registros.length === 0) return { pts: tope, tope, presentes: 0, total: 0 };
   const total = registros.length;
   const suma = registros.reduce((s, r) => s + (PESO_ASISTENCIA[r.estado] ?? 0), 0);
   return { pts: (suma / total) * tope, tope, presentes: suma, total };
@@ -272,7 +276,9 @@ function calcularParcialBase(parcial, datos) {
   datos = quitarExentos(datos || {});
   const tareasDelParcial = (datos.tareas || []).filter(t => t.parcial === parcial);
   const participacionDelParcial = (datos.participaciones || []).filter(p => p.parcial === parcial);
-  const asistenciaDelParcial = (datos.asistencias || []).filter(a => a.parcial === parcial);
+  // La asistencia se asigna al parcial por su FECHA (el selector del panel arrancaba en «Parcial 1»
+  // y varias listas del Parcial 2 se guardaron como p1). El Parcial 1 lo calificó la docente anterior.
+  const asistenciaDelParcial = (datos.asistencias || []).filter(a => parcialAsistencia(a) === parcial);
   const catalogoDelParcial = (datos.catalogoTareas || []).filter(t => t.parcial === parcial);
 
   if (parcial === 'final') {
