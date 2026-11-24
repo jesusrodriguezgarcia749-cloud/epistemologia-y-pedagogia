@@ -14,12 +14,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Cuál era la base epistemológica del modelo de rasgos y factores?",
    "opciones": [
-    "Positivista: rasgos estables y medibles, instrumentos estandarizados, un experto que diagnostica y una respuesta correcta",
+    "Sociocrítica: analizar las barreras y desigualdades que limitan la elección",
+    "Constructivista: la carrera como una historia que la persona va escribiendo",
     "Interpretativa: comprender los significados que la persona da a su historia",
-    "Sociocrítica: analizar las barreras y desigualdades del entorno",
-    "Constructivista: la carrera como una historia que la persona escribe"
+    "Positivista: rasgos estables y medibles, evaluados con instrumentos estandarizados"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "El modelo de Parsons buscaba la correspondencia entre rasgos medibles y requisitos de una ocupación."
   },
   {
@@ -29,10 +29,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué cambio epistemológico vivió la orientación vocacional?",
    "opciones": [
-    "Pasar del diagnóstico de rasgos estables para predecir una ocupación a acompañar la construcción de proyectos de vida",
-    "Pasar de las entrevistas a los tests estandarizados",
-    "Dejar de considerar los intereses de la persona",
-    "Eliminar la orientación de las escuelas"
+    "Del diagnóstico de rasgos para predecir una ocupación al acompañamiento del proyecto de vida",
+    "De la orientación grupal en la escuela a la atención exclusiva en consultorios",
+    "Del acompañamiento del proyecto de vida al diagnóstico de rasgos estables",
+    "De la entrevista clínica individual a la aplicación masiva de tests estandarizados"
    ],
    "correcta": 0,
    "explicacion": "Las personas cambian y el mundo del trabajo es inestable."
@@ -44,10 +44,10 @@
    "tipo": "caso",
    "pregunta": "Un orientador aplica a un grupo un test de intereses y entrega a cada alumno \"la carrera para la que nació\", sin entrevistas ni contexto. Con lo visto en todo el curso, ¿cuál es la crítica más completa?",
    "opciones": [
-    "Trabaja desde un supuesto positivista que confunde un momento con un destino; ignora el contexto sistémico y la construcción del proyecto de vida",
-    "Ninguna: los tests estandarizados son el único conocimiento válido sobre una persona",
-    "Su único error es no usar inteligencia artificial para interpretar el test",
-    "Que el test es falsable y por eso no es científico"
+    "Parte de un supuesto positivista que confunde un momento con un destino e ignora el contexto",
+    "Debió aplicar el test de forma individual y no grupal para ser válido",
+    "Usa un instrumento no estandarizado, por lo que sus resultados no son confiables",
+    "Su error es metodológico: un test de intereses debe aplicarse dos veces para confirmar"
    ],
    "correcta": 0,
    "explicacion": "Une el modelo de rasgos y factores (Tema 8) con los paradigmas (Tema 3) y la plasticidad y el cambio (Temas 3 y 7)."
@@ -89,12 +89,12 @@
    "tipo": "caso",
    "pregunta": "Un alumno pregunta: «¿Para qué hago un proyecto de vida, si el test ya me dijo qué estudiar?». Con la crítica del nuevo paradigma, ¿qué argumento es más sólido?",
    "opciones": [
-    "El test capta un momento, el contexto también decide y el mundo del trabajo cambia: conviene aprender a construir una trayectoria",
-    "El test siempre se equivoca y no debe tomarse en cuenta",
-    "El proyecto de vida sustituye por completo a cualquier instrumento de evaluación",
-    "El test solo es válido si lo interpreta un psicólogo"
+    "El test es más confiable que el proyecto de vida, así que este solo sirve como complemento",
+    "El proyecto de vida sirve para confirmar el resultado del test con la opinión de la familia",
+    "El test capta un momento; el contexto también decide y el trabajo cambia, por eso el proyecto se construye",
+    "El test predice bien la carrera, pero el proyecto de vida ayuda a elegir la escuela"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Las personas cambian, el contexto importa y el mundo del trabajo ya no es estable."
   },
   {
@@ -160,10 +160,10 @@
    "tipo": "caso",
    "pregunta": "Una escuela con problemas graves de violencia en su entorno responde solo con talleres para que los alumnos «aprendan a manejar su enojo». ¿Qué advertencia del compendio aplica?",
    "opciones": [
-    "La educación emocional no debe usarse para que los alumnos se adapten a situaciones injustas que habría que transformar",
-    "La educación emocional no tiene relación con el aprendizaje",
-    "Solo los alumnos con diagnóstico deben recibir educación emocional",
-    "La educación emocional basta para resolver cualquier problema del contexto"
+    "La educación emocional no debe usarse para que los alumnos se adapten a situaciones injustas",
+    "La educación emocional basta si se trabaja de forma constante durante el ciclo",
+    "La educación emocional debe dejarse a los especialistas y no a los docentes",
+    "Los talleres deben aplicarse solo a los alumnos con reportes de conducta"
    ],
    "correcta": 0,
    "explicacion": "Mantener la mirada crítica: también hay que intervenir sobre el contexto."
@@ -218,12 +218,12 @@
    "tipo": "caso",
    "pregunta": "Un docente afirma: \"Ese alumno no aprende porque tiene un problema\". Desde el enfoque de Booth y Ainscow, ¿cómo reformularías la pregunta?",
    "opciones": [
-    "¿Qué barreras en la enseñanza, los materiales, la organización o las actitudes le impiden aprender y participar?",
-    "¿Qué diagnóstico médico tiene para enviarlo a otra escuela?",
-    "¿Cuántos reportes acumula en el ciclo?",
-    "¿Por qué no se esfuerza como los demás?"
+    "¿Qué estilo de aprendizaje tiene, para adaptar la enseñanza a él?",
+    "¿Qué diagnóstico tiene, para canalizarlo con el especialista adecuado?",
+    "¿Qué rasgos de personalidad explican que no aprenda como los demás?",
+    "¿Qué barreras de enseñanza, materiales, organización o actitudes limitan su aprendizaje?"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "El problema se ve como relacional y sistémico, no solo del alumno."
   },
   {
@@ -233,12 +233,12 @@
    "tipo": "caso",
    "pregunta": "Una escuela atribuye el bajo rendimiento de un grupo a que \"los alumnos no quieren aprender\". Desde la mirada sistémica del Tema 3 y el enfoque de barreras del Tema 8, ¿qué conviene hacer primero?",
    "opciones": [
-    "Analizar las relaciones entre enseñanza, materiales, organización, familias y comunidad para identificar barreras para el aprendizaje y la participación",
-    "Sancionar a los alumnos con más reportes para que cambien de actitud",
-    "Aplicar un test de inteligencia a cada alumno para clasificarlos",
-    "Esperar a que el problema se resuelva solo con el tiempo"
+    "Aplicar un test de motivación a cada alumno para identificar a los desinteresados",
+    "Analizar las relaciones entre enseñanza, materiales, organización, familias y comunidad",
+    "Canalizar a los alumnos de menor rendimiento con el psicólogo escolar",
+    "Reforzar las sanciones para que los alumnos asuman su responsabilidad"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "Un problema educativo rara vez tiene una sola causa ubicada en el alumno."
   },
   {
@@ -315,12 +315,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Por qué el paso del modelo del déficit al de barreras es «profundamente epistemológico»?",
    "opciones": [
-    "Porque el problema deja de ubicarse solo en el individuo y se ve como un fenómeno relacional y sistémico",
-    "Porque sustituye los tests por entrevistas",
-    "Porque elimina la evaluación de los aprendizajes",
-    "Porque convierte al psicopedagogo en un especialista que diagnostica"
+    "Porque traslada la responsabilidad del aprendizaje del docente a la familia",
+    "Porque convierte al psicopedagogo en el único responsable de diagnosticar",
+    "Porque el problema deja de estar solo en el individuo y se entiende como relacional y sistémico",
+    "Porque cambia los instrumentos: los tests se sustituyen por entrevistas a profundidad"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Cambia la idea de dónde está el problema y, por tanto, cómo se conoce."
   },
   {
@@ -330,10 +330,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Cuál era la preocupación de fondo, de carácter epistemológico, de Van Rensselaer Potter al proponer la bioética?",
    "opciones": [
-    "Que el conocimiento científico había crecido tan rápido que la reflexión sobre su uso se había quedado atrás",
-    "Que la ética impedía el avance de la medicina",
-    "Que la ciencia debía someterse a la autoridad religiosa",
-    "Que la biología debía sustituir a la filosofía"
+    "Que el conocimiento científico crecía más rápido que la reflexión sobre su uso",
+    "Que las decisiones sobre la vida debían quedar en manos de los científicos",
+    "Que la biología debía ocupar el lugar de la filosofía moral",
+    "Que la ética médica frenaba la investigación con nuevas tecnologías"
    ],
    "correcta": 0,
    "explicacion": "Potter (1971) la concibió como puente entre la ciencia y los valores."
@@ -360,10 +360,10 @@
    "tipo": "caso",
    "pregunta": "Para tu tesis vas a entrevistar a alumnos de secundaria. ¿Qué conjunto de medidas éticas corresponde?",
    "opciones": [
-    "Consentimiento de los tutores, asentimiento de los menores, confidencialidad con seudónimos, no daño y devolución de resultados",
-    "Solo pedir permiso al director",
-    "Publicar los nombres reales para dar credibilidad",
-    "Grabar sin avisar para no influir en las respuestas"
+    "Consentimiento de tutores, asentimiento de los menores, seudónimos y resguardo de datos",
+    "Permiso de la supervisión escolar y publicación de resultados con los nombres de los grupos",
+    "Consentimiento de los alumnos, grabación sin aviso para no influir y borrado posterior",
+    "Permiso del director, consentimiento de los alumnos y uso de nombres reales con autorización"
    ],
    "correcta": 0,
    "explicacion": "La ética de la investigación con menores es una aplicación concreta de la bioética."
@@ -375,12 +375,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "En el caso de la practicante que publicó fotos de los niños, ¿por qué el problema era más grave que un simple descuido de permisos?",
    "opciones": [
-    "Porque algunos niños podían estar en situación de riesgo y su ubicación no debía hacerse pública: se comprometía el no daño",
-    "Porque las fotos tenían baja calidad",
-    "Porque violaba los derechos de autor de la escuela",
-    "Porque no citó la fuente en formato APA"
+    "Porque la escuela no había firmado un convenio de uso de imagen con la practicante",
+    "Porque algunos niños podían estar en riesgo y su ubicación no debía hacerse pública",
+    "Porque las fotos mostraban las instalaciones de la escuela sin permiso",
+    "Porque publicó las fotos antes de terminar su informe de prácticas"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "La bioética empieza en lo cotidiano."
   },
   {
@@ -390,10 +390,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué distingue la ética de Hans Jonas de una ética que solo atiende las consecuencias inmediatas?",
    "opciones": [
-    "Que exige pensar en las generaciones futuras, por el enorme poder de la tecnología moderna",
-    "Que se centra en la autonomía del paciente",
-    "Que propone cuatro principios para la investigación biomédica",
-    "Que deja las decisiones éticas a los científicos"
+    "Exige pensar en las generaciones futuras, por el enorme poder de la tecnología moderna",
+    "Propone cuatro principios para guiar la investigación biomédica",
+    "Pide evaluar cada acción solo por la felicidad que produce hoy",
+    "Se centra en la autonomía del paciente y en el consentimiento informado"
    ],
    "correcta": 0,
    "explicacion": "Jonas (1979/1995), El principio de responsabilidad."
@@ -420,10 +420,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué problema bioético se hizo evidente durante la pandemia de COVID-19, según el compendio?",
    "opciones": [
-    "La distribución desigual de los avances científicos entre países ricos y pobres, como el acceso a las vacunas",
-    "La edición genética de embriones",
-    "Las decisiones sobre el final de la vida",
-    "El uso de inteligencia artificial en diagnósticos médicos"
+    "La distribución desigual de los avances, como el acceso a las vacunas",
+    "Las decisiones sobre el final de la vida en terapia intensiva",
+    "El uso de inteligencia artificial para priorizar pacientes",
+    "La edición genética de embriones con fines terapéuticos"
    ],
    "correcta": 0,
    "explicacion": "Todos son temas bioéticos, pero el de la pandemia fue la desigualdad en el acceso."
@@ -450,12 +450,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Por qué el desarrollo sustentable es un problema \"complejo\" en el sentido de Morin?",
    "opciones": [
-    "Porque sus dimensiones ambiental, social y económica están entrelazadas y no pueden resolverse por separado",
-    "Porque es un problema matemático difícil",
-    "Porque solo lo entienden los especialistas",
-    "Porque no tiene relación con la educación"
+    "Porque cada país lo define de manera distinta en sus leyes",
+    "Porque requiere modelos matemáticos que solo manejan los especialistas",
+    "Porque depende sobre todo de una causa ambiental que es difícil medir",
+    "Porque sus dimensiones ambiental, social y económica están entrelazadas"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Una solución técnica a un problema ambiental puede generar problemas sociales."
   },
   {
@@ -465,12 +465,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué pide una de las metas del Objetivo 4 de la Agenda 2030?",
    "opciones": [
-    "Que todos los estudiantes adquieran los conocimientos necesarios para promover el desarrollo sostenible",
-    "Que todas las escuelas tengan computadoras",
-    "Que se elimine la evaluación estandarizada",
-    "Que la educación sea obligatoria solo hasta primaria"
+    "Que se elimine la evaluación estandarizada en educación básica",
+    "Que todas las escuelas cuenten con conectividad y computadoras",
+    "Que todos adquieran los conocimientos para promover el desarrollo sostenible",
+    "Que la educación ambiental sea una asignatura obligatoria en primaria"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "El Objetivo 4 busca una educación inclusiva, equitativa y de calidad."
   },
   {
@@ -480,12 +480,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué crítica se le hace al concepto de desarrollo sustentable, según el compendio?",
    "opciones": [
-    "Que mantiene la idea de un crecimiento económico ilimitado, incompatible con un planeta finito",
-    "Que ignora por completo la dimensión ambiental",
-    "Que fue propuesto por comunidades indígenas sin respaldo científico",
-    "Que prohíbe toda actividad económica"
+    "Que propone frenar toda actividad económica para proteger el ambiente",
+    "Que deja fuera la dimensión social y se centra solo en lo ambiental",
+    "Que se basa en saberes indígenas sin suficiente respaldo científico",
+    "Que mantiene la idea de crecimiento económico ilimitado en un planeta finito"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "De ahí propuestas latinoamericanas como el buen vivir."
   },
   {
@@ -495,12 +495,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Por qué un proyecto escolar sobre el cuidado de los cenotes de Campeche ilustra a la vez el pensamiento complejo y la ecología de saberes?",
    "opciones": [
-    "Porque el problema une dimensiones ambientales, sociales y económicas, y puede integrar el conocimiento científico con el saber de la comunidad",
-    "Porque solo requiere conocimiento científico de laboratorio",
-    "Porque se resuelve con una sola disciplina y una sola causa",
-    "Porque los saberes comunitarios sustituyen por completo a la ciencia"
+    "Requiere sobre todo análisis de laboratorio, que dan una sola respuesta",
+    "Une dimensiones ambientales, sociales y económicas, y puede integrar el saber local",
+    "Se resuelve con una disciplina, la biología, y una causa principal",
+    "Muestra que el saber comunitario puede sustituir al conocimiento científico"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "Integra el desarrollo sustentable (Tema 9) con Morin (Tema 4) y Sousa Santos (Tema 6)."
   },
   {
@@ -551,12 +551,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "Según Bowles y Gintis, ¿cómo reproduce la escuela las desigualdades?",
    "opciones": [
-    "Mediante una correspondencia entre las relaciones sociales de la escuela y las del trabajo: prepara a unos para obedecer y a otros para dirigir",
-    "Premiando el capital cultural que los alumnos privilegiados traen de casa",
-    "Midiendo solo el ingreso futuro de los egresados",
-    "Negando el derecho a la educación en la Constitución"
+    "Por el capital cultural que los alumnos privilegiados traen de casa",
+    "Por la correspondencia entre las relaciones sociales de la escuela y las del trabajo",
+    "Por la inversión desigual en capital humano entre familias",
+    "Por la falta de libertades reales para elegir qué estudiar"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "El capital cultural es la tesis de Bourdieu y Passeron, no la de Bowles y Gintis."
   },
   {
@@ -596,12 +596,12 @@
    "tipo": "caso",
    "pregunta": "Una tesis evalúa un programa de becas midiendo solo el salario de los egresados cinco años después. Desde la lectura epistemológica del Tema 9, ¿qué limitación tiene?",
    "opciones": [
-    "Solo encontrará lo que la teoría del capital humano sabe ver; deja fuera, por ejemplo, la ampliación de libertades o la reproducción de desigualdades",
-    "Ninguna: el salario es la única evidencia válida del valor de la educación",
-    "Que no usa ningún dato numérico",
-    "Que pertenece al paradigma interpretativo"
+    "Es correcta, porque el salario resume todos los beneficios de la educación",
+    "Usa un indicador válido, pero cinco años son poco tiempo para medirlo",
+    "Solo verá lo que la teoría del capital humano sabe ver y dejará fuera otros efectos",
+    "Debió comparar el salario con el de quienes no recibieron beca"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Elegir qué medir ya es tomar una postura epistemológica."
   },
   {
@@ -626,10 +626,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué tienen en común la teoría del capital humano y la manera en que la OCDE concibe PISA?",
    "opciones": [
-    "Ambas tratan las competencias de los estudiantes como indicador del potencial económico de un país",
-    "Ambas miden la ampliación de libertades reales",
-    "Ambas buscan demostrar que la escuela reproduce desigualdades",
-    "Ambas entienden la educación sobre todo como un derecho humano"
+    "Tratan las competencias como indicador del potencial económico de un país",
+    "Entienden la educación ante todo como un derecho humano",
+    "Miden la ampliación de las libertades reales de las personas",
+    "Buscan mostrar que la escuela reproduce las desigualdades sociales"
    ],
    "correcta": 0,
    "explicacion": "Schultz (1961) y Becker (1964) influyeron en el Banco Mundial y la OCDE."
@@ -641,12 +641,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "Además del software educativo, ¿a qué se refería el subtema de «programas computacionales» en el contexto de la epistemología de los noventa?",
    "opciones": [
-    "A los programas de análisis de datos, sobre todo los primeros para analizar datos cualitativos",
-    "A la inteligencia artificial generativa",
-    "A las redes sociales educativas",
-    "A las plataformas de videollamadas"
+    "A los programas de diseño para elaborar materiales didácticos",
+    "A los sistemas de gestión escolar para registrar calificaciones",
+    "A los programas de análisis de datos, sobre todo los de datos cualitativos",
+    "A las plataformas de aprendizaje en línea y sus foros"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Martínez Miguélez discutió si cambiaban la naturaleza de la interpretación o solo la facilitaban."
   },
   {
@@ -656,12 +656,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "Seymour Papert criticó que la computadora se usara para \"programar al niño\". ¿Qué propuso a cambio?",
    "opciones": [
-    "Que el niño programara a la computadora y construyera conocimiento al hacerlo, con el lenguaje Logo",
-    "Que se eliminaran las computadoras de las escuelas",
-    "Que la computadora sustituyera al maestro",
-    "Que se usaran solo enciclopedias en disco compacto"
+    "Que el maestro programara actividades personalizadas para cada niño",
+    "Que la computadora sirviera para practicar ejercicios con retroalimentación",
+    "Que el niño programara a la computadora y construyera conocimiento al hacerlo",
+    "Que la computadora presentara contenidos en secuencia con refuerzo inmediato"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Era una propuesta constructivista, heredera de Piaget."
   },
   {
@@ -671,12 +671,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "En el caso del «ensayo perfecto», ¿por qué el maestro pidió una explicación oral en lugar de acusar al alumno?",
    "opciones": [
-    "Porque así podía comprobar si el alumno sabía lo que decía el texto y verificar sus fuentes",
-    "Porque las reglas prohíben revisar trabajos escritos",
-    "Porque la inteligencia artificial no comete errores",
-    "Porque el ensayo tenía errores de ortografía"
+    "Porque la explicación oral era parte de la rúbrica del ensayo",
+    "Porque así comprobaba si el alumno entendía el texto y conocía sus fuentes",
+    "Porque un detector de IA había marcado el ensayo como sospechoso",
+    "Porque así el alumno podía corregir su ensayo antes de entregarlo"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "Después rediseñó sus tareas: entregas por etapas, bitácora y defensa oral."
   },
   {
@@ -701,12 +701,12 @@
    "tipo": "caso",
    "pregunta": "Una inteligencia artificial responde correctamente una pregunta de examen. Usando la definición clásica de conocimiento del Tema 1, ¿qué es lo más preciso afirmar?",
    "opciones": [
-    "Produce una afirmación verdadera, pero no tiene creencias ni justificación en el sentido humano; quien copia la respuesta tampoco demuestra saberla",
-    "La IA sabe exactamente como un ser humano, porque acertó",
-    "La respuesta es falsa por haber sido generada por una máquina",
-    "La definición clásica de conocimiento no tiene relación con la IA"
+    "No produce conocimiento porque sus respuestas no pueden ser verdaderas",
+    "Tiene creencias verdaderas, pero le falta la justificación de una fuente citada",
+    "Sabe en sentido pleno, porque su respuesta es verdadera y está justificada por datos",
+    "Produce una afirmación verdadera, pero no tiene creencias ni justificación como un humano"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Creencia, verdad y justificación: acertar no es lo mismo que saber."
   },
   {
@@ -815,12 +815,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Cuál es el marco legal y curricular de la Nueva Escuela Mexicana?",
    "opciones": [
-    "La reforma al artículo 3.º de 2019, la Ley General de Educación de 2019 y el Plan de Estudio 2022",
-    "La Constitución de 1857 y el Plan de Once Años",
-    "El Acuerdo Nacional para la Modernización de 1992 únicamente",
-    "Las recomendaciones de PISA"
+    "El Acuerdo Nacional para la Modernización de 1992 y el Plan de Estudio 2022",
+    "La Ley General de Educación de 1993, el Plan de Estudios 2011 y el Acuerdo 592",
+    "La reforma al artículo tercero de 2019, la Ley General de Educación de 2019 y el Plan de Estudio 2022",
+    "La reforma al artículo tercero de 2013, la Ley General del Servicio Profesional Docente y el Plan 2017"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "El Plan de Estudio 2022 se implementó a partir del ciclo 2023-2024."
   },
   {
@@ -929,12 +929,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué concepción de la educación, criticada por Freire, rechaza la NEM al pensar la educación como un proceso dialógico ligado a la comunidad?",
    "opciones": [
-    "La educación bancaria, que deposita contenidos en los alumnos",
-    "La praxis, que une reflexión y acción",
-    "El diálogo liberador",
-    "La problematización de la realidad"
+    "La educación liberadora, que une reflexión y acción",
+    "La educación problematizadora, que parte de la realidad del alumno",
+    "La educación dialógica, que reconoce los saberes del pueblo",
+    "La educación bancaria, que deposita contenidos en los alumnos"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Las otras tres son propuestas de Freire, no lo que critica."
   },
   {
@@ -957,12 +957,12 @@
    "tipo": "caso",
    "pregunta": "Un maestro dice: \"La NEM es perfecta y cualquier crítica es política\". Otro dice: \"La NEM no sirve y punto\". Con los criterios del curso, ¿qué harías?",
    "opciones": [
-    "Distinguir fundamentos de implementación, pedir evidencia, explicitar supuestos y dialogar con quien piensa distinto",
-    "Apoyar al primero porque defiende la reforma vigente",
-    "Apoyar al segundo porque criticar siempre es mejor",
-    "Evitar el tema porque no es pedagógico"
+    "Apoyar al primero, porque la reforma es obligatoria y criticarla no cambia nada",
+    "Buscar un punto medio entre ambos, porque las dos posturas tienen la mitad de razón",
+    "Distinguir fundamentos de implementación, pedir evidencia y dialogar con quien piensa distinto",
+    "Apoyar al segundo, porque la crítica es la base del pensamiento científico"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "La actitud epistemológica examina fundamentos, argumentos y evidencia."
   },
   {
@@ -987,12 +987,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Por qué algunos críticos señalan que es difícil saber si la NEM mejora los aprendizajes?",
    "opciones": [
-    "Porque se necesita evidencia sistemática y se han reducido o cambiado los instrumentos de medición",
-    "Porque la NEM prohíbe evaluar",
-    "Porque los aprendizajes no pueden estudiarse científicamente",
-    "Porque la reforma todavía no se aplica en ninguna escuela"
+    "Porque la reforma lleva muy poco tiempo y aún no hay ningún dato",
+    "Porque se requiere evidencia sistemática y cambiaron los instrumentos de medición",
+    "Porque los aprendizajes comunitarios no pueden estudiarse con método científico",
+    "Porque la NEM evalúa solo de forma cualitativa y eso no permite comparar"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "Evaluar una reforma exige evidencia sistemática."
   },
   {
@@ -1017,12 +1017,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "Según el Tema 10, ¿qué se espera del alumno frente a la respuesta posible a la pregunta guía?",
    "opciones": [
-    "Que pueda argumentar su propia posición con autores, conceptos y ejemplos, aunque no coincida con ella",
-    "Que la memorice para el examen",
-    "Que la adopte como la única válida",
-    "Que la rechace para mostrar pensamiento crítico"
+    "Que la rechace y proponga una propia para demostrar pensamiento crítico",
+    "Que la contraste con la NEM y elija la que mejor se adapte",
+    "Que argumente su propia posición con autores y ejemplos, aunque no coincida con ella",
+    "Que la adopte como la conclusión del curso y la defienda en su ensayo"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Puedes estar de acuerdo, matizarla o rechazarla, pero argumentando."
   },
   {
@@ -1032,10 +1032,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué aporta la epistemología a un pedagogo, según el epílogo?",
    "opciones": [
-    "Una manera de hacer preguntas: sobre el origen, la evidencia y los supuestos de lo que se afirma en educación",
-    "Un conjunto cerrado de respuestas correctas",
-    "Un método único para enseñar cualquier contenido",
-    "Una lista de autores para memorizar"
+    "Una forma de preguntar por el origen, la evidencia y los supuestos de lo que se afirma",
+    "Un marco para clasificar a los autores clásicos de la pedagogía",
+    "Un conjunto de criterios para elegir el mejor modelo educativo",
+    "Un método general para diseñar cualquier secuencia didáctica"
    ],
    "correcta": 0,
    "explicacion": "Pensar lo que hacemos mientras lo hacemos."
@@ -1047,12 +1047,12 @@
    "tipo": "caso",
    "pregunta": "El epílogo vuelve a la junta de Consejo Técnico donde se afirmaba que «los alumnos son visuales» y que «la música clásica mejora la concentración». ¿Qué haría un pedagogo formado en el curso?",
    "opciones": [
-    "Preguntar de dónde viene cada afirmación, qué evidencia la respalda y qué supuestos la sostienen",
-    "Aceptarlas porque son ideas muy difundidas entre docentes",
-    "Rechazarlas todas sin revisarlas, porque vienen de la costumbre",
-    "Votar en la junta para decidir cuáles son verdaderas"
+    "Rechazarlas de entrada, porque provienen de la costumbre y no de la ciencia",
+    "Pedir a un especialista que decida cuáles se aplican en la escuela",
+    "Preguntar de dónde viene cada afirmación, qué evidencia la respalda y qué supone",
+    "Aceptarlas como hipótesis de trabajo, porque las comparten muchos docentes"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Distinguir un neuromito de un hallazgo sólido, una inercia de un argumento."
   },
   {
@@ -1063,9 +1063,9 @@
    "pregunta": "Según la estructura sugerida para el ensayo final, ¿en qué parte debe aparecer al menos un contraargumento con su respuesta?",
    "opciones": [
     "En el desarrollo, junto con al menos cinco autores del curso",
-    "En la introducción, antes de la tesis",
-    "En la conclusión, como pregunta abierta",
-    "En las referencias, como nota"
+    "En un apartado final de anexos, separado del argumento",
+    "En la conclusión, para dejar abierta la discusión",
+    "En la introducción, inmediatamente después de la tesis"
    ],
    "correcta": 0,
    "explicacion": "Introducción con tesis, desarrollo con autores y contraargumento, aplicación, conclusión y referencias."
@@ -1092,10 +1092,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "Según el Taller APA, ¿cuál es la diferencia entre \"Referencias\" y \"Bibliografía\"?",
    "opciones": [
-    "Referencias incluye solo las obras citadas; Bibliografía designa obras consultadas, aunque no se hayan citado",
-    "Son exactamente lo mismo en APA 7",
-    "Referencias se ordena por fecha y Bibliografía por tema",
-    "Bibliografía solo incluye libros y Referencias solo artículos"
+    "Referencias incluye solo lo citado; Bibliografía, también lo consultado sin citar",
+    "Son sinónimos en APA 7 y pueden usarse de forma indistinta",
+    "Referencias se ordena por fecha; Bibliografía, alfabéticamente",
+    "Referencias incluye libros y artículos; Bibliografía, solo libros"
    ],
    "correcta": 0,
    "explicacion": "En APA la lista se titula \"Referencias\"."
@@ -1107,12 +1107,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Cuál de estos requisitos del ensayo final es correcto?",
    "opciones": [
-    "Al menos ocho fuentes en APA 7, de las cuales al menos dos son artículos académicos",
-    "Al menos tres fuentes, todas de internet",
-    "Al menos ocho fuentes, sin necesidad de artículos académicos",
-    "Al menos dos fuentes, ambas libros de texto"
+    "Al menos ocho fuentes en APA 7, de ellas al menos cinco artículos",
+    "Al menos seis fuentes en APA 7, de ellas al menos dos libros del curso",
+    "Al menos ocho fuentes en APA 7, de ellas al menos dos artículos académicos",
+    "Al menos diez fuentes en APA 7, sin importar su tipo"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Requisitos del Tema 10.5."
   },
   {
@@ -1122,12 +1122,12 @@
    "tipo": "caso",
    "pregunta": "Un alumno responde bien todas las preguntas de un examen, pero en la revisión oral no puede explicar ninguna respuesta. Usando la definición clásica de conocimiento, ¿qué conclusión es más defendible?",
    "opciones": [
-    "Tenía creencias verdaderas, pero sin justificación; acertar no basta para afirmar que sabe",
-    "Sabe perfectamente, porque sus respuestas fueron verdaderas",
-    "No tiene creencias, porque no las explica",
-    "Sus respuestas eran falsas aunque fueran correctas"
+    "Sabe, pero tiene un problema de expresión oral que no afecta al conocimiento",
+    "Tenía creencias verdaderas sin justificación; acertar no basta para afirmar que sabe",
+    "No sabe, porque sus respuestas eran falsas aunque coincidieran con la clave",
+    "Sabe, porque sus creencias son verdaderas y están respaldadas por el examen"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "Creencia, verdad y justificación son las tres condiciones de la definición clásica."
   },
   {
@@ -1163,12 +1163,12 @@
    "tipo": "caso",
    "pregunta": "Una tesista quiere comprender cómo viven las madres de familia la evaluación de sus hijos y, además, que ellas mismas propongan cambios que se pongan en práctica. ¿Qué combinación de paradigmas describe mejor su proyecto?",
    "opciones": [
-    "Interpretativo en su comprensión de significados y sociocrítico en su búsqueda de transformación participativa",
-    "Exclusivamente positivista",
-    "Exclusivamente mecanicista",
-    "Positivista e inductivo"
+    "Positivista al medir la evaluación e interpretativo al entrevistar a las madres",
+    "Interpretativo en todo el estudio, porque la participación es una técnica cualitativa",
+    "Sociocrítico en todo el estudio, porque comprender significados es parte de transformar",
+    "Interpretativo al comprender significados y sociocrítico al buscar la transformación participativa"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Los paradigmas pueden dialogar cuando la pregunta lo exige."
   },
   {
@@ -1178,12 +1178,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué aporta la mirada sistémica al análisis de un problema de conducta en un grupo?",
    "opciones": [
-    "Buscar su origen en las relaciones entre escuela, familia, comunidad y organización, no solo en el alumno",
-    "Encontrar una sola causa en el alumno y sancionarla",
-    "Ignorar el contexto para ser objetivo",
-    "Medir la conducta con una escala numérica"
+    "Medir con precisión la frecuencia de la conducta para evaluar el cambio",
+    "Identificar al alumno que origina la conducta para intervenir con él",
+    "Analizar la historia personal del alumno para encontrar la causa principal",
+    "Buscar el origen en las relaciones entre escuela, familia, comunidad y organización"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Una escuela es un sistema con clima, normas no escritas e historia."
   },
   {
@@ -1193,12 +1193,12 @@
    "tipo": "caso",
    "pregunta": "Un equipo docente afirma que su estrategia \"siempre funciona\": si los alumnos mejoran, es por la estrategia; si no mejoran, es por factores externos. ¿Qué crítica haría Popper y qué propondría Lakatos?",
    "opciones": [
-    "Popper diría que no es falsable; Lakatos preguntaría si los ajustes predicen logros nuevos o solo justifican fracasos",
-    "Ambos dirían que es un ejemplo perfecto de ciencia",
-    "Popper diría que está verificada y Lakatos que es progresiva",
-    "Ninguno tendría nada que decir, porque no es física"
+    "Popper: es falsable porque puede fallar; Lakatos: es degenerativo desde el inicio",
+    "Popper: está verificada por los casos de éxito; Lakatos: es un programa progresivo",
+    "Popper: hay que buscar más casos de éxito; Lakatos: hay que proteger su núcleo duro",
+    "Popper: no es falsable; Lakatos: ver si los ajustes predicen logros nuevos o solo justifican fracasos"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Explicar cualquier resultado es una debilidad, no una fortaleza."
   },
   {
@@ -1208,10 +1208,10 @@
    "tipo": "caso",
    "pregunta": "La NEM se presenta como un \"cambio de paradigma\". ¿Qué tendría que mostrarse para hablar de revolución en el sentido técnico de Kuhn?",
    "opciones": [
-    "Que el modelo anterior acumuló anomalías, entró en crisis y fue sustituido por una nueva forma de ver los problemas y los conceptos",
-    "Que cambió el nombre de las asignaturas",
-    "Que se publicaron libros de texto nuevos",
-    "Que una autoridad lo declaró así"
+    "Que el modelo anterior acumuló anomalías, entró en crisis y fue sustituido por otra forma de ver",
+    "Que la comunidad docente votó mayoritariamente a favor del nuevo modelo",
+    "Que el nuevo modelo incorporó gradualmente los aciertos del anterior",
+    "Que el nuevo modelo resolvió todos los problemas que tenía el anterior"
    ],
    "correcta": 0,
    "explicacion": "En Kuhn, paradigma tiene un sentido técnico ligado a las comunidades."
@@ -1253,10 +1253,10 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué crítica central hace Morin a la ciencia clásica?",
    "opciones": [
-    "Que su paradigma de simplificación produjo un conocimiento fragmentado incapaz de entender problemas complejos",
-    "Que nunca obtuvo resultados útiles",
-    "Que fue demasiado interdisciplinaria",
-    "Que se basó en el pensamiento dialéctico"
+    "Que la simplificación produjo un conocimiento fragmentado ante problemas complejos",
+    "Que la ciencia clásica dependió demasiado de la intuición del investigador",
+    "Que la ciencia clásica rechazó las matemáticas como lenguaje de la naturaleza",
+    "Que su método experimental no podía aplicarse a los fenómenos físicos"
    ],
    "correcta": 0,
    "explicacion": "Disyunción, reducción y abstracción dieron frutos, pero fragmentaron el conocimiento."
@@ -1281,12 +1281,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Cómo se relaciona la inercia mental con el cambio en las escuelas?",
    "opciones": [
-    "Los hábitos de pensamiento heredados frenan la adopción de nuevas prácticas aunque existan razones para cambiar",
-    "Garantiza que solo se adopten cambios buenos",
-    "No tiene relación con la práctica docente",
-    "Acelera la adopción de cualquier reforma"
+    "Los docentes con más experiencia adoptan las innovaciones más rápido",
+    "Las escuelas cambian solo cuando una reforma oficial obliga a hacerlo",
+    "Los hábitos de pensamiento heredados frenan nuevas prácticas aunque haya razones para cambiar",
+    "Las prácticas nuevas se adoptan cuando los alumnos las piden"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Hay que distinguir los argumentos de los hábitos."
   },
   {
@@ -1311,10 +1311,10 @@
    "tipo": "caso",
    "pregunta": "En un proyecto sobre plantas medicinales, unos alumnos proponen \"comprobar\" un remedio tradicional para la diabetes de un familiar dejando su tratamiento médico. ¿Qué respuesta es coherente con la ecología de saberes y con la bioética?",
    "opciones": [
-    "Valorar el saber tradicional como objeto de estudio, sin sustituir un tratamiento médico y cuidando no causar daño",
-    "Apoyar la propuesta porque todos los saberes valen lo mismo",
-    "Prohibir cualquier mención a los saberes tradicionales",
-    "Dejar la decisión a los alumnos sin intervenir"
+    "Valorar el saber tradicional como objeto de estudio sin sustituir el tratamiento ni causar daño",
+    "Descartar el tema, porque los saberes tradicionales no pueden estudiarse en la escuela",
+    "Apoyarlos, porque la ecología de saberes da el mismo valor a todos los conocimientos",
+    "Pedir que lo prueben solo con la autorización de la familia"
    ],
    "correcta": 0,
    "explicacion": "Se evitan a la vez el relativismo ingenuo y el cientificismo, y se respeta el principio de no maleficencia."
@@ -1352,12 +1352,12 @@
    "tipo": "caso",
    "pregunta": "Una escuela compra un programa que promete \"sincronizar los hemisferios\" con ejercicios físicos para mejorar las calificaciones. ¿Cómo evaluarlo con lo aprendido?",
    "opciones": [
-    "Es un neuromito: no hay evidencia de esos efectos específicos; hay que pedir investigación verificable y replicada",
-    "Es una práctica respaldada por el premio Nobel de Sperry",
-    "Hay que aceptarlo porque usa vocabulario neurocientífico",
-    "Es válido porque cualquier ejercicio mejora el aprendizaje igual"
+    "Es útil si los alumnos mejoran, aunque no se conozca el mecanismo",
+    "Es un neuromito: no hay evidencia de ese efecto; hay que pedir estudios verificables y replicados",
+    "Es válido, porque el ejercicio físico mejora la atención y eso basta",
+    "Es válido, porque se basa en la investigación de Sperry sobre los hemisferios"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "La actividad física en general favorece el bienestar, pero no esos efectos prometidos."
   },
   {
@@ -1423,10 +1423,10 @@
    "tipo": "caso",
    "pregunta": "Una abuela de Hecelchakán sabe, por la forma de las nubes, cuándo va a llover, y casi siempre acierta. Un alumno dice que eso «ya es ciencia, porque predice». ¿Qué responderías?",
    "opciones": [
-    "Es conocimiento empírico: práctico y preciso, pero no sistematizado ni sometido a crítica pública",
-    "Es ciencia, porque toda predicción correcta es científica",
-    "Es conocimiento religioso, porque se transmite por tradición",
-    "Es conocimiento filosófico, porque reflexiona sobre la naturaleza"
+    "Es conocimiento empírico: práctico y certero, pero no sistematizado ni sometido a crítica pública",
+    "Es ciencia, porque hace predicciones que pueden comprobarse con la lluvia",
+    "Es conocimiento científico, aunque no haya sido publicado en una revista",
+    "Es conocimiento filosófico, porque nace de la observación de la naturaleza"
    ],
    "correcta": 0,
    "explicacion": "Acertar no basta: la ciencia se valida por comprobación y crítica de la comunidad."
@@ -1438,12 +1438,12 @@
    "tipo": "opcion_multiple",
    "pregunta": "Según la definición de trabajo del curso, ¿qué permite que la historia sea ciencia aunque no pueda repetir sus hechos en un laboratorio?",
    "opciones": [
-    "Que somete sus afirmaciones a prueba con métodos adecuados a su objeto y a la crítica pública",
-    "Que sus conclusiones son verdades eternas",
-    "Que sigue los mismos cinco pasos que la física",
-    "Que la practican personas con doctorado"
+    "Que usa el mismo método experimental de las ciencias naturales",
+    "Que sus conclusiones son aceptadas por todos los historiadores",
+    "Que reconstruye los hechos con documentos y eso equivale a repetirlos",
+    "Que somete sus afirmaciones a prueba con métodos adecuados a su objeto y a la crítica pública"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "No existe un método único."
   },
   {
@@ -1498,12 +1498,12 @@
    "tipo": "caso",
    "pregunta": "Un maestro dicta los contenidos, los alumnos copian y en el examen repiten lo dictado. Freire lo llamaría educación bancaria. ¿Qué propondría en su lugar?",
    "opciones": [
-    "Una educación problematizadora y dialógica, que una reflexión y acción (praxis)",
-    "Más exámenes, para asegurar que repitan bien",
-    "Que el alumno estudie solo, sin maestro",
-    "Una educación técnica centrada en la productividad"
+    "Una educación personalizada en la que cada alumno avance a su ritmo",
+    "Una educación por competencias evaluadas con desempeños",
+    "Una educación problematizadora y dialógica, que una reflexión y acción",
+    "Una educación activa, en la que el alumno aprenda haciendo"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Freire (1970/2005)."
   },
   {
@@ -1543,12 +1543,12 @@
    "tipo": "caso",
    "pregunta": "En un debate, un compañero cita a Feyerabend para decir que «la vacuna y el remedio milagroso valen igual». ¿Qué le responderías?",
    "opciones": [
-    "Que es una lectura superficial: «todo vale» significa que ninguna regla fija garantiza el progreso, no que toda opinión valga igual",
-    "Que tiene razón: Feyerabend defendía el relativismo extremo",
-    "Que Feyerabend era un positivista lógico",
-    "Que Feyerabend nunca habló del método científico"
+    "Que tiene razón: Feyerabend afirmó que la ciencia es una opinión más entre otras",
+    "Que «todo vale» significa que ninguna regla fija garantiza el progreso, no que toda opinión valga igual",
+    "Que Feyerabend defendía el método científico frente a los saberes populares",
+    "Que Feyerabend se refería solo a la física y no a la medicina"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "El riesgo de leerlo sin cuidado es el relativismo."
   },
   {
@@ -1558,12 +1558,12 @@
    "tipo": "caso",
    "pregunta": "Dos testigos de un mismo accidente describen cosas distintas, y ambos están seguros de lo que vieron. ¿Qué idea del Tema 5 lo explica mejor?",
    "opciones": [
-    "El cerebro no es un espejo: completa, interpreta y anticipa lo que percibe",
-    "Uno de los dos necesariamente miente",
-    "La observación es neutral si se pone atención",
-    "La memoria guarda copias exactas de lo que vemos"
+    "La memoria registra los hechos fielmente, pero los recuerdos se borran pronto",
+    "La percepción depende solo de la posición física de cada testigo",
+    "Uno de los dos observó con menos atención, por eso su versión es falsa",
+    "El cerebro no es un espejo: completa, interpreta y anticipa lo que percibe"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Percibir no es recibir pasivamente."
   },
   {
@@ -1573,12 +1573,12 @@
    "tipo": "caso",
    "pregunta": "Al leer un texto antiguo, un alumno dice: «Debo entenderlo exactamente como lo entendía su autor, olvidando todo lo que yo sé». ¿Qué le diría Gadamer?",
    "opciones": [
-    "Que comprender es una fusión de horizontes en la que el suyo y el del texto se amplían",
-    "Que tiene razón: hay que abandonar el propio horizonte",
-    "Que debe imponer su propia interpretación al texto",
-    "Que la comprensión de un texto antiguo es imposible"
+    "Que tiene razón: el buen intérprete deja de lado sus prejuicios",
+    "Que el sentido del texto lo decide siempre el lector actual",
+    "Que debe reconstruir la intención del autor con el método histórico",
+    "Que comprender es una fusión de horizontes en la que su horizonte y el del texto se amplían"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Gadamer (1960/1977)."
   },
   {
@@ -1588,12 +1588,12 @@
    "tipo": "caso",
    "pregunta": "Un practicante leyó todos los manuales de manejo de grupo, pero en el salón no sabe cuándo intervenir. Según Polanyi, ¿qué explica su dificultad?",
    "opciones": [
-    "Hay un saber tácito que se aprende en la práctica, junto a quien lo domina, y no solo en los libros",
-    "Le faltó leer más manuales",
-    "El manejo de grupo no se puede aprender",
-    "Es un obstáculo verbal de Bachelard"
+    "Le falta integrar lo que leyó en una teoría sistemática del grupo",
+    "Hay un saber tácito que se aprende en la práctica, junto a quien lo domina",
+    "Tiene un obstáculo verbal: confunde las palabras con las cosas",
+    "Los manuales que leyó no estaban basados en evidencia científica"
    ],
-   "correcta": 0,
+   "correcta": 1,
    "explicacion": "La formación no puede hacerse solo con libros."
   },
   {
@@ -1603,12 +1603,12 @@
    "tipo": "caso",
    "pregunta": "Un colectivo sistematiza durante un ciclo su estrategia de comprensión lectora y comparte lo que aprendió. ¿Qué respuesta a la pregunta guía respalda?",
    "opciones": [
-    "Que la pedagogía también es ciencia por lo que los maestros investigan y sistematizan en sus aulas",
-    "Que solo las universidades producen conocimiento pedagógico",
-    "Que la pedagogía es solo un arte",
-    "Que la experiencia docente no es conocimiento"
+    "Que la pedagogía es un arte que se aprende solo con la práctica",
+    "Que la pedagogía es una ciencia aplicada que depende de la psicología",
+    "Que el conocimiento pedagógico válido lo producen las universidades",
+    "Que la pedagogía también es ciencia por lo que los maestros investigan y sistematizan"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Stenhouse y el docente investigador."
   },
   {
@@ -1618,12 +1618,12 @@
    "tipo": "caso",
    "pregunta": "Un orientador dice de un alumno de secundaria: «Es así y no va a cambiar». ¿Qué evidencia del Tema 7 contradice esa afirmación?",
    "opciones": [
-    "La plasticidad cerebral: el cerebro modifica sus conexiones con la experiencia durante toda la vida",
-    "El cerebro triuno: el cerebro reptiliano domina en la adolescencia",
-    "Los estilos de aprendizaje, que son fijos",
-    "La dominancia de un hemisferio como rasgo de personalidad"
+    "El periodo crítico: después de la infancia el cerebro ya no se modifica",
+    "La herencia genética: el temperamento define la conducta futura",
+    "La plasticidad cerebral: el cerebro cambia sus conexiones con la experiencia toda la vida",
+    "La maduración: la conducta cambia sola al terminar la adolescencia"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Nadie está condenado por su cerebro."
   },
   {
@@ -1633,12 +1633,12 @@
    "tipo": "caso",
    "pregunta": "Un alumno que vive violencia en casa no logra concentrarse y lo reportan por «mala actitud». ¿Qué conclusión integra mejor los Temas 7 y 8?",
    "opciones": [
-    "El estrés intenso afecta el aprendizaje; conviene un clima seguro e identificar barreras del contexto, no solo sancionar",
-    "Es falta de voluntad que se corrige con más reportes",
-    "Debe ir a una escuela especial",
-    "La emoción no influye en la atención"
+    "Es un problema de conducta que se corrige con reglas claras y consecuencias",
+    "Es un trastorno de atención que debe diagnosticar un especialista",
+    "El estrés intenso afecta el aprendizaje; hace falta un clima seguro y atender las barreras",
+    "Es un tema familiar que la escuela no puede atender"
    ],
-   "correcta": 0,
+   "correcta": 2,
    "explicacion": "Emoción y cognición no se separan; el problema no está solo en el alumno."
   },
   {
@@ -1648,12 +1648,12 @@
    "tipo": "caso",
    "pregunta": "Un taller promete «activar el cerebro derecho» para que los alumnos sean más creativos. Con los cánones de cientificidad, ¿qué preguntarías primero?",
    "opciones": [
-    "¿Dónde está la evidencia y se ha replicado?, sabiendo que en un cerebro sano los hemisferios trabajan juntos",
-    "¿Cuántos ejercicios incluye el taller?",
-    "¿Lo recomienda algún personaje famoso?",
-    "¿Usa imágenes del cerebro en sus materiales?"
+    "¿Qué especialista lo diseñó y qué formación tiene en neurociencia?",
+    "¿Qué escuelas lo han usado y qué opinan los maestros que lo aplicaron?",
+    "¿Qué ejercicios incluye y cuántas sesiones se necesitan para notar el cambio?",
+    "¿Dónde está la evidencia y se ha replicado?, sabiendo que los hemisferios trabajan juntos"
    ],
-   "correcta": 0,
+   "correcta": 3,
    "explicacion": "Ante cualquier propuesta «neuro», preguntar por la evidencia."
   }
  ]
