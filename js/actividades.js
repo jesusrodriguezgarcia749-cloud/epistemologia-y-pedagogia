@@ -13,7 +13,11 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { elegirConCuotas } from "./seleccion-examen.js?v=2026111801";
-import { ACTIVIDADES_PARCIAL, NOMBRES_PARCIAL, PARTICIPACION_MIXTA, actividadesAbiertas, textoCierre } from "./calculo.js";
+import { ACTIVIDADES_PARCIAL, NOMBRES_PARCIAL, PARTICIPACION_MIXTA, CIERRE_ACTIVIDADES, actividadesAbiertas, textoCierre } from "./calculo.js";
+// Fecha en que terminó cada tema: lo terminado después del cierre del parcial ya no suma (igual que en el cálculo).
+let fechaTema = {};
+const msF = f => f && typeof f.toMillis === 'function' ? f.toMillis() : null;
+const tarde = (p, n) => { const c = CIERRE_ACTIVIDADES[p], ms = fechaTema[n]; return !!(c && ms && ms > Date.parse(c)); };
 
 // ------------------------------------------------------------ configuración
 const SESSION_KEY = 'ep_sesion_alumno';
@@ -111,7 +115,8 @@ async function entrar() {
   $('act-quien').textContent = sesion.nombre;
   try {
     const snap = await getDocs(collection(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'actividades'));
-    terminados = new Set(snap.docs.map(d => d.data()).filter(a => a.completado).map(a => Number(a.tema)));
+    const D = snap.docs.map(d => d.data()).filter(a => a.completado);
+    terminados = new Set(D.map(a => Number(a.tema))); fechaTema = {}; D.forEach(a => { fechaTema[Number(a.tema)] = msF(a.fecha); });
   } catch { terminados = new Set(); }
   pintarPrep();
   renderSelectorTemas();
@@ -128,7 +133,7 @@ function renderSelectorTemas() {
   const cont = $('act-lista-temas');
   const resumen = Object.keys(ACTIVIDADES_PARCIAL).map(p => {
     const temas = ACTIVIDADES_PARCIAL[p];
-    const hechos = temas.filter(n => terminados.has(n)).length;
+    const hechos = temas.filter(n => terminados.has(n) && !tarde(p, n)).length;
     const valor = p === 'final'
       ? 'cuentan dentro de «Tareas y participación»'
       : `<strong>${(hechos * ptsPorTema(p)).toFixed(2)} de ${PARTICIPACION_MIXTA.actividades} pts</strong>${actividadesAbiertas(p) ? (textoCierre(p) ? ` · se cierra el ${textoCierre(p)}` : '') : ' · ya cerrado'}`;
@@ -161,7 +166,8 @@ function renderSelectorTemas() {
   TEMAS_INFO.forEach(async t => {
     const el = cont.querySelector(`[data-avance="${t.n}"]`);
     if (!el) return;
-    if (terminados.has(t.n)) { el.textContent = '¡Ya lo dominas! Puedes repasarlo cuando quieras.'; return; }
+    if (terminados.has(t.n)) { const p = Object.keys(ACTIVIDADES_PARCIAL).find(k => ACTIVIDADES_PARCIAL[k].includes(t.n));
+      el.textContent = p && tarde(p, t.n) ? `¡Ya lo dominas! Pero lo terminaste después del cierre (${textoCierre(p)}), así que no suma a tu participación.` : '¡Ya lo dominas! Puedes repasarlo cuando quieras.'; return; }
     const total = await totalDe(t);
     const bien = leerAvance(t.n).size;
     if (bien > 0 && total) el.innerHTML = `<span class="act-mini-barra"><span style="width:${Math.round(bien / total * 100)}%"></span></span>${bien} de ${total} correctas`;

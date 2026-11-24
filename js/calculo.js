@@ -69,9 +69,9 @@ export const PARTICIPACION_MIXTA = { clase: 10, actividades: 15 };
 
 // Cierre de las actividades con valor de cada parcial (hora de Campeche).
 // Un tema terminado después de esta hora ya no suma a ese parcial.
-// Parcial 2: lunes 23 de noviembre de 2026, 11:59 p. m. (decisión del docente).
-export const CIERRE_ACTIVIDADES = { p2: '2026-11-23T23:59:59-06:00' };
-export const textoCierre = (p) => CIERRE_ACTIVIDADES[p] ? 'lunes 23 de noviembre a las 11:59 p. m.' : '';
+// Parcial 2: martes 24 de noviembre de 2026, 11:59 p. m. (el examen se movió al martes 24).
+export const CIERRE_ACTIVIDADES = { p2: '2026-11-24T23:59:59-06:00' };
+export const textoCierre = (p) => CIERRE_ACTIVIDADES[p] ? 'martes 24 de noviembre a las 11:59 p. m.' : '';
 export function actividadesAbiertas(p, ahora = Date.now()) {
   return !CIERRE_ACTIVIDADES[p] || ahora <= Date.parse(CIERRE_ACTIVIDADES[p]);
 }
