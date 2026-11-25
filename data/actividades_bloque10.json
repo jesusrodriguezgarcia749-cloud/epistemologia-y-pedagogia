@@ -340,7 +340,7 @@
    "tipo": "opcion_multiple",
    "pregunta": "¿Qué extensión debe tener el ensayo final del curso?",
    "opciones": [
-    "Entre 2500 y 3500 palabras",
+    "Al menos 2500 palabras",
     "Entre 100 y 200 palabras",
     "Más de 10 000 palabras",
     "No tiene extensión mínima"

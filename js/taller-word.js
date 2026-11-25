@@ -14,7 +14,7 @@ export const TITULOS = {
 export const ENTREGAS = {
   entrega1: { titulo: 'primera parte del ensayo', archivo: 'preguntas_1_a_6', minRefs: 3, boton: 'la primera parte del ensayo (preguntas 1 a 6)' },
   entrega2: { titulo: 'borrador completo del ensayo', archivo: 'preguntas_1_a_14', minRefs: 6, boton: 'el borrador completo (preguntas 1 a 14)' },
-  entregaFinal: { titulo: 'ensayo final', archivo: 'ensayo_final', minRefs: 8, minArticulos: 2, minPal: 2500, maxPal: 3500, intro: true, boton: 'el ensayo final completo' },
+  entregaFinal: { titulo: 'ensayo final', archivo: 'ensayo_final', minRefs: 8, minArticulos: 2, minPal: 2500, intro: true, boton: 'el ensayo final completo' },
 };
 // El ensayo final organizado en apartados (etapa «Mi ensayo completo»): las 18 respuestas en orden, agrupadas.
 export const APARTADOS = [

@@ -303,3 +303,7 @@ html[data-theme="dark"] .t-paso-n { color: #8fb8e0; }
 .ens-modo label { display: flex; align-items: flex-start; gap: .5rem; text-align: left; line-height: 1.35; }
 .ens-modo input[type="radio"] { width: auto !important; flex: 0 0 auto; margin: .2rem 0 0; display: inline-block; }
 .ens-modo label span { display: block; }
+/* Botón Guardar con comprobación */
+.e1-guardar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin: .8rem 0; padding: .6rem .7rem; border: 1px dashed var(--line); border-radius: 10px; }
+.e1-save-msg { margin: 0; font-size: .9rem; flex: 1 1 16rem; opacity: .85; }
+.e1-save-msg.ok { color: #2E7D4F; opacity: 1; font-weight: 600; } .e1-save-msg.mal { color: #C0392B; opacity: 1; font-weight: 600; }

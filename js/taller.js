@@ -3,7 +3,7 @@
 // automáticamente en grupos/{grupo}/alumnos/{alumno}/investigacion/taller
 // (y una copia en el navegador). El docente ve el avance en el Panel docente.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, getDocFromServer, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { wordTaller, APARTADOS, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, revisarCitas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026112401";
 
@@ -94,9 +94,31 @@ async function guardarYa() {
     });
     nube = true; estado('Guardado en tu cuenta ✓', 'ok');
   } catch (e) {
-    nube = false; estado('Guardado solo en este dispositivo (no se pudo subir a tu cuenta). Avísale a tu docente.', 'mal');
+    nube = false; ultimoError = e; estado('Guardado solo en este dispositivo (no se pudo subir a tu cuenta). Avísale a tu docente.', 'mal');
   }
 }
+let ultimoError = null;
+// Botón «Guardar»: sube lo que hay y lo vuelve a leer DEL SERVIDOR para comprobar que llegó (igual que en Tareas).
+async function guardarComprobado(btn, msg, igual) {
+  const m = typeof msg === 'string' ? $(msg) : msg, txt0 = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Guardando…'; m.className = 'e1-save-msg'; m.textContent = '';
+  try {
+    if (sesion.anon) { await guardarYa(); m.textContent = '✓ Guardado en este dispositivo. Para que tu maestro lo vea, entra con tu nombre y PIN.'; m.classList.add('ok'); return; }
+    ultimoError = null; await guardarYa();
+    if (!nube) throw ultimoError || new Error('sin conexión');
+    const sn = await getDocFromServer(doc(db, 'grupos', sesion.grupoId, 'alumnos', sesion.alumnoId, 'investigacion', 'taller'));
+    const R = sn.exists() ? (sn.data().datos || {}) : {};
+    if (!igual(R)) throw new Error('El servidor todavía no tiene tu última versión.');
+    m.textContent = `✓ Guardado en tu cuenta y comprobado a las ${new Date().toLocaleTimeString('es-MX', { hour: 'numeric', minute: '2-digit' }).replace(/\.$/, '')}. Tu maestro ya lo puede ver.`; m.classList.add('ok');
+  } catch (e) {
+    const code = (e && e.code) || '';
+    m.textContent = code === 'permission-denied' ? '⚠️ No se pudo guardar en tu cuenta: tu sesión ya no es válida (quizá tu maestro corrigió tu nombre). Toca «Salir», vuelve a entrar con tu nombre y PIN y guarda otra vez. Lo que escribiste sigue en este dispositivo.'
+      : !navigator.onLine || code === 'unavailable' ? '⚠️ Sin internet: lo que escribiste sigue en este dispositivo. Cuando regrese la señal, toca «Guardar» otra vez.'
+      : `⚠️ No se pudo comprobar el guardado (${esc(e.message || code || 'error')}). Toca «Guardar» otra vez; si sigue, avísale a tu maestro.`;
+    m.classList.add('mal');
+  } finally { btn.disabled = false; btn.textContent = txt0; }
+}
+const mismo = (a, b) => String(a || '').trim() === String(b || '').trim();
 window.addEventListener('beforeunload', () => { if (timer) guardarYa(); });
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && timer) guardarYa(); });
 
@@ -111,7 +133,7 @@ function completas() {
     cuaderno: D.preguntas.every(p => palabras(T.respuestas[p.n]) >= 150),
     matriz: T.matriz.length > 0 && T.matriz.every(f => f.tecnica && f.instrumento.trim() && f.participantes.trim()),
     cierre: T.etica.length === D.etica.length && T.etica.every(Boolean),
-    ensayo: D.preguntas.every(p => palabras(T.respuestas[p.n]) >= 150) && palabras(T.intro) >= 100 && (t => t >= 2500 && t <= 3500)(textosDe(T, D, 'entregaFinal').reduce((s2, [, x]) => s2 + palabras(x), 0)),
+    ensayo: D.preguntas.every(p => palabras(T.respuestas[p.n]) >= 150) && palabras(T.intro) >= 100 && (t => t >= 2500)(textosDe(T, D, 'entregaFinal').reduce((s2, [, x]) => s2 + palabras(x), 0)),
   };
   return D.etapas.map(e => hecho[e.id]);
 }
@@ -823,7 +845,7 @@ function apoyo(p) {
 }
 function etapaCuaderno(c) {
   const ea = entregaActual(), faltan1 = ea !== 'entrega1' && numsDe(D, 'entrega1').filter(n => palabras(T.respuestas[n]) < 150);
-  c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">Aquí escribes tu proyecto. Cada pregunta te dice qué te piden, te da pistas y te sugiere autores. Lo que hiciste en las etapas anteriores aparece como punto de partida. Busca de 150 a 250 palabras por respuesta; lo ideal son unas 170, para que tu ensayo final quede entre 2,500 y 3,500 palabras. Al final, en la etapa 7 «Mi ensayo completo», ves todo junto y lo pules.</p>
+  c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">Aquí escribes tu proyecto. Cada pregunta te dice qué te piden, te da pistas y te sugiere autores. Lo que hiciste en las etapas anteriores aparece como punto de partida. Busca de 150 a 250 palabras por respuesta. Al final, en la etapa 7 «Mi ensayo completo», ves todo junto y lo pules.</p>
     <p class="t-recuerda"><b>📌 Ahora toca la ${esc(D.entregas[ea].nombre)}: ${rangoEnt(ea)}.</b> Elige la entrega en estos botones; cada una tiene sus preguntas con el mismo sistema que ya conoces.${faltan1 && faltan1.length ? ` Ojo: en la Entrega 1 te falta completar la${faltan1.length === 1 ? ' pregunta' : 's preguntas'} ${faltan1.join(', ')}.` : ''}</p>
     <div class="lab-chips t-chips-ent" id="c-ent">${Object.entries(D.entregas).map(([k, e]) => `<button type="button" class="chip-lab" aria-pressed="${k === entregaSel}" data-e="${k}">${esc(e.nombre)}<small> · ${rangoEnt(k)}</small></button>`).join('')}</div>
     <div id="c-lista"></div>`);
@@ -969,12 +991,13 @@ function pintarGuiada(ent) {
     <button type="button" class="btn-lab-l" id="e1-armar">🧩 Armar mi respuesta con lo anterior</button>
     <textarea class="t-resp" id="e1-final" rows="10" placeholder="Aquí queda tu respuesta completa.">${esc(T.respuestas[n] || '')}</textarea>
     <ul class="e1-checks" id="e1-checks"></ul>
+    <div class="e1-guardar"><button type="button" class="btn-lab" id="e1-save">💾 Guardar pregunta ${n}</button><p class="e1-save-msg" id="e1-save-msg">${T.respuestas[n] ? 'Se guarda solo mientras escribes; toca «Guardar» para comprobar que ya está en tu cuenta.' : ''}</p></div>
     <div class="e1-nav">${paso ? '<button type="button" class="btn-lab-l" id="e1-ant">← Pregunta anterior</button>' : '<span></span>'}<button type="button" class="btn-lab" id="e1-sig">${paso < tot - 1 ? `Siguiente: pregunta ${NS[paso + 1]} →` : `Siguiente: ${E.intro ? 'introducción, ' : ''}referencias y Word →`}</button></div>
   </article>`;
   const checks = () => {
     const t = T.respuestas[n] || '', w = palabras(t), sub = (T.e1[n] || []).filter(x => palabras(x) >= 5).length, pl = base ? platDe(n) : 0;
     $('#e1-checks').innerHTML = [
-      [w >= 150 && w <= 250, w < 150 ? `${w} palabras: te faltan ${150 - w} para el mínimo de 150` : w > 250 ? `${w} palabras: pasaste el máximo de 250, recorta` : w > 200 ? `${w} palabras ✓ dentro del rango (algo larga: si todas quedan así, tu ensayo final pasaría de 3,500)` : `${w} palabras ✓ dentro del rango`],
+      [w >= 150 && w <= 250, w < 150 ? `${w} palabras: te faltan ${150 - w} para el mínimo de 150` : w > 250 ? `${w} palabras: pasaste el máximo de 250, recorta` : `${w} palabras ✓ dentro del rango`],
       [sub === G.pasos.length, `Argumentaste ${sub} de ${G.pasos.length} puntos de «Ahora hazla tuya»`],
       [tieneCita(t), tieneCita(t) ? 'Incluye al menos una cita (Autor, año) ✓' : 'Falta al menos una cita en APA: (Autor, año)'],
       ...(base && w ? [[pl <= MAX_PLAT, pl <= MAX_PLAT ? `Texto tuyo: ${100 - pl} % ✓` : `Solo ${100 - pl} % es texto tuyo: el ${pl} % es la respuesta base de la plataforma. Agrega tus argumentos o reescribe la base con tus palabras (al menos la mitad debe ser tuya).`]] : []),
@@ -987,6 +1010,7 @@ function pintarGuiada(ent) {
     if ((T.respuestas[n] || '').trim() && !confirm('Ya tienes una respuesta final. ¿Reemplazarla por una nueva armada con tu respuesta base y lo que escribiste arriba?')) return;
     T.respuestas[n] = nuevo; $('#e1-final').value = nuevo; guardarPlat(n); cambio(); checks(); $('#e1-final').focus();
   });
+  $('#e1-save').addEventListener('click', () => guardarComprobado($('#e1-save'), '#e1-save-msg', R => mismo((R.respuestas || {})[n], T.respuestas[n]) && (T.e1[n] || []).every((x, i) => mismo(((R.e1 || {})[n] || [])[i], x))));
   const ba = $('#e1-ant'); if (ba) ba.addEventListener('click', () => ir(paso - 1));
   $('#e1-sig').addEventListener('click', () => ir(paso + 1));
   checks();
@@ -1007,6 +1031,7 @@ function pintarFinal(ent, cuerpo, ir) {
     <p class="lab-ayuda">${esc(D.entregas[ent].nombre)} pide <b>al menos ${E.minRefs} referencias en APA 7</b>${E.minArticulos ? `, de ellas <b>al menos ${E.minArticulos} artículos académicos</b> (de revista, con volumen y número o DOI)` : ''}. Marca las obras de los autores que citaste (vienen del compendio, ya en formato APA) y agrega las que tú encontraste, una por renglón.</p>
     <div class="e1-refs">${sug.map(r => `<label><input type="checkbox" data-r="${r.id}" ${S.has(r.id) ? 'checked' : ''}> <span>${md2(r.apa)}</span></label>`).join('')}</div>
     <label class="e1-sub"><span><b>Otras referencias</b><small>Una por renglón, en APA 7. Para poner un título en cursivas, enciérralo entre asteriscos: *Título del libro*. Un artículo: Apellido, N. (año). Título del artículo. *Nombre de la revista*, *volumen*(número), páginas. https://doi.org/…</small></span><textarea id="e1-otras" rows="4">${esc(T.refs.otras || '')}</textarea></label>
+    <div class="e1-guardar"><button type="button" class="btn-lab-l" id="fin-save">💾 Guardar${E.intro ? ' introducción y' : ''} referencias</button><p class="e1-save-msg" id="fin-save-msg"></p></div>
     <h4 class="e1-h">Antes de entregar</h4><ul class="e1-checks" id="e1-rev"></ul>
     <button type="button" class="btn-lab e1-word" id="e1-word">⬇ Descargar ${esc(E.boton)} en Word</button>
     ${ent === 'entregaFinal' ? '<p class="t-recuerda">📖 Antes de descargar, revisa tu trabajo <b>todo junto</b>: en «Mi ensayo completo» lo lees de corrido, le pones título, unes los apartados y corriges. <button type="button" class="btn-lab-l" id="e1-ensayo">Ver mi ensayo completo →</button></p>' : ''}
@@ -1038,7 +1063,7 @@ function pintarFinal(ent, cuerpo, ir) {
     if (rc.repetidas && rc.repetidas.length) L.push([false, `Esta obra está dos veces en tu lista: ${rc.repetidas.join('; ')}. Deja solo una.`]);
     if (E.minArticulos) L.push([na >= E.minArticulos, `${na} artículo${na === 1 ? '' : 's'} académico${na === 1 ? '' : 's'} ${na >= E.minArticulos ? '✓' : `· te faltan ${E.minArticulos - na} (de revista, con volumen y número o DOI)`}`]);
     if (E.intro) L.push([palabras(T.intro) >= 100, palabras(T.intro) >= 100 ? 'Tiene introducción ✓' : 'Falta la introducción (al menos 100 palabras)']);
-    if (E.minPal) L.push([total >= E.minPal && total <= E.maxPal, `${total.toLocaleString('es-MX')} palabras en total ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500` : total > E.maxPal ? '· pasaste el máximo de 3,500' : '✓ dentro del rango (2,500 a 3,500)'}`]);
+    if (E.minPal) L.push([total >= E.minPal, `${total.toLocaleString('es-MX')} palabras en total ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500` : '✓ (mínimo 2,500)'}`]);
     $('#e1-rev').innerHTML = L.map(([ok, txt]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(txt.replace(/\s*✓$/, ''))}</li>`).join('');
     const est = estadoEntrega(T, D, ent), fecha = t => new Date(t).toLocaleString('es-MX', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
     $('#t-entregar').innerHTML = est.entregada
@@ -1068,6 +1093,7 @@ function pintarFinal(ent, cuerpo, ir) {
   $('#e1-otras').addEventListener('input', ev => { T.refs.otras = ev.target.value; cambio(); rev(); });
   $('#e1-ant').addEventListener('click', () => ir(NS.length - 1));
   $('#e1-word').addEventListener('click', () => descargarWord(ent));
+  $('#fin-save').addEventListener('click', () => guardarComprobado($('#fin-save'), '#fin-save-msg', R => mismo(R.intro, T.intro) && JSON.stringify(R.refs || {}) === JSON.stringify(T.refs || {})));
   const ve = $('#e1-ensayo'); if (ve) ve.addEventListener('click', () => irA(D.etapas.findIndex(x => x.id === 'ensayo')));
   const se = $('#e1-sig-ent'); if (se) se.addEventListener('click', () => { entregaSel = ent === 'entrega1' ? 'entrega2' : 'entregaFinal'; $$('#c-ent .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.e === entregaSel))); pintarCuaderno(); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   rev();
@@ -1105,7 +1131,8 @@ function etapaEnsayo(c) {
     <div class="lab-chips ens-vista"><button type="button" class="chip-lab" data-v="editar" aria-pressed="${ensModo === 'editar'}">✏️ Editar</button><button type="button" class="chip-lab" data-v="leer" aria-pressed="${ensModo === 'leer'}">📖 Leer de corrido</button></div>
     <div id="ens-cuerpo"></div>
     <h3 class="t-h3">Revisión de tu ensayo</h3><ul class="e1-checks" id="ens-rev"></ul>
-    <div class="ens-acciones"><button type="button" class="btn-lab" id="ens-word">⬇ Descargar mi ensayo en Word</button><button type="button" class="btn-lab-l" id="ens-ent">📚 Referencias y entrega final →</button></div>
+    <div class="e1-guardar"><button type="button" class="btn-lab" id="ens-save">💾 Guardar mi ensayo</button><p class="e1-save-msg" id="ens-save-msg">Todo se guarda solo mientras escribes; toca «Guardar» para comprobar que ya está en tu cuenta.</p></div>
+    <div class="ens-acciones"><button type="button" class="btn-lab-l" id="ens-word">⬇ Descargar mi ensayo en Word</button><button type="button" class="btn-lab-l" id="ens-ent">📚 Referencias y entrega final →</button></div>
     <p class="t-nota">El Word sale con la portada del ITES y en APA 7. Las referencias y el botón para entregar están en «Las 18 preguntas», Entrega final, último paso.</p>`);
   const tit = $('#ens-tit'); tit.addEventListener('input', () => { T.ensayo.titulo = tit.value; cambio(); cuentas(); const t2 = $('#ens-tit-sug'); if (t2 && tit.value.trim()) t2.remove(); });
   const ts = $('#ens-tit-sug'); if (ts) ts.addEventListener('click', () => { tit.value = tituloSug; T.ensayo.titulo = tituloSug; cambio(); cuentas(); ts.remove(); });
@@ -1113,6 +1140,7 @@ function etapaEnsayo(c) {
   $$('.ens-vista .chip-lab', c).forEach(b => b.addEventListener('click', () => { ensModo = b.dataset.v; $$('.ens-vista .chip-lab', c).forEach(x => x.setAttribute('aria-pressed', String(x === b))); pintarEns(); }));
   $('#ens-word').addEventListener('click', () => descargarWord('entregaFinal'));
   $('#ens-ent').addEventListener('click', irAEntregaFinal);
+  $('#ens-save').addEventListener('click', () => guardarComprobado($('#ens-save'), '#ens-save-msg', R => mismo(R.intro, T.intro) && D.preguntas.every(p => mismo((R.respuestas || {})[p.n], T.respuestas[p.n])) && JSON.stringify((R.ensayo || {}).puentes || {}) === JSON.stringify(T.ensayo.puentes || {}) && mismo((R.ensayo || {}).titulo, T.ensayo.titulo)));
   const apartados = () => T.ensayo.modo === 'preguntas' ? APARTADOS.flatMap(a => a.nums.map(n => ({ id: 'q' + n, titulo: `${n}. ${TITULOS[n]}`, nums: [n], puente: null }))) : APARTADOS;
   function pintarEns() {
     const cu = $('#ens-cuerpo'), r = T.respuestas, pu = T.ensayo.puentes;
@@ -1150,10 +1178,9 @@ function etapaEnsayo(c) {
     set('ens-w-intro', `· ${palabras(T.intro)} palabras`);
     apartados().forEach(a => set('ens-w-' + a.id, `· ${a.nums.reduce((s, n) => s + palabras(r[n]), 0) + (a.puente !== null ? palabras(pu[a.id]) : 0)} palabras`));
     D.preguntas.forEach(p => set('ens-w' + p.n, `${palabras(r[p.n])} palabras`, palabras(r[p.n]) >= 150));
-    const enR = total >= E.minPal && total <= E.maxPal;
-    $('#ens-barra').innerHTML = `<div class="ens-medidor"><span style="width:${Math.min(100, Math.round(total / E.maxPal * 100))}%" class="${enR ? 'ok' : total > E.maxPal ? 'mal' : ''}"></span></div>
-      <p><b>${total.toLocaleString('es-MX')}</b> palabras ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500` : total > E.maxPal ? `· te pasas ${(total - E.maxPal).toLocaleString('es-MX')} del máximo de 3,500: resume las respuestas más largas` : '· ✓ dentro del rango'} · <b>${hechas}</b> de 18 respuestas completas · <b>${refs.length}</b> referencia${refs.length === 1 ? '' : 's'}</p>
-      <small>Para quedar en el rango, procura unas 140 a 190 palabras por respuesta.</small>`;
+    const enR = total >= E.minPal;
+    $('#ens-barra').innerHTML = `<div class="ens-medidor"><span style="width:${Math.min(100, Math.round(total / E.minPal * 100))}%" class="${enR ? 'ok' : ''}"></span></div>
+      <p><b>${total.toLocaleString('es-MX')}</b> palabras ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500`  : '· ✓ ya pasaste el mínimo de 2,500'} · <b>${hechas}</b> de 18 respuestas completas · <b>${refs.length}</b> referencia${refs.length === 1 ? '' : 's'}</p>`;
     // Revisión
     const TX = textosDe(T, D, 'entregaFinal'), sinCita = D.preguntas.filter(p => (r[p.n] || '').trim() && !tieneCita(r[p.n])).map(p => p.n);
     const cortas = D.preguntas.filter(p => palabras(r[p.n]) < 150).map(p => p.n), rc = revisarCitas(TX.map(([, t]) => t), refs);
@@ -1162,7 +1189,7 @@ function etapaEnsayo(c) {
     const L = [
       [!cortas.length, cortas.length ? `Respuestas con menos de 150 palabras: ${cortas.join(', ')}` : 'Las 18 respuestas tienen al menos 150 palabras'],
       [palabras(T.intro) >= 100, palabras(T.intro) >= 100 ? 'Tiene introducción' : 'Falta la introducción (al menos 100 palabras)'],
-      [enR, `${total.toLocaleString('es-MX')} palabras en total (de 2,500 a 3,500)`],
+      [enR, `${total.toLocaleString('es-MX')} palabras en total (mínimo 2,500)`],
       [!sinCita.length, sinCita.length ? `Respuestas sin cita (Autor, año): ${sinCita.join(', ')}` : 'Todas las respuestas tienen al menos una cita'],
       [!rep.size, rep.size ? `Ideas repetidas, la misma oración en: ${[...rep].join(', ')}. Al juntar todo se nota: deja cada idea una sola vez.` : 'Sin oraciones repetidas'],
       [!rc.sinRef.length, rc.sinRef.length ? `Citas sin su referencia en la lista: ${rc.sinRef.join(', ')}` : 'Cada autor que citas está en tus referencias'],
