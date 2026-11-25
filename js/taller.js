@@ -5,7 +5,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc, collection, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { wordTaller, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, revisarCitas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026111904";
+import { wordTaller, APARTADOS, ENTREGAS, TITULOS, numsDe, hastaDe, tieneCita, esArticulo, refsSugeridas, refsElegidas, revisarCitas, textosDe, huella, estadoEntrega, porcentajePlataforma } from "./taller-word.js?v=2026112401";
 
 const db = getFirestore(initializeApp(firebaseConfig));
 const SESSION_KEY = 'ep_sesion_alumno';
@@ -111,6 +111,7 @@ function completas() {
     cuaderno: D.preguntas.every(p => palabras(T.respuestas[p.n]) >= 150),
     matriz: T.matriz.length > 0 && T.matriz.every(f => f.tecnica && f.instrumento.trim() && f.participantes.trim()),
     cierre: T.etica.length === D.etica.length && T.etica.every(Boolean),
+    ensayo: D.preguntas.every(p => palabras(T.respuestas[p.n]) >= 150) && palabras(T.intro) >= 100 && (t => t >= 2500 && t <= 3500)(textosDe(T, D, 'entregaFinal').reduce((s2, [, x]) => s2 + palabras(x), 0)),
   };
   return D.etapas.map(e => hecho[e.id]);
 }
@@ -130,7 +131,7 @@ function pintarEtapa() {
   $('#t-ant').disabled = etapa === 0; $('#t-sig').disabled = etapa === D.etapas.length - 1;
   const cont = $('#t-etapa');
   cont.innerHTML = `<p class="ficha-kicker">Etapa ${e.n} de ${D.etapas.length}</p><h2 class="t-h2">${esc(e.titulo)}</h2>`;
-  ({ pregunta: etapaPregunta, brujula: etapaBrujula, objetivos: etapaObjetivos, matriz: etapaMatriz, cuaderno: etapaCuaderno, cierre: etapaCierre })[e.id](cont);
+  ({ pregunta: etapaPregunta, brujula: etapaBrujula, objetivos: etapaObjetivos, matriz: etapaMatriz, cuaderno: etapaCuaderno, cierre: etapaCierre, ensayo: etapaEnsayo })[e.id](cont);
 }
 const enlazar = (sel, campo, fn) => { const el = $(sel); el.addEventListener('input', () => { campo(el.value); cambio(); fn && fn(); }); return el; };
 
@@ -822,7 +823,7 @@ function apoyo(p) {
 }
 function etapaCuaderno(c) {
   const ea = entregaActual(), faltan1 = ea !== 'entrega1' && numsDe(D, 'entrega1').filter(n => palabras(T.respuestas[n]) < 150);
-  c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">Aquí escribes tu proyecto. Cada pregunta te dice qué te piden, te da pistas y te sugiere autores. Lo que hiciste en las etapas anteriores aparece como punto de partida. Busca de 150 a 250 palabras por respuesta.</p>
+  c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">Aquí escribes tu proyecto. Cada pregunta te dice qué te piden, te da pistas y te sugiere autores. Lo que hiciste en las etapas anteriores aparece como punto de partida. Busca de 150 a 250 palabras por respuesta; lo ideal son unas 170, para que tu ensayo final quede entre 2,500 y 3,500 palabras. Al final, en la etapa 7 «Mi ensayo completo», ves todo junto y lo pules.</p>
     <p class="t-recuerda"><b>📌 Ahora toca la ${esc(D.entregas[ea].nombre)}: ${rangoEnt(ea)}.</b> Elige la entrega en estos botones; cada una tiene sus preguntas con el mismo sistema que ya conoces.${faltan1 && faltan1.length ? ` Ojo: en la Entrega 1 te falta completar la${faltan1.length === 1 ? ' pregunta' : 's preguntas'} ${faltan1.join(', ')}.` : ''}</p>
     <div class="lab-chips t-chips-ent" id="c-ent">${Object.entries(D.entregas).map(([k, e]) => `<button type="button" class="chip-lab" aria-pressed="${k === entregaSel}" data-e="${k}">${esc(e.nombre)}<small> · ${rangoEnt(k)}</small></button>`).join('')}</div>
     <div id="c-lista"></div>`);
@@ -973,7 +974,7 @@ function pintarGuiada(ent) {
   const checks = () => {
     const t = T.respuestas[n] || '', w = palabras(t), sub = (T.e1[n] || []).filter(x => palabras(x) >= 5).length, pl = base ? platDe(n) : 0;
     $('#e1-checks').innerHTML = [
-      [w >= 150 && w <= 250, w < 150 ? `${w} palabras: te faltan ${150 - w} para el mínimo de 150` : w > 250 ? `${w} palabras: pasaste el máximo de 250, recorta` : `${w} palabras ✓ dentro del rango`],
+      [w >= 150 && w <= 250, w < 150 ? `${w} palabras: te faltan ${150 - w} para el mínimo de 150` : w > 250 ? `${w} palabras: pasaste el máximo de 250, recorta` : w > 200 ? `${w} palabras ✓ dentro del rango (algo larga: si todas quedan así, tu ensayo final pasaría de 3,500)` : `${w} palabras ✓ dentro del rango`],
       [sub === G.pasos.length, `Argumentaste ${sub} de ${G.pasos.length} puntos de «Ahora hazla tuya»`],
       [tieneCita(t), tieneCita(t) ? 'Incluye al menos una cita (Autor, año) ✓' : 'Falta al menos una cita en APA: (Autor, año)'],
       ...(base && w ? [[pl <= MAX_PLAT, pl <= MAX_PLAT ? `Texto tuyo: ${100 - pl} % ✓` : `Solo ${100 - pl} % es texto tuyo: el ${pl} % es la respuesta base de la plataforma. Agrega tus argumentos o reescribe la base con tus palabras (al menos la mitad debe ser tuya).`]] : []),
@@ -1008,6 +1009,7 @@ function pintarFinal(ent, cuerpo, ir) {
     <label class="e1-sub"><span><b>Otras referencias</b><small>Una por renglón, en APA 7. Para poner un título en cursivas, enciérralo entre asteriscos: *Título del libro*. Un artículo: Apellido, N. (año). Título del artículo. *Nombre de la revista*, *volumen*(número), páginas. https://doi.org/…</small></span><textarea id="e1-otras" rows="4">${esc(T.refs.otras || '')}</textarea></label>
     <h4 class="e1-h">Antes de entregar</h4><ul class="e1-checks" id="e1-rev"></ul>
     <button type="button" class="btn-lab e1-word" id="e1-word">⬇ Descargar ${esc(E.boton)} en Word</button>
+    ${ent === 'entregaFinal' ? '<p class="t-recuerda">📖 Antes de descargar, revisa tu trabajo <b>todo junto</b>: en «Mi ensayo completo» lo lees de corrido, le pones título, unes los apartados y corriges. <button type="button" class="btn-lab-l" id="e1-ensayo">Ver mi ensayo completo →</button></p>' : ''}
     ${ent !== 'entregaFinal' ? `<p class="t-recuerda">➡️ Al terminar esta entrega, sigue con la ${esc(D.entregas[ent === 'entrega1' ? 'entrega2' : 'entregaFinal'].nombre)}: ${rangoEnt(ent === 'entrega1' ? 'entrega2' : 'entregaFinal')}. <button type="button" class="btn-lab-l" id="e1-sig-ent">Ir a la siguiente entrega →</button></p>` : ''}
     <p class="t-nota">Sale con la portada oficial del ITES y en formato APA 7: Times New Roman 12, doble espacio, sangría, número de página y referencias con sangría francesa. Puedes descargarlo las veces que quieras.</p>
     <div class="t-entregar" id="t-entregar"></div>
@@ -1066,6 +1068,7 @@ function pintarFinal(ent, cuerpo, ir) {
   $('#e1-otras').addEventListener('input', ev => { T.refs.otras = ev.target.value; cambio(); rev(); });
   $('#e1-ant').addEventListener('click', () => ir(NS.length - 1));
   $('#e1-word').addEventListener('click', () => descargarWord(ent));
+  const ve = $('#e1-ensayo'); if (ve) ve.addEventListener('click', () => irA(D.etapas.findIndex(x => x.id === 'ensayo')));
   const se = $('#e1-sig-ent'); if (se) se.addEventListener('click', () => { entregaSel = ent === 'entrega1' ? 'entrega2' : 'entregaFinal'; $$('#c-ent .chip-lab').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.e === entregaSel))); pintarCuaderno(); $('#c-lista').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   rev();
 }
@@ -1073,6 +1076,103 @@ function pintarCuaderno() { pintarGuiada(entregaSel); }
 async function descargarWord(ent) {
   await guardarYa();
   await wordTaller(T, D, LAB, ent, sesion.anon ? '' : sesion.nombre);
+}
+
+// ------------------------------------------------ Etapa 7: Mi ensayo completo
+// Todas las respuestas juntas, en orden y agrupadas en apartados, para leer el ensayo de corrido, unir las ideas
+// con párrafos de enlace y corregir. Lo que se edita aquí es la misma respuesta de cada pregunta (se sincroniza).
+let ensModo = 'editar';
+const TRANSICIONES = ['En primer lugar,', 'Además,', 'Por otra parte,', 'Sin embargo,', 'Por lo tanto,', 'En este sentido,', 'Dicho lo anterior,', 'A partir de ello,', 'En consecuencia,', 'Finalmente,'];
+const autoAlto = ta => { ta.style.height = 'auto'; ta.style.height = Math.min(900, ta.scrollHeight + 4) + 'px'; };
+function irAPregunta(n) {
+  const p = D.preguntas.find(x => x.n === n); if (!p) return;
+  entregaSel = p.entrega; fijarPaso(p.entrega, NUMS(p.entrega).indexOf(n)); cambio();
+  irA(D.etapas.findIndex(x => x.id === 'cuaderno'));
+}
+function irAEntregaFinal() { entregaSel = 'entregaFinal'; fijarPaso('entregaFinal', NUMS('entregaFinal').length); cambio(); irA(D.etapas.findIndex(x => x.id === 'cuaderno')); }
+function etapaEnsayo(c) {
+  T.ensayo = Object.assign({ titulo: '', modo: 'apartados', puentes: {} }, T.ensayo || {});
+  const E = ENTREGAS.entregaFinal, tituloSug = `Pienso, luego investigo: ${T.tema && T.tema.trim() ? sinPunto(T.tema) : 'mi investigación'} vista desde la epistemología`;
+  c.insertAdjacentHTML('beforeend', `<p class="lab-ayuda">Aquí está <b>todo tu trabajo junto</b>, como un solo ensayo: la introducción, tus 18 respuestas en orden y agrupadas en apartados, y la conclusión. Léelo de corrido, une las ideas y corrige. <b>Lo que cambies aquí se cambia también en su pregunta</b>, y al revés.</p>
+    <div class="ens-datos">
+      <label class="e1-sub"><span><b>Título de tu ensayo</b><small>Que diga de qué trata. Si lo dejas vacío, se usa «Pienso, luego investigo: ensayo final».</small></span><input id="ens-tit" value="${esc(T.ensayo.titulo)}" placeholder="${esc(tituloSug)}"></label>
+      ${T.ensayo.titulo ? '' : `<button type="button" class="chip-lab" id="ens-tit-sug">💡 Usar: «${esc(tituloSug)}»</button>`}
+      <fieldset class="ens-modo"><legend><b>¿Cómo quieres que salga en Word?</b></legend>
+        <label><input type="radio" name="ens-modo" value="apartados" ${T.ensayo.modo !== 'preguntas' ? 'checked' : ''}><span><b>Como ensayo, con apartados</b> <small>(recomendado: se lee de corrido, sin números de pregunta)</small></span></label>
+        <label><input type="radio" name="ens-modo" value="preguntas" ${T.ensayo.modo === 'preguntas' ? 'checked' : ''}><span>Con las 18 preguntas como subtítulos <small>(como las entregas 1 y 2)</small></span></label></fieldset>
+    </div>
+    <div class="ens-barra" id="ens-barra"></div>
+    <div class="lab-chips ens-vista"><button type="button" class="chip-lab" data-v="editar" aria-pressed="${ensModo === 'editar'}">✏️ Editar</button><button type="button" class="chip-lab" data-v="leer" aria-pressed="${ensModo === 'leer'}">📖 Leer de corrido</button></div>
+    <div id="ens-cuerpo"></div>
+    <h3 class="t-h3">Revisión de tu ensayo</h3><ul class="e1-checks" id="ens-rev"></ul>
+    <div class="ens-acciones"><button type="button" class="btn-lab" id="ens-word">⬇ Descargar mi ensayo en Word</button><button type="button" class="btn-lab-l" id="ens-ent">📚 Referencias y entrega final →</button></div>
+    <p class="t-nota">El Word sale con la portada del ITES y en APA 7. Las referencias y el botón para entregar están en «Las 18 preguntas», Entrega final, último paso.</p>`);
+  const tit = $('#ens-tit'); tit.addEventListener('input', () => { T.ensayo.titulo = tit.value; cambio(); cuentas(); const t2 = $('#ens-tit-sug'); if (t2 && tit.value.trim()) t2.remove(); });
+  const ts = $('#ens-tit-sug'); if (ts) ts.addEventListener('click', () => { tit.value = tituloSug; T.ensayo.titulo = tituloSug; cambio(); cuentas(); ts.remove(); });
+  $$('[name="ens-modo"]', c).forEach(r => r.addEventListener('change', () => { T.ensayo.modo = r.value; cambio(); pintarEns(); }));
+  $$('.ens-vista .chip-lab', c).forEach(b => b.addEventListener('click', () => { ensModo = b.dataset.v; $$('.ens-vista .chip-lab', c).forEach(x => x.setAttribute('aria-pressed', String(x === b))); pintarEns(); }));
+  $('#ens-word').addEventListener('click', () => descargarWord('entregaFinal'));
+  $('#ens-ent').addEventListener('click', irAEntregaFinal);
+  const apartados = () => T.ensayo.modo === 'preguntas' ? APARTADOS.flatMap(a => a.nums.map(n => ({ id: 'q' + n, titulo: `${n}. ${TITULOS[n]}`, nums: [n], puente: null }))) : APARTADOS;
+  function pintarEns() {
+    const cu = $('#ens-cuerpo'), r = T.respuestas, pu = T.ensayo.puentes;
+    if (ensModo === 'leer') {
+      const pars = t => String(t || '').split(/\n+/).map(x => x.trim()).filter(Boolean).map(x => `<p>${esc(x)}</p>`).join('');
+      cu.innerHTML = `<article class="ens-doc"><h2>${esc(T.ensayo.titulo.trim() || 'Pienso, luego investigo: ensayo final')}</h2>
+        <h3>Introducción</h3>${pars(T.intro) || '<p class="ens-falta">[Falta la introducción]</p>'}
+        ${apartados().map(a => `<h3>${esc(a.titulo)}</h3>${a.puente !== null ? pars(pu[a.id]) : ''}${a.nums.map(n => pars(r[n]) || `<p class="ens-falta">[Falta la respuesta a la pregunta ${n}]</p>`).join('')}`).join('')}
+        <h3>Referencias</h3>${refsElegidas(T, D, LAB, 18).map(x => `<p class="ens-ref">${esc(x).replace(/\*([^*]+)\*/g, '<i>$1</i>')}</p>`).join('') || '<p class="ens-falta">[Aún no eliges referencias]</p>'}</article>`;
+      return;
+    }
+    cu.innerHTML = `<section class="ens-ap"><h3 class="ens-h">Introducción <small id="ens-w-intro"></small></h3>
+        <p class="lab-ayuda">Presenta tu tema, tu tesis y cómo está organizado el ensayo. Si aún no la tienes, ármala en la Entrega final, último paso.</p>
+        <textarea class="t-resp ens-ta" data-k="intro" rows="5" placeholder="Tu introducción…">${esc(T.intro || '')}</textarea></section>
+      ${apartados().map(a => `<section class="ens-ap"><h3 class="ens-h">${esc(a.titulo)} <small id="ens-w-${a.id}"></small></h3>
+        ${a.puente !== null && a.id !== 'f' ? `<label class="ens-puente"><span><b>Párrafo de enlace</b> <small>(opcional) Una o dos oraciones que presentan el apartado y lo unen con el anterior.</small></span>
+          <textarea class="t-resp ens-ta" data-k="p-${a.id}" rows="2" placeholder="${esc(a.puente)}">${esc(pu[a.id] || '')}</textarea>
+          ${(pu[a.id] || '').trim() ? '' : `<button type="button" class="chip-lab ens-usar" data-ap="${a.id}">💡 Usar la frase sugerida</button>`}</label>` : ''}
+        ${a.nums.map(n => { const w = palabras(r[n]); return `<div class="ens-q"><p class="ens-q-k"><span>Pregunta ${n} · ${esc(TITULOS[n])}</span><span class="ens-q-w ${w >= 150 ? 'ok' : ''}" id="ens-w${n}">${w} palabras</span><button type="button" class="btn-lab-l ens-ir" data-n="${n}">Ver su guía</button></p>
+          ${(r[n] || '').trim() ? '' : `<p class="aviso-lab">Todavía no respondes esta pregunta. <button type="button" class="btn-lab-l ens-ir" data-n="${n}">Ir a la pregunta ${n} →</button></p>`}
+          <textarea class="t-resp ens-ta" data-k="${n}" rows="6">${esc(r[n] || '')}</textarea></div>`; }).join('')}</section>`).join('')}
+      <p class="lab-ayuda ens-conect"><b>Palabras para unir ideas:</b> ${TRANSICIONES.map(x => `«${esc(x)}»`).join(' · ')}</p>`;
+    $$('.ens-ta', cu).forEach(ta => { autoAlto(ta); ta.addEventListener('input', () => {
+      const k = ta.dataset.k;
+      if (k === 'intro') T.intro = ta.value; else if (k.startsWith('p-')) T.ensayo.puentes[k.slice(2)] = ta.value; else { T.respuestas[k] = ta.value; guardarPlat(+k); }
+      autoAlto(ta); cambio(); cuentas(); }); });
+    $$('.ens-usar', cu).forEach(b => b.addEventListener('click', () => { const a = APARTADOS.find(x => x.id === b.dataset.ap), ta = $(`.ens-ta[data-k="p-${a.id}"]`, cu); ta.value = a.puente; T.ensayo.puentes[a.id] = a.puente; autoAlto(ta); cambio(); cuentas(); b.remove(); }));
+    $$('.ens-ir', cu).forEach(b => b.addEventListener('click', () => irAPregunta(+b.dataset.n)));
+    cuentas();
+  }
+  function cuentas() {
+    const r = T.respuestas, pu = T.ensayo.puentes, total = textosDe(T, D, 'entregaFinal').reduce((s, [, t]) => s + palabras(t), 0);
+    const hechas = D.preguntas.filter(p => palabras(r[p.n]) >= 150).length, refs = refsElegidas(T, D, LAB, 18);
+    const set = (id, t, ok) => { const el = $('#' + id); if (el) { el.textContent = t; el.classList.toggle('ok', !!ok); } };
+    set('ens-w-intro', `· ${palabras(T.intro)} palabras`);
+    apartados().forEach(a => set('ens-w-' + a.id, `· ${a.nums.reduce((s, n) => s + palabras(r[n]), 0) + (a.puente !== null ? palabras(pu[a.id]) : 0)} palabras`));
+    D.preguntas.forEach(p => set('ens-w' + p.n, `${palabras(r[p.n])} palabras`, palabras(r[p.n]) >= 150));
+    const enR = total >= E.minPal && total <= E.maxPal;
+    $('#ens-barra').innerHTML = `<div class="ens-medidor"><span style="width:${Math.min(100, Math.round(total / E.maxPal * 100))}%" class="${enR ? 'ok' : total > E.maxPal ? 'mal' : ''}"></span></div>
+      <p><b>${total.toLocaleString('es-MX')}</b> palabras ${total < E.minPal ? `· te faltan ${(E.minPal - total).toLocaleString('es-MX')} para el mínimo de 2,500` : total > E.maxPal ? `· te pasas ${(total - E.maxPal).toLocaleString('es-MX')} del máximo de 3,500: resume las respuestas más largas` : '· ✓ dentro del rango'} · <b>${hechas}</b> de 18 respuestas completas · <b>${refs.length}</b> referencia${refs.length === 1 ? '' : 's'}</p>
+      <small>Para quedar en el rango, procura unas 140 a 190 palabras por respuesta.</small>`;
+    // Revisión
+    const TX = textosDe(T, D, 'entregaFinal'), sinCita = D.preguntas.filter(p => (r[p.n] || '').trim() && !tieneCita(r[p.n])).map(p => p.n);
+    const cortas = D.preguntas.filter(p => palabras(r[p.n]) < 150).map(p => p.n), rc = revisarCitas(TX.map(([, t]) => t), refs);
+    const visto = new Map(), rep = new Set();
+    TX.forEach(([n, t]) => String(t || '').split(/(?<=[.!?])\s+/).forEach(o => { const k = o.toLowerCase().replace(/[^a-záéíóúñü0-9 ]/g, '').replace(/\s+/g, ' ').trim(); if (k.split(' ').length < 8) return; const nom = n === 'intro' ? 'introducción' : String(n).startsWith('enlace') ? 'un párrafo de enlace' : 'pregunta ' + n; if (visto.has(k)) rep.add(nom).add(visto.get(k)); else visto.set(k, nom); }));
+    const L = [
+      [!cortas.length, cortas.length ? `Respuestas con menos de 150 palabras: ${cortas.join(', ')}` : 'Las 18 respuestas tienen al menos 150 palabras'],
+      [palabras(T.intro) >= 100, palabras(T.intro) >= 100 ? 'Tiene introducción' : 'Falta la introducción (al menos 100 palabras)'],
+      [enR, `${total.toLocaleString('es-MX')} palabras en total (de 2,500 a 3,500)`],
+      [!sinCita.length, sinCita.length ? `Respuestas sin cita (Autor, año): ${sinCita.join(', ')}` : 'Todas las respuestas tienen al menos una cita'],
+      [!rep.size, rep.size ? `Ideas repetidas, la misma oración en: ${[...rep].join(', ')}. Al juntar todo se nota: deja cada idea una sola vez.` : 'Sin oraciones repetidas'],
+      [!rc.sinRef.length, rc.sinRef.length ? `Citas sin su referencia en la lista: ${rc.sinRef.join(', ')}` : 'Cada autor que citas está en tus referencias'],
+      [refs.length >= E.minRefs, `${refs.length} referencia${refs.length === 1 ? '' : 's'} (mínimo ${E.minRefs}, con ${E.minArticulos} artículos académicos)`],
+      [!!(T.ensayo.titulo || '').trim(), (T.ensayo.titulo || '').trim() ? 'Tu ensayo tiene título propio' : 'Ponle un título propio a tu ensayo'],
+    ];
+    if (T.ensayo.modo !== 'preguntas') { const sinP = APARTADOS.filter(a => a.id !== 'f' && !(pu[a.id] || '').trim()).length; L.push([sinP <= 2, sinP ? `${sinP} apartado${sinP === 1 ? '' : 's'} sin párrafo de enlace (opcional, pero ayuda a que se lea como ensayo)` : 'Todos los apartados tienen párrafo de enlace']); }
+    $('#ens-rev').innerHTML = L.map(([ok, t]) => `<li class="${ok ? 'ok' : ''}">${ok ? '✓' : '○'} ${esc(t)}</li>`).join('');
+  }
+  pintarEns();
 }
 
 // ------------------------------------------------ Etapa 6: ética, APA y defensa

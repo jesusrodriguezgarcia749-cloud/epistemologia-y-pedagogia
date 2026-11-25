@@ -18,7 +18,7 @@ import { vistaRapida } from "./matriz.js";
 import { TEMAS_TAREAS, TAREAS_DIG, califica, catalogoId, nombreCatalogo, CUADROS, sugerirCuadro, MIN_PALABRAS_CELDA, ARENA, COEV, TR_LENTES, TR_VER, TR_MIN_ARG, trPuntos, TR_CASOS_SUGERIDOS, PRUEBA_ID, PRUEBA_NOMBRE, varianteDe, respuestasDe } from "./tareas-datos.js?v=2026112401";
 import { cierreDe, parcialDe, esAuto } from "./cierre-tareas.js?v=2026111901";
 import { zipDocx, DocITES } from "./docx-ites.js?v=2026102708";
-import { wordTaller, numsDe, estadoEntrega, slugArchivo, revisarCitas, textosDe, refsElegidas, hastaDe } from "./taller-word.js?v=2026111904";
+import { wordTaller, numsDe, estadoEntrega, slugArchivo, revisarCitas, textosDe, refsElegidas, hastaDe } from "./taller-word.js?v=2026112401";
 import { docCuadro } from "./cuadro-word.js?v=2026110601";
 import { RUTAS, sugerirRuta, MIN_SALIDA, bitacoraCompleta, bitacoraAvance } from "./ruta-datos.js?v=2026111002";
 import { BASE, enEquipo, formacionDe, formaciones, ordenFormaciones, formacionDeTarea, equiposDe, tareasDeFormacion, urlUnir, qrSvg } from "./equipos.js";

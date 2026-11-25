@@ -275,3 +275,31 @@ html[data-theme="dark"] .t-paso-n { color: #8fb8e0; }
 .t-entregar { margin: 1rem 0 .4rem; padding: .8rem .9rem; border-radius: 10px; border: 1.5px dashed var(--line); background: var(--cream); }
 .t-entregar p { margin: 0 0 .5rem; }
 .t-chips-ent .chip-lab small { font-weight: 400; opacity: .8; }
+/* ---------- Etapa 7: Mi ensayo completo ---------- */
+.ens-datos { display: grid; gap: .5rem; margin: .6rem 0 1rem; }
+.ens-datos input { width: 100%; padding: .6rem .7rem; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: var(--paper, #fff); color: inherit; }
+.ens-modo { border: 1px solid var(--line); border-radius: 10px; padding: .5rem .8rem; display: grid; gap: .35rem; }
+.ens-modo small { opacity: .75; }
+.ens-barra { position: sticky; top: .5rem; z-index: 3; background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: .6rem .8rem; margin: .4rem 0 .8rem; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+.ens-barra p { margin: .35rem 0 .1rem; } .ens-barra small { opacity: .8; }
+.ens-medidor { height: 8px; border-radius: 99px; background: rgba(0,0,0,.08); overflow: hidden; }
+.ens-medidor span { display: block; height: 100%; background: var(--saffron); transition: width .3s; }
+.ens-medidor span.ok { background: #2E7D4F; } .ens-medidor span.mal { background: #C0392B; }
+.ens-vista { margin: .3rem 0 .8rem; }
+.ens-ap { border-top: 2px solid var(--line); padding: .8rem 0 .4rem; }
+.ens-h { font-size: 1.12rem; margin: 0 0 .5rem; } .ens-h small { font-weight: 400; opacity: .7; font-size: .85rem; }
+.ens-puente { display: block; background: var(--cream); border-left: 4px solid var(--saffron); border-radius: 0 8px 8px 0; padding: .5rem .7rem; margin-bottom: .8rem; }
+.ens-puente > span { display: block; margin-bottom: .3rem; } .ens-puente small { opacity: .75; }
+.ens-q { margin: 0 0 1rem; }
+.ens-q-k { display: flex; flex-wrap: wrap; gap: .4rem .8rem; align-items: center; justify-content: space-between; margin: 0 0 .3rem; font-size: .9rem; font-weight: 600; }
+.ens-q-w { font-weight: 400; opacity: .8; } .ens-q-w.ok { color: #2E7D4F; opacity: 1; }
+.ens-ta { min-height: 4.5rem; resize: vertical; line-height: 1.55; }
+.ens-conect { font-size: .88rem; }
+.ens-doc { background: #fff; color: #1b1b1b; border: 1px solid var(--line); border-radius: 6px; padding: 1.6rem 1.4rem; font-family: 'Times New Roman', Times, serif; font-size: 1.05rem; line-height: 1.9; max-width: 46rem; margin: 0 auto; box-shadow: 0 6px 22px rgba(0,0,0,.08); }
+.ens-doc h2 { text-align: center; font-size: 1.2rem; margin: 0 0 1rem; } .ens-doc h3 { text-align: center; font-size: 1.05rem; margin: 1.2rem 0 .4rem; }
+.ens-doc p { text-indent: 2.2rem; margin: 0; } .ens-doc .ens-ref { text-indent: -2.2rem; padding-left: 2.2rem; }
+.ens-doc .ens-falta { color: #C0392B; text-indent: 0; font-style: italic; }
+.ens-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0 .4rem; }
+.ens-modo label { display: flex; align-items: flex-start; gap: .5rem; text-align: left; line-height: 1.35; }
+.ens-modo input[type="radio"] { width: auto !important; flex: 0 0 auto; margin: .2rem 0 0; display: inline-block; }
+.ens-modo label span { display: block; }

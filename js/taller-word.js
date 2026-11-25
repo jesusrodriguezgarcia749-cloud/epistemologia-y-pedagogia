@@ -16,6 +16,16 @@ export const ENTREGAS = {
   entrega2: { titulo: 'borrador completo del ensayo', archivo: 'preguntas_1_a_14', minRefs: 6, boton: 'el borrador completo (preguntas 1 a 14)' },
   entregaFinal: { titulo: 'ensayo final', archivo: 'ensayo_final', minRefs: 8, minArticulos: 2, minPal: 2500, maxPal: 3500, intro: true, boton: 'el ensayo final completo' },
 };
+// El ensayo final organizado en apartados (etapa «Mi ensayo completo»): las 18 respuestas en orden, agrupadas.
+export const APARTADOS = [
+  { id: 'a', titulo: 'El problema de investigación', nums: [1, 2], puente: 'Toda investigación comienza con una inquietud que nace de la práctica. En este apartado presento mi tema, mi pregunta y el tipo de conocimiento que busco producir.' },
+  { id: 'b', titulo: 'Fundamentos epistemológicos de mi investigación', nums: [3, 4, 5, 6], puente: 'Una vez planteado el problema, conviene ubicar mi investigación en el mapa de las ciencias y explicar desde qué paradigma la pienso.' },
+  { id: 'c', titulo: 'El método y la vigilancia epistemológica', nums: [7, 8, 9, 10, 11], puente: 'Definida mi postura, el siguiente paso es decidir cómo investigar y qué cuidados tomar para que mis propias ideas no sesguen los resultados.' },
+  { id: 'd', titulo: 'Mi investigación frente a la crítica', nums: [12, 13, 14, 15], puente: 'Ningún método está libre de objeciones. En este apartado reviso el interés que guía mi trabajo, respondo a sus críticas y planteo una tesis provisional.' },
+  { id: 'e', titulo: 'Ética y pertinencia', nums: [16, 17], puente: 'Investigar con personas implica responsabilidades. Aquí explico los dilemas éticos de mi estudio y su relación con la Nueva Escuela Mexicana.' },
+  { id: 'f', titulo: 'Conclusión: ¿mi investigación es ciencia?', nums: [18], puente: '' },
+];
+const enApartados = (T, ent) => ent === 'entregaFinal' && (T.ensayo || {}).modo !== 'preguntas';
 export const palabras = t => (String(t || '').trim().match(/\S+/g) || []).length;
 export const numsDe = (D, ent) => D.preguntas.filter(p => p.entrega === ent).map(p => p.n);
 export const hastaDe = (D, ent) => Math.max(...numsDe(D, ent));
@@ -43,11 +53,14 @@ export function refsElegidas(T, D, LAB, hasta) {
 // Lo que entra al Word de cada entrega.
 export function textosDe(T, D, ent) {
   const hasta = hastaDe(D, ent), r = T.respuestas || {};
-  return [...(ENTREGAS[ent].intro ? [['intro', T.intro || '']] : []), ...D.preguntas.filter(p => p.n <= hasta).map(p => [p.n, r[p.n] || ''])];
+  const pu = (T.ensayo || {}).puentes || {};
+  return [...(ENTREGAS[ent].intro ? [['intro', T.intro || '']] : []), ...D.preguntas.filter(p => p.n <= hasta).flatMap(p => {
+    const ap = enApartados(T, ent) ? APARTADOS.find(a => a.nums[0] === p.n && (pu[a.id] || '').trim()) : null;
+    return [...(ap ? [['enlace ' + ap.id, pu[ap.id]]] : []), [p.n, r[p.n] || '']]; })];
 }
 // Huella del texto entregado: si cambia después de entregar, el docente lo ve.
 export function huella(T, D, ent) {
-  const s = textosDe(T, D, ent).map(([, t]) => String(t).replace(/\s+/g, ' ').trim()).join('|') + '|' + JSON.stringify(T.refs || {});
+  const s = textosDe(T, D, ent).map(([, t]) => String(t).replace(/\s+/g, ' ').trim()).join('|') + '|' + JSON.stringify(T.refs || {}) + (ent === 'entregaFinal' && T.ensayo ? '|' + (T.ensayo.titulo || '') + '|' + (T.ensayo.modo || '') : '');
   let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h.toString(36);
 }
 export function estadoEntrega(T, D, ent) {
@@ -64,14 +77,22 @@ export function porcentajePlataforma(texto, base) {
   return Math.round(100 * marca.filter(Boolean).length / w.length);
 }
 
+// Secciones del Word: con las preguntas como subtítulos (entregas 1 y 2) o, en el ensayo final, por apartados.
+export function seccionesWord(T, D, ent) {
+  const par = t => String(t || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
+  if (!enApartados(T, ent)) return textosDe(T, D, ent).map(([n, t]) => ({ titulo: n === 'intro' ? TITULOS.intro : `${n}. ${TITULOS[n]}`, parrafos: par(t) }));
+  const r = T.respuestas || {}, pu = (T.ensayo || {}).puentes || {};
+  return [{ titulo: TITULOS.intro, parrafos: par(T.intro) },
+    ...APARTADOS.map(a => ({ titulo: a.titulo, parrafos: [...par(pu[a.id]), ...a.nums.flatMap(n => par(r[n]))] }))];
+}
 export async function wordTaller(T, D, LAB, ent, nombre, { soloBlob = false } = {}) {
   const E = ENTREGAS[ent], hasta = hastaDe(D, ent), refs = refsElegidas(T, D, LAB, hasta);
   return descargarAPA({
-    titulo: `Pienso, luego investigo: ${E.titulo}`,
+    titulo: ent === 'entregaFinal' && (T.ensayo || {}).titulo && T.ensayo.titulo.trim() ? T.ensayo.titulo.trim() : `Pienso, luego investigo: ${E.titulo}`,
     autor: nombre || '',
     programa: 'Licenciatura en Pedagogía', institucion: 'ITES René Descartes',
     curso: 'Epistemología y Pedagogía', docente: 'Mtro. Jesús Rodríguez García',
-    secciones: textosDe(T, D, ent).map(([n, t]) => ({ titulo: n === 'intro' ? TITULOS.intro : `${n}. ${TITULOS[n]}`, parrafos: String(t).split(/\n+/) })),
+    secciones: seccionesWord(T, D, ent),
     referencias: refs.length ? refs : ['Agrega aquí tus referencias en APA 7, en orden alfabético y con sangría francesa.'],
     archivo: `Pienso_luego_investigo_${E.archivo}_${slugArchivo(nombre || 'borrador')}`,
     soloBlob,
