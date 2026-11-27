@@ -153,7 +153,7 @@ async function cargarListaOficial(grupoId) {
     const res = await fetch('data/lista_oficial.json', { cache: 'no-store' });
     if (!res.ok) return null;
     const data = await res.json();
-    return (data.grupos || {})[grupoId] || null;
+    return (data.grupos || {})[grupoId] || (data.grupos || {})['*'] || null;
   } catch { return null; }
 }
 
@@ -165,6 +165,14 @@ function ordenarSegunActa(lista, alumnos) {
   const renglones = lista.map((oficial, i) => {
     let item = alumnos.find(x => x.alumno.id === oficial.alumnoId && !usados.has(x));
     if (!item) item = alumnos.find(x => !usados.has(x) && normalizar(x.alumno.nombre) === normalizar(oficial.nombre));
+    // Si en la plataforma el nombre está incompleto (sin segundo apellido o sin segundo nombre), basta con que
+    // todas sus palabras, al menos dos, estén en el nombre del acta y que solo un renglón del acta le quede.
+    if (!item) {
+      const of = new Set(normalizar(oficial.nombre).split(' '));
+      const cand = alumnos.filter(x => { if (usados.has(x)) return false; const w = normalizar(x.alumno.nombre).split(' '); return w.length >= 2 && w.every(p => of.has(p)); });
+      const unico = c => lista.filter(o => { const s2 = new Set(normalizar(o.nombre).split(' ')); return normalizar(c.alumno.nombre).split(' ').every(p => s2.has(p)); }).length === 1;
+      if (cand.length === 1 && unico(cand[0])) item = cand[0];
+    }
     if (item) usados.add(item);
     return { no: i + 1, matricula: oficial.matricula, nombre: oficial.nombre, item };
   });

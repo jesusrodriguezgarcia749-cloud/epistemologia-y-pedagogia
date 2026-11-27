@@ -1,4 +1,87 @@
 {
- "_comentario": "Lista oficial del acta de calificaciones (ITES). El reporte PDF del grupo sale en este orden, con matrícula y apellidos primero. alumnoId = identificador del alumno en la plataforma (null = no está registrado). Se llena cuando el docente comparta el acta del grupo de Epistemología y Pedagogía.",
- "grupos": {}
+ "_comentario": "Lista oficial del acta de calificaciones (ITES), Epistemología y Pedagogía, 7.º cuatrimestre matutino, clave 740. El reporte PDF del grupo sale en este orden, con matrícula y apellidos primero. La clave «*» sirve para cualquier grupo de la plataforma (solo hay uno). Cada renglón se empata con su alumno por las palabras del nombre, sin importar orden ni acentos; alumnoId es opcional.",
+ "grupos": {
+  "*": [
+   {
+    "matricula": "2511088",
+    "nombre": "AGUILAR ESCAMILLA JOSHUA NICOLAS",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511111",
+    "nombre": "ALVIDREZ PORTILLO JESUS FERNANDO",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511017",
+    "nombre": "CHABLE RODRIGUEZ IRANI YAMILET",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511068",
+    "nombre": "CHAN CHE ROGELIO GABRIEL",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511023",
+    "nombre": "COBOS ROCA ANIELSKA SINAI",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511130",
+    "nombre": "FRAZ ROSADO ESTRELLA DEL ROSARIO",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511008",
+    "nombre": "GIL PACHECO MIA YANET",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511122",
+    "nombre": "MUT TORRES LIBNI AMISADAI",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511034",
+    "nombre": "OLIVARES PACHECO VANIA ANYELINE",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511115",
+    "nombre": "ORDOÑEZ SOSA THANIA AMAYRANI",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511083",
+    "nombre": "PEREZ MAGARIÑO BRANIA SOFIA",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511124",
+    "nombre": "REYES RODRIGUEZ KEYLA OLIVA",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511138",
+    "nombre": "TORRES CRUZ WILMA AIDE",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511090",
+    "nombre": "TORRES RAMIREZ ALISON YUDITH",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511134",
+    "nombre": "TUYUB ROSALES PERLA ESTHER",
+    "alumnoId": null
+   },
+   {
+    "matricula": "2511005",
+    "nombre": "VARGUEZ EK MARIA ISABEL",
+    "alumnoId": null
+   }
+  ]
+ }
 }
