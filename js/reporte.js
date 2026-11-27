@@ -147,6 +147,9 @@ const LETRAS = ['CERO', 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE'
 function califEnLetras(calif) { return calif.pendiente ? 'POR DECIDIR' : (LETRAS[calif.oficial] ?? ''); }
 
 function normalizar(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean).sort().join(' '); }
+// Igual que normalizar, pero también empareja letras que suenan igual y se escriben distinto
+// (Keyla y Keila, Yanet y Janet, Báez y Baes, Vania y Bania).
+const fonetico = t => normalizar(t).split(' ').map(w => w.replace(/h/g, '').replace(/y/g, 'i').replace(/v/g, 'b').replace(/z/g, 's').replace(/c(?=[ei])/g, 's').replace(/ll/g, 'i').replace(/j/g, 'i')).sort().join(' ');
 
 async function cargarListaOficial(grupoId) {
   try {
@@ -165,6 +168,7 @@ function ordenarSegunActa(lista, alumnos) {
   const renglones = lista.map((oficial, i) => {
     let item = alumnos.find(x => x.alumno.id === oficial.alumnoId && !usados.has(x));
     if (!item) item = alumnos.find(x => !usados.has(x) && normalizar(x.alumno.nombre) === normalizar(oficial.nombre));
+    if (!item) item = alumnos.find(x => !usados.has(x) && fonetico(x.alumno.nombre) === fonetico(oficial.nombre));
     // Si en la plataforma el nombre está incompleto (sin segundo apellido o sin segundo nombre), basta con que
     // todas sus palabras, al menos dos, estén en el nombre del acta y que solo un renglón del acta le quede.
     if (!item) {

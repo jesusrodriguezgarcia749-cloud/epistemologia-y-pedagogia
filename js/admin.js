@@ -11,7 +11,7 @@ import {
 
 import { firebaseConfig } from "./firebase-config.js";
 import { parcialAsistencia, textoAsistencia, asistenciaHTML, ACTIVIDADES_PARCIAL, calcularParcial, calcularCuatrimestre, calcularCuatrimestreRedondeado, zonaDeDecision, textoCalificacion, NOMBRES_PARCIAL, NOMBRES_REDONDEO, TOPES } from "./calculo.js";
-import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js?v=2026112701";
+import { reporteGrupo, reporteAlumno, reporteExamenAlumno, reporteExamenGrupo } from "./reporte.js?v=2026112702";
 import { resumenGeneral } from "./resumen-tareas.js?v=2026111801";
 import { resumenSemana } from "./resumen-semana.js?v=2026112001";
 import { vistaRapida } from "./matriz.js";
